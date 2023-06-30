@@ -225,7 +225,7 @@ public class AssemblyStateMachine : MonoBehaviour
     {
     _playerInput.MouseOperate.Click.Enable();
     _playerInput.MouseOperate.MousePosition.Enable();
-    _playerInput.MouseOperate.MoveCamera.Enable();
+    
     }
 
    
@@ -233,7 +233,7 @@ public class AssemblyStateMachine : MonoBehaviour
     {
     _playerInput.MouseOperate.Click.Disable();
     _playerInput.MouseOperate.MousePosition.Disable();
-    _playerInput.MouseOperate.MoveCamera.Disable();
+    
     }
 
 

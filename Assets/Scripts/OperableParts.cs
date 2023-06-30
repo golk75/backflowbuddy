@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class OperableParts : MonoBehaviour
 {
-   
-   
-    enum here {
-        hi
-    }
     public enum ComponentId
     {
         ShutOffValve1,
@@ -16,14 +11,18 @@ public class OperableParts : MonoBehaviour
         TestCock1,
         TestCock2,
         TestCock3,
-        TestCock4       
+        TestCock4,
+        CheckValve1,
+        CheckValve2,
     }
 
-    public enum PartsType{
+    public enum PartsType
+    {
         ShutOff,
-        TestCock
+        TestCock,
+        CheckValve,
     }
-    
-    public ComponentId  componentId;
+
+    public ComponentId componentId;
     public PartsType partsType;
 }

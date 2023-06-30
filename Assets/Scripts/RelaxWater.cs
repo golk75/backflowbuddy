@@ -6,21 +6,26 @@ public class RelaxWater : MonoBehaviour
 {
     [SerializeField]
     AssemblyController assemblyController;
-    ZibraLiquidForceField forceField;
+    [SerializeField]
+    ZibraLiquidForceField checkValve1ForceField;
+    [SerializeField]
+    ZibraLiquidForceField checkValve2ForceField;
 
     private void checkRelax(){
         if(assemblyController.IsSupplyOn == false){
-            forceField.enabled = false;        
+            checkValve1ForceField.enabled = false;
+            checkValve2ForceField.enabled = false;        
             }
             else{
-                forceField.enabled = true;
+                checkValve1ForceField.enabled = true;
+                checkValve2ForceField.enabled = true;
             }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        forceField = GetComponent<ZibraLiquidForceField>();
+        
     }
 
     // Update is called once per frame
