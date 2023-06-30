@@ -6,4 +6,4 @@
 <div>2This application can be ran on mobile and desktop devices.</div>
 
 
-
+<div>branch-b alteration, this commit was 2nd. neither a nor b branches have pushed</div>
