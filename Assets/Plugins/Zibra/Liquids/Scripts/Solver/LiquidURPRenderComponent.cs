@@ -17,7 +17,7 @@ namespace com.zibra.liquid
     /// </remarks>
     public class LiquidURPRenderComponent : ScriptableRendererFeature
     {
-        #region Public Interface
+#region Public Interface
         /// <summary>
         ///     URP specific liquid rendering settings.
         /// </summary>
@@ -28,7 +28,6 @@ namespace com.zibra.liquid
             ///     Globally defines whether liquid renders in URP.
             /// </summary>
             public bool IsEnabled = true;
-
             /// <summary>
             ///     Injection point where we will insert liquid rendering.
             /// </summary>
@@ -48,25 +47,22 @@ namespace com.zibra.liquid
         /// <summary>
         ///     Creates URP ScriptableRendererFeature.
         /// </summary>
-        public override void Create() { }
+        public override void Create()
+        {
+        }
 
         /// <summary>
         ///     Adds scriptable render passes.
         /// </summary>
-        public override void AddRenderPasses(
-            ScriptableRenderer renderer,
-            ref RenderingData renderingData
-        )
+        public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
             if (!settings.IsEnabled)
             {
                 return;
             }
 
-            if (
-                renderingData.cameraData.cameraType != CameraType.Game
-                && renderingData.cameraData.cameraType != CameraType.SceneView
-            )
+            if (renderingData.cameraData.cameraType != CameraType.Game &&
+                renderingData.cameraData.cameraType != CameraType.SceneView)
             {
                 return;
             }
@@ -136,20 +132,16 @@ namespace com.zibra.liquid
 
             foreach (var liquid in ZibraLiquid.AllFluids)
             {
-                if (
-                    liquid != null
-                    && liquid.IsRenderingEnabled()
-                    && ((camera.cullingMask & (1 << liquid.gameObject.layer)) != 0)
-                )
+                if (liquid != null && liquid.IsRenderingEnabled() &&
+                    ((camera.cullingMask & (1 << liquid.gameObject.layer)) != 0))
                 {
                     if (liquid.IsBackgroundCopyNeeded(camera))
                     {
                         copyPasses[currentCopyPass].liquid = liquid;
 
 #if UNITY_PIPELINE_URP_10_0_OR_HIGHER
-                        copyPasses[currentCopyPass].ConfigureInput(
-                            ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth
-                        );
+                        copyPasses[currentCopyPass].ConfigureInput(ScriptableRenderPassInput.Color |
+                                                                   ScriptableRenderPassInput.Depth);
 #endif
                         copyPasses[currentCopyPass].renderPassEvent = settings.InjectionPoint;
 
@@ -163,9 +155,8 @@ namespace com.zibra.liquid
 
                     liquidURPPasses[currentLiquidPass].liquid = liquid;
 #if UNITY_PIPELINE_URP_10_0_OR_HIGHER
-                    liquidURPPasses[currentLiquidPass].ConfigureInput(
-                        ScriptableRenderPassInput.Color | ScriptableRenderPassInput.Depth
-                    );
+                    liquidURPPasses[currentLiquidPass].ConfigureInput(ScriptableRenderPassInput.Color |
+                                                                      ScriptableRenderPassInput.Depth);
 #endif
 
 #if !UNITY_PIPELINE_URP_9_0_OR_HIGHER
@@ -187,8 +178,8 @@ namespace com.zibra.liquid
                 }
             }
         }
-        #endregion
-        #region Implementation details
+#endregion
+#region Implementation details
         private class CopyBackgroundURPRenderPass : ScriptableRenderPass
         {
             public ZibraLiquid liquid;
@@ -212,10 +203,7 @@ namespace com.zibra.liquid
             }
 #endif
 
-            public override void Execute(
-                ScriptableRenderContext context,
-                ref RenderingData renderingData
-            )
+            public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
                 Camera camera = renderingData.cameraData.camera;
 
@@ -245,38 +233,23 @@ namespace com.zibra.liquid
                 renderPassEvent = injectionPoint;
             }
 
-            public override void Execute(
-                ScriptableRenderContext context,
-                ref RenderingData renderingData
-            )
+            public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
                 Camera camera = renderingData.cameraData.camera;
                 camera.depthTextureMode = DepthTextureMode.Depth;
                 CommandBuffer cmd = CommandBufferPool.Get("ZibraLiquid.Render");
 
-                liquid.RenderCallBack(
-                    renderingData.cameraData.camera,
-                    renderingData.cameraData.renderScale
-                );
+                liquid.RenderCallBack(renderingData.cameraData.camera, renderingData.cameraData.renderScale);
 
                 // set initial parameters in the native plugin
-                ZibraLiquidBridge.SubmitInstanceEvent(
-                    cmd,
-                    liquid.CurrentInstanceID,
-                    ZibraLiquidBridge.EventID.SetCameraParams,
-                    liquid.CamNativeParams[camera]
-                );
+                ZibraLiquidBridge.SubmitInstanceEvent(cmd, liquid.CurrentInstanceID,
+                                                      ZibraLiquidBridge.EventID.SetCameraParams,
+                                                      liquid.CamNativeParams[camera]);
 
                 if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Vulkan)
                 {
-                    cmd.SetRenderTarget(
-                        liquid.Color0,
-                        RenderBufferLoadAction.DontCare,
-                        RenderBufferStoreAction.Store,
-                        liquid.Depth,
-                        RenderBufferLoadAction.DontCare,
-                        RenderBufferStoreAction.Store
-                    );
+                    cmd.SetRenderTarget(liquid.Color0, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
+                                        liquid.Depth, RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
                     cmd.ClearRenderTarget(true, true, Color.clear);
                 }
 
@@ -293,9 +266,7 @@ namespace com.zibra.liquid
 
             RenderTargetIdentifier cameraColorTexture;
 
-            static int UpscaleColorTextureID = Shader.PropertyToID(
-                "ZibraLiquid_LiquidTempColorTexture"
-            );
+            static int UpscaleColorTextureID = Shader.PropertyToID("ZibraLiquid_LiquidTempColorTexture");
             RenderTargetIdentifier UpscaleColorTexture;
 
             public LiquidURPRenderPass(RenderPassEvent injectionPoint)
@@ -315,10 +286,7 @@ namespace com.zibra.liquid
             }
 #endif
 
-            public override void Configure(
-                CommandBuffer cmd,
-                RenderTextureDescriptor cameraTextureDescriptor
-            )
+            public override void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
             {
                 if (liquid.EnableDownscale)
                 {
@@ -348,10 +316,7 @@ namespace com.zibra.liquid
                 }
             }
 
-            public override void Execute(
-                ScriptableRenderContext context,
-                ref RenderingData renderingData
-            )
+            public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
                 Camera camera = renderingData.cameraData.camera;
                 camera.depthTextureMode = DepthTextureMode.Depth;
@@ -385,9 +350,7 @@ namespace com.zibra.liquid
         {
             public ZibraLiquid liquid;
 
-            static int UpscaleColorTextureID = Shader.PropertyToID(
-                "ZibraLiquid_LiquidTempColorTexture"
-            );
+            static int UpscaleColorTextureID = Shader.PropertyToID("ZibraLiquid_LiquidTempColorTexture");
             RenderTargetIdentifier UpscaleColorTexture;
 
             public LiquidUpscaleURPRenderPass(RenderPassEvent injectionPoint)
@@ -395,10 +358,7 @@ namespace com.zibra.liquid
                 renderPassEvent = injectionPoint;
             }
 
-            public override void Execute(
-                ScriptableRenderContext context,
-                ref RenderingData renderingData
-            )
+            public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
             {
                 Camera camera = renderingData.cameraData.camera;
                 camera.depthTextureMode = DepthTextureMode.Depth;
@@ -414,16 +374,13 @@ namespace com.zibra.liquid
 
         // 1 pass per rendered liquid that requires background copy
         CopyBackgroundURPRenderPass[] copyPasses;
-
         // 1 pass per rendered liquid
         LiquidNativeRenderPass[] liquidNativePasses;
-
         // 1 pass per rendered liquid
         LiquidURPRenderPass[] liquidURPPasses;
-
         // 1 pass per rendered liquid that have downscale enabled
         LiquidUpscaleURPRenderPass[] upscalePasses;
-        #endregion
+#endregion
     }
 }
 
