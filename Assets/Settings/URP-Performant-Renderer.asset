@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     IsEnabled: 1
-    InjectionPoint: 500
+    InjectionPoint: 450
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
