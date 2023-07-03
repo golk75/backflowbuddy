@@ -112,4 +112,4 @@ MonoBehaviour:
   m_Active: 1
   settings:
     IsEnabled: 1
-    InjectionPoint: 500
+    InjectionPoint: 450
