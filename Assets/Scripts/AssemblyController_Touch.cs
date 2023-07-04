@@ -18,6 +18,12 @@ public class AssemblyController_Touch : MonoBehaviour
     ZibraLiquidSolverParameters liquidSolver;
 
     [SerializeField]
+    List<TestCockPressure> TestCockPressures;
+
+    [SerializeField]
+    List<float> tcPressures;
+
+    [SerializeField]
     GameObject ShutOffValve1;
 
     [SerializeField]
@@ -265,7 +271,7 @@ public class AssemblyController_Touch : MonoBehaviour
 
     private void Touch0Contact_started(InputAction.CallbackContext context)
     {
-        Debug.Log($"Primary finger now pressing down");
+        //Debug.Log($"Primary finger now pressing down");
         //touchStart = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
         touchStart = Camera.main.ScreenToWorldPoint(
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
@@ -277,7 +283,7 @@ public class AssemblyController_Touch : MonoBehaviour
     {
         if (panningCoroutine != null)
         {
-            Debug.Log($"Panning Stopped");
+            //Debug.Log($"Panning Stopped");
             StopCoroutine(panningCoroutine);
         }
         IsOperable = false;
@@ -285,7 +291,7 @@ public class AssemblyController_Touch : MonoBehaviour
         _operableValve = null;
         isPanningCamera = false;
         touchStart = Vector3.zero;
-        Debug.Log($"Primary UNpressed");
+        //Debug.Log($"Primary UNpressed");
     }
 
     private void Zoom_started(InputAction.CallbackContext context)
@@ -394,7 +400,7 @@ public class AssemblyController_Touch : MonoBehaviour
                 _operableObject = hit.collider.transform.gameObject;
                 _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
                 IsOperable = true;
-                Debug.Log(_operableObject);
+                //Debug.Log(_operableObject);
             }
         }
         else
@@ -403,7 +409,7 @@ public class AssemblyController_Touch : MonoBehaviour
             {
                 isPanningCamera = true;
             }
-            Debug.Log($"Nothing hit!");
+            //Debug.Log($"Nothing hit!");
         }
     }
 
@@ -431,7 +437,7 @@ public class AssemblyController_Touch : MonoBehaviour
         _operableObjectRotation.z +=
             (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
             * RotationSensitivity;
-        Debug.Log($"{Camera.main.ScreenToViewportPoint(Input.mousePosition).x}|");
+        //Debug.Log($"{Camera.main.ScreenToViewportPoint(Input.mousePosition).x}|");
         //(touch0Delta.x - touchStart.x) * RotationSensitivity * -1 / SceneWidth;
 
         //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
@@ -451,6 +457,7 @@ public class AssemblyController_Touch : MonoBehaviour
                 case OperableParts.ComponentId.TestCock1:
                     _operableValve = TestCockValve1;
                     _operableTestCockFF = TestCockFF1;
+
                     break;
                 case OperableParts.ComponentId.TestCock2:
                     _operableValve = TestCockValve2;
@@ -482,9 +489,11 @@ public class AssemblyController_Touch : MonoBehaviour
             /// </summary>
 
 
-            //testcock valve should still be able to be closed (via Void) while emitter volume scaled with supply volume
+            //testcock valve should still be closable (via Void) while emitter volume scaled with supply volume
 
             // manipulate forcefield on test cock
+
+
             _operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
 
             ///END TEST COCK CHECK
@@ -596,7 +605,7 @@ public class AssemblyController_Touch : MonoBehaviour
         }
         else if (_operableObject == null && isZooming != true && isPanningCamera)
         {
-            Debug.Log($"panning camera!");
+            //Debug.Log($"panning camera!");
             CameraPanning();
         }
         else if (isZooming) { }
