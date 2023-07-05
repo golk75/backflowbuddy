@@ -18,9 +18,6 @@ public class AssemblyController_Touch : MonoBehaviour
     ZibraLiquidSolverParameters liquidSolver;
 
     [SerializeField]
-    List<TestCockPressure> TestCockPressures;
-
-    [SerializeField]
     List<float> tcPressures;
 
     [SerializeField]
@@ -472,7 +469,6 @@ public class AssemblyController_Touch : MonoBehaviour
                     _operableTestCockFF = TestCockFF4;
                     break;
             }
-            //check is supply is turned on before opening test cocks, so that water will not emit from the test cocks if shutoff#1 (supply) is off.
 
             _operableValveScale = _operableValve.transform.localScale;
 
@@ -493,8 +489,8 @@ public class AssemblyController_Touch : MonoBehaviour
 
             // manipulate forcefield on test cock
 
-
-            _operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
+            //moving to relaxwater.cs
+            //_operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
 
             ///END TEST COCK CHECK
         }

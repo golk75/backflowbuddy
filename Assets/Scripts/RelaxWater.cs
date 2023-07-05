@@ -21,14 +21,54 @@ public class RelaxWater : MonoBehaviour
     [SerializeField]
     ZibraLiquidSolverParameters liquidSolverParameters;
 
+    [SerializeField]
+    ZibraLiquidForceField testCock1FF;
+
+    [SerializeField]
+    ZibraLiquidForceField testCock2FF;
+
+    [SerializeField]
+    ZibraLiquidForceField testCock3FF;
+
+    [SerializeField]
+    ZibraLiquidForceField testCock4FF;
+
+    [SerializeField]
+    ZibraLiquidDetector testCock1Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector testCock2Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector testCock3Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector testCock4Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector zone1Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector zone2Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector zone3Detector;
+
     float currentVelocity;
 
     private void checkRelax()
     {
         if (assemblyController_Touch.IsSupplyOn == false)
         {
+            //relax water in check housing
             checkValve1ForceField.enabled = false;
             checkValve2ForceField.enabled = false;
+            //relax water @ test cocks
+            if (zone1Detector.ParticlesInside < 50000)
+            {
+                checkValve1ForceField.Strength = 0;
+                checkValve2ForceField.Strength = 0;
+            }
         }
         else
         {
