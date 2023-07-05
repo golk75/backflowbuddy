@@ -54,6 +54,8 @@ public class RelaxWater : MonoBehaviour
     [SerializeField]
     ZibraLiquidDetector zone3Detector;
 
+    AssemblyController_Touch controller;
+
     float currentVelocity;
 
     private void checkRelax()
@@ -63,22 +65,34 @@ public class RelaxWater : MonoBehaviour
             //relax water in check housing
             checkValve1ForceField.enabled = false;
             checkValve2ForceField.enabled = false;
-            //relax water @ test cocks
-            if (zone1Detector.ParticlesInside < 50000)
-            {
-                checkValve1ForceField.Strength = 0;
-                checkValve2ForceField.Strength = 0;
-            }
         }
         else
         {
             checkValve1ForceField.enabled = true;
             checkValve2ForceField.enabled = true;
         }
+
+        //relax water @ test cocks
+
+        if (zone1Detector.ParticlesInside < 50000)
+        {
+            controller.OperableTestCockFF.Strength = 0;
+        }
+        else
+        {
+            controller.OperableTestCockFF.Strength = Mathf.Lerp(
+                0,
+                1f,
+                controller.TestCockValveScaleFactor
+            );
+        }
     }
 
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        controller = GetComponent<AssemblyController_Touch>();
+    }
 
     // Update is called once per frame
     void Update()

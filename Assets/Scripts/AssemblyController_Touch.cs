@@ -79,7 +79,13 @@ public class AssemblyController_Touch : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidForceField TestCockFF4;
+
     ZibraLiquidForceField _operableTestCockFF;
+    public ZibraLiquidForceField OperableTestCockFF
+    {
+        get { return _operableTestCockFF; }
+        set { _operableTestCockFF = value; }
+    }
 
     [SerializeField]
     GameObject CheckValve1;
@@ -180,6 +186,12 @@ public class AssemblyController_Touch : MonoBehaviour
     Vector3 _operableValveScale;
     Vector3 _startingTestCockValveScale;
     float testCockClosedYScale;
+    public float TestCockValveScaleFactor
+    {
+        get { return _testCockValveScaleFactor; }
+        private set { _testCockValveScaleFactor = value; }
+    }
+    float _testCockValveScaleFactor;
 
     public float testCockOpenYScale = 0.005f;
 
@@ -441,7 +453,7 @@ public class AssemblyController_Touch : MonoBehaviour
         _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
         _operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
         float shutOffValveScaleFactor = (_operableObjectRotation.z * 0.01f) + 0.1f;
-        float testCockValveScaleFactor = (_operableObjectRotation.z * 0.01f) + 0.1f;
+        _testCockValveScaleFactor = (_operableObjectRotation.z * 0.01f) + 0.1f;
 
         /// <summary>
         /// TestCock Operation
@@ -475,7 +487,7 @@ public class AssemblyController_Touch : MonoBehaviour
             _operableValveScale.y = Mathf.Lerp(
                 testCockClosedYScale,
                 testCockOpenYScale,
-                testCockValveScaleFactor
+                _testCockValveScaleFactor
             );
             _operableValve.transform.localScale = _operableValveScale;
 
@@ -489,7 +501,7 @@ public class AssemblyController_Touch : MonoBehaviour
 
             // manipulate forcefield on test cock
 
-            //moving to relaxwater.cs
+
             //_operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
 
             ///END TEST COCK CHECK
