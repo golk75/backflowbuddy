@@ -73,19 +73,11 @@ public class RelaxWater : MonoBehaviour
         }
 
         //relax water @ test cocks
+    }
 
-        if (zone1Detector.ParticlesInside < 50000)
-        {
-            controller.OperableTestCockFF.Strength = 0;
-        }
-        else
-        {
-            controller.OperableTestCockFF.Strength = Mathf.Lerp(
-                0,
-                1f,
-                controller.TestCockValveScaleFactor
-            );
-        }
+    public void EventResponseTest()
+    {
+        Debug.Log($"Responding");
     }
 
     // Start is called before the first frame update

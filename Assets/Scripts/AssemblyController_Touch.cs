@@ -11,7 +11,8 @@ public class AssemblyController_Touch : MonoBehaviour
     private PlayerInputAction playerInput;
 
     //cameras
-
+    [Header("Events")]
+    public GameEvent shutOffValve1Opened;
 
     //assembly components
     [SerializeField]
@@ -552,6 +553,7 @@ public class AssemblyController_Touch : MonoBehaviour
                     shutOffValveScaleFactor
                 );
                 _operableValve.transform.localScale = lerpedScale;
+                shutOffValve1Opened.Raise();
             }
             /// END SHUTOFF CHECK
         }
