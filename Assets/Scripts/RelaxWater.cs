@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.DataStructures;
 
 public class RelaxWater : MonoBehaviour
 {
@@ -17,9 +18,14 @@ public class RelaxWater : MonoBehaviour
     [SerializeField]
     ZibraLiquidForceField checkValve2ForceField;
 
+    [SerializeField]
+    ZibraLiquidSolverParameters liquidSolverParameters;
+
+    float currentVelocity;
+
     private void checkRelax()
     {
-        if (assemblyController.IsSupplyOn == false || assemblyController_Touch.IsSupplyOn == false)
+        if (assemblyController_Touch.IsSupplyOn == false)
         {
             checkValve1ForceField.enabled = false;
             checkValve2ForceField.enabled = false;
