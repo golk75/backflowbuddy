@@ -268,8 +268,8 @@ public class AssemblyController : MonoBehaviour
 
     public void Operate()
     {
-        var _componentId = _operableObject.GetComponent<OperableParts>().componentId;
-        var _componentType = _operableObject.GetComponent<OperableParts>().partsType;
+        var _componentId = _operableObject.GetComponent<OperableComponentDescription>().componentId;
+        var _componentType = _operableObject.GetComponent<OperableComponentDescription>().partsType;
 
         _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
         IsOperating = true;
@@ -287,24 +287,24 @@ public class AssemblyController : MonoBehaviour
         /// <summary>
         /// TestCock Operation
         /// </summary>
-        if (_componentType == OperableParts.PartsType.TestCock)
+        if (_componentType == OperableComponentDescription.PartsType.TestCock)
         {
             //assign the associated test cock valve game object to currently operating test cock;
             switch (_componentId)
             {
-                case OperableParts.ComponentId.TestCock1:
+                case OperableComponentDescription.ComponentId.TestCock1:
                     _operableValve = TestCockValve1;
                     _operableTestCockFF = TestCockFF1;
                     break;
-                case OperableParts.ComponentId.TestCock2:
+                case OperableComponentDescription.ComponentId.TestCock2:
                     _operableValve = TestCockValve2;
                     _operableTestCockFF = TestCockFF2;
                     break;
-                case OperableParts.ComponentId.TestCock3:
+                case OperableComponentDescription.ComponentId.TestCock3:
                     _operableValve = TestCockValve3;
                     _operableTestCockFF = TestCockFF3;
                     break;
-                case OperableParts.ComponentId.TestCock4:
+                case OperableComponentDescription.ComponentId.TestCock4:
                     _operableValve = TestCockValve4;
                     _operableTestCockFF = TestCockFF4;
                     break;
@@ -338,21 +338,21 @@ public class AssemblyController : MonoBehaviour
         /// need to differentiate ShutoffValve1's supply emiiter from ShutOffValve2's output void..
         /// </summary>
 
-        else if (_componentType == OperableParts.PartsType.ShutOff)
+        else if (_componentType == OperableComponentDescription.PartsType.ShutOff)
         {
             //assign the associated shutoff valve game object to currently operating shutoff;
             switch (_componentId)
             {
-                case OperableParts.ComponentId.ShutOffValve1:
+                case OperableComponentDescription.ComponentId.ShutOffValve1:
                     _operableValve = ShutOffValve1;
                     break;
-                case OperableParts.ComponentId.ShutOffValve2:
+                case OperableComponentDescription.ComponentId.ShutOffValve2:
                     _operableValve = ShutOffValve2;
                     break;
             }
 
             //ShutOffValve1's emitter operation--->
-            if (_componentId == OperableParts.ComponentId.ShutOffValve1)
+            if (_componentId == OperableComponentDescription.ComponentId.ShutOffValve1)
             {
                 supply.VolumePerSimTime = Mathf.Lerp(
                     supplyVolume,
@@ -371,7 +371,7 @@ public class AssemblyController : MonoBehaviour
                 }
             }
             //ShutOffValve2's void operation--->
-            else if (_componentId == OperableParts.ComponentId.ShutOffValve2)
+            else if (_componentId == OperableComponentDescription.ComponentId.ShutOffValve2)
             {
                 Vector3 lerpedScale = Vector3.Lerp(
                     new Vector3(3, 1, 1),

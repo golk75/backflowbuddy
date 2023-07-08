@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OperableParts : MonoBehaviour
+public class OperableComponentDescription : MonoBehaviour
 {
     public enum ComponentId
     {
