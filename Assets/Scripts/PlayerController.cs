@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     PlayerInputAction playerInput;
     public Vector3 touchStart;
-    public InputAction Touch0ContactAction;
-    public InputAction Touch0PositionAction;
+
     public Vector2 primaryTouchPos;
 
     public static event Action onZoomStart;
@@ -87,6 +86,41 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context) { }
+
+    /*
+        public void DetectObjectWithRaycast()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+            ///TODO----------->> create boundry for panning camera; differntiate between zooming and panning->
+    
+            ///check if anything is hit, then if something was hit, check whether it is an operable component or not
+            /// (if it has an OperableComponentDescription component, then it is operable)
+            if (hit.collider != null)
+            {
+                if (
+                    hit.collider.transform.TryGetComponent<OperableComponentDescription>(
+                        out OperableComponentDescription component
+                    )
+                )
+                {
+                    _operableObject = hit.collider.transform.gameObject;
+                    _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+                    IsOperable = true;
+                    //Debug.Log(_operableObject);
+                }
+            }
+            else
+            {
+                if (!isZooming)
+                {
+                    isPanningCamera = true;
+                }
+                //Debug.Log($"Nothing hit!");
+            }
+        }
+        */
 
     void Start() { }
 

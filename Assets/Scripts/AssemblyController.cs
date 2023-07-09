@@ -133,7 +133,7 @@ public class AssemblyController : MonoBehaviour
     public GameObject OperableValve
     {
         get { return _operableValve; }
-        private set { _operableValve = value; }
+        set { _operableValve = value; }
     }
     public bool IsOperable { get; private set; }
     public bool IsOperating { get; private set; }
