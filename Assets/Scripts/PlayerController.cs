@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     PlayerInputAction playerInput;
+    public Vector3 touchStart;
+    public InputAction Touch0ContactAction;
+    public InputAction Touch0PositionAction;
+    public Vector2 primaryTouchPos;
+
+    public static event Action onZoomStart;
+    public static event Action onZoomStop;
 
     // Start is called before the first frame update
     void Awake()
@@ -29,6 +37,9 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         playerInput.Touchscreen.Touch0Delta.canceled += Touch0Delta_canceled;
+        playerInput.Touchscreen.Touch1Contact.started += _ => Touch1Contact_started();
+        playerInput.Touchscreen.Touch1Contact.canceled += _ => Touch1Contact_canceled();
+
         //Touch1
         //playerInput.Touchscreen.Touch1Contact.started += Zoom_started;
         //playerInput.Touchscreen.Touch1Contact.canceled += Zoom_canceled;
@@ -47,6 +58,17 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     ///
     /// </summary>
+    private void Touch1Contact_canceled()
+    {
+        Debug.Log($"Touch1 canceled");
+        onZoomStop?.Invoke();
+    }
+
+    private void Touch1Contact_started()
+    {
+        Debug.Log($"Touch1 started");
+        onZoomStart?.Invoke();
+    }
 
     private void Touch0Delta_started(InputAction.CallbackContext context) { }
 
@@ -57,6 +79,10 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_started(InputAction.CallbackContext context)
     {
+        touchStart = Camera.main.ScreenToWorldPoint(
+            playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
+        );
+
         // DetectObjectWithRaycast();
     }
 
