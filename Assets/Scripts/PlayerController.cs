@@ -14,6 +14,13 @@ public class PlayerController : MonoBehaviour
     public static event Action onZoomStart;
     public static event Action onZoomStop;
 
+    public static event Action onPanStart;
+    public static event Action onPanCanceled;
+
+    public bool isZooming = false;
+
+    public bool isOperableObject = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,16 +64,17 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     ///
     /// </summary>
+    private void Touch1Contact_started()
+    {
+        Debug.Log($"Touch1 started");
+
+        onZoomStart?.Invoke();
+    }
+
     private void Touch1Contact_canceled()
     {
         Debug.Log($"Touch1 canceled");
         onZoomStop?.Invoke();
-    }
-
-    private void Touch1Contact_started()
-    {
-        Debug.Log($"Touch1 started");
-        onZoomStart?.Invoke();
     }
 
     private void Touch0Delta_started(InputAction.CallbackContext context) { }
@@ -81,11 +89,14 @@ public class PlayerController : MonoBehaviour
         touchStart = Camera.main.ScreenToWorldPoint(
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
         );
-
+        onPanStart?.Invoke();
         // DetectObjectWithRaycast();
     }
 
-    private void Touch0Contact_canceled(InputAction.CallbackContext context) { }
+    private void Touch0Contact_canceled(InputAction.CallbackContext context)
+    {
+        onPanCanceled?.Invoke();
+    }
 
     /*
         public void DetectObjectWithRaycast()
@@ -105,6 +116,7 @@ public class PlayerController : MonoBehaviour
                     )
                 )
                 {
+                    isOperableObject = true;
                     _operableObject = hit.collider.transform.gameObject;
                     _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
                     IsOperable = true;

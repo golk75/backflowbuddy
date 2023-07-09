@@ -6,7 +6,11 @@ public class CameraController : MonoBehaviour
 {
     PlayerInputAction playerInput;
     PlayerController playerController;
-    public static Coroutine zoomCoroutine;
+    private Coroutine zoomCoroutine;
+    private Coroutine panCoroutine;
+
+    private bool isZooming;
+    private bool isPanning;
 
     [SerializeField]
     float maxZoom;
@@ -49,6 +53,8 @@ public class CameraController : MonoBehaviour
         playerInput.Enable();
         PlayerController.onZoomStart += Zoom_started;
         PlayerController.onZoomStop += Zoom_canceled;
+        PlayerController.onPanStart += Pan_started;
+        PlayerController.onPanCanceled += Pan_cancled;
     }
 
     void OnDisable()
@@ -56,11 +62,15 @@ public class CameraController : MonoBehaviour
         playerInput.Disable();
         PlayerController.onZoomStart -= Zoom_started;
         PlayerController.onZoomStop -= Zoom_canceled;
+        PlayerController.onPanStart -= Pan_started;
+        PlayerController.onPanCanceled -= Pan_cancled;
     }
 
     /// <summary>
     /// Camera pan
     /// </summary>
+
+    /*
     private void CameraPanning()
     {
         Vector3 difference =
@@ -103,24 +113,84 @@ public class CameraController : MonoBehaviour
             );
         }
     }
+*/
+    IEnumerator PanDectection()
+    {
+        Vector3 difference =
+            playerController.touchStart
+            - Camera.main.ScreenToWorldPoint(
+                playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
+            );
+        while (isPanning == true)
+        {
+            Debug.Log($"PANNNNNNNN");
+            Camera.main.transform.position += difference;
+            //placing bouneries on camera panning
+            if (Camera.main.transform.position.x < panningLeftBoundry)
+            {
+                Camera.main.transform.position = new Vector3(
+                    panningLeftBoundry,
+                    Camera.main.transform.position.y,
+                    Camera.main.transform.position.z
+                );
+            }
+            else if (Camera.main.transform.position.x > panningRightBoundry)
+            {
+                Camera.main.transform.position = new Vector3(
+                    panningRightBoundry,
+                    Camera.main.transform.position.y,
+                    Camera.main.transform.position.z
+                );
+            }
+            if (Camera.main.transform.position.y > panningTopBoundry)
+            {
+                Camera.main.transform.position = new Vector3(
+                    Camera.main.transform.position.x,
+                    panningTopBoundry,
+                    Camera.main.transform.position.z
+                );
+            }
+            else if (Camera.main.transform.position.y < panningBottomBoundry)
+            {
+                Camera.main.transform.position = new Vector3(
+                    Camera.main.transform.position.x,
+                    panningBottomBoundry,
+                    Camera.main.transform.position.z
+                );
+            }
+            yield return null;
+        }
+    }
 
     /// <summary>
     /// Camera zoom
     /// </summary>
 
+    private void Pan_started()
+    {
+        Debug.Log($"Pan started");
+        isPanning = true;
+        panCoroutine = StartCoroutine(PanDectection());
+    }
+
+    private void Pan_cancled()
+    {
+        Debug.Log($"Pan canceled");
+        isPanning = false;
+        StopCoroutine(PanDectection());
+    }
 
     private void Zoom_started()
     {
         Debug.Log($"Zoom started!");
-
+        isZooming = true;
         zoomCoroutine = StartCoroutine(ZoomDetection());
-
-        //isZooming = true;
     }
 
     private void Zoom_canceled()
     {
         Debug.Log($"Zoom canceled!");
+        isZooming = false;
         StopCoroutine(zoomCoroutine);
 
         /*
@@ -141,7 +211,7 @@ public class CameraController : MonoBehaviour
 
         float distance = 0f;
 
-        while (true)
+        while (isZooming == true)
         {
             Debug.Log($"ZOOOOOOOM");
             distance = Vector2.Distance(
