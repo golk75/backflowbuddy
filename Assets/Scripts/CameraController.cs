@@ -9,6 +9,9 @@ public class CameraController : MonoBehaviour
     private Coroutine zoomCoroutine;
     private Coroutine panCoroutine;
 
+    [SerializeField]
+    Camera mainCam;
+
     private bool isZooming;
     private bool isPanning;
 
@@ -23,7 +26,7 @@ public class CameraController : MonoBehaviour
     float zoomingSpeed = 0.001f;
 
     [SerializeField]
-    float panningSpeed;
+    float panningSpeed = 0.01f;
 
     [SerializeField]
     float panningLeftBoundry = -15.0f;
@@ -51,18 +54,18 @@ public class CameraController : MonoBehaviour
     void OnEnable()
     {
         playerInput.Enable();
-        PlayerController.onZoomStart += Zoom_started;
+        // PlayerController.onZoomStart += Zoom_started;
         PlayerController.onZoomStop += Zoom_canceled;
-        PlayerController.onPanStart += Pan_started;
+        //PlayerController.onPanStart += Pan_started;
         PlayerController.onPanCanceled += Pan_cancled;
     }
 
     void OnDisable()
     {
         playerInput.Disable();
-        PlayerController.onZoomStart -= Zoom_started;
+        //PlayerController.onZoomStart -= Zoom_started;
         PlayerController.onZoomStop -= Zoom_canceled;
-        PlayerController.onPanStart -= Pan_started;
+        // PlayerController.onPanStart -= Pan_started;
         PlayerController.onPanCanceled -= Pan_cancled;
     }
 
@@ -116,16 +119,26 @@ public class CameraController : MonoBehaviour
 */
     IEnumerator PanDectection()
     {
-        Vector3 difference =
-            playerController.touchStart
-            - Camera.main.ScreenToWorldPoint(
+        Vector3 pointerOrigin = GetPointerPos();
+
+        while (
+            playerController.primaryTouchStarted == true
+            && playerController.secondaryTouchStarted == false
+        )
+        {
+            Vector3 currentPointerPos = GetPointerPos();
+            Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
+
+            /*
+            currentPos = Camera.main.ScreenToViewportPoint(
                 playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
             );
-        while (isPanning == true)
-        {
-            Debug.Log($"PANNNNNNNN");
-            Camera.main.transform.position += difference;
+            */
+            //  Debug.Log($"PANNNNNNNN--> {Camera.main.transform.position}");
+
             //placing bouneries on camera panning
+            Debug.Log($"targetPointerPos = {targetPointerPosition}");
+            Camera.main.transform.position += -targetPointerPosition * panningSpeed;
             if (Camera.main.transform.position.x < panningLeftBoundry)
             {
                 Camera.main.transform.position = new Vector3(
@@ -158,6 +171,7 @@ public class CameraController : MonoBehaviour
                     Camera.main.transform.position.z
                 );
             }
+
             yield return null;
         }
     }
@@ -166,17 +180,17 @@ public class CameraController : MonoBehaviour
     /// Camera zoom
     /// </summary>
 
+
     private void Pan_started()
     {
-        Debug.Log($"Pan started");
-        isPanning = true;
         panCoroutine = StartCoroutine(PanDectection());
+        Debug.Log($"Pan started");
     }
 
     private void Pan_cancled()
     {
         Debug.Log($"Pan canceled");
-        isPanning = false;
+
         StopCoroutine(PanDectection());
     }
 
@@ -202,6 +216,17 @@ public class CameraController : MonoBehaviour
         */
     }
 
+    Vector3 GetPointerPos()
+    {
+        Vector3 screenPosition = Input.mousePosition;
+
+        // If you're using a perspective camera for parallax,
+        // be sure to assign a depth to this point.
+        // screenPosition.z = 1f;
+
+        return Camera.main.ScreenToWorldPoint(screenPosition);
+    }
+
     IEnumerator ZoomDetection()
     {
         float prevDistance = Vector2.Distance(
@@ -211,7 +236,7 @@ public class CameraController : MonoBehaviour
 
         float distance = 0f;
 
-        while (isZooming == true)
+        while (playerController.secondaryTouchStarted == true)
         {
             Debug.Log($"ZOOOOOOOM");
             distance = Vector2.Distance(
@@ -240,15 +265,34 @@ public class CameraController : MonoBehaviour
                 }
             }
             //keeps track of previous distance for next loop
-            prevDistance = distance;
+
 
             yield return null;
+        }
+    }
+
+    private void CameraMovement()
+    {
+        if (playerController.isOperableObject == false)
+        {
+            if (
+                playerController.secondaryTouchStarted == false
+                && playerController.primaryTouchStarted == true
+            )
+            {
+                Pan_started();
+            }
+            else if (playerController.secondaryTouchStarted)
+            {
+                Zoom_started();
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        CameraMovement();
         //Debug.Log(playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>());
     }
 }
