@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ShutOffValveController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject ShutOffValve1;
+
+    [SerializeField]
+    GameObject ShutOffValve2;
+
     // Start is called before the first frame update
     void Start() { }
 

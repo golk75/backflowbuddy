@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     PlayerInputAction playerInput;
+
+    [SerializeField]
     PlayerController playerController;
     private Coroutine zoomCoroutine;
     private Coroutine panCoroutine;
@@ -68,26 +70,26 @@ public class CameraController : MonoBehaviour
     private void Pan_started()
     {
         panCoroutine = StartCoroutine(PanDectection());
-        Debug.Log($"Pan started");
+        //Debug.Log($"Pan started");
     }
 
     private void Pan_cancled()
     {
-        Debug.Log($"Pan canceled");
+        //Debug.Log($"Pan canceled");
 
         StopCoroutine(PanDectection());
     }
 
     private void Zoom_started()
     {
-        Debug.Log($"Zoom started!");
+        //Debug.Log($"Zoom started!");
         isZooming = true;
         zoomCoroutine = StartCoroutine(ZoomDetection());
     }
 
     private void Zoom_canceled()
     {
-        Debug.Log($"Zoom canceled!");
+        //Debug.Log($"Zoom canceled!");
         isZooming = false;
         StopCoroutine(zoomCoroutine);
     }
@@ -120,7 +122,7 @@ public class CameraController : MonoBehaviour
             Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
 
             //placing bounderies on camera panning
-            Debug.Log($"targetPointerPos = {targetPointerPosition}");
+            //Debug.Log($"targetPointerPos = {targetPointerPosition}");
             Camera.main.transform.position += -targetPointerPosition * panningSpeed;
             if (Camera.main.transform.position.x < panningLeftBoundry)
             {
@@ -174,7 +176,7 @@ public class CameraController : MonoBehaviour
         float distanceDamp = 0.5f;
         while (playerController.secondaryTouchStarted == true)
         {
-            Debug.Log($"ZOOOOOOOM");
+            //Debug.Log($"Zooming");
             distance = Vector2.Distance(
                 playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>(),
                 playerInput.Touchscreen.Touch1Position.ReadValue<Vector2>()
@@ -238,6 +240,5 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         CameraMovement();
-        //Debug.Log(playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>());
     }
 }

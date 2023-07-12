@@ -11,9 +11,14 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 primaryTouchPos;
 
+    //Camera events
     public static event Action onZoomStop;
 
     public static event Action onPanCanceled;
+
+    //Operable component events
+    public static event Action onTestCockOperation;
+    public static event Action onShutOffOperation;
 
     public bool isOperableObject = false;
     public bool primaryTouchStarted = false;
@@ -60,9 +65,9 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    ///
+    ///Input-------------------
     /// </summary>
-    ///
+
 
     private void Touch0Contact_started(InputAction.CallbackContext context)
     {
@@ -70,8 +75,7 @@ public class PlayerController : MonoBehaviour
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
         );
         primaryTouchStarted = context.ReadValueAsButton();
-
-        // DetectObjectWithRaycast();
+        DetectObjectWithRaycast();
     }
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
@@ -82,20 +86,23 @@ public class PlayerController : MonoBehaviour
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
     {
-        Debug.Log($"Touch1 started");
+        //Debug.Log($"Touch1 started");
         secondaryTouchStarted = context.ReadValueAsButton();
     }
 
     private void Touch1Contact_canceled(InputAction.CallbackContext context)
     {
         secondaryTouchStarted = context.ReadValueAsButton();
-        Debug.Log($"Touch1 canceled");
+        //Debug.Log($"Touch1 canceled");
         onZoomStop?.Invoke();
     }
 
     private void Touch0Delta_started(InputAction.CallbackContext context) { }
 
     private void Touch0Delta_canceled(InputAction.CallbackContext context) { }
+
+    /// END INPUT
+    ///-----------------------
 
     public void DetectObjectWithRaycast()
     {
@@ -114,6 +121,9 @@ public class PlayerController : MonoBehaviour
             )
             {
                 isOperableObject = true;
+                OperableComponentCheck(
+                    hit.collider.transform.GetComponent<OperableComponentDescription>()
+                );
             }
             else
             {
@@ -122,8 +132,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Start() { }
+    private void OperableComponentCheck(OperableComponentDescription operableComponent)
+    {
+        Debug.Log(operableComponent.componentId);
+    }
+
+    private void Start() { }
 
     // Update is called once per frame
-    void Update() { }
+    private void Update() { }
 }
