@@ -11,10 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 primaryTouchPos;
 
-    public static event Action onZoomStart;
     public static event Action onZoomStop;
 
-    public static event Action onPanStart;
     public static event Action onPanCanceled;
 
     public bool isOperableObject = false;
