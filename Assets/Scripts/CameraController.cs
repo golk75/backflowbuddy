@@ -6,8 +6,11 @@ public class CameraController : MonoBehaviour
 {
     PlayerInputAction playerInput;
 
+    private PlayerController playerController;
+
     [SerializeField]
-    PlayerController playerController;
+    GameObject playerManager;
+
     private Coroutine zoomCoroutine;
     private Coroutine panCoroutine;
 
@@ -50,7 +53,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        playerController = playerManager.GetComponent<PlayerController>();
     }
 
     void OnEnable()
@@ -239,6 +242,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(playerController.Touch0Position.ReadValue<Vector2>());
         CameraMovement();
     }
 }

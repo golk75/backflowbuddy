@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     PlayerInputAction playerInput;
+    public InputAction Touch0Position;
     public Vector3 touchStart;
 
     public Vector2 primaryTouchPos;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch0Delta.canceled += Touch0Delta_canceled;
         playerInput.Touchscreen.Touch1Contact.started += Touch1Contact_started;
         playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
+        Touch0Position = playerInput.Touchscreen.Touch0Position;
 
         //Touch1
         //playerInput.Touchscreen.Touch1Contact.started += Zoom_started;
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
 
 
-    private void Touch0Contact_started(InputAction.CallbackContext context)
+    public void Touch0Contact_started(InputAction.CallbackContext context)
     {
         touchStart = Camera.main.ScreenToWorldPoint(
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
