@@ -29,9 +29,20 @@ public class ShutOffValveController : MonoBehaviour
     GameObject playerManager;
 
     public ZibraLiquidEmitter mainSupplyEmitter;
+
     float volume;
+
     float shutOffValveScaleFactor;
+
     Vector3 VelocityRef = Vector3.zero;
+
+    private bool _isSupplyOn;
+
+    public bool IsSupplyOn
+    {
+        get { return _isSupplyOn; }
+        set { value = _isSupplyOn; }
+    }
 
     // Start is called before the first frame update
     void Start()

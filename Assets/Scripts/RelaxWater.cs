@@ -7,10 +7,7 @@ using com.zibra.liquid.DataStructures;
 public class RelaxWater : MonoBehaviour
 {
     [SerializeField]
-    AssemblyController assemblyController;
-
-    [SerializeField]
-    AssemblyController_Touch assemblyController_Touch;
+    ZibraLiquidEmitter supplyEmitter;
 
     [SerializeField]
     ZibraLiquidForceField checkValve1ForceField;
@@ -32,6 +29,9 @@ public class RelaxWater : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidForceField testCock4FF;
+
+    [SerializeField]
+    ZibraLiquidForceField supplyFF;
 
     [SerializeField]
     ZibraLiquidDetector testCock1Detector;
@@ -56,11 +56,14 @@ public class RelaxWater : MonoBehaviour
 
     AssemblyController_Touch controller;
 
+    [SerializeField]
+    ShutOffValveController shutOffValveController;
+
     float currentVelocity;
 
     private void checkRelax()
     {
-        if (assemblyController_Touch.IsSupplyOn == false)
+        if (shutOffValveController.IsSupplyOn == false)
         {
             //relax water in check housing
             checkValve1ForceField.enabled = false;
@@ -71,20 +74,14 @@ public class RelaxWater : MonoBehaviour
             checkValve1ForceField.enabled = true;
             checkValve2ForceField.enabled = true;
         }
-
-        //relax water @ test cocks
-    }
-
-    public void EventResponseTest()
-    {
-        Debug.Log($"Responding");
+        if (zone2Detector.ParticlesInside < 20000)
+        {
+            supplyEmitter.VolumePerSimTime /= 2;
+        }
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        controller = GetComponent<AssemblyController_Touch>();
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
