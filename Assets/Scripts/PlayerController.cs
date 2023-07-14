@@ -25,6 +25,38 @@ public class PlayerController : MonoBehaviour
     public bool primaryTouchStarted = false;
     public bool secondaryTouchStarted = false;
 
+    public GameObject OperableObject
+    {
+        get { return _operableObject; }
+        private set { _operableObject = value; }
+    }
+    public GameObject OperableValve
+    {
+        get { return _operableValve; }
+        private set { _operableValve = value; }
+    }
+
+    public Vector3 _operableObjectRotation;
+    Vector3 _operableValveScale;
+
+    public Vector3 OperableObjectRotation
+    {
+        get { return _operableObjectRotation; }
+        private set { _operableObjectRotation = value; }
+    }
+    public Vector3 OperableValveScale
+    {
+        get { return _operableValveScale; }
+        private set { _operableValveScale = value; }
+    }
+    public float deviceRotSensitivity;
+
+    [SerializeField]
+    public GameObject _operableObject;
+
+    [SerializeField]
+    GameObject _operableValve;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -84,6 +116,10 @@ public class PlayerController : MonoBehaviour
     {
         primaryTouchStarted = context.ReadValueAsButton();
         onPanCanceled?.Invoke();
+        _operableObject = null;
+        isOperableObject = false;
+        touchStart = Vector3.zero;
+        _operableObjectRotation = Vector3.zero;
     }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
@@ -123,9 +159,10 @@ public class PlayerController : MonoBehaviour
             )
             {
                 isOperableObject = true;
-                OperableComponentCheck(
-                    hit.collider.transform.GetComponent<OperableComponentDescription>()
-                );
+                _operableObject = hit.collider.transform.gameObject;
+                _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+
+                //GetOperableComponentComponent(hit.collider.transform.gameObject);
             }
             else
             {
@@ -134,13 +171,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OperableComponentCheck(OperableComponentDescription operableComponent)
+    private void Operate()
     {
-        Debug.Log(operableComponent.componentId);
+        //_operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+
+        Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
+        _operableObjectRotation.z +=
+            (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+            * deviceRotSensitivity;
+
+        //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
+        _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+        _operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
+    }
+
+    public void GetOperableComponentComponent(GameObject operableComponent)
+    {
+        _operableObject = operableComponent.gameObject;
+        _operableObjectRotation = operableComponent.transform.rotation.eulerAngles;
     }
 
     private void Start() { }
 
+    /// <summary>
+    /// This will be in the update method to constantly check if the input was intended for assembly operation
+    /// </summary>
+    public void OperateCheck()
+    {
+        if (isOperableObject == true && primaryTouchStarted)
+        {
+            Operate();
+        }
+    }
+
     // Update is called once per frame
-    private void Update() { }
+    private void Update()
+    {
+        OperateCheck();
+    }
 }

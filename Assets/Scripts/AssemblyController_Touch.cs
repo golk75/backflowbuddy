@@ -301,6 +301,7 @@ public class AssemblyController_Touch : MonoBehaviour
         _operableValve = null;
         isPanningCamera = false;
         touchStart = Vector3.zero;
+        _operableObjectRotation = Vector3.zero;
         //Debug.Log($"Primary UNpressed");
     }
 
