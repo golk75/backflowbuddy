@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject _operableValve;
 
+    public bool isInit = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour
 
     public void Touch0Contact_started(InputAction.CallbackContext context)
     {
+        isInit = true;
         touchStart = Camera.main.ScreenToWorldPoint(
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
         );

@@ -9,6 +9,10 @@ public class ShutOffValveController : MonoBehaviour
     public GameObject ShutOffValve1;
 
     [SerializeField]
+    ZibraLiquidCollider supplyCollider;
+    Vector3 supplyColliderPos;
+
+    [SerializeField]
     GameObject ShutOffValve2;
 
     [SerializeField]
@@ -17,8 +21,7 @@ public class ShutOffValveController : MonoBehaviour
     [SerializeField]
     ZibraLiquidForceField supplyFF;
 
-    [SerializeField]
-    float supplyVolume = 20;
+    public float supplyVolume;
 
     [SerializeField]
     float supplyVelocity;
@@ -30,7 +33,7 @@ public class ShutOffValveController : MonoBehaviour
 
     public ZibraLiquidEmitter mainSupplyEmitter;
 
-    float volume;
+    public float volume;
 
     float shutOffValveScaleFactor;
 
@@ -48,6 +51,7 @@ public class ShutOffValveController : MonoBehaviour
     void Start()
     {
         playerController = playerManager.GetComponent<PlayerController>();
+        supplyColliderPos = supplyCollider.transform.position;
     }
 
     private void DeviceOperationCheck()
@@ -59,6 +63,7 @@ public class ShutOffValveController : MonoBehaviour
         {
             //mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp();
             volume = Mathf.Lerp(supplyVolume, 0, playerController.OperableObjectRotation.z / 90);
+
             //supplyFF.Strength = Mathf.SmoothDamp(4, 0, ref VelocityRef.y, 1);
         }
         mainSupplyEmitter.VolumePerSimTime = volume;
@@ -85,6 +90,14 @@ public class ShutOffValveController : MonoBehaviour
     }
 }
 */
+        if (mainSupplyEmitter.VolumePerSimTime > 0)
+        {
+            _isSupplyOn = true;
+        }
+        else
+        {
+            _isSupplyOn = false;
+        }
     }
 
     // Update is called once per frame
