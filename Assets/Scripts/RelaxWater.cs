@@ -63,6 +63,9 @@ public class RelaxWater : MonoBehaviour
     ZibraLiquidDetector zone3Detector;
 
     [SerializeField]
+    ZibraLiquidDetector check1HousingDetector;
+
+    [SerializeField]
     ShutOffValveController shutOffValveController;
 
     [SerializeField]
@@ -70,8 +73,8 @@ public class RelaxWater : MonoBehaviour
 
     SDFObject supplyVoidSDF;
 
-    float skinSurface;
-
+    [SerializeField]
+    ZibraLiquidSolverParameters waterMaxVelocity;
     Vector3 supplyColliderClosedPos = new Vector3(-16, -0.06f, 0.03f);
     Vector3 initSupplyColliderPos;
     Vector3 initSupplyVoidScale;
@@ -82,83 +85,27 @@ public class RelaxWater : MonoBehaviour
     [Range(0, 0.00009f)]
     public float supplyVoidSurfaceDepthLerpFactor;
 
+    [Range(0, 100000)]
+    public float zone1MinCompressionThreshold;
+
+    [Range(0, 3000000)]
+    public float zone1MaxCompressionThreshold;
+
+    [Range(0, 3000000)]
+    public float zone2MinCompressionThreshold;
+
+    [Range(0, 5000000)]
+    public float zone2MaxCompressionThreshold;
     PlayerController playerController;
     public GameObject playerManager;
 
     public float supplyVolume;
 
-    float currentVelocity;
+    float currentVelocity = 0;
 
     private void checkRelax()
     {
-        //Debug.Log((zone2Detector.ParticlesInside + zone2Detector.ParticlesInside) / 150000);
-        //Debug.Log(zone1Detector.ParticlesInside + zone2Detector.ParticlesInside);
         supplyVolume = shutOffValveController.mainSupplyEmitter.VolumePerSimTime;
-        //150,000
-
-        if (
-            zone1Detector.ParticlesInside + zone2Detector.ParticlesInside > 10000
-            && zone1Detector.ParticlesInside + zone2Detector.ParticlesInside < 120000
-        )
-        {
-            //supplyVoidSDF.SurfaceDistance = Mathf.SmoothDamp(0, -1, ref supplyVoidRef.x, 0.1f);
-            /*
-            targetSupplyVoidScale.y = Mathf.Lerp(
-                initSupplyVoidScale.y,
-                initSupplyVoidScale.y + 2,
-                zone1Detector.ParticlesInside + zone2Detector.ParticlesInside
-            );
-
-            supplyVoid.transform.localScale = new Vector3(
-                supplyVoid.transform.localScale.x,
-                targetSupplyVoidScale.y,
-                supplyVoid.transform.localScale.z
-            );
-            */
-            /*
-            supplyVoidSDF.SurfaceDistance = Mathf.Lerp(
-                0,
-                -2,
-                (zone1Detector.ParticlesInside + zone2Detector.ParticlesInside / 2)
-                    * supplyVoidSurfaceDepthLerpFactor
-            );
-            */
-            supplyVoidSDF.SurfaceDistance = Mathf.MoveTowards(
-                supplyVoidSDF.SurfaceDistance,
-                -1,
-                0.01f
-            );
-        }
-        else if (zone3Detector.ParticlesInside > 20000 && zone3Detector.ParticlesInside < 60000)
-        {
-            supplyVoidSDF.SurfaceDistance = Mathf.MoveTowards(
-                supplyVoidSDF.SurfaceDistance,
-                -1,
-                0.01f
-            );
-            /*
-            supplyVoidSDF.SurfaceDistance = Mathf.Lerp(
-                -2,
-                0,
-                (zone1Detector.ParticlesInside + zone2Detector.ParticlesInside / 2)
-                    * supplyVoidSurfaceDepthLerpFactor
-            );
-            */
-        }
-        else if (zone3Detector.ParticlesInside > 60000)
-        {
-            //supplyVoidSDF.SurfaceDistance = 0;
-            supplyVoidSDF.SurfaceDistance = Mathf.MoveTowards(
-                supplyVoidSDF.SurfaceDistance,
-                0,
-                0.001f
-            );
-        }
-        //supplyVoidSDF.SurfaceDistance = Mathf.SmoothDamp(supplyVoidSDF.SurfaceDistance,0,ref supplyVoidRef.x,0.1f);
-
-
-        //zone1Detector+zone2Detector
-
 
         if (shutOffValveController.IsSupplyOn == false)
         {
