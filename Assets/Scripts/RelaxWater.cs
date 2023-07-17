@@ -115,20 +115,17 @@ public class RelaxWater : MonoBehaviour
         //close supply end with collider if shutoff is closed, to keep current volume of water at time of shutoff (protect water from supply void)
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
-
         supplyCollider.transform.position = initSupplyColliderPos + supplyColliderTargetPos;
+
         if (shutOffValveController.IsSupplyOn == false)
         {
-            // checkValve1ForceField.enabled = false;
-            // checkValve2ForceField.enabled = false;
             supplyFF.enabled = false;
         }
         else if (shutOffValveController.IsSupplyOn == true)
         {
-            checkValve1ForceField.enabled = true;
-            checkValve2ForceField.enabled = true;
             supplyFF.enabled = true;
         }
+        //exists only for easily peeking water velocity in inspector without finding the ZibraLiquid in hierarchy
         currentVelocity = waterMaxVelocity.MaximumVelocity;
 
         //Debug.Log($"supplyColliderTargetPos.z = {supplyColliderTargetPos.z / 90}");
