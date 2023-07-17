@@ -63,20 +63,25 @@ public class RelaxWater : MonoBehaviour
     ZibraLiquidDetector zone3Detector;
 
     [SerializeField]
-    ZibraLiquidDetector check1HousingDetector;
-
-    [SerializeField]
     ShutOffValveController shutOffValveController;
 
     [SerializeField]
     ZibraLiquidCollider supplyCollider;
 
-    SDFObject supplyVoidSDF;
-
     [SerializeField]
     ZibraLiquidSolverParameters waterMaxVelocity;
-    Vector3 supplyColliderClosedPos = new Vector3(-16, -0.06f, 0.03f);
+
+    [SerializeField]
+    ConfigurableJoint check1Spring;
+
+    [SerializeField]
+    ConfigurableJoint check2Spring;
+
+    float initialWaterMaxVelocity;
+    Vector3 supplyColliderClosedPos = new Vector3(-15, -0.06f, 0.03f);
     Vector3 initSupplyColliderPos;
+    Vector3 supplyColliderTargetPos;
+
     Vector3 initSupplyVoidScale;
     Vector3 currentSupplyVoidScale;
     Vector3 targetSupplyVoidScale;
@@ -101,7 +106,7 @@ public class RelaxWater : MonoBehaviour
 
     public float supplyVolume;
 
-    float currentVelocity = 0;
+    public float currentVelocity = 0;
 
     private void checkRelax()
     {
@@ -112,7 +117,6 @@ public class RelaxWater : MonoBehaviour
             //relax water in check housing
             checkValve1ForceField.enabled = false;
             checkValve2ForceField.enabled = false;
-            supplyVoidSDF.SurfaceDistance = 0;
         }
         else
         {
@@ -121,21 +125,43 @@ public class RelaxWater : MonoBehaviour
         }
 
         //close supply end with collider if shutoff is closed, to keep current volume of water at time of shutoff (protect water from supply void)
-        if (supplyVolume <= 0 && playerController.isInit == true)
+        supplyColliderTargetPos.x =
+            shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
+
+        supplyCollider.transform.position = initSupplyColliderPos + supplyColliderTargetPos;
+        if (shutOffValveController.IsSupplyOn == false)
         {
-            supplyCollider.transform.position = supplyColliderClosedPos;
+            checkValve1ForceField.enabled = false;
+            checkValve2ForceField.enabled = false;
+            supplyFF.enabled = false;
         }
-        else if (supplyVolume > 0 && playerController.isInit == true)
+        else if (shutOffValveController.IsSupplyOn == true)
         {
-            supplyCollider.transform.position = initSupplyColliderPos;
+            checkValve1ForceField.enabled = true;
+            checkValve2ForceField.enabled = true;
+            supplyFF.enabled = true;
         }
+        currentVelocity = waterMaxVelocity.MaximumVelocity;
+
+        //Debug.Log($"supplyColliderTargetPos.z = {supplyColliderTargetPos.z / 90}");
+        //Debug.Log(shutOffValveController.ShutOffValve1.transform.rotation.eulerAngles);
+        /*
+                if (supplyVolume <= 0 && playerController.isInit == true)
+                {
+                    supplyCollider.transform.position = supplyColliderClosedPos;
+                }
+                else if (supplyVolume > 0 && playerController.isInit == false)
+                {
+                    supplyCollider.transform.position = initSupplyColliderPos;
+                }
+                */
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        supplyVoidSDF = supplyVoid.GetComponent<SDFObject>();
         playerController = playerManager.GetComponent<PlayerController>();
+
         initSupplyColliderPos = supplyCollider.transform.position;
         initSupplyVolume = shutOffValveController.supplyVolume;
         initSupplyVoidScale = supplyVoid.transform.localScale;

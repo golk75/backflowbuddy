@@ -28,11 +28,13 @@ public class ResetButton : MonoBehaviour
         playerController._operableObject = ShutOffValve1;
         ShutOffValve1.transform.eulerAngles = initialShutOffValveRot;
         playerController._operableObjectRotation = initialShutOffValveRot;
+        shutOffValveController.mainSupplyEmitter.VolumePerSimTime = 0f;
         yield return new WaitForSeconds(0.5f);
         Debug.Log($"Coroutine stoppped");
         playerController._operableObjectRotation = Vector3.zero;
         playerController.touchStart = Vector3.zero;
         playerController._operableObject = null;
+
         resetVoid.enabled = false;
     }
 

@@ -63,10 +63,14 @@ public class ShutOffValveController : MonoBehaviour
         {
             //mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp();
             volume = Mathf.Lerp(supplyVolume, 0, playerController.OperableObjectRotation.z / 90);
-
-            //supplyFF.Strength = Mathf.SmoothDamp(4, 0, ref VelocityRef.y, 1);
         }
-        mainSupplyEmitter.VolumePerSimTime = volume;
+        //mainSupplyEmitter.VolumePerSimTime = volume;
+        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp(
+            mainSupplyEmitter.VolumePerSimTime,
+            volume,
+            ref VelocityRef.y,
+            1f
+        );
 
         //mainSupplyEmitter.InitialVelocity.y = Mathf.SmoothDamp(0, 2, ref VelocityRef.y, 0.05f);
         /*
@@ -90,13 +94,15 @@ public class ShutOffValveController : MonoBehaviour
     }
 }
 */
-        if (mainSupplyEmitter.VolumePerSimTime > 0)
+
+
+        if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
         {
-            _isSupplyOn = true;
+            _isSupplyOn = false;
         }
         else
         {
-            _isSupplyOn = false;
+            _isSupplyOn = true;
         }
     }
 
