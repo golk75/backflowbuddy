@@ -18,6 +18,7 @@ TagManager:
   - TC04
   - TC03_void
   - TC04_void
+  - TestCock
   layers:
   - Default
   - TransparentFX

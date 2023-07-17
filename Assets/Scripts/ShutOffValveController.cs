@@ -5,6 +5,11 @@ using com.zibra.liquid.Manipulators;
 
 public class ShutOffValveController : MonoBehaviour
 {
+    private PlayerController playerController;
+
+    [SerializeField]
+    GameObject playerManager;
+
     [SerializeField]
     public GameObject ShutOffValve1;
 
@@ -25,11 +30,6 @@ public class ShutOffValveController : MonoBehaviour
 
     [SerializeField]
     float supplyVelocity;
-
-    private PlayerController playerController;
-
-    [SerializeField]
-    GameObject playerManager;
 
     public ZibraLiquidEmitter mainSupplyEmitter;
 
@@ -54,7 +54,7 @@ public class ShutOffValveController : MonoBehaviour
         supplyColliderPos = supplyCollider.transform.position;
     }
 
-    private void DeviceOperationCheck()
+    private void ShutOffValveOperationCheck()
     {
         shutOffValveScaleFactor = (playerController.OperableObjectRotation.z * 0.1f);
         //Debug.Log(playerController.OperableObject);
@@ -109,6 +109,6 @@ public class ShutOffValveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DeviceOperationCheck();
+        ShutOffValveOperationCheck();
     }
 }
