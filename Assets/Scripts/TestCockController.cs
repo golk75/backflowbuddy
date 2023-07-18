@@ -28,6 +28,18 @@ public class TestCockController : MonoBehaviour
     Vector3 _operableTestCockValveScale;
 
     [SerializeField]
+    GameObject TestCock1;
+
+    [SerializeField]
+    GameObject TestCock2;
+
+    [SerializeField]
+    GameObject TestCock3;
+
+    [SerializeField]
+    GameObject TestCock4;
+
+    [SerializeField]
     ZibraLiquidEmitter TestCockEmitter1;
 
     [SerializeField]
@@ -66,18 +78,16 @@ public class TestCockController : MonoBehaviour
     OperableComponentDescription operableComponentDescription;
     ZibraLiquidForceField _operableTestCockFF;
     Vector3 _startingTestCockValveScale;
-    float testCockClosedYScale;
-    public float TestCockValveScaleFactor
-    {
-        get { return _testCockValveScaleFactor; }
-        private set { _testCockValveScaleFactor = value; }
-    }
-    float _testCockValveScaleFactor;
+    public float testCockClosedYScale;
+
+    public float testCockValveScaleFactor;
 
     public float testCockOpenYScale = 0.005f;
 
     //Vector3 testCockClosedScale = new Vector3(0.00886263326f,0.0028f,0.000265074486f);
     Vector3 testCockClosedScale;
+    public float testCockFFStrength;
+
     public bool TestCockOpenCheck { get; private set; } = false;
     public ZibraLiquidForceField OperableTestCockFF
     {
@@ -93,11 +103,13 @@ public class TestCockController : MonoBehaviour
 
     private void TestCockValveOperationCheck()
     {
+        if (
+            playerController.OperableObject != null
+            && playerController.OperableObject.transform.tag == "TestCock"
+        )
+        {
             operableComponentDescription =
                 playerController.OperableObject.GetComponent<OperableComponentDescription>();
-        
-        if (playerController.OperableObject.tag == "TestCock")
-        {
             switch (operableComponentDescription.componentId)
             {
                 case OperableComponentDescription.ComponentId.TestCock1:
@@ -119,32 +131,43 @@ public class TestCockController : MonoBehaviour
                     _operableTestCockFF = TestCockFF4;
                     break;
             }
+
+            //assign the associated test cock valve game object to currently operating test cock;
+
+            _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
+            /*
+            _operableTestCockValveScale.y = Mathf.SmoothStep(
+                _operableTestCockValve.transform.localScale.y,
+                (playerController.OperableObjectRotation.z / 90) * testCockValveScaleFactor,
+                1f
+            );
+            */
+            _operableTestCockValveScale.y = Mathf.Lerp(
+                testCockClosedYScale,
+                testCockOpenYScale,
+                playerController.OperableObjectRotation.z / 90 * testCockValveScaleFactor
+            );
+
+            _operableTestCockFF.Strength = Mathf.SmoothStep(
+                0,
+                testCockFFStrength,
+                playerController.OperableObjectRotation.z / 90
+            );
+
+            _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
+            /// <summary>
+            /// Might revisit this to scale with checkvalve movement for a more realistic
+            /// operation (ie. test cocks will not open if the psi upstream is not strong enough to open upstream checkvalve)
+            /// </summary>
+
+
+            //testcock valve should still be closable (via Void) while emitter volume scaled with supply volume
+
+            // manipulate forcefield on test cock
+
+
+            //_operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
         }
-
-        //assign the associated test cock valve game object to currently operating test cock;
-
-        _testCockValveScaleFactor = (playerController.OperableObjectRotation.z * 0.01f) + 0.1f;
-        _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
-
-        _operableTestCockValveScale.y = Mathf.Lerp(
-            testCockClosedYScale,
-            testCockOpenYScale,
-            _testCockValveScaleFactor
-        );
-        _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
-
-        /// <summary>
-        /// Might revisit this to scale with checkvalve movement for a more realistic
-        /// operation (ie. test cocks will not open if the psi upstream is not strong enough to open upstream checkvalve)
-        /// </summary>
-
-
-        //testcock valve should still be closable (via Void) while emitter volume scaled with supply volume
-
-        // manipulate forcefield on test cock
-
-
-        //_operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
     }
 
     // Update is called once per frame

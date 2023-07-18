@@ -22,6 +22,26 @@ public class RelaxWater : MonoBehaviour
     ZibraLiquidSolverParameters liquidSolverParameters;
 
     [SerializeField]
+    ZibraLiquidVoid supplyVoid;
+
+    float initSupplyVolume;
+
+    [SerializeField]
+    TestCockController testCockController;
+
+    [SerializeField]
+    GameObject TestCock1;
+
+    [SerializeField]
+    GameObject TestCock2;
+
+    [SerializeField]
+    GameObject TestCock3;
+
+    [SerializeField]
+    GameObject TestCock4;
+
+    [SerializeField]
     ZibraLiquidForceField testCock1FF;
 
     [SerializeField]
@@ -32,14 +52,6 @@ public class RelaxWater : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidForceField testCock4FF;
-
-    [SerializeField]
-    ZibraLiquidForceField supplyFF;
-
-    [SerializeField]
-    ZibraLiquidVoid supplyVoid;
-
-    float initSupplyVolume;
 
     [SerializeField]
     ZibraLiquidDetector testCock1Detector;
@@ -101,8 +113,10 @@ public class RelaxWater : MonoBehaviour
 
     [Range(0, 5000000)]
     public float zone2MaxCompressionThreshold;
-    PlayerController playerController;
+
     public GameObject playerManager;
+
+    private PlayerController playerController;
 
     public float supplyVolume;
 
@@ -117,14 +131,8 @@ public class RelaxWater : MonoBehaviour
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyCollider.transform.position = initSupplyColliderPos + supplyColliderTargetPos;
 
-        if (shutOffValveController.IsSupplyOn == false)
-        {
-            supplyFF.enabled = false;
-        }
-        else if (shutOffValveController.IsSupplyOn == true)
-        {
-            supplyFF.enabled = true;
-        }
+        if (shutOffValveController.IsSupplyOn == false) { }
+        else if (shutOffValveController.IsSupplyOn == true) { }
         //exists only for easily peeking water velocity in inspector without finding the ZibraLiquid in hierarchy
         currentVelocity = waterMaxVelocity.MaximumVelocity;
 
@@ -140,6 +148,15 @@ public class RelaxWater : MonoBehaviour
                     supplyCollider.transform.position = initSupplyColliderPos;
                 }
                 */
+
+        Debug.Log(TestCock3.transform.rotation.eulerAngles.z);
+        if (
+            shutOffValveController.IsSupplyOn == false
+            && TestCock3.transform.rotation.eulerAngles.z > 0
+        )
+        {
+            checkValve1ForceField.enabled = false;
+        }
     }
 
     // Start is called before the first frame update
