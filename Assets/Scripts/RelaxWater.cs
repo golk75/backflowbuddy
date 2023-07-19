@@ -93,6 +93,8 @@ public class RelaxWater : MonoBehaviour
     Vector3 supplyColliderClosedPos = new Vector3(-15, -0.06f, 0.03f);
     Vector3 initSupplyColliderPos;
     Vector3 supplyColliderTargetPos;
+    Vector3 supplyVoidTargetPos;
+    Vector3 initSupplyVoidPos;
 
     Vector3 initSupplyVoidScale;
     Vector3 currentSupplyVoidScale;
@@ -163,7 +165,7 @@ public class RelaxWater : MonoBehaviour
     void Start()
     {
         playerController = playerManager.GetComponent<PlayerController>();
-
+        initSupplyVoidPos = supplyVoid.transform.position;
         initSupplyColliderPos = supplyCollider.transform.position;
         initSupplyVolume = shutOffValveController.supplyVolume;
         initSupplyVoidScale = supplyVoid.transform.localScale;

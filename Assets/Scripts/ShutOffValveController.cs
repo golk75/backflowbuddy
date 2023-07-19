@@ -37,7 +37,7 @@ public class ShutOffValveController : MonoBehaviour
 
     float shutOffValveScaleFactor;
 
-    Vector3 VelocityRef = Vector3.zero;
+    Vector3 VelocityRef = new Vector3(0, 10, 0);
 
     private bool _isSupplyOn;
 
@@ -78,7 +78,7 @@ public class ShutOffValveController : MonoBehaviour
             mainSupplyEmitter.VolumePerSimTime,
             volume,
             ref VelocityRef.y,
-            1f
+            0.5f
         );
 
         //mainSupplyEmitter.InitialVelocity.y = Mathf.SmoothDamp(0, 2, ref VelocityRef.y, 0.05f);
