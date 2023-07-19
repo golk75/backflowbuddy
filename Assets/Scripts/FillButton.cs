@@ -9,7 +9,7 @@ public class FillButton : MonoBehaviour
 {
     ZibraLiquid liquid;
 
-    private void FillDevice()
+    public void FillDevice()
     {
         liquid.InitialState = ZibraLiquid.InitialStateType.BakedLiquidState;
     }
