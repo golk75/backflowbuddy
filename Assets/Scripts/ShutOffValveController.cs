@@ -62,6 +62,7 @@ public class ShutOffValveController : MonoBehaviour
         if (playerController.OperableObject == ShutOffValve1)
         {
             //mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp();
+
             volume = Mathf.Lerp(supplyVolume, 0, playerController.OperableObjectRotation.z / 90f);
         }
         mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
