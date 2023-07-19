@@ -80,11 +80,13 @@ public class TestCockController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidVoid Zone2Void;
-    Vector3 ZoneVoidMaxSize = new Vector3(0.02f, 0.02f, 0.02f);
+    Vector3 ZoneVoidMaxSize = new Vector3(0.04f, 0.02f, 0.02f);
 
     [SerializeField]
     ZibraLiquidVoid Zone3Void;
     OperableComponentDescription operableComponentDescription;
+
+    [SerializeField]
     ZibraLiquidForceField _operableTestCockFF;
     Vector3 _startingTestCockValveScale;
     public float testCockClosedYScale;
@@ -104,6 +106,9 @@ public class TestCockController : MonoBehaviour
         set { _operableTestCockFF = value; }
     }
     ZibraLiquidVoid ZoneVoid;
+
+    [SerializeField]
+    ZibraLiquidDetector TestCockDetector;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +141,7 @@ public class TestCockController : MonoBehaviour
                     _operableTestCockValve = TestCockValve3;
                     _operableTestCockFF = TestCockFF3;
                     ZoneVoid = Zone2Void;
+                    TestCockDetector = TestCockDetector3;
                     break;
                 case OperableComponentDescription.ComponentId.TestCock4:
                     _operableTestCockValve = TestCockValve4;
@@ -163,14 +169,29 @@ public class TestCockController : MonoBehaviour
                 testCockOpenYScale,
                 playerController.OperableObjectRotation.z / 90 * testCockValveScaleFactor
             );
+            /*
+                    _operableTestCockFF.Strength = Mathf.SmoothStep(
+                        0,
+                        testCockFFStrength,
+                        playerController.OperableObjectRotation.z / 90
+                    );
+            */
 
-            _operableTestCockFF.Strength = Mathf.SmoothStep(
-                0,
-                testCockFFStrength,
-                playerController.OperableObjectRotation.z / 90
-            );
+
 
             _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
+            if (TestCockDetector.ParticlesInside > 3000)
+            {
+                _operableTestCockFF.Strength = Mathf.Lerp(
+                    0,
+                    1,
+                    playerController.OperableObjectRotation.z / 90
+                );
+            }
+            else
+            {
+                _operableTestCockFF.Strength = 0;
+            }
 
             //ZoneVoid.transform.localScale += testCockFFStrength;
             /// <summary>
