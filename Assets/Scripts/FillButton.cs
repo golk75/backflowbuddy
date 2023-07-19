@@ -8,6 +8,7 @@ public class FillButton : MonoBehaviour
     public ZibraLiquid liquid;
     public GameObject Check1;
     public GameObject Check2;
+    public ShutOffValveController shutOffValveController;
 
     // Start is called before the first frame update
     void Start() { }
@@ -22,6 +23,7 @@ public class FillButton : MonoBehaviour
 
         Check1.transform.localPosition = new Vector3(-0.10f, 0, -0.08f);
         Check2.transform.localPosition = new Vector3(-0.20f, -2.25f, -0.17f);
+        //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame

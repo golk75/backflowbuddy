@@ -11,18 +11,18 @@ public class TestCockController : MonoBehaviour
     GameObject playerManager;
 
     [SerializeField]
-    GameObject TestCockValve1;
+    ZibraLiquidVoid TestCockValve1;
 
     [SerializeField]
-    GameObject TestCockValve2;
+    ZibraLiquidVoid TestCockValve2;
 
     [SerializeField]
-    GameObject TestCockValve3;
+    ZibraLiquidVoid TestCockValve3;
 
     [SerializeField]
-    GameObject TestCockValve4;
+    ZibraLiquidVoid TestCockValve4;
 
-    GameObject _operableTestCockValve;
+    ZibraLiquidVoid _operableTestCockValve;
     GameObject _operatingTestCock;
 
     Vector3 _operableTestCockValveScale;
@@ -75,6 +75,15 @@ public class TestCockController : MonoBehaviour
     [SerializeField]
     ZibraLiquidForceField TestCockFF4;
 
+    [SerializeField]
+    ZibraLiquidVoid Zone1Void;
+
+    [SerializeField]
+    ZibraLiquidVoid Zone2Void;
+    Vector3 ZoneVoidMaxSize = new Vector3(0.02f, 0.02f, 0.02f);
+
+    [SerializeField]
+    ZibraLiquidVoid Zone3Void;
     OperableComponentDescription operableComponentDescription;
     ZibraLiquidForceField _operableTestCockFF;
     Vector3 _startingTestCockValveScale;
@@ -94,6 +103,7 @@ public class TestCockController : MonoBehaviour
         get { return _operableTestCockFF; }
         set { _operableTestCockFF = value; }
     }
+    ZibraLiquidVoid ZoneVoid;
 
     // Start is called before the first frame update
     void Start()
@@ -125,6 +135,7 @@ public class TestCockController : MonoBehaviour
                 case OperableComponentDescription.ComponentId.TestCock3:
                     _operableTestCockValve = TestCockValve3;
                     _operableTestCockFF = TestCockFF3;
+                    ZoneVoid = Zone2Void;
                     break;
                 case OperableComponentDescription.ComponentId.TestCock4:
                     _operableTestCockValve = TestCockValve4;
@@ -135,6 +146,11 @@ public class TestCockController : MonoBehaviour
             //assign the associated test cock valve game object to currently operating test cock;
 
             _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
+            ZoneVoid.transform.localScale = Vector3.Lerp(
+                Vector3.zero,
+                ZoneVoidMaxSize,
+                playerController.OperableObjectRotation.z / 90
+            );
             /*
             _operableTestCockValveScale.y = Mathf.SmoothStep(
                 _operableTestCockValve.transform.localScale.y,
@@ -155,6 +171,8 @@ public class TestCockController : MonoBehaviour
             );
 
             _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
+
+            //ZoneVoid.transform.localScale += testCockFFStrength;
             /// <summary>
             /// Might revisit this to scale with checkvalve movement for a more realistic
             /// operation (ie. test cocks will not open if the psi upstream is not strong enough to open upstream checkvalve)

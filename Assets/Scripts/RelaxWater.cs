@@ -159,7 +159,7 @@ public class RelaxWater : MonoBehaviour
             && TestCock3.transform.rotation.eulerAngles.z > 0
         )
         {
-            checkValve1ForceField.enabled = false;
+            //checkValve1ForceField.enabled = false;
         }
     }
 
