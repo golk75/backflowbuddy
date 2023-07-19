@@ -90,10 +90,10 @@ public class RelaxWater : MonoBehaviour
     ConfigurableJoint check2Spring;
 
     float initialWaterMaxVelocity;
-    Vector3 supplyColliderClosedPos = new Vector3(-15, -0.06f, 0.03f);
+    Vector3 supplyColliderClosedPos;
     Vector3 initSupplyColliderPos;
-    Vector3 supplyColliderTargetPos;
-    Vector3 supplyVoidTargetPos;
+    Vector3 supplyColliderTargetPos = new Vector3(-15f, 0, 0);
+    Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
     Vector3 initSupplyVoidPos;
 
     Vector3 initSupplyVoidScale;
@@ -129,10 +129,12 @@ public class RelaxWater : MonoBehaviour
         supplyVolume = shutOffValveController.mainSupplyEmitter.VolumePerSimTime;
 
         //close supply end with collider if shutoff is closed, to keep current volume of water at time of shutoff (protect water from supply void)
+
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
-        supplyCollider.transform.position = initSupplyColliderPos + supplyColliderTargetPos;
-
+        supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
+        supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
+        supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
         if (shutOffValveController.IsSupplyOn == false) { }
         else if (shutOffValveController.IsSupplyOn == true) { }
         //exists only for easily peeking water velocity in inspector without finding the ZibraLiquid in hierarchy
@@ -151,7 +153,7 @@ public class RelaxWater : MonoBehaviour
                 }
                 */
 
-        Debug.Log(TestCock3.transform.rotation.eulerAngles.z);
+
         if (
             shutOffValveController.IsSupplyOn == false
             && TestCock3.transform.rotation.eulerAngles.z > 0
@@ -161,13 +163,18 @@ public class RelaxWater : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        initSupplyVoidPos = supplyVoid.transform.localPosition;
+        initSupplyColliderPos = supplyCollider.transform.localPosition;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        playerController = playerManager.GetComponent<PlayerController>();
-        initSupplyVoidPos = supplyVoid.transform.position;
-        initSupplyColliderPos = supplyCollider.transform.position;
         initSupplyVolume = shutOffValveController.supplyVolume;
+        playerController = playerManager.GetComponent<PlayerController>();
+
         initSupplyVoidScale = supplyVoid.transform.localScale;
     }
 

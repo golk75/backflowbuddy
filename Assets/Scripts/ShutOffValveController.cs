@@ -51,7 +51,6 @@ public class ShutOffValveController : MonoBehaviour
     void Start()
     {
         playerController = playerManager.GetComponent<PlayerController>();
-        supplyColliderPos = supplyCollider.transform.position;
     }
 
     private void ShutOffValveOperationCheck()
@@ -68,7 +67,7 @@ public class ShutOffValveController : MonoBehaviour
         mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
             mainSupplyEmitter.VolumePerSimTime,
             volume,
-            0.1f
+            1f
         );
         //mainSupplyEmitter.VolumePerSimTime = volume;
 
