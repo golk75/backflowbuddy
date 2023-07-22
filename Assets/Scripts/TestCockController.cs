@@ -8,7 +8,10 @@ public class TestCockController : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField]
-    GameObject playerManager;
+    GameObject PlayerManager;
+
+    public GameObject WaterManager;
+    RelaxWater relaxWater;
 
     [SerializeField]
     ZibraLiquidVoid TestCockValve1;
@@ -23,7 +26,13 @@ public class TestCockController : MonoBehaviour
     ZibraLiquidVoid TestCockValve4;
 
     ZibraLiquidVoid _operableTestCockValve;
+
     GameObject _operatingTestCock;
+    public GameObject OperatingTestCock
+    {
+        get { return _operatingTestCock; }
+        private set { value = _operatingTestCock; }
+    }
 
     Vector3 _operableTestCockValveScale;
 
@@ -64,6 +73,9 @@ public class TestCockController : MonoBehaviour
     ZibraLiquidDetector TestCockDetector4;
 
     [SerializeField]
+    ZibraLiquidDetector check1Detector;
+
+    [SerializeField]
     ZibraLiquidForceField TestCockFF1;
 
     [SerializeField]
@@ -75,19 +87,16 @@ public class TestCockController : MonoBehaviour
     [SerializeField]
     ZibraLiquidForceField TestCockFF4;
 
-    [SerializeField]
-    ZibraLiquidVoid Zone1Void;
-
-    [SerializeField]
-    ZibraLiquidVoid Zone2Void;
-    Vector3 ZoneVoidMaxSize = new Vector3(0.04f, 0.02f, 0.02f);
-
-    [SerializeField]
-    ZibraLiquidVoid Zone3Void;
     OperableComponentDescription operableComponentDescription;
+    public ZibraLiquidForceField operableTestCockFF;
 
-    [SerializeField]
-    ZibraLiquidForceField _operableTestCockFF;
+    private float _testCockFFStrength;
+    public float TestCockFFStrength
+    {
+        get { return _testCockFFStrength; }
+        private set { value = _testCockFFStrength; }
+    }
+
     Vector3 _startingTestCockValveScale;
     public float testCockClosedYScale;
 
@@ -97,115 +106,124 @@ public class TestCockController : MonoBehaviour
 
     //Vector3 testCockClosedScale = new Vector3(0.00886263326f,0.0028f,0.000265074486f);
     Vector3 testCockClosedScale;
-    public float testCockFFStrength;
 
-    public bool TestCockOpenCheck { get; private set; } = false;
-    public ZibraLiquidForceField OperableTestCockFF
+    public bool isCurrentTestCockOpen { get; private set; } = false;
+    public bool isTestCock1Open { get; private set; } = false;
+    public bool isTestCock2Open { get; private set; } = false;
+    public bool isTestCock3Open { get; private set; } = false;
+    public bool isTestCock4Open { get; private set; } = false;
+
+    private ZibraLiquidVoid _zoneVoid;
+    public ZibraLiquidVoid ZoneVoid
     {
-        get { return _operableTestCockFF; }
-        set { _operableTestCockFF = value; }
+        get { return _zoneVoid; }
+        private set { value = _zoneVoid; }
     }
-    ZibraLiquidVoid ZoneVoid;
+    private ZibraLiquidDetector _testCockDetector;
+    public ZibraLiquidDetector TestCockDetector
+    {
+        get { return _testCockDetector; }
+        private set { value = _testCockDetector; }
+    }
+    private ZibraLiquidDetector _checkZoneDetector;
+    public ZibraLiquidDetector CheckZoneDetector
+    {
+        get { return _checkZoneDetector; }
+        private set { value = _checkZoneDetector; }
+    }
 
-    [SerializeField]
-    ZibraLiquidDetector TestCockDetector;
+    public List<TestCock> TestCockList;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerController = playerManager.GetComponent<PlayerController>();
+        playerController = PlayerManager.GetComponent<PlayerController>();
+        relaxWater = WaterManager.GetComponent<RelaxWater>();
     }
 
     private void TestCockValveOperationCheck()
     {
+        /*
         if (
             playerController.OperableObject != null
             && playerController.OperableObject.transform.tag == "TestCock"
         )
-        {
+        */
+        if (playerController.OperableObject != null)
             operableComponentDescription =
                 playerController.OperableObject.GetComponent<OperableComponentDescription>();
-            switch (operableComponentDescription.componentId)
+
+        if (playerController.isOperableObject == true)
+        {
+            if (
+                operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestCock
+            )
             {
-                case OperableComponentDescription.ComponentId.TestCock1:
+                switch (operableComponentDescription.componentId)
+                {
+                    case OperableComponentDescription.ComponentId.TestCock1:
+                        _operatingTestCock = TestCock1;
+                        _operableTestCockValve = TestCockValve1;
+                        operableTestCockFF = TestCockFF1;
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
 
-                    _operableTestCockValve = TestCockValve1;
-                    _operableTestCockFF = TestCockFF1;
+                        break;
+                    case OperableComponentDescription.ComponentId.TestCock2:
+                        _operatingTestCock = TestCock2;
+                        _operableTestCockValve = TestCockValve2;
+                        operableTestCockFF = TestCockFF2;
 
-                    break;
-                case OperableComponentDescription.ComponentId.TestCock2:
-                    _operableTestCockValve = TestCockValve2;
-                    _operableTestCockFF = TestCockFF2;
-                    break;
-                case OperableComponentDescription.ComponentId.TestCock3:
-                    _operableTestCockValve = TestCockValve3;
-                    _operableTestCockFF = TestCockFF3;
-                    ZoneVoid = Zone2Void;
-                    TestCockDetector = TestCockDetector3;
-                    break;
-                case OperableComponentDescription.ComponentId.TestCock4:
-                    _operableTestCockValve = TestCockValve4;
-                    _operableTestCockFF = TestCockFF4;
-                    break;
-            }
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        break;
+                    case OperableComponentDescription.ComponentId.TestCock3:
+                        _operatingTestCock = TestCock3;
+                        _operableTestCockValve = TestCockValve3;
+                        operableTestCockFF = TestCockFF3;
 
-            //assign the associated test cock valve game object to currently operating test cock;
+                        TestCockDetector = TestCockDetector3;
+                        _checkZoneDetector = check1Detector;
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        break;
+                    case OperableComponentDescription.ComponentId.TestCock4:
+                        _operatingTestCock = TestCock4;
+                        _operableTestCockValve = TestCockValve4;
+                        operableTestCockFF = TestCockFF4;
 
-            _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
-            ZoneVoid.transform.localScale = Vector3.Lerp(
-                Vector3.zero,
-                ZoneVoidMaxSize,
-                playerController.OperableObjectRotation.z / 90
-            );
-            /*
-            _operableTestCockValveScale.y = Mathf.SmoothStep(
-                _operableTestCockValve.transform.localScale.y,
-                (playerController.OperableObjectRotation.z / 90) * testCockValveScaleFactor,
-                1f
-            );
-            */
-            _operableTestCockValveScale.y = Mathf.Lerp(
-                testCockClosedYScale,
-                testCockOpenYScale,
-                playerController.OperableObjectRotation.z / 90 * testCockValveScaleFactor
-            );
-            /*
-                    _operableTestCockFF.Strength = Mathf.SmoothStep(
-                        0,
-                        testCockFFStrength,
-                        playerController.OperableObjectRotation.z / 90
-                    );
-            */
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        break;
+                }
+                //assign the associated test cock valve game object to currently operating test cock;
 
-
-
-            _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
-            if (TestCockDetector.ParticlesInside > 3000)
-            {
-                _operableTestCockFF.Strength = Mathf.Lerp(
-                    0,
-                    1,
-                    playerController.OperableObjectRotation.z / 90
+                _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
+                _operableTestCockValveScale.y = Mathf.Lerp(
+                    testCockClosedYScale,
+                    testCockOpenYScale,
+                    _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
                 );
+
+                _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
+                if (OperatingTestCock.transform.eulerAngles.z > 0)
+                {
+                    isCurrentTestCockOpen = true;
+                }
+                else
+                {
+                    isCurrentTestCockOpen = false;
+                }
+                if (TestCock3.transform.eulerAngles.z > 0)
+                {
+                    isTestCock3Open = true;
+                }
+                else
+                {
+                    isTestCock3Open = false;
+                }
             }
-            else
-            {
-                _operableTestCockFF.Strength = 0;
-            }
-
-            //ZoneVoid.transform.localScale += testCockFFStrength;
-            /// <summary>
-            /// Might revisit this to scale with checkvalve movement for a more realistic
-            /// operation (ie. test cocks will not open if the psi upstream is not strong enough to open upstream checkvalve)
-            /// </summary>
-
-
-            //testcock valve should still be closable (via Void) while emitter volume scaled with supply volume
-
-            // manipulate forcefield on test cock
-
-
-            //_operableTestCockFF.Strength = Mathf.Lerp(0, 1f, testCockValveScaleFactor);
         }
     }
 

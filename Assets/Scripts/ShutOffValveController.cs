@@ -6,6 +6,7 @@ using com.zibra.liquid.Manipulators;
 public class ShutOffValveController : MonoBehaviour
 {
     private PlayerController playerController;
+    OperableComponentDescription operableComponentDescription;
 
     [SerializeField]
     GameObject playerManager;
@@ -55,55 +56,30 @@ public class ShutOffValveController : MonoBehaviour
 
     private void ShutOffValveOperationCheck()
     {
+        if (playerController.OperableObject != null)
+            operableComponentDescription =
+                playerController.OperableObject.GetComponent<OperableComponentDescription>();
+        if (playerController.isOperableObject == true)
+            if (
+                operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.ShutOff
+            )
+                if (
+                    operableComponentDescription.componentId
+                    == OperableComponentDescription.ComponentId.ShutOffValve1
+                )
+                {
+                    ShutOffValve1.transform.eulerAngles = playerController.OperableObjectRotation;
+                }
         shutOffValveScaleFactor = (playerController.OperableObjectRotation.z * 0.1f);
-        //Debug.Log(playerController.OperableObject);
-        //Debug.Log(playerController.OperableObjectRotation.z / 90);
-        if (playerController.OperableObject == ShutOffValve1)
-        {
-            //mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp();
 
-            volume = Mathf.Lerp(supplyVolume, 0, playerController.OperableObjectRotation.z / 90f);
-        }
+        volume = Mathf.Lerp(supplyVolume, 0, ShutOffValve1.transform.eulerAngles.z / 90f);
 
         mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
             mainSupplyEmitter.VolumePerSimTime,
             volume,
             1f
         );
-        //mainSupplyEmitter.VolumePerSimTime = volume;
-
-
-        /*
-        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp(
-            mainSupplyEmitter.VolumePerSimTime,
-            volume,
-            ref VelocityRef.y,
-            0.5f
-        );
-
-        //mainSupplyEmitter.InitialVelocity.y = Mathf.SmoothDamp(0, 2, ref VelocityRef.y, 0.05f);
-        /*
-        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothDamp(
-            mainSupplyEmitter.VolumePerSimTime,
-            volume,
-            ref VelocityRef.y,
-            5f
-        );
-        
-
-        /*
-    // tie test cock emitter volumes to Assembly volume filled (using detectors), so that if the supply is off the test cocks can not output and visa versa
-    if (supply.VolumePerSimTime > 0)
-    {
-        IsSupplyOn = true;
-    }
-    else if (supply.VolumePerSimTime <= 0)
-    {
-        IsSupplyOn = false;
-    }
-}
-*/
-
 
         if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
         {

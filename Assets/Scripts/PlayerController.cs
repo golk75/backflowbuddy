@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    GameObject TestCockManager;
+    TestCockController testCockController;
+    OperableComponentsUsed list;
     PlayerInputAction playerInput;
     public InputAction Touch0Position;
     public Vector3 touchStart;
@@ -24,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public bool isOperableObject = false;
     public bool primaryTouchStarted = false;
     public bool secondaryTouchStarted = false;
-
+    public bool primaryTouchPerformed = false;
     public GameObject OperableObject
     {
         get { return _operableObject; }
@@ -58,36 +62,24 @@ public class PlayerController : MonoBehaviour
     GameObject _operableValve;
 
     public bool isInit = false;
+    public GameObject initialOperableObject;
 
     // Start is called before the first frame update
     void Awake()
     {
         playerInput = new PlayerInputAction();
-        /*
-
-        
-        Checkvalve1InitPos = CheckValve1.transform.localPosition;
-        Checkvalve2InitPos = CheckValve2.transform.localPosition;
-        testCockClosedScale = TestCockValve1.transform.localScale;
-        testCockClosedYScale = testCockClosedScale.y;
-        
-
-        //touch input
-
-
-        */
-        //Touch0
+        list = GetComponent<OperableComponentsUsed>();
+        testCockController = TestCockManager.GetComponent<TestCockController>();
+        //Input
         playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
+        playerInput.Touchscreen.Touch0Contact.performed += Touch0Contact_performed;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         playerInput.Touchscreen.Touch0Delta.canceled += Touch0Delta_canceled;
         playerInput.Touchscreen.Touch1Contact.started += Touch1Contact_started;
         playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
         Touch0Position = playerInput.Touchscreen.Touch0Position;
-
-        //Touch1
-        //playerInput.Touchscreen.Touch1Contact.started += Zoom_started;
-        //playerInput.Touchscreen.Touch1Contact.canceled += Zoom_canceled;
+        _operableObject = initialOperableObject;
     }
 
     void OnEnable()
@@ -118,11 +110,16 @@ public class PlayerController : MonoBehaviour
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
         primaryTouchStarted = context.ReadValueAsButton();
+        primaryTouchPerformed = context.ReadValueAsButton();
         onPanCanceled?.Invoke();
-        _operableObject = null;
+
         isOperableObject = false;
         touchStart = Vector3.zero;
-        _operableObjectRotation = Vector3.zero;
+    }
+
+    private void Touch0Contact_performed(InputAction.CallbackContext context)
+    {
+        primaryTouchPerformed = context.ReadValueAsButton();
     }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
@@ -134,6 +131,7 @@ public class PlayerController : MonoBehaviour
     private void Touch1Contact_canceled(InputAction.CallbackContext context)
     {
         secondaryTouchStarted = context.ReadValueAsButton();
+
         //Debug.Log($"Touch1 canceled");
         onZoomStop?.Invoke();
     }
@@ -164,6 +162,7 @@ public class PlayerController : MonoBehaviour
                 isOperableObject = true;
                 _operableObject = hit.collider.transform.gameObject;
                 _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+                list.AddUsedComponent(_operableObject);
 
                 //GetOperableComponentComponent(hit.collider.transform.gameObject);
             }

@@ -27,6 +27,7 @@ public class RelaxWater : MonoBehaviour
     float initSupplyVolume;
 
     [SerializeField]
+    GameObject TestCockManager;
     TestCockController testCockController;
 
     [SerializeField]
@@ -75,6 +76,12 @@ public class RelaxWater : MonoBehaviour
     ZibraLiquidDetector zone3Detector;
 
     [SerializeField]
+    ZibraLiquidDetector check1Detector;
+
+    [SerializeField]
+    ZibraLiquidDetector check2Detector;
+
+    [SerializeField]
     ShutOffValveController shutOffValveController;
 
     [SerializeField]
@@ -100,21 +107,7 @@ public class RelaxWater : MonoBehaviour
     Vector3 currentSupplyVoidScale;
     Vector3 targetSupplyVoidScale;
     Vector3 supplyVoidRef = Vector3.zero;
-
-    [Range(0, 0.00009f)]
-    public float supplyVoidSurfaceDepthLerpFactor;
-
-    [Range(0, 100000)]
-    public float zone1MinCompressionThreshold;
-
-    [Range(0, 3000000)]
-    public float zone1MaxCompressionThreshold;
-
-    [Range(0, 3000000)]
-    public float zone2MinCompressionThreshold;
-
-    [Range(0, 5000000)]
-    public float zone2MaxCompressionThreshold;
+    float floatRef = 0;
 
     public GameObject playerManager;
 
@@ -124,43 +117,48 @@ public class RelaxWater : MonoBehaviour
 
     public float currentVelocity = 0;
 
+    [SerializeField]
+    private List<GameObject> TestCockList;
+
+    [SerializeField]
+    private GameObject _operatingTestCock;
+
+    public GameObject OperatingTestCock
+    {
+        get { return _operatingTestCock; }
+        private set { value = _operatingTestCock; }
+    }
+    Vector3 ZoneVoidMaxSize = new Vector3(0.04f, 0.02f, 0.02f);
+    public bool isZone1Primed;
+    public bool isZone2Primed;
+    public bool isZone3Primed;
+
+    [Range(1000, 5000)]
+    public float check1ClosingThreshold;
+
+    /// <summary>
+    ///
+    /// Need to find a way to constantly monitor values of x's, and adjust y's accordingly
+    ///
+    /// --find x's and y's
+    /// Y: These should be that I want to be reactive to persistant change.
+    /// things like: force fields, voids, colliders
+    ///
+    /// X: This might only be the water..Or supplyVolume.
+    /// </summary>
     private void checkRelax()
     {
-        supplyVolume = shutOffValveController.mainSupplyEmitter.VolumePerSimTime;
+        //supplyVolume = shutOffValveController.mainSupplyEmitter.VolumePerSimTime;
+        //_operatingTestCock = testCockController.OperatingTestCock;
 
-        //close supply end with collider if shutoff is closed, to keep current volume of water at time of shutoff (protect water from supply void)
-
+        /// <summary>
+        /// //close supply end with collider if shutoff is closed, to keep current volume of water at time of shutoff (protect water from supply void)
+        /// </summary>
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
-        if (shutOffValveController.IsSupplyOn == false) { }
-        else if (shutOffValveController.IsSupplyOn == true) { }
-        //exists only for easily peeking water velocity in inspector without finding the ZibraLiquid in hierarchy
-        currentVelocity = waterMaxVelocity.MaximumVelocity;
-
-        //Debug.Log($"supplyColliderTargetPos.z = {supplyColliderTargetPos.z / 90}");
-        //Debug.Log(shutOffValveController.ShutOffValve1.transform.rotation.eulerAngles);
-        /*
-                if (supplyVolume <= 0 && playerController.isInit == true)
-                {
-                    supplyCollider.transform.position = supplyColliderClosedPos;
-                }
-                else if (supplyVolume > 0 && playerController.isInit == false)
-                {
-                    supplyCollider.transform.position = initSupplyColliderPos;
-                }
-                */
-
-
-        if (
-            shutOffValveController.IsSupplyOn == false
-            && TestCock3.transform.rotation.eulerAngles.z > 0
-        )
-        {
-            //checkValve1ForceField.enabled = false;
-        }
     }
 
     void Awake()
@@ -172,9 +170,9 @@ public class RelaxWater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initSupplyVolume = shutOffValveController.supplyVolume;
         playerController = playerManager.GetComponent<PlayerController>();
-
+        testCockController = TestCockManager.GetComponent<TestCockController>();
+        initSupplyVolume = shutOffValveController.supplyVolume;
         initSupplyVoidScale = supplyVoid.transform.localScale;
     }
 

@@ -12,8 +12,7 @@ public class ResetButton : MonoBehaviour
     public ZibraLiquidEmitter supplyEmitter;
     public PlayerController playerController;
     public ZibraLiquidDetector detector;
-
-    [SerializeField]
+    public TestCockController testCockController;
     ShutOffValveController shutOffValveController;
 
     public void ButtonPress()
@@ -23,17 +22,24 @@ public class ResetButton : MonoBehaviour
 
     IEnumerator Reset()
     {
+        foreach (TestCock testCock in testCockController.TestCockList)
+        {
+            Debug.Log(testCock.description);
+        }
         resetVoid.enabled = true;
         Debug.Log($"Coroutine started");
         playerController._operableObject = ShutOffValve1;
+
         ShutOffValve1.transform.eulerAngles = initialShutOffValveRot;
         playerController._operableObjectRotation = initialShutOffValveRot;
         shutOffValveController.mainSupplyEmitter.VolumePerSimTime = 0f;
         yield return new WaitForSeconds(0.5f);
+        shutOffValveController.mainSupplyEmitter.VolumePerSimTime = 0f;
         Debug.Log($"Coroutine stoppped");
         playerController._operableObjectRotation = Vector3.zero;
         playerController.touchStart = Vector3.zero;
-        playerController._operableObject = null;
+        if (playerController._operableObject != null)
+            playerController._operableObject = null;
 
         resetVoid.enabled = false;
     }
