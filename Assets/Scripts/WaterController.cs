@@ -8,7 +8,11 @@ public class WaterController : MonoBehaviour
     [SerializeField]
     GameObject testCockManager;
 
+    [SerializeField]
+    GameObject shutOffValveManager;
+
     TestCockController testCockController;
+    ShutOffValveController shutOffValveController;
 
     [SerializeField]
     ZibraLiquidDetector TestCockDetector1;
@@ -76,6 +80,7 @@ public class WaterController : MonoBehaviour
     void Start()
     {
         testCockController = testCockManager.GetComponent<TestCockController>();
+        shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
     }
 
     // Update is called once per frame
@@ -85,25 +90,32 @@ public class WaterController : MonoBehaviour
         /// Test cock force fields
         /// </summary>
 
-        if (testCockController.isTestCock3Open)
+        if (shutOffValveController.IsSupplyOn == false)
         {
-            TestCockFF3.Strength = Mathf.SmoothStep(0, 1, (check1Detector.ParticlesInside * 0.01f));
+            if (testCockController.isTestCock3Open)
+            {
+                TestCockFF3.Strength = Mathf.SmoothStep(
+                    0,
+                    1,
+                    (check1Detector.ParticlesInside * 0.01f)
+                );
+            }
+            else
+            {
+                TestCockFF3.Strength = 0;
+            }
+            //may need to figure out what other factors should influence this  void's size
+            Zone2Void.transform.localScale = Vector3.Lerp(
+                Vector3.zero,
+                Zone2VoidMaxSize,
+                TestCockFF3.Strength
+            );
+            Zone3Void.transform.localScale = Vector3.Lerp(
+                Vector3.zero,
+                Zone3VoidMaxSize,
+                TestCockFF3.Strength
+            );
+            check1housing.Strength = TestCockFF3.Strength;
         }
-        else
-        {
-            TestCockFF3.Strength = 0;
-        }
-        //may need to figure out what other factors should influence this  void's size
-        Zone2Void.transform.localScale = Vector3.Lerp(
-            Vector3.zero,
-            Zone2VoidMaxSize,
-            TestCockFF3.Strength
-        );
-        Zone3Void.transform.localScale = Vector3.Lerp(
-            Vector3.zero,
-            Zone3VoidMaxSize,
-            TestCockFF3.Strength
-        );
-        check1housing.Strength = TestCockFF3.Strength;
     }
 }
