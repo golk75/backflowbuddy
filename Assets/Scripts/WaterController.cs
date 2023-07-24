@@ -172,10 +172,11 @@ public class WaterController : MonoBehaviour
                 TestCockFF3.Strength
             );
             */
-            Void_Check2.transform.localScale = Vector3.Lerp(
-                Vector3.zero,
-                check2VoidMaxSize,
-                TestCockFF4.Strength
+            Void_Check2.transform.localScale = Vector3.SmoothDamp(
+                Void_Check2.transform.localScale,
+                check2VoidMaxSize * TestCockFF4.Strength,
+                ref supplyVoidRef,
+                1f
             );
         }
     }
