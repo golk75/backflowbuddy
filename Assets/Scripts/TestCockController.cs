@@ -207,14 +207,25 @@ public class TestCockController : MonoBehaviour
                 );
 
                 _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
-                if (OperatingTestCock.transform.eulerAngles.z > 0)
+                //cache test cock status
+                if (TestCock1.transform.eulerAngles.z > 0)
                 {
-                    isCurrentTestCockOpen = true;
+                    isTestCock1Open = true;
                 }
                 else
                 {
-                    isCurrentTestCockOpen = false;
+                    isTestCock1Open = false;
                 }
+
+                if (TestCock2.transform.eulerAngles.z > 0)
+                {
+                    isTestCock2Open = true;
+                }
+                else
+                {
+                    isTestCock2Open = false;
+                }
+
                 if (TestCock3.transform.eulerAngles.z > 0)
                 {
                     isTestCock3Open = true;
@@ -222,6 +233,15 @@ public class TestCockController : MonoBehaviour
                 else
                 {
                     isTestCock3Open = false;
+                }
+
+                if (TestCock4.transform.eulerAngles.z > 0)
+                {
+                    isTestCock4Open = true;
+                }
+                else
+                {
+                    isTestCock4Open = false;
                 }
             }
         }

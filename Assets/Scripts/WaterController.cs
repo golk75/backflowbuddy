@@ -42,6 +42,9 @@ public class WaterController : MonoBehaviour
     ZibraLiquidDetector check1Detector;
 
     [SerializeField]
+    ZibraLiquidDetector check2Detector;
+
+    [SerializeField]
     ZibraLiquidForceField TestCockFF1;
 
     [SerializeField]
@@ -66,9 +69,9 @@ public class WaterController : MonoBehaviour
     ZibraLiquidVoid Void_Check2;
 
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
-    Vector3 Zone2VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.02f);
+    Vector3 check1VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.02f);
 
-    Vector3 Zone3VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.02f);
+    Vector3 check2VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.02f);
     private ZibraLiquidVoid _zoneVoid;
     public ZibraLiquidVoid ZoneVoid
     {
@@ -121,6 +124,7 @@ public class WaterController : MonoBehaviour
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
 
+        //test cock #3 pressure regulation
         if (testCockController.isTestCock3Open)
         {
             TestCockFF3.Strength = Mathf.SmoothStep(0, 1, (check1Detector.ParticlesInside * 0.01f));
@@ -131,18 +135,47 @@ public class WaterController : MonoBehaviour
         {
             TestCockFF3.Strength = 0;
         }
-        //may need to figure out what other factors should influence this  void's size
+        //test cock #4 pressure regulation
+        if (testCockController.isTestCock4Open)
+        {
+            TestCockFF4.Strength = Mathf.SmoothStep(0, 1, (check2Detector.ParticlesInside * 0.01f));
+            check1housing.Strength = TestCockFF4.Strength;
+            check2housing.Strength = TestCockFF4.Strength;
+        }
+        else
+        {
+            TestCockFF4.Strength = 0;
+        }
+
+        //Remove/release pressure from static device state, upon opening testcock.
+
         if (shutOffValveController.IsSupplyOn == false)
         {
+            Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                Vector3.zero,
+                check1VoidMaxSize,
+                ref supplyVoidRef,
+                1f
+            );
+
+            /*
             Void_Check1.transform.localScale = Vector3.Lerp(
                 Vector3.zero,
-                Zone2VoidMaxSize,
+                check1VoidMaxSize,
                 TestCockFF3.Strength
             );
+            */
+            /*
             Void_Check2.transform.localScale = Vector3.Lerp(
                 Vector3.zero,
                 Zone3VoidMaxSize,
                 TestCockFF3.Strength
+            );
+            */
+            Void_Check2.transform.localScale = Vector3.Lerp(
+                Vector3.zero,
+                check2VoidMaxSize,
+                TestCockFF4.Strength
             );
         }
     }
