@@ -102,7 +102,7 @@ public class TestCockController : MonoBehaviour
 
     public float testCockValveScaleFactor;
 
-    public float testCockOpenYScale = 0.005f;
+    public float testCockOpenYScale = 0.0045f;
 
     //Vector3 testCockClosedScale = new Vector3(0.00886263326f,0.0028f,0.000265074486f);
     Vector3 testCockClosedScale;

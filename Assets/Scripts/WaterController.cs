@@ -69,7 +69,7 @@ public class WaterController : MonoBehaviour
     ZibraLiquidVoid Void_Check2;
 
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
-    Vector3 check1VoidMaxSize = new Vector3(0.040f, 0.0354f, 0.0201f);
+    Vector3 check1VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
 
     Vector3 check2VoidMaxSize = new Vector3(0.040f, 0.0354f, 0.0201f);
     private ZibraLiquidVoid _zoneVoid;
@@ -106,6 +106,7 @@ public class WaterController : MonoBehaviour
     Vector3 testCockFF2Ref = Vector3.zero;
     Vector3 testCockFF3Ref = Vector3.zero;
     Vector3 testCockFF4Ref = Vector3.zero;
+    public float testCock3MaxStr;
 
     // Start is called before the first frame update
     void Start()
@@ -132,12 +133,12 @@ public class WaterController : MonoBehaviour
         //test cock #3 pressure regulation
         if (testCockController.isTestCock3Open)
         {
-            if (check1Detector.ParticlesInside > 500)
+            if (check1Detector.ParticlesInside > 2000)
                 TestCockFF3.Strength = Mathf.SmoothDamp(
                     TestCockFF3.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
                     ref testCockFF3Ref.x,
-                    0.05f
+                    0.005f
                 );
             else
             {
@@ -145,7 +146,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF3.Strength,
                     0,
                     ref testCockFF3Ref.x,
-                    1f
+                    2f
                 );
             }
 
@@ -163,8 +164,8 @@ public class WaterController : MonoBehaviour
         {
             //TestCockFF4.Strength = Mathf.SmoothStep(0, 1, (check2Detector.ParticlesInside * 0.1f));
 
-            TestCockFF3.Strength = Mathf.SmoothDamp(
-                TestCockFF3.Strength,
+            TestCockFF4.Strength = Mathf.SmoothDamp(
+                TestCockFF4.Strength,
                 Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
                 ref testCockFF4Ref.x,
                 0.9f
@@ -207,7 +208,7 @@ public class WaterController : MonoBehaviour
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
                 ref check1VoidRef,
-                6f
+                4f
             );
 
             Void_Check2.transform.localScale = Vector3.SmoothDamp(
