@@ -57,10 +57,10 @@ public class WaterController : MonoBehaviour
     ZibraLiquidForceField TestCockFF4;
 
     [SerializeField]
-    ZibraLiquidForceField check1housing;
+    ZibraLiquidForceField check1housingForceField;
 
     [SerializeField]
-    ZibraLiquidForceField check2housing;
+    ZibraLiquidForceField check2housingForceField;
 
     [SerializeField]
     ZibraLiquidVoid Void_Check1;
@@ -69,9 +69,9 @@ public class WaterController : MonoBehaviour
     ZibraLiquidVoid Void_Check2;
 
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
-    Vector3 check1VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.02f);
+    Vector3 check1VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.0201f);
 
-    Vector3 check2VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.02f);
+    Vector3 check2VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.0201f);
     private ZibraLiquidVoid _zoneVoid;
     public ZibraLiquidVoid ZoneVoid
     {
@@ -100,7 +100,12 @@ public class WaterController : MonoBehaviour
     Vector3 initSupplyVoidScale;
     Vector3 currentSupplyVoidScale;
     Vector3 targetSupplyVoidScale;
-    Vector3 supplyVoidRef = Vector3.zero;
+    Vector3 check1VoidRef = Vector3.zero;
+    Vector3 check2VoidRef = Vector3.zero;
+    Vector3 testCockFF1Ref = Vector3.zero;
+    Vector3 testCockFF2Ref = Vector3.zero;
+    Vector3 testCockFF3Ref = Vector3.zero;
+    Vector3 testCockFF4Ref = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -127,37 +132,51 @@ public class WaterController : MonoBehaviour
         //test cock #3 pressure regulation
         if (testCockController.isTestCock3Open)
         {
-            TestCockFF3.Strength = Mathf.SmoothStep(0, 1, (check1Detector.ParticlesInside * 0.01f));
-            check1housing.Strength = TestCockFF3.Strength;
-            check2housing.Strength = TestCockFF3.Strength;
+            //TestCockFF3.Strength = Mathf.SmoothStep(0, 1, (check1Detector.ParticlesInside * 0.1f));
+
+            TestCockFF3.Strength = Mathf.SmoothDamp(
+                TestCockFF3.Strength,
+                Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
+                ref testCockFF3Ref.x,
+                0.5f
+            );
+
+            check1housingForceField.Strength = TestCockFF3.Strength;
         }
         else
         {
             TestCockFF3.Strength = 0;
+            check1housingForceField.Strength = 1;
         }
+
         //test cock #4 pressure regulation
         if (testCockController.isTestCock4Open)
         {
-            TestCockFF4.Strength = Mathf.SmoothStep(0, 1, (check2Detector.ParticlesInside * 0.01f));
-            check1housing.Strength = TestCockFF4.Strength;
-            check2housing.Strength = TestCockFF4.Strength;
+            //TestCockFF4.Strength = Mathf.SmoothStep(0, 1, (check2Detector.ParticlesInside * 0.1f));
+
+            TestCockFF3.Strength = Mathf.SmoothDamp(
+                TestCockFF3.Strength,
+                Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
+                ref testCockFF4Ref.x,
+                0.5f
+            );
+            check2housingForceField.Strength = TestCockFF4.Strength;
         }
         else
         {
             TestCockFF4.Strength = 0;
+            check2housingForceField.Strength = 1;
         }
 
         //Remove/release pressure from static device state, upon opening testcock.
 
         if (shutOffValveController.IsSupplyOn == false)
         {
-            Void_Check1.transform.localScale = Vector3.SmoothDamp(
+            Void_Check1.transform.localScale = Vector3.MoveTowards(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
-                ref supplyVoidRef,
-                1f
+                0.001f
             );
-
             /*
             Void_Check1.transform.localScale = Vector3.Lerp(
                 Vector3.zero,
@@ -165,19 +184,28 @@ public class WaterController : MonoBehaviour
                 TestCockFF3.Strength
             );
             */
-            /*
+
             Void_Check2.transform.localScale = Vector3.Lerp(
                 Vector3.zero,
-                Zone3VoidMaxSize,
-                TestCockFF3.Strength
+                check2VoidMaxSize,
+                TestCockFF4.Strength * 0.01f
             );
-            */
+            /*
+            Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                Void_Check1.transform.localScale,
+                check1VoidMaxSize * TestCockFF3.Strength,
+                ref check1VoidRef,
+                5f
+            );
+
             Void_Check2.transform.localScale = Vector3.SmoothDamp(
                 Void_Check2.transform.localScale,
                 check2VoidMaxSize * TestCockFF4.Strength,
-                ref supplyVoidRef,
-                1f
+                ref check2VoidRef,
+                0.01f
             );
+            */
         }
+        //checkvalve housing force fields
     }
 }
