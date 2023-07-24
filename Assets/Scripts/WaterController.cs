@@ -152,8 +152,8 @@ public class WaterController : MonoBehaviour
         if (shutOffValveController.IsSupplyOn == false)
         {
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                Vector3.zero,
-                check1VoidMaxSize,
+                Void_Check1.transform.localScale,
+                check1VoidMaxSize * TestCockFF3.Strength,
                 ref supplyVoidRef,
                 1f
             );
