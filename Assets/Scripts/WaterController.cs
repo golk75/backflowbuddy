@@ -69,9 +69,9 @@ public class WaterController : MonoBehaviour
     ZibraLiquidVoid Void_Check2;
 
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
-    Vector3 check1VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.0201f);
+    Vector3 check1VoidMaxSize = new Vector3(0.040f, 0.0354f, 0.0201f);
 
-    Vector3 check2VoidMaxSize = new Vector3(0.0401f, 0.0354f, 0.0201f);
+    Vector3 check2VoidMaxSize = new Vector3(0.040f, 0.0354f, 0.0201f);
     private ZibraLiquidVoid _zoneVoid;
     public ZibraLiquidVoid ZoneVoid
     {
@@ -132,16 +132,25 @@ public class WaterController : MonoBehaviour
         //test cock #3 pressure regulation
         if (testCockController.isTestCock3Open)
         {
-            //TestCockFF3.Strength = Mathf.SmoothStep(0, 1, (check1Detector.ParticlesInside * 0.1f));
+            if (check1Detector.ParticlesInside > 500)
+                TestCockFF3.Strength = Mathf.SmoothDamp(
+                    TestCockFF3.Strength,
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
+                    ref testCockFF3Ref.x,
+                    0.05f
+                );
+            else
+            {
+                TestCockFF3.Strength = Mathf.SmoothDamp(
+                    TestCockFF3.Strength,
+                    0,
+                    ref testCockFF3Ref.x,
+                    1f
+                );
+            }
 
-            TestCockFF3.Strength = Mathf.SmoothDamp(
-                TestCockFF3.Strength,
-                Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
-                ref testCockFF3Ref.x,
-                0.5f
-            );
-
-            check1housingForceField.Strength = TestCockFF3.Strength;
+            //check1housingForceField.Strength = TestCockFF3.Strength;
+            check1housingForceField.Strength = 0;
         }
         else
         {
@@ -158,7 +167,7 @@ public class WaterController : MonoBehaviour
                 TestCockFF3.Strength,
                 Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
                 ref testCockFF4Ref.x,
-                0.5f
+                0.9f
             );
             check2housingForceField.Strength = TestCockFF4.Strength;
         }
@@ -172,30 +181,33 @@ public class WaterController : MonoBehaviour
 
         if (shutOffValveController.IsSupplyOn == false)
         {
+            /*
             Void_Check1.transform.localScale = Vector3.MoveTowards(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
                 0.001f
             );
-            /*
-            Void_Check1.transform.localScale = Vector3.Lerp(
-                Vector3.zero,
-                check1VoidMaxSize,
-                TestCockFF3.Strength
-            );
             */
-
-            Void_Check2.transform.localScale = Vector3.Lerp(
-                Vector3.zero,
-                check2VoidMaxSize,
-                TestCockFF4.Strength * 0.01f
-            );
             /*
+              Void_Check1.transform.localScale = Vector3.Lerp(
+                  Vector3.zero,
+                  check1VoidMaxSize,
+                  TestCockFF3.Strength
+              );
+  
+              Void_Check2.transform.localScale = Vector3.Lerp(
+                  Vector3.zero,
+                  check2VoidMaxSize,
+                  TestCockFF4.Strength * 0.01f
+              );
+              */
+
+
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
                 ref check1VoidRef,
-                5f
+                6f
             );
 
             Void_Check2.transform.localScale = Vector3.SmoothDamp(
@@ -204,7 +216,6 @@ public class WaterController : MonoBehaviour
                 ref check2VoidRef,
                 0.01f
             );
-            */
         }
         //checkvalve housing force fields
     }
