@@ -162,7 +162,6 @@ public class PlayerController : MonoBehaviour
                 isOperableObject = true;
                 _operableObject = hit.collider.transform.gameObject;
                 _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
-                list.AddUsedComponent(_operableObject);
 
                 //GetOperableComponentComponent(hit.collider.transform.gameObject);
             }
