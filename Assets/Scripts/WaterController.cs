@@ -121,19 +121,24 @@ public class WaterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /// <summary>
-        /// Test cock force fields
-        /// </summary>
-
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
+        /// <summary>
+        /// Test cock force fields
+        /// </summary>
 
-        //test cock #3 pressure regulation
         if (testCockController.isTestCock3Open)
         {
+            TestCockFF3.Strength = Mathf.SmoothDamp(
+                TestCockFF3.Strength,
+                Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                ref testCockFF3Ref.x,
+                0.005f
+            );
+            /*
             if (check1Detector.ParticlesInside > 2000)
                 TestCockFF3.Strength = Mathf.SmoothDamp(
                     TestCockFF3.Strength,
@@ -150,64 +155,50 @@ public class WaterController : MonoBehaviour
                     2f
                 );
             }
-
-            //check1housingForceField.Strength = TestCockFF3.Strength;
-            check1housingForceField.Strength = 0;
+            */
         }
         else
         {
             TestCockFF3.Strength = 0;
-            check1housingForceField.Strength = 1;
         }
-
         //test cock #4 pressure regulation
         if (testCockController.isTestCock4Open)
         {
-            //TestCockFF4.Strength = Mathf.SmoothStep(0, 1, (check2Detector.ParticlesInside * 0.1f));
+            TestCockFF4.Strength = Mathf.SmoothDamp(
+                TestCockFF4.Strength,
+                Mathf.Clamp(check2Detector.ParticlesInside, 0, 1) * testCock4MaxStr,
+                ref testCockFF4Ref.x,
+                0.005f
+            );
 
+            /*
             if (check2Detector.ParticlesInside > 2000)
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock4MaxStr),
+                    Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
                     ref testCockFF4Ref.x,
                     0.005f
                 );
             else
             {
-                TestCockFF3.Strength = Mathf.SmoothDamp(
-                    TestCockFF3.Strength,
+                TestCockFF4.Strength = Mathf.SmoothDamp(
+                    TestCockFF4.Strength,
                     0,
-                    ref testCockFF3Ref.x,
+                    ref testCockFF4Ref.x,
                     2f
                 );
             }
+            */
         }
+        else
+        {
+            TestCockFF4.Strength = 0;
+        }
+
         //Remove/release pressure from static device state, upon opening testcock.
 
         if (shutOffValveController.IsSupplyOn == false)
         {
-            /*
-            Void_Check1.transform.localScale = Vector3.MoveTowards(
-                Void_Check1.transform.localScale,
-                check1VoidMaxSize * TestCockFF3.Strength,
-                0.001f
-            );
-            */
-            /*
-              Void_Check1.transform.localScale = Vector3.Lerp(
-                  Vector3.zero,
-                  check1VoidMaxSize,
-                  TestCockFF3.Strength
-              );
-  
-              Void_Check2.transform.localScale = Vector3.Lerp(
-                  Vector3.zero,
-                  check2VoidMaxSize,
-                  TestCockFF4.Strength * 0.01f
-              );
-              */
-
-
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
@@ -219,9 +210,20 @@ public class WaterController : MonoBehaviour
                 Void_Check2.transform.localScale,
                 check2VoidMaxSize * TestCockFF4.Strength,
                 ref check2VoidRef,
-                0.01f
+                6f
             );
+            if (
+                testCockController.isTestCock1Open == true
+                || testCockController.isTestCock2Open == true
+                || testCockController.isTestCock3Open == true
+                || testCockController.isTestCock4Open == true
+            )
+            {
+                {
+                    check1housingForceField.enabled = false;
+                    check2housingForceField.enabled = false;
+                }
+            }
         }
-        //checkvalve housing force fields
     }
 }
