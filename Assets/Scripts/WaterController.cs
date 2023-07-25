@@ -107,6 +107,7 @@ public class WaterController : MonoBehaviour
     Vector3 testCockFF3Ref = Vector3.zero;
     Vector3 testCockFF4Ref = Vector3.zero;
     public float testCock3MaxStr;
+    public float testCock4MaxStr;
 
     // Start is called before the first frame update
     void Start()
@@ -164,20 +165,23 @@ public class WaterController : MonoBehaviour
         {
             //TestCockFF4.Strength = Mathf.SmoothStep(0, 1, (check2Detector.ParticlesInside * 0.1f));
 
-            TestCockFF4.Strength = Mathf.SmoothDamp(
-                TestCockFF4.Strength,
-                Mathf.Clamp(check1Detector.ParticlesInside, 0, 1),
-                ref testCockFF4Ref.x,
-                0.9f
-            );
-            check2housingForceField.Strength = TestCockFF4.Strength;
+            if (check2Detector.ParticlesInside > 2000)
+                TestCockFF4.Strength = Mathf.SmoothDamp(
+                    TestCockFF4.Strength,
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock4MaxStr),
+                    ref testCockFF4Ref.x,
+                    0.005f
+                );
+            else
+            {
+                TestCockFF3.Strength = Mathf.SmoothDamp(
+                    TestCockFF3.Strength,
+                    0,
+                    ref testCockFF3Ref.x,
+                    2f
+                );
+            }
         }
-        else
-        {
-            TestCockFF4.Strength = 0;
-            check2housingForceField.Strength = 1;
-        }
-
         //Remove/release pressure from static device state, upon opening testcock.
 
         if (shutOffValveController.IsSupplyOn == false)
