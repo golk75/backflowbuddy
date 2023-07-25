@@ -71,7 +71,7 @@ public class WaterController : MonoBehaviour
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
     Vector3 check1VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
 
-    Vector3 check2VoidMaxSize = new Vector3(0.040f, 0.0354f, 0.0201f);
+    Vector3 check2VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
     private ZibraLiquidVoid _zoneVoid;
     public ZibraLiquidVoid ZoneVoid
     {
@@ -108,6 +108,8 @@ public class WaterController : MonoBehaviour
     Vector3 testCockFF4Ref = Vector3.zero;
     public float testCock3MaxStr;
     public float testCock4MaxStr;
+    public float testCock2MaxStr;
+    public float testCock1MaxStr;
 
     // Start is called before the first frame update
     void Start()
@@ -132,7 +134,56 @@ public class WaterController : MonoBehaviour
         /// </summary>
 
         //check if device is primed
-
+        if (testCockController.isTestCock1Open)
+        {
+            if (check1Detector.ParticlesInside > 1000)
+            {
+                TestCockFF1.Strength = Mathf.SmoothDamp(
+                    TestCockFF1.Strength,
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock1MaxStr),
+                    ref testCockFF1Ref.x,
+                    0.005f
+                );
+            }
+            else
+            {
+                TestCockFF1.Strength = Mathf.SmoothDamp(
+                    TestCockFF1.Strength,
+                    0,
+                    ref testCockFF1Ref.x,
+                    1f
+                );
+            }
+        }
+        else
+        {
+            TestCockFF1.Strength = 0;
+        }
+        if (testCockController.isTestCock2Open)
+        {
+            if (check1Detector.ParticlesInside > 2000)
+            {
+                TestCockFF2.Strength = Mathf.SmoothDamp(
+                    TestCockFF2.Strength,
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                    ref testCockFF2Ref.x,
+                    0.005f
+                );
+            }
+            else
+            {
+                TestCockFF2.Strength = Mathf.SmoothDamp(
+                    TestCockFF2.Strength,
+                    0,
+                    ref testCockFF2Ref.x,
+                    2f
+                );
+            }
+        }
+        else
+        {
+            TestCockFF2.Strength = 0;
+        }
         if (testCockController.isTestCock3Open)
         {
             if (check1Detector.ParticlesInside > 3000)
@@ -143,24 +194,6 @@ public class WaterController : MonoBehaviour
                     ref testCockFF3Ref.x,
                     0.005f
                 );
-                /*
-                if (check1Detector.ParticlesInside > 2000)
-                    TestCockFF3.Strength = Mathf.SmoothDamp(
-                        TestCockFF3.Strength,
-                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
-                        ref testCockFF3Ref.x,
-                        0.005f
-                    );
-                else
-                {
-                    TestCockFF3.Strength = Mathf.SmoothDamp(
-                        TestCockFF3.Strength,
-                        0,
-                        ref testCockFF3Ref.x,
-                        2f
-                    );
-                }
-                */
             }
             else
             {
@@ -187,24 +220,6 @@ public class WaterController : MonoBehaviour
                     ref testCockFF4Ref.x,
                     0.005f
                 );
-                /*
-                if (check2Detector.ParticlesInside > 2000)
-                    TestCockFF4.Strength = Mathf.SmoothDamp(
-                        TestCockFF4.Strength,
-                        Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
-                        ref testCockFF4Ref.x,
-                        0.005f
-                    );
-                else
-                {
-                    TestCockFF4.Strength = Mathf.SmoothDamp(
-                        TestCockFF4.Strength,
-                        0,
-                        ref testCockFF4Ref.x,
-                        2f
-                    );
-                }
-                */
             }
             else
             {

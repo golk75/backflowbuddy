@@ -14,18 +14,31 @@ public class TestCockController : MonoBehaviour
     RelaxWater relaxWater;
 
     [SerializeField]
-    ZibraLiquidVoid TestCockValve1;
+    ZibraLiquidVoid TestCockVoid1;
 
     [SerializeField]
-    ZibraLiquidVoid TestCockValve2;
+    ZibraLiquidVoid TestCockVoid2;
 
     [SerializeField]
-    ZibraLiquidVoid TestCockValve3;
+    ZibraLiquidVoid TestCockVoid3;
 
     [SerializeField]
-    ZibraLiquidVoid TestCockValve4;
+    ZibraLiquidVoid TestCockVoid4;
 
-    ZibraLiquidVoid _operableTestCockValve;
+    [SerializeField]
+    ZibraLiquidCollider TestCockCollider1;
+
+    [SerializeField]
+    ZibraLiquidCollider TestCockCollider2;
+
+    [SerializeField]
+    ZibraLiquidCollider TestCockCollider3;
+
+    [SerializeField]
+    ZibraLiquidCollider TestCockCollider4;
+
+    ZibraLiquidVoid _operableTestCockVoid;
+    ZibraLiquidCollider _operableTestCockCollider;
 
     GameObject _operatingTestCock;
     public GameObject OperatingTestCock
@@ -33,8 +46,6 @@ public class TestCockController : MonoBehaviour
         get { return _operatingTestCock; }
         private set { value = _operatingTestCock; }
     }
-
-    Vector3 _operableTestCockValveScale;
 
     [SerializeField]
     GameObject TestCock1;
@@ -88,7 +99,6 @@ public class TestCockController : MonoBehaviour
     ZibraLiquidForceField TestCockFF4;
 
     OperableComponentDescription operableComponentDescription;
-    public ZibraLiquidForceField operableTestCockFF;
 
     public float testCockValveScaleFactor;
 
@@ -97,6 +107,9 @@ public class TestCockController : MonoBehaviour
 
     //Open Vector3(0.010200086,0.00762913516,0.000314917503)
     public Vector3 testCockOpenScale = new Vector3(0.010200086f, 0.00762913516f, 0.000314917503f);
+
+    Vector3 _operableTestCockVoidScale;
+    Vector3 _operableTestCockColliderScale;
 
     public bool isCurrentTestCockOpen { get; private set; } = false;
     public bool isTestCock1Open { get; private set; } = false;
@@ -131,7 +144,7 @@ public class TestCockController : MonoBehaviour
     {
         playerController = PlayerManager.GetComponent<PlayerController>();
         relaxWater = WaterManager.GetComponent<RelaxWater>();
-        testCockClosedScale = TestCock1.transform.localScale;
+        testCockClosedScale = TestCockVoid1.transform.localScale;
         // TestCockList = new List<GameObject>();
     }
 
@@ -158,25 +171,23 @@ public class TestCockController : MonoBehaviour
                 {
                     case OperableComponentDescription.ComponentId.TestCock1:
                         _operatingTestCock = TestCock1;
-                        _operableTestCockValve = TestCockValve1;
-                        operableTestCockFF = TestCockFF1;
+                        _operableTestCockVoid = TestCockVoid1;
+                        _operableTestCockCollider = TestCockCollider1;
                         _operatingTestCock.transform.eulerAngles =
                             playerController.OperableObjectRotation;
 
                         break;
                     case OperableComponentDescription.ComponentId.TestCock2:
                         _operatingTestCock = TestCock2;
-                        _operableTestCockValve = TestCockValve2;
-                        operableTestCockFF = TestCockFF2;
-
+                        _operableTestCockVoid = TestCockVoid2;
+                        _operableTestCockCollider = TestCockCollider2;
                         _operatingTestCock.transform.eulerAngles =
                             playerController.OperableObjectRotation;
                         break;
                     case OperableComponentDescription.ComponentId.TestCock3:
                         _operatingTestCock = TestCock3;
-                        _operableTestCockValve = TestCockValve3;
-                        operableTestCockFF = TestCockFF3;
-
+                        _operableTestCockVoid = TestCockVoid3;
+                        _operableTestCockCollider = TestCockCollider3;
                         TestCockDetector = TestCockDetector3;
                         _checkZoneDetector = check1Detector;
                         _operatingTestCock.transform.eulerAngles =
@@ -184,31 +195,27 @@ public class TestCockController : MonoBehaviour
                         break;
                     case OperableComponentDescription.ComponentId.TestCock4:
                         _operatingTestCock = TestCock4;
-                        _operableTestCockValve = TestCockValve4;
-                        operableTestCockFF = TestCockFF4;
-
+                        _operableTestCockVoid = TestCockVoid4;
+                        _operableTestCockCollider = TestCockCollider4;
                         _operatingTestCock.transform.eulerAngles =
                             playerController.OperableObjectRotation;
                         break;
                 }
                 //assign the associated test cock valve game object to currently operating test cock;
 
-                _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
-                /*
-                _operableTestCockValveScale.y = Mathf.Lerp(
-                    testCockClosedYScale,
-                    testCockOpenYScale,
-                    _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
-                );
-                */
+                _operableTestCockColliderScale = _operableTestCockVoidScale = _operableTestCockVoid
+                    .transform
+                    .localScale;
 
-                _operableTestCockValveScale.y = Mathf.Lerp(
+                _operableTestCockVoidScale.y = Mathf.Lerp(
                     testCockClosedScale.y,
                     testCockOpenScale.y,
                     _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
                 );
 
-                _operableTestCockValve.transform.localScale = _operableTestCockValveScale;
+                _operableTestCockCollider.transform.localScale = _operableTestCockVoid
+                    .transform
+                    .localScale = _operableTestCockVoidScale;
                 //cache test cock status
                 if (TestCock1.transform.eulerAngles.z > 0)
                 {
