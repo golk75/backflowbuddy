@@ -9,7 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject TestCockManager;
     TestCockController testCockController;
-    OperableComponentsUsed list;
+
+    [SerializeField]
+    GameObject WaterManager;
+    private WaterController waterController;
+
     PlayerInputAction playerInput;
     public InputAction Touch0Position;
     public Vector3 touchStart;
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
         get { return _operableValveScale; }
         private set { _operableValveScale = value; }
     }
+
     public float deviceRotSensitivity;
 
     [SerializeField]
@@ -63,13 +68,15 @@ public class PlayerController : MonoBehaviour
 
     public bool isInit = false;
     public GameObject initialOperableObject;
+    public OperableComponentDescription operableComponentDescription;
 
     // Start is called before the first frame update
     void Awake()
     {
         playerInput = new PlayerInputAction();
-        list = GetComponent<OperableComponentsUsed>();
+
         testCockController = TestCockManager.GetComponent<TestCockController>();
+        waterController = WaterManager.GetComponent<WaterController>();
         //Input
         playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
@@ -160,10 +167,17 @@ public class PlayerController : MonoBehaviour
             )
             {
                 isOperableObject = true;
+                operableComponentDescription =
+                    hit.collider.transform.GetComponent<OperableComponentDescription>();
                 _operableObject = hit.collider.transform.gameObject;
                 _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
-
-                //GetOperableComponentComponent(hit.collider.transform.gameObject);
+                if (
+                    operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestCock
+                )
+                {
+                    // waterController.AddTestCockToList(_operableObject);
+                }
             }
             else
             {

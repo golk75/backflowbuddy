@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.zibra.liquid.Manipulators;
+using UnityEngine;
 
-[System.Serializable]
-public class TestCock
+[CreateAssetMenu(fileName = "Data", menuName = "TestCock/List", order = 1)]
+public class TestCock : ScriptableObject
 {
     public OperableComponentDescription description;
-
-    public TestCock(OperableComponentDescription componentDescription)
-    {
-        this.description = componentDescription;
-    }
+    public ZibraLiquidCollider testCockCollider;
+    public ZibraLiquidVoid testCockVoid;
 }

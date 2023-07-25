@@ -112,6 +112,7 @@ public class WaterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //TestCockList = new List<GameObject>();
         testCockController = testCockManager.GetComponent<TestCockController>();
         shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
         initSupplyVoidPos = supplyVoid.transform.localPosition;
@@ -130,32 +131,46 @@ public class WaterController : MonoBehaviour
         /// Test cock force fields
         /// </summary>
 
+        //check if device is primed
+
         if (testCockController.isTestCock3Open)
         {
-            TestCockFF3.Strength = Mathf.SmoothDamp(
-                TestCockFF3.Strength,
-                Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
-                ref testCockFF3Ref.x,
-                0.005f
-            );
-            /*
-            if (check1Detector.ParticlesInside > 2000)
+            if (check1Detector.ParticlesInside > 3000)
+            {
                 TestCockFF3.Strength = Mathf.SmoothDamp(
                     TestCockFF3.Strength,
                     Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
                     ref testCockFF3Ref.x,
                     0.005f
                 );
+                /*
+                if (check1Detector.ParticlesInside > 2000)
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                        ref testCockFF3Ref.x,
+                        0.005f
+                    );
+                else
+                {
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        0,
+                        ref testCockFF3Ref.x,
+                        2f
+                    );
+                }
+                */
+            }
             else
             {
                 TestCockFF3.Strength = Mathf.SmoothDamp(
                     TestCockFF3.Strength,
                     0,
                     ref testCockFF3Ref.x,
-                    2f
+                    3f
                 );
             }
-            */
         }
         else
         {
@@ -164,31 +179,42 @@ public class WaterController : MonoBehaviour
         //test cock #4 pressure regulation
         if (testCockController.isTestCock4Open)
         {
-            TestCockFF4.Strength = Mathf.SmoothDamp(
-                TestCockFF4.Strength,
-                Mathf.Clamp(check2Detector.ParticlesInside, 0, 1) * testCock4MaxStr,
-                ref testCockFF4Ref.x,
-                0.005f
-            );
-
-            /*
-            if (check2Detector.ParticlesInside > 2000)
+            if (check2Detector.ParticlesInside > 3000)
+            {
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
                     Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
                     ref testCockFF4Ref.x,
                     0.005f
                 );
+                /*
+                if (check2Detector.ParticlesInside > 2000)
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
+                        TestCockFF4.Strength,
+                        Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
+                        ref testCockFF4Ref.x,
+                        0.005f
+                    );
+                else
+                {
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
+                        TestCockFF4.Strength,
+                        0,
+                        ref testCockFF4Ref.x,
+                        2f
+                    );
+                }
+                */
+            }
             else
             {
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
                     0,
                     ref testCockFF4Ref.x,
-                    2f
+                    3f
                 );
             }
-            */
         }
         else
         {
@@ -199,6 +225,11 @@ public class WaterController : MonoBehaviour
 
         if (shutOffValveController.IsSupplyOn == false)
         {
+            foreach (GameObject testCock in testCockController.TestCockList)
+            {
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+            }
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
@@ -224,6 +255,25 @@ public class WaterController : MonoBehaviour
                     check2housingForceField.enabled = false;
                 }
             }
+            else
+            {
+                check1housingForceField.enabled = true;
+                check2housingForceField.enabled = true;
+            }
+        }
+        else if (shutOffValveController.IsSupplyOn == true)
+        {
+            foreach (GameObject testCock in testCockController.TestCockList)
+            {
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
+                    false;
+            }
+            check1housingForceField.enabled = true;
+            check2housingForceField.enabled = true;
+            Void_Check1.transform.localScale = Vector3.zero;
+
+            Void_Check2.transform.localScale = Vector3.zero;
         }
     }
 }

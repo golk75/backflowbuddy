@@ -22,10 +22,7 @@ public class ResetButton : MonoBehaviour
 
     IEnumerator Reset()
     {
-        foreach (TestCock testCock in testCockController.TestCockList)
-        {
-            Debug.Log(testCock.description);
-        }
+        foreach (GameObject testCock in testCockController.TestCockList) { }
         resetVoid.enabled = true;
         Debug.Log($"Coroutine started");
         playerController._operableObject = ShutOffValve1;

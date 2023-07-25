@@ -90,22 +90,13 @@ public class TestCockController : MonoBehaviour
     OperableComponentDescription operableComponentDescription;
     public ZibraLiquidForceField operableTestCockFF;
 
-    private float _testCockFFStrength;
-    public float TestCockFFStrength
-    {
-        get { return _testCockFFStrength; }
-        private set { value = _testCockFFStrength; }
-    }
-
-    Vector3 _startingTestCockValveScale;
-    public float testCockClosedYScale;
-
     public float testCockValveScaleFactor;
-
-    public float testCockOpenYScale = 0.0045f;
 
     //Vector3 testCockClosedScale = new Vector3(0.00886263326f,0.0028f,0.000265074486f);
     Vector3 testCockClosedScale;
+
+    //Open Vector3(0.010200086,0.00762913516,0.000314917503)
+    public Vector3 testCockOpenScale = new Vector3(0.010200086f, 0.00762913516f, 0.000314917503f);
 
     public bool isCurrentTestCockOpen { get; private set; } = false;
     public bool isTestCock1Open { get; private set; } = false;
@@ -132,13 +123,16 @@ public class TestCockController : MonoBehaviour
         private set { value = _checkZoneDetector; }
     }
 
-    public List<TestCock> TestCockList;
+    [SerializeField]
+    public List<GameObject> TestCockList;
 
     // Start is called before the first frame update
     void Start()
     {
         playerController = PlayerManager.GetComponent<PlayerController>();
         relaxWater = WaterManager.GetComponent<RelaxWater>();
+        testCockClosedScale = TestCock1.transform.localScale;
+        // TestCockList = new List<GameObject>();
     }
 
     private void TestCockValveOperationCheck()
@@ -200,9 +194,17 @@ public class TestCockController : MonoBehaviour
                 //assign the associated test cock valve game object to currently operating test cock;
 
                 _operableTestCockValveScale = _operableTestCockValve.transform.localScale;
+                /*
                 _operableTestCockValveScale.y = Mathf.Lerp(
                     testCockClosedYScale,
                     testCockOpenYScale,
+                    _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
+                );
+                */
+
+                _operableTestCockValveScale.y = Mathf.Lerp(
+                    testCockClosedScale.y,
+                    testCockOpenScale.y,
                     _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
                 );
 
