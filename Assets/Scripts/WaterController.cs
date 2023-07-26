@@ -39,6 +39,9 @@ public class WaterController : MonoBehaviour
     ZibraLiquidDetector TestCockDetector4;
 
     [SerializeField]
+    ZibraLiquidDetector BodyDetectorZone1;
+
+    [SerializeField]
     ZibraLiquidDetector check1Detector;
 
     [SerializeField]
@@ -92,6 +95,9 @@ public class WaterController : MonoBehaviour
         get { return _checkZoneDetector; }
         private set { value = _checkZoneDetector; }
     }
+
+    public GameObject CheckValve1;
+
     Vector3 supplyColliderPos;
     Vector3 supplyColliderClosedPos;
     Vector3 initSupplyColliderPos;
@@ -138,11 +144,11 @@ public class WaterController : MonoBehaviour
         //check if device is primed
         if (testCockController.isTestCock1Open)
         {
-            if (check1Detector.ParticlesInside > 1000)
+            if (BodyDetectorZone1.ParticlesInside > 50000)
             {
                 TestCockFF1.Strength = Mathf.SmoothDamp(
                     TestCockFF1.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock1MaxStr),
+                    Mathf.Clamp(BodyDetectorZone1.ParticlesInside, 0, testCock1MaxStr),
                     ref testCockFF1Ref.x,
                     0.005f
                 );
@@ -163,13 +169,13 @@ public class WaterController : MonoBehaviour
         }
         if (testCockController.isTestCock2Open)
         {
-            if (check1Detector.ParticlesInside > 2000)
+            if (TestCockDetector2.ParticlesInside > 5500)
             {
                 TestCockFF2.Strength = Mathf.SmoothDamp(
                     TestCockFF2.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                    Mathf.Clamp(BodyDetectorZone1.ParticlesInside, 0, testCock2MaxStr),
                     ref testCockFF2Ref.x,
-                    0.005f
+                    0.1f
                 );
             }
             else
