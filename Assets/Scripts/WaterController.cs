@@ -144,7 +144,7 @@ public class WaterController : MonoBehaviour
         //check if device is primed
         if (testCockController.isTestCock1Open)
         {
-            if (BodyDetectorZone1.ParticlesInside > 50000)
+            if (TestCockDetector2.ParticlesInside > 5500)
             {
                 TestCockFF1.Strength = Mathf.SmoothDamp(
                     TestCockFF1.Strength,
@@ -159,7 +159,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF1.Strength,
                     0,
                     ref testCockFF1Ref.x,
-                    1f
+                    2f
                 );
             }
         }
