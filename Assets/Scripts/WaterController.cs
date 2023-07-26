@@ -227,7 +227,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF4.Strength,
                     0,
                     ref testCockFF4Ref.x,
-                    3f
+                    5f
                 );
             }
         }
