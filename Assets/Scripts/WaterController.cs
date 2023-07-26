@@ -106,10 +106,10 @@ public class WaterController : MonoBehaviour
     Vector3 testCockFF2Ref = Vector3.zero;
     Vector3 testCockFF3Ref = Vector3.zero;
     Vector3 testCockFF4Ref = Vector3.zero;
+    public float testCock1MaxStr;
+    public float testCock2MaxStr;
     public float testCock3MaxStr;
     public float testCock4MaxStr;
-    public float testCock2MaxStr;
-    public float testCock1MaxStr;
 
     // Start is called before the first frame update
     void Start()
