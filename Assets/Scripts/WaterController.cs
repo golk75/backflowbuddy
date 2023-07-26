@@ -67,6 +67,8 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidVoid Void_Check2;
+    public float Void_check2ScaleUpSpeed;
+    public float Void_check2ScaleDownSpeed;
 
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
     Vector3 check1VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
@@ -218,7 +220,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF4.Strength,
                     Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
                     ref testCockFF4Ref.x,
-                    0.005f
+                    Void_check2ScaleUpSpeed
                 );
             }
             else
@@ -227,7 +229,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF4.Strength,
                     0,
                     ref testCockFF4Ref.x,
-                    5f
+                    Void_check2ScaleDownSpeed
                 );
             }
         }
