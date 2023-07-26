@@ -175,7 +175,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF2.Strength,
                     Mathf.Clamp(BodyDetectorZone1.ParticlesInside, 0, testCock2MaxStr),
                     ref testCockFF2Ref.x,
-                    0.1f
+                    0.005f
                 );
             }
             else
