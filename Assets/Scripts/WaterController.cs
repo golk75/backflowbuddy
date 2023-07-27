@@ -60,10 +60,10 @@ public class WaterController : MonoBehaviour
     ZibraLiquidForceField TestCockFF4;
 
     [SerializeField]
-    ZibraLiquidForceField check1housingForceField;
+    public ZibraLiquidForceField check1housingForceField;
 
     [SerializeField]
-    ZibraLiquidForceField check2housingForceField;
+    public ZibraLiquidForceField check2housingForceField;
 
     [SerializeField]
     ZibraLiquidVoid Void_Check1;
