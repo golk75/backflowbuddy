@@ -9,10 +9,12 @@ public class FillButton : MonoBehaviour
     public ZibraLiquid liquid;
     public GameObject Check1;
     public GameObject Check2;
+    public GameObject ShutOff1;
     public ShutOffValveController shutOffValveController;
     public TestCockController testCockController;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
+    Vector3 initShutOffRot;
 
     private float checkffVelref;
 
@@ -22,7 +24,11 @@ public class FillButton : MonoBehaviour
     private void Awake() { }
 
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        if (ShutOff1)
+            initShutOffRot = ShutOff1.transform.eulerAngles;
+    }
 
     public void FillDevice()
     {
@@ -34,8 +40,14 @@ public class FillButton : MonoBehaviour
 
         Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
         Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
-
-        //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 0, 0);
+        shutOffValveController.ShutOffValve1.transform.eulerAngles = initShutOffRot;
+        shutOffValveController.ShutOffValve1.transform.Rotate(
+            new Vector3(
+                shutOffValveController.ShutOffValve1.transform.eulerAngles.x,
+                shutOffValveController.ShutOffValve1.transform.eulerAngles.y,
+                90
+            )
+        );
         foreach (GameObject testCock in testCockController.TestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;

@@ -19,6 +19,7 @@ TagManager:
   - TC03_void
   - TC04_void
   - TestCock
+  - Check1BotSeat
   layers:
   - Default
   - TransparentFX
