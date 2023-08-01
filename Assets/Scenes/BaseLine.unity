@@ -777,7 +777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100468278}
   m_Layer: 0
-  m_Name: TestGaugeManager
+  m_Name: TestKitManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
