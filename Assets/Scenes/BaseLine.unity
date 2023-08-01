@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 448393512}
   m_Layer: 5
   m_Name: HighBleedKnob
-  m_TagString: Untagged
+  m_TagString: HighBleed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 920155578}
   m_Layer: 5
   m_Name: HighControlKnob
-  m_TagString: Untagged
+  m_TagString: HighControl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 1028944503}
   m_Layer: 5
   m_Name: BypassKnob
-  m_TagString: Untagged
+  m_TagString: BypassControl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -776,6 +776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100468278}
+  - component: {fileID: 1100468279}
   m_Layer: 0
   m_Name: TestKitManager
   m_TagString: Untagged
@@ -799,6 +800,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100468279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100468277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddb0ce3eb71a4d33b4621cbebd8f181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterController: {fileID: 6991473213321237439}
+  playerController: {fileID: 1446278364}
+  lowBleed: {fileID: 1508745244}
+  lowControl: {fileID: 1808861984}
+  highBleed: {fileID: 448393510}
+  highControl: {fileID: 920155576}
+  bypassControl: {fileID: 1028944501}
+  needle: {fileID: 2072988492}
 --- !u!114 &1103923068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8117723385236119829, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -1101,7 +1122,7 @@ GameObject:
   - component: {fileID: 1508745246}
   m_Layer: 5
   m_Name: LowBleedKnob
-  m_TagString: Untagged
+  m_TagString: LowBleed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1397,7 +1418,7 @@ GameObject:
   - component: {fileID: 1808861986}
   m_Layer: 5
   m_Name: LowControlKnob
-  m_TagString: Untagged
+  m_TagString: LowControl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2268,7 +2289,7 @@ PrefabInstance:
     - target: {fileID: 8030062089417333396, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2803,6 +2824,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9242a77ce9b24fab85cddfa72914f01, type: 3}
+--- !u!114 &6991473213321237439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+    type: 3}
+  m_PrefabInstance: {fileID: 6991473213321237438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306244206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8440566ef4a1d4aa59d3056873c53aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8637847959912836899
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,11 @@ TagManager:
   - TC04_void
   - TestCock
   - Check1BotSeat
+  - LowControl
+  - LowBleed
+  - HighControl
+  - HighBleed
+  - BypassControl
   layers:
   - Default
   - TransparentFX
