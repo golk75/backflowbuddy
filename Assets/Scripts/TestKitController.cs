@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using System;
 
 public class TestKitController : MonoBehaviour
 {
@@ -28,6 +31,16 @@ public class TestKitController : MonoBehaviour
 
     private float currentPSID;
     private float maxPSID;
+
+    void OnEnable()
+    {
+        Actions.OnTestKitOperate += TestKitOperate;
+    }
+
+    void OnDisable()
+    {
+        Actions.OnTestKitOperate -= TestKitOperate;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,12 +70,14 @@ public class TestKitController : MonoBehaviour
         return MinKnob_rotation + normalizedRotation * rotationDiff;
     }
 
-    private void DetectKnob() { }
+    private void TestKitOperate(OperateTestKit testKit)
+    {
+        Debug.Log(testKit.gameObject);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        DetectKnob();
         /*
         currentPSID += 1 * Time.deltaTime;
         if (currentPSID > maxPSID)
