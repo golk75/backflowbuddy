@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject TestCockManager;
     TestCockController testCockController;
+    public TestKitController testKitController;
 
     [SerializeField]
     GameObject WaterManager;
@@ -69,6 +70,8 @@ public class PlayerController : MonoBehaviour
     public bool isInit = false;
     public GameObject initialOperableObject;
     public OperableComponentDescription operableComponentDescription;
+    public Vector2 primaryFingerPos;
+    public Vector2 primaryFingerDelta;
 
     // Start is called before the first frame update
     void Awake()
@@ -85,6 +88,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch0Delta.canceled += Touch0Delta_canceled;
         playerInput.Touchscreen.Touch1Contact.started += Touch1Contact_started;
         playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
+        playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         Touch0Position = playerInput.Touchscreen.Touch0Position;
         _operableObject = initialOperableObject;
     }
@@ -110,6 +114,7 @@ public class PlayerController : MonoBehaviour
         touchStart = Camera.main.ScreenToWorldPoint(
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
         );
+
         primaryTouchStarted = context.ReadValueAsButton();
         DetectObjectWithRaycast();
     }
@@ -121,6 +126,7 @@ public class PlayerController : MonoBehaviour
         onPanCanceled?.Invoke();
 
         isOperableObject = false;
+        testKitController.isOperableObject = false;
         touchStart = Vector3.zero;
     }
 
@@ -143,7 +149,14 @@ public class PlayerController : MonoBehaviour
         onZoomStop?.Invoke();
     }
 
-    private void Touch0Delta_started(InputAction.CallbackContext context) { }
+    private void Touch0Delta_started(InputAction.CallbackContext context)
+    {
+        primaryFingerDelta = new Vector2(
+            (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
+            0
+        );
+        primaryTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
 
     private void Touch0Delta_canceled(InputAction.CallbackContext context) { }
 
@@ -171,13 +184,6 @@ public class PlayerController : MonoBehaviour
                     hit.collider.transform.GetComponent<OperableComponentDescription>();
                 _operableObject = hit.collider.transform.gameObject;
                 _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
-                if (
-                    operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestCock
-                )
-                {
-                    // waterController.AddTestCockToList(_operableObject);
-                }
             }
             else
             {
@@ -190,7 +196,7 @@ public class PlayerController : MonoBehaviour
     {
         //_operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
 
-        Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
+        //Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
         _operableObjectRotation.z +=
             (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
             * deviceRotSensitivity;

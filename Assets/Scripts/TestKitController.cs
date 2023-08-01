@@ -25,12 +25,15 @@ public class TestKitController : MonoBehaviour
 
     //limit knobs to 4 complete rotations (x1 rotation = 360;)->
     private const float MaxKnob_rotation = 1440;
+    private float currentKnobRotCount;
 
     private float currentKnobRotation;
     private float maxKnobRotation;
+    private float minKnobRotation;
 
     private float currentPSID;
     private float maxPSID;
+    public bool isOperableObject;
 
     void OnEnable()
     {
@@ -49,6 +52,7 @@ public class TestKitController : MonoBehaviour
         maxPSID = 15;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
+        minKnobRotation = 0;
     }
 
     private float GetPsidNeedleRotation()
@@ -60,19 +64,70 @@ public class TestKitController : MonoBehaviour
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
     }
 
-    private float GetKnobRoation()
+    private float GetKnobRotation()
     {
         // max - min to rotate left while increasing
         float rotationDiff = MaxKnob_rotation - MinKnob_rotation;
 
         float normalizedRotation = currentKnobRotation / maxKnobRotation;
 
+        //return MinKnob_rotation + normalizedRotation * rotationDiff;
         return MinKnob_rotation + normalizedRotation * rotationDiff;
     }
 
     private void TestKitOperate(OperateTestKit testKit)
     {
-        Debug.Log(testKit.gameObject);
+        currentKnob = testKit.gameObject;
+
+        //currentKnobRotation = testKit.gameObject.transform.eulerAngles.z;
+    }
+
+    /*
+    private void OperateControls()
+    {
+        if (isOperableObject == true)
+        {
+            float counter = 0;
+            currentKnobRotation = (
+                playerController.touchStart.x
+                - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
+            );
+           
+            if (currentKnob.transform.eulerAngles.z > maxKnobRotation)
+            {
+                currentKnobRotation = maxKnobRotation;
+            }
+            //currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRoation());
+            currentKnob.transform.rotation = Quaternion.Euler(
+                new Vector3(0, 0, currentKnob.transform.eulerAngles.z + GetKnobRotation() * 0.5f)
+            );
+            Debug.Log($"isOperableObject= {isOperableObject}; counter = {counter}");
+        }
+    }
+    */
+    private void OperateControls()
+    {
+        if (isOperableObject == true)
+        {
+            currentKnobRotation +=
+                (
+                    playerController.touchStart.x
+                    - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
+                ) / 5;
+
+            //currentKnobRotation += 1 * Time.deltaTime;
+
+            if (currentKnobRotation > maxKnobRotation)
+            {
+                currentKnobRotation = maxKnobRotation;
+            }
+            if (currentKnobRotation < minKnobRotation)
+            {
+                currentKnobRotation = minKnobRotation;
+            }
+
+            currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
+        }
     }
 
     // Update is called once per frame
@@ -86,5 +141,6 @@ public class TestKitController : MonoBehaviour
         }
         needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
         */
+        OperateControls();
     }
 }

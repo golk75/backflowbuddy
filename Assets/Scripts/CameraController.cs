@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     PlayerInputAction playerInput;
 
     private PlayerController playerController;
+    public TestKitController testKitController;
 
     [SerializeField]
     GameObject playerManager;
@@ -223,7 +224,10 @@ public class CameraController : MonoBehaviour
 
     private void CameraMovement()
     {
-        if (playerController.isOperableObject == false)
+        if (
+            playerController.isOperableObject == false
+            && testKitController.isOperableObject == false
+        )
         {
             if (
                 playerController.secondaryTouchStarted == false
