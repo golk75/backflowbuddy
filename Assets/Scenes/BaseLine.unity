@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 448393511}
   - component: {fileID: 448393513}
   - component: {fileID: 448393512}
+  - component: {fileID: 448393514}
   m_Layer: 5
   m_Name: HighBleedKnob
   m_TagString: HighBleed
@@ -441,6 +442,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448393510}
   m_CullTransparentMesh: 1
+--- !u!114 &448393514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448393510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 10
+  partsType: 3
 --- !u!114 &515110408 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2362861173652336466, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -572,6 +587,7 @@ GameObject:
   - component: {fileID: 920155577}
   - component: {fileID: 920155579}
   - component: {fileID: 920155578}
+  - component: {fileID: 920155580}
   m_Layer: 5
   m_Name: HighControlKnob
   m_TagString: HighControl
@@ -637,6 +653,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920155576}
   m_CullTransparentMesh: 1
+--- !u!114 &920155580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920155576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 11
+  partsType: 3
 --- !u!114 &924518176 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5710483862916539990, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -702,6 +732,7 @@ GameObject:
   - component: {fileID: 1028944502}
   - component: {fileID: 1028944504}
   - component: {fileID: 1028944503}
+  - component: {fileID: 1028944505}
   m_Layer: 5
   m_Name: BypassKnob
   m_TagString: BypassControl
@@ -767,6 +798,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028944501}
   m_CullTransparentMesh: 1
+--- !u!114 &1028944505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028944501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 12
+  partsType: 3
 --- !u!1 &1100468277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1165,7 @@ GameObject:
   - component: {fileID: 1508745245}
   - component: {fileID: 1508745247}
   - component: {fileID: 1508745246}
+  - component: {fileID: 1508745248}
   m_Layer: 5
   m_Name: LowBleedKnob
   m_TagString: LowBleed
@@ -1185,6 +1231,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508745244}
   m_CullTransparentMesh: 1
+--- !u!114 &1508745248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508745244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 8
+  partsType: 3
 --- !u!1 &1545699697 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6259366447982672789, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -1416,6 +1476,7 @@ GameObject:
   - component: {fileID: 1808861985}
   - component: {fileID: 1808861987}
   - component: {fileID: 1808861986}
+  - component: {fileID: 1808861988}
   m_Layer: 5
   m_Name: LowControlKnob
   m_TagString: LowControl
@@ -1481,6 +1542,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1808861984}
   m_CullTransparentMesh: 1
+--- !u!114 &1808861988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808861984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 9
+  partsType: 3
 --- !u!114 &1814406243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5465832299868221362, guid: b9242a77ce9b24fab85cddfa72914f01,

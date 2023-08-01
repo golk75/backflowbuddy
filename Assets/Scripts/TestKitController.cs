@@ -15,7 +15,7 @@ public class TestKitController : MonoBehaviour
     public GameObject bypassControl;
 
     public GameObject needle;
-
+    private GameObject currentKnob;
     private const float MinNeedle_rotation = 11;
     private const float MaxNeedle_rotation = -101;
     private const float MinKnob_rotation = 0;
@@ -59,16 +59,37 @@ public class TestKitController : MonoBehaviour
 
     private void DetectKnob()
     {
-        switch (playerController.OperableObject.tag)
         {
-            default:
-
+            switch (playerController.OperableObject.tag)
+            {
+                case "LowControl":
+                    currentKnob = lowControl;
+                    break;
+                case "HighControl":
+                    currentKnob = highControl;
+                    break;
+                case "LowBleed":
+                    currentKnob = lowBleed;
+                    break;
+                case "HighBleed":
+                    currentKnob = highBleed;
+                    break;
+                case "BypassControl":
+                    currentKnob = bypassControl;
+                    break;
+                default:
+                    currentKnob = null;
+                    break;
+            }
+            if (currentKnob != null)
+                currentKnobRotation = currentKnob.transform.eulerAngles.z;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        DetectKnob();
         /*
         currentPSID += 1 * Time.deltaTime;
         if (currentPSID > maxPSID)
@@ -77,10 +98,15 @@ public class TestKitController : MonoBehaviour
         }
         needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
         */
-        currentKnobRotation += 1 * Time.deltaTime;
-        if (currentKnobRotation > maxKnobRotation)
+        if (currentKnob != null)
         {
-            currentKnobRotation = maxKnobRotation;
+            currentKnobRotation += 1 * Time.deltaTime;
+            if (currentKnobRotation > maxKnobRotation)
+            {
+                currentKnobRotation = maxKnobRotation;
+            }
+
+            currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRoation());
         }
     }
 }

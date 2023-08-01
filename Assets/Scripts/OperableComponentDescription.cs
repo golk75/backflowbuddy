@@ -14,6 +14,11 @@ public class OperableComponentDescription : MonoBehaviour
         TestCock4,
         CheckValve1,
         CheckValve2,
+        LowBleed,
+        LowControl,
+        HighBleed,
+        HighControl,
+        BypassControl
     }
 
     public enum PartsType
@@ -21,6 +26,7 @@ public class OperableComponentDescription : MonoBehaviour
         ShutOff,
         TestCock,
         CheckValve,
+        TestKitValve
     }
 
     public ComponentId componentId;
