@@ -59,30 +59,37 @@ public class TestKitController : MonoBehaviour
 
     private void DetectKnob()
     {
+        if (playerController.isOperableObject == true)
         {
-            switch (playerController.OperableObject.tag)
+            if (
+                playerController.operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitValve
+            )
             {
-                case "LowControl":
-                    currentKnob = lowControl;
-                    break;
-                case "HighControl":
-                    currentKnob = highControl;
-                    break;
-                case "LowBleed":
-                    currentKnob = lowBleed;
-                    break;
-                case "HighBleed":
-                    currentKnob = highBleed;
-                    break;
-                case "BypassControl":
-                    currentKnob = bypassControl;
-                    break;
-                default:
-                    currentKnob = null;
-                    break;
+                switch (playerController.operableComponentDescription.componentId)
+                {
+                    case OperableComponentDescription.ComponentId.LowControl:
+                        currentKnob = lowControl;
+                        break;
+                    case OperableComponentDescription.ComponentId.HighControl:
+                        currentKnob = highControl;
+                        break;
+                    case OperableComponentDescription.ComponentId.LowBleed:
+                        currentKnob = lowBleed;
+                        break;
+                    case OperableComponentDescription.ComponentId.HighBleed:
+                        currentKnob = highBleed;
+                        break;
+                    case OperableComponentDescription.ComponentId.BypassControl:
+                        currentKnob = bypassControl;
+                        break;
+                    default:
+                        currentKnob = null;
+                        break;
+                }
+                if (currentKnob != null)
+                    currentKnobRotation = currentKnob.transform.eulerAngles.z;
             }
-            if (currentKnob != null)
-                currentKnobRotation = currentKnob.transform.eulerAngles.z;
         }
     }
 
