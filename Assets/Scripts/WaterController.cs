@@ -78,6 +78,10 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidVoid Void_Check2;
+
+    [SerializeField]
+    ZibraLiquidVoid Void_Check1TC1;
+
     public float Void_check2ScaleUpSpeed;
     public float Void_check2ScaleDownSpeed;
 
@@ -85,12 +89,7 @@ public class WaterController : MonoBehaviour
     Vector3 check1VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
 
     Vector3 check2VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
-    private ZibraLiquidVoid _zoneVoid;
-    public ZibraLiquidVoid ZoneVoid
-    {
-        get { return _zoneVoid; }
-        private set { value = _zoneVoid; }
-    }
+
     private ZibraLiquidDetector _testCockDetector;
     public ZibraLiquidDetector TestCockDetector
     {
@@ -118,6 +117,9 @@ public class WaterController : MonoBehaviour
     Vector3 targetSupplyVoidScale;
     Vector3 check1VoidRef = Vector3.zero;
     Vector3 check2VoidRef = Vector3.zero;
+    Vector3 check1VoidTC1Ref = Vector3.zero;
+    Vector3 check1FFref = Vector3.zero;
+    Vector3 check2FFref = Vector3.zero;
     Vector3 testCockFF1Ref = Vector3.zero;
     Vector3 testCockFF2Ref = Vector3.zero;
     Vector3 testCockFF3Ref = Vector3.zero;
@@ -173,15 +175,9 @@ public class WaterController : MonoBehaviour
                     TestCockFF1.Strength,
                     0,
                     ref testCockFF1Ref.x,
-                    1f
+                    2f
                 );
             }
-            Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                Void_Check1.transform.localScale,
-                check1VoidMaxSize * TestCockFF1.Strength * 0.1f,
-                ref check1VoidRef,
-                2f
-            );
         }
         else
         {
@@ -189,11 +185,11 @@ public class WaterController : MonoBehaviour
         }
         if (testCockController.isTestCock2Open)
         {
-            if (TestCockDetector2.ParticlesInside > 5500)
+            if (check1Detector.ParticlesInside > 3000)
             {
                 TestCockFF2.Strength = Mathf.SmoothDamp(
                     TestCockFF2.Strength,
-                    Mathf.Clamp(BodyDetectorZone1.ParticlesInside, 0, testCock2MaxStr),
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
                     ref testCockFF2Ref.x,
                     0.005f
                 );
@@ -204,15 +200,9 @@ public class WaterController : MonoBehaviour
                     TestCockFF2.Strength,
                     0,
                     ref testCockFF2Ref.x,
-                    2f
+                    1f
                 );
             }
-            Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                Void_Check1.transform.localScale,
-                check1VoidMaxSize * TestCockFF2.Strength * 0.1f,
-                ref check1VoidRef,
-                3f
-            );
         }
         else
         {
@@ -238,12 +228,6 @@ public class WaterController : MonoBehaviour
                     3f
                 );
             }
-            Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                Void_Check1.transform.localScale,
-                check1VoidMaxSize * TestCockFF3.Strength,
-                ref check1VoidRef,
-                4f
-            );
         }
         else
         {
@@ -270,12 +254,6 @@ public class WaterController : MonoBehaviour
                     Void_check2ScaleDownSpeed
                 );
             }
-            Void_Check2.transform.localScale = Vector3.SmoothDamp(
-                Void_Check2.transform.localScale,
-                check1VoidMaxSize * TestCockFF4.Strength,
-                ref check1VoidRef,
-                6f
-            );
         }
         else
         {
@@ -317,6 +295,25 @@ public class WaterController : MonoBehaviour
                     check2housingForceField.Strength = 1;
                 }
             }
+            Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                Void_Check1.transform.localScale,
+                check1VoidMaxSize * TestCockFF3.Strength,
+                ref check1VoidRef,
+                4f
+            );
+
+            Void_Check2.transform.localScale = Vector3.SmoothDamp(
+                Void_Check2.transform.localScale,
+                check2VoidMaxSize * TestCockFF4.Strength,
+                ref check2VoidRef,
+                6f
+            );
+            Void_Check1TC1.transform.localScale = Vector3.SmoothDamp(
+                Void_Check1TC1.transform.localScale,
+                check1VoidMaxSize * TestCockFF2.Strength / 8,
+                ref check1VoidTC1Ref,
+                5f
+            );
         }
         else if (shutOffValveController.IsSupplyOn == true)
         {
@@ -327,28 +324,24 @@ public class WaterController : MonoBehaviour
                     false;
             }
             //while shutoff valve is open regulate ff in check housing according to amount of water being supplied supply
-            check1housingForceField.Strength = 1;
-            check2housingForceField.Strength = 1;
+            check1housingForceField.Strength = Mathf.SmoothDamp(
+                check1housingForceField.Strength,
+                1.2f,
+                ref check1FFref.x,
+                0.2f
+            );
+            check2housingForceField.Strength = Mathf.SmoothDamp(
+                check2housingForceField.Strength,
+                1f,
+                ref check2FFref.x,
+                1f
+            );
 
             Void_Check1.transform.localScale = Vector3.zero;
 
             Void_Check2.transform.localScale = Vector3.zero;
+
+            Void_Check1TC1.transform.localScale = Vector3.zero;
         }
-
-        /*
-       Void_Check1.transform.localScale = Vector3.SmoothDamp(
-           Void_Check1.transform.localScale,
-           check1VoidMaxSize * TestCockFF3.Strength,
-           ref check1VoidRef,
-           4f
-       );
-
-       Void_Check2.transform.localScale = Vector3.SmoothDamp(
-           Void_Check2.transform.localScale,
-           check2VoidMaxSize * TestCockFF4.Strength,
-           ref check2VoidRef,
-           6f
-       );
-       */
     }
 }

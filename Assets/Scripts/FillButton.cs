@@ -26,7 +26,7 @@ public class FillButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ShutOff1)
+        if (ShutOff1 != null)
             initShutOffRot = ShutOff1.transform.eulerAngles;
     }
 

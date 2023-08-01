@@ -1,0 +1,17 @@
+version: 2
+tpsheetFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/SpritePacker/TestGauge.tpsheet
+- Assets/SpritePacker/TestGauge-default.tpsheet
+- Assets/SpritePacker/TestGauge-GaugeFace.tpsheet
+textureFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/SpritePacker/TestGauge.png
+- Assets/SpritePacker/TestGauge-default.png
+- Assets/SpritePacker/TestGauge-GaugeFace.png
+normalmapFileNames:
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+enableDebugOutput: 0
