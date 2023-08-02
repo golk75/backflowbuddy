@@ -25,6 +25,8 @@ TagManager:
   - HighControl
   - HighBleed
   - BypassControl
+  - Hose
+  - HoseBib
   layers:
   - Default
   - TransparentFX

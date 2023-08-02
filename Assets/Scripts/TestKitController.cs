@@ -26,11 +26,14 @@ public class TestKitController : MonoBehaviour
 
     [SerializeField]
     GameObject BypassHose;
+
     ZibraLiquidDetector LowHoseDetector;
 
     ZibraLiquidDetector HighHoseDetector;
 
     ZibraLiquidDetector BypassHoseDetector;
+
+    public Collider TC1HoseDetect;
 
     private const float MinNeedle_rotation = 55;
     private const float MaxNeedle_rotation = -55;
@@ -141,6 +144,11 @@ public class TestKitController : MonoBehaviour
 
             currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
         }
+    }
+
+    public void AttachHoseBib()
+    {
+        Debug.Log($"hose bib attached");
     }
 
     private void NeedleControl()
