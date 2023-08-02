@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using System;
+using com.zibra.liquid.Manipulators;
 
 public class TestKitController : MonoBehaviour
 {
@@ -19,8 +17,23 @@ public class TestKitController : MonoBehaviour
 
     public GameObject needle;
     private GameObject currentKnob;
-    private const float MinNeedle_rotation = 11;
-    private const float MaxNeedle_rotation = -101;
+
+    [SerializeField]
+    GameObject LowHose;
+
+    [SerializeField]
+    GameObject HighHose;
+
+    [SerializeField]
+    GameObject BypassHose;
+    ZibraLiquidDetector LowHoseDetector;
+
+    ZibraLiquidDetector HighHoseDetector;
+
+    ZibraLiquidDetector BypassHoseDetector;
+
+    private const float MinNeedle_rotation = 55;
+    private const float MaxNeedle_rotation = -55;
     private const float MinKnob_rotation = 0;
 
     //limit knobs to 4 complete rotations (x1 rotation = 360;)->
@@ -49,7 +62,7 @@ public class TestKitController : MonoBehaviour
     void Start()
     {
         currentPSID = 0;
-        maxPSID = 15;
+        maxPSID = 55;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
@@ -130,9 +143,12 @@ public class TestKitController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void NeedleControl()
     {
+        float lowHosePressure;
+        float highHosePressure;
+        float bypasshosePressure;
+
         /*
         currentPSID += 1 * Time.deltaTime;
         if (currentPSID > maxPSID)
@@ -141,6 +157,12 @@ public class TestKitController : MonoBehaviour
         }
         needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
         */
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         OperateControls();
+        NeedleControl();
     }
 }
