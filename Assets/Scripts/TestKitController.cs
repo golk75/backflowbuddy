@@ -27,13 +27,13 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     GameObject BypassHose;
 
+    GameObject ConnectedTestCock;
+
     ZibraLiquidDetector LowHoseDetector;
 
     ZibraLiquidDetector HighHoseDetector;
 
     ZibraLiquidDetector BypassHoseDetector;
-
-    public Collider TC1HoseDetect;
 
     private const float MinNeedle_rotation = 55;
     private const float MaxNeedle_rotation = -55;
@@ -50,10 +50,15 @@ public class TestKitController : MonoBehaviour
     private float currentPSID;
     private float maxPSID;
     public bool isOperableObject;
+    public bool isConnectedToAssembly;
+    float lowHosePressure;
+    float highHosePressure;
+    float bypasshosePressure;
 
     void OnEnable()
     {
         Actions.OnTestKitOperate += TestKitOperate;
+        HoseDetector.onHoseAttach += AttachHoseBib;
     }
 
     void OnDisable()
@@ -146,17 +151,26 @@ public class TestKitController : MonoBehaviour
         }
     }
 
-    public void AttachHoseBib()
+    public void AttachHoseBib(GameObject gameObject)
     {
-        Debug.Log($"hose bib attached");
+        isConnectedToAssembly = true;
+        highHosePressure = gameObject.GetComponent<ZibraLiquidDetector>().ParticlesInside;
+        Debug.Log(highHosePressure);
+        //Debug.Log($"Connected to Assembly");
+    }
+
+    public void DetachHoseBib()
+    {
+        isConnectedToAssembly = false;
+        //Debug.Log($"Disconnected from Assembly");
     }
 
     private void NeedleControl()
     {
-        float lowHosePressure;
-        float highHosePressure;
-        float bypasshosePressure;
-
+        if (isConnectedToAssembly == true)
+        {
+            // For now, soely using high hose (double check assembly)
+        }
         /*
         currentPSID += 1 * Time.deltaTime;
         if (currentPSID > maxPSID)

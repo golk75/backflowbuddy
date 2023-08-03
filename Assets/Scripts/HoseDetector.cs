@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +6,15 @@ using UnityEngine.Events;
 
 public class HoseDetector : MonoBehaviour
 {
-    public UnityEvent<Collider> onHoseBibEnter;
-    public UnityEvent<Collider> onHoseBibStay;
-    public UnityEvent<Collider> onHoseBibExit;
+    public static event Action<GameObject> onHoseAttach;
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        onHoseBibEnter?.Invoke(other);
+        //onHoseBibEnter.Invoke();
+        onHoseAttach?.Invoke(this.gameObject);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        onHoseBibStay?.Invoke(other);
-    }
+    private void OnTriggerStay() { }
 
-    private void OnTriggerExit(Collider other)
-    {
-        onHoseBibExit?.Invoke(other);
-    }
+    private void OnTriggerExit() { }
 }
