@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using com.zibra.liquid.Manipulators;
+using System;
 
 public class TestKitController : MonoBehaviour
 {
@@ -27,12 +28,19 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     GameObject BypassHose;
 
+    Vector3 initLowHosePosition;
+    Vector3 initHighHosePosition;
+    Vector3 initBypassHosePosition;
+
     GameObject ConnectedTestCock;
 
+    [SerializeField]
     ZibraLiquidDetector LowHoseDetector;
 
+    [SerializeField]
     ZibraLiquidDetector HighHoseDetector;
 
+    [SerializeField]
     ZibraLiquidDetector BypassHoseDetector;
 
     private const float MinNeedle_rotation = 55;
@@ -58,12 +66,15 @@ public class TestKitController : MonoBehaviour
     void OnEnable()
     {
         Actions.OnTestKitOperate += TestKitOperate;
-        HoseDetector.onHoseAttach += AttachHoseBib;
+        Actions.onHoseAttach += AttachHoseBib;
+        Actions.onHoseDetach += DetachHoseBib;
     }
 
     void OnDisable()
     {
         Actions.OnTestKitOperate -= TestKitOperate;
+        Actions.onHoseAttach -= AttachHoseBib;
+        Actions.onHoseDetach += DetachHoseBib;
     }
 
     // Start is called before the first frame update
@@ -74,6 +85,9 @@ public class TestKitController : MonoBehaviour
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
+        initLowHosePosition = LowHose.transform.position;
+        initHighHosePosition = HighHose.transform.position;
+        initBypassHosePosition = BypassHose.transform.position;
     }
 
     private float GetPsidNeedleRotation()
@@ -96,7 +110,7 @@ public class TestKitController : MonoBehaviour
         return MinKnob_rotation + normalizedRotation * rotationDiff;
     }
 
-    private void TestKitOperate(OperateTestKit testKit)
+    private void TestKitOperate(TestKitOperableCheck testKit)
     {
         currentKnob = testKit.gameObject;
 
@@ -154,12 +168,11 @@ public class TestKitController : MonoBehaviour
     public void AttachHoseBib(GameObject gameObject)
     {
         isConnectedToAssembly = true;
-        highHosePressure = gameObject.GetComponent<ZibraLiquidDetector>().ParticlesInside;
-        Debug.Log(highHosePressure);
+
         //Debug.Log($"Connected to Assembly");
     }
 
-    public void DetachHoseBib()
+    public void DetachHoseBib(GameObject gameObject)
     {
         isConnectedToAssembly = false;
         //Debug.Log($"Disconnected from Assembly");
@@ -170,20 +183,30 @@ public class TestKitController : MonoBehaviour
         if (isConnectedToAssembly == true)
         {
             // For now, soely using high hose (double check assembly)
+            currentPSID += highHosePressure * Time.deltaTime;
+            if (currentPSID > maxPSID)
+            {
+                currentPSID = maxPSID;
+            }
+            needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
         }
-        /*
-        currentPSID += 1 * Time.deltaTime;
-        if (currentPSID > maxPSID)
+    }
+
+    private void PressureControl()
+    {
+        if (isConnectedToAssembly == true)
         {
-            currentPSID = maxPSID;
+            highHosePressure = HighHoseDetector.ParticlesInside;
+            lowHosePressure = LowHoseDetector.ParticlesInside;
+            bypasshosePressure = BypassHoseDetector.ParticlesInside;
         }
-        needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
-        */
     }
 
     // Update is called once per frame
     void Update()
     {
+        PressureControl();
+
         OperateControls();
         NeedleControl();
     }

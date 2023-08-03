@@ -165,30 +165,32 @@ public class PlayerController : MonoBehaviour
 
     public void DetectObjectWithRaycast()
     {
+        LayerMask layerMask = LayerMask.GetMask("OperableObject");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D ray2DHit = Physics2D.Raycast(
+            Camera.main.ScreenToWorldPoint(Input.mousePosition),
+            Vector2.zero
+        );
         RaycastHit hit;
-        Physics.Raycast(ray, out hit);
 
+        //current distance to device is about 60-70
+        Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
+
+        Debug.Log($"hit.collider = {hit.collider == null}; ray2DHit = {ray2DHit.collider}");
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
         if (hit.collider != null)
         {
-            if (
-                hit.collider.transform.TryGetComponent<OperableComponentDescription>(
-                    out OperableComponentDescription component
-                )
-            )
-            {
-                isOperableObject = true;
-                operableComponentDescription =
-                    hit.collider.transform.GetComponent<OperableComponentDescription>();
-                _operableObject = hit.collider.transform.gameObject;
-                _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
-            }
-            else
-            {
-                isOperableObject = false;
-            }
+            isOperableObject = true;
+            operableComponentDescription =
+                hit.collider.transform.GetComponent<OperableComponentDescription>();
+            _operableObject = hit.collider.transform.gameObject;
+            _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+            //Debug.Log($"playerController.OperableObject = {OperableObject}");
+        }
+        else
+        {
+            isOperableObject = false;
         }
     }
 
