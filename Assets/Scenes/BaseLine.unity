@@ -505,8 +505,6 @@ GameObject:
   - component: {fileID: 448393513}
   - component: {fileID: 448393512}
   - component: {fileID: 448393515}
-  - component: {fileID: 448393517}
-  - component: {fileID: 448393518}
   - component: {fileID: 448393519}
   m_Layer: 5
   m_Name: HighBleedKnob
@@ -605,7 +603,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.41046143, y: -0.5755768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -616,77 +614,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 340.8957, y: 340.2244}
   m_EdgeRadius: 0
---- !u!114 &448393517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448393510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ce961b0eda664b47abbbb7ca1d3cdff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testKitController: {fileID: 1100468279}
---- !u!114 &448393518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448393510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 448393512}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 448393517}
-        m_TargetAssemblyTypeName: OperateTestKit, Assembly-CSharp
-        m_MethodName: DetectOperation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &448393519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,8 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentId: 10
-  partsType: 3
+  componentId: 11
+  partsType: 4
 --- !u!114 &515110408 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2362861173652336466, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -1075,7 +1004,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.41046143, y: -0.5755768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1086,7 +1015,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 340.8957, y: 340.2244}
   m_EdgeRadius: 0
 --- !u!114 &920155582
 MonoBehaviour:
@@ -1145,7 +1074,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 448393517}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OperateTestKit, Assembly-CSharp
         m_MethodName: DetectOperation
         m_Mode: 1
@@ -1169,8 +1098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentId: 11
-  partsType: 3
+  componentId: 12
+  partsType: 4
 --- !u!114 &924518176 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5710483862916539990, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -1370,7 +1299,6 @@ GameObject:
   - component: {fileID: 1028944503}
   - component: {fileID: 1028944506}
   - component: {fileID: 1028944507}
-  - component: {fileID: 1028944508}
   - component: {fileID: 1028944509}
   m_Layer: 5
   m_Name: BypassKnob
@@ -1466,10 +1394,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.41046143, y: -0.5755768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1480,7 +1408,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 340.8957, y: 340.2244}
   m_EdgeRadius: 0
 --- !u!114 &1028944507
 MonoBehaviour:
@@ -1495,62 +1423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testKitController: {fileID: 1100468279}
---- !u!114 &1028944508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028944501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1028944503}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 448393517}
-        m_TargetAssemblyTypeName: OperateTestKit, Assembly-CSharp
-        m_MethodName: DetectOperation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1028944509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,8 +1435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentId: 12
-  partsType: 3
+  componentId: 13
+  partsType: 4
 --- !u!1 &1100468277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,7 +1447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100468278}
   - component: {fileID: 1100468279}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TestKitManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2430,8 +2302,6 @@ GameObject:
   - component: {fileID: 1508745247}
   - component: {fileID: 1508745246}
   - component: {fileID: 1508745249}
-  - component: {fileID: 1508745250}
-  - component: {fileID: 1508745251}
   - component: {fileID: 1508745252}
   m_Layer: 5
   m_Name: LowBleedKnob
@@ -2530,7 +2400,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.41046143, y: -0.5755768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2541,77 +2411,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 340.8957, y: 340.2244}
   m_EdgeRadius: 0
---- !u!114 &1508745250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508745244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1508745246}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 448393517}
-        m_TargetAssemblyTypeName: OperateTestKit, Assembly-CSharp
-        m_MethodName: DetectOperation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1508745251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508745244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ce961b0eda664b47abbbb7ca1d3cdff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testKitController: {fileID: 1100468279}
 --- !u!114 &1508745252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2624,8 +2425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentId: 8
-  partsType: 3
+  componentId: 9
+  partsType: 4
 --- !u!1 &1545699697 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6259366447982672789, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -3197,8 +2998,6 @@ GameObject:
   - component: {fileID: 1808861987}
   - component: {fileID: 1808861986}
   - component: {fileID: 1808861989}
-  - component: {fileID: 1808861990}
-  - component: {fileID: 1808861991}
   - component: {fileID: 1808861992}
   m_Layer: 5
   m_Name: LowControlKnob
@@ -3297,7 +3096,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.41046143, y: -0.5755768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3308,77 +3107,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 340.8957, y: 340.2244}
   m_EdgeRadius: 0
---- !u!114 &1808861990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808861984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ce961b0eda664b47abbbb7ca1d3cdff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testKitController: {fileID: 1100468279}
---- !u!114 &1808861991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808861984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1808861986}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 448393517}
-        m_TargetAssemblyTypeName: OperateTestKit, Assembly-CSharp
-        m_MethodName: DetectOperation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1808861992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,8 +3121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentId: 9
-  partsType: 3
+  componentId: 10
+  partsType: 4
 --- !u!114 &1814406243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5465832299868221362, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -3486,7 +3216,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944022032}
-  - component: {fileID: 1944022033}
   m_Layer: 0
   m_Name: BypassHose
   m_TagString: Untagged
@@ -3511,19 +3240,6 @@ Transform:
   m_Father: {fileID: 1207125251}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1944022033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944022031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ce961b0eda664b47abbbb7ca1d3cdff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testKitController: {fileID: 1100468279}
 --- !u!1 &1947499199
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,6 +3503,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testKitController: {fileID: 1100468279}
+--- !u!1 &2108882486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8030062089417333396, guid: 5cb0acac16e984deab4d687da8d483d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6859429864286210997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2108882489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108882486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 0
+  partsType: 0
 --- !u!114 &2129988836 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5936221328871084426, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -4214,6 +3950,31 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 432933830630922902, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: partsType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 432933830630922902, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: componentId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 570767255783885257, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: partsType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 570767255783885257, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: componentId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 680801116235263878, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: partsType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 991561046990561817, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_Layer
@@ -4283,6 +4044,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 11.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719210017352182955, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: partsType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719210017352182955, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: componentId
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3562515941341216778, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
@@ -4449,6 +4220,26 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 11.6
       objectReference: {fileID: 0}
+    - target: {fileID: 6910525192780690130, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: partsType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910525192780690130, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: componentId
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714264138499888016, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: partsType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714264138499888016, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: componentId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8030062089417333396, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_Name
@@ -4518,7 +4309,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 662512902}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8030062089417333396, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2108882489}
   m_SourcePrefab: {fileID: 100100000, guid: 5cb0acac16e984deab4d687da8d483d5, type: 3}
 --- !u!1001 &6991473213321237438
 PrefabInstance:
@@ -5078,6 +4873,11 @@ PrefabInstance:
       propertyPath: SDFColliders.Array.data[10]
       value: 
       objectReference: {fileID: 3469287836985616734}
+    - target: {fileID: 7771636306630523595, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: VolumePerSimTime
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

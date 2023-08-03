@@ -180,14 +180,24 @@ public class PlayerController : MonoBehaviour
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
 
-        if (hit.collider != null || ray2DHit.collider != null)
+        if (hit.collider != null && ray2DHit.collider == null)
         {
             isOperableObject = true;
             operableComponentDescription =
                 hit.collider.transform.GetComponent<OperableComponentDescription>();
+
             _operableObject = hit.collider.transform.gameObject;
             _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
             //Debug.Log($"playerController.OperableObject = {OperableObject}");
+        }
+        else if (hit.collider == null && ray2DHit.collider != null)
+        {
+            isOperableObject = true;
+            operableComponentDescription =
+                ray2DHit.collider.transform.GetComponent<OperableComponentDescription>();
+
+            _operableObject = ray2DHit.collider.transform.gameObject;
+            _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
         }
         else
         {

@@ -164,95 +164,99 @@ public class TestCockController : MonoBehaviour
                     out OperableComponentDescription component
                 )
             )
-            {
-                testCockComponentDescription =
-                    playerController.OperableObject.GetComponent<OperableComponentDescription>();
-                switch (testCockComponentDescription.componentId)
+                if (
+                    playerController.operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestCock
+                )
                 {
-                    case OperableComponentDescription.ComponentId.TestCock1:
-                        _operatingTestCock = TestCock1;
-                        _operableTestCockVoid = TestCockVoid1;
-                        _operableTestCockCollider = TestCockCollider1;
-                        _operatingTestCock.transform.eulerAngles =
-                            playerController.OperableObjectRotation;
+                    testCockComponentDescription =
+                        playerController.OperableObject.GetComponent<OperableComponentDescription>();
 
-                        break;
-                    case OperableComponentDescription.ComponentId.TestCock2:
-                        _operatingTestCock = TestCock2;
-                        _operableTestCockVoid = TestCockVoid2;
-                        _operableTestCockCollider = TestCockCollider2;
-                        _operatingTestCock.transform.eulerAngles =
-                            playerController.OperableObjectRotation;
-                        break;
-                    case OperableComponentDescription.ComponentId.TestCock3:
-                        _operatingTestCock = TestCock3;
-                        _operableTestCockVoid = TestCockVoid3;
-                        _operableTestCockCollider = TestCockCollider3;
-                        TestCockDetector = TestCockDetector3;
-                        _checkZoneDetector = check1Detector;
-                        _operatingTestCock.transform.eulerAngles =
-                            playerController.OperableObjectRotation;
-                        break;
-                    case OperableComponentDescription.ComponentId.TestCock4:
-                        _operatingTestCock = TestCock4;
-                        _operableTestCockVoid = TestCockVoid4;
-                        _operableTestCockCollider = TestCockCollider4;
-                        _operatingTestCock.transform.eulerAngles =
-                            playerController.OperableObjectRotation;
-                        break;
-                }
-                //assign the associated test cock valve game object to currently operating test cock;
+                    switch (testCockComponentDescription.componentId)
+                    {
+                        case OperableComponentDescription.ComponentId.TestCock1:
+                            _operatingTestCock = TestCock1;
+                            _operableTestCockVoid = TestCockVoid1;
+                            _operableTestCockCollider = TestCockCollider1;
+                            _operatingTestCock.transform.eulerAngles =
+                                playerController.OperableObjectRotation;
 
-                _operableTestCockColliderScale = _operableTestCockVoidScale = _operableTestCockVoid
-                    .transform
-                    .localScale;
+                            break;
+                        case OperableComponentDescription.ComponentId.TestCock2:
+                            _operatingTestCock = TestCock2;
+                            _operableTestCockVoid = TestCockVoid2;
+                            _operableTestCockCollider = TestCockCollider2;
+                            _operatingTestCock.transform.eulerAngles =
+                                playerController.OperableObjectRotation;
+                            break;
+                        case OperableComponentDescription.ComponentId.TestCock3:
+                            _operatingTestCock = TestCock3;
+                            _operableTestCockVoid = TestCockVoid3;
+                            _operableTestCockCollider = TestCockCollider3;
+                            TestCockDetector = TestCockDetector3;
+                            _checkZoneDetector = check1Detector;
+                            _operatingTestCock.transform.eulerAngles =
+                                playerController.OperableObjectRotation;
+                            break;
+                        case OperableComponentDescription.ComponentId.TestCock4:
+                            _operatingTestCock = TestCock4;
+                            _operableTestCockVoid = TestCockVoid4;
+                            _operableTestCockCollider = TestCockCollider4;
+                            _operatingTestCock.transform.eulerAngles =
+                                playerController.OperableObjectRotation;
+                            break;
+                    }
+                    //assign the associated test cock valve game object to currently operating test cock;
 
-                _operableTestCockVoidScale.y = Mathf.Lerp(
-                    testCockClosedScale.y,
-                    testCockOpenScale.y,
-                    _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
-                );
+                    _operableTestCockColliderScale = _operableTestCockVoidScale =
+                        _operableTestCockVoid.transform.localScale;
 
-                _operableTestCockCollider.transform.localScale = _operableTestCockVoid
-                    .transform
-                    .localScale = _operableTestCockVoidScale;
-                //cache test cock status
-                if (TestCock1.transform.eulerAngles.z > 0)
-                {
-                    isTestCock1Open = true;
-                }
-                else
-                {
-                    isTestCock1Open = false;
-                }
+                    _operableTestCockVoidScale.y = Mathf.Lerp(
+                        testCockClosedScale.y,
+                        testCockOpenScale.y,
+                        _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
+                    );
 
-                if (TestCock2.transform.eulerAngles.z > 0)
-                {
-                    isTestCock2Open = true;
-                }
-                else
-                {
-                    isTestCock2Open = false;
-                }
+                    _operableTestCockCollider.transform.localScale = _operableTestCockVoid
+                        .transform
+                        .localScale = _operableTestCockVoidScale;
+                    //cache test cock status
+                    if (TestCock1.transform.eulerAngles.z > 0)
+                    {
+                        isTestCock1Open = true;
+                    }
+                    else
+                    {
+                        isTestCock1Open = false;
+                    }
 
-                if (TestCock3.transform.eulerAngles.z > 0)
-                {
-                    isTestCock3Open = true;
-                }
-                else
-                {
-                    isTestCock3Open = false;
-                }
+                    if (TestCock2.transform.eulerAngles.z > 0)
+                    {
+                        isTestCock2Open = true;
+                    }
+                    else
+                    {
+                        isTestCock2Open = false;
+                    }
 
-                if (TestCock4.transform.eulerAngles.z > 0)
-                {
-                    isTestCock4Open = true;
+                    if (TestCock3.transform.eulerAngles.z > 0)
+                    {
+                        isTestCock3Open = true;
+                    }
+                    else
+                    {
+                        isTestCock3Open = false;
+                    }
+
+                    if (TestCock4.transform.eulerAngles.z > 0)
+                    {
+                        isTestCock4Open = true;
+                    }
+                    else
+                    {
+                        isTestCock4Open = false;
+                    }
                 }
-                else
-                {
-                    isTestCock4Open = false;
-                }
-            }
         }
     }
 

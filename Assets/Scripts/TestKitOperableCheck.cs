@@ -11,17 +11,14 @@ public class TestKitOperableCheck : MonoBehaviour, IPointerEnterHandler, IPointe
     // Start is called before the first frame update
     void Start() { }
 
-    public void DetectOperation()
-    {
-        Actions.OnTestKitOperate(this);
-    }
+    public void DetectOperation() { }
 
     // Update is called once per frame
     void Update() { }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Actions.OnTestKitOperate(this);
+        //   Actions.OnTestKitOperate(this);
     }
 
     public void OnPointerDown(PointerEventData eventData)

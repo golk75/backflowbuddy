@@ -65,14 +65,12 @@ public class TestKitController : MonoBehaviour
 
     void OnEnable()
     {
-        Actions.OnTestKitOperate += TestKitOperate;
         Actions.onHoseAttach += AttachHoseBib;
         Actions.onHoseDetach += DetachHoseBib;
     }
 
     void OnDisable()
     {
-        Actions.OnTestKitOperate -= TestKitOperate;
         Actions.onHoseAttach -= AttachHoseBib;
         Actions.onHoseDetach += DetachHoseBib;
     }
@@ -112,8 +110,6 @@ public class TestKitController : MonoBehaviour
 
     private void TestKitOperate(TestKitOperableCheck testKit)
     {
-        currentKnob = testKit.gameObject;
-
         //currentKnobRotation = testKit.gameObject.transform.eulerAngles.z;
     }
 
@@ -144,6 +140,11 @@ public class TestKitController : MonoBehaviour
     {
         if (playerController.isOperableObject == true)
         {
+            if (
+                playerController.operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitValve
+            )
+                currentKnob = playerController.OperableObject;
             currentKnobRotation +=
                 (
                     playerController.touchStart.x

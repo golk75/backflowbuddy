@@ -57,37 +57,50 @@ public class ShutOffValveController : MonoBehaviour
     private void ShutOffValveOperationCheck()
     {
         if (playerController.OperableObject != null)
-            operableComponentDescription =
-                playerController.OperableObject.GetComponent<OperableComponentDescription>();
-        if (playerController.isOperableObject == true)
+        {
             if (
-                operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.ShutOff
+                playerController.OperableObject.TryGetComponent<OperableComponentDescription>(
+                    out OperableComponentDescription component
+                )
             )
+
                 if (
-                    operableComponentDescription.componentId
-                    == OperableComponentDescription.ComponentId.ShutOffValve1
+                    playerController.operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.ShutOff
                 )
                 {
-                    ShutOffValve1.transform.eulerAngles = playerController.OperableObjectRotation;
+                    operableComponentDescription = playerController.operableComponentDescription;
+                    if (
+                        operableComponentDescription.componentId
+                        == OperableComponentDescription.ComponentId.ShutOffValve1
+                    )
+                    {
+                        ShutOffValve1.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                    }
+                    shutOffValveScaleFactor = (playerController.OperableObjectRotation.z * 0.1f);
+
+                    volume = Mathf.Lerp(
+                        supplyVolume,
+                        0,
+                        ShutOffValve1.transform.eulerAngles.z / 90f
+                    );
+
+                    mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
+                        mainSupplyEmitter.VolumePerSimTime,
+                        volume,
+                        1f
+                    );
+
+                    if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
+                    {
+                        _isSupplyOn = false;
+                    }
+                    else
+                    {
+                        _isSupplyOn = true;
+                    }
                 }
-        shutOffValveScaleFactor = (playerController.OperableObjectRotation.z * 0.1f);
-
-        volume = Mathf.Lerp(supplyVolume, 0, ShutOffValve1.transform.eulerAngles.z / 90f);
-
-        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
-            mainSupplyEmitter.VolumePerSimTime,
-            volume,
-            1f
-        );
-
-        if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
-        {
-            _isSupplyOn = false;
-        }
-        else
-        {
-            _isSupplyOn = true;
         }
     }
 
