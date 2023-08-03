@@ -21,12 +21,11 @@ public class TestKitOperableCheck : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (testKitController.isOperableObject == false)
-            Actions.OnTestKitOperate(this);
+        Actions.OnTestKitOperate(this);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        testKitController.isOperableObject = true;
+        //testKitController.isOperableObject = true;
     }
 }

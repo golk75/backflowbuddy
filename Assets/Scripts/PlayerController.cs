@@ -176,10 +176,11 @@ public class PlayerController : MonoBehaviour
         //current distance to device is about 60-70
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
 
-        Debug.Log($"hit.collider = {hit.collider == null}; ray2DHit = {ray2DHit.collider}");
+        Debug.Log($"hit.collider = {hit.collider}; ray2DHit = {ray2DHit.collider}");
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
-        if (hit.collider != null)
+
+        if (hit.collider != null || ray2DHit.collider != null)
         {
             isOperableObject = true;
             operableComponentDescription =
@@ -206,12 +207,6 @@ public class PlayerController : MonoBehaviour
         //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
         _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
         _operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
-    }
-
-    public void GetOperableComponentComponent(GameObject operableComponent)
-    {
-        _operableObject = operableComponent.gameObject;
-        _operableObjectRotation = operableComponent.transform.rotation.eulerAngles;
     }
 
     private void Start() { }

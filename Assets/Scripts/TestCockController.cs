@@ -98,7 +98,7 @@ public class TestCockController : MonoBehaviour
     [SerializeField]
     ZibraLiquidForceField TestCockFF4;
 
-    OperableComponentDescription operableComponentDescription;
+    OperableComponentDescription testCockComponentDescription;
 
     public float testCockValveScaleFactor;
 
@@ -156,18 +156,18 @@ public class TestCockController : MonoBehaviour
             && playerController.OperableObject.transform.tag == "TestCock"
         )
         */
-        if (playerController.OperableObject != null)
-            operableComponentDescription =
-                playerController.OperableObject.GetComponent<OperableComponentDescription>();
 
-        if (playerController.isOperableObject == true)
+        if (playerController.OperableObject != null)
         {
             if (
-                operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestCock
+                playerController.OperableObject.TryGetComponent<OperableComponentDescription>(
+                    out OperableComponentDescription component
+                )
             )
             {
-                switch (operableComponentDescription.componentId)
+                testCockComponentDescription =
+                    playerController.OperableObject.GetComponent<OperableComponentDescription>();
+                switch (testCockComponentDescription.componentId)
                 {
                     case OperableComponentDescription.ComponentId.TestCock1:
                         _operatingTestCock = TestCock1;

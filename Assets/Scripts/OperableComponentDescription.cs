@@ -6,6 +6,7 @@ public class OperableComponentDescription : MonoBehaviour
 {
     public enum ComponentId
     {
+        Body,
         ShutOffValve1,
         ShutOffValve2,
         TestCock1,
@@ -23,6 +24,7 @@ public class OperableComponentDescription : MonoBehaviour
 
     public enum PartsType
     {
+        Housing,
         ShutOff,
         TestCock,
         CheckValve,

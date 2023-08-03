@@ -142,7 +142,7 @@ public class TestKitController : MonoBehaviour
     */
     private void OperateControls()
     {
-        if (isOperableObject == true)
+        if (playerController.isOperableObject == true)
         {
             currentKnobRotation +=
                 (
@@ -206,7 +206,6 @@ public class TestKitController : MonoBehaviour
     void Update()
     {
         PressureControl();
-
         OperateControls();
         NeedleControl();
     }
