@@ -81,7 +81,7 @@ public class TestKitController : MonoBehaviour
     void OnDisable()
     {
         Actions.onHoseAttach -= AttachHoseBib;
-        Actions.onHoseDetach += DetachHoseBib;
+        Actions.onHoseDetach -= DetachHoseBib;
     }
 
     // Start is called before the first frame update
@@ -205,12 +205,12 @@ public class TestKitController : MonoBehaviour
                     Mathf.Clamp(GetPsidNeedleRotation(), -55, 55)
                 );
         */
-        Debug.Log(GetPsidNeedleRotation());
+        // Debug.Log(GetPsidNeedleRotation());
     }
 
     private void PressureControl()
     {
-        Debug.Log(highHosePressure);
+        //Debug.Log(highHosePressure);
         Check1Pos = Check1.transform.localPosition;
 
         highHosePressure = Mathf.SmoothStep(

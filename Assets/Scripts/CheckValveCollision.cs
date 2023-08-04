@@ -9,11 +9,13 @@ public class CheckValveCollision : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         isCheckClosed = true;
+        Actions.onCheckClosed?.Invoke(this.gameObject);
     }
 
     void OnCollisionExit(Collision other)
     {
         isCheckClosed = false;
+        Actions.onCheckOpened?.Invoke(this.gameObject);
     }
 
     void Start() { }

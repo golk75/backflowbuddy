@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using com.zibra.liquid.Manipulators;
+using Unity.VisualScripting;
+using System;
 
 public class WaterController : MonoBehaviour
 {
+    public CheckValveCollision checkValveCollision;
+
     [SerializeField]
     GameObject testCockManager;
 
@@ -141,11 +145,71 @@ public class WaterController : MonoBehaviour
         initSupplyColliderPos = supplyCollider.transform.localPosition;
     }
 
+    /// <summary>
+    /// This function is called when the object becomes enabled and active.
+    /// </summary>
+    private void OnEnable()
+    {
+        Actions.onCheckClosed += DetectCheckClosure;
+        Actions.onCheckOpened += DetectCheckOpening;
+    }
+
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    private void OnDisable()
+    {
+        Actions.onCheckClosed -= DetectCheckClosure;
+        Actions.onCheckOpened -= DetectCheckOpening;
+    }
+
+    private void DetectCheckOpening(GameObject checkValve)
+    {
+        //Debug.Log($"{checkValve.tag} is OPEN");
+
+        switch (checkValve.tag)
+        {
+            case "CV01":
+                isCheck1Closed = false;
+                break;
+            case "CV02":
+                isCheck2Closed = false;
+                break;
+            default:
+                Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
+                break;
+        }
+
+        Debug.Log(
+            $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
+        );
+    }
+
+    private void DetectCheckClosure(GameObject checkValve)
+    {
+        switch (checkValve.tag)
+        {
+            case "CV01":
+                isCheck1Closed = true;
+                break;
+            case "CV02":
+                isCheck2Closed = true;
+                break;
+            default:
+                Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
+                break;
+        }
+
+        Debug.Log(
+            $"DetectClose: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
+        );
+    }
+
     // Update is called once per frame
     void Update()
     {
-        isCheck1Closed = check1Collision.isCheckClosed;
-        isCheck1Closed = check2Collision.isCheckClosed;
+        //isCheck1Closed = check1Collision.isCheckClosed;
+        //isCheck1Closed = check2Collision.isCheckClosed;
 
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
@@ -183,7 +247,7 @@ public class WaterController : MonoBehaviour
         {
             TestCockFF1.Strength = 0;
         }
-        if (testCockController.isTestCock2Open)
+        if (testCockController.isTestCock2Open && isCheck1Closed == false)
         {
             if (check1Detector.ParticlesInside > 3000)
             {
@@ -208,6 +272,7 @@ public class WaterController : MonoBehaviour
         {
             TestCockFF2.Strength = 0;
         }
+
         if (testCockController.isTestCock3Open)
         {
             if (check1Detector.ParticlesInside > 3000)
