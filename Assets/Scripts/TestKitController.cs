@@ -221,15 +221,6 @@ public class TestKitController : MonoBehaviour
     {
         // For  now, soely using high hose (double check assembly)
         needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
-
-        /*
-                needle.transform.eulerAngles = new Vector3(
-                    0,
-                    0,
-                    Mathf.Clamp(GetPsidNeedleRotation(), -55, 55)
-                );
-        */
-        // Debug.Log(GetPsidNeedleRotation());
     }
 
     private void PressureControl()

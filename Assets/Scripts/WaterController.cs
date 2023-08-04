@@ -176,11 +176,10 @@ public class WaterController : MonoBehaviour
                 Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
                 break;
         }
-        /*
+
         Debug.Log(
             $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
         );
-        */
     }
 
     private void DetectCheckClosure(GameObject checkValve)
@@ -188,66 +187,35 @@ public class WaterController : MonoBehaviour
         switch (checkValve.tag)
         {
             case "CV01":
-                isCheck1Closed = true;
+                isCheck1Closed = !isCheck1Closed;
                 break;
             case "CV02":
-                isCheck2Closed = true;
+                isCheck2Closed = !isCheck2Closed;
                 break;
             default:
                 Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
                 break;
         }
-        /*
         Debug.Log(
-            $"DetectClose: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
+            $"DetectClosed: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
         );
-        */
     }
 
     // Update is called once per frame
     void Update()
     {
-        //isCheck1Closed = check1Collision.isCheckClosed;
-        //isCheck1Closed = check2Collision.isCheckClosed;
-
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
-        //check1housingForceField.Strength = 1;
+
         /// <summary>
         /// Test cock force fields
         /// </summary>
 
-        //check if device is primed
-        /*
-        if (testCockController.isTestCock1Open)
-        {
-            if (TestCockDetector2.ParticlesInside > 5500)
-            {
-                TestCockFF1.Strength = Mathf.SmoothDamp(
-                    TestCockFF1.Strength,
-                    Mathf.Clamp(BodyDetectorZone1.ParticlesInside, 0, testCock1MaxStr),
-                    ref testCockFF1Ref.x,
-                    0.005f
-                );
-            }
-            else
-            {
-                TestCockFF1.Strength = Mathf.SmoothDamp(
-                    TestCockFF1.Strength,
-                    0,
-                    ref testCockFF1Ref.x,
-                    2f
-                );
-            }
-        }
-        else
-        {
-            TestCockFF1.Strength = 0;
-        }
-        */
+
+        //test cock #1 pressure regulation
         if (testCockController.isTestCock1Open)
         {
             if (TestCockDetector1.ParticlesInside > 2000)
@@ -264,6 +232,7 @@ public class WaterController : MonoBehaviour
         {
             TestCockFF1.Strength = 0;
         }
+        //test cock #2 pressure regulation
         if (testCockController.isTestCock2Open && isCheck1Closed == false)
         {
             if (check1Detector.ParticlesInside > 3000)
@@ -289,7 +258,7 @@ public class WaterController : MonoBehaviour
         {
             TestCockFF2.Strength = 0;
         }
-
+        //test cock #3 pressure regulation
         if (testCockController.isTestCock3Open && isCheck1Closed == false)
         {
             if (check1Detector.ParticlesInside > 3000)
@@ -360,8 +329,6 @@ public class WaterController : MonoBehaviour
             )
             {
                 {
-                    //check1housingForceField.enabled = false;
-                    //check2housingForceField.enabled = false;
                     if (isCheck1Closed == false && isCheck2Closed == false)
                     {
                         check1housingForceField.Strength = 0;
