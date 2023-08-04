@@ -81,6 +81,9 @@ public class TestKitController : MonoBehaviour
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
 
+    [SerializeField]
+    public List<GameObject> TestCockList;
+
     void OnEnable()
     {
         Actions.onHoseAttach += AttachHoseBib;
@@ -126,11 +129,6 @@ public class TestKitController : MonoBehaviour
 
         //return MinKnob_rotation + normalizedRotation * rotationDiff;
         return MinKnob_rotation + normalizedRotation * rotationDiff;
-    }
-
-    private void TestKitOperate(TestKitOperableCheck testKit)
-    {
-        //currentKnobRotation = testKit.gameObject.transform.eulerAngles.z;
     }
 
     /*
@@ -189,17 +187,32 @@ public class TestKitController : MonoBehaviour
         }
     }
 
-    public void AttachHoseBib(GameObject gameObject)
+    public void AttachHoseBib(GameObject testCock)
     {
         isConnectedToAssembly = true;
 
-        Debug.Log($"{gameObject}");
+        //  Debug.Log($"{gameObject} attached to assembly");
+
+        if (TestCockList.Contains(testCock) != true)
+        {
+            TestCockList.Add(testCock);
+        }
+        /* if (TestCockList[i] != gameObject)
+         {
+             TestCockList.Add(gameObject);
+         }
+         */
+
+        //foreach (GameObject testCock in TestCockList) { }
     }
 
-    public void DetachHoseBib(GameObject gameObject)
+    public void DetachHoseBib(GameObject testCock)
     {
         isConnectedToAssembly = false;
-        //Debug.Log($"Disconnected from Assembly");
+
+        TestCockList.Remove(testCock);
+
+        //Debug.Log($"{gameObject} detached from assembly");
     }
 
     float needleVelRef = 0;
@@ -247,7 +260,7 @@ public class TestKitController : MonoBehaviour
 
         // lowHosePressure = LowHoseDetector.ParticlesInside;
         // bypasshosePressure = BypassHoseDetector.ParticlesInside;
-        Debug.Log(highHosePressure);
+        //Debug.Log(highHosePressure);
     }
 
     // Update is called once per frame

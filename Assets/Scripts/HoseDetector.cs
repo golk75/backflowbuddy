@@ -6,16 +6,18 @@ using UnityEngine.Events;
 
 public class HoseDetector : MonoBehaviour
 {
+    public GameObject testCock;
+
     public void OnTriggerEnter(Collider other)
     {
         //onHoseBibEnter.Invoke();
-        Actions.onHoseAttach?.Invoke(other.gameObject);
+        Actions.onHoseAttach?.Invoke(testCock);
     }
 
     private void OnTriggerStay() { }
 
     private void OnTriggerExit(Collider other)
     {
-        Actions.onHoseDetach?.Invoke(other.gameObject);
+        Actions.onHoseDetach?.Invoke(testCock);
     }
 }

@@ -133,12 +133,9 @@ public class WaterController : MonoBehaviour
     public float testCock3MaxStr;
     public float testCock4MaxStr;
 
-    Coroutine CheckHousingFFDampCheck;
-
     // Start is called before the first frame update
     void Start()
     {
-        //TestCockList = new List<GameObject>();
         testCockController = testCockManager.GetComponent<TestCockController>();
         shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
         initSupplyVoidPos = supplyVoid.transform.localPosition;
@@ -179,10 +176,11 @@ public class WaterController : MonoBehaviour
                 Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
                 break;
         }
-
+        /*
         Debug.Log(
             $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
         );
+        */
     }
 
     private void DetectCheckClosure(GameObject checkValve)
@@ -199,10 +197,11 @@ public class WaterController : MonoBehaviour
                 Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
                 break;
         }
-
+        /*
         Debug.Log(
             $"DetectClose: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
         );
+        */
     }
 
     // Update is called once per frame
