@@ -765,6 +765,8 @@ GameObject:
   - component: {fileID: 662512902}
   - component: {fileID: 662512903}
   - component: {fileID: 662512904}
+  - component: {fileID: 662512905}
+  - component: {fileID: 662512906}
   m_Layer: 0
   m_Name: HoseDetector
   m_TagString: TC04
@@ -820,6 +822,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &662512905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662512901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c2b90a17fbfbd44807e4d99b680a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
+  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  ObjectVersion: 2
+--- !u!114 &662512906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662512901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e1948b31becfb4a9cc7647516c70e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvertSDF: 0
+  SurfaceDistance: 0
+  ChosenSDFType: 1
 --- !u!114 &715421594 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1144099433934687623, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -1484,6 +1516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterController: {fileID: 6991473213321237439}
   playerController: {fileID: 1446278364}
+  shutOffValveController: {fileID: 2051383271}
   lowBleed: {fileID: 1508745244}
   lowControl: {fileID: 1808861984}
   highBleed: {fileID: 448393510}
@@ -1493,9 +1526,12 @@ MonoBehaviour:
   LowHose: {fileID: 2100592570}
   HighHose: {fileID: 262431609}
   BypassHose: {fileID: 1944022031}
+  Check1: {fileID: 1027411676}
+  Check1Pos: {x: 0, y: 0, z: 0}
   LowHoseDetector: {fileID: 307571235}
   HighHoseDetector: {fileID: 1135142862}
   BypassHoseDetector: {fileID: 1019245621}
+  currentPSID: 0
   isOperableObject: 0
   isConnectedToAssembly: 0
 --- !u!114 &1103923068 stripped
@@ -2926,7 +2962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793769585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -63.6, y: 7.5931635, z: -13.6933}
+  m_LocalPosition: {x: -23.6, y: -1.9, z: -13.6933}
   m_LocalScale: {x: 3.5596616, y: 1.6908393, z: 3.5596616}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3251,6 +3287,8 @@ GameObject:
   - component: {fileID: 1947499200}
   - component: {fileID: 1947499201}
   - component: {fileID: 1947499202}
+  - component: {fileID: 1947499203}
+  - component: {fileID: 1947499204}
   m_Layer: 0
   m_Name: HoseDetector
   m_TagString: TC03
@@ -3306,6 +3344,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1947499203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947499199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c2b90a17fbfbd44807e4d99b680a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
+  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  ObjectVersion: 2
+--- !u!114 &1947499204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947499199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e1948b31becfb4a9cc7647516c70e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvertSDF: 0
+  SurfaceDistance: 0
+  ChosenSDFType: 1
 --- !u!1 &1950613917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,6 +3385,8 @@ GameObject:
   - component: {fileID: 1950613918}
   - component: {fileID: 1950613919}
   - component: {fileID: 1950613920}
+  - component: {fileID: 1950613921}
+  - component: {fileID: 1950613922}
   m_Layer: 0
   m_Name: HoseDetector
   m_TagString: TC02
@@ -3372,6 +3442,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1950613921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950613917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c2b90a17fbfbd44807e4d99b680a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
+  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  ObjectVersion: 2
+--- !u!114 &1950613922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950613917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e1948b31becfb4a9cc7647516c70e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvertSDF: 0
+  SurfaceDistance: 0
+  ChosenSDFType: 1
 --- !u!114 &1974353056 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9170446127577655784, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -4516,7 +4616,7 @@ PrefabInstance:
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.size
-      value: 59
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -4802,70 +4902,85 @@ PrefabInstance:
         type: 3}
       propertyPath: Manipulators.Array.data[45]
       value: 
-      objectReference: {fileID: 1700191810}
+      objectReference: {fileID: 1947499203}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[46]
       value: 
-      objectReference: {fileID: 53511190}
+      objectReference: {fileID: 662512905}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[47]
       value: 
-      objectReference: {fileID: 107841527}
+      objectReference: {fileID: 1950613921}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[48]
       value: 
-      objectReference: {fileID: 177506921}
+      objectReference: {fileID: 53511190}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[49]
       value: 
-      objectReference: {fileID: 245500042}
+      objectReference: {fileID: 107841527}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[50]
       value: 
-      objectReference: {fileID: 307571235}
+      objectReference: {fileID: 177506921}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[51]
       value: 
-      objectReference: {fileID: 324204553}
+      objectReference: {fileID: 245500042}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[52]
       value: 
-      objectReference: {fileID: 1019245621}
+      objectReference: {fileID: 307571235}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[53]
       value: 
-      objectReference: {fileID: 1129872135}
+      objectReference: {fileID: 324204553}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[54]
       value: 
-      objectReference: {fileID: 1135142862}
+      objectReference: {fileID: 1019245621}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[55]
       value: 
-      objectReference: {fileID: 1173856535}
+      objectReference: {fileID: 1129872135}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[56]
       value: 
-      objectReference: {fileID: 1594502665}
+      objectReference: {fileID: 1135142862}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[57]
       value: 
-      objectReference: {fileID: 1626657316}
+      objectReference: {fileID: 1173856535}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.data[58]
+      value: 
+      objectReference: {fileID: 1594502665}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Manipulators.Array.data[59]
+      value: 
+      objectReference: {fileID: 1626657316}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Manipulators.Array.data[60]
+      value: 
+      objectReference: {fileID: 1700191810}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Manipulators.Array.data[61]
       value: 
       objectReference: {fileID: 1925426993}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,

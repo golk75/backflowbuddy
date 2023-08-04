@@ -8,6 +8,8 @@ public class TestKitController : MonoBehaviour
 {
     public WaterController waterController;
     public PlayerController playerController;
+    public ShutOffValveController shutOffValveController;
+
     public GameObject lowBleed;
     public GameObject lowControl;
 
@@ -27,6 +29,12 @@ public class TestKitController : MonoBehaviour
 
     [SerializeField]
     GameObject BypassHose;
+
+    [SerializeField]
+    GameObject Check1;
+
+    [SerializeField]
+    Vector3 Check1Pos;
 
     Vector3 initLowHosePosition;
     Vector3 initHighHosePosition;
@@ -80,7 +88,7 @@ public class TestKitController : MonoBehaviour
     void Start()
     {
         currentPSID = 0;
-        maxPSID = 55;
+        maxPSID = 50;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
@@ -188,23 +196,39 @@ public class TestKitController : MonoBehaviour
     private void NeedleControl()
     {
         // For  now, soely using high hose (double check assembly)
+        needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
 
-
-
-        needle.transform.eulerAngles = new Vector3(
-            0,
-            0,
-            Mathf.Clamp(GetPsidNeedleRotation(), -55, 55)
-        );
-
+        /*
+                needle.transform.eulerAngles = new Vector3(
+                    0,
+                    0,
+                    Mathf.Clamp(GetPsidNeedleRotation(), -55, 55)
+                );
+        */
         Debug.Log(GetPsidNeedleRotation());
     }
 
     private void PressureControl()
     {
-        highHosePressure = HighHoseDetector.ParticlesInside;
+        Debug.Log(highHosePressure);
+        Check1Pos = Check1.transform.localPosition;
+
+        highHosePressure = Mathf.SmoothStep(
+            highHosePressure,
+            HighHoseDetector.ParticlesInside,
+            0.1f
+        );
+        if (highHosePressure > MinNeedle_rotation && shutOffValveController.IsSupplyOn == false)
+        {
+            highHosePressure -= Check1Pos.x;
+        }
         lowHosePressure = LowHoseDetector.ParticlesInside;
         bypasshosePressure = BypassHoseDetector.ParticlesInside;
+
+        if (highHosePressure > maxPSID)
+        {
+            highHosePressure = maxPSID;
+        }
     }
 
     // Update is called once per frame
