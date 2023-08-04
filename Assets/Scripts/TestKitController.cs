@@ -54,6 +54,9 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     ZibraLiquidDetector Zone1Detector;
 
+    [SerializeField]
+    GameObject connectedTestCock;
+
     private const float MinNeedle_rotation = 55;
     private const float MaxNeedle_rotation = -55;
     private const float MinKnob_rotation = 0;
@@ -69,11 +72,14 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     private float currentPSID;
     private float maxPSID;
+    private float minPSID;
+
     public bool isOperableObject;
     public bool isConnectedToAssembly;
     float lowHosePressure;
     float highHosePressure;
     float bypasshosePressure;
+    float needleSpeedDamp = 0.005f;
 
     void OnEnable()
     {
@@ -91,10 +97,12 @@ public class TestKitController : MonoBehaviour
     void Start()
     {
         currentPSID = 0;
-        maxPSID = 50;
+        minPSID = 0;
+        maxPSID = 55;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
+        highHosePressure = 0;
         initLowHosePosition = LowHose.transform.position;
         initHighHosePosition = HighHose.transform.position;
         initBypassHosePosition = BypassHose.transform.position;
@@ -185,7 +193,7 @@ public class TestKitController : MonoBehaviour
     {
         isConnectedToAssembly = true;
 
-        //Debug.Log($"Connected to Assembly");
+        Debug.Log($"{gameObject}");
     }
 
     public void DetachHoseBib(GameObject gameObject)
@@ -213,25 +221,33 @@ public class TestKitController : MonoBehaviour
 
     private void PressureControl()
     {
-        //Debug.Log(highHosePressure);
+        // For  now, soely using high hose (double check assembly)
 
 
-        highHosePressure = Mathf.SmoothStep(
-            highHosePressure,
-            HighHoseDetector.ParticlesInside,
-            0.1f
-        );
-        if (highHosePressure > MinNeedle_rotation && shutOffValveController.IsSupplyOn == false)
+        if (isConnectedToAssembly == true)
         {
-            highHosePressure -= Check1Pos.x;
+            highHosePressure = Mathf.SmoothStep(
+                highHosePressure,
+                Zone1Detector.ParticlesInside,
+                needleSpeedDamp
+            );
         }
-        lowHosePressure = LowHoseDetector.ParticlesInside;
-        bypasshosePressure = BypassHoseDetector.ParticlesInside;
-
+        if (isConnectedToAssembly == false)
+        {
+            highHosePressure -= 5;
+        }
+        if (highHosePressure <= minPSID)
+        {
+            highHosePressure = minPSID;
+        }
         if (highHosePressure > maxPSID)
         {
             highHosePressure = maxPSID;
         }
+
+        // lowHosePressure = LowHoseDetector.ParticlesInside;
+        // bypasshosePressure = BypassHoseDetector.ParticlesInside;
+        Debug.Log(highHosePressure);
     }
 
     // Update is called once per frame

@@ -9,13 +9,13 @@ public class HoseDetector : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         //onHoseBibEnter.Invoke();
-        Actions.onHoseAttach?.Invoke(this.gameObject);
+        Actions.onHoseAttach?.Invoke(other.gameObject);
     }
 
     private void OnTriggerStay() { }
 
-    private void OnTriggerExit()
+    private void OnTriggerExit(Collider other)
     {
-        Actions.onHoseDetach?.Invoke(this.gameObject);
+        Actions.onHoseDetach?.Invoke(other.gameObject);
     }
 }
