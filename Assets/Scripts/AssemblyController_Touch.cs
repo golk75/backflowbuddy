@@ -577,6 +577,7 @@ public class AssemblyController_Touch : MonoBehaviour
                 Camera.main.transform.position.y,
                 Camera.main.transform.position.z
             );
+            //
         }
         else if (Camera.main.transform.position.x > panningRightBoundry)
         {

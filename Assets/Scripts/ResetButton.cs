@@ -25,7 +25,7 @@ public class ResetButton : MonoBehaviour
         foreach (GameObject testCock in testCockController.TestCockList) { }
         resetVoid.enabled = true;
         Debug.Log($"Coroutine started");
-        playerController._operableObject = ShutOffValve1;
+        //playerController.OperableObject = ShutOffValve1;
 
         ShutOffValve1.transform.eulerAngles = initialShutOffValveRot;
         playerController._operableObjectRotation = initialShutOffValveRot;
@@ -35,10 +35,9 @@ public class ResetButton : MonoBehaviour
         Debug.Log($"Coroutine stoppped");
         playerController._operableObjectRotation = Vector3.zero;
         playerController.touchStart = Vector3.zero;
-        if (playerController._operableObject != null)
-            playerController._operableObject = null;
+        if (playerController.OperableObject != null)
 
-        resetVoid.enabled = false;
+            resetVoid.enabled = false;
     }
 
     // Start is called before the first frame update

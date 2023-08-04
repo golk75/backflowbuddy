@@ -55,6 +55,7 @@ public class TestKitController : MonoBehaviour
     private float maxKnobRotation;
     private float minKnobRotation;
 
+    [SerializeField]
     private float currentPSID;
     private float maxPSID;
     public bool isOperableObject;
@@ -92,7 +93,7 @@ public class TestKitController : MonoBehaviour
     {
         float PsidDiff = MinNeedle_rotation - MaxNeedle_rotation;
 
-        float normalizedPsid = currentPSID / maxPSID;
+        float normalizedPsid = highHosePressure / maxPSID;
 
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
     }
@@ -144,7 +145,8 @@ public class TestKitController : MonoBehaviour
                 playerController.operableComponentDescription.partsType
                 == OperableComponentDescription.PartsType.TestKitValve
             )
-                currentKnob = playerController.OperableObject;
+                currentKnob = playerController.OperableTestGaugeObject;
+
             currentKnobRotation +=
                 (
                     playerController.touchStart.x
@@ -161,8 +163,10 @@ public class TestKitController : MonoBehaviour
             {
                 currentKnobRotation = minKnobRotation;
             }
-
-            currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
+            if (currentKnob != null)
+            {
+                currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
+            }
         }
     }
 
@@ -179,28 +183,28 @@ public class TestKitController : MonoBehaviour
         //Debug.Log($"Disconnected from Assembly");
     }
 
+    float needleVelRef = 0;
+
     private void NeedleControl()
     {
-        if (isConnectedToAssembly == true)
-        {
-            // For now, soely using high hose (double check assembly)
-            currentPSID += highHosePressure * Time.deltaTime;
-            if (currentPSID > maxPSID)
-            {
-                currentPSID = maxPSID;
-            }
-            needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
-        }
+        // For  now, soely using high hose (double check assembly)
+
+
+
+        needle.transform.eulerAngles = new Vector3(
+            0,
+            0,
+            Mathf.Clamp(GetPsidNeedleRotation(), -55, 55)
+        );
+
+        Debug.Log(GetPsidNeedleRotation());
     }
 
     private void PressureControl()
     {
-        if (isConnectedToAssembly == true)
-        {
-            highHosePressure = HighHoseDetector.ParticlesInside;
-            lowHosePressure = LowHoseDetector.ParticlesInside;
-            bypasshosePressure = BypassHoseDetector.ParticlesInside;
-        }
+        highHosePressure = HighHoseDetector.ParticlesInside;
+        lowHosePressure = LowHoseDetector.ParticlesInside;
+        bypasshosePressure = BypassHoseDetector.ParticlesInside;
     }
 
     // Update is called once per frame

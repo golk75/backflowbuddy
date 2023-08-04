@@ -62,13 +62,22 @@ public class PlayerController : MonoBehaviour
     public float deviceRotSensitivity;
 
     [SerializeField]
-    public GameObject _operableObject;
+    GameObject _operableObject;
+
+    [SerializeField]
+    public GameObject _operableTestGaugeObject;
+    public GameObject OperableTestGaugeObject
+    {
+        get { return _operableTestGaugeObject; }
+        private set { _operableTestGaugeObject = value; }
+    }
 
     [SerializeField]
     GameObject _operableValve;
 
     public bool isInit = false;
     public GameObject initialOperableObject;
+    public GameObject initialTestGaugeOperableObject;
     public OperableComponentDescription operableComponentDescription;
     public Vector2 primaryFingerPos;
     public Vector2 primaryFingerDelta;
@@ -91,6 +100,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         Touch0Position = playerInput.Touchscreen.Touch0Position;
         _operableObject = initialOperableObject;
+        _operableTestGaugeObject = initialTestGaugeOperableObject;
     }
 
     void OnEnable()
@@ -126,7 +136,7 @@ public class PlayerController : MonoBehaviour
         onPanCanceled?.Invoke();
 
         isOperableObject = false;
-        testKitController.isOperableObject = false;
+
         touchStart = Vector3.zero;
     }
 
@@ -176,47 +186,53 @@ public class PlayerController : MonoBehaviour
         //current distance to device is about 60-70
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
 
-        Debug.Log($"hit.collider = {hit.collider}; ray2DHit = {ray2DHit.collider}");
+        //Debug.Log($"hit.collider = {hit.collider}; ray2DHit = {ray2DHit.collider}");
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
 
         if (hit.collider != null && ray2DHit.collider == null)
         {
+            _operableTestGaugeObject = null;
             isOperableObject = true;
             operableComponentDescription =
                 hit.collider.transform.GetComponent<OperableComponentDescription>();
 
             _operableObject = hit.collider.transform.gameObject;
             _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
-            //Debug.Log($"playerController.OperableObject = {OperableObject}");
         }
         else if (hit.collider == null && ray2DHit.collider != null)
         {
+            _operableObject = null;
             isOperableObject = true;
             operableComponentDescription =
                 ray2DHit.collider.transform.GetComponent<OperableComponentDescription>();
 
-            _operableObject = ray2DHit.collider.transform.gameObject;
-            _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+            _operableTestGaugeObject = ray2DHit.collider.transform.gameObject;
         }
         else
         {
+            _operableTestGaugeObject = null;
+            _operableObject = null;
             isOperableObject = false;
         }
     }
 
+    //THIS ONLY OPERATES ASSEMBY COMPONENTS! NOT TESTGAUGE COMPONENTS
     private void Operate()
     {
         //_operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
 
         //Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
-        _operableObjectRotation.z +=
-            (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-            * deviceRotSensitivity;
+        if (_operableObject != null)
+        {
+            _operableObjectRotation.z +=
+                (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                * deviceRotSensitivity;
 
-        //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
-        _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
-        _operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
+            //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
+            _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+            _operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
+        }
     }
 
     private void Start() { }
