@@ -291,7 +291,7 @@ public class WaterController : MonoBehaviour
             TestCockFF2.Strength = 0;
         }
 
-        if (testCockController.isTestCock3Open)
+        if (testCockController.isTestCock3Open && isCheck1Closed == false)
         {
             if (check1Detector.ParticlesInside > 3000)
             {
