@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using com.zibra.liquid.Manipulators;
 using System;
+using JetBrains.Annotations;
 
 public class TestKitController : MonoBehaviour
 {
@@ -57,6 +58,9 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     GameObject connectedTestCock;
 
+    [SerializeField]
+    ZibraLiquidDetector TestCock2Detector;
+
     private const float MinNeedle_rotation = 55;
     private const float MaxNeedle_rotation = -55;
     private const float MinKnob_rotation = 0;
@@ -73,7 +77,7 @@ public class TestKitController : MonoBehaviour
     private float currentPSID;
     private float maxPSID;
     private float minPSID;
-
+    float closingPoint = 0;
     public bool isOperableObject;
     public bool isConnectedToAssembly;
     float lowHosePressure;
@@ -83,6 +87,10 @@ public class TestKitController : MonoBehaviour
 
     [SerializeField]
     public List<GameObject> TestCockList;
+
+    [SerializeField]
+    public List<ZibraLiquidDetector> TestCockDetectorList;
+    Coroutine Check1ClosingPoint;
 
     void OnEnable()
     {
@@ -191,19 +199,18 @@ public class TestKitController : MonoBehaviour
     {
         isConnectedToAssembly = true;
 
-        //  Debug.Log($"{gameObject} attached to assembly");
-
         if (TestCockList.Contains(testCock) != true)
         {
             TestCockList.Add(testCock);
         }
-        /* if (TestCockList[i] != gameObject)
-         {
-             TestCockList.Add(gameObject);
-         }
-         */
-
-        //foreach (GameObject testCock in TestCockList) { }
+        if (
+            TestCockDetectorList.Contains(testCock.GetComponentInChildren<ZibraLiquidDetector>())
+            != true
+        )
+        {
+            TestCockDetectorList.Add(testCock.GetComponentInChildren<ZibraLiquidDetector>());
+        }
+        //  Debug.Log($"{gameObject} attached to assembly");
     }
 
     public void DetachHoseBib(GameObject testCock)
@@ -230,12 +237,32 @@ public class TestKitController : MonoBehaviour
 
         if (isConnectedToAssembly == true)
         {
-            highHosePressure = Mathf.SmoothStep(
-                highHosePressure,
-                Zone1Detector.ParticlesInside,
-                needleSpeedDamp
-            );
+            if (
+                TestCockList[0].transform.eulerAngles.z > 0
+                && shutOffValveController.IsSupplyOn == true
+            )
+            {
+                //supply is open and test cock is open
+                highHosePressure = Mathf.SmoothStep(
+                    highHosePressure,
+                    Zone1Detector.ParticlesInside,
+                    needleSpeedDamp
+                );
+            }
+            if (
+                TestCockList[0].transform.eulerAngles.z > 0
+                && shutOffValveController.IsSupplyOn == false
+            )
+            {
+                //supply is closed and test cock is open
+                highHosePressure = Mathf.SmoothStep(
+                    highHosePressure,
+                    TestCock2Detector.ParticlesInside,
+                    needleSpeedDamp
+                );
+            }
         }
+
         if (isConnectedToAssembly == false)
         {
             highHosePressure -= 5;
@@ -247,11 +274,23 @@ public class TestKitController : MonoBehaviour
         if (highHosePressure > maxPSID)
         {
             highHosePressure = maxPSID;
-        }
-
+        } /*
+        Debug.Log(
+            $"highHosePressure = {highHosePressure}| GetPsidNeedleRotation() = {GetPsidNeedleRotation()}| closingPoint = {closingPoint}"
+        );
+        */
         // lowHosePressure = LowHoseDetector.ParticlesInside;
         // bypasshosePressure = BypassHoseDetector.ParticlesInside;
         //Debug.Log(highHosePressure);
+    }
+
+    IEnumerator Check1Test()
+    {
+        while (true)
+        {
+            closingPoint += 0.1f * Time.deltaTime;
+            yield return null;
+        }
     }
 
     // Update is called once per frame

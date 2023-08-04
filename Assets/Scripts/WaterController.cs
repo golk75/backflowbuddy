@@ -74,8 +74,8 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     CheckValveCollision check2Collision;
-    bool isCheck1Closed;
-    bool isCheck2Closed;
+    public bool isCheck1Closed;
+    public bool isCheck2Closed;
 
     [SerializeField]
     ZibraLiquidVoid Void_Check1;
@@ -133,6 +133,9 @@ public class WaterController : MonoBehaviour
     public float testCock3MaxStr;
     public float testCock4MaxStr;
 
+    [SerializeField]
+    bool isAttachedToGauge;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,6 +152,8 @@ public class WaterController : MonoBehaviour
     {
         Actions.onCheckClosed += DetectCheckClosure;
         Actions.onCheckOpened += DetectCheckOpening;
+        Actions.onHoseAttach += DetectHoseAttachment;
+        Actions.onHoseDetach += DetectHoseDetachment;
     }
 
     /// <summary>
@@ -158,6 +163,8 @@ public class WaterController : MonoBehaviour
     {
         Actions.onCheckClosed -= DetectCheckClosure;
         Actions.onCheckOpened -= DetectCheckOpening;
+        Actions.onHoseAttach -= DetectHoseAttachment;
+        Actions.onHoseDetach -= DetectHoseDetachment;
     }
 
     private void DetectCheckOpening(GameObject checkValve)
@@ -176,10 +183,11 @@ public class WaterController : MonoBehaviour
                 Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
                 break;
         }
-
+        /*
         Debug.Log(
             $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
         );
+        */
     }
 
     private void DetectCheckClosure(GameObject checkValve)
@@ -196,9 +204,21 @@ public class WaterController : MonoBehaviour
                 Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
                 break;
         }
+        /*
         Debug.Log(
             $"DetectClosed: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
         );
+        */
+    }
+
+    private void DetectHoseAttachment(GameObject @object)
+    {
+        isAttachedToGauge = true;
+    }
+
+    private void DetectHoseDetachment(GameObject @object)
+    {
+        isAttachedToGauge = false;
     }
 
     // Update is called once per frame
@@ -233,7 +253,11 @@ public class WaterController : MonoBehaviour
             TestCockFF1.Strength = 0;
         }
         //test cock #2 pressure regulation
-        if (testCockController.isTestCock2Open && isCheck1Closed == false)
+        if (
+            testCockController.isTestCock2Open
+            && isCheck1Closed == false
+            && isAttachedToGauge == false
+        )
         {
             if (check1Detector.ParticlesInside > 3000)
             {
@@ -320,30 +344,30 @@ public class WaterController : MonoBehaviour
             }
 
             //while shutoff valve is closed regulate ff in check housing, according to the open/close status of all test cocks (ie. if any of them open, reduce ff strength to 0)
-
-            if (
-                testCockController.isTestCock1Open == true
-                || testCockController.isTestCock2Open == true
-                || testCockController.isTestCock3Open == true
-                || testCockController.isTestCock4Open == true
-            )
-            {
-                {
-                    if (isCheck1Closed == false && isCheck2Closed == false)
-                    {
-                        check1housingForceField.Strength = 0;
-                        check2housingForceField.Strength = 0;
-                    }
-                }
-            }
-            else
-            {
-                if (isCheck1Closed == false && isCheck2Closed == false)
-                {
-                    check1housingForceField.Strength = 1;
-                    check2housingForceField.Strength = 1;
-                }
-            }
+            /*
+                        if (
+                            testCockController.isTestCock1Open == true
+                            || testCockController.isTestCock2Open == true
+                            || testCockController.isTestCock3Open == true
+                            || testCockController.isTestCock4Open == true
+                        )
+                        {
+                            {
+                                if (isCheck1Closed == false && isCheck2Closed == false)
+                                {
+                                    check1housingForceField.Strength = 0;
+                                    check2housingForceField.Strength = 0;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (isCheck1Closed == false && isCheck2Closed == false)
+                            {
+                                check1housingForceField.Strength = 1;
+                                check2housingForceField.Strength = 1;
+                            }
+                        }*/
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
@@ -362,6 +386,18 @@ public class WaterController : MonoBehaviour
                 check1VoidMaxSize * TestCockFF2.Strength / 8,
                 ref check1VoidTC1Ref,
                 5f
+            );
+            check1housingForceField.Strength = Mathf.SmoothDamp(
+                check1housingForceField.Strength,
+                1.2f,
+                ref check1FFref.x,
+                0.2f
+            );
+            check2housingForceField.Strength = Mathf.SmoothDamp(
+                check2housingForceField.Strength,
+                1f,
+                ref check2FFref.x,
+                1f
             );
         }
         else if (shutOffValveController.IsSupplyOn == true)
