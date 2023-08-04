@@ -51,6 +51,9 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     ZibraLiquidDetector BypassHoseDetector;
 
+    [SerializeField]
+    ZibraLiquidDetector Zone1Detector;
+
     private const float MinNeedle_rotation = 55;
     private const float MaxNeedle_rotation = -55;
     private const float MinKnob_rotation = 0;
@@ -211,7 +214,7 @@ public class TestKitController : MonoBehaviour
     private void PressureControl()
     {
         //Debug.Log(highHosePressure);
-        Check1Pos = Check1.transform.localPosition;
+
 
         highHosePressure = Mathf.SmoothStep(
             highHosePressure,
