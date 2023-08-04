@@ -317,7 +317,7 @@ public class WaterController : MonoBehaviour
             TestCockFF3.Strength = 0;
         }
         //test cock #4 pressure regulation
-        if (testCockController.isTestCock4Open)
+        if (testCockController.isTestCock4Open && isCheck2Closed == false)
         {
             if (check2Detector.ParticlesInside > 3000)
             {
