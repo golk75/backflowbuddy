@@ -43,6 +43,18 @@ public class WaterController : MonoBehaviour
     ZibraLiquidDetector TestCockDetector4;
 
     [SerializeField]
+    HoseDetector TestCockHoseDetect1;
+
+    [SerializeField]
+    HoseDetector TestCockHoseDetect2;
+
+    [SerializeField]
+    HoseDetector TestCockHoseDetect3;
+
+    [SerializeField]
+    HoseDetector TestCockHoseDetect4;
+
+    [SerializeField]
     ZibraLiquidDetector BodyDetectorZone1;
 
     [SerializeField]
@@ -74,6 +86,7 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     CheckValveCollision check2Collision;
+
     public bool isCheck1Closed;
     public bool isCheck2Closed;
 
@@ -236,7 +249,7 @@ public class WaterController : MonoBehaviour
 
 
         //test cock #1 pressure regulation
-        if (testCockController.isTestCock1Open)
+        if (testCockController.isTestCock1Open && TestCockHoseDetect1.isConnected == false)
         {
             if (TestCockDetector1.ParticlesInside > 2000)
             {
@@ -256,7 +269,7 @@ public class WaterController : MonoBehaviour
         if (
             testCockController.isTestCock2Open
             && isCheck1Closed == false
-            && isAttachedToGauge == false
+            && TestCockHoseDetect2.isConnected == false
         )
         {
             if (check1Detector.ParticlesInside > 3000)
@@ -283,7 +296,11 @@ public class WaterController : MonoBehaviour
             TestCockFF2.Strength = 0;
         }
         //test cock #3 pressure regulation
-        if (testCockController.isTestCock3Open && isCheck1Closed == false)
+        if (
+            testCockController.isTestCock3Open
+            && isCheck1Closed == false
+            && TestCockHoseDetect3.isConnected == false
+        )
         {
             if (check1Detector.ParticlesInside > 3000)
             {
@@ -309,7 +326,11 @@ public class WaterController : MonoBehaviour
             TestCockFF3.Strength = 0;
         }
         //test cock #4 pressure regulation
-        if (testCockController.isTestCock4Open && isCheck2Closed == false)
+        if (
+            testCockController.isTestCock4Open
+            && isCheck2Closed == false
+            && TestCockHoseDetect4.isConnected == false
+        )
         {
             if (check2Detector.ParticlesInside > 3000)
             {
@@ -387,18 +408,32 @@ public class WaterController : MonoBehaviour
                 ref check1VoidTC1Ref,
                 5f
             );
-            check1housingForceField.Strength = Mathf.SmoothDamp(
-                check1housingForceField.Strength,
-                1.2f,
-                ref check1FFref.x,
-                0.2f
-            );
-            check2housingForceField.Strength = Mathf.SmoothDamp(
-                check2housingForceField.Strength,
-                1f,
-                ref check2FFref.x,
-                1f
-            );
+            if (
+                TestCockHoseDetect2.isConnected == true
+                && testCockController.isTestCock3Open == true
+            )
+            {
+                check1housingForceField.Strength = 0;
+            }
+            else
+            {
+                check1housingForceField.Strength = Mathf.SmoothDamp(
+                    check1housingForceField.Strength,
+                    1.2f,
+                    ref check1FFref.x,
+                    0.2f
+                );
+            }
+            if (
+                TestCockHoseDetect3.isConnected == true
+                && testCockController.isTestCock4Open == true
+            )
+                check2housingForceField.Strength = Mathf.SmoothDamp(
+                    check2housingForceField.Strength,
+                    1f,
+                    ref check2FFref.x,
+                    1f
+                );
         }
         else if (shutOffValveController.IsSupplyOn == true)
         {
