@@ -15,8 +15,11 @@ public class WaterController : MonoBehaviour
     [SerializeField]
     GameObject shutOffValveManager;
 
+    public CheckValveStatus checkValveStatus;
+
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
+    public TestKitController testKitController;
 
     [SerializeField]
     public GameObject ShutOffValve1;
@@ -81,14 +84,8 @@ public class WaterController : MonoBehaviour
     [SerializeField]
     public ZibraLiquidForceField check2housingForceField;
 
-    [SerializeField]
-    CheckValveCollision check1Collision;
-
-    [SerializeField]
-    CheckValveCollision check2Collision;
-
-    public bool isCheck1Closed;
-    public bool isCheck2Closed;
+    // public bool isCheck1Closed;
+    // public bool isCheck2Closed;
 
     [SerializeField]
     ZibraLiquidVoid Void_Check1;
@@ -163,8 +160,8 @@ public class WaterController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        Actions.onCheckClosed += DetectCheckClosure;
-        Actions.onCheckOpened += DetectCheckOpening;
+        //Actions.onCheckClosed += DetectCheckClosure;
+        //Actions.onCheckOpened += DetectCheckOpening;
         Actions.onHoseAttach += DetectHoseAttachment;
         Actions.onHoseDetach += DetectHoseDetachment;
     }
@@ -174,55 +171,58 @@ public class WaterController : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        Actions.onCheckClosed -= DetectCheckClosure;
-        Actions.onCheckOpened -= DetectCheckOpening;
+        //Actions.onCheckClosed -= DetectCheckClosure;
+        //Actions.onCheckOpened -= DetectCheckOpening;
         Actions.onHoseAttach -= DetectHoseAttachment;
         Actions.onHoseDetach -= DetectHoseDetachment;
     }
 
-    private void DetectCheckOpening(GameObject checkValve)
-    {
-        //Debug.Log($"{checkValve.tag} is OPEN");
-
-        switch (checkValve.tag)
+    /*
+        private void DetectCheckOpening(GameObject checkValve)
         {
-            case "CV01":
-                isCheck1Closed = false;
-                break;
-            case "CV02":
-                isCheck2Closed = false;
-                break;
-            default:
-                Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
-                break;
+            //Debug.Log($"{checkValve.tag} is OPEN");
+    
+            switch (checkValve.tag)
+            {
+                case "CV01":
+                    isCheck1Closed = false;
+                    break;
+                case "CV02":
+                    isCheck2Closed = false;
+                    break;
+                default:
+                    Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
+                    break;
+            }
+            /*
+                    Debug.Log(
+                        $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
+                    );
+            
         }
-        /*
-        Debug.Log(
-            $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
-        );
-        */
-    }
-
-    private void DetectCheckClosure(GameObject checkValve)
-    {
-        switch (checkValve.tag)
+        
+    
+        private void DetectCheckClosure(GameObject checkValve)
         {
-            case "CV01":
-                isCheck1Closed = !isCheck1Closed;
-                break;
-            case "CV02":
-                isCheck2Closed = !isCheck2Closed;
-                break;
-            default:
-                Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
-                break;
+            switch (checkValve.tag)
+            {
+                case "CV01":
+                    isCheck1Closed = !isCheck1Closed;
+                    break;
+                case "CV02":
+                    isCheck2Closed = !isCheck2Closed;
+                    break;
+                default:
+                    Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
+                    break;
+            }
+            
+                    Debug.Log(
+                        $"DetectClosed: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
+                    );
+            
         }
-        /*
-        Debug.Log(
-            $"DetectClosed: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
-        );
         */
-    }
 
     private void DetectHoseAttachment(GameObject @object)
     {
@@ -268,7 +268,7 @@ public class WaterController : MonoBehaviour
         //test cock #2 pressure regulation
         if (
             testCockController.isTestCock2Open
-            && isCheck1Closed == false
+            && checkValveStatus.isCheck1Closed == false
             && TestCockHoseDetect2.isConnected == false
         )
         {
@@ -298,7 +298,7 @@ public class WaterController : MonoBehaviour
         //test cock #3 pressure regulation
         if (
             testCockController.isTestCock3Open
-            && isCheck1Closed == false
+            && checkValveStatus.isCheck1Closed == false
             && TestCockHoseDetect3.isConnected == false
         )
         {
@@ -328,7 +328,7 @@ public class WaterController : MonoBehaviour
         //test cock #4 pressure regulation
         if (
             testCockController.isTestCock4Open
-            && isCheck2Closed == false
+            && checkValveStatus.isCheck2Closed == false
             && TestCockHoseDetect4.isConnected == false
         )
         {
@@ -428,12 +428,21 @@ public class WaterController : MonoBehaviour
                 TestCockHoseDetect3.isConnected == true
                 && testCockController.isTestCock4Open == true
             )
+            {
+                check2housingForceField.Strength = 0;
+            }
+            else if (
+                TestCockHoseDetect3.isConnected == true
+                && testCockController.isTestCock4Open == true
+            )
+            {
                 check2housingForceField.Strength = Mathf.SmoothDamp(
                     check2housingForceField.Strength,
                     1f,
                     ref check2FFref.x,
                     1f
                 );
+            }
         }
         else if (shutOffValveController.IsSupplyOn == true)
         {

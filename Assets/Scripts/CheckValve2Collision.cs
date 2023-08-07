@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckValveCollision : MonoBehaviour
+public class CheckValve2Collision : MonoBehaviour
 {
     public bool isCheckClosed;
 
     void OnCollisionEnter(Collision other)
     {
         isCheckClosed = true;
-        Actions.onCheck1Closed?.Invoke(this.gameObject);
-        Debug.Log($"open");
+        Actions.onCheck2Closed?.Invoke(this.gameObject);
     }
 
     void OnCollisionExit(Collision other)
     {
         isCheckClosed = false;
-        Actions.onCheck1Opened?.Invoke(this.gameObject);
+        Actions.onCheck2Opened?.Invoke(this.gameObject);
     }
 
     void Start() { }

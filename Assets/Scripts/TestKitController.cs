@@ -10,7 +10,8 @@ public class TestKitController : MonoBehaviour
     public WaterController waterController;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
-
+    public TestCockController testCockController;
+    public CheckValveStatus checkValveStatus;
     public GameObject lowBleed;
     public GameObject lowControl;
 
@@ -80,7 +81,11 @@ public class TestKitController : MonoBehaviour
     float closingPoint = 0;
     public bool isOperableObject;
     public bool isConnectedToAssembly;
+    public bool isCheck1Open;
+    public bool isCheck2Open;
     float lowHosePressure;
+
+    [SerializeField]
     float highHosePressure;
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
@@ -96,12 +101,16 @@ public class TestKitController : MonoBehaviour
     {
         Actions.onHoseAttach += AttachHoseBib;
         Actions.onHoseDetach += DetachHoseBib;
+
+        //Actions.onTestCockOpen += DetectTestCockOpen;
     }
 
     void OnDisable()
     {
         Actions.onHoseAttach -= AttachHoseBib;
         Actions.onHoseDetach -= DetachHoseBib;
+
+        //Actions.onTestCockOpen -= DetectTestCockOpen;
     }
 
     // Start is called before the first frame update
@@ -126,6 +135,11 @@ public class TestKitController : MonoBehaviour
         float normalizedPsid = highHosePressure / maxPSID;
 
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
+    }
+
+    private void DetectTestCockOpen(bool isTestCockOpen, GameObject testCock)
+    {
+        // Debug.Log($"{testCock} has opened");
     }
 
     private float GetKnobRotation()
@@ -237,6 +251,9 @@ public class TestKitController : MonoBehaviour
 
         if (isConnectedToAssembly == true)
         {
+            //========================================
+            // #1 Check Test//========================>
+            //========================================
             if (
                 TestCockList[0].transform.eulerAngles.z > 0
                 && shutOffValveController.IsSupplyOn == true
@@ -248,9 +265,11 @@ public class TestKitController : MonoBehaviour
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
+                //Debug.Log($"supply is open and test cock is open");
             }
-            if (
-                TestCockList[0].transform.eulerAngles.z > 0
+            else if (
+                testCockController.isTestCock2Open
+                && !testCockController.isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
             )
             {
@@ -258,11 +277,98 @@ public class TestKitController : MonoBehaviour
                 highHosePressure = Mathf.SmoothStep(
                     highHosePressure,
                     TestCock2Detector.ParticlesInside,
+                    0.015f
+                );
+
+                //Debug.Log($"supply is closed & test cock #2 is open & test cock #3 is closed");
+            }
+            else if (
+                testCockController.isTestCock3Open
+                && testCockController.isTestCock2Open
+                && shutOffValveController.IsSupplyOn == false
+                && checkValveStatus.isCheck1Closed == false
+            )
+            {
+                //best looking psid drop so far is: highHosePressure -= 0.3f;
+                highHosePressure -= 0.3f;
+
+                //Debug.Log($"highHosePressure = {highHosePressure}");
+
+                //Debug.Log($"supply is closed & check1 is open & test cock #2 is open & test cock #3 is open");
+            }
+            else if (
+                testCockController.isTestCock3Open
+                && testCockController.isTestCock2Open
+                && shutOffValveController.IsSupplyOn == false
+                && checkValveStatus.isCheck1Closed == true
+            )
+            {
+                highHosePressure += 0;
+                //CaptureCheck1ClosingPoint(highHosePressure);
+
+                //Debug.Log($"closingPoint = {closingPoint}");
+            }
+            //========================================
+            // END - #1 Check Test//==================>
+            //========================================
+            //========================================
+            // #2 Check Test//========================>
+            //========================================
+
+            if (testCockController.isTestCock3Open && shutOffValveController.IsSupplyOn == true)
+            {
+                //supply is open and test cock is open
+                highHosePressure = Mathf.SmoothStep(
+                    highHosePressure,
+                    Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
+                //Debug.Log($"supply is open and test cock is open");
             }
-        }
+            else if (
+                testCockController.isTestCock3Open
+                && !testCockController.isTestCock4Open
+                && shutOffValveController.IsSupplyOn == false
+            )
+            {
+                //supply is closed and test cock is open
+                highHosePressure = Mathf.SmoothStep(
+                    highHosePressure,
+                    TestCock2Detector.ParticlesInside,
+                    0.015f
+                );
 
+                //Debug.Log($"supply is closed & test cock #3 is open & test cock #4 is closed");
+            }
+            else if (
+                testCockController.isTestCock3Open
+                && testCockController.isTestCock4Open
+                && shutOffValveController.IsSupplyOn == false
+                && checkValveStatus.isCheck2Closed == false
+            )
+            {
+                //best looking psid drop so far is: highHosePressure -= 0.3f;
+                highHosePressure -= 0.45f;
+                closingPoint = highHosePressure;
+
+                //Debug.Log($"highHosePressure = {highHosePressure}");
+
+                //Debug.Log($"supply is closed & check1 is open & test cock #2 is open & test cock #3 is open");
+            }
+            else if (
+                testCockController.isTestCock3Open
+                && testCockController.isTestCock4Open
+                && shutOffValveController.IsSupplyOn == false
+                && checkValveStatus.isCheck2Closed == true
+            )
+            {
+                highHosePressure += 0;
+                Debug.Log($"closingPoint = {closingPoint}");
+            }
+            //========================================
+            // END - #2 Check Test//==================>
+            //========================================
+        }
         if (isConnectedToAssembly == false)
         {
             highHosePressure -= 5;
@@ -274,7 +380,8 @@ public class TestKitController : MonoBehaviour
         if (highHosePressure > maxPSID)
         {
             highHosePressure = maxPSID;
-        } /*
+        }
+        /*
         Debug.Log(
             $"highHosePressure = {highHosePressure}| GetPsidNeedleRotation() = {GetPsidNeedleRotation()}| closingPoint = {closingPoint}"
         );
@@ -282,6 +389,11 @@ public class TestKitController : MonoBehaviour
         // lowHosePressure = LowHoseDetector.ParticlesInside;
         // bypasshosePressure = BypassHoseDetector.ParticlesInside;
         //Debug.Log(highHosePressure);
+    }
+
+    private float CaptureCheck1ClosingPoint(float psid)
+    {
+        return psid;
     }
 
     IEnumerator Check1Test()
@@ -296,6 +408,8 @@ public class TestKitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isCheck1Open = checkValveStatus.isCheck1Open;
+
         PressureControl();
         OperateControls();
         NeedleControl();
