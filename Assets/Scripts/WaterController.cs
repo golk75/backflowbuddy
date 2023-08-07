@@ -430,43 +430,6 @@ public class WaterController : MonoBehaviour
                     1f
                 );
             }
-            /*
-             if (
-                 TestCockHoseDetect2.isConnected == true
-                 && testCockController.isTestCock3Open == true
-             )
-             {
-                 check1housingForceField.Strength = 0;
-             }
-             else
-             {
-                 check1housingForceField.Strength = Mathf.SmoothDamp(
-                     check1housingForceField.Strength,
-                     1.2f,
-                     ref check1FFref.x,
-                     0.2f
-                 );
-             }
-             if (
-                 TestCockHoseDetect3.isConnected == true
-                 && testCockController.isTestCock4Open == true
-             )
-             {
-                 check2housingForceField.Strength = 0;
-             }
-             else if (
-                 TestCockHoseDetect3.isConnected == true
-                 && testCockController.isTestCock4Open == true
-             )
-             {
-                 check2housingForceField.Strength = Mathf.SmoothDamp(
-                     check2housingForceField.Strength,
-                     1f,
-                     ref check2FFref.x,
-                     1f
-                 );
-             }
-             */
         }
         else if (shutOffValveController.IsSupplyOn == true)
         {
