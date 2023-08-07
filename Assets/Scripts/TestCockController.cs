@@ -48,16 +48,16 @@ public class TestCockController : MonoBehaviour
     }
 
     [SerializeField]
-    GameObject TestCock1;
+    public GameObject TestCock1;
 
     [SerializeField]
-    GameObject TestCock2;
+    public GameObject TestCock2;
 
     [SerializeField]
-    GameObject TestCock3;
+    public GameObject TestCock3;
 
     [SerializeField]
-    GameObject TestCock4;
+    public GameObject TestCock4;
 
     [SerializeField]
     ZibraLiquidEmitter TestCockEmitter1;

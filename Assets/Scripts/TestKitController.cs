@@ -288,13 +288,15 @@ public class TestKitController : MonoBehaviour
 
     private void PressureControl()
     {
-        // For  now, soely using high hose (double check assembly)
+        // For  now, soely using high hose (double check assembly testing)
 
 
         if (isConnectedToAssembly == true)
         {
-            //END CHECKING IS TC IS HOOKED UP TO MOVE GAUGE WHILE DEVICE IS OPEN
-            if (TestCockList.Contains(TestCock1) && shutOffValveController.IsSupplyOn == true)
+            //checking if hose/ test kit is connected to test cock while supply is open
+
+            //test cock #1 will have continuous pressure whether the supply is open or closed, as it sits upstream of #1 shut off valve
+            if (TestCockList.Contains(TestCock1) && isTestCock1Open)
             {
                 //supply is open and test cock is open
                 highHosePressure = Mathf.SmoothStep(
@@ -302,7 +304,7 @@ public class TestKitController : MonoBehaviour
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
-                Debug.Log($"supply is open and test cock #1 is connected & open");
+                Debug.Log($"test cock #1 is connected & open");
             }
             else if (
                 TestCockList.Contains(TestCock3)

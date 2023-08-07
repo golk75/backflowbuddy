@@ -34,6 +34,9 @@ public class WaterController : MonoBehaviour
     ZibraLiquidVoid supplyVoid;
 
     [SerializeField]
+    ZibraLiquidEmitter TestCock1Emitter;
+
+    [SerializeField]
     ZibraLiquidDetector TestCockDetector1;
 
     [SerializeField]
@@ -251,19 +254,12 @@ public class WaterController : MonoBehaviour
         //test cock #1 pressure regulation
         if (testCockController.isTestCock1Open && TestCockHoseDetect1.isConnected == false)
         {
-            if (TestCockDetector1.ParticlesInside > 2000)
-            {
-                TestCockFF1.Strength = Mathf.SmoothDamp(
-                    TestCockFF1.Strength,
-                    Mathf.Clamp(BodyDetectorZone1.ParticlesInside, 0, testCock1MaxStr),
-                    ref testCockFF1Ref.x,
-                    0.005f
-                );
-            }
+            TestCock1Emitter.enabled = true;
+            //TestCock1Emitter.VolumePerSimTime = 2;
         }
         else
         {
-            TestCockFF1.Strength = 0;
+            TestCock1Emitter.enabled = false;
         }
         //test cock #2 pressure regulation
         if (
@@ -364,31 +360,6 @@ public class WaterController : MonoBehaviour
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
             }
 
-            //while shutoff valve is closed regulate ff in check housing, according to the open/close status of all test cocks (ie. if any of them open, reduce ff strength to 0)
-            /*
-                        if (
-                            testCockController.isTestCock1Open == true
-                            || testCockController.isTestCock2Open == true
-                            || testCockController.isTestCock3Open == true
-                            || testCockController.isTestCock4Open == true
-                        )
-                        {
-                            {
-                                if (isCheck1Closed == false && isCheck2Closed == false)
-                                {
-                                    check1housingForceField.Strength = 0;
-                                    check2housingForceField.Strength = 0;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (isCheck1Closed == false && isCheck2Closed == false)
-                            {
-                                check1housingForceField.Strength = 1;
-                                check2housingForceField.Strength = 1;
-                            }
-                        }*/
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
@@ -411,6 +382,15 @@ public class WaterController : MonoBehaviour
 
             //Regulate check housing force fields while shut off is closed (or testing is in progress)
             if (checkValveStatus.isCheck1Closed || checkValveStatus.isCheck2Closed)
+            {
+                check1housingForceField.Strength = 0;
+                check2housingForceField.Strength = 0;
+            }
+            else if (
+                !isAttachedToGauge && testCockController.isTestCock2Open
+                || !isAttachedToGauge && testCockController.isTestCock3Open
+                || !isAttachedToGauge && testCockController.isTestCock4Open
+            )
             {
                 check1housingForceField.Strength = 0;
                 check2housingForceField.Strength = 0;
