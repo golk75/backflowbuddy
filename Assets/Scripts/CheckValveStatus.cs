@@ -53,8 +53,5 @@ public class CheckValveStatus : MonoBehaviour
         isCheck2Open = true;
     }
 
-    void Update()
-    {
-        Debug.Log($"isCheck1Closed = {isCheck1Closed}");
-    }
+    void Update() { }
 }

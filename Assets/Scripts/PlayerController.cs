@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     GameObject TestCockManager;
     TestCockController testCockController;
     public TestKitController testKitController;
+    public GameObject FillButton;
 
     [SerializeField]
     GameObject WaterManager;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public InputAction Touch0Position;
     public Vector3 touchStart;
 
+    [SerializeField]
     public Vector2 primaryTouchPos;
 
     //Camera events
@@ -36,8 +38,8 @@ public class PlayerController : MonoBehaviour
     public bool primaryTouchPerformed = false;
     public GameObject OperableObject
     {
-        get { return _operableObject; }
-        private set { _operableObject = value; }
+        get { return operableObject; }
+        private set { operableObject = value; }
     }
     public GameObject OperableValve
     {
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
     public float deviceRotSensitivity;
 
     [SerializeField]
-    GameObject _operableObject;
+    public GameObject operableObject;
 
     [SerializeField]
     public GameObject _operableTestGaugeObject;
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         Touch0Position = playerInput.Touchscreen.Touch0Position;
-        _operableObject = initialOperableObject;
+        operableObject = initialOperableObject;
         _operableTestGaugeObject = initialTestGaugeOperableObject;
     }
 
@@ -136,6 +138,7 @@ public class PlayerController : MonoBehaviour
         onPanCanceled?.Invoke();
 
         isOperableObject = false;
+        operableObject = null;
 
         touchStart = Vector3.zero;
     }
@@ -197,22 +200,21 @@ public class PlayerController : MonoBehaviour
             operableComponentDescription =
                 hit.collider.transform.GetComponent<OperableComponentDescription>();
 
-            _operableObject = hit.collider.transform.gameObject;
-            _operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
+            operableObject = hit.collider.transform.gameObject;
+            _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
         }
         else if (hit.collider == null && ray2DHit.collider != null)
         {
-            _operableObject = null;
+            operableObject = null;
             isOperableObject = true;
             operableComponentDescription =
                 ray2DHit.collider.transform.GetComponent<OperableComponentDescription>();
-
             _operableTestGaugeObject = ray2DHit.collider.transform.gameObject;
         }
         else
         {
             _operableTestGaugeObject = null;
-            _operableObject = null;
+            operableObject = null;
             isOperableObject = false;
         }
     }
@@ -223,7 +225,7 @@ public class PlayerController : MonoBehaviour
         //_operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
 
         //Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
-        if (_operableObject != null)
+        if (operableObject != null)
         {
             _operableObjectRotation.z +=
                 (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
@@ -231,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
             //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
             _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
-            _operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
+            operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
         }
     }
 

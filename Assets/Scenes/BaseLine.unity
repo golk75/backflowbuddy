@@ -785,6 +785,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60815565df9b1e64e891757bcf54edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &541701179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7720970984379559242, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
+    type: 3}
+  m_PrefabInstance: {fileID: 4572911339219594618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &541701185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541701179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 1
+  partsType: 1
 --- !u!114 &604347184 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7211416897699030153, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -1587,6 +1607,10 @@ MonoBehaviour:
   HighHoseDetector: {fileID: 1135142862}
   BypassHoseDetector: {fileID: 1019245621}
   Zone1Detector: {fileID: 1173856535}
+  TestCock1: {fileID: 1940697353}
+  TestCock2: {fileID: 1005029042}
+  TestCock3: {fileID: 1700393506}
+  TestCock4: {fileID: 365308010}
   connectedTestCock: {fileID: 0}
   TestCock2Detector: {fileID: 177506921}
   currentPSID: 0
@@ -1594,6 +1618,11 @@ MonoBehaviour:
   isConnectedToAssembly: 0
   isCheck1Open: 0
   isCheck2Open: 0
+  isConnectedTestCockOpen: 0
+  isTestCock1Open: 0
+  isTestCock2Open: 0
+  isTestCock3Open: 0
+  isTestCock4Open: 0
   highHosePressure: 0
   TestCockList: []
   TestCockDetectorList: []
@@ -3464,6 +3493,12 @@ Transform:
   m_Father: {fileID: 1207125251}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1944694391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7950770479002068229, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
+    type: 3}
+  m_PrefabInstance: {fileID: 4572911339219594618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1947499199
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,6 +4223,11 @@ PrefabInstance:
       objectReference: {fileID: 225413029}
     - target: {fileID: 6475355435924564220, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
         type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1446278364}
+    - target: {fileID: 6475355435924564220, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
+        type: 3}
       propertyPath: testCockController
       value: 
       objectReference: {fileID: 1506706878}
@@ -4196,6 +4236,11 @@ PrefabInstance:
       propertyPath: shutOffValveController
       value: 
       objectReference: {fileID: 2051383271}
+    - target: {fileID: 7720970984379559242, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7950770479002068229, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
         type: 3}
       propertyPath: m_Name
@@ -4259,7 +4304,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7720970984379559242, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 541701185}
   m_SourcePrefab: {fileID: 100100000, guid: 0ca6c1de31a82458f9cecb1aa2f84b84, type: 3}
 --- !u!1001 &6859429864286210997
 PrefabInstance:
@@ -5498,6 +5547,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2188251840394604002, guid: e6f20a08661774fbc9fa6c2efdef3a81,
+        type: 3}
+      propertyPath: FillButton
+      value: 
+      objectReference: {fileID: 1944694391}
+    - target: {fileID: 2188251840394604002, guid: e6f20a08661774fbc9fa6c2efdef3a81,
+        type: 3}
+      propertyPath: AssemblyFill
+      value: 
+      objectReference: {fileID: 2076229190}
     - target: {fileID: 2188251840394604002, guid: e6f20a08661774fbc9fa6c2efdef3a81,
         type: 3}
       propertyPath: WaterManager

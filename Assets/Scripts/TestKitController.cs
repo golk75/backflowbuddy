@@ -42,8 +42,6 @@ public class TestKitController : MonoBehaviour
     Vector3 initHighHosePosition;
     Vector3 initBypassHosePosition;
 
-    GameObject ConnectedTestCock;
-
     [SerializeField]
     ZibraLiquidDetector LowHoseDetector;
 
@@ -55,6 +53,18 @@ public class TestKitController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidDetector Zone1Detector;
+
+    [SerializeField]
+    GameObject TestCock1;
+
+    [SerializeField]
+    GameObject TestCock2;
+
+    [SerializeField]
+    GameObject TestCock3;
+
+    [SerializeField]
+    GameObject TestCock4;
 
     [SerializeField]
     GameObject connectedTestCock;
@@ -85,8 +95,13 @@ public class TestKitController : MonoBehaviour
     public bool isCheck2Open;
     float lowHosePressure;
 
-    [SerializeField]
-    float highHosePressure;
+    public bool isConnectedTestCockOpen;
+    public bool isTestCock1Open;
+    public bool isTestCock2Open;
+    public bool isTestCock3Open;
+    public bool isTestCock4Open;
+
+    public float highHosePressure;
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
 
@@ -96,11 +111,20 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     public List<ZibraLiquidDetector> TestCockDetectorList;
     Coroutine Check1ClosingPoint;
+    float needleVelRef = 0;
 
     void OnEnable()
     {
         Actions.onHoseAttach += AttachHoseBib;
         Actions.onHoseDetach += DetachHoseBib;
+        Actions.onTestCock1Opened += TestCock1Opened;
+        Actions.onTestCock1Closed += TestCock1Closed;
+        Actions.onTestCock2Opened += TestCoc2Opened;
+        Actions.onTestCock2Closed += TestCock2Closed;
+        Actions.onTestCock3Opened += TestCock3Opened;
+        Actions.onTestCock3Closed += TestCock3Closed;
+        Actions.onTestCock4Opened += TestCoc4Opened;
+        Actions.onTestCock4Closed += TestCock4Closed;
 
         //Actions.onTestCockOpen += DetectTestCockOpen;
     }
@@ -109,6 +133,14 @@ public class TestKitController : MonoBehaviour
     {
         Actions.onHoseAttach -= AttachHoseBib;
         Actions.onHoseDetach -= DetachHoseBib;
+        Actions.onTestCock1Opened -= TestCock1Opened;
+        Actions.onTestCock1Closed -= TestCock1Closed;
+        Actions.onTestCock2Opened -= TestCoc2Opened;
+        Actions.onTestCock2Opened -= TestCock2Closed;
+        Actions.onTestCock3Opened -= TestCock3Opened;
+        Actions.onTestCock3Closed -= TestCock3Closed;
+        Actions.onTestCock4Opened -= TestCoc4Opened;
+        Actions.onTestCock4Closed -= TestCock4Closed;
 
         //Actions.onTestCockOpen -= DetectTestCockOpen;
     }
@@ -137,11 +169,6 @@ public class TestKitController : MonoBehaviour
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
     }
 
-    private void DetectTestCockOpen(bool isTestCockOpen, GameObject testCock)
-    {
-        // Debug.Log($"{testCock} has opened");
-    }
-
     private float GetKnobRotation()
     {
         // max - min to rotate left while increasing
@@ -153,29 +180,6 @@ public class TestKitController : MonoBehaviour
         return MinKnob_rotation + normalizedRotation * rotationDiff;
     }
 
-    /*
-    private void OperateControls()
-    {
-        if (isOperableObject == true)
-        {
-            float counter = 0;
-            currentKnobRotation = (
-                playerController.touchStart.x
-                - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
-            );
-           
-            if (currentKnob.transform.eulerAngles.z > maxKnobRotation)
-            {
-                currentKnobRotation = maxKnobRotation;
-            }
-            //currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRoation());
-            currentKnob.transform.rotation = Quaternion.Euler(
-                new Vector3(0, 0, currentKnob.transform.eulerAngles.z + GetKnobRotation() * 0.5f)
-            );
-            Debug.Log($"isOperableObject= {isOperableObject}; counter = {counter}");
-        }
-    }
-    */
     private void OperateControls()
     {
         if (playerController.isOperableObject == true)
@@ -209,6 +213,46 @@ public class TestKitController : MonoBehaviour
         }
     }
 
+    private void TestCock4Closed()
+    {
+        isTestCock4Open = false;
+    }
+
+    private void TestCoc4Opened()
+    {
+        isTestCock4Open = true;
+    }
+
+    private void TestCock3Closed()
+    {
+        isTestCock3Open = false;
+    }
+
+    private void TestCock3Opened()
+    {
+        isTestCock3Open = true;
+    }
+
+    private void TestCock2Closed()
+    {
+        isTestCock2Open = false;
+    }
+
+    private void TestCoc2Opened()
+    {
+        isTestCock2Open = true;
+    }
+
+    private void TestCock1Closed()
+    {
+        isTestCock1Open = false;
+    }
+
+    private void TestCock1Opened()
+    {
+        isTestCock1Open = true;
+    }
+
     public void AttachHoseBib(GameObject testCock)
     {
         isConnectedToAssembly = true;
@@ -236,8 +280,6 @@ public class TestKitController : MonoBehaviour
         //Debug.Log($"{gameObject} detached from assembly");
     }
 
-    float needleVelRef = 0;
-
     private void NeedleControl()
     {
         // For  now, soely using high hose (double check assembly)
@@ -251,12 +293,21 @@ public class TestKitController : MonoBehaviour
 
         if (isConnectedToAssembly == true)
         {
-            //========================================
-            // #1 Check Test//========================>
-            //========================================
-            if (
-                TestCockList[0].transform.eulerAngles.z > 0
+            //END CHECKING IS TC IS HOOKED UP TO MOVE GAUGE WHILE DEVICE IS OPEN
+            if (TestCockList.Contains(TestCock1) && shutOffValveController.IsSupplyOn == true)
+            {
+                //supply is open and test cock is open
+                highHosePressure = Mathf.SmoothStep(
+                    highHosePressure,
+                    Zone1Detector.ParticlesInside,
+                    needleSpeedDamp
+                );
+                Debug.Log($"supply is open and test cock #1 is connected & open");
+            }
+            else if (
+                TestCockList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
+                && isTestCock3Open
             )
             {
                 //supply is open and test cock is open
@@ -265,26 +316,51 @@ public class TestKitController : MonoBehaviour
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
-                //Debug.Log($"supply is open and test cock is open");
+                Debug.Log($"supply is open and test cock 3 is connected & open");
             }
             else if (
-                testCockController.isTestCock2Open
-                && !testCockController.isTestCock3Open
-                && shutOffValveController.IsSupplyOn == false
+                TestCockList.Contains(TestCock4)
+                && shutOffValveController.IsSupplyOn == true
+                && isTestCock4Open
             )
             {
-                //supply is closed and test cock is open
+                //supply is open and test cock is open
+                highHosePressure = Mathf.SmoothStep(
+                    highHosePressure,
+                    Zone1Detector.ParticlesInside,
+                    needleSpeedDamp
+                );
+                Debug.Log($"supply is open and test cock 4 is connected & open");
+            }
+            //END CHECKING IS TC IS HOOKED UP TO MOVE GAUGE WHILE DEVICE IS OPEN
+
+
+
+
+            //========================================
+            // #1 Check Test//========================>
+            //========================================
+
+            else if (
+                TestCockList.Contains(TestCock2)
+                && shutOffValveController.IsSupplyOn == true
+                && isTestCock2Open
+                && !isTestCock3Open
+            )
+            {
                 highHosePressure = Mathf.SmoothStep(
                     highHosePressure,
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
-
-                //Debug.Log($"supply is closed & test cock #2 is open & test cock #3 is closed");
+                Debug.Log(
+                    $"supply is open & test cock #2 is connected & open & test cock #3 is closed"
+                );
             }
             else if (
-                testCockController.isTestCock3Open
-                && testCockController.isTestCock2Open
+                TestCockList.Contains(TestCock2)
+                && isTestCock2Open
+                && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
                 && checkValveStatus.isCheck1Closed == false
             )
@@ -292,13 +368,16 @@ public class TestKitController : MonoBehaviour
                 //best looking psid drop so far is: highHosePressure -= 0.3f;
                 highHosePressure -= 0.3f;
 
-                //Debug.Log($"highHosePressure = {highHosePressure}");
+                Debug.Log($"highHosePressure = {highHosePressure}");
 
-                //Debug.Log($"supply is closed & check1 is open & test cock #2 is open & test cock #3 is open");
+                Debug.Log(
+                    $"supply is closed & check1 is open & test cock #2 is connected & open & test cock #3 is open"
+                );
             }
             else if (
-                testCockController.isTestCock3Open
-                && testCockController.isTestCock2Open
+                TestCockList.Contains(TestCock2)
+                && isTestCock2Open
+                && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
                 && checkValveStatus.isCheck1Closed == true
             )
@@ -314,56 +393,51 @@ public class TestKitController : MonoBehaviour
             //========================================
             // #2 Check Test//========================>
             //========================================
-
-            if (testCockController.isTestCock3Open && shutOffValveController.IsSupplyOn == true)
-            {
-                //supply is open and test cock is open
-                highHosePressure = Mathf.SmoothStep(
-                    highHosePressure,
-                    Zone1Detector.ParticlesInside,
-                    needleSpeedDamp
-                );
-                //Debug.Log($"supply is open and test cock is open");
-            }
             else if (
-                testCockController.isTestCock3Open
-                && !testCockController.isTestCock4Open
-                && shutOffValveController.IsSupplyOn == false
+                TestCockList.Contains(TestCock3)
+                && shutOffValveController.IsSupplyOn == true
+                && isTestCock3Open
+                && !isTestCock4Open
             )
             {
-                //supply is closed and test cock is open
                 highHosePressure = Mathf.SmoothStep(
                     highHosePressure,
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
-
-                //Debug.Log($"supply is closed & test cock #3 is open & test cock #4 is closed");
+                Debug.Log(
+                    $"supply is open & test cock #3 is connected & open & test cock #4 is closed"
+                );
             }
             else if (
-                testCockController.isTestCock3Open
-                && testCockController.isTestCock4Open
+                TestCockList.Contains(TestCock3)
+                && isTestCock3Open
+                && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false
                 && checkValveStatus.isCheck2Closed == false
             )
             {
                 //best looking psid drop so far is: highHosePressure -= 0.3f;
-                highHosePressure -= 0.45f;
-                closingPoint = highHosePressure;
+                highHosePressure -= 0.4f;
 
-                //Debug.Log($"highHosePressure = {highHosePressure}");
+                Debug.Log($"highHosePressure = {highHosePressure}");
 
-                //Debug.Log($"supply is closed & check1 is open & test cock #2 is open & test cock #3 is open");
+                Debug.Log(
+                    $"supply is closed & check2 is open & test cock #3 is connected & open & test cock #4 is open"
+                );
             }
             else if (
-                testCockController.isTestCock3Open
-                && testCockController.isTestCock4Open
+                TestCockList.Contains(TestCock3)
+                && isTestCock3Open
+                && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false
                 && checkValveStatus.isCheck2Closed == true
             )
             {
                 highHosePressure += 0;
-                Debug.Log($"closingPoint = {closingPoint}");
+                Debug.Log(
+                    $"supply is closed & check2 is closed & test cock #3 is connected & open & test cock #4 is open"
+                );
             }
             //========================================
             // END - #2 Check Test//==================>

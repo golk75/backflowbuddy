@@ -15,4 +15,12 @@ public static class Actions
     public static Action<GameObject> onCheck1Opened;
     public static Action<GameObject> onCheck2Closed;
     public static Action<GameObject> onCheck2Opened;
+    public static Action onTestCock1Opened;
+    public static Action onTestCock1Closed;
+    public static Action onTestCock2Opened;
+    public static Action onTestCock2Closed;
+    public static Action onTestCock3Opened;
+    public static Action onTestCock3Closed;
+    public static Action onTestCock4Opened;
+    public static Action onTestCock4Closed;
 }

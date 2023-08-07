@@ -150,13 +150,6 @@ public class TestCockController : MonoBehaviour
 
     private void TestCockValveOperationCheck()
     {
-        /*
-        if (
-            playerController.OperableObject != null
-            && playerController.OperableObject.transform.tag == "TestCock"
-        )
-        */
-
         if (playerController.OperableObject != null)
         {
             if (
@@ -224,37 +217,45 @@ public class TestCockController : MonoBehaviour
                     if (TestCock1.transform.eulerAngles.z > 0)
                     {
                         isTestCock1Open = true;
+                        Actions.onTestCock1Opened?.Invoke();
                     }
                     else
                     {
                         isTestCock1Open = false;
+                        Actions.onTestCock1Closed?.Invoke();
                     }
 
                     if (TestCock2.transform.eulerAngles.z > 0)
                     {
                         isTestCock2Open = true;
+                        Actions.onTestCock2Opened?.Invoke();
                     }
                     else
                     {
                         isTestCock2Open = false;
+                        Actions.onTestCock2Closed?.Invoke();
                     }
 
                     if (TestCock3.transform.eulerAngles.z > 0)
                     {
                         isTestCock3Open = true;
+                        Actions.onTestCock3Opened?.Invoke();
                     }
                     else
                     {
                         isTestCock3Open = false;
+                        Actions.onTestCock3Closed?.Invoke();
                     }
 
                     if (TestCock4.transform.eulerAngles.z > 0)
                     {
                         isTestCock4Open = true;
+                        Actions.onTestCock4Opened?.Invoke();
                     }
                     else
                     {
                         isTestCock4Open = false;
+                        Actions.onTestCock4Closed?.Invoke();
                     }
                 }
         }
