@@ -24,10 +24,13 @@ public class HoseManager : MonoBehaviour
         hingeJointConnections = hoseArmature.GetComponentsInChildren<Rigidbody>();
         for (int i = 1; i < hingeJointConnections.Length; i++)
         {
-            hingeJointConnections[i].GetComponent<ConfigurableJoint>().connectedBody =
+            hingeJointConnections[i].GetComponent<FixedJoint>().connectedBody =
                 hingeJointConnections[i - 1];
-            hingeJointConnections[i].GetComponent<HingeJoint>().connectedBody =
-                hingeJointConnections[i - 1];
+            // hingeJointConnections[i].GetComponent<ConfigurableJoint>().connectedBody =
+            //     hingeJointConnections[i - 1];
+
+            // hingeJointConnections[i].GetComponent<HingeJoint>().connectedBody =
+            //     hingeJointConnections[i - 1];
         }
     }
 

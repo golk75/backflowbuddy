@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: d812d821b589644e690d878d3aefbc3e
+guid: e413904c1e7c94fffb77040b0da3a132
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HoseBib
+    second: {fileID: 2100000, guid: fd6ee449ca1144d14ae12d1b8ccdefd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HoseBody
+    second: {fileID: 2100000, guid: d63ebbd5ef74d4b9582f7899b2ee1931, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hoseBibTip
+    second: {fileID: 2100000, guid: 1977ef9146ae64fdbaeb47fbc7696440, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
