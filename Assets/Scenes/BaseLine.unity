@@ -507,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 3394356689419574775, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -101.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5027926992319091932, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
         type: 3}
@@ -1168,7 +1168,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -9.23, y: -84.42, z: -19.74}
+  m_ConnectedAnchor: {x: 0.23999977, y: -79.1, z: -9.3333}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -1305,7 +1305,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.019050168, y: 0.013237116, z: 0.013317428}
-  m_Center: {x: 0, y: -0.001, z: -0.003}
+  m_Center: {x: 0, y: -0.004, z: -0.003}
 --- !u!114 &570482156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,8 +1318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3c6ca646af442c6a52c45760c84be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configurableJoint: {fileID: 570482153}
   playerController: {fileID: 1446278364}
+  HighHoseBib: {fileID: 0}
+  HighHoseConfigJointConnectedBody: {fileID: 156448776}
+  CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
+    type: 2}
 --- !u!114 &570482157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5642,6 +5645,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3394356689419574775, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475355435924564220, guid: 0ca6c1de31a82458f9cecb1aa2f84b84,
         type: 3}
       propertyPath: Check1
