@@ -80,8 +80,13 @@ public class HoseSpring : MonoBehaviour
 
             Destroy(configurableJoint);
 
-            transform.position =
-                Camera.main.ScreenToWorldPoint(Input.mousePosition) * Time.deltaTime;
+            transform.localPosition =
+                Camera.main.ScreenToWorldPoint(Input.mousePosition)
+                - new Vector3(
+                    playerController.primaryFingerDelta.x,
+                    playerController.primaryFingerDelta.y,
+                    0
+                );
             yield return null;
         }
     }
