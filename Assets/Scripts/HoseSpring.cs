@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,35 +8,60 @@ using UnityEngine.UIElements;
 
 public class HoseSpring : MonoBehaviour
 {
-    public ConfigurableJoint configurableJoint;
+    ConfigurableJoint configurableJoint;
     public PlayerController playerController;
     private Vector3 initAnchorPos;
-    private Coroutine OnHoseBibPress;
+    private Vector3 targetAnchorPos;
+    private Coroutine DetectHoseBibManipulation;
+    bool pointerDown;
 
-    void OnMouseDown()
+    private void OnEnable()
     {
-        //configurableJoint.connectedAnchor = Input.mousePosition;
-        OnHoseBibPress = StartCoroutine(MoveAnchor());
+        Actions.onHoseBibGrab += GrabHoseBib;
+        Actions.onHoseBibDrop += DropHoseBib;
+    }
+
+    public void OnDisable()
+    {
+        Actions.onHoseBibGrab -= GrabHoseBib;
+        Actions.onHoseBibDrop -= DropHoseBib;
+    }
+
+    public void GrabHoseBib()
+    {
+        DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
+        pointerDown = true;
+    }
+
+    private void DropHoseBib()
+    {
+        configurableJoint.connectedAnchor = initAnchorPos;
+        Debug.Log($"hose dropped");
     }
 
     IEnumerator MoveAnchor()
     {
-        while (true)
+        while (playerController.primaryTouchStarted == true)
         {
-            configurableJoint.connectedAnchor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //targetAnchorPos -= playerController.touchStart
+            // configurableJoint.connectedAnchor = new Vector3(
+            //     playerController.primaryTouchPos.x,
+            //     playerController.primaryTouchPos.y,
+            //     0
+            // );
+            //  Debug.Log($"configurableJoint.connectedAnchor = {configurableJoint.connectedAnchor}");
+            targetAnchorPos = initAnchorPos - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // Debug.Log($"targetAnchorPos = {targetAnchorPos}");
+            configurableJoint.connectedAnchor = targetAnchorPos;
             yield return null;
         }
-    }
-
-    void OnMouseUp()
-    {
-        StopCoroutine(MoveAnchor());
-        configurableJoint.connectedAnchor = initAnchorPos;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        configurableJoint = GetComponent<ConfigurableJoint>();
         initAnchorPos = configurableJoint.connectedAnchor;
     }
 

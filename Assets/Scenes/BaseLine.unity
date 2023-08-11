@@ -1168,7 +1168,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -9.23, y: -71.2, z: -19.74}
+  m_ConnectedAnchor: {x: -9.23, y: -84.42, z: -19.74}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -1320,6 +1320,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configurableJoint: {fileID: 570482153}
   playerController: {fileID: 1446278364}
+--- !u!114 &570482157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570482151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentId: 14
+  partsType: 5
 --- !u!114 &604347184 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7211416897699030153, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -4751,6 +4765,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1208582733625838705, guid: 567375a3ec9b74af89c2c8cccd913bad,
         type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208582733625838705, guid: 567375a3ec9b74af89c2c8cccd913bad,
+        type: 3}
       propertyPath: m_TagString
       value: HoseBib
       objectReference: {fileID: 0}
@@ -5052,6 +5071,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 570482156}
+    - targetCorrespondingSourceObject: {fileID: 1208582733625838705, guid: 567375a3ec9b74af89c2c8cccd913bad,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 570482157}
   m_SourcePrefab: {fileID: 100100000, guid: 567375a3ec9b74af89c2c8cccd913bad, type: 3}
 --- !u!114 &1974761699 stripped
 MonoBehaviour:

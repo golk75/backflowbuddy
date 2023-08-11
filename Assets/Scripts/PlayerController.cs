@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 touchStart;
 
     [SerializeField]
-    public Vector2 primaryTouchPos;
+    public Vector2 primaryTouchStartPos;
 
     //Camera events
     public static event Action onZoomStop;
@@ -126,8 +126,9 @@ public class PlayerController : MonoBehaviour
         touchStart = Camera.main.ScreenToWorldPoint(
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
         );
-
+        primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         primaryTouchStarted = context.ReadValueAsButton();
+
         DetectObjectWithRaycast();
     }
 
@@ -137,9 +138,17 @@ public class PlayerController : MonoBehaviour
         primaryTouchPerformed = context.ReadValueAsButton();
         onPanCanceled?.Invoke();
 
+        if (
+            isOperableObject == true
+            && operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitHose
+        )
+        {
+            Actions.onHoseBibDrop?.Invoke();
+        }
         isOperableObject = false;
         operableObject = null;
-
+        primaryTouchStartPos = Vector3.zero;
         touchStart = Vector3.zero;
     }
 
@@ -166,9 +175,9 @@ public class PlayerController : MonoBehaviour
     {
         primaryFingerDelta = new Vector2(
             (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
-            0
+            touchStart.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y
         );
-        primaryTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(primaryFingerDelta);
     }
 
     private void Touch0Delta_canceled(InputAction.CallbackContext context) { }
@@ -180,10 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         LayerMask layerMask = LayerMask.GetMask("OperableObject");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D ray2DHit = Physics2D.Raycast(
-            Camera.main.ScreenToWorldPoint(Input.mousePosition),
-            Vector2.zero
-        );
+        RaycastHit2D ray2DHit = Physics2D.Raycast(primaryTouchStartPos, Vector2.zero);
         RaycastHit hit;
 
         //current distance to device is about 60-70
@@ -199,8 +205,8 @@ public class PlayerController : MonoBehaviour
             isOperableObject = true;
             operableComponentDescription =
                 hit.collider.transform.GetComponent<OperableComponentDescription>();
-
             operableObject = hit.collider.transform.gameObject;
+
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
         }
         else if (hit.collider == null && ray2DHit.collider != null)
@@ -227,13 +233,28 @@ public class PlayerController : MonoBehaviour
         //Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
         if (operableObject != null)
         {
-            _operableObjectRotation.z +=
-                (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                * deviceRotSensitivity;
+            if (
+                operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.ShutOff
+                || operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestCock
+            )
+            {
+                _operableObjectRotation.z +=
+                    (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                    * deviceRotSensitivity;
 
-            //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
-            _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
-            operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
+                //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
+                _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+                operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
+            }
+            else if (
+                operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitHose
+            )
+            {
+                Actions.onHoseBibGrab?.Invoke();
+            }
         }
     }
 

@@ -23,4 +23,6 @@ public static class Actions
     public static Action onTestCock3Closed;
     public static Action onTestCock4Opened;
     public static Action onTestCock4Closed;
+    public static Action onHoseBibGrab;
+    public static Action onHoseBibDrop;
 }
