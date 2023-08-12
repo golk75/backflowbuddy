@@ -8,6 +8,7 @@ public class HoseDetector : MonoBehaviour
 {
     public GameObject testCock;
     public bool isConnected;
+    Coroutine onAttachAttempt;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -16,11 +17,23 @@ public class HoseDetector : MonoBehaviour
         Actions.onHoseAttach?.Invoke(testCock);
     }
 
-    private void OnTriggerStay() { }
+    private void OnTriggerStay(Collider other)
+    {
+        onAttachAttempt = StartCoroutine(AttachInitiate());
+    }
 
     private void OnTriggerExit(Collider other)
     {
         isConnected = false;
         Actions.onHoseDetach?.Invoke(testCock);
+    }
+
+    IEnumerator AttachInitiate()
+    {
+        yield return new WaitForSeconds(2);
+        if (isConnected == true)
+        {
+            Actions.onHoseBibConnect?.Invoke(testCock);
+        }
     }
 }

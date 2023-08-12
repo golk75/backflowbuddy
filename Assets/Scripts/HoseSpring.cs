@@ -11,48 +11,56 @@ public class HoseSpring : MonoBehaviour
     private Vector3 initAnchorPos;
     private Vector3 targetAnchorPos;
     private Coroutine DetectHoseBibManipulation;
+    private Coroutine AttachHose;
     public GameObject HighHoseBib;
     public Rigidbody HighHoseConfigJointConnectedBody;
     Rigidbody highHoseRb;
     public Preset CongfigurableJointPreset;
     bool pointerDown;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+    private bool isAttaching;
+    Vector3 testCockPosition;
 
     private void OnEnable()
     {
         Actions.onHoseBibGrab += GrabHoseBib;
         Actions.onHoseBibDrop += DropHoseBib;
-        Actions.onHoseAttach += AttachHoseBib;
+        Actions.onHoseBibConnect += AttachHoseBib;
     }
 
     public void OnDisable()
     {
         Actions.onHoseBibGrab -= GrabHoseBib;
         Actions.onHoseBibDrop -= DropHoseBib;
-        Actions.onHoseAttach -= AttachHoseBib;
+        Actions.onHoseBibConnect -= AttachHoseBib;
     }
 
     private void AttachHoseBib(GameObject obj)
     {
-        Debug.Log(obj.name);
+        isAttaching = true;
+        HighHoseBib.transform.position = obj.transform.position;
+        // StopCoroutine(MoveAnchor());
     }
 
     public void GrabHoseBib()
     {
         Destroy(configurableJoint);
+
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
-        pointerDown = true;
+        isAttaching = false;
     }
 
     private void DropHoseBib()
     {
-        pointerDown = false;
-        configurableJoint = HighHoseBib.AddComponent<ConfigurableJoint>();
-        CongfigurableJointPreset.ApplyTo(configurableJoint);
-        configurableJoint.autoConfigureConnectedAnchor = false;
-        configurableJoint.connectedAnchor = initAnchorPos;
-        configurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
-
+        //isAttaching = false;
+        if (isAttaching != true)
+        {
+            configurableJoint = HighHoseBib.AddComponent<ConfigurableJoint>();
+            CongfigurableJointPreset.ApplyTo(configurableJoint);
+            configurableJoint.autoConfigureConnectedAnchor = false;
+            configurableJoint.connectedAnchor = initAnchorPos;
+            configurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
+        }
         Debug.Log($"hose dropped");
     }
 
@@ -66,7 +74,7 @@ public class HoseSpring : MonoBehaviour
     IEnumerator MoveAnchor()
     {
         //check is mouse left button or screen is being pressed down
-        while (playerController.primaryTouchStarted != 0)
+        while (playerController.primaryTouchStarted > 0 && isAttaching != true)
         {
             //move object: HighHoseBib to mouse position: Camera.main.ScreenToWorldPoint(Input.mousePosition)
             Vector3 direction =
