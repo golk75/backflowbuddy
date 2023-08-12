@@ -118,7 +118,7 @@ public class CameraController : MonoBehaviour
         Vector3 pointerOrigin = GetPointerPos();
 
         while (
-            playerController.primaryTouchStarted == true
+            playerController.primaryTouchStarted > 0
             && playerController.secondaryTouchStarted == false
         )
         {
@@ -231,7 +231,7 @@ public class CameraController : MonoBehaviour
         {
             if (
                 playerController.secondaryTouchStarted == false
-                && playerController.primaryTouchStarted == true
+                && playerController.primaryTouchStarted > 0
             )
             {
                 Pan_started();

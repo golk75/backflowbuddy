@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public static event Action onShutOffOperation;
 
     public bool isOperableObject = false;
-    public bool primaryTouchStarted = false;
+    public float primaryTouchStarted;
     public bool secondaryTouchStarted = false;
     public bool primaryTouchPerformed = false;
     public GameObject OperableObject
@@ -127,14 +128,14 @@ public class PlayerController : MonoBehaviour
             playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
         );
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        primaryTouchStarted = context.ReadValueAsButton();
+        primaryTouchStarted = context.ReadValue<float>();
 
         DetectObjectWithRaycast();
     }
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
-        primaryTouchStarted = context.ReadValueAsButton();
+        primaryTouchStarted = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
         onPanCanceled?.Invoke();
 
@@ -177,7 +178,6 @@ public class PlayerController : MonoBehaviour
             (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
             touchStart.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y
         );
-        Debug.Log(primaryFingerDelta);
     }
 
     private void Touch0Delta_canceled(InputAction.CallbackContext context) { }
@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OperateCheck()
     {
-        if (isOperableObject == true && primaryTouchStarted)
+        if (isOperableObject == true && primaryTouchStarted > 0)
         {
             Operate();
         }

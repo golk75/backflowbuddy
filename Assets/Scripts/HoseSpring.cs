@@ -1,16 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters;
-using Unity.VisualScripting;
 using UnityEditor.Presets;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class HoseSpring : MonoBehaviour
 {
-    ConfigurableJoint configurableJoint;
+    public ConfigurableJoint configurableJoint;
     public PlayerController playerController;
     private Vector3 initHighHosePos;
     private Vector3 initAnchorPos;
@@ -18,30 +13,41 @@ public class HoseSpring : MonoBehaviour
     private Coroutine DetectHoseBibManipulation;
     public GameObject HighHoseBib;
     public Rigidbody HighHoseConfigJointConnectedBody;
+    Rigidbody highHoseRb;
     public Preset CongfigurableJointPreset;
     bool pointerDown;
+    WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     private void OnEnable()
     {
         Actions.onHoseBibGrab += GrabHoseBib;
         Actions.onHoseBibDrop += DropHoseBib;
+        Actions.onHoseAttach += AttachHoseBib;
     }
 
     public void OnDisable()
     {
         Actions.onHoseBibGrab -= GrabHoseBib;
         Actions.onHoseBibDrop -= DropHoseBib;
+        Actions.onHoseAttach -= AttachHoseBib;
+    }
+
+    private void AttachHoseBib(GameObject obj)
+    {
+        Debug.Log(obj.name);
     }
 
     public void GrabHoseBib()
     {
+        Destroy(configurableJoint);
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
         pointerDown = true;
     }
 
     private void DropHoseBib()
     {
-        configurableJoint = gameObject.AddComponent<ConfigurableJoint>();
+        pointerDown = false;
+        configurableJoint = HighHoseBib.AddComponent<ConfigurableJoint>();
         CongfigurableJointPreset.ApplyTo(configurableJoint);
         configurableJoint.autoConfigureConnectedAnchor = false;
         configurableJoint.connectedAnchor = initAnchorPos;
@@ -50,43 +56,36 @@ public class HoseSpring : MonoBehaviour
         Debug.Log($"hose dropped");
     }
 
+    Vector3 GetPointerPos()
+    {
+        Vector3 screenPosition = Input.mousePosition;
+
+        return Camera.main.ScreenToWorldPoint(screenPosition);
+    }
+
     IEnumerator MoveAnchor()
     {
-        while (playerController.primaryTouchStarted == true)
+        //check is mouse left button or screen is being pressed down
+        while (playerController.primaryTouchStarted != 0)
         {
-            //targetAnchorPos -= playerController.touchStart
-            // configurableJoint.connectedAnchor = new Vector3(
-            //     playerController.primaryTouchPos.x,
-            //     playerController.primaryTouchPos.y,
-            //     0
-            // );
-            //  Debug.Log($"configurableJoint.connectedAnchor = {configurableJoint.connectedAnchor}");
-            // targetAnchorPos = initAnchorPos - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // /targetAnchorPos = initAnchorPos - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // Debug.Log($"targetAnchorPos = {targetAnchorPos}");
-
-            // configurableJoint.connectedAnchor = new Vector3(
-            //     -playerController.primaryFingerDelta.x + initAnchorPos.x,
-            //     -playerController.primaryFingerDelta.y + initAnchorPos.y,
-            //     initAnchorPos.z
-            // );
-
-            // transform.localPosition += new Vector3(
-            //     playerController.primaryFingerDelta.x,
-            //     playerController.primaryFingerDelta.y,
-            //     initHighHosePos.z
-            // );
-
-
-            Destroy(configurableJoint);
-
-            transform.localPosition =
+            //move object: HighHoseBib to mouse position: Camera.main.ScreenToWorldPoint(Input.mousePosition)
+            Vector3 direction =
                 Camera.main.ScreenToWorldPoint(Input.mousePosition)
-                - new Vector3(
-                    playerController.primaryFingerDelta.x,
-                    playerController.primaryFingerDelta.y,
-                    0
-                );
+                - HighHoseBib.transform.localPosition;
+
+            //Works, although rb is not Kinematic?-->
+            // highHoseRb.MovePosition(
+            //     new Vector3(direction.x, direction.y, HighHoseBib.transform.position.z)
+            // );
+            highHoseRb.Move(
+                new Vector3(direction.x, direction.y, HighHoseBib.transform.position.z),
+                Quaternion.Euler(
+                    HighHoseBib.transform.eulerAngles.x,
+                    HighHoseBib.transform.eulerAngles.y,
+                    HighHoseBib.transform.eulerAngles.z
+                )
+            );
+
             yield return null;
         }
     }
@@ -94,9 +93,9 @@ public class HoseSpring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        configurableJoint = GetComponent<ConfigurableJoint>();
         //configurableJoint.autoConfigureConnectedAnchor = true;
         initAnchorPos = configurableJoint.connectedAnchor;
+        highHoseRb = HighHoseBib.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
