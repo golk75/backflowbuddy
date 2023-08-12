@@ -227,12 +227,18 @@ public class WaterController : MonoBehaviour
         }
         */
 
-    private void DetectHoseAttachment(GameObject @object)
+    private void DetectHoseAttachment(
+        GameObject gameObject,
+        OperableComponentDescription description
+    )
     {
         isAttachedToGauge = true;
     }
 
-    private void DetectHoseDetachment(GameObject @object)
+    private void DetectHoseDetachment(
+        GameObject gameObject,
+        OperableComponentDescription description
+    )
     {
         isAttachedToGauge = false;
     }

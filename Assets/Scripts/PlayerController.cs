@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
                 == OperableComponentDescription.PartsType.TestKitHose
         )
         {
-            Actions.onHoseBibDrop?.Invoke();
+            Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
         }
         isOperableObject = false;
         operableObject = null;
@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
                 == OperableComponentDescription.PartsType.TestKitHose
             )
             {
-                Actions.onHoseBibGrab?.Invoke();
+                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
             }
         }
     }
