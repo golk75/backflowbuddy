@@ -253,7 +253,7 @@ public class TestKitController : MonoBehaviour
         isTestCock1Open = true;
     }
 
-    public void AttachHoseBib(GameObject testCock)
+    public void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
     {
         isConnectedToAssembly = true;
 
@@ -271,7 +271,7 @@ public class TestKitController : MonoBehaviour
         //  Debug.Log($"{gameObject} attached to assembly");
     }
 
-    public void DetachHoseBib(GameObject testCock)
+    public void DetachHoseBib(GameObject testCock, OperableComponentDescription description)
     {
         isConnectedToAssembly = false;
 

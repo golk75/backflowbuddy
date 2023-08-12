@@ -9,12 +9,15 @@ public class HoseDetector : MonoBehaviour
     public GameObject testCock;
     public bool isConnected;
     Coroutine onAttachAttempt;
+    public GameObject Hose;
+    public OperableComponentDescription operableComponentDescription;
 
     public void OnTriggerEnter(Collider other)
     {
-        //onHoseBibEnter.Invoke();
         isConnected = true;
-        Actions.onHoseAttach?.Invoke(testCock);
+        operableComponentDescription = other.GetComponent<OperableComponentDescription>();
+        Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+        Debug.Log(Hose);
     }
 
     private void OnTriggerStay(Collider other)
@@ -25,7 +28,7 @@ public class HoseDetector : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isConnected = false;
-        Actions.onHoseDetach?.Invoke(testCock);
+        Actions.onHoseDetach?.Invoke(testCock, operableComponentDescription);
     }
 
     IEnumerator AttachInitiate()
@@ -33,7 +36,7 @@ public class HoseDetector : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (isConnected == true)
         {
-            Actions.onHoseBibConnect?.Invoke(testCock);
+            Actions.onHoseBibConnect?.Invoke(testCock, operableComponentDescription);
         }
     }
 }

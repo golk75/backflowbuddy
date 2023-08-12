@@ -5,9 +5,9 @@ using UnityEngine;
 
 public static class Actions
 {
-    public static Action<GameObject> onHoseAttach;
-    public static Action<GameObject> onHoseDetach;
-    public static Action<GameObject> onHoseBibConnect;
+    public static Action<GameObject, OperableComponentDescription> onHoseAttach;
+    public static Action<GameObject, OperableComponentDescription> onHoseDetach;
+    public static Action<GameObject, OperableComponentDescription> onHoseBibConnect;
     public static Action<GameObject> onCheckClosed;
     public static Action<GameObject> onCheckOpened;
     public static Action<bool, GameObject> onTestCockOpen;
@@ -23,6 +23,6 @@ public static class Actions
     public static Action onTestCock3Closed;
     public static Action onTestCock4Opened;
     public static Action onTestCock4Closed;
-    public static Action onHoseBibGrab;
-    public static Action onHoseBibDrop;
+    public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
+    public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;
 }

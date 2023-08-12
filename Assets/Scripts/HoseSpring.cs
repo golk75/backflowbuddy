@@ -35,14 +35,14 @@ public class HoseSpring : MonoBehaviour
         Actions.onHoseBibConnect -= AttachHoseBib;
     }
 
-    private void AttachHoseBib(GameObject obj)
+    private void AttachHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         isAttaching = true;
-        HighHoseBib.transform.position = obj.transform.position;
+        HighHoseBib.transform.position = gameObject.transform.position;
         // StopCoroutine(MoveAnchor());
     }
 
-    public void GrabHoseBib()
+    public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         Destroy(configurableJoint);
 
@@ -50,7 +50,7 @@ public class HoseSpring : MonoBehaviour
         isAttaching = false;
     }
 
-    private void DropHoseBib()
+    private void DropHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         //isAttaching = false;
         if (isAttaching != true)
