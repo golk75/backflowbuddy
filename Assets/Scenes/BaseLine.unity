@@ -4241,6 +4241,8 @@ MonoBehaviour:
   LowHoseBib: {fileID: 1828313985}
   BypassHoseBib: {fileID: 996136261}
   HighHoseConfigJointConnectedBody: {fileID: 156448776}
+  LowHoseConfigJointConnectedBody: {fileID: 162921628}
+  BypassHoseConfigJointConnectedBody: {fileID: 666397479}
   CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
     type: 2}
 --- !u!114 &1103923068 stripped

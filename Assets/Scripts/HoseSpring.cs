@@ -18,6 +18,8 @@ public class HoseSpring : MonoBehaviour
     public GameObject LowHoseBib;
     public GameObject BypassHoseBib;
     public Rigidbody HighHoseConfigJointConnectedBody;
+    public Rigidbody LowHoseConfigJointConnectedBody;
+    public Rigidbody BypassHoseConfigJointConnectedBody;
     private GameObject currentHoseBibObj;
     private OperableComponentDescription currentHoseDescription;
     private GameObject currentTestCock;
@@ -66,13 +68,12 @@ public class HoseSpring : MonoBehaviour
                 break;
             case OperableComponentDescription.ComponentId.BypassHose:
                 currentHoseBibObj = BypassHoseBib;
-
                 break;
             default:
                 Debug.Log($"Not the HoseBib you're looking for");
                 break;
         }
-
+        configurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
         Destroy(configurableJoint);
         Debug.Log($"config joint destroyed");
         HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
@@ -89,8 +90,24 @@ public class HoseSpring : MonoBehaviour
             configurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
             CongfigurableJointPreset.ApplyTo(configurableJoint);
             configurableJoint.autoConfigureConnectedAnchor = false;
-            configurableJoint.connectedAnchor = initAnchorPos_highHose;
-            configurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
+            switch (description.componentId)
+            {
+                case OperableComponentDescription.ComponentId.HighHose:
+                    configurableJoint.connectedAnchor = initAnchorPos_highHose;
+                    configurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
+                    break;
+                case OperableComponentDescription.ComponentId.LowHose:
+                    configurableJoint.connectedAnchor = initAnchorPos_lowHose;
+                    configurableJoint.connectedBody = LowHoseConfigJointConnectedBody;
+                    break;
+                case OperableComponentDescription.ComponentId.BypassHose:
+                    configurableJoint.connectedAnchor = initAnchorPos_bypassHose;
+                    configurableJoint.connectedBody = BypassHoseConfigJointConnectedBody;
+                    break;
+                default:
+                    Debug.Log($"Not the HoseBib you're looking for");
+                    break;
+            }
         }
         //Debug.Log($"hose dropped");
     }
