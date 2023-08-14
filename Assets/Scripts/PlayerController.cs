@@ -159,7 +159,6 @@ public class PlayerController : MonoBehaviour
         )
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-            Debug.Log($"GRABBING");
         }
     }
 

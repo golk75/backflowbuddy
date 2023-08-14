@@ -7,45 +7,52 @@ using UnityEngine.Events;
 
 public class HoseDetector : MonoBehaviour
 {
+    public HoseSpring hoseSpring;
     public GameObject testCock;
     public bool isConnected;
     Coroutine onAttachAttempt;
     public GameObject Hose;
+    public PlayerController playerController;
     public OperableComponentDescription operableComponentDescription;
 
     public void OnTriggerEnter(Collider other)
     {
-        isConnected = true;
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
         //Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
-
-        onAttachAttempt = StartCoroutine(AttachInitiate());
+        Actions.onHoseContact?.Invoke(gameObject, operableComponentDescription);
+        if (playerController.primaryTouchPerformed)
+        {
+            onAttachAttempt = StartCoroutine(AttachInitiate());
+            Debug.Log($"detector= {name}");
+        }
+        isConnected = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        isConnected = true;
+        // Debug.Log($"isConnected = {isConnected}");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (isConnected == true)
-        {
-            isConnected = false;
-        }
+        isConnected = false;
 
         Actions.onHoseDetach?.Invoke(testCock, operableComponentDescription);
     }
 
     IEnumerator AttachInitiate()
     {
-        yield return new WaitForSeconds(2);
-
+        Debug.Log($"waiting for 2 sec.");
+        yield return new WaitForSeconds(1);
         if (isConnected == true)
         {
-            Actions.onHoseBibConnect?.Invoke(testCock, operableComponentDescription);
+            Debug.Log($"wait completed");
+            Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
         }
     }
 
-    void Update() { }
+    void Update()
+    {
+        // Debug.Log($"isConnected = {isConnected}");
+    }
 }

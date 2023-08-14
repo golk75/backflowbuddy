@@ -264,9 +264,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoseSpring: {fileID: 1100468280}
   testCock: {fileID: 1940697353}
   isConnected: 0
   Hose: {fileID: 0}
+  playerController: {fileID: 1446278364}
   operableComponentDescription: {fileID: 0}
 --- !u!65 &39476481
 BoxCollider:
@@ -4245,6 +4247,7 @@ MonoBehaviour:
   BypassHoseConfigJointConnectedBody: {fileID: 666397479}
   CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
     type: 2}
+  hoseDetector: {fileID: 2123083319}
 --- !u!114 &1103923068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8117723385236119829, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -4811,9 +4814,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoseSpring: {fileID: 1100468280}
   testCock: {fileID: 1700393506}
   isConnected: 0
   Hose: {fileID: 0}
+  playerController: {fileID: 1446278364}
   operableComponentDescription: {fileID: 0}
 --- !u!65 &1268881199
 BoxCollider:
@@ -5874,9 +5879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoseSpring: {fileID: 1100468280}
   testCock: {fileID: 1005029042}
   isConnected: 0
   Hose: {fileID: 0}
+  playerController: {fileID: 1446278364}
   operableComponentDescription: {fileID: 0}
 --- !u!65 &1620704107
 BoxCollider:
@@ -7948,9 +7955,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoseSpring: {fileID: 1100468280}
   testCock: {fileID: 365308010}
   isConnected: 0
   Hose: {fileID: 0}
+  playerController: {fileID: 1446278364}
   operableComponentDescription: {fileID: 0}
 --- !u!65 &2123083320
 BoxCollider:
