@@ -22,25 +22,30 @@ public class HoseDetector : MonoBehaviour
         onAttachAttempt = StartCoroutine(AttachInitiate());
     }
 
-    private void OnTriggerStay(Collider other) { }
+    private void OnTriggerStay(Collider other)
+    {
+        isConnected = true;
+    }
 
     private void OnTriggerExit(Collider other)
     {
-        isConnected = false;
+        if (isConnected == true)
+        {
+            isConnected = false;
+        }
+
         Actions.onHoseDetach?.Invoke(testCock, operableComponentDescription);
     }
 
     IEnumerator AttachInitiate()
     {
         yield return new WaitForSeconds(2);
+
         if (isConnected == true)
         {
             Actions.onHoseBibConnect?.Invoke(testCock, operableComponentDescription);
         }
     }
 
-    void Update()
-    {
-        Debug.Log($"isConnected = {isConnected}");
-    }
+    void Update() { }
 }

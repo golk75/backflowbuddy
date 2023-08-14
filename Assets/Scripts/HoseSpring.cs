@@ -8,7 +8,9 @@ public class HoseSpring : MonoBehaviour
     public ConfigurableJoint configurableJoint;
     public PlayerController playerController;
     private Vector3 initHighHosePos;
-    private Vector3 initAnchorPos;
+    private Vector3 initAnchorPos_highHose;
+    private Vector3 initAnchorPos_lowHose;
+    private Vector3 initAnchorPos_bypassHose;
     private Vector3 targetAnchorPos;
     private Coroutine DetectHoseBibManipulation;
     private Coroutine AttachHose;
@@ -43,10 +45,9 @@ public class HoseSpring : MonoBehaviour
     private void AttachHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         isAttaching = true;
-        if (currentHoseBibObj != null)
-        {
-            currentHoseBibObj.transform.position = gameObject.transform.position;
-        }
+
+        currentHoseBibObj.transform.position = gameObject.transform.position;
+
         Debug.Log($"connection attempt");
         // StopCoroutine(MoveAnchor());
     }
@@ -65,12 +66,15 @@ public class HoseSpring : MonoBehaviour
                 break;
             case OperableComponentDescription.ComponentId.BypassHose:
                 currentHoseBibObj = BypassHoseBib;
+
                 break;
             default:
                 Debug.Log($"Not the HoseBib you're looking for");
                 break;
         }
 
+        Destroy(configurableJoint);
+        Debug.Log($"config joint destroyed");
         HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
         //Debug.Log($"currentHoseBibObj = {currentHoseBibObj}");
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
@@ -85,7 +89,7 @@ public class HoseSpring : MonoBehaviour
             configurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
             CongfigurableJointPreset.ApplyTo(configurableJoint);
             configurableJoint.autoConfigureConnectedAnchor = false;
-            configurableJoint.connectedAnchor = initAnchorPos;
+            configurableJoint.connectedAnchor = initAnchorPos_highHose;
             configurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
         }
         //Debug.Log($"hose dropped");
@@ -129,7 +133,9 @@ public class HoseSpring : MonoBehaviour
     void Start()
     {
         //configurableJoint.autoConfigureConnectedAnchor = true;
-        initAnchorPos = configurableJoint.connectedAnchor;
+        initAnchorPos_highHose = HighHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
+        initAnchorPos_lowHose = LowHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
+        initAnchorPos_bypassHose = BypassHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
     }
 
     // Update is called once per frame

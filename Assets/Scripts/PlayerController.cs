@@ -29,10 +29,6 @@ public class PlayerController : MonoBehaviour
 
     public static event Action onPanCanceled;
 
-    //Operable component events
-    public static event Action onTestCockOperation;
-    public static event Action onShutOffOperation;
-
     public bool isOperableObject = false;
     public float primaryTouchStarted;
     public bool secondaryTouchStarted = false;
@@ -156,6 +152,15 @@ public class PlayerController : MonoBehaviour
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
         primaryTouchPerformed = context.ReadValueAsButton();
+        if (
+            isOperableObject == true
+            && operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitHose
+        )
+        {
+            Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+            Debug.Log($"GRABBING");
+        }
     }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
@@ -247,16 +252,6 @@ public class PlayerController : MonoBehaviour
                 //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
                 _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
                 operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
-            }
-            else if (
-                operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitHose
-            )
-            {
-                // Debug.Log(
-                //     $"operableObject = {operableObject} | operableComponentDescription = {operableComponentDescription}"
-                // );
-                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
             }
         }
     }
