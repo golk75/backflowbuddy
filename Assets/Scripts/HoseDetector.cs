@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,5 +37,10 @@ public class HoseDetector : MonoBehaviour
         {
             Actions.onHoseBibConnect?.Invoke(testCock, operableComponentDescription);
         }
+    }
+
+    void Update()
+    {
+        Debug.Log($"isConnected = {isConnected}");
     }
 }

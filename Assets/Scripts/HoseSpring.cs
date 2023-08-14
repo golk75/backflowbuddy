@@ -47,15 +47,12 @@ public class HoseSpring : MonoBehaviour
         {
             currentHoseBibObj.transform.position = gameObject.transform.position;
         }
+        Debug.Log($"connection attempt");
         // StopCoroutine(MoveAnchor());
     }
 
     public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
-        Destroy(configurableJoint);
-        Debug.Log($"gameObject = {gameObject} | description ={description.componentId} ");
-        Destroy(configurableJoint);
-        // currentHoseBibObj = gameObject;
         currentHoseDescription = description;
 
         switch (description.componentId)
@@ -91,7 +88,7 @@ public class HoseSpring : MonoBehaviour
             configurableJoint.connectedAnchor = initAnchorPos;
             configurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
         }
-        Debug.Log($"hose dropped");
+        //Debug.Log($"hose dropped");
     }
 
     Vector3 GetPointerPos()
@@ -106,7 +103,7 @@ public class HoseSpring : MonoBehaviour
         //check is mouse left button or screen is being pressed down
         while (playerController.primaryTouchStarted > 0 && isAttaching != true)
         {
-            //move object: HighHoseBib to mouse position: Camera.main.ScreenToWorldPoint(Input.mousePosition)
+            //move object: currentHoseBibObj to -> mouse position: Camera.main.ScreenToWorldPoint(Input.mousePosition)
             Vector3 direction =
                 Camera.main.ScreenToWorldPoint(Input.mousePosition)
                 - currentHoseBibObj.transform.localPosition;

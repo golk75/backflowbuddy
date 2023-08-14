@@ -1261,10 +1261,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1276606435}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 567375a3ec9b74af89c2c8cccd913bad,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1724384201}
     - targetCorrespondingSourceObject: {fileID: -4258411891960909470, guid: 567375a3ec9b74af89c2c8cccd913bad,
         type: 3}
       insertIndex: -1
@@ -2998,10 +2994,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 707057538}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 567375a3ec9b74af89c2c8cccd913bad,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 886803456}
     - targetCorrespondingSourceObject: {fileID: -4258411891960909470, guid: 567375a3ec9b74af89c2c8cccd913bad,
         type: 3}
       insertIndex: -1
@@ -3302,38 +3294,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 265198919}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &886803454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 567375a3ec9b74af89c2c8cccd913bad,
-    type: 3}
-  m_PrefabInstance: {fileID: 657453130}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &886803455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 567375a3ec9b74af89c2c8cccd913bad,
     type: 3}
   m_PrefabInstance: {fileID: 657453130}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &886803456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886803454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3c6ca646af442c6a52c45760c84be8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configurableJoint: {fileID: 1828313990}
-  playerController: {fileID: 1446278364}
-  HighHoseBib: {fileID: 1195468796}
-  LowHoseBib: {fileID: 886803454}
-  BypassHoseBib: {fileID: 1724384199}
-  HighHoseConfigJointConnectedBody: {fileID: 162921628}
-  CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
-    type: 2}
 --- !u!114 &899993980 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6666489128940764892, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -4561,12 +4527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6ee375c01c3754092bcd25096894ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1195468796 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 567375a3ec9b74af89c2c8cccd913bad,
-    type: 3}
-  m_PrefabInstance: {fileID: 1968255199}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1207125247
 GameObject:
   m_ObjectHideFlags: 0
@@ -6187,38 +6147,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 265198919}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1724384199 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 567375a3ec9b74af89c2c8cccd913bad,
-    type: 3}
-  m_PrefabInstance: {fileID: 265198919}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1724384200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 567375a3ec9b74af89c2c8cccd913bad,
     type: 3}
   m_PrefabInstance: {fileID: 265198919}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1724384201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724384199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d3c6ca646af442c6a52c45760c84be8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configurableJoint: {fileID: 996136266}
-  playerController: {fileID: 1446278364}
-  HighHoseBib: {fileID: 996136261}
-  LowHoseBib: {fileID: 0}
-  BypassHoseBib: {fileID: 0}
-  HighHoseConfigJointConnectedBody: {fileID: 666397479}
-  CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
-    type: 2}
 --- !u!114 &1748372387 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 933957314294723417, guid: b9242a77ce9b24fab85cddfa72914f01,
