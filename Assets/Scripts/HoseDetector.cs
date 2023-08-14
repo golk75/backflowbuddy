@@ -18,7 +18,7 @@ public class HoseDetector : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
-        //Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+        Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
         Actions.onHoseContact?.Invoke(gameObject, operableComponentDescription);
         if (playerController.primaryTouchPerformed)
         {
@@ -43,7 +43,7 @@ public class HoseDetector : MonoBehaviour
     IEnumerator AttachInitiate()
     {
         Debug.Log($"waiting for 2 sec.");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         if (isConnected == true)
         {
             Debug.Log($"wait completed");

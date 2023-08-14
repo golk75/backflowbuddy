@@ -392,15 +392,14 @@ public class WaterController : MonoBehaviour
                 check1housingForceField.Strength = 0;
                 check2housingForceField.Strength = 0;
             }
-            else if (
-                !isAttachedToGauge && testCockController.isTestCock2Open
-                || !isAttachedToGauge && testCockController.isTestCock3Open
-                || !isAttachedToGauge && testCockController.isTestCock4Open
-            )
-            {
-                check1housingForceField.Strength = 0;
-                check2housingForceField.Strength = 0;
-            }
+            // else if (
+            //     !isAttachedToGauge && testCockController.isTestCock2Open
+
+            // )
+            // {
+            //     check1housingForceField.Strength = 0;
+            //     check2housingForceField.Strength = 0;
+            // }
             else
             {
                 check1housingForceField.Strength = Mathf.SmoothDamp(
