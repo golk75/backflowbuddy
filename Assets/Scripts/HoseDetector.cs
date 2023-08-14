@@ -16,14 +16,12 @@ public class HoseDetector : MonoBehaviour
     {
         isConnected = true;
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
-        Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
-        Debug.Log(Hose);
-    }
+        //Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
 
-    private void OnTriggerStay(Collider other)
-    {
         onAttachAttempt = StartCoroutine(AttachInitiate());
     }
+
+    private void OnTriggerStay(Collider other) { }
 
     private void OnTriggerExit(Collider other)
     {

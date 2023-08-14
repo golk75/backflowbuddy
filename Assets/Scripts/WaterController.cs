@@ -165,7 +165,7 @@ public class WaterController : MonoBehaviour
     {
         //Actions.onCheckClosed += DetectCheckClosure;
         //Actions.onCheckOpened += DetectCheckOpening;
-        Actions.onHoseAttach += DetectHoseAttachment;
+        Actions.onHoseBibConnect += DetectHoseAttachment;
         Actions.onHoseDetach += DetectHoseDetachment;
     }
 

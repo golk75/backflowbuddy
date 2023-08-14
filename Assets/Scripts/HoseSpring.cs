@@ -13,8 +13,13 @@ public class HoseSpring : MonoBehaviour
     private Coroutine DetectHoseBibManipulation;
     private Coroutine AttachHose;
     public GameObject HighHoseBib;
+    public GameObject LowHoseBib;
+    public GameObject BypassHoseBib;
     public Rigidbody HighHoseConfigJointConnectedBody;
-    Rigidbody highHoseRb;
+    private GameObject currentHoseBibObj;
+    private OperableComponentDescription currentHoseDescription;
+    private GameObject currentTestCock;
+    Rigidbody HoseRb;
     public Preset CongfigurableJointPreset;
     bool pointerDown;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
@@ -38,14 +43,39 @@ public class HoseSpring : MonoBehaviour
     private void AttachHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         isAttaching = true;
-        HighHoseBib.transform.position = gameObject.transform.position;
+        if (currentHoseBibObj != null)
+        {
+            currentHoseBibObj.transform.position = gameObject.transform.position;
+        }
         // StopCoroutine(MoveAnchor());
     }
 
     public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         Destroy(configurableJoint);
+        Debug.Log($"gameObject = {gameObject} | description ={description.componentId} ");
+        Destroy(configurableJoint);
+        // currentHoseBibObj = gameObject;
+        currentHoseDescription = description;
 
+        switch (description.componentId)
+        {
+            case OperableComponentDescription.ComponentId.HighHose:
+                currentHoseBibObj = HighHoseBib;
+                break;
+            case OperableComponentDescription.ComponentId.LowHose:
+                currentHoseBibObj = LowHoseBib;
+                break;
+            case OperableComponentDescription.ComponentId.BypassHose:
+                currentHoseBibObj = BypassHoseBib;
+                break;
+            default:
+                Debug.Log($"Not the HoseBib you're looking for");
+                break;
+        }
+
+        HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
+        //Debug.Log($"currentHoseBibObj = {currentHoseBibObj}");
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
         isAttaching = false;
     }
@@ -55,7 +85,7 @@ public class HoseSpring : MonoBehaviour
         //isAttaching = false;
         if (isAttaching != true)
         {
-            configurableJoint = HighHoseBib.AddComponent<ConfigurableJoint>();
+            configurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
             CongfigurableJointPreset.ApplyTo(configurableJoint);
             configurableJoint.autoConfigureConnectedAnchor = false;
             configurableJoint.connectedAnchor = initAnchorPos;
@@ -79,18 +109,18 @@ public class HoseSpring : MonoBehaviour
             //move object: HighHoseBib to mouse position: Camera.main.ScreenToWorldPoint(Input.mousePosition)
             Vector3 direction =
                 Camera.main.ScreenToWorldPoint(Input.mousePosition)
-                - HighHoseBib.transform.localPosition;
+                - currentHoseBibObj.transform.localPosition;
 
             //Works, although rb is not Kinematic?-->
             // highHoseRb.MovePosition(
-            //     new Vector3(direction.x, direction.y, HighHoseBib.transform.position.z)
+            //     new Vector3(direction.x, direction.y, currentHoseBibObj.transform.position.z)
             // );
-            highHoseRb.Move(
-                new Vector3(direction.x, direction.y, HighHoseBib.transform.position.z),
+            HoseRb.Move(
+                new Vector3(direction.x, direction.y, currentHoseBibObj.transform.position.z),
                 Quaternion.Euler(
-                    HighHoseBib.transform.eulerAngles.x,
-                    HighHoseBib.transform.eulerAngles.y,
-                    HighHoseBib.transform.eulerAngles.z
+                    currentHoseBibObj.transform.eulerAngles.x,
+                    currentHoseBibObj.transform.eulerAngles.y,
+                    currentHoseBibObj.transform.eulerAngles.z
                 )
             );
 
@@ -103,7 +133,6 @@ public class HoseSpring : MonoBehaviour
     {
         //configurableJoint.autoConfigureConnectedAnchor = true;
         initAnchorPos = configurableJoint.connectedAnchor;
-        highHoseRb = HighHoseBib.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame

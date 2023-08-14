@@ -253,6 +253,9 @@ public class PlayerController : MonoBehaviour
                 == OperableComponentDescription.PartsType.TestKitHose
             )
             {
+                // Debug.Log(
+                //     $"operableObject = {operableObject} | operableComponentDescription = {operableComponentDescription}"
+                // );
                 Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
             }
         }

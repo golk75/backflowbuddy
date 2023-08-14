@@ -8,6 +8,8 @@ public static class Actions
     public static Action<GameObject, OperableComponentDescription> onHoseAttach;
     public static Action<GameObject, OperableComponentDescription> onHoseDetach;
     public static Action<GameObject, OperableComponentDescription> onHoseBibConnect;
+
+    // public static Action<GameObject, OperableComponentDescription> onHoseBibDisconnect;
     public static Action<GameObject> onCheckClosed;
     public static Action<GameObject> onCheckOpened;
     public static Action<bool, GameObject> onTestCockOpen;
