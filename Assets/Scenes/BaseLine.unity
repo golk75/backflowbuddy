@@ -4583,6 +4583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1180445816}
+  - component: {fileID: 1180445817}
   m_Layer: 0
   m_Name: PlayerOpsUi
   m_TagString: Untagged
@@ -4605,6 +4606,23 @@ Transform:
   m_Father: {fileID: 1461425740}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180445817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180445815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: e46d6d19c93aa44c6ab2a5e70272a2d8, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: a7c962fc1895d4c06a92f989872546c8,
+    type: 3}
+  m_SortingOrder: 0
 --- !u!114 &1182569083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
