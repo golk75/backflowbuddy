@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using com.zibra.liquid.Solver;
 using com.zibra.liquid.Manipulators;
-
+using UnityEngine.UIElements;
 
 public class FillButton : MonoBehaviour
 {
+    Button fillButton;
     public ZibraLiquid liquid;
     public GameObject Check1;
     public GameObject Check2;
@@ -30,6 +31,10 @@ public class FillButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var root = GetComponent<UIDocument>().rootVisualElement.Q<Button>("FillButton");
+        fillButton = root.Q<Button>("FillButton");
+        fillButton.clicked += FillDevice;
+
         ShutOff1OperableDescription = ShutOff1.GetComponent<OperableComponentDescription>();
         if (ShutOff1 != null)
             initShutOffRot = ShutOff1.transform.eulerAngles;

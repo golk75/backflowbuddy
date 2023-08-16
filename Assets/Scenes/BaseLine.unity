@@ -4584,6 +4584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1180445816}
   - component: {fileID: 1180445817}
+  - component: {fileID: 1180445818}
   m_Layer: 0
   m_Name: PlayerOpsUi
   m_TagString: Untagged
@@ -4623,6 +4624,27 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: a7c962fc1895d4c06a92f989872546c8,
     type: 3}
   m_SortingOrder: 0
+--- !u!114 &1180445818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180445815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4645b7a9e63174998a8887cabbee7967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liquid: {fileID: 1182569083}
+  Check1: {fileID: 1027411676}
+  Check2: {fileID: 1807207375}
+  ShutOff1: {fileID: 2076229190}
+  playerController: {fileID: 1446278364}
+  shutOffValveController: {fileID: 2051383271}
+  testCockController: {fileID: 1506706878}
+  check1HousingFF: {fileID: 645251561}
+  check2HousingFF: {fileID: 225413029}
 --- !u!114 &1182569083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -5473,7 +5495,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1461425740}
-  - component: {fileID: 1461425741}
   m_Layer: 0
   m_Name: UiManager
   m_TagString: Untagged
@@ -5498,18 +5519,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1461425741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461425738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 542dfd99c248f4f90919056030c424e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1466428993
 GameObject:
   m_ObjectHideFlags: 0
