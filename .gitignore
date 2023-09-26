@@ -27,6 +27,20 @@
 # Visual Studio cache directory
 .vs/
 
+# Mono-specific patterns
+.dirstamp
+compile
+mono.h
+mono-*.tar.*
+mono_crash*
+tmpinst-dir.stamp
+extensions-config.h
+*.dylib.dSYM
+*.mlpd
+llvm/build/
+llvm/usr/
+mcs/build/compiler-server.log
+
 # Gradle cache directory
 .gradle/
 
