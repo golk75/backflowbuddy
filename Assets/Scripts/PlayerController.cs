@@ -191,18 +191,24 @@ public class PlayerController : MonoBehaviour
 
     public void DetectObjectWithRaycast()
     {
+        int layerMaskInt = 1 << 8;
+        // layerMaskInt = ~layerMaskInt;
         LayerMask layerMask = LayerMask.GetMask("OperableObject");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D ray2DHit = Physics2D.Raycast(primaryTouchStartPos, Vector2.zero);
         RaycastHit hit;
+        RaycastHit hit2;
 
         //current distance to device is about 60-70
-        Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
+        //Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
 
         //Debug.Log($"hit.collider = {hit.collider}; ray2DHit = {ray2DHit.collider}");
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
-
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.Log($"here-> hit a {hit.transform.gameObject.name}");
+        }
         if (hit.collider != null && ray2DHit.collider == null)
         {
             _operableTestGaugeObject = null;
@@ -212,11 +218,9 @@ public class PlayerController : MonoBehaviour
             operableObject = hit.collider.transform.gameObject;
 
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
-            Debug.Log($"1");
         }
         else if (hit.collider == null && ray2DHit.collider != null)
         {
-            Debug.Log($"2");
             operableObject = null;
             isOperableObject = true;
             operableComponentDescription =
@@ -225,7 +229,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log($"3");
             _operableTestGaugeObject = null;
             operableObject = null;
             isOperableObject = false;
