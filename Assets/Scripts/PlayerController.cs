@@ -213,8 +213,13 @@ public class PlayerController : MonoBehaviour
         {
             _operableTestGaugeObject = null;
             isOperableObject = true;
-            operableComponentDescription =
-                hit.collider.transform.GetComponent<OperableComponentDescription>();
+            //This is to differentiate between operable component types if an operable component is pressed/ clicked
+            if (hit.collider.transform.GetComponent<OperableComponentDescription>())
+            {
+                operableComponentDescription =
+                    hit.collider.transform.GetComponent<OperableComponentDescription>();
+            }
+
             operableObject = hit.collider.transform.gameObject;
 
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
