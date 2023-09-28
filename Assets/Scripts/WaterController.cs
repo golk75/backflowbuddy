@@ -246,6 +246,9 @@ public class WaterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /// <summary>
+        /// Regulate supply pressure
+        /// </summary>
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
@@ -334,8 +337,10 @@ public class WaterController : MonoBehaviour
             && TestCockHoseDetect4.isConnected == false
         )
         {
+            Debug.Log($" testCockController.isTestCock4Open");
             if (check2Detector.ParticlesInside > 3000)
             {
+                Debug.Log($"check2Detector.ParticlesInside > 3000");
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
                     Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
@@ -345,6 +350,7 @@ public class WaterController : MonoBehaviour
             }
             else
             {
+                Debug.Log($"check2Detector.ParticlesInside < 3000");
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
                     0,
