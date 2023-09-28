@@ -199,7 +199,7 @@ public class TestCockController : MonoBehaviour
                                 playerController.OperableObjectRotation;
                             break;
                     }
-                    //assign the associated test cock valve game object to currently operating test cock;
+                    //assign the associated test cock valve/collider to currently operating test cock;
 
                     _operableTestCockColliderScale = _operableTestCockVoidScale =
                         _operableTestCockVoid.transform.localScale;
