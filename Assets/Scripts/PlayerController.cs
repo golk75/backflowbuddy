@@ -212,9 +212,11 @@ public class PlayerController : MonoBehaviour
             operableObject = hit.collider.transform.gameObject;
 
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
+            Debug.Log($"1");
         }
         else if (hit.collider == null && ray2DHit.collider != null)
         {
+            Debug.Log($"2");
             operableObject = null;
             isOperableObject = true;
             operableComponentDescription =
@@ -223,6 +225,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            Debug.Log($"3");
             _operableTestGaugeObject = null;
             operableObject = null;
             isOperableObject = false;
@@ -248,7 +251,7 @@ public class PlayerController : MonoBehaviour
                     (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
                     * deviceRotSensitivity;
 
-                //rotation clamp for parts that rotate arpund center mass (i.e. test cock valves)
+                //rotation clamp for parts that rotate around center mass (i.e. test cock valves)
                 _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
                 operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
             }
@@ -262,7 +265,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OperateCheck()
     {
-        if (isOperableObject == true && primaryTouchStarted > 0)
+        // if (isOperableObject == true && primaryTouchStarted > 0)
+        // {
+        //     Operate();
+        // }
+        if (primaryTouchStarted > 0)
         {
             Operate();
         }
