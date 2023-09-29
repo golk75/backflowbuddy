@@ -211,6 +211,7 @@ public class PlayerController : MonoBehaviour
         }
         if (hit.collider != null && ray2DHit.collider == null)
         {
+            Debug.Log($"{operableObject}");
             _operableTestGaugeObject = null;
             isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked
@@ -257,11 +258,11 @@ public class PlayerController : MonoBehaviour
             {
                 _operableObjectRotation.z +=
                     (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                    * deviceRotSensitivity;
+                    * deviceRotSensitivity
+                    * -1;
 
                 //rotation clamp for parts that rotate around center mass (i.e. test cock valves)
                 _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
-                operableObject.transform.rotation = Quaternion.Euler(_operableObjectRotation);
             }
         }
     }
