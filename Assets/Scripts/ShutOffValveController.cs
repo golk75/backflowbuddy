@@ -77,20 +77,30 @@ public class ShutOffValveController : MonoBehaviour
                     {
                         ShutOffValve1.transform.eulerAngles =
                             playerController.OperableObjectRotation;
+                        shutOffValveScaleFactor = (
+                            playerController.OperableObjectRotation.z * 0.1f
+                        );
+
+                        volume = Mathf.Lerp(
+                            supplyVolume,
+                            0,
+                            ShutOffValve1.transform.eulerAngles.z / 90f
+                        );
+
+                        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
+                            mainSupplyEmitter.VolumePerSimTime,
+                            volume,
+                            1f
+                        );
                     }
-                    shutOffValveScaleFactor = (playerController.OperableObjectRotation.z * 0.1f);
-
-                    volume = Mathf.Lerp(
-                        supplyVolume,
-                        0,
-                        ShutOffValve1.transform.eulerAngles.z / 90f
-                    );
-
-                    mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
-                        mainSupplyEmitter.VolumePerSimTime,
-                        volume,
-                        1f
-                    );
+                    else if (
+                        operableComponentDescription.componentId
+                        == OperableComponentDescription.ComponentId.ShutOffValve2
+                    )
+                    {
+                        ShutOffValve2.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                    }
 
                     if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
                     {
