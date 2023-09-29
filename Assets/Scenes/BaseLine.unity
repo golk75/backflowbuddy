@@ -5004,6 +5004,8 @@ MonoBehaviour:
   testCockController: {fileID: 1506706878}
   check1HousingFF: {fileID: 645251561}
   check2HousingFF: {fileID: 225413029}
+  supplyCollider: {fileID: 750122479}
+  supplyVoid: {fileID: 1890183833}
 --- !u!114 &1182569083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,

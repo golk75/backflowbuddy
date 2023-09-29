@@ -23,6 +23,17 @@ public class FillButton : MonoBehaviour
 
     private float checkffVelref;
 
+    [SerializeField]
+    ZibraLiquidCollider supplyCollider;
+
+    [SerializeField]
+    ZibraLiquidVoid supplyVoid;
+
+    Vector3 initSupplyColliderPos;
+    Vector3 supplyColliderTargetPos = new Vector3(-15f, 0, 0);
+    Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
+    Vector3 initSupplyVoidPos;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -49,9 +60,11 @@ public class FillButton : MonoBehaviour
         Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
         Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
 
+        //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 180, 360);
+        playerController.operableObject = ShutOff1;
         playerController.operableComponentDescription = ShutOff1OperableDescription;
 
-        shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 180, 360);
+        playerController._operableObjectRotation.y = 180;
 
         foreach (GameObject testCock in testCockController.TestCockList)
         {
@@ -61,5 +74,8 @@ public class FillButton : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() { }
+    void Update()
+    {
+        Debug.Log($"{shutOffValveController.ShutOffValve1.transform.eulerAngles}");
+    }
 }
