@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Presets;
 using UnityEngine;
 
@@ -156,7 +157,10 @@ public class HoseSpring : MonoBehaviour
     IEnumerator MoveAnchor()
     {
         //check is mouse left button or screen is being pressed down
-        while (playerController.primaryTouchStarted > 0 && isAttaching == false)
+        while (
+            playerController.primaryTouchStarted > 0 && isAttaching == false
+            || playerController.primaryClickStarted > 0 && isAttaching == false
+        )
         {
             //move object: currentHoseBibObj to -> mouse position: Camera.main.ScreenToWorldPoint(Input.mousePosition)
             Vector3 direction =

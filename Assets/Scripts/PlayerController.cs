@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isOperableObject = false;
     public float primaryTouchStarted;
+    public float primaryClickStarted;
     public bool secondaryTouchStarted = false;
     public bool primaryTouchPerformed = false;
     public GameObject OperableObject
@@ -80,6 +82,7 @@ public class PlayerController : MonoBehaviour
     public OperableComponentDescription operableComponentDescription;
     public Vector2 primaryFingerPos;
     public Vector2 primaryFingerDelta;
+    public bool isMouseDown;
 
     // Start is called before the first frame update
     void Awake()
@@ -88,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
         testCockController = TestCockManager.GetComponent<TestCockController>();
         waterController = WaterManager.GetComponent<WaterController>();
-        //Input
+        //Touch Input
         playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
         playerInput.Touchscreen.Touch0Contact.performed += Touch0Contact_performed;
@@ -98,8 +101,45 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         Touch0Position = playerInput.Touchscreen.Touch0Position;
+
+        //Mouse Input
+        playerInput.MouseOperate.Click.started += LeftMouseClick_started;
+        playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+
         operableObject = initialOperableObject;
         _operableTestGaugeObject = initialTestGaugeOperableObject;
+    }
+
+    private void LeftMouseClick_canceled(InputAction.CallbackContext context)
+    {
+        primaryClickStarted = context.ReadValue<float>();
+        primaryTouchStarted = context.ReadValue<float>();
+        primaryTouchPerformed = context.ReadValueAsButton();
+        onPanCanceled?.Invoke();
+
+        if (
+            isOperableObject == true
+            && operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitHose
+        )
+        {
+            Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+        }
+        isOperableObject = false;
+        operableObject = null;
+        primaryTouchStartPos = Vector3.zero;
+        touchStart = Vector3.zero;
+    }
+
+    private void LeftMouseClick_started(InputAction.CallbackContext context)
+    {
+        primaryClickStarted = context.ReadValue<float>();
+        touchStart = Camera.main.ScreenToWorldPoint(
+            playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
+        );
+        primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        primaryTouchStarted = context.ReadValue<float>();
+        DetectObjectWithRaycast();
     }
 
     void OnEnable()
@@ -131,6 +171,7 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
+        primaryClickStarted = context.ReadValue<float>();
         primaryTouchStarted = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
         onPanCanceled?.Invoke();
@@ -256,11 +297,20 @@ public class PlayerController : MonoBehaviour
                     == OperableComponentDescription.PartsType.TestCock
             )
             {
-                _operableObjectRotation.z +=
-                    (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                    * deviceRotSensitivity
-                    * -1;
-
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _operableObjectRotation.z +=
+                        (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                        * deviceRotSensitivity
+                        * -1;
+                }
+                else
+                {
+                    _operableObjectRotation.z +=
+                        (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                        * deviceRotSensitivity
+                        * -1;
+                }
                 //rotation clamp for parts that rotate around center mass (i.e. test cock valves)
                 _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
             }
@@ -278,6 +328,7 @@ public class PlayerController : MonoBehaviour
         // {
         //     Operate();
         // }
+
         if (primaryTouchStarted > 0)
         {
             Operate();

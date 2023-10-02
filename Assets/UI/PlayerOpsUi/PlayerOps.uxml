@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/fill-button.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#fill-button" />
     <ui:VisualElement name="SceneWrapper" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: flex-start; align-self: auto; justify-content: flex-start;">
-        <ui:VisualElement name="ButtonWrapper" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-start; align-items: stretch; height: 255px; width: 74px; flex-direction: column; flex-shrink: 1; margin-bottom: 0; align-self: auto; transform-origin: center;">
-            <ui:Button display-tooltip-when-elided="true" name="MenuButton" style="position: relative; align-self: center; left: auto; background-image: url(&apos;project://database/Assets/UI/GameMenu/Cog2064.png?fileID=21300000&amp;guid=85464fdea47564d069f826898aeb0bc7&amp;type=3#Cog2064&apos;); background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(255, 255, 255); border-bottom-color: rgba(255, 255, 255, 0); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); height: 21px; width: 20px; align-items: auto;" />
-            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&amp;guid=6f649aea2852e3b46a8c4386355a2c53&amp;type=3#T_5_drop_&apos;); align-items: auto; -unity-background-scale-mode: scale-to-fit; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; width: 42px; height: 174px; justify-content: flex-start; align-self: auto; flex-direction: column; margin-top: 162px;" />
+        <ui:VisualElement name="ButtonWrapper">
+            <ui:Button display-tooltip-when-elided="false" name="MenuButton" class="menu-button" />
+            <ui:Button display-tooltip-when-elided="true" name="FillButton" class="fill-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
