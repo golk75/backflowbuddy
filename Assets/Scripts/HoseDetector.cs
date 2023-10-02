@@ -28,6 +28,7 @@ public class HoseDetector : MonoBehaviour
         isConnected = true;
     }
 
+    //
     private void OnTriggerStay(Collider other)
     {
         // Debug.Log($"isConnected = {isConnected}");

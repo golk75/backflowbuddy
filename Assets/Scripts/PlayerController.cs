@@ -105,9 +105,23 @@ public class PlayerController : MonoBehaviour
         //Mouse Input
         playerInput.MouseOperate.Click.started += LeftMouseClick_started;
         playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+        playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
 
         operableObject = initialOperableObject;
         _operableTestGaugeObject = initialTestGaugeOperableObject;
+    }
+
+    private void LeftMouseClick_performed(InputAction.CallbackContext context)
+    {
+        primaryTouchPerformed = context.ReadValueAsButton();
+        if (
+            isOperableObject == true
+            && operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestKitHose
+        )
+        {
+            Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+        }
     }
 
     private void LeftMouseClick_canceled(InputAction.CallbackContext context)
@@ -246,10 +260,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log($"hit.collider = {hit.collider}; ray2DHit = {ray2DHit.collider}");
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-        {
-            Debug.Log($"here-> hit a {hit.transform.gameObject.name}");
-        }
+        Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
         if (hit.collider != null && ray2DHit.collider == null)
         {
             Debug.Log($"{operableObject}");
