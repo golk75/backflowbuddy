@@ -3,8 +3,7 @@ using UnityEngine.UIElements;
 
 public class GameMenuController : MonoBehaviour
 {
-    public VectorImage cog;
-    Button gameMenu;
+
 
     void Start() { }
 

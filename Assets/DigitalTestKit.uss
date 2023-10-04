@@ -1,0 +1,142 @@
+.gauge-tick-short {
+    height: 10px;
+    width: 1px;
+    align-items: center;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgb(0, 0, 0);
+    align-self: center;
+    justify-content: center;
+}
+
+.gauge-tick-whole {
+    background-color: rgb(0, 0, 0);
+    height: 30px;
+    width: 1px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+}
+
+.gauge-tick-half {
+    background-color: rgb(0, 0, 0);
+    height: 15px;
+    width: 1px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tick-group {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: auto;
+    flex-shrink: 1;
+    align-self: auto;
+}
+
+.progress-bar {
+    flex-grow: 0;
+    background-color: rgb(0, 176, 255);
+    align-items: flex-start;
+    align-self: flex-start;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    height: 99%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 0;
+}
+
+.gauge-bar {
+    align-items: center;
+    height: 10%;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 0;
+    border-bottom-width: 1px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-direction: row;
+    width: 75%;
+    align-self: center;
+    justify-content: flex-start;
+}
+
+.gauge-tick-container {
+    flex-grow: 0;
+    background-color: rgba(0, 0, 0, 0);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    flex-shrink: 0;
+    width: 75%;
+}
+
+.tick {
+    flex-grow: 0;
+    align-items: center;
+    align-self: auto;
+    flex-direction: column;
+    margin-left: 0;
+}
+
+.group-tick-label-container {
+    flex-grow: 0;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: center;
+    align-self: auto;
+    flex-shrink: 1;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-basis: auto;
+    flex-wrap: nowrap;
+}
+
+.group-tick-labels {
+    align-items: auto;
+    align-self: auto;
+    flex-direction: row;
+    flex-grow: 0;
+    width: 0;
+    -unity-text-align: lower-center;
+    white-space: nowrap;
+}
+
+.gauge-container {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 2%;
+}
+
+.tick-group-start {
+}
