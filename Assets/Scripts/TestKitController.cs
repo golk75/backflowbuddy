@@ -188,12 +188,14 @@ public class TestKitController : MonoBehaviour
 
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
     }
-    private void GetPsidDigitalNeedle()
+    private float GetPsidDigitalNeedle()
     {
-        // Length PsiDiff = MinFillPos - MaxFillPos;
+        float PsiDiff = MinFillPos - MaxFillPos;
         float percentChange = hosePressure;
-        _gaugeProgressBar.style.width = Length.Percent(MinFillPos + percentChange);
-        Debug.Log($"hosePressure = {hosePressure}|| progressBar = {_gaugeProgressBar.style.width} || MinFillPos - percentChange = {MinFillPos - percentChange}");
+        float normalizedPsid = hosePressure / maxPSID;
+
+        return MinFillPos - normalizedPsid * PsiDiff;
+        // Debug.Log($"hosePressure = {hosePressure}|| progressBar = {_gaugeProgressBar.style.width} || MinFillPos - percentChange = {MinFillPos - percentChange}");
 
     }
 
@@ -316,7 +318,7 @@ public class TestKitController : MonoBehaviour
     }
     private void DigitalNeedleControl()
     {
-        //digitalKitNeedle.transform.position = new Vector3(GetPsidDigitalNeedle(), 0, 0);
+        _gaugeProgressBar.style.width = Length.Percent(GetPsidDigitalNeedle());
     }
     private void PressureControl()
     {
@@ -336,7 +338,7 @@ public class TestKitController : MonoBehaviour
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
-                Debug.Log($"test cock #1 is connected & open");
+                // Debug.Log($"test cock #1 is connected & open");
             }
             else if (
                 TestCockList.Contains(TestCock3)
@@ -350,7 +352,7 @@ public class TestKitController : MonoBehaviour
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
-                Debug.Log($"supply is open and test cock 3 is connected & open");
+                // Debug.Log($"supply is open and test cock 3 is connected & open");
             }
             else if (
                 TestCockList.Contains(TestCock4)
@@ -364,7 +366,7 @@ public class TestKitController : MonoBehaviour
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
-                Debug.Log($"supply is open and test cock 4 is connected & open");
+                // Debug.Log($"supply is open and test cock 4 is connected & open");
             }
             //END CHECKING IS TC IS HOOKED UP TO MOVE GAUGE WHILE DEVICE IS OPEN
 
@@ -387,9 +389,9 @@ public class TestKitController : MonoBehaviour
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
-                Debug.Log(
-                    $"supply is open & test cock #2 is connected & open & test cock #3 is closed"
-                );
+                // Debug.Log(
+                //     $"supply is open & test cock #2 is connected & open & test cock #3 is closed"
+                // );
             }
             else if (
                 TestCockList.Contains(TestCock2)
@@ -402,11 +404,11 @@ public class TestKitController : MonoBehaviour
                 //best looking psid drop so far is: hosePressure -= 0.3f;
                 hosePressure -= 0.3f;
 
-                Debug.Log($"hosePressure = {hosePressure}");
+                // Debug.Log($"hosePressure = {hosePressure}");
 
-                Debug.Log(
-                    $"supply is closed & check1 is open & test cock #2 is connected & open & test cock #3 is open"
-                );
+                // Debug.Log(
+                //     $"supply is closed & check1 is open & test cock #2 is connected & open & test cock #3 is open"
+                // );
             }
             else if (
                 TestCockList.Contains(TestCock2)
@@ -439,9 +441,9 @@ public class TestKitController : MonoBehaviour
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
-                Debug.Log(
-                    $"supply is open & test cock #3 is connected & open & test cock #4 is closed"
-                );
+                // Debug.Log(
+                //     $"supply is open & test cock #3 is connected & open & test cock #4 is closed"
+                // );
             }
             else if (
                 TestCockList.Contains(TestCock3)
@@ -454,11 +456,11 @@ public class TestKitController : MonoBehaviour
                 //best looking psid drop so far is: hosePressure -= 0.3f;
                 hosePressure -= 0.4f;
 
-                Debug.Log($"hosePressure = {hosePressure}");
+                // Debug.Log($"hosePressure = {hosePressure}");
 
-                Debug.Log(
-                    $"supply is closed & check2 is open & test cock #3 is connected & open & test cock #4 is open"
-                );
+                // Debug.Log(
+                //     $"supply is closed & check2 is open & test cock #3 is connected & open & test cock #4 is open"
+                // );
             }
             else if (
                 TestCockList.Contains(TestCock3)
@@ -469,9 +471,9 @@ public class TestKitController : MonoBehaviour
             )
             {
                 hosePressure += 0;
-                Debug.Log(
-                    $"supply is closed & check2 is closed & test cock #3 is connected & open & test cock #4 is open"
-                );
+                // Debug.Log(
+                //     $"supply is closed & check2 is closed & test cock #3 is connected & open & test cock #4 is open"
+                // );
             }
             //========================================
             // END - #2 Check Test//==================>
@@ -521,8 +523,8 @@ public class TestKitController : MonoBehaviour
         PressureControl();
         OperateControls();
         NeedleControl();
-        // DigitalNeedleControl();
-        GetPsidDigitalNeedle();
+        DigitalNeedleControl();
+
     }
 
 
