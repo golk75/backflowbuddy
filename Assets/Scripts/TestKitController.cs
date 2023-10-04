@@ -192,7 +192,7 @@ public class TestKitController : MonoBehaviour
     {
         // Length PsiDiff = MinFillPos - MaxFillPos;
         float percentChange = hosePressure;
-        _gaugeProgressBar.style.width = Length.Percent(MinFillPos += percentChange);
+        _gaugeProgressBar.style.width = Length.Percent(MinFillPos + percentChange);
         Debug.Log($"hosePressure = {hosePressure}|| progressBar = {_gaugeProgressBar.style.width} || MinFillPos - percentChange = {MinFillPos - percentChange}");
 
     }
