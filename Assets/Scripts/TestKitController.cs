@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using com.zibra.liquid.Manipulators;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TestKitController : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class TestKitController : MonoBehaviour
     public GameObject bypassControl;
 
     public GameObject needle;
+    public GameObject digitalKitNeedle;
     private GameObject currentKnob;
 
     [SerializeField]
@@ -98,7 +101,7 @@ public class TestKitController : MonoBehaviour
     public bool isTestCock2Open;
     public bool isTestCock3Open;
     public bool isTestCock4Open;
-
+    public float hosePressure;
     public float highHosePressure;
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
@@ -110,6 +113,14 @@ public class TestKitController : MonoBehaviour
     public List<ZibraLiquidDetector> TestCockDetectorList;
     Coroutine Check1ClosingPoint;
     float needleVelRef = 0;
+
+    //ui toolkit
+    private VisualElement _root;
+    private VisualElement _gaugeProgressBar;
+    // private Length MinFillPos = Length.Percent(0);
+    // private Length MaxFillPos = Length.Percent(100);
+    private float MinFillPos = 0;
+    private float MaxFillPos = 100;
 
     void OnEnable()
     {
@@ -146,6 +157,16 @@ public class TestKitController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        /// <summary>
+        /// //ui tool kit for digital gauge
+        /// </summary>
+        /// <typeparam name="UIDocument"></typeparam>
+        /// <returns></returns>
+        _root = GetComponent<UIDocument>().rootVisualElement;
+        _gaugeProgressBar = _root.Q<VisualElement>("Gauge_progress_bar");
+
+
         currentPSID = 0;
         minPSID = 0;
         maxPSID = 55;
@@ -153,6 +174,7 @@ public class TestKitController : MonoBehaviour
         maxKnobRotation = 1440;
         minKnobRotation = 0;
         highHosePressure = 0;
+        hosePressure = 0;
         initLowHosePosition = LowHose.transform.position;
         initHighHosePosition = HighHose.transform.position;
         initBypassHosePosition = BypassHose.transform.position;
@@ -162,10 +184,19 @@ public class TestKitController : MonoBehaviour
     {
         float PsidDiff = MinNeedle_rotation - MaxNeedle_rotation;
 
-        float normalizedPsid = highHosePressure / maxPSID;
+        float normalizedPsid = hosePressure / maxPSID;
 
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
     }
+    private void GetPsidDigitalNeedle()
+    {
+        // Length PsiDiff = MinFillPos - MaxFillPos;
+        float percentChange = hosePressure;
+        _gaugeProgressBar.style.width = Length.Percent(MinFillPos += percentChange);
+        Debug.Log($"hosePressure = {hosePressure}|| progressBar = {_gaugeProgressBar.style.width} || MinFillPos - percentChange = {MinFillPos - percentChange}");
+
+    }
+
 
     private float GetKnobRotation()
     {
@@ -283,7 +314,10 @@ public class TestKitController : MonoBehaviour
         // For  now, soely using high hose (double check assembly)
         needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
     }
-
+    private void DigitalNeedleControl()
+    {
+        //digitalKitNeedle.transform.position = new Vector3(GetPsidDigitalNeedle(), 0, 0);
+    }
     private void PressureControl()
     {
         // For  now, soely using high hose (double check assembly testing)
@@ -297,8 +331,8 @@ public class TestKitController : MonoBehaviour
             if (TestCockList.Contains(TestCock1) && isTestCock1Open)
             {
                 //supply is open and test cock is open
-                highHosePressure = Mathf.SmoothStep(
-                    highHosePressure,
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
@@ -311,8 +345,8 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //supply is open and test cock is open
-                highHosePressure = Mathf.SmoothStep(
-                    highHosePressure,
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
@@ -325,8 +359,8 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //supply is open and test cock is open
-                highHosePressure = Mathf.SmoothStep(
-                    highHosePressure,
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
                     Zone1Detector.ParticlesInside,
                     needleSpeedDamp
                 );
@@ -348,8 +382,8 @@ public class TestKitController : MonoBehaviour
                 && !isTestCock3Open
             )
             {
-                highHosePressure = Mathf.SmoothStep(
-                    highHosePressure,
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
@@ -365,10 +399,10 @@ public class TestKitController : MonoBehaviour
                 && checkValveStatus.isCheck1Closed == false
             )
             {
-                //best looking psid drop so far is: highHosePressure -= 0.3f;
-                highHosePressure -= 0.3f;
+                //best looking psid drop so far is: hosePressure -= 0.3f;
+                hosePressure -= 0.3f;
 
-                Debug.Log($"highHosePressure = {highHosePressure}");
+                Debug.Log($"hosePressure = {hosePressure}");
 
                 Debug.Log(
                     $"supply is closed & check1 is open & test cock #2 is connected & open & test cock #3 is open"
@@ -382,8 +416,8 @@ public class TestKitController : MonoBehaviour
                 && checkValveStatus.isCheck1Closed == true
             )
             {
-                highHosePressure += 0;
-                //CaptureCheck1ClosingPoint(highHosePressure);
+                hosePressure += 0;
+                //CaptureCheck1ClosingPoint(hosePressure);
 
                 //Debug.Log($"closingPoint = {closingPoint}");
             }
@@ -400,8 +434,8 @@ public class TestKitController : MonoBehaviour
                 && !isTestCock4Open
             )
             {
-                highHosePressure = Mathf.SmoothStep(
-                    highHosePressure,
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
@@ -417,10 +451,10 @@ public class TestKitController : MonoBehaviour
                 && checkValveStatus.isCheck2Closed == false
             )
             {
-                //best looking psid drop so far is: highHosePressure -= 0.3f;
-                highHosePressure -= 0.4f;
+                //best looking psid drop so far is: hosePressure -= 0.3f;
+                hosePressure -= 0.4f;
 
-                Debug.Log($"highHosePressure = {highHosePressure}");
+                Debug.Log($"hosePressure = {hosePressure}");
 
                 Debug.Log(
                     $"supply is closed & check2 is open & test cock #3 is connected & open & test cock #4 is open"
@@ -434,7 +468,7 @@ public class TestKitController : MonoBehaviour
                 && checkValveStatus.isCheck2Closed == true
             )
             {
-                highHosePressure += 0;
+                hosePressure += 0;
                 Debug.Log(
                     $"supply is closed & check2 is closed & test cock #3 is connected & open & test cock #4 is open"
                 );
@@ -445,24 +479,24 @@ public class TestKitController : MonoBehaviour
         }
         if (isConnectedToAssembly == false)
         {
-            highHosePressure -= 5;
+            hosePressure -= 5;
         }
-        if (highHosePressure <= minPSID)
+        if (hosePressure <= minPSID)
         {
-            highHosePressure = minPSID;
+            hosePressure = minPSID;
         }
-        if (highHosePressure > maxPSID)
+        if (hosePressure > maxPSID)
         {
-            highHosePressure = maxPSID;
+            hosePressure = maxPSID;
         }
         /*
         Debug.Log(
-            $"highHosePressure = {highHosePressure}| GetPsidNeedleRotation() = {GetPsidNeedleRotation()}| closingPoint = {closingPoint}"
+            $"hosePressure = {hosePressure}| GetPsidNeedleRotation() = {GetPsidNeedleRotation()}| closingPoint = {closingPoint}"
         );
         */
         // lowHosePressure = LowHoseDetector.ParticlesInside;
         // bypasshosePressure = BypassHoseDetector.ParticlesInside;
-        //Debug.Log(highHosePressure);
+        //Debug.Log(hosePressure);
     }
 
     private float CaptureCheck1ClosingPoint(float psid)
@@ -487,5 +521,9 @@ public class TestKitController : MonoBehaviour
         PressureControl();
         OperateControls();
         NeedleControl();
+        // DigitalNeedleControl();
+        GetPsidDigitalNeedle();
     }
+
+
 }
