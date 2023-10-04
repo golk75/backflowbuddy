@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using com.zibra.liquid.Solver;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.Solver;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class FillButton : MonoBehaviour
@@ -12,10 +12,11 @@ public class FillButton : MonoBehaviour
     public GameObject Check1;
     public GameObject Check2;
     public GameObject ShutOff1;
+    public TestCockController testCockController;
     OperableComponentDescription ShutOff1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
-    public TestCockController testCockController;
+    public TestKitController testKitController;
 
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
@@ -33,7 +34,7 @@ public class FillButton : MonoBehaviour
     Vector3 supplyColliderTargetPos = new Vector3(-15f, 0, 0);
     Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
     Vector3 initSupplyVoidPos;
-
+    HoseSpring hoseSpring;
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -71,6 +72,8 @@ public class FillButton : MonoBehaviour
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
         }
+        // hoseSpring.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
+        // testKitController.DetachHoseBib();
     }
 
     // Update is called once per frame

@@ -115,7 +115,7 @@ public class HoseSpring : MonoBehaviour
         isAttaching = false;
     }
 
-    private void DropHoseBib(GameObject gameObject, OperableComponentDescription description)
+    public void DropHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         // isAttaching = false;
         if (isAttaching != true)
