@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using com.zibra.liquid.Manipulators;
-using System;
-using JetBrains.Annotations;
 
 public class TestKitController : MonoBehaviour
 {

@@ -74,8 +74,5 @@ public class FillButton : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Debug.Log($"{shutOffValveController.ShutOffValve1.transform.eulerAngles}");
-    }
+    void Update() { }
 }

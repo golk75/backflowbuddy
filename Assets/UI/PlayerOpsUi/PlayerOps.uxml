@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/fill-button.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#fill-button" />
     <ui:VisualElement name="SceneWrapper" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: flex-start; align-self: auto; justify-content: flex-start;">
-        <ui:VisualElement name="ButtonWrapper">
+        <ui:VisualElement name="ButtonWrapper" style="flex-direction: column-reverse; align-items: auto; justify-content: flex-start; align-self: auto;">
             <ui:Button display-tooltip-when-elided="false" name="MenuButton" class="menu-button" />
             <ui:Button display-tooltip-when-elided="true" name="FillButton" class="fill-button" />
         </ui:VisualElement>
