@@ -219,6 +219,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Gauge_bar" class="gauge-bar">
             <ui:VisualElement name="Gauge_progress_bar" class="progress-bar" />
+            <ui:VisualElement name="Gauge_progress_bar" class="progress-bar" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

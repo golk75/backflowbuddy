@@ -115,7 +115,8 @@ public class TestKitController : MonoBehaviour
     float needleVelRef = 0;
 
     //ui toolkit
-    private VisualElement _root;
+    public UIDocument _root;
+    //public VisualElement _root;
     private VisualElement _gaugeProgressBar;
     // private Length MinFillPos = Length.Percent(0);
     // private Length MaxFillPos = Length.Percent(100);
@@ -163,8 +164,8 @@ public class TestKitController : MonoBehaviour
         /// </summary>
         /// <typeparam name="UIDocument"></typeparam>
         /// <returns></returns>
-        _root = GetComponent<UIDocument>().rootVisualElement;
-        _gaugeProgressBar = _root.Q<VisualElement>("Gauge_progress_bar");
+       // _root = GetComponent<UIDocument>().rootVisualElement;
+        _gaugeProgressBar = _root.rootVisualElement.Q<VisualElement>("Gauge_progress_bar");
 
 
         currentPSID = 0;

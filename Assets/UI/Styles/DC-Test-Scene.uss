@@ -1,0 +1,50 @@
+.fill-button {
+}
+
+.menu-button {
+}
+
+.button {
+    flex-grow: 0;
+    align-items: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
+}
+
+.button:hover {
+}
+
+.button:active {
+}
+
+.button-wrapper {
+    align-items: auto;
+    justify-content: space-between;
+    flex-grow: 0;
+    align-self: center;
+    flex-direction: column-reverse;
+    width: auto;
+    height: 100%;
+}
+
+.scene-container {
+    align-items: auto;
+    align-self: auto;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.gauge-reading-wrapper {
+    align-items: auto;
+    align-self: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-grow: 0;
+    width: 80%;
+    height: 35%;
+}

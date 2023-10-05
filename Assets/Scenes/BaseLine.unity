@@ -4302,7 +4302,6 @@ GameObject:
   - component: {fileID: 1100468278}
   - component: {fileID: 1100468279}
   - component: {fileID: 1100468280}
-  - component: {fileID: 1100468281}
   m_Layer: 5
   m_Name: TestKitManager
   m_TagString: Untagged
@@ -4382,6 +4381,7 @@ MonoBehaviour:
   highHosePressure: 0
   TestCockList: []
   TestCockDetectorList: []
+  _root: {fileID: 1180445817}
 --- !u!114 &1100468280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4405,23 +4405,6 @@ MonoBehaviour:
   CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
     type: 2}
   hoseDetector: {fileID: 0}
---- !u!114 &1100468281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100468277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: e46d6d19c93aa44c6ab2a5e70272a2d8, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 27458618d10684dc6874f8e6d01ec91a,
-    type: 3}
-  m_SortingOrder: 0
 --- !u!114 &1103923068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8117723385236119829, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -4506,7 +4489,7 @@ GameObject:
   - component: {fileID: 1180445817}
   - component: {fileID: 1180445818}
   m_Layer: 0
-  m_Name: Menu_FillButton
+  m_Name: DC Scene Ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11713,7 +11696,7 @@ PrefabInstance:
     - target: {fileID: 4657695335378183965, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: testCockValveScaleFactor
-      value: 0.55
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4657695335378183965, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
@@ -12451,7 +12434,7 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock4MaxStr
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
