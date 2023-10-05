@@ -4488,6 +4488,7 @@ GameObject:
   - component: {fileID: 1180445816}
   - component: {fileID: 1180445817}
   - component: {fileID: 1180445818}
+  - component: {fileID: 1180445819}
   m_Layer: 0
   m_Name: DC Scene Ui
   m_TagString: Untagged
@@ -4551,6 +4552,18 @@ MonoBehaviour:
   check2HousingFF: {fileID: 225413029}
   supplyCollider: {fileID: 750122479}
   supplyVoid: {fileID: 1890183833}
+--- !u!114 &1180445819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180445815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c2fa9ba05e14125a6ecfe2f6f7fd46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1182569083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -9764,6 +9777,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3634401227976157786, guid: 4bd54eb7cb8314422beba476d6b75854,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4386202448236112821, guid: 4bd54eb7cb8314422beba476d6b75854,
         type: 3}
       propertyPath: m_RootOrder
@@ -9823,6 +9841,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EventSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561825230675949884, guid: 4bd54eb7cb8314422beba476d6b75854,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
