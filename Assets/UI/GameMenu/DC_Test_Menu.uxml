@@ -8,7 +8,4 @@
         </ui:VisualElement>
         <ui:Instance template="GaugeReading" name="GaugeReading" class="gauge-reading-wrapper" />
     </ui:VisualElement>
-    <ui:VisualElement name="ToolTip_container" class="tool-tip-container">
-        <ui:Label tabindex="-1" text="This is a tool tip!" display-tooltip-when-elided="true" name="ToolTip_txt" class="tool-tip-label" />
-    </ui:VisualElement>
 </ui:UXML>
