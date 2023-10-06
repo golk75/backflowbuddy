@@ -14,26 +14,36 @@ public class TooltipTrigger : MonoBehaviour
     public string content;
     public string header;
     public ToolTipScriptableObject fillButtonTooltip;
+    UIDocument root;
+    public List<ScriptableObject> tooltips;
+
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     private void Awake()
     {
-        var root = GetComponent<UIDocument>();
+        root = GetComponent<UIDocument>();
 
         fillButton = root.rootVisualElement.Q<Button>("FillButton");
         menuButton = root.rootVisualElement.Q<Button>("MenuButton");
         buttonWrapper = root.rootVisualElement.Q<VisualElement>("ButtonWrapper");
+        fillButton.AddManipulator(new UIManipulatorTest());
 
-
-        fillButton.RegisterCallback<MouseEnterEvent>(MouseIn);
-        fillButton.RegisterCallback<MouseOutEvent>(MouseOut);
+        // fillButton.RegisterCallback<MouseEnterEvent>(MouseIn);
+        // fillButton.RegisterCallback<MouseOutEvent>(MouseOut);
     }
 
     private void Start()
     {
-        Debug.Log(buttonWrapper.childCount);
+        buttonWrapper.Query(className: "button")
+                      .ForEach((element) =>
+                       {
+                           Debug.Log($"{element.name}");
+                           element.RegisterCallback<MouseEnterEvent>(MouseIn);
+                           element.RegisterCallback<MouseOutEvent>(MouseOut);
+                       });
+
     }
 
 
@@ -45,10 +55,17 @@ public class TooltipTrigger : MonoBehaviour
 
     private void MouseIn(MouseEnterEvent evt)
     {
+        buttonWrapper.Query(className: "button")
+                     .ForEach((element) =>
+                      {
+                          //   Debug.Log($"{element.GetType().sta}");
+
+                      });
 
         TooltipSystem.Show(fillButtonTooltip.content, fillButtonTooltip.header);
         // Debug.Log($"MouseIn");
     }
+
     void Update()
     {
 

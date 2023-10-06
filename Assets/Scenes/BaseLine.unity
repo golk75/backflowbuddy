@@ -4819,6 +4819,9 @@ MonoBehaviour:
   content: 
   header: 
   fillButtonTooltip: {fileID: 11400000, guid: 90b826c64d9554d6e883c6eefc65e228, type: 2}
+  tooltips:
+  - {fileID: 11400000, guid: 90b826c64d9554d6e883c6eefc65e228, type: 2}
+  - {fileID: 11400000, guid: a9bb92f206cd549108b8ec0f7f2b10d1, type: 2}
 --- !u!114 &1182569083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
