@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class TooltipTrigger : MonoBehaviour
 {
     private Button fillButton;
     private Button menuButton;
+    private VisualElement buttonWrapper;
     public string content;
     public string header;
     public ToolTipScriptableObject fillButtonTooltip;
@@ -18,9 +20,12 @@ public class TooltipTrigger : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement.Q<Button>("FillButton");
-        fillButton = root.Q<Button>("FillButton");
-        menuButton = root.Q<Button>("MenuButton");
+        var root = GetComponent<UIDocument>();
+
+        fillButton = root.rootVisualElement.Q<Button>("FillButton");
+        menuButton = root.rootVisualElement.Q<Button>("MenuButton");
+        buttonWrapper = root.rootVisualElement.Q<VisualElement>("ButtonWrapper");
+
 
         fillButton.RegisterCallback<MouseEnterEvent>(MouseIn);
         fillButton.RegisterCallback<MouseOutEvent>(MouseOut);
@@ -28,7 +33,7 @@ public class TooltipTrigger : MonoBehaviour
 
     private void Start()
     {
-
+        Debug.Log(buttonWrapper.childCount);
     }
 
 
@@ -44,6 +49,9 @@ public class TooltipTrigger : MonoBehaviour
         TooltipSystem.Show(fillButtonTooltip.content, fillButtonTooltip.header);
         // Debug.Log($"MouseIn");
     }
+    void Update()
+    {
 
+    }
 
 }
