@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="GaugeReading" src="project://database/Assets/UI/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
-    <Style src="project://database/Assets/UI/Styles/DC-Test-Scene.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DC-Test-Scene" />
+    <ui:Template name="GaugeReading" src="project://database/Assets/Resources/UI/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
+    <Style src="project://database/Assets/Resources/UI/Styles/DC-Test-Scene.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DC-Test-Scene" />
+    <Style src="project://database/Assets/Resources/GameUI/Styles/TooltipStyleSheet/tooltip.uss?fileID=7433441132597879392&amp;guid=72328e4cf734b4ba39e55c0b6a641365&amp;type=3#tooltip" />
     <ui:VisualElement name="SceneContainer" class="scene-container" style="justify-content: flex-start; flex-direction: row;">
         <ui:VisualElement name="ButtonWrapper" class="button-wrapper">
             <ui:Button name="FillButton" class="fill-button button" />
@@ -8,4 +9,5 @@
         </ui:VisualElement>
         <ui:Instance template="GaugeReading" name="GaugeReading" class="gauge-reading-wrapper" />
     </ui:VisualElement>
+    <ui:VisualElement name="tooltip" picking-mode="Ignore" delay="500" fade-time="15" />
 </ui:UXML>
