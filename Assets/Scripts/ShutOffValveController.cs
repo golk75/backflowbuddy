@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using com.zibra.liquid.Manipulators;
+using UnityEngine;
 
 public class ShutOffValveController : MonoBehaviour
 {
@@ -76,7 +76,7 @@ public class ShutOffValveController : MonoBehaviour
                     )
                     {
                         ShutOffValve1.transform.eulerAngles =
-                            playerController.OperableObjectRotation;
+                            playerController._operableObjectRotation;
                         shutOffValveScaleFactor = (
                             playerController.OperableObjectRotation.z * 0.1f
                         );

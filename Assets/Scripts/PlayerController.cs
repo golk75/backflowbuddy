@@ -198,10 +198,7 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
         }
-        isOperableObject = false;
-        operableObject = null;
-        primaryTouchStartPos = Vector3.zero;
-        touchStart = Vector3.zero;
+
     }
 
     private void Touch0Contact_performed(InputAction.CallbackContext context)
@@ -246,13 +243,13 @@ public class PlayerController : MonoBehaviour
 
     public void DetectObjectWithRaycast()
     {
-        int layerMaskInt = 1 << 8;
+        // int layerMaskInt = 1 << 8;
         // layerMaskInt = ~layerMaskInt;
         LayerMask layerMask = LayerMask.GetMask("OperableObject");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D ray2DHit = Physics2D.Raycast(primaryTouchStartPos, Vector2.zero);
         RaycastHit hit;
-        RaycastHit hit2;
+        // RaycastHit hit2;
 
         //current distance to device is about 60-70
         //Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
@@ -308,20 +305,27 @@ public class PlayerController : MonoBehaviour
                     == OperableComponentDescription.PartsType.TestCock
             )
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    _operableObjectRotation.z +=
-                        (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                        * deviceRotSensitivity
-                        * -1;
-                }
-                else
-                {
-                    _operableObjectRotation.z +=
-                        (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                        * deviceRotSensitivity
-                        * -1;
-                }
+                // may come back to this after building out to mobile and testing on actual phone/ tablet
+                // if (Input.GetMouseButtonDown(0))
+                // {
+                //     _operableObjectRotation.z +=
+                //         (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                //         * deviceRotSensitivity
+                //         * -1;
+                // }
+                // else
+                // {
+                //     _operableObjectRotation.z +=
+                //         (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                //         * deviceRotSensitivity
+                //         * -1;
+                // }
+
+                _operableObjectRotation.z +=
+                    (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                    * deviceRotSensitivity
+                    * -1;
+                Debug.Log($"_operableObjectRotation.z = {_operableObjectRotation.z}");
                 //rotation clamp for parts that rotate around center mass (i.e. test cock valves)
                 _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
             }

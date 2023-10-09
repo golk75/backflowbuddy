@@ -43,8 +43,8 @@ public class HoseDetector : MonoBehaviour
 
     IEnumerator AttachInitiate()
     {
-        Debug.Log($"waiting for 0.5 sec.");
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(0.5f);
         if (isConnected == true)
         {
             Debug.Log($"wait completed");

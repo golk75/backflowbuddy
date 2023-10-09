@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 64299823}
   - component: {fileID: 64299822}
   - component: {fileID: 64299824}
+  - component: {fileID: 64299825}
   m_Layer: 5
   m_Name: GameUi
   m_TagString: Untagged
@@ -390,6 +391,7 @@ MonoBehaviour:
   playerController: {fileID: 1446278365}
   shutOffValveController: {fileID: 2051383271}
   testKitController: {fileID: 1100468279}
+  SO1: {fileID: 467913331}
   check1HousingFF: {fileID: 645251561}
   check2HousingFF: {fileID: 225413029}
   supplyCollider: {fileID: 750122479}
@@ -408,10 +410,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 
   header: head
+  playerController: {fileID: 1446278365}
+  SO1: {fileID: 467913331}
   fillButtonTooltip: {fileID: 11400000, guid: 90b826c64d9554d6e883c6eefc65e228, type: 2}
   menuButtonTooltip: {fileID: 11400000, guid: a9bb92f206cd549108b8ec0f7f2b10d1, type: 2}
-  tooltips:
-  - {fileID: 11400000, guid: 90b826c64d9554d6e883c6eefc65e228, type: 2}
+  resetButtonTooltip: {fileID: 11400000, guid: 8b3bc1313ec644f6c99af2ee34f6fe0f, type: 2}
+--- !u!114 &64299825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64299817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c2350ddadab4c8faab72c6f6ded439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  liquid: {fileID: 1182569083}
+  Check1: {fileID: 1027411676}
+  Check2: {fileID: 1807207375}
+  ShutOff1: {fileID: 467913331}
+  testCockController: {fileID: 1506706878}
+  playerController: {fileID: 1446278365}
+  shutOffValveController: {fileID: 2051383271}
+  testKitController: {fileID: 1100468279}
+  check1HousingFF: {fileID: 645251561}
+  check2HousingFF: {fileID: 225413029}
+  supplyCollider: {fileID: 750122479}
+  supplyVoid: {fileID: 1890183833}
 --- !u!114 &86714469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4895190393130077630, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -2493,7 +2520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &525685596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6128,7 +6155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1577289243
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9841,6 +9868,11 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 7975887091541937799, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: orthographic size
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8069590082364867965, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_BoxSize.x
@@ -11228,7 +11260,12 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock4MaxStr
-      value: 6
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock4MinStr
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}

@@ -12,16 +12,20 @@ public class TooltipTrigger : MonoBehaviour
 {
     private Button fillButton;
     private Button menuButton;
+    private Button resetButton;
     private VisualElement buttonWrapper;
     public string content;
     public string header;
     public VisualElement tooltip;
+    public PlayerController playerController;
+    public GameObject SO1;
 
     public ToolTipScriptableObject fillButtonTooltip;
     public ToolTipScriptableObject menuButtonTooltip;
+    public ToolTipScriptableObject resetButtonTooltip;
     UIDocument root;
     // public List<ScriptableObject> tooltips;
-
+    OperableComponentDescription ShutOff1OperableDescription;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -33,6 +37,7 @@ public class TooltipTrigger : MonoBehaviour
 
         fillButton = root.rootVisualElement.Q<Button>("FillButton");
         menuButton = root.rootVisualElement.Q<Button>("MenuButton");
+        resetButton = root.rootVisualElement.Q<Button>("ResetButton");
         buttonWrapper = root.rootVisualElement.Q<VisualElement>("ButtonWrapper");
         tooltip = root.rootVisualElement.Q<VisualElement>("Tooltip");
 
@@ -42,7 +47,16 @@ public class TooltipTrigger : MonoBehaviour
         fillButton.RegisterCallback<MouseOutEvent>(MouseOut);
         menuButton.RegisterCallback<MouseEnterEvent>(MouseIn);
         menuButton.RegisterCallback<MouseOutEvent>(MouseOut);
+        resetButton.RegisterCallback<MouseEnterEvent>(MouseIn);
+        resetButton.RegisterCallback<MouseOutEvent>(MouseOut);
+
+
+        // fillButton.RegisterCallback<MouseDownEvent>(MouseDown);
+
     }
+
+
+
     public void OnPointerExit(PointerEventData eventData)
     {
         TooltipSystem.Hide();
@@ -60,7 +74,7 @@ public class TooltipTrigger : MonoBehaviour
     }
     private void Start()
     {
-
+        ShutOff1OperableDescription = SO1.GetComponent<OperableComponentDescription>();
 
     }
 
@@ -68,6 +82,7 @@ public class TooltipTrigger : MonoBehaviour
     private void MouseOut(MouseOutEvent evt)
     {
         Debug.Log($"MouseEvent Out");
+        playerController.operableObject = null;
         TooltipSystem.Hide();
     }
 
@@ -76,15 +91,19 @@ public class TooltipTrigger : MonoBehaviour
         if (evt.target == fillButton)
         {
             TooltipSystem.Show(fillButtonTooltip.content, fillButtonTooltip.header);
+
         }
         else if (evt.target == menuButton)
         {
             TooltipSystem.Show(menuButtonTooltip.content, menuButtonTooltip.header);
         }
+        else if (evt.target == resetButton)
+        {
+            TooltipSystem.Show(resetButtonTooltip.content, resetButtonTooltip.header);
+        }
 
         // TooltipSystem.Show(content, header);
-        Debug.Log($"MouseEvent In");
-        // Debug.Log($"{evt.target == fillButton}");
+        Debug.Log($"{evt.target == resetButton}");
     }
 
     void Update()

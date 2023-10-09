@@ -18,7 +18,7 @@ public class FillButton : MonoBehaviour
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public TestKitController testKitController;
-
+    public GameObject SO1;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
     float initShutOffRot;
@@ -66,7 +66,10 @@ public class FillButton : MonoBehaviour
         playerController.operableObject = ShutOff1;
         playerController.operableComponentDescription = ShutOff1OperableDescription;
 
-        playerController._operableObjectRotation.y = 180;
+
+
+        playerController._operableObjectRotation.z = 0;
+        // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
         foreach (GameObject testCock in testCockController.TestCockList)
         {

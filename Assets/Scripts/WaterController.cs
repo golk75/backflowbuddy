@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using com.zibra.liquid.Manipulators;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -144,7 +142,10 @@ public class WaterController : MonoBehaviour
     public float testCock1MaxStr;
     public float testCock2MaxStr;
     public float testCock3MaxStr;
+    public float testCock4MinStr;
     public float testCock4MaxStr;
+    public float rnd;
+
 
     [SerializeField]
     bool isAttachedToGauge;
@@ -233,6 +234,7 @@ public class WaterController : MonoBehaviour
     )
     {
         isAttachedToGauge = true;
+        rnd = Random.Range(testCock4MinStr, testCock4MaxStr);
     }
 
     private void DetectHoseDetachment(
@@ -264,7 +266,7 @@ public class WaterController : MonoBehaviour
         if (testCockController.isTestCock1Open && TestCockHoseDetect1.isConnected == false)
         {
             TestCock1Emitter.enabled = true;
-            //TestCock1Emitter.VolumePerSimTime = 2;
+
         }
         else
         {
@@ -337,16 +339,21 @@ public class WaterController : MonoBehaviour
             && TestCockHoseDetect4.isConnected == false
         )
         {
-            Debug.Log($" testCockController.isTestCock4Open");
+            // Debug.Log($" testCockController.isTestCock4Open");
             if (check2Detector.ParticlesInside > 3000)
             {
-                Debug.Log($"check2Detector.ParticlesInside > 3000");
+                // System.Random rnd = new System.Random();
+                // int randomStrVal = rnd.Next(2, 6);
+
+                // Debug.Log($"check2Detector.ParticlesInside > 3000");
+
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
-                    Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
+                    Mathf.Clamp(check2Detector.ParticlesInside, 0, rnd),
                     ref testCockFF4Ref.x,
                     Void_check2ScaleUpSpeed
                 );
+
             }
             else
             {
