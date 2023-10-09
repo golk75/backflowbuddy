@@ -69,6 +69,7 @@ public class FillButton : MonoBehaviour
 
 
         playerController._operableObjectRotation.z = 0;
+        playerController._operableObjectRotation.y = 180;
         // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
         foreach (GameObject testCock in testCockController.TestCockList)
