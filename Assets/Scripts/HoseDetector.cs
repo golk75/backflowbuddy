@@ -14,7 +14,10 @@ public class HoseDetector : MonoBehaviour
     public GameObject Hose;
     public PlayerController playerController;
     public OperableComponentDescription operableComponentDescription;
+    void OnEnable()
+    {
 
+    }
     public void OnTriggerEnter(Collider other)
     {
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();

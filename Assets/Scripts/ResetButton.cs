@@ -13,29 +13,24 @@ public class ResetButton : MonoBehaviour
     public GameObject Check1;
     public GameObject Check2;
     public GameObject ShutOff1;
+    public GameObject Tc1;
     public TestCockController testCockController;
     OperableComponentDescription ShutOff1OperableDescription;
+    OperableComponentDescription Tc1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public TestKitController testKitController;
 
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
-    float initShutOffRot;
 
-    private float checkffVelref;
 
-    [SerializeField]
-    ZibraLiquidCollider supplyCollider;
 
-    [SerializeField]
-    ZibraLiquidVoid supplyVoid;
 
-    Vector3 initSupplyColliderPos;
-    Vector3 supplyColliderTargetPos = new Vector3(-15f, 0, 0);
-    Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
-    Vector3 initSupplyVoidPos;
-    HoseSpring hoseSpring;
+
+    public List<GameObject> HoseList;
+
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -49,6 +44,8 @@ public class ResetButton : MonoBehaviour
         resetButton.clicked += ResetDevice;
 
         ShutOff1OperableDescription = ShutOff1.GetComponent<OperableComponentDescription>();
+        Tc1OperableDescription = Tc1.GetComponent<OperableComponentDescription>();
+
     }
     //SO OPEN -->
     // pos = Vector3(-0.0244999994,-0.0284000002,-0.0217000004)
@@ -73,7 +70,25 @@ public class ResetButton : MonoBehaviour
         playerController.operableObject = ShutOff1;
         playerController.operableComponentDescription = ShutOff1OperableDescription;
 
-        playerController._operableObjectRotation.z = 90;
+
+        playerController._operableObjectRotation.z = 0;
+        playerController._operableObjectRotation.y = 180;
+
+
+        playerController.operableObject = Tc1;
+        playerController.operableComponentDescription = Tc1OperableDescription;
+
+        playerController._operableObjectRotation.z = 0;
+        playerController._operableObjectRotation.y = 180;
+
+
+
+        //remove attached hoses
+        for (int i = 0; i < HoseList.Count; i++)
+        {
+            Actions.onHoseBibDrop?.Invoke(HoseList[i], HoseList[i].GetComponent<OperableComponentDescription>());
+        }
+        // Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
 
         foreach (GameObject testCock in testCockController.TestCockList)
         {

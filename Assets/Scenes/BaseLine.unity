@@ -263,13 +263,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39476478}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hoseSpring: {fileID: 1100468280}
-  testCock: {fileID: 1940697353}
+  testCock: {fileID: 2038795515}
   isConnected: 0
   Hose: {fileID: 0}
   playerController: {fileID: 1446278365}
@@ -431,14 +431,15 @@ MonoBehaviour:
   Check1: {fileID: 1027411676}
   Check2: {fileID: 1807207375}
   ShutOff1: {fileID: 467913331}
+  Tc1: {fileID: 1696467892}
   testCockController: {fileID: 1506706878}
   playerController: {fileID: 1446278365}
   shutOffValveController: {fileID: 2051383271}
   testKitController: {fileID: 1100468279}
   check1HousingFF: {fileID: 645251561}
   check2HousingFF: {fileID: 225413029}
-  supplyCollider: {fileID: 750122479}
-  supplyVoid: {fileID: 1890183833}
+  HoseList:
+  - {fileID: 570482151}
 --- !u!114 &86714469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4895190393130077630, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -2029,24 +2030,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 1255913095}
---- !u!1 &365308010 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4709326067593583075, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &365308018 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6910525192780690130, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365308010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &365845778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5663108344161921695, guid: 567375a3ec9b74af89c2c8cccd913bad,
@@ -4394,24 +4377,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &1005029042 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 114789970366753102, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1005029050 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1719210017352182955, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005029042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1012737544 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4258411891960909470, guid: 567375a3ec9b74af89c2c8cccd913bad,
@@ -4718,10 +4683,10 @@ MonoBehaviour:
   HighHoseDetector: {fileID: 0}
   BypassHoseDetector: {fileID: 0}
   Zone1Detector: {fileID: 1173856535}
-  TestCock1: {fileID: 1940697353}
-  TestCock2: {fileID: 1005029042}
-  TestCock3: {fileID: 1700393506}
-  TestCock4: {fileID: 365308010}
+  TestCock1: {fileID: 2038795515}
+  TestCock2: {fileID: 524974314}
+  TestCock3: {fileID: 1975507136}
+  TestCock4: {fileID: 1696467892}
   connectedTestCock: {fileID: 0}
   TestCock2Detector: {fileID: 177506921}
   currentPSID: 0
@@ -4761,6 +4726,7 @@ MonoBehaviour:
   BypassHoseConfigJointConnectedBody: {fileID: 666397479}
   CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
     type: 2}
+  isAttaching: 0
   hoseDetector: {fileID: 0}
 --- !u!114 &1103923068 stripped
 MonoBehaviour:
@@ -5415,13 +5381,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268881196}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hoseSpring: {fileID: 1100468280}
-  testCock: {fileID: 1700393506}
+  testCock: {fileID: 1975507136}
   isConnected: 0
   Hose: {fileID: 0}
   playerController: {fileID: 1446278365}
@@ -6423,13 +6389,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620704104}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hoseSpring: {fileID: 1100468280}
-  testCock: {fileID: 1005029042}
+  testCock: {fileID: 1904466805}
   isConnected: 0
   Hose: {fileID: 0}
   playerController: {fileID: 1446278365}
@@ -6581,7 +6547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 372366014}
   testCockVoid: {fileID: 55441783}
-  description: {fileID: 365308018}
+  description: {fileID: 0}
 --- !u!114 &1696467895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6736,24 +6702,6 @@ MonoBehaviour:
   AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
   AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
   ObjectVersion: 2
---- !u!1 &1700393506 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8834416751719053450, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1700393514 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 570767255783885257, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700393506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1709113021 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8218837671113655984, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -7562,7 +7510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 86714469}
   testCockVoid: {fileID: 1662844177}
-  description: {fileID: 1005029050}
+  description: {fileID: 0}
 --- !u!114 &1904466808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7766,24 +7714,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &1940697353 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5365693155376487894, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1940697371 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7714264138499888016, guid: 5cb0acac16e984deab4d687da8d483d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859429864286210997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940697353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1943325687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8988,7 +8918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 715421594}
   testCockVoid: {fileID: 1587235364}
-  description: {fileID: 1700393514}
+  description: {fileID: 0}
 --- !u!114 &1975507139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9213,7 +9143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 1485278144}
   testCockVoid: {fileID: 1520184829}
-  description: {fileID: 1940697371}
+  description: {fileID: 0}
 --- !u!114 &2038795518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9495,13 +9425,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123083317}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9e0742b895574430a8ac0091a312310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hoseSpring: {fileID: 1100468280}
-  testCock: {fileID: 365308010}
+  testCock: {fileID: 1696467892}
   isConnected: 0
   Hose: {fileID: 0}
   playerController: {fileID: 1446278365}
@@ -10938,7 +10868,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6848170849133374933, guid: 5cb0acac16e984deab4d687da8d483d5, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4709326067593583075, guid: 5cb0acac16e984deab4d687da8d483d5, type: 3}
+    - {fileID: 114789970366753102, guid: 5cb0acac16e984deab4d687da8d483d5, type: 3}
+    - {fileID: 8834416751719053450, guid: 5cb0acac16e984deab4d687da8d483d5, type: 3}
+    - {fileID: 5365693155376487894, guid: 5cb0acac16e984deab4d687da8d483d5, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1015636773445691800, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
@@ -11135,22 +11069,22 @@ PrefabInstance:
         type: 3}
       propertyPath: TestCock1
       value: 
-      objectReference: {fileID: 1940697353}
+      objectReference: {fileID: 0}
     - target: {fileID: 5045483125192129565, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: TestCock2
       value: 
-      objectReference: {fileID: 1005029042}
+      objectReference: {fileID: 0}
     - target: {fileID: 5045483125192129565, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: TestCock3
       value: 
-      objectReference: {fileID: 1700393506}
+      objectReference: {fileID: 0}
     - target: {fileID: 5045483125192129565, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: TestCock4
       value: 
-      objectReference: {fileID: 365308010}
+      objectReference: {fileID: 0}
     - target: {fileID: 5045483125192129565, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: check1Spring

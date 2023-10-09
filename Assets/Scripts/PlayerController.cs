@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
                     (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
                     * deviceRotSensitivity
                     * -1;
-                Debug.Log($"_operableObjectRotation.z = {_operableObjectRotation.z}");
+
                 //rotation clamp for parts that rotate around center mass (i.e. test cock valves)
                 _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
             }

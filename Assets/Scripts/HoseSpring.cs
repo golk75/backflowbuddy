@@ -28,7 +28,7 @@ public class HoseSpring : MonoBehaviour
     public Preset CongfigurableJointPreset;
     bool pointerDown;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
-    private bool isAttaching;
+    public bool isAttaching;
     Vector3 testCockPosition;
     Vector3 testCockTransform;
     public HoseDetector hoseDetector;
@@ -84,6 +84,7 @@ public class HoseSpring : MonoBehaviour
                 break;
         }
         currentHoseBibObj.transform.position = testCock.transform.position;
+
         Debug.Log($"connection attempt");
     }
 
@@ -121,7 +122,11 @@ public class HoseSpring : MonoBehaviour
         // isAttaching = false;
         if (isAttaching != true)
         {
-            configurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
+            if (currentHoseBibObj)
+            {
+                configurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
+            }
+            // configurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
             CongfigurableJointPreset.ApplyTo(configurableJoint);
             configurableJoint.autoConfigureConnectedAnchor = false;
             switch (description.componentId)
@@ -144,7 +149,8 @@ public class HoseSpring : MonoBehaviour
             }
         }
         isAttaching = false;
-        HoseRb.isKinematic = false;
+        if (HoseRb != null)
+            HoseRb.isKinematic = false;
         //Debug.Log($"hose dropped");
     }
 
