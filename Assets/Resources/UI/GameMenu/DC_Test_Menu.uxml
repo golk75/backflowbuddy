@@ -7,7 +7,11 @@
             <ui:Button name="FillButton" class="fill-button button" />
             <ui:Button name="MenuButton" class="menu-button button" />
         </ui:VisualElement>
-        <ui:Instance template="GaugeReading" name="GaugeReading" class="gauge-reading-wrapper" />
+        <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper">
+            <AttributeOverrides element-name="Container" picking-mode="Ignore" />
+            <AttributeOverrides element-name="Gauge_tick_container" picking-mode="Ignore" />
+            <AttributeOverrides element-name="Gauge_bar" picking-mode="Ignore" />
+            <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
+        </ui:Instance>
     </ui:VisualElement>
-    <ui:VisualElement name="tooltip" picking-mode="Ignore" delay="500" fade-time="15" />
 </ui:UXML>

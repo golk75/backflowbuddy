@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+
 [ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
 {
@@ -11,12 +14,15 @@ public class Tooltip : MonoBehaviour
     public TextMeshProUGUI contentField;
     public LayoutElement layoutElement;
     public int characterWrapLimit;
+    public RectTransform rectTransform;
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        rectTransform = GetComponent<RectTransform>();
     }
+
     public void SetText(string content, string header = "")
     {
         if (string.IsNullOrEmpty(header))
@@ -40,5 +46,12 @@ public class Tooltip : MonoBehaviour
             // layoutElement.enabled = (headerCharacterLength > characterWrapLimit || contentCharacterLength > characterWrapLimit) ? true : false;
             layoutElement.enabled = headerField.preferredWidth > layoutElement.preferredWidth || contentField.preferredWidth > layoutElement.preferredWidth;
         }
+
+        Vector2 mousePos = Input.mousePosition;
+        transform.position = mousePos;
+
+        float pivotX = mousePos.x / Screen.width;
+        float pivotY = mousePos.y / Screen.height;
+        rectTransform.pivot = new Vector2(pivotX - 0.15f, pivotY);
     }
 }
