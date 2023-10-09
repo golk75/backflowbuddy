@@ -19,19 +19,20 @@ public class HoseDetector : MonoBehaviour
     {
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
         Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
-        Actions.onHoseContact?.Invoke(gameObject, operableComponentDescription);
+
         if (playerController.primaryTouchPerformed)
         {
             onAttachAttempt = StartCoroutine(AttachInitiate());
             Debug.Log($"detector= {name}");
         }
         isConnected = true;
+        // Debug.Log($"isConnected = {isConnected}");
     }
 
     //
     private void OnTriggerStay(Collider other)
     {
-        // Debug.Log($"isConnected = {isConnected}");
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -44,12 +45,15 @@ public class HoseDetector : MonoBehaviour
     IEnumerator AttachInitiate()
     {
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.75f);
         if (isConnected == true)
         {
+
             Debug.Log($"wait completed");
             Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
         }
+
+
     }
 
     void Update()

@@ -38,7 +38,7 @@ public class HoseSpring : MonoBehaviour
         Actions.onHoseBibGrab += GrabHoseBib;
         Actions.onHoseBibDrop += DropHoseBib;
         Actions.onHoseBibConnect += AttachHoseBib;
-        Actions.onHoseContact += CheckTestCockContact;
+
     }
 
     public void OnDisable()
@@ -46,7 +46,7 @@ public class HoseSpring : MonoBehaviour
         Actions.onHoseBibGrab -= GrabHoseBib;
         Actions.onHoseBibDrop -= DropHoseBib;
         Actions.onHoseBibConnect -= AttachHoseBib;
-        Actions.onHoseContact += CheckTestCockContact;
+
     }
 
     /// <summary>
@@ -89,6 +89,7 @@ public class HoseSpring : MonoBehaviour
 
     public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
+        isAttaching = false;
         Debug.Log($"grabbing hose..");
         switch (description.componentId)
         {
@@ -112,7 +113,7 @@ public class HoseSpring : MonoBehaviour
         HoseRb.isKinematic = true;
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
 
-        isAttaching = false;
+
     }
 
     public void DropHoseBib(GameObject gameObject, OperableComponentDescription description)
