@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using Unity.AI.Navigation.Editor.Converter;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class TooltipTrigger : MonoBehaviour
-// , IPointerEnterHandler, IPointerExitHandler
+
 {
     private Button fillButton;
     private Button menuButton;
@@ -26,7 +29,11 @@ public class TooltipTrigger : MonoBehaviour
     UIDocument root;
     // public List<ScriptableObject> tooltips;
     OperableComponentDescription ShutOff1OperableDescription;
+    [SerializeField]
 
+    UnityEngine.UIElements.Cursor cursor_default;
+    UnityEngine.UIElements.Cursor cursor_grab;
+    VisualElement sceneContainer;
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -40,7 +47,17 @@ public class TooltipTrigger : MonoBehaviour
         resetButton = root.rootVisualElement.Q<Button>("ResetButton");
         buttonWrapper = root.rootVisualElement.Q<VisualElement>("ButtonWrapper");
         tooltip = root.rootVisualElement.Q<VisualElement>("Tooltip");
-
+        sceneContainer = root.rootVisualElement.Q<VisualElement>("SceneContainer");
+        cursor_grab = new()
+        {
+            texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-34"),
+            hotspot = new Vector2(10, 10)
+        };
+        cursor_default = new()
+        {
+            texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-32"),
+            hotspot = new Vector2(10, 10)
+        };
 
 
         fillButton.RegisterCallback<MouseEnterEvent>(MouseIn);
@@ -50,17 +67,31 @@ public class TooltipTrigger : MonoBehaviour
         resetButton.RegisterCallback<MouseEnterEvent>(MouseIn);
         resetButton.RegisterCallback<MouseOutEvent>(MouseOut);
 
+        // resetButton.clicked += MouseDown;
+        resetButton.RegisterCallback<MouseDownEvent>(MouseDown);
+        sceneContainer.RegisterCallback<MouseDownEvent>(MouseDown);
+        sceneContainer.RegisterCallback<MouseUpEvent>(MouseUp);
 
-        // fillButton.RegisterCallback<MouseDownEvent>(MouseDown);
 
     }
 
+    private void MouseUp(MouseUpEvent evt)
+    {
+        sceneContainer.style.cursor = new StyleCursor(cursor_default);
+    }
 
+    private void MouseDown(MouseDownEvent evt)
+    {
+
+        sceneContainer.style.cursor = new StyleCursor(cursor_grab);
+
+
+    }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         TooltipSystem.Hide();
-        Debug.Log($"IPOINT OUT");
+
 
     }
 
@@ -70,7 +101,7 @@ public class TooltipTrigger : MonoBehaviour
 
         TooltipSystem.Show(content, header);
         tooltip.transform.position = Input.mousePosition;
-        Debug.Log($"IPOINT IN");
+
     }
     private void Start()
     {

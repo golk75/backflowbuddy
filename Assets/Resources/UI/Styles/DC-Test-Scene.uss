@@ -45,6 +45,7 @@
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
     -unity-background-image-tint-color: rgb(255, 255, 255);
+    
 }
 
 .button-wrapper {
@@ -55,6 +56,7 @@
     flex-direction: row;
     width: auto;
     height: 100%;
+    cursor: resource('UI/Textures/icons8-hand-32');
 }
 
 .scene-container {
@@ -64,6 +66,7 @@
     flex-grow: 1;
     width: 100%;
     height: 100%;
+    cursor: resource('UI/Textures/icons8-hand-32');
 }
 
 .gauge-reading-wrapper {
