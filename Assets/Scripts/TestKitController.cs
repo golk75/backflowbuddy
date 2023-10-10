@@ -341,6 +341,7 @@ public class TestKitController : MonoBehaviour
                 );
                 // Debug.Log($"test cock #1 is connected & open");
             }
+
             else if (
                 TestCockList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
