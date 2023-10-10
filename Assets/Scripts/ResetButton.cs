@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,18 +24,47 @@ public class ResetButton : MonoBehaviour
 
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
-
-
-
-
+    [SerializeField]
+    List<ResetableObject> objectsToReset;
+    ResetableObject resetableObject;
+    ZibraLiquid resetVoid;
 
     public List<GameObject> HoseList;
 
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    private void Awake() { }
+    [System.Serializable]
+    public class ResetableObject
+    {
+
+
+        public GameObject resetThis;
+        public Quaternion initRotation;
+
+
+
+    }
+    private void Awake()
+    {
+        for (int i = 0; i < objectsToReset.Count; i++)
+        {
+            SetResetables(objectsToReset[i]);
+        }
+
+    }
+    private void SetResetables(ResetableObject resetableObject)
+    {
+        this.resetableObject = resetableObject;
+        resetableObject.initRotation = resetableObject.resetThis.transform.rotation;
+
+
+    }
+    private void ResetTransforms()
+    {
+        foreach (ResetableObject item in objectsToReset)
+        {
+            item.resetThis.transform.rotation = item.initRotation;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -58,29 +88,32 @@ public class ResetButton : MonoBehaviour
     // Quaternion rot = Quaternion(0.5,-0.5,0.5,0.5)
     public void ResetDevice()
     {
-        liquid.ReleaseSimulation();
 
+        // liquid.enabled = false;
+        liquid.ReleaseSimulation();
         liquid.enabled = false;
+
+
+
 
 
         Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
         Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
 
         //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 180, 360);
-        playerController.operableObject = ShutOff1;
-        playerController.operableComponentDescription = ShutOff1OperableDescription;
+
+        // playerController.operableComponentDescription = ShutOff1OperableDescription;
+
+        ResetTransforms();
+        // playerController._operableObjectRotation.z = 90;
+        // playerController._operableObjectRotation.y = 180;
 
 
-        playerController._operableObjectRotation.z = 0;
-        playerController._operableObjectRotation.y = 180;
+        // playerController.operableObject = Tc1;
+        // playerController.operableComponentDescription = Tc1OperableDescription;
 
-
-        playerController.operableObject = Tc1;
-        playerController.operableComponentDescription = Tc1OperableDescription;
-
-        playerController._operableObjectRotation.z = 0;
-        playerController._operableObjectRotation.y = 180;
-
+        // playerController._operableObjectRotation.z = 0;
+        // playerController._operableObjectRotation.y = 180;
 
 
         //remove attached hoses
@@ -88,13 +121,16 @@ public class ResetButton : MonoBehaviour
         {
             Actions.onHoseBibDrop?.Invoke(HoseList[i], HoseList[i].GetComponent<OperableComponentDescription>());
         }
+
+
+
         // Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
 
-        foreach (GameObject testCock in testCockController.TestCockList)
-        {
-            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
-        }
+        // foreach (GameObject testCock in testCockController.TestCockList)
+        // {
+        //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+        //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+        // }
         // hoseSpring.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
         // testKitController.DetachHoseBib();
     }

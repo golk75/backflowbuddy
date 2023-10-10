@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.zibra.liquid;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.Solver;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ShutOffValveController : MonoBehaviour
 {
     private PlayerController playerController;
     OperableComponentDescription operableComponentDescription;
-
+    public ZibraLiquid liquid;
     [SerializeField]
     GameObject playerManager;
 
@@ -75,6 +78,15 @@ public class ShutOffValveController : MonoBehaviour
                         == OperableComponentDescription.ComponentId.ShutOffValve1
                     )
                     {
+                        if (!liquid.Initialized)
+                        {
+                            liquid.InitialState = ZibraLiquid.InitialStateType.NoParticles;
+                            liquid.InitializeSimulation();
+                            if (!liquid.isActiveAndEnabled)
+                            {
+                                liquid.enabled = true;
+                            }
+                        }
                         ShutOffValve1.transform.eulerAngles =
                             playerController._operableObjectRotation;
                         shutOffValveScaleFactor = (

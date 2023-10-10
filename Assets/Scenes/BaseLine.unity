@@ -440,6 +440,19 @@ MonoBehaviour:
   testKitController: {fileID: 1100468279}
   check1HousingFF: {fileID: 645251561}
   check2HousingFF: {fileID: 225413029}
+  objectsToReset:
+  - resetThis: {fileID: 467913331}
+    initRotation: {x: 0, y: 0, z: 0, w: 0}
+  - resetThis: {fileID: 524974314}
+    initRotation: {x: 0, y: 0, z: 0, w: 0}
+  - resetThis: {fileID: 2038795515}
+    initRotation: {x: 0, y: 0, z: 0, w: 0}
+  - resetThis: {fileID: 1904466805}
+    initRotation: {x: 0, y: 0, z: 0, w: 0}
+  - resetThis: {fileID: 1975507136}
+    initRotation: {x: 0, y: 0, z: 0, w: 0}
+  - resetThis: {fileID: 1696467892}
+    initRotation: {x: 0, y: 0, z: 0, w: 0}
   HoseList:
   - {fileID: 570482151}
 --- !u!114 &64299826
@@ -11213,6 +11226,11 @@ PrefabInstance:
         type: 3}
       propertyPath: testCock1MaxStr
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock3MaxStr
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
