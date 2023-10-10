@@ -4,9 +4,9 @@
     <Style src="project://database/Assets/Resources/GameUI/Styles/TooltipStyleSheet/tooltip.uss?fileID=7433441132597879392&amp;guid=72328e4cf734b4ba39e55c0b6a641365&amp;type=3#tooltip" />
     <ui:VisualElement name="SceneContainer" class="scene-container" style="justify-content: flex-start; flex-direction: row;">
         <ui:VisualElement name="ButtonWrapper" class="button-wrapper">
-            <ui:Button name="FillButton" focusable="false" class="fill-button button" />
             <ui:Button name="MenuButton" focusable="false" class="menu-button button" />
             <ui:Button display-tooltip-when-elided="true" name="ResetButton" focusable="false" class="button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_19_previoust2_.png?fileID=2800000&amp;guid=ce5dfcf0b45530443bd2fbf805c38d52&amp;type=3#T_19_previoust2_&apos;);" />
+            <ui:Button name="FillButton" focusable="false" class="fill-button button" />
         </ui:VisualElement>
         <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper">
             <AttributeOverrides element-name="Container" picking-mode="Ignore" />
