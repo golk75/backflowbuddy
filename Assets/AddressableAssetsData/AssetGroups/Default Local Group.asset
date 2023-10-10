@@ -16,7 +16,17 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 1f40d37ae33904d05ab30dc9cf4f08c0
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 5988a2020badc834c96521b52b6a08f5
+    m_Address: Assets/Clean Vector Icons/T_1_cursor_al.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b669239a8c1b6ac4080aa3be64aefa82
+    m_Address: Assets/Cursor/Cursor_Settings.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ee3b66ac156c04a4585a8a97425a2bd3, type: 2}
   m_SchemaSet:
