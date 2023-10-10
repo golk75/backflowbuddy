@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 64299822}
   - component: {fileID: 64299824}
   - component: {fileID: 64299825}
+  - component: {fileID: 64299826}
   m_Layer: 5
   m_Name: GameUi
   m_TagString: Untagged
@@ -440,6 +441,20 @@ MonoBehaviour:
   check2HousingFF: {fileID: 225413029}
   HoseList:
   - {fileID: 570482151}
+--- !u!114 &64299826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64299817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9743b3cfaf66943609e8b5e4aabd4b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursorTexture: {fileID: 0}
+  clickedCursorTexture: {fileID: 0}
 --- !u!114 &86714469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4895190393130077630, guid: 5cb0acac16e984deab4d687da8d483d5,

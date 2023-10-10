@@ -26,6 +26,7 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
+    cursor: resource('UI/Textures/icons8-hand-33');
 }
 
 .button:hover {
