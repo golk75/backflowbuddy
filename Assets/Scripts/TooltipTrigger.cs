@@ -30,7 +30,7 @@ public class TooltipTrigger : MonoBehaviour
     // public List<ScriptableObject> tooltips;
     OperableComponentDescription ShutOff1OperableDescription;
     [SerializeField]
-
+    private Texture2D[] cursorTextureArray;
     UnityEngine.UIElements.Cursor cursor_default;
     UnityEngine.UIElements.Cursor cursor_grab;
     VisualElement sceneContainer;
@@ -51,12 +51,12 @@ public class TooltipTrigger : MonoBehaviour
         cursor_grab = new()
         {
             texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-34"),
-            hotspot = new Vector2(10, 10)
+            hotspot = new Vector2(15, 12)
         };
         cursor_default = new()
         {
             texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-32"),
-            hotspot = new Vector2(10, 10)
+            hotspot = new Vector2(15, 12)
         };
 
 

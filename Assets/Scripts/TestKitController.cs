@@ -519,7 +519,7 @@ public class TestKitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isCheck1Open = checkValveStatus.isCheck1Open;
+        //isCheck1Open = checkValveStatus.isCheck1Open;
 
         PressureControl();
         OperateControls();

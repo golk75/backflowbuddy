@@ -142,8 +142,10 @@ public class WaterController : MonoBehaviour
     public float testCock1MaxStr;
     public float testCock2MaxStr;
     public float testCock3MaxStr;
-    public float testCock4MinStr;
-    public float testCock4MaxStr;
+    // public float testCock4MinStr;
+    // public float testCock4MaxStr;
+    public int testCock4MinStr;
+    public int testCock4MaxStr;
     public float rnd;
 
 
@@ -235,6 +237,7 @@ public class WaterController : MonoBehaviour
     {
         isAttachedToGauge = true;
         rnd = Random.Range(testCock4MinStr, testCock4MaxStr);
+
     }
 
     private void DetectHoseDetachment(
@@ -457,5 +460,6 @@ public class WaterController : MonoBehaviour
 
             Void_Check1TC1.transform.localScale = Vector3.zero;
         }
+        Debug.Log($"{rnd}");
     }
 }

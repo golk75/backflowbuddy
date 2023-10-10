@@ -416,6 +416,7 @@ MonoBehaviour:
   fillButtonTooltip: {fileID: 11400000, guid: 90b826c64d9554d6e883c6eefc65e228, type: 2}
   menuButtonTooltip: {fileID: 11400000, guid: a9bb92f206cd549108b8ec0f7f2b10d1, type: 2}
   resetButtonTooltip: {fileID: 11400000, guid: 8b3bc1313ec644f6c99af2ee34f6fe0f, type: 2}
+  cursorTextureArray: []
 --- !u!114 &64299825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11216,12 +11217,12 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock4MaxStr
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock4MinStr
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
