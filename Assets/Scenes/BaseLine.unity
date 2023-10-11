@@ -411,8 +411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: 
   header: head
-  playerController: {fileID: 1446278365}
-  SO1: {fileID: 467913331}
   fillButtonTooltip: {fileID: 11400000, guid: 90b826c64d9554d6e883c6eefc65e228, type: 2}
   menuButtonTooltip: {fileID: 11400000, guid: a9bb92f206cd549108b8ec0f7f2b10d1, type: 2}
   resetButtonTooltip: {fileID: 11400000, guid: 8b3bc1313ec644f6c99af2ee34f6fe0f, type: 2}
@@ -494,35 +492,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64299817}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9743b3cfaf66943609e8b5e4aabd4b77, type: 3}
+  m_Script: {fileID: 11500000, guid: eb602cdc227794eee9886942e6e6da30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameCount: 2
-  frameRate: 0.5
-  cursorAnimationList:
-  - cursorType: 0
-    textureArray:
-    - {fileID: 2800000, guid: 7d2fe4c11ed4d4e11a57df58946d68b6, type: 3}
-    frameRate: 0
-    offset: {x: 10, y: 10}
-  - cursorType: 1
-    textureArray:
-    - {fileID: 2800000, guid: 7d2fe4c11ed4d4e11a57df58946d68b6, type: 3}
-    - {fileID: 2800000, guid: 1162a40ecff154f5bb2b1ab61aa08533, type: 3}
-    frameRate: 0.5
-    offset: {x: 10, y: 10}
-  - cursorType: 2
-    textureArray:
-    - {fileID: 2800000, guid: 1162a40ecff154f5bb2b1ab61aa08533, type: 3}
-    frameRate: 0
-    offset: {x: 10, y: 10}
-  - cursorType: 3
-    textureArray:
-    - {fileID: 2800000, guid: 5b96e062d806346bd8fd18295cd2de3c, type: 3}
-    frameRate: 0.5
-    offset: {x: 10, y: 10}
+  cursorTextureArray: []
 --- !u!114 &86714469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4895190393130077630, guid: 5cb0acac16e984deab4d687da8d483d5,

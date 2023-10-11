@@ -16,24 +16,19 @@ public class TooltipTrigger : MonoBehaviour
     private Button fillButton;
     private Button menuButton;
     private Button resetButton;
-    private VisualElement buttonWrapper;
     public string content;
     public string header;
     public VisualElement tooltip;
-    public PlayerController playerController;
-    public GameObject SO1;
-
     public ToolTipScriptableObject fillButtonTooltip;
     public ToolTipScriptableObject menuButtonTooltip;
     public ToolTipScriptableObject resetButtonTooltip;
     UIDocument root;
-    // public List<ScriptableObject> tooltips;
     OperableComponentDescription ShutOff1OperableDescription;
     [SerializeField]
     private Texture2D[] cursorTextureArray;
     UnityEngine.UIElements.Cursor cursor_default;
     UnityEngine.UIElements.Cursor cursor_grab;
-    VisualElement sceneContainer;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -45,9 +40,8 @@ public class TooltipTrigger : MonoBehaviour
         fillButton = root.rootVisualElement.Q<Button>("FillButton");
         menuButton = root.rootVisualElement.Q<Button>("MenuButton");
         resetButton = root.rootVisualElement.Q<Button>("ResetButton");
-        buttonWrapper = root.rootVisualElement.Q<VisualElement>("ButtonWrapper");
         tooltip = root.rootVisualElement.Q<VisualElement>("Tooltip");
-        sceneContainer = root.rootVisualElement.Q<VisualElement>("SceneContainer");
+
         cursor_grab = new()
         {
             texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-34"),
@@ -67,30 +61,11 @@ public class TooltipTrigger : MonoBehaviour
         resetButton.RegisterCallback<MouseEnterEvent>(MouseIn);
         resetButton.RegisterCallback<MouseOutEvent>(MouseOut);
 
-        // resetButton.clicked += MouseDown;
-        resetButton.RegisterCallback<MouseDownEvent>(MouseDown);
-        sceneContainer.RegisterCallback<MouseDownEvent>(MouseDown);
-        sceneContainer.RegisterCallback<MouseUpEvent>(MouseUp);
-        buttonWrapper.RegisterCallback<MouseDownEvent>(MouseDown);
-        buttonWrapper.RegisterCallback<MouseUpEvent>(MouseUp);
+
 
 
     }
 
-    private void MouseUp(MouseUpEvent evt)
-    {
-        sceneContainer.style.cursor = new StyleCursor(cursor_default);
-        buttonWrapper.style.cursor = new StyleCursor(cursor_default);
-    }
-
-    private void MouseDown(MouseDownEvent evt)
-    {
-
-        sceneContainer.style.cursor = new StyleCursor(cursor_grab);
-        buttonWrapper.style.cursor = new StyleCursor(cursor_grab);
-
-
-    }
 
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -109,7 +84,7 @@ public class TooltipTrigger : MonoBehaviour
     }
     private void Start()
     {
-        ShutOff1OperableDescription = SO1.GetComponent<OperableComponentDescription>();
+
 
     }
 
@@ -117,7 +92,7 @@ public class TooltipTrigger : MonoBehaviour
     private void MouseOut(MouseOutEvent evt)
     {
         Debug.Log($"MouseEvent Out");
-        playerController.operableObject = null;
+
         TooltipSystem.Hide();
     }
 

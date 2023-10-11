@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 primaryFingerPos;
     public Vector2 primaryFingerDelta;
     public bool isMouseDown;
-
+    public bool ClickOperationEnabled;
     // Start is called before the first frame update
     void Awake()
     {
@@ -122,6 +122,11 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
         }
+        if (ClickOperationEnabled)
+        {
+            ClickOperate();
+        }
+
     }
 
     private void LeftMouseClick_canceled(InputAction.CallbackContext context)
@@ -212,6 +217,7 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
         }
+
     }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
@@ -305,6 +311,7 @@ public class PlayerController : MonoBehaviour
                     == OperableComponentDescription.PartsType.TestCock
             )
             {
+
                 // may come back to this after building out to mobile and testing on actual phone/ tablet
                 // if (Input.GetMouseButtonDown(0))
                 // {
@@ -321,17 +328,45 @@ public class PlayerController : MonoBehaviour
                 //         * -1;
                 // }
 
-                _operableObjectRotation.z +=
-                    (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                    * deviceRotSensitivity
-                    * -1;
 
-                //rotation clamp for parts that rotate around center mass (i.e. test cock valves)
-                _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+                ///Click/press and drag-----------------------------------------------------------------------
+                if (!ClickOperationEnabled)
+                {
+                    _operableObjectRotation.z +=
+                        (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                        * deviceRotSensitivity
+                        * -1;
+
+                    //rotation clamp for parts that rotate around center mass(i.e.test cock valves)
+
+                    _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+                    ///End Click/press and drag--------------------------------------------------------------------
+                }
+                /// <summary>
+                /// For Click Operations, see LeftMouseClicked_performed() && 
+                /// </summary>
+
+
+
             }
         }
     }
+    private void ClickOperate()
+    {
+        ///Click/press---------------------------------------------------------------------------------
 
+        if (_operableObjectRotation.z == 90)
+        {
+            _operableObjectRotation.z = 0;
+        }
+        else
+        {
+            _operableObjectRotation.z = 90;
+
+        }
+        _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+        ///End Click/press------------------------------------------------------------------------------
+    }
     private void Start() { }
 
     /// <summary>
