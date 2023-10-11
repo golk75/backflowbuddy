@@ -126,11 +126,11 @@ public class ResetButton : MonoBehaviour
 
         // Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
 
-        // foreach (GameObject testCock in testCockController.TestCockList)
-        // {
-        //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-        //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
-        // }
+        foreach (GameObject testCock in testCockController.TestCockList)
+        {
+            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+        }
         // hoseSpring.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
         // testKitController.DetachHoseBib();
     }
