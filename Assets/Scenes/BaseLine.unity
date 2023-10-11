@@ -6694,7 +6694,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00021398692, y: 0.00006969215, z: 0.000033664437}
+  m_Size: {x: 0.0005, y: 0.0002, z: 0.0001}
   m_Center: {x: 0.00006983852, y: -0.0000000087176435, z: 0.00001088588}
 --- !u!23 &1696467897
 MeshRenderer:
@@ -7656,7 +7656,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00021398692, y: 0.00006969215, z: 0.000033664437}
+  m_Size: {x: 0.0005, y: 0.0002, z: 0.0001}
   m_Center: {x: 0.00006983852, y: -0.0000000087176435, z: 0.00001088588}
 --- !u!23 &1904466810
 MeshRenderer:
@@ -9063,8 +9063,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00029794857, y: 0.00012985262, z: 0.000033664437}
-  m_Center: {x: 0.00006840668, y: -0.0000023959667, z: 0.000010885882}
+  m_Size: {x: 0.0005, y: 0.0002, z: 0.0001}
+  m_Center: {x: 0.00006841499, y: -0.0000023960538, z: 0.000010909697}
 --- !u!23 &1975507141
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9293,7 +9293,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00021398692, y: 0.00006969215, z: 0.000033664437}
+  m_Size: {x: 0.0005, y: 0.0002, z: 0.0001}
   m_Center: {x: 0.00006983852, y: -0.0000000087176435, z: 0.00001088588}
 --- !u!1 &2051383269 stripped
 GameObject:
