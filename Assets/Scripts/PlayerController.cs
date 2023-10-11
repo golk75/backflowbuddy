@@ -367,6 +367,7 @@ public class PlayerController : MonoBehaviour
         _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
         ///End Click/press------------------------------------------------------------------------------
     }
+
     private void Start() { }
 
     /// <summary>
