@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FillButton
   m_EditorClassIdentifier: 
   header: Fill Button
-  content: Click to prime assembly with water
+  content: Prime assembly with water
