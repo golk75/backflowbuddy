@@ -173,6 +173,8 @@ public class WaterController : MonoBehaviour
         //Actions.onCheckOpened += DetectCheckOpening;
         Actions.onHoseBibConnect += DetectHoseAttachment;
         Actions.onHoseDetach += DetectHoseDetachment;
+        testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
+        testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
     }
 
     /// <summary>

@@ -45,7 +45,6 @@
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    
 }
 
 .button-wrapper {

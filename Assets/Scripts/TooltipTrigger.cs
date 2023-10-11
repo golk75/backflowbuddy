@@ -71,6 +71,8 @@ public class TooltipTrigger : MonoBehaviour
         resetButton.RegisterCallback<MouseDownEvent>(MouseDown);
         sceneContainer.RegisterCallback<MouseDownEvent>(MouseDown);
         sceneContainer.RegisterCallback<MouseUpEvent>(MouseUp);
+        buttonWrapper.RegisterCallback<MouseDownEvent>(MouseDown);
+        buttonWrapper.RegisterCallback<MouseUpEvent>(MouseUp);
 
 
     }
@@ -78,12 +80,14 @@ public class TooltipTrigger : MonoBehaviour
     private void MouseUp(MouseUpEvent evt)
     {
         sceneContainer.style.cursor = new StyleCursor(cursor_default);
+        buttonWrapper.style.cursor = new StyleCursor(cursor_default);
     }
 
     private void MouseDown(MouseDownEvent evt)
     {
 
         sceneContainer.style.cursor = new StyleCursor(cursor_grab);
+        buttonWrapper.style.cursor = new StyleCursor(cursor_grab);
 
 
     }

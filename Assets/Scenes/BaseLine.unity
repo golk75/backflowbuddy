@@ -484,7 +484,8 @@ MonoBehaviour:
   - alteredObject: {fileID: 1594122276}
     initRotation: {x: 0, y: 0, z: 0, w: 0}
     initScale: {x: 0, y: 0, z: 0}
-  hoseList: []
+  hoseList:
+  - {fileID: 570482151}
   testCockValveList: []
 --- !u!114 &64299826
 MonoBehaviour:
@@ -6672,7 +6673,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 372366014}
   testCockVoid: {fileID: 55441783}
-  description: {fileID: 0}
 --- !u!114 &1696467895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7635,7 +7635,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 86714469}
   testCockVoid: {fileID: 1662844177}
-  description: {fileID: 0}
 --- !u!114 &1904466808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7832,8 +7831,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930986057}
   m_LocalRotation: {x: -0.7071068, y: -0, z: 4.3947068e-15, w: 0.7071068}
-  m_LocalPosition: {x: 2.1376896, y: -9.243259, z: 10.953347}
-  m_LocalScale: {x: 7.9914994, y: 7.9914994, z: 7.9914994}
+  m_LocalPosition: {x: 2.1377, y: -9.2433, z: 10.953347}
+  m_LocalScale: {x: 22.118874, y: 22.118874, z: 22.118874}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1461425740}
@@ -9043,7 +9042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 715421594}
   testCockVoid: {fileID: 1587235364}
-  description: {fileID: 0}
 --- !u!114 &1975507139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9274,7 +9272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testCockCollider: {fileID: 1485278144}
   testCockVoid: {fileID: 1520184829}
-  description: {fileID: 0}
 --- !u!114 &2038795518
 MonoBehaviour:
   m_ObjectHideFlags: 0

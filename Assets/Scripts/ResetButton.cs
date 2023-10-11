@@ -68,6 +68,7 @@ public class ResetButton : MonoBehaviour
         foreach (ResetableObject item in objectsToReset)
         {
             item.alteredObject.transform.rotation = item.initRotation;
+            item.alteredObject.transform.localScale = item.initScale;
         }
     }
 
