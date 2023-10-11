@@ -16,6 +16,7 @@ public class ResetButton : MonoBehaviour
     public GameObject ShutOff1;
     public GameObject Tc1;
     public TestCockController testCockController;
+    public WaterController waterController;
     OperableComponentDescription ShutOff1OperableDescription;
     OperableComponentDescription Tc1OperableDescription;
     public PlayerController playerController;
@@ -29,7 +30,9 @@ public class ResetButton : MonoBehaviour
     ResetableObject resetableObject;
     ZibraLiquid resetVoid;
 
-    public List<GameObject> HoseList;
+    public List<GameObject> hoseList;
+    [SerializeField]
+    List<GameObject> testCockValveList;
 
 
     [System.Serializable]
@@ -37,8 +40,9 @@ public class ResetButton : MonoBehaviour
     {
 
 
-        public GameObject resetThis;
+        public GameObject alteredObject;
         public Quaternion initRotation;
+        public Vector3 initScale;
 
 
 
@@ -54,7 +58,8 @@ public class ResetButton : MonoBehaviour
     private void SetResetables(ResetableObject resetableObject)
     {
         this.resetableObject = resetableObject;
-        resetableObject.initRotation = resetableObject.resetThis.transform.rotation;
+        resetableObject.initRotation = resetableObject.alteredObject.transform.rotation;
+        resetableObject.initScale = resetableObject.alteredObject.transform.localScale;
 
 
     }
@@ -62,7 +67,7 @@ public class ResetButton : MonoBehaviour
     {
         foreach (ResetableObject item in objectsToReset)
         {
-            item.resetThis.transform.rotation = item.initRotation;
+            item.alteredObject.transform.rotation = item.initRotation;
         }
     }
 
@@ -100,39 +105,25 @@ public class ResetButton : MonoBehaviour
         Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
         Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
 
-        //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 180, 360);
-
-        // playerController.operableComponentDescription = ShutOff1OperableDescription;
-
         ResetTransforms();
-        // playerController._operableObjectRotation.z = 90;
-        // playerController._operableObjectRotation.y = 180;
 
-
-        // playerController.operableObject = Tc1;
-        // playerController.operableComponentDescription = Tc1OperableDescription;
-
-        // playerController._operableObjectRotation.z = 0;
-        // playerController._operableObjectRotation.y = 180;
 
 
         //remove attached hoses
-        for (int i = 0; i < HoseList.Count; i++)
+        for (int i = 0; i < hoseList.Count; i++)
         {
-            Actions.onHoseBibDrop?.Invoke(HoseList[i], HoseList[i].GetComponent<OperableComponentDescription>());
+            Actions.onHoseBibDrop?.Invoke(hoseList[i], hoseList[i].GetComponent<OperableComponentDescription>());
         }
 
 
-
-        // Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
 
         foreach (GameObject testCock in testCockController.TestCockList)
         {
-            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+
         }
-        // hoseSpring.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
-        // testKitController.DetachHoseBib();
+
     }
 
     // Update is called once per frame

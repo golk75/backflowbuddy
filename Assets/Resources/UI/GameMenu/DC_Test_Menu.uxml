@@ -15,7 +15,4 @@
             <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
         </ui:Instance>
     </ui:VisualElement>
-    <ui:VisualElement name="TestResults" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-        <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="Result_label" />
-    </ui:VisualElement>
 </ui:UXML>

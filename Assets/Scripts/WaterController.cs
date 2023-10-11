@@ -142,11 +142,13 @@ public class WaterController : MonoBehaviour
     public float testCock1MaxStr;
     public float testCock2MaxStr;
     public float testCock3MaxStr;
-    // public float testCock4MinStr;
-    // public float testCock4MaxStr;
+    public float testCock3MinStr;
+    public float testCock3Str;
+
     public int testCock4MinStr;
     public int testCock4MaxStr;
-    public float rnd;
+    public float testCock4Str;
+
 
 
     [SerializeField]
@@ -159,6 +161,7 @@ public class WaterController : MonoBehaviour
         shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
         initSupplyVoidPos = supplyVoid.transform.localPosition;
         initSupplyColliderPos = supplyCollider.transform.localPosition;
+
     }
 
     /// <summary>
@@ -183,52 +186,7 @@ public class WaterController : MonoBehaviour
         Actions.onHoseDetach -= DetectHoseDetachment;
     }
 
-    /*
-        private void DetectCheckOpening(GameObject checkValve)
-        {
-            //Debug.Log($"{checkValve.tag} is OPEN");
-    
-            switch (checkValve.tag)
-            {
-                case "CV01":
-                    isCheck1Closed = false;
-                    break;
-                case "CV02":
-                    isCheck2Closed = false;
-                    break;
-                default:
-                    Debug.Log($"DetectCheckOpening Failure| checkValve.tag = {checkValve.tag}");
-                    break;
-            }
-            /*
-                    Debug.Log(
-                        $"DetectOpen: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
-                    );
-            
-        }
-        
-    
-        private void DetectCheckClosure(GameObject checkValve)
-        {
-            switch (checkValve.tag)
-            {
-                case "CV01":
-                    isCheck1Closed = !isCheck1Closed;
-                    break;
-                case "CV02":
-                    isCheck2Closed = !isCheck2Closed;
-                    break;
-                default:
-                    Debug.Log($"DetectCheckClosure Failure| checkValve.tag = {checkValve.tag}");
-                    break;
-            }
-            
-                    Debug.Log(
-                        $"DetectClosed: isCheck1Closed = {isCheck1Closed} | isCheck2Closed = {isCheck2Closed}"
-                    );
-            
-        }
-        */
+
 
     private void DetectHoseAttachment(
         GameObject gameObject,
@@ -236,7 +194,8 @@ public class WaterController : MonoBehaviour
     )
     {
         isAttachedToGauge = true;
-        rnd = Random.Range(testCock4MinStr, testCock4MaxStr);
+        testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
+        testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
 
     }
 
@@ -316,7 +275,7 @@ public class WaterController : MonoBehaviour
             {
                 TestCockFF3.Strength = Mathf.SmoothDamp(
                     TestCockFF3.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
                     ref testCockFF3Ref.x,
                     0.005f
                 );
@@ -352,7 +311,7 @@ public class WaterController : MonoBehaviour
 
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
-                    Mathf.Clamp(check2Detector.ParticlesInside, 0, rnd),
+                    Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
                     ref testCockFF4Ref.x,
                     Void_check2ScaleUpSpeed
                 );
@@ -460,6 +419,6 @@ public class WaterController : MonoBehaviour
 
             Void_Check1TC1.transform.localScale = Vector3.zero;
         }
-        Debug.Log($"{rnd}");
+
     }
 }

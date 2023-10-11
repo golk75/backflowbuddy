@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using com.zibra.liquid.Manipulators;
+using UnityEngine;
 
 public class TestCockController : MonoBehaviour
 {
@@ -112,10 +112,14 @@ public class TestCockController : MonoBehaviour
     Vector3 _operableTestCockColliderScale;
 
     public bool isCurrentTestCockOpen { get; private set; } = false;
-    public bool isTestCock1Open { get; private set; } = false;
-    public bool isTestCock2Open { get; private set; } = false;
-    public bool isTestCock3Open { get; private set; } = false;
-    public bool isTestCock4Open { get; private set; } = false;
+    [SerializeField]
+    public bool isTestCock1Open;
+    [SerializeField]
+    public bool isTestCock2Open;
+    [SerializeField]
+    public bool isTestCock3Open;
+    [SerializeField]
+    public bool isTestCock4Open;
 
     private ZibraLiquidVoid _zoneVoid;
     public ZibraLiquidVoid ZoneVoid
@@ -214,50 +218,51 @@ public class TestCockController : MonoBehaviour
                         .transform
                         .localScale = _operableTestCockVoidScale;
                     //cache test cock status
-                    if (TestCock1.transform.eulerAngles.z > 0)
-                    {
-                        isTestCock1Open = true;
-                        Actions.onTestCock1Opened?.Invoke();
-                    }
-                    else
-                    {
-                        isTestCock1Open = false;
-                        Actions.onTestCock1Closed?.Invoke();
-                    }
 
-                    if (TestCock2.transform.eulerAngles.z > 0)
-                    {
-                        isTestCock2Open = true;
-                        Actions.onTestCock2Opened?.Invoke();
-                    }
-                    else
-                    {
-                        isTestCock2Open = false;
-                        Actions.onTestCock2Closed?.Invoke();
-                    }
-
-                    if (TestCock3.transform.eulerAngles.z > 0)
-                    {
-                        isTestCock3Open = true;
-                        Actions.onTestCock3Opened?.Invoke();
-                    }
-                    else
-                    {
-                        isTestCock3Open = false;
-                        Actions.onTestCock3Closed?.Invoke();
-                    }
-
-                    if (TestCock4.transform.eulerAngles.z > 0)
-                    {
-                        isTestCock4Open = true;
-                        Actions.onTestCock4Opened?.Invoke();
-                    }
-                    else
-                    {
-                        isTestCock4Open = false;
-                        Actions.onTestCock4Closed?.Invoke();
-                    }
                 }
+        }
+        if (TestCock1.transform.eulerAngles.z > 0)
+        {
+            isTestCock1Open = true;
+            Actions.onTestCock1Opened?.Invoke();
+        }
+        else
+        {
+            isTestCock1Open = false;
+            Actions.onTestCock1Closed?.Invoke();
+        }
+
+        if (TestCock2.transform.eulerAngles.z > 0)
+        {
+            isTestCock2Open = true;
+            Actions.onTestCock2Opened?.Invoke();
+        }
+        else
+        {
+            isTestCock2Open = false;
+            Actions.onTestCock2Closed?.Invoke();
+        }
+
+        if (TestCock3.transform.eulerAngles.z > 0)
+        {
+            isTestCock3Open = true;
+            Actions.onTestCock3Opened?.Invoke();
+        }
+        else
+        {
+            isTestCock3Open = false;
+            Actions.onTestCock3Closed?.Invoke();
+        }
+
+        if (TestCock4.transform.eulerAngles.z > 0)
+        {
+            isTestCock4Open = true;
+            Actions.onTestCock4Opened?.Invoke();
+        }
+        else
+        {
+            isTestCock4Open = false;
+            Actions.onTestCock4Closed?.Invoke();
         }
     }
 

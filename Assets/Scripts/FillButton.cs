@@ -74,8 +74,8 @@ public class FillButton : MonoBehaviour
 
         foreach (GameObject testCock in testCockController.TestCockList)
         {
-            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
         }
         // hoseSpring.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
         // testKitController.DetachHoseBib();
