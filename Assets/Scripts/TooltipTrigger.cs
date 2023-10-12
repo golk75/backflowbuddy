@@ -98,7 +98,6 @@ public class TooltipTrigger : MonoBehaviour
         if (evt.target == fillButton)
         {
             TooltipSystem.Show(fillButtonTooltip.content, fillButtonTooltip.header);
-
         }
         else if (evt.target == menuButton)
         {
@@ -112,6 +111,7 @@ public class TooltipTrigger : MonoBehaviour
         {
             TooltipSystem.Show(clickEnableTooltip.content, clickEnableTooltip.header);
         }
+
 
 
     }
