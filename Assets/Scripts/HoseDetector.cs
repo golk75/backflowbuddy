@@ -48,7 +48,7 @@ public class HoseDetector : MonoBehaviour
     IEnumerator AttachInitiate()
     {
 
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(1.0f);
         if (isConnected == true)
         {
 

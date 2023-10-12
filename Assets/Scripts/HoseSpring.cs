@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using Unity.VisualScripting;
-using UnityEditor.Presets;
+// using UnityEditor.Presets;
 using UnityEngine;
 
 public class HoseSpring : MonoBehaviour
@@ -28,7 +28,7 @@ public class HoseSpring : MonoBehaviour
     private OperableComponentDescription currentHoseDescription;
     private GameObject currentTestCock;
     Rigidbody HoseRb;
-    public Preset CongfigurableJointPreset;
+    // public Preset CongfigurableJointPreset;
     bool pointerDown;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
     public bool isAttaching;
