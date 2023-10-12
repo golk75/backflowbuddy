@@ -1,33 +1,38 @@
+
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Timers;
-using Unity.AI.Navigation.Editor.Converter;
+using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
+
 
 public class TooltipTrigger : MonoBehaviour
 
 {
-    private Button fillButton;
+    public Button fillButton;
     private Button menuButton;
     private Button resetButton;
+    private VisualElement clickEnableToggle;
     public string content;
     public string header;
     public VisualElement tooltip;
     public ToolTipScriptableObject fillButtonTooltip;
     public ToolTipScriptableObject menuButtonTooltip;
     public ToolTipScriptableObject resetButtonTooltip;
+    public ToolTipScriptableObject clickEnableTooltip;
     UIDocument root;
-    OperableComponentDescription ShutOff1OperableDescription;
     [SerializeField]
     private Texture2D[] cursorTextureArray;
     UnityEngine.UIElements.Cursor cursor_default;
     UnityEngine.UIElements.Cursor cursor_grab;
+
+    public VisualElement buttonWrapper;
+    public VisualElement sceneContainer;
+
+
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -37,10 +42,11 @@ public class TooltipTrigger : MonoBehaviour
     {
         root = GetComponent<UIDocument>();
 
+
         fillButton = root.rootVisualElement.Q<Button>("FillButton");
         menuButton = root.rootVisualElement.Q<Button>("MenuButton");
         resetButton = root.rootVisualElement.Q<Button>("ResetButton");
-        tooltip = root.rootVisualElement.Q<VisualElement>("Tooltip");
+        clickEnableToggle = root.rootVisualElement.Q<VisualElement>("ClickEnable_toggle");
 
         cursor_grab = new()
         {
@@ -60,6 +66,8 @@ public class TooltipTrigger : MonoBehaviour
         menuButton.RegisterCallback<MouseOutEvent>(MouseOut);
         resetButton.RegisterCallback<MouseEnterEvent>(MouseIn);
         resetButton.RegisterCallback<MouseOutEvent>(MouseOut);
+        clickEnableToggle.RegisterCallback<MouseEnterEvent>(MouseIn);
+        clickEnableToggle.RegisterCallback<MouseOutEvent>(MouseOut);
 
 
 
@@ -67,37 +75,26 @@ public class TooltipTrigger : MonoBehaviour
     }
 
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        TooltipSystem.Hide();
 
-
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-
-
-        TooltipSystem.Show(content, header);
-        tooltip.transform.position = Input.mousePosition;
-
-    }
     private void Start()
     {
-
-
     }
 
 
     private void MouseOut(MouseOutEvent evt)
     {
-        Debug.Log($"MouseEvent Out");
+
 
         TooltipSystem.Hide();
     }
 
     private void MouseIn(MouseEnterEvent evt)
     {
+
+
+
+
+
         if (evt.target == fillButton)
         {
             TooltipSystem.Show(fillButtonTooltip.content, fillButtonTooltip.header);
@@ -111,15 +108,19 @@ public class TooltipTrigger : MonoBehaviour
         {
             TooltipSystem.Show(resetButtonTooltip.content, resetButtonTooltip.header);
         }
+        else if (evt.target == clickEnableToggle)
+        {
+            TooltipSystem.Show(clickEnableTooltip.content, clickEnableTooltip.header);
+        }
 
-        // TooltipSystem.Show(content, header);
-        Debug.Log($"{evt.target == resetButton}");
+
     }
 
     void Update()
     {
 
     }
+
 
 
 }

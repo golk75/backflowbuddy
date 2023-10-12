@@ -10,7 +10,7 @@ public class ClickEnableButton : MonoBehaviour
 {
     UIDocument root;
 
-    Toggle toggle;
+    public Toggle toggle;
 
     public PlayerController playerController;
 
