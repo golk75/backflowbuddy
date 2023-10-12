@@ -30,7 +30,7 @@ public class HoseSpring : MonoBehaviour
     Rigidbody HoseRb;
     // public Preset CongfigurableJointPreset;
     bool pointerDown;
-    WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+
     public bool isAttaching;
     Vector3 testCockPosition;
     Vector3 testCockTransform;
@@ -129,50 +129,49 @@ public class HoseSpring : MonoBehaviour
             {
                 currentConfigurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
 
+                currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
+
+                currentConfigurableJoint.autoConfigureConnectedAnchor = false;
 
 
 
+
+                // CongfigurableJointPreset.ApplyTo(currentConfigurableJoint);
+
+
+
+
+
+
+                switch (description.componentId)
+                {
+
+                    case OperableComponentDescription.ComponentId.HighHose:
+                        currentConfigurableJoint.connectedAnchor = initAnchorPos_highHose;
+                        currentConfigurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
+                        break;
+                    case OperableComponentDescription.ComponentId.LowHose:
+                        currentConfigurableJoint.connectedAnchor = initAnchorPos_lowHose;
+                        currentConfigurableJoint.connectedBody = LowHoseConfigJointConnectedBody;
+                        break;
+                    case OperableComponentDescription.ComponentId.BypassHose:
+                        currentConfigurableJoint.connectedAnchor = initAnchorPos_bypassHose;
+                        currentConfigurableJoint.connectedBody = BypassHoseConfigJointConnectedBody;
+                        break;
+                    default:
+                        Debug.Log($"Not the HoseBib you're looking for");
+                        break;
+                }
+                currentConfigurableJoint.xMotion = jointPreset.xMotion;
+                currentConfigurableJoint.yMotion = jointPreset.yMotion;
+                currentConfigurableJoint.zMotion = jointPreset.zMotion;
+                currentConfigurableJoint.angularXMotion = jointPreset.angularXMotion;
+                currentConfigurableJoint.angularYMotion = jointPreset.angularYMotion;
+                currentConfigurableJoint.angularZMotion = jointPreset.angularZMotion;
+                currentConfigurableJoint.xDrive = jointPreset.xDrive;
+                currentConfigurableJoint.yDrive = jointPreset.yDrive;
 
             }
-            // currentConfigurableJoint = currentHoseBibObj.AddComponent<ConfigurableJoint>();
-
-            // CongfigurableJointPreset.ApplyTo(currentConfigurableJoint);
-
-            currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
-
-            currentConfigurableJoint.autoConfigureConnectedAnchor = false;
-
-
-
-
-
-            switch (description.componentId)
-            {
-                case OperableComponentDescription.ComponentId.HighHose:
-                    currentConfigurableJoint.connectedAnchor = initAnchorPos_highHose;
-                    currentConfigurableJoint.connectedBody = HighHoseConfigJointConnectedBody;
-                    break;
-                case OperableComponentDescription.ComponentId.LowHose:
-                    currentConfigurableJoint.connectedAnchor = initAnchorPos_lowHose;
-                    currentConfigurableJoint.connectedBody = LowHoseConfigJointConnectedBody;
-                    break;
-                case OperableComponentDescription.ComponentId.BypassHose:
-                    currentConfigurableJoint.connectedAnchor = initAnchorPos_bypassHose;
-                    currentConfigurableJoint.connectedBody = BypassHoseConfigJointConnectedBody;
-                    break;
-                default:
-                    Debug.Log($"Not the HoseBib you're looking for");
-                    break;
-            }
-            currentConfigurableJoint.xMotion = jointPreset.xMotion;
-            currentConfigurableJoint.yMotion = jointPreset.yMotion;
-            currentConfigurableJoint.zMotion = jointPreset.zMotion;
-            currentConfigurableJoint.angularXMotion = jointPreset.angularXMotion;
-            currentConfigurableJoint.angularYMotion = jointPreset.angularYMotion;
-            currentConfigurableJoint.angularZMotion = jointPreset.angularZMotion;
-            currentConfigurableJoint.xDrive = jointPreset.xDrive;
-            currentConfigurableJoint.yDrive = jointPreset.yDrive;
-            Debug.Log($"{currentConfigurableJoint.connectedAnchor}");
         }
         isAttaching = false;
         if (HoseRb != null)
@@ -220,6 +219,7 @@ public class HoseSpring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //configurableJoint.autoConfigureConnectedAnchor = true;
         initAnchorPos_highHose = HighHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
         initAnchorPos_lowHose = LowHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;

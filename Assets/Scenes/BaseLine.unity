@@ -4672,8 +4672,6 @@ MonoBehaviour:
   currentJoint: {fileID: 0}
   jointPreset: {fileID: 0}
   jointPresetParent: {fileID: 1984302210}
-  CongfigurableJointPreset: {fileID: 2655988077585873504, guid: 1c7b90add6fc444e6a932715e2fa992c,
-    type: 2}
   isAttaching: 0
   hoseDetector: {fileID: 0}
 --- !u!114 &1103923068 stripped
