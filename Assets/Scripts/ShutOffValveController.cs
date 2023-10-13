@@ -114,15 +114,16 @@ public class ShutOffValveController : MonoBehaviour
                             playerController.OperableObjectRotation;
                     }
 
-                    if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
-                    {
-                        _isSupplyOn = false;
-                    }
-                    else
-                    {
-                        _isSupplyOn = true;
-                    }
                 }
+        }
+
+        if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
+        {
+            _isSupplyOn = false;
+        }
+        else
+        {
+            _isSupplyOn = true;
         }
     }
 
