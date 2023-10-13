@@ -8,11 +8,13 @@ using UnityEngine.UIElements;
 public class GameScreen : MonoBehaviour
 {
 
-
+    //Actions
+    public static event Action GameQuit;
 
     // notify listeners to pause after delay in seconds
     public static event Action<float> GamePaused;
     public static event Action GameResumed;
+
 
 
     [Header("Menu Screen elements")]
@@ -24,7 +26,8 @@ public class GameScreen : MonoBehaviour
 
 
     // string Ids
-    const string MenuButtonString = "MenuButtonString";
+    const string MenuButtonString = "MenuButton";
+    const string ResumeButtonString = "GameMenuScreen_resume-button";
 
 
 
@@ -32,13 +35,14 @@ public class GameScreen : MonoBehaviour
     // references to functional UI elements (buttons and screens)
     VisualElement m_MenuScreen;
     Button m_MenuButton;
+    Button m_ResumeButton;
     UIDocument m_DCTestScreen;
 
 
     private void OnEnable()
     {
         SetVisualElements();
-
+        RegisterButtonCallBacks();
     }
 
     private void OnDisable()
@@ -51,18 +55,30 @@ public class GameScreen : MonoBehaviour
         VisualElement root = m_DCTestScreen.rootVisualElement;
         m_MenuScreen = root.Q(m_MenuScreenName);
         m_MenuButton = root.Q<Button>(MenuButtonString);
+        m_ResumeButton = root.Q<Button>(ResumeButtonString);
 
 
 
     }
     void RegisterButtonCallBacks()
     {
-        m_MenuButton?.RegisterCallback<PointerDownEvent>(ShowGameMenuScreen);
+        m_MenuButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
+        m_ResumeButton?.RegisterCallback<ClickEvent>(ResumeGame);
     }
 
-    private void ShowGameMenuScreen(PointerDownEvent evt)
+    private void ResumeGame(ClickEvent evt)
+    {
+        // GameResumed?.Invoke();
+
+        ShowVisualElement(m_MenuScreen, false);
+
+    }
+
+    private void ShowGameMenuScreen(ClickEvent evt)
     {
         ShowVisualElement(m_MenuScreen, true);
+
+
     }
 
     void ShowVisualElement(VisualElement visualElement, bool state)
@@ -71,6 +87,7 @@ public class GameScreen : MonoBehaviour
             return;
 
         visualElement.style.display = (state) ? DisplayStyle.Flex : DisplayStyle.None;
+
     }
 
 

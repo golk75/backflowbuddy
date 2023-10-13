@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="GaugeReading" src="project://database/Assets/Resources/UI/uxml/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
+    <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <Style src="project://database/Assets/Resources/UI/uss/DC-Test-Scene.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DC-Test-Scene" />
     <ui:VisualElement name="SceneContainer" class="scene-container">
         <ui:VisualElement name="ButtonWrapper" class="button-wrapper">
@@ -14,5 +15,6 @@
             <AttributeOverrides element-name="Gauge_bar" picking-mode="Ignore" />
             <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
         </ui:Instance>
+        <ui:Instance template="GameMenuScreen" name="GameMenuScreen" picking-mode="Ignore" style="position: absolute; display: none; width: 100%; height: 100%;" />
     </ui:VisualElement>
 </ui:UXML>

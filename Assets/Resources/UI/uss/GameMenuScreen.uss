@@ -1,8 +1,9 @@
 .game-menu-panel {
     align-items: center;
-    justify-content: center;
-    width: 25%;
+    justify-content: space-between;
+    width: 25px;
     height: 50%;
+    cursor: resource('UI/Textures/icons8-hand-32');
 }
 
 .game-menu-overlay {
@@ -16,6 +17,9 @@
 }
 
 .game-menu-button {
+    align-self: center;
+    width: 100%;
+    cursor: resource('UI/Textures/icons8-hand-33');
 }
 
 .game-menu-label {
@@ -23,6 +27,7 @@
     width: auto;
     height: auto;
     align-self: auto;
+    cursor: resource('UI/Textures/icons8-hand-32');
 }
 
 .game-menu-close-button {
@@ -30,21 +35,22 @@
     align-items: auto;
     align-self: auto;
     left: 100%;
-    top: 0;
+    top: -54%;
     width: 10%;
     height: 10%;
     justify-content: flex-start;
+    cursor: resource('UI/Textures/icons8-hand-33');
 }
 
 .game-menu-header {
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-self: auto;
     width: 100%;
-    height: auto;
+    height: 55px;
     margin-bottom: 0;
     position: absolute;
-    top: 0;
+    top: -28%;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -57,4 +63,5 @@
     align-items: center;
     justify-content: center;
     align-self: center;
+    flex-direction: column;
 }

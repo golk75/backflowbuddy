@@ -1,16 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/GameMenuScreen.uss?fileID=7433441132597879392&amp;guid=3f629d560412543729baa98ea06c55aa&amp;type=3#GameMenuScreen" />
-    <ui:VisualElement name="GameMenuScreen_anchor" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; position: absolute; width: 100%; height: 100%; align-self: center; justify-content: center;">
+    <ui:VisualElement name="GameMenuScreen_anchor" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-items: center; position: absolute; width: 100%; height: 100%; align-self: auto; justify-content: center; cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
         <ui:VisualElement name="GameMenuScreen_overlay" class="pause-screen-button pause-screen-overlay" />
         <ui:VisualElement name="GameMenuScreen_panel" class="pause-screen-panel">
-            <ui:VisualElement name="GameMenuScreen_header" class="pause-screen-header">
+            <ui:VisualElement name="GameMenuScreen_header" class="pause-screen-header game-menu-header">
                 <ui:Label tabindex="-1" text="Paused" display-tooltip-when-elided="true" name="GameMenuScreen_label" enable-rich-text="true" picking-mode="Ignore" />
             </ui:VisualElement>
-            <ui:VisualElement name="GameMenuScreen_body" class="pause-screen-body">
-                <ui:Button text="Button" display-tooltip-when-elided="true" name="GameMenuScreen_resume-button" />
-                <ui:Button text="Button" display-tooltip-when-elided="true" name="GameMenuScreen_main-menu-button" />
+            <ui:VisualElement name="GameMenuScreen_body" class="pause-screen-body game-menu-body">
+                <ui:Button text="Resume" display-tooltip-when-elided="true" name="GameMenuScreen_resume-button" enable-rich-text="true" class="game-menu-button" />
+                <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="GameMenuScreen_main-menu-button" class="game-menu-button" />
             </ui:VisualElement>
-            <ui:Button text="Button" display-tooltip-when-elided="true" name="GameMenuScreen_close-button" class="pause-screen-close-button" />
+            <ui:Button text="Close" display-tooltip-when-elided="true" name="GameMenuScreen_close-button" class="pause-screen-close-button game-menu-close-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
