@@ -38,6 +38,7 @@ public class GameScreen : MonoBehaviour
     private void OnEnable()
     {
         SetVisualElements();
+
     }
 
     private void OnDisable()
@@ -53,6 +54,23 @@ public class GameScreen : MonoBehaviour
 
 
 
+    }
+    void RegisterButtonCallBacks()
+    {
+        m_MenuButton?.RegisterCallback<PointerDownEvent>(ShowGameMenuScreen);
+    }
+
+    private void ShowGameMenuScreen(PointerDownEvent evt)
+    {
+        ShowVisualElement(m_MenuScreen, true);
+    }
+
+    void ShowVisualElement(VisualElement visualElement, bool state)
+    {
+        if (visualElement == null)
+            return;
+
+        visualElement.style.display = (state) ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
 
