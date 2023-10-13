@@ -28,6 +28,7 @@ public class GameScreen : MonoBehaviour
     // string Ids
     const string MenuButtonString = "MenuButton";
     const string ResumeButtonString = "GameMenuScreen_resume-button";
+    const string CloseMenuButton = "GameMenuScreen_close-button";
 
 
 
@@ -36,6 +37,9 @@ public class GameScreen : MonoBehaviour
     VisualElement m_MenuScreen;
     Button m_MenuButton;
     Button m_ResumeButton;
+    Button m_CloseMenuButton;
+
+
     UIDocument m_DCTestScreen;
 
 
@@ -56,6 +60,7 @@ public class GameScreen : MonoBehaviour
         m_MenuScreen = root.Q(m_MenuScreenName);
         m_MenuButton = root.Q<Button>(MenuButtonString);
         m_ResumeButton = root.Q<Button>(ResumeButtonString);
+        m_CloseMenuButton = root.Q<Button>(CloseMenuButton);
 
 
 
@@ -64,6 +69,7 @@ public class GameScreen : MonoBehaviour
     {
         m_MenuButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
         m_ResumeButton?.RegisterCallback<ClickEvent>(ResumeGame);
+        m_CloseMenuButton?.RegisterCallback<ClickEvent>(ResumeGame);
     }
 
     private void ResumeGame(ClickEvent evt)

@@ -1,9 +1,23 @@
 .game-menu-panel {
     align-items: center;
     justify-content: space-between;
-    width: 25px;
-    height: 50%;
+    width: 15%;
+    height: 40%;
     cursor: resource('UI/Textures/icons8-hand-32');
+    background-image: none;
+    background-color: rgb(54, 55, 63);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .game-menu-overlay {
@@ -20,6 +34,13 @@
     align-self: center;
     width: 100%;
     cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(54, 55, 63);
+    -unity-font-style: bold;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .game-menu-label {
@@ -28,6 +49,9 @@
     height: auto;
     align-self: auto;
     cursor: resource('UI/Textures/icons8-hand-32');
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    font-size: 17px;
 }
 
 .game-menu-close-button {
@@ -35,11 +59,17 @@
     align-items: auto;
     align-self: auto;
     left: 100%;
-    top: -54%;
-    width: 10%;
-    height: 10%;
+    top: -19%;
+    width: 30px;
+    height: 30px;
     justify-content: flex-start;
     cursor: resource('UI/Textures/icons8-hand-33');
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/Clean%20Vector%20Icons/T_11_no_.png?fileID=2800000&guid=4d2a4136ebef6f041b43fdca42412caa&type=3#T_11_no_');
 }
 
 .game-menu-header {
@@ -50,7 +80,7 @@
     height: 55px;
     margin-bottom: 0;
     position: absolute;
-    top: -28%;
+    top: 5%;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -64,4 +94,29 @@
     justify-content: center;
     align-self: center;
     flex-direction: column;
+    position: absolute;
+    top: 25%;
+}
+
+.game-menu-close-button:hover {
+    position: absolute;
+    align-items: auto;
+    align-self: auto;
+    left: 100%;
+    top: -19%;
+    width: 30px;
+    height: 30px;
+    justify-content: flex-start;
+    cursor: resource('UI/Textures/icons8-hand-33');
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/Clean%20Vector%20Icons/T_11_no_.png?fileID=2800000&guid=4d2a4136ebef6f041b43fdca42412caa&type=3#T_11_no_');
+    -unity-background-image-tint-color: rgb(98, 178, 245);
+}
+
+.game-menu-close-button:active {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
 }
