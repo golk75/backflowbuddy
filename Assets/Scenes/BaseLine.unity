@@ -335,6 +335,8 @@ GameObject:
   - component: {fileID: 64299826}
   - component: {fileID: 64299827}
   - component: {fileID: 64299828}
+  - component: {fileID: 64299830}
+  - component: {fileID: 64299829}
   m_Layer: 5
   m_Name: GameUi
   m_TagString: Untagged
@@ -349,12 +351,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64299817}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.000000059604645, y: 0.00000008940697, z: -0.000000006519258,
+    w: 1}
+  m_LocalPosition: {x: 3.807692, y: -6.1029487, z: -9.881104}
+  m_LocalScale: {x: 0.045338985, y: 0.045338985, z: 0.045338985}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1207125251}
+  m_Father: {fileID: 1461425740}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &64299822
@@ -532,6 +535,32 @@ MonoBehaviour:
     textureArray: []
     frameRate: 0
     offset: {x: 0, y: 0}
+--- !u!114 &64299829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64299817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89535a967e96343048e40221e7f15965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &64299830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64299817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de606804bc8d949e69abb6a4a7aff084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuScreenName: GameMenuScreen
+  m_Volume: {fileID: 0}
 --- !u!114 &86714469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4895190393130077630, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -4963,7 +4992,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 64299818}
   - {fileID: 1808861985}
   - {fileID: 920155577}
   - {fileID: 1028944502}
@@ -5719,6 +5747,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 64299818}
   - {fileID: 1207125251}
   - {fileID: 364853806}
   - {fileID: 1930986061}
@@ -7584,7 +7613,7 @@ GameObject:
   - component: {fileID: 1930986059}
   - component: {fileID: 1930986058}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
