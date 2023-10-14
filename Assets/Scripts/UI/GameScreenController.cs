@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameScreenController : MonoBehaviour
 {
+
+    [Header("Scenes")]
+    [SerializeField] string m_MainMenuSceneName = "MainMenu";
+
     /// <summary>
     /// This function is called when the object becomes enabled and active.
     /// </summary>
@@ -27,7 +31,8 @@ public class GameScreenController : MonoBehaviour
 #if UNITY_EDITOR
         if (Application.isPlaying)
 #endif
-            Application.Quit();
+            // Application.Quit();
+            SceneManager.LoadSceneAsync(m_MainMenuSceneName);
     }
     // Start is called before the first frame update
     void Start()

@@ -10,8 +10,6 @@ public class GameScreen : MonoBehaviour
 
     //Actions
     public static event Action GameQuit;
-
-    // notify listeners to pause after delay in seconds
     public static event Action<float> GamePaused;
     public static event Action GameResumed;
 
@@ -28,7 +26,8 @@ public class GameScreen : MonoBehaviour
     // string Ids
     const string MenuButtonString = "MenuButton";
     const string ResumeButtonString = "GameMenuScreen_resume-button";
-    const string CloseMenuButton = "GameMenuScreen_close-button";
+    const string CloseMenuButtonString = "GameMenuScreen_close-button";
+    const string QuitToMenuButtonString = "GameMenuScreen_main-menu-button";
 
 
 
@@ -38,6 +37,7 @@ public class GameScreen : MonoBehaviour
     Button m_MenuButton;
     Button m_ResumeButton;
     Button m_CloseMenuButton;
+    Button m_QuitToMenuButton;
 
 
     UIDocument m_DCTestScreen;
@@ -60,7 +60,9 @@ public class GameScreen : MonoBehaviour
         m_MenuScreen = root.Q(m_MenuScreenName);
         m_MenuButton = root.Q<Button>(MenuButtonString);
         m_ResumeButton = root.Q<Button>(ResumeButtonString);
-        m_CloseMenuButton = root.Q<Button>(CloseMenuButton);
+        m_CloseMenuButton = root.Q<Button>(CloseMenuButtonString);
+        m_QuitToMenuButton = root.Q<Button>(QuitToMenuButtonString);
+
 
 
 
@@ -70,6 +72,8 @@ public class GameScreen : MonoBehaviour
         m_MenuButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
         m_ResumeButton?.RegisterCallback<ClickEvent>(ResumeGame);
         m_CloseMenuButton?.RegisterCallback<ClickEvent>(ResumeGame);
+        m_QuitToMenuButton?.RegisterCallback<ClickEvent>(QuitGame);
+
     }
 
     private void ResumeGame(ClickEvent evt)
@@ -86,7 +90,12 @@ public class GameScreen : MonoBehaviour
 
 
     }
+    void QuitGame(ClickEvent evt)
+    {
+        // AudioManager.PlayDefaultButtonSound();
+        GameQuit?.Invoke();
 
+    }
     void ShowVisualElement(VisualElement visualElement, bool state)
     {
         if (visualElement == null)
