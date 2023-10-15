@@ -407,7 +407,7 @@ public class WaterController : MonoBehaviour
                 check2housingForceField.Strength,
                 1f,
                 ref check2FFref.x,
-                1f
+                0.5f
             );
 
             Void_Check1.transform.localScale = Vector3.zero;
