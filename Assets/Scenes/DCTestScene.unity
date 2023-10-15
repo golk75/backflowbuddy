@@ -561,6 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89535a967e96343048e40221e7f15965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MainMenuSceneName: MainMenu
 --- !u!114 &86714469 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4895190393130077630, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -2369,14 +2370,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524974314}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: -0.3603, y: -0.028400004, z: -0.021699993}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 929021394}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!65 &524974316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10965,6 +10966,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Metalness
       value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: RefractionBounces
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5004021387698966782, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}

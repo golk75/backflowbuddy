@@ -303,25 +303,20 @@ public class WaterController : MonoBehaviour
             && TestCockHoseDetect4.isConnected == false
         )
         {
-            // Debug.Log($" testCockController.isTestCock4Open");
+
             if (check2Detector.ParticlesInside > 3000)
             {
-                // System.Random rnd = new System.Random();
-                // int randomStrVal = rnd.Next(2, 6);
-
-                // Debug.Log($"check2Detector.ParticlesInside > 3000");
-
                 TestCockFF4.Strength = Mathf.SmoothDamp(
-                    TestCockFF4.Strength,
-                    Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                    ref testCockFF4Ref.x,
-                    Void_check2ScaleUpSpeed
-                );
+                 TestCockFF4.Strength,
+                 Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
+                 ref testCockFF4Ref.x,
+                 Void_check2ScaleUpSpeed
+             );
 
             }
             else
             {
-                Debug.Log($"check2Detector.ParticlesInside < 3000");
+
                 TestCockFF4.Strength = Mathf.SmoothDamp(
                     TestCockFF4.Strength,
                     0,

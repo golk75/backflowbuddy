@@ -5,10 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class MainMenuScreenController : MonoBehaviour
 {
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_DCTestScene = "DCTestScene";
+    // [SerializeField] string m_DCTestScene_BuildOut_water = "DCTestScene_BuildOut_water";
     private void OnEnable()
     {
         MainMenuScreen.GamePlayed += OnPlayGame;
@@ -31,6 +33,8 @@ public class MainMenuScreenController : MonoBehaviour
 #endif
             // Application.Quit();
             SceneManager.LoadSceneAsync(m_DCTestScene);
+        //SceneManager.LoadSceneAsync(m_DCTestScene_BuildOut_water);
+
     }
 
     void OnDisable()
