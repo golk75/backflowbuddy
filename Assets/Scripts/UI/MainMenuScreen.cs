@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
+
+
 
 public class MainMenuScreen : MonoBehaviour
 {
+
     public static event Action GamePlayed;
     public static event Action GameQuit;
 
@@ -34,6 +38,8 @@ public class MainMenuScreen : MonoBehaviour
     {
         m_MainMenuPlayButton.RegisterCallback<ClickEvent>(PlayGame);
         m_MainMenuQuitButton.RegisterCallback<ClickEvent>(QuitGame);
+        m_MainMenuPlayButton.RegisterCallback<PointerDownEvent>(PlayGame);
+        m_MainMenuQuitButton.RegisterCallback<ClickEvent>(QuitGame);
     }
 
     private void QuitGame(ClickEvent evt)
@@ -42,6 +48,10 @@ public class MainMenuScreen : MonoBehaviour
     }
 
     void PlayGame(ClickEvent evt)
+    {
+        GamePlayed?.Invoke();
+    }
+    void PlayGame(PointerDownEvent evt)
     {
         GamePlayed?.Invoke();
     }
