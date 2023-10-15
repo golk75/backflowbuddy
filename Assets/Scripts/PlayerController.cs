@@ -214,6 +214,10 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
         }
+        if (ClickOperationEnabled)
+        {
+            ClickOperate();
+        }
 
     }
 
