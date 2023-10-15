@@ -459,7 +459,7 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
-                hosePressure -= 0.4f;
+                hosePressure -= 0.6f;
 
                 // Debug.Log($"hosePressure = {hosePressure}");
 
