@@ -38,7 +38,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         m_MainMenuPlayButton.RegisterCallback<ClickEvent>(PlayGame);
         m_MainMenuQuitButton.RegisterCallback<ClickEvent>(QuitGame);
-        m_MainMenuPlayButton.RegisterCallback<PointerDownEvent>(PlayGame);
+        // m_MainMenuPlayButton.RegisterCallback<PointerDownEvent>(PlayGame);
         m_MainMenuQuitButton.RegisterCallback<ClickEvent>(QuitGame);
     }
 
@@ -51,10 +51,10 @@ public class MainMenuScreen : MonoBehaviour
     {
         GamePlayed?.Invoke();
     }
-    void PlayGame(PointerDownEvent evt)
-    {
-        GamePlayed?.Invoke();
-    }
+    // void PlayGame(PointerDownEvent evt)
+    // {
+    //     GamePlayed?.Invoke();
+    // }
     private void OnDisable()
     {
 
