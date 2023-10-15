@@ -2799,8 +2799,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019050168, y: 0.009436657, z: 0.009602515}
-  m_Center: {x: 0, y: -0.0020997706, z: -0.0029142748}
+  m_Size: {x: 0.019050168, y: 0.023310998, z: 0.009602515}
+  m_Center: {x: 0, y: -0.009036943, z: -0.0029142748}
 --- !u!114 &570482157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6071,14 +6071,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577289242}
-  m_LocalRotation: {x: 0, y: 0, z: 0.46174863, w: 0.8870109}
+  m_LocalRotation: {x: 0, y: 0, z: 0.4848096, w: 0.8746197}
   m_LocalPosition: {x: 0, y: 0, z: -33}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1223622518}
   m_Father: {fileID: 1207125251}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 58}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -26, y: -77}
@@ -10507,6 +10507,11 @@ PrefabInstance:
       objectReference: {fileID: 1182569083}
     - target: {fileID: 6333891425081055793, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
+      propertyPath: supplyVolume
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6333891425081055793, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
       propertyPath: ShutOffValve1
       value: 
       objectReference: {fileID: 467913331}
@@ -10926,8 +10931,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: Color.b
+      value: 0.8371093
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Color.g
+      value: 0.8584906
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Color.r
+      value: 0.45759168
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: Metalness
-      value: 0.012
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Roughness
+      value: 0.04000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: Shadowing
+      value: 0.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: ObjectVersion
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: AbsorptionAmount
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: FluidSurfaceBlur
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: ScatteringAmount
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063864287524576170, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: IndexOfRefraction
+      value: 1.333
       objectReference: {fileID: 0}
     - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -11022,7 +11077,7 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock3Str
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}

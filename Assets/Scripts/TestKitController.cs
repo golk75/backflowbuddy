@@ -73,8 +73,10 @@ public class TestKitController : MonoBehaviour
     [SerializeField]
     ZibraLiquidDetector TestCock2Detector;
 
-    private const float MinNeedle_rotation = 55;
-    private const float MaxNeedle_rotation = -55;
+    // private const float MinNeedle_rotation = 55;
+    // private const float MaxNeedle_rotation = -55;
+    private const float MinNeedle_rotation = 61;
+    private const float MaxNeedle_rotation = -58;
     private const float MinKnob_rotation = 0;
 
     //limit knobs to 4 complete rotations (x1 rotation = 360;)->
@@ -122,6 +124,7 @@ public class TestKitController : MonoBehaviour
     // private Length MaxFillPos = Length.Percent(100);
     private float MinFillPos = 0;
     private float MaxFillPos = 100;
+
 
     void OnEnable()
     {
@@ -404,7 +407,7 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
-                hosePressure -= 0.3f;
+                hosePressure -= 0.5f;
 
                 // Debug.Log($"hosePressure = {hosePressure}");
 
