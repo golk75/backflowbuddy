@@ -16,6 +16,8 @@ public class TooltipTrigger : MonoBehaviour
     private Button menuButton;
     private Button resetButton;
     private VisualElement clickEnableToggle;
+
+
     public string content;
     public string header;
     public VisualElement tooltip;
@@ -48,6 +50,7 @@ public class TooltipTrigger : MonoBehaviour
         resetButton = root.rootVisualElement.Q<Button>("ResetButton");
         clickEnableToggle = root.rootVisualElement.Q<VisualElement>("ClickEnable_toggle");
 
+
         cursor_grab = new()
         {
             texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-34"),
@@ -68,6 +71,8 @@ public class TooltipTrigger : MonoBehaviour
         resetButton.RegisterCallback<MouseOutEvent>(MouseOut);
         clickEnableToggle.RegisterCallback<MouseEnterEvent>(MouseIn);
         clickEnableToggle.RegisterCallback<MouseOutEvent>(MouseOut);
+
+
 
 
 
@@ -111,6 +116,7 @@ public class TooltipTrigger : MonoBehaviour
         {
             TooltipSystem.Show(clickEnableTooltip.content, clickEnableTooltip.header);
         }
+
 
 
 

@@ -93,6 +93,10 @@
     cursor: resource('UI/Textures/icons8-hand-33');
 }
 
+.toggle > .unity-toggle__label {
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
 .unity-toggle__label {
     -unity-font-style: bold;
     flex-grow: 0;

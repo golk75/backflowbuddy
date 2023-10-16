@@ -26,7 +26,7 @@ public class ClickEnableButton : MonoBehaviour
 
     private void ClickOperationToggled(ChangeEvent<bool> evt)
     {
-        Debug.Log($"Toggle value = {evt.newValue}");
+
         playerController.ClickOperationEnabled = evt.newValue;
     }
 
