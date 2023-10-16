@@ -5,8 +5,8 @@
             <ui:Label tabindex="-1" text="BackflowBuddy" display-tooltip-when-elided="true" name="MainMenu_title_label" class="main-menu-title-label" />
         </ui:VisualElement>
         <ui:VisualElement name="MainMenu_panel" class="main-menu-panel">
-            <ui:Button text="Play" display-tooltip-when-elided="true" name="PlayButton" focusable="false" class="game-menu-button main-menu-button" />
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" focusable="false" class="game-menu-button main-menu-button" />
+            <ui:Button text="Play" display-tooltip-when-elided="true" name="PlayButton" focusable="false" class="main-menu-button" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" focusable="false" class="main-menu-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

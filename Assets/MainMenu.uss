@@ -40,8 +40,6 @@
 }
 
 .main-menu-button:hover {
-    align-self: center;
-    width: 100%;
     cursor: resource('UI/Textures/icons8-hand-33');
     color: rgb(54, 55, 63);
     -unity-font-style: bold;
