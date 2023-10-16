@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
         if (hit.collider != null && ray2DHit.collider == null)
         {
-            Debug.Log($"{operableObject}");
+            
             _operableTestGaugeObject = null;
             isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked

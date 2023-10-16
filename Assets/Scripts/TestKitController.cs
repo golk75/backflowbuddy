@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using com.zibra.liquid.Manipulators;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -119,7 +120,7 @@ public class TestKitController : MonoBehaviour
     //ui toolkit
     public UIDocument _root;
     //public VisualElement _root;
-    private VisualElement _gaugeProgressBar;
+    // private VisualElement _gaugeProgressBar;
     // private Length MinFillPos = Length.Percent(0);
     // private Length MaxFillPos = Length.Percent(100);
     private float MinFillPos = 0;
@@ -128,6 +129,7 @@ public class TestKitController : MonoBehaviour
 
     void OnEnable()
     {
+
         Actions.onHoseAttach += AttachHoseBib;
         Actions.onHoseDetach += DetachHoseBib;
         Actions.onTestCock1Opened += TestCock1Opened;
@@ -139,7 +141,7 @@ public class TestKitController : MonoBehaviour
         Actions.onTestCock4Opened += TestCoc4Opened;
         Actions.onTestCock4Closed += TestCock4Closed;
 
-        //Actions.onTestCockOpen += DetectTestCockOpen;
+
     }
 
     void OnDisable()
@@ -162,13 +164,14 @@ public class TestKitController : MonoBehaviour
     void Start()
     {
 
+
         /// <summary>
         /// //ui tool kit for digital gauge
         /// </summary>
         /// <typeparam name="UIDocument"></typeparam>
         /// <returns></returns>
-       // _root = GetComponent<UIDocument>().rootVisualElement;
-        _gaugeProgressBar = _root.rootVisualElement.Q<VisualElement>("Gauge_progress_bar");
+        // _root = GetComponent<UIDocument>().rootVisualElement;
+        // _gaugeProgressBar = _root.rootVisualElement.Q<VisualElement>("Gauge_progress_bar");
 
 
         currentPSID = 0;
@@ -303,7 +306,7 @@ public class TestKitController : MonoBehaviour
         {
             TestCockDetectorList.Add(testCock.GetComponentInChildren<ZibraLiquidDetector>());
         }
-        //  Debug.Log($"{gameObject} attached to assembly");
+
     }
 
     public void DetachHoseBib(GameObject testCock, OperableComponentDescription description)
@@ -312,7 +315,7 @@ public class TestKitController : MonoBehaviour
 
         TestCockList.Remove(testCock);
 
-        //Debug.Log($"{gameObject} detached from assembly");
+
     }
 
     private void NeedleControl()
@@ -322,7 +325,7 @@ public class TestKitController : MonoBehaviour
     }
     private void DigitalNeedleControl()
     {
-        _gaugeProgressBar.style.width = Length.Percent(GetPsidDigitalNeedle());
+        // _gaugeProgressBar.style.width = Length.Percent(GetPsidDigitalNeedle());
     }
     private void PressureControl()
     {
@@ -407,13 +410,17 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
-                hosePressure -= 0.5f;
+                //Windows----------------
+                if (Application.platform == RuntimePlatform.WindowsPlayer)
+                {
+                    hosePressure -= 0.1f;
+                }
+                //OSX--------------------
+                else
+                {
+                    hosePressure -= 0.3f;
+                }
 
-                // Debug.Log($"hosePressure = {hosePressure}");
-
-                // Debug.Log(
-                //     $"supply is closed & check1 is open & test cock #2 is connected & open & test cock #3 is open"
-                // );
             }
             else if (
                 TestCockList.Contains(TestCock2)
@@ -424,9 +431,7 @@ public class TestKitController : MonoBehaviour
             )
             {
                 hosePressure += 0;
-                //CaptureCheck1ClosingPoint(hosePressure);
 
-                //Debug.Log($"closingPoint = {closingPoint}");
             }
             //========================================
             // END - #1 Check Test//==================>
@@ -446,9 +451,7 @@ public class TestKitController : MonoBehaviour
                     TestCock2Detector.ParticlesInside,
                     0.015f
                 );
-                // Debug.Log(
-                //     $"supply is open & test cock #3 is connected & open & test cock #4 is closed"
-                // );
+
             }
             else if (
                 TestCockList.Contains(TestCock3)
@@ -459,13 +462,18 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
-                hosePressure -= 0.3f;
+                //Windows----------------
+                if (Application.platform == RuntimePlatform.WindowsPlayer)
+                {
+                    hosePressure -= 0.1f;
+                }
+                //OSX--------------------
+                else
+                {
+                    hosePressure -= 0.4f;
+                }
 
-                // Debug.Log($"hosePressure = {hosePressure}");
 
-                // Debug.Log(
-                //     $"supply is closed & check2 is open & test cock #3 is connected & open & test cock #4 is open"
-                // );
             }
             else if (
                 TestCockList.Contains(TestCock3)
@@ -476,9 +484,7 @@ public class TestKitController : MonoBehaviour
             )
             {
                 hosePressure += 0;
-                // Debug.Log(
-                //     $"supply is closed & check2 is closed & test cock #3 is connected & open & test cock #4 is open"
-                // );
+
             }
             //========================================
             // END - #2 Check Test//==================>
@@ -496,14 +502,7 @@ public class TestKitController : MonoBehaviour
         {
             hosePressure = maxPSID;
         }
-        /*
-        Debug.Log(
-            $"hosePressure = {hosePressure}| GetPsidNeedleRotation() = {GetPsidNeedleRotation()}| closingPoint = {closingPoint}"
-        );
-        */
-        // lowHosePressure = LowHoseDetector.ParticlesInside;
-        // bypasshosePressure = BypassHoseDetector.ParticlesInside;
-        //Debug.Log(hosePressure);
+
     }
 
     private float CaptureCheck1ClosingPoint(float psid)
