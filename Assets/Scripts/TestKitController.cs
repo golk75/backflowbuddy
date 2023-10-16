@@ -465,7 +465,7 @@ public class TestKitController : MonoBehaviour
                 //Windows----------------
                 if (Application.platform == RuntimePlatform.WindowsPlayer)
                 {
-                    hosePressure -= 0.1f;
+                    hosePressure -= 0.3f;
                 }
                 //OSX--------------------
                 else
