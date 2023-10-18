@@ -78,12 +78,15 @@ public class ShutOffValveController : MonoBehaviour
                         == OperableComponentDescription.ComponentId.ShutOffValve1
                     )
                     {
+                        mainSupplyEmitter.enabled = true;
                         if (!liquid.Initialized)
                         {
+
                             liquid.InitialState = ZibraLiquid.InitialStateType.NoParticles;
                             liquid.InitializeSimulation();
-                            if (!liquid.isActiveAndEnabled)
+                            if (liquid.enabled != true)
                             {
+
                                 liquid.enabled = true;
                             }
                         }

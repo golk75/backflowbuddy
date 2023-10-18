@@ -389,16 +389,9 @@ public class WaterController : MonoBehaviour
 
                 check1housingForceField.Strength = 0;
                 check2housingForceField.Strength = 0;
-                /// <summary>
-                /// Regulate checkvalve behavior and properties based on operating system (we have Windows using a fixed time step!)
-                /// </summary>
-
-                if (liquid.UseFixedTimestep == true)
-                {
 
 
 
-                }
             }
 
             else
@@ -447,7 +440,7 @@ public class WaterController : MonoBehaviour
 
             Void_Check2.transform.localScale = Vector3.zero;
 
-            Void_Check1TC1.transform.localScale = Vector3.zero;
+            // Void_Check1TC1.transform.localScale = Vector3.zero;
         }
 
     }

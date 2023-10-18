@@ -61,7 +61,6 @@ public class ResetButton : MonoBehaviour
         resetableObject.initRotation = resetableObject.alteredObject.transform.rotation;
         resetableObject.initScale = resetableObject.alteredObject.transform.localScale;
 
-
     }
     private void ResetTransforms()
     {
@@ -99,7 +98,7 @@ public class ResetButton : MonoBehaviour
         liquid.ReleaseSimulation();
         liquid.enabled = false;
 
-
+        shutOffValveController.mainSupplyEmitter.enabled = false;
 
 
 

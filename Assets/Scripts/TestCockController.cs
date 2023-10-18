@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.Solver;
 using UnityEngine;
 
 public class TestCockController : MonoBehaviour
@@ -110,7 +111,7 @@ public class TestCockController : MonoBehaviour
 
     Vector3 _operableTestCockVoidScale;
     Vector3 _operableTestCockColliderScale;
-
+    public ZibraLiquid liquid;
     public bool isCurrentTestCockOpen { get; private set; } = false;
     [SerializeField]
     public bool isTestCock1Open;
@@ -177,6 +178,15 @@ public class TestCockController : MonoBehaviour
                             _operableTestCockCollider = TestCockCollider1;
                             _operatingTestCock.transform.eulerAngles =
                                 playerController.OperableObjectRotation;
+                            if (!liquid.Initialized)
+                            {
+                                liquid.InitialState = ZibraLiquid.InitialStateType.NoParticles;
+                                liquid.InitializeSimulation();
+                                if (liquid.enabled != true)
+                                {
+                                    liquid.enabled = true;
+                                }
+                            }
 
                             break;
                         case OperableComponentDescription.ComponentId.TestCock2:
