@@ -1,9 +1,9 @@
 #if UNITY_PIPELINE_URP
 
-using com.zibra.liquid.Solver;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using com.zibra.liquid.Solver;
 
 namespace com.zibra.liquid
 {
@@ -17,7 +17,7 @@ namespace com.zibra.liquid
     /// </remarks>
     public class LiquidURPRenderComponent : ScriptableRendererFeature
     {
-        #region Public Interface
+#region Public Interface
         /// <summary>
         ///     URP specific liquid rendering settings.
         /// </summary>
@@ -178,8 +178,8 @@ namespace com.zibra.liquid
                 }
             }
         }
-        #endregion
-        #region Implementation details
+#endregion
+#region Implementation details
         private class CopyBackgroundURPRenderPass : ScriptableRenderPass
         {
             public ZibraLiquid liquid;
@@ -277,7 +277,7 @@ namespace com.zibra.liquid
 #if UNITY_PIPELINE_URP_9_0_OR_HIGHER
             public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
             {
-                cameraColorTexture = renderingData.cameraData.renderer.cameraColorTargetHandle;
+                cameraColorTexture = renderingData.cameraData.renderer.cameraColorTarget;
             }
 #else
             public void Setup(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -380,7 +380,7 @@ namespace com.zibra.liquid
         LiquidURPRenderPass[] liquidURPPasses;
         // 1 pass per rendered liquid that have downscale enabled
         LiquidUpscaleURPRenderPass[] upscalePasses;
-        #endregion
+#endregion
     }
 }
 
