@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.Solver;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,7 +16,7 @@ public class TestKitController : MonoBehaviour
     public CheckValveStatus checkValveStatus;
     public GameObject lowBleed;
     public GameObject lowControl;
-
+    public ZibraLiquid liquid;
     public GameObject highBleed;
     public GameObject highControl;
 
@@ -411,11 +412,12 @@ public class TestKitController : MonoBehaviour
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
                 //Windows----------------
-                if (Application.platform == RuntimePlatform.WindowsPlayer)
+
+                if (liquid.UseFixedTimestep == true)
                 {
-                    hosePressure -= 0.15f;
+                    hosePressure -= 0.02f;
                 }
-                //OSX--------------------
+                //!Windows----------------
                 else
                 {
                     hosePressure -= 0.3f;
@@ -465,13 +467,21 @@ public class TestKitController : MonoBehaviour
                 //Windows----------------
                 if (Application.platform == RuntimePlatform.WindowsPlayer)
                 {
-                    hosePressure -= 0.3f;
+                    hosePressure -= 0.025f;
                 }
                 //OSX--------------------
                 else
                 {
                     hosePressure -= 0.4f;
                 }
+                // if (liquid.UseFixedTimestep == true)
+                // {
+                //     hosePressure -= 0.05f;
+                // }
+                // else
+                // {
+                //     hosePressure -= 0.4f;
+                // }
 
 
             }

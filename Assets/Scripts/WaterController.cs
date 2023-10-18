@@ -1,5 +1,7 @@
 
+using com.zibra.liquid.DataStructures;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.Solver;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -148,8 +150,13 @@ public class WaterController : MonoBehaviour
     public int testCock4MinStr;
     public int testCock4MaxStr;
     public float testCock4Str;
+    public GameObject checkValve1;
+    public GameObject checkValve2;
+    Rigidbody check1Rb;
+    Rigidbody check2Rb;
 
-
+    public ZibraLiquid liquid;
+    ZibraLiquidSolverParameters liquidSolverParameters;
 
     [SerializeField]
     bool isAttachedToGauge;
@@ -161,7 +168,8 @@ public class WaterController : MonoBehaviour
         shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
         initSupplyVoidPos = supplyVoid.transform.localPosition;
         initSupplyColliderPos = supplyCollider.transform.localPosition;
-
+        check1Rb = checkValve1.GetComponent<Rigidbody>();
+        check2Rb = checkValve2.GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -175,6 +183,8 @@ public class WaterController : MonoBehaviour
         Actions.onHoseDetach += DetectHoseDetachment;
         testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
         testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
+
+        liquidSolverParameters = liquid.GetComponent<ZibraLiquidSolverParameters>();
     }
 
     /// <summary>
@@ -212,6 +222,10 @@ public class WaterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+
         /// <summary>
         /// Regulate supply pressure
         /// </summary>
@@ -337,7 +351,15 @@ public class WaterController : MonoBehaviour
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
             }
-
+            //     if (liquid.UseFixedTimestep == true)
+            //     {
+            //         Void_Check1.transform.localScale = Vector3.SmoothDamp(
+            //       Void_Check1.transform.localScale,
+            //       check1VoidMaxSize * TestCockFF3.Strength,
+            //       ref check1VoidRef,
+            //       6f
+            //   );
+            //     }
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
@@ -359,19 +381,24 @@ public class WaterController : MonoBehaviour
             );
 
             //Regulate check housing force fields while shut off is closed (or testing is in progress)
+
             if (checkValveStatus.isCheck1Closed || checkValveStatus.isCheck2Closed)
             {
+
                 check1housingForceField.Strength = 0;
                 check2housingForceField.Strength = 0;
-            }
-            // else if (
-            //     !isAttachedToGauge && testCockController.isTestCock2Open
+                /// <summary>
+                /// Regulate checkvalve behavior and properties based on operating system (we have Windows using a fixed time step!)
+                /// </summary>
 
-            // )
-            // {
-            //     check1housingForceField.Strength = 0;
-            //     check2housingForceField.Strength = 0;
-            // }
+                if (liquid.UseFixedTimestep == true)
+                {
+
+
+
+                }
+            }
+
             else
             {
                 check1housingForceField.Strength = Mathf.SmoothDamp(
@@ -386,7 +413,11 @@ public class WaterController : MonoBehaviour
                     ref check2FFref.x,
                     1f
                 );
+
             }
+
+
+
         }
         else if (shutOffValveController.IsSupplyOn == true)
         {
@@ -418,4 +449,5 @@ public class WaterController : MonoBehaviour
         }
 
     }
+
 }
