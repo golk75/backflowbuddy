@@ -249,7 +249,9 @@ public class WaterController : MonoBehaviour
         else
         {
             TestCock1Emitter.enabled = false;
+
         }
+
         //test cock #2 pressure regulation
         if (
             testCockController.isTestCock2Open
