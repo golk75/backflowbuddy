@@ -7,7 +7,6 @@ public class MainMenuScreenController : MonoBehaviour
 {
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_DCTestScene = "DCTestScene";
-    [SerializeField] string m_CompressionTest = "CompressionTest";
     // [SerializeField] string m_DCTestScene_BuildOut_water = "DCTestScene_BuildOut_water";
     private void OnEnable()
     {
@@ -30,10 +29,7 @@ public class MainMenuScreenController : MonoBehaviour
         if (Application.isPlaying)
 #endif
             // Application.Quit();
-            // SceneManager.LoadScene(m_DCTestScene);
-            SceneManager.LoadScene(m_CompressionTest);
-
-
+            SceneManager.LoadSceneAsync(m_DCTestScene);
 
 
     }

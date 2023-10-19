@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using com.zibra.liquid.Solver;
 using UnityEngine;
 using UnityEngine.Serialization;
-using com.zibra.liquid.Solver;
 
 namespace com.zibra.liquid.Manipulators
 {
@@ -50,7 +50,7 @@ namespace com.zibra.liquid.Manipulators
     [ExecuteInEditMode]
     public abstract class Manipulator : MonoBehaviour
     {
-#region Public Interface
+        #region Public Interface
         /// <summary>
         ///     List of all enabled manipulators.
         /// </summary>
@@ -144,8 +144,8 @@ namespace com.zibra.liquid.Manipulators
             }
         }
 #endif
-#endregion
-#region Implementation details
+        #endregion
+        #region Implementation details
         [SerializeField]
         [HideInInspector]
         internal Vector4 AdditionalData0;
@@ -180,6 +180,6 @@ namespace com.zibra.liquid.Manipulators
             }
         }
 #endif
-#endregion
+        #endregion
     }
 }

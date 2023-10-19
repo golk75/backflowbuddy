@@ -32,7 +32,7 @@ public class GameScreenController : MonoBehaviour
         if (Application.isPlaying)
 #endif
             // Application.Quit();
-            SceneManager.LoadScene(m_MainMenuSceneName);
+            SceneManager.LoadSceneAsync(m_MainMenuSceneName);
     }
     // Start is called before the first frame update
     void Start()

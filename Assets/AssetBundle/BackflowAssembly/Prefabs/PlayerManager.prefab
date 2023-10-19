@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3130206605340565032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57673153265814795}
+  - component: {fileID: 2188251840394604002}
+  - component: {fileID: 3830166027685018098}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &57673153265814795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130206605340565032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.149342, y: 0.14875156, z: -0.008014213}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2188251840394604002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130206605340565032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda4c6ec8158342e3b4edf6abad6fda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestCockManager: {fileID: 0}
+  WaterManager: {fileID: 0}
+  Touch0Position:
+    m_Name: Touch 0 Position
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 743f578f-8403-42f2-8cdd-8c0a467923cb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  touchStart: {x: 0, y: 0, z: 0}
+  primaryTouchPos: {x: 0, y: 0}
+  isOperableObject: 0
+  primaryTouchStarted: 0
+  secondaryTouchStarted: 0
+  primaryTouchPerformed: 0
+  _operableObjectRotation: {x: 0, y: 0, z: 0}
+  deviceRotSensitivity: 1
+  _operableObject: {fileID: 0}
+  _operableValve: {fileID: 0}
+  isInit: 0
+  initialOperableObject: {fileID: 0}
+  operableComponentDescription: {fileID: 0}
+--- !u!114 &3830166027685018098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130206605340565032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f8d7730e55a42419bc547d0ae5d1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObjectsUsed: []
