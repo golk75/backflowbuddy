@@ -10,10 +10,10 @@ public class MainMenuScreenController : MonoBehaviour
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_DCTestScene = "DCTestScene";
     // [SerializeField] string m_DCTestScene_BuildOut_water = "DCTestScene_BuildOut_water";
-    public ZibraLiquidSolverParameters solverParameters;
-    public ZibraLiquid liquid;
+
     private void OnEnable()
     {
+
         MainMenuScreen.GamePlayed += OnPlayGame;
         MainMenuScreen.GameQuit += OnQuitGame;
     }
@@ -33,9 +33,9 @@ public class MainMenuScreenController : MonoBehaviour
         //         if (Application.isPlaying)
         // #endif
         // Application.Quit();
-        // SceneManager.LoadSceneAsync(m_DCTestScene);
-        liquid.ReleaseSimulation();
-        SceneManager.LoadScene(m_DCTestScene);
+        SceneManager.LoadSceneAsync(m_DCTestScene);
+
+        // SceneManager.LoadScene(m_DCTestScene);
 
 
 

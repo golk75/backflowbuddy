@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/GameMenuScreen.uss?fileID=7433441132597879392&amp;guid=3f629d560412543729baa98ea06c55aa&amp;type=3#GameMenuScreen" />
-    <ui:VisualElement name="GameMenuScreen_anchor" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-items: center; position: absolute; width: 100%; height: 100%; align-self: auto; justify-content: center; cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
+    <ui:VisualElement name="GameMenuScreen_anchor" class="game-menu-screen-anchor" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-items: center; position: absolute; width: 100%; height: 100%; align-self: auto; justify-content: center; cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
         <ui:VisualElement name="GameMenuScreen_overlay" class="pause-screen-button pause-screen-overlay" />
         <ui:VisualElement name="GameMenuScreen_panel" class="pause-screen-panel game-menu-panel" style="height: 50%;">
             <ui:VisualElement name="GameMenuScreen_header" class="pause-screen-header game-menu-header">

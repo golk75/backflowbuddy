@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GameScreen : MonoBehaviour
@@ -18,6 +19,7 @@ public class GameScreen : MonoBehaviour
     [Header("Menu Screen elements")]
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_MenuScreenName = "GameMenuScreen";
+    [SerializeField] string m_MenuMenusceneName = "MainMenu";
 
     [Header("Blur")]
     [SerializeField] Volume m_Volume;
@@ -45,8 +47,8 @@ public class GameScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        SetVisualElements();
-        RegisterButtonCallBacks();
+        // SetVisualElements();
+
     }
 
     private void OnDisable()
@@ -93,7 +95,8 @@ public class GameScreen : MonoBehaviour
     void QuitGame(ClickEvent evt)
     {
         // AudioManager.PlayDefaultButtonSound();
-        GameQuit?.Invoke();
+        // GameQuit?.Invoke();
+        SceneManager.LoadSceneAsync(m_MenuMenusceneName);
 
     }
     void ShowVisualElement(VisualElement visualElement, bool state)
@@ -109,7 +112,8 @@ public class GameScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        SetVisualElements();
+        RegisterButtonCallBacks();
     }
 
     // Update is called once per frame

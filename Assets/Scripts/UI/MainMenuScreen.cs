@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
@@ -16,7 +17,7 @@ public class MainMenuScreen : MonoBehaviour
 
     const string MainMenuPlayButtonString = "PlayButton";
     const string MainMenuQuitButtonString = "QuitButton";
-
+    [SerializeField] string m_DCTestScene = "DCTestScene";
     Button m_MainMenuPlayButton;
     Button m_MainMenuQuitButton;
 
@@ -24,8 +25,8 @@ public class MainMenuScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        SetVisualElements();
-        RegisterButtonCallBacks();
+
+
     }
     void SetVisualElements()
     {
@@ -44,12 +45,14 @@ public class MainMenuScreen : MonoBehaviour
 
     private void QuitGame(ClickEvent evt)
     {
-        GameQuit?.Invoke();
+        // GameQuit?.Invoke();
     }
 
     void PlayGame(ClickEvent evt)
     {
-        GamePlayed?.Invoke();
+        // GamePlayed?.Invoke();
+
+        SceneManager.LoadSceneAsync(m_DCTestScene);
     }
     // void PlayGame(PointerDownEvent evt)
     // {
@@ -58,6 +61,11 @@ public class MainMenuScreen : MonoBehaviour
     private void OnDisable()
     {
 
+    }
+    void Start()
+    {
+        SetVisualElements();
+        RegisterButtonCallBacks();
     }
 
 }
