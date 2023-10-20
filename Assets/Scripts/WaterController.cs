@@ -97,7 +97,7 @@ public class WaterController : MonoBehaviour
     ZibraLiquidVoid Void_Check2;
 
     [SerializeField]
-    ZibraLiquidVoid Void_Check1TC1;
+
 
     public float Void_check2ScaleUpSpeed;
     public float Void_check2ScaleDownSpeed;
@@ -375,12 +375,6 @@ public class WaterController : MonoBehaviour
                 ref check2VoidRef,
                 6f
             );
-            Void_Check1TC1.transform.localScale = Vector3.SmoothDamp(
-                Void_Check1TC1.transform.localScale,
-                check1VoidMaxSize * TestCockFF2.Strength / 8,
-                ref check1VoidTC1Ref,
-                5f
-            );
 
             //Regulate check housing force fields while shut off is closed (or testing is in progress)
 
@@ -440,7 +434,7 @@ public class WaterController : MonoBehaviour
 
             Void_Check2.transform.localScale = Vector3.zero;
 
-            // Void_Check1TC1.transform.localScale = Vector3.zero;
+
         }
 
     }
