@@ -1,4 +1,6 @@
 
+using com.zibra.liquid.DataStructures;
+using com.zibra.liquid.Solver;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,8 @@ public class MainMenuScreenController : MonoBehaviour
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_DCTestScene = "DCTestScene";
     // [SerializeField] string m_DCTestScene_BuildOut_water = "DCTestScene_BuildOut_water";
+    public ZibraLiquidSolverParameters solverParameters;
+    public ZibraLiquid liquid;
     private void OnEnable()
     {
         MainMenuScreen.GamePlayed += OnPlayGame;
@@ -30,7 +34,10 @@ public class MainMenuScreenController : MonoBehaviour
         // #endif
         // Application.Quit();
         // SceneManager.LoadSceneAsync(m_DCTestScene);
+        liquid.ReleaseSimulation();
         SceneManager.LoadScene(m_DCTestScene);
+
+
 
 
     }
