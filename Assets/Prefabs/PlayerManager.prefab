@@ -78,6 +78,7 @@ MonoBehaviour:
   primaryFingerDelta: {x: 0, y: 0}
   isMouseDown: 0
   ClickOperationEnabled: 0
+  root: {fileID: 0}
 --- !u!114 &3830166027685018098
 MonoBehaviour:
   m_ObjectHideFlags: 0
