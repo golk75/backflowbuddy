@@ -56,7 +56,10 @@ public class TestKitController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidDetector Zone1Detector;
-
+    [SerializeField]
+    ZibraLiquidDetector Zone2Detector;
+    [SerializeField]
+    ZibraLiquidDetector Zone3Detector;
     [SerializeField]
     GameObject TestCock1;
 
@@ -358,7 +361,7 @@ public class TestKitController : MonoBehaviour
                 //supply is open and test cock is open
                 hosePressure = Mathf.SmoothStep(
                     hosePressure,
-                    Zone1Detector.ParticlesInside,
+                    Zone2Detector.ParticlesInside,
                     needleSpeedDamp
                 );
                 // Debug.Log($"supply is open and test cock 3 is connected & open");
@@ -372,7 +375,7 @@ public class TestKitController : MonoBehaviour
                 //supply is open and test cock is open
                 hosePressure = Mathf.SmoothStep(
                     hosePressure,
-                    Zone1Detector.ParticlesInside,
+                    Zone3Detector.ParticlesInside,
                     needleSpeedDamp
                 );
                 // Debug.Log($"supply is open and test cock 4 is connected & open");
