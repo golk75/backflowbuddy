@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3130206605340565032}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.149342, y: 0.14875156, z: -0.008014213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2188251840394604002
 MonoBehaviour:
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestCockManager: {fileID: 0}
+  testKitController: {fileID: 0}
+  FillButton: {fileID: 0}
   WaterManager: {fileID: 0}
   Touch0Position:
     m_Name: Touch 0 Position
@@ -57,18 +59,25 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   touchStart: {x: 0, y: 0, z: 0}
-  primaryTouchPos: {x: 0, y: 0}
+  primaryTouchStartPos: {x: 0, y: 0}
   isOperableObject: 0
   primaryTouchStarted: 0
+  primaryClickStarted: 0
   secondaryTouchStarted: 0
   primaryTouchPerformed: 0
   _operableObjectRotation: {x: 0, y: 0, z: 0}
   deviceRotSensitivity: 1
-  _operableObject: {fileID: 0}
+  operableObject: {fileID: 0}
+  _operableTestGaugeObject: {fileID: 0}
   _operableValve: {fileID: 0}
   isInit: 0
   initialOperableObject: {fileID: 0}
+  initialTestGaugeOperableObject: {fileID: 0}
   operableComponentDescription: {fileID: 0}
+  primaryFingerPos: {x: 0, y: 0}
+  primaryFingerDelta: {x: 0, y: 0}
+  isMouseDown: 0
+  ClickOperationEnabled: 0
 --- !u!114 &3830166027685018098
 MonoBehaviour:
   m_ObjectHideFlags: 0
