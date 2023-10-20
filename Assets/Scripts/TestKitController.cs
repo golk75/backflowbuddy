@@ -451,7 +451,7 @@ public class TestKitController : MonoBehaviour
                 hosePressure = Mathf.SmoothStep(
                     hosePressure,
                     TestCock2Detector.ParticlesInside,
-                    0.015f
+                    0.1f
                 );
 
             }
