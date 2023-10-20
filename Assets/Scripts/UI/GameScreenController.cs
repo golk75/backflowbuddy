@@ -28,11 +28,12 @@ public class GameScreenController : MonoBehaviour
     }
     void QuitGame()
     {
-#if UNITY_EDITOR
-        if (Application.isPlaying)
-#endif
-            // Application.Quit();
-            SceneManager.LoadSceneAsync(m_MainMenuSceneName);
+        // #if UNITY_EDITOR
+        //         if (Application.isPlaying)
+        // #endif
+        // Application.Quit();
+        // SceneManager.LoadSceneAsync(m_MainMenuSceneName);
+        SceneManager.LoadScene(m_MainMenuSceneName);
     }
     // Start is called before the first frame update
     void Start()

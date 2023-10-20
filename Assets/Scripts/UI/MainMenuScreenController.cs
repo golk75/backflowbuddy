@@ -25,11 +25,12 @@ public class MainMenuScreenController : MonoBehaviour
 
     void OnPlayGame()
     {
-#if UNITY_EDITOR
-        if (Application.isPlaying)
-#endif
-            // Application.Quit();
-            SceneManager.LoadSceneAsync(m_DCTestScene);
+        // #if UNITY_EDITOR
+        //         if (Application.isPlaying)
+        // #endif
+        // Application.Quit();
+        // SceneManager.LoadSceneAsync(m_DCTestScene);
+        SceneManager.LoadScene(m_DCTestScene);
 
 
     }
