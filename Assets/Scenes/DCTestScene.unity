@@ -2818,7 +2818,10 @@ PrefabInstance:
       value: TestKitManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5804323846672073514, guid: e63f8fce2994e456e83ce6912408065e, type: 3}
+    - {fileID: 4545390900817160227, guid: e63f8fce2994e456e83ce6912408065e, type: 3}
+    - {fileID: 9205746737905272962, guid: e63f8fce2994e456e83ce6912408065e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e63f8fce2994e456e83ce6912408065e, type: 3}
