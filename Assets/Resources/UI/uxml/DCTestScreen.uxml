@@ -7,7 +7,7 @@
             <ui:Button name="MenuButton" focusable="false" class="menu-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_15_list_.png?fileID=2800000&amp;guid=32a4f33563139ce4da97630a9d7a3722&amp;type=3#T_15_list_&apos;);" />
             <ui:Button display-tooltip-when-elided="false" name="ResetButton" focusable="false" class="button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_19_previoust2_.png?fileID=2800000&amp;guid=ce5dfcf0b45530443bd2fbf805c38d52&amp;type=3#T_19_previoust2_&apos;);" />
             <ui:Button name="FillButton" focusable="false" class="fill-button button" />
-            <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" class="toggle" />
+            <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" />
         </ui:VisualElement>
         <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper" style="display: none;">
             <AttributeOverrides element-name="Container" picking-mode="Ignore" />

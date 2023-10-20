@@ -2,6 +2,7 @@ using System;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -81,9 +82,16 @@ public class PlayerController : MonoBehaviour
     public Vector2 primaryFingerDelta;
     public bool isMouseDown;
     public bool ClickOperationEnabled;
+    public UIDocument root;
+    public Toggle toggle;
     // Start is called before the first frame update
     void Awake()
     {
+        toggle = root.rootVisualElement.Q<Toggle>("ClickEnable_toggle");
+        if (toggle.value == true)
+        {
+            ClickOperationEnabled = true;
+        }
         playerInput = new PlayerInputAction();
 
         testCockController = TestCockManager.GetComponent<TestCockController>();
@@ -119,7 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
         }
-        if (ClickOperationEnabled)
+        if (ClickOperationEnabled == true)
         {
             ClickOperate();
         }
@@ -161,6 +169,7 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         playerInput.Enable();
+
     }
 
     void OnDisable()
@@ -214,7 +223,7 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
         }
-        if (ClickOperationEnabled)
+        if (ClickOperationEnabled == true)
         {
             ClickOperate();
         }
@@ -267,7 +276,7 @@ public class PlayerController : MonoBehaviour
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
         if (hit.collider != null && ray2DHit.collider == null)
         {
-            
+
             _operableTestGaugeObject = null;
             isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked
@@ -331,7 +340,7 @@ public class PlayerController : MonoBehaviour
 
 
                 ///Click/press and drag-----------------------------------------------------------------------
-                if (!ClickOperationEnabled)
+                if (ClickOperationEnabled == false)
                 {
                     _operableObjectRotation.z +=
                         (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
@@ -356,16 +365,16 @@ public class PlayerController : MonoBehaviour
     {
         ///Click/press---------------------------------------------------------------------------------
 
-        if (_operableObjectRotation.z == 90)
+        if (_operableObjectRotation.z > 0)
         {
             _operableObjectRotation.z = 0;
         }
-        else
+        else if (_operableObjectRotation.z <= 0)
         {
             _operableObjectRotation.z = 90;
 
         }
-        _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+        // _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
         ///End Click/press------------------------------------------------------------------------------
     }
 
