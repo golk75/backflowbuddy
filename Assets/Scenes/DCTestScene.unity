@@ -2543,6 +2543,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1372113974}
+    - target: {fileID: 6653288536532356118, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8408137675765720165, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: playerController

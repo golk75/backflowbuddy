@@ -548,7 +548,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 32767
@@ -885,7 +885,6 @@ GameObject:
   - component: {fileID: 4188148446844342141}
   - component: {fileID: 7875466980762198326}
   - component: {fileID: 8408137675765720165}
-  - component: {fileID: 5575453037078891507}
   - component: {fileID: 4753035537382020084}
   - component: {fileID: 5223085132162842862}
   m_Layer: 5
@@ -1067,25 +1066,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
---- !u!114 &5575453037078891507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5701968674246366777}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9743b3cfaf66943609e8b5e4aabd4b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frameCount: 0
-  frameRate: 0
-  cursorAnimationList:
-  - cursorType: 0
-    textureArray: []
-    frameRate: 0
-    offset: {x: 0, y: 0}
 --- !u!114 &4753035537382020084
 MonoBehaviour:
   m_ObjectHideFlags: 0
