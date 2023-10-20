@@ -885,7 +885,6 @@ GameObject:
   - component: {fileID: 4188148446844342141}
   - component: {fileID: 7875466980762198326}
   - component: {fileID: 8408137675765720165}
-  - component: {fileID: 4753035537382020084}
   - component: {fileID: 5223085132162842862}
   m_Layer: 5
   m_Name: GameUi
@@ -1066,19 +1065,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
---- !u!114 &4753035537382020084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5701968674246366777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89535a967e96343048e40221e7f15965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MainMenuSceneName: MainMenu
 --- !u!114 &5223085132162842862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MenuScreenName: GameMenuScreen
+  m_MenuMenusceneName: MainMenu
   m_Volume: {fileID: 0}
 --- !u!1 &6344383832322251146
 GameObject:
