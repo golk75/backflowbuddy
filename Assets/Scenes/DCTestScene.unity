@@ -369,37 +369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60815565df9b1e64e891757bcf54edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1749560234
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1749560235}
-  m_Layer: 5
-  m_Name: BleedHose
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1749560235
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749560234}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1995715176}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1808861984 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7261539336062736322, guid: e8e079197ce4f417e91c42a2a0cca0c9,
@@ -418,12 +387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60815565df9b1e64e891757bcf54edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1995715176 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1396646120946119137, guid: e63f8fce2994e456e83ce6912408065e,
-    type: 3}
-  m_PrefabInstance: {fileID: 9069183984932428705}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &291841097159207565 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6574486829040705848, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -2673,11 +2636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1396646120946119137, guid: e63f8fce2994e456e83ce6912408065e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1749560235}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e63f8fce2994e456e83ce6912408065e, type: 3}
 --- !u!1660057539 &9223372036854775807
