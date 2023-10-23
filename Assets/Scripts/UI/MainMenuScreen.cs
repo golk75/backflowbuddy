@@ -45,7 +45,13 @@ public class MainMenuScreen : MonoBehaviour
 
     private void QuitGame(ClickEvent evt)
     {
-        // GameQuit?.Invoke();
+
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+#endif
+            Application.Quit();
+
+
     }
 
     void PlayGame(ClickEvent evt)
