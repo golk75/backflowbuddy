@@ -703,13 +703,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684817881941632138}
+  - component: {fileID: 684817881941632139}
   m_Layer: 0
   m_Name: BleederHose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &216083613806703657
 Transform:
   m_ObjectHideFlags: 0
@@ -1102,6 +1103,19 @@ Transform:
   - {fileID: 2012908868}
   m_Father: {fileID: 7979768276041640512}
   m_LocalEulerAnglesHint: {x: 177.545, y: 90.648, z: 268.2}
+--- !u!114 &684817881941632139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201297011054951984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ffae3f0ef0a4a939c34e2ec923e146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testKitController: {fileID: 2769071947225662792}
 --- !u!4 &744900688229994192
 Transform:
   m_ObjectHideFlags: 0
@@ -2825,6 +2839,7 @@ MonoBehaviour:
   TestCockList: []
   TestCockDetectorList: []
   _root: {fileID: 64299822}
+  knobRotation: 0
 --- !u!114 &2820352474242559008 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5054539038417289118, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -7148,6 +7163,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UiManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579605743555587917, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579605743555587917, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 225
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351390292697210407, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351390292697210407, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 224.99994
       objectReference: {fileID: 0}
     - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}

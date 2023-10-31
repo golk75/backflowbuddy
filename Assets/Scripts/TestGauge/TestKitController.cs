@@ -129,7 +129,7 @@ public class TestKitController : MonoBehaviour
     // private Length MaxFillPos = Length.Percent(100);
     private float MinFillPos = 0;
     private float MaxFillPos = 100;
-
+    public float knobRotation;
 
     void OnEnable()
     {
@@ -211,13 +211,13 @@ public class TestKitController : MonoBehaviour
     }
 
 
-    private float GetKnobRotation()
+    public float GetKnobRotation()
     {
         // max - min to rotate left while increasing
         float rotationDiff = MaxKnob_rotation - MinKnob_rotation;
 
         float normalizedRotation = currentKnobRotation / maxKnobRotation;
-
+        knobRotation = MinKnob_rotation + normalizedRotation * rotationDiff;
         //return MinKnob_rotation + normalizedRotation * rotationDiff;
         return MinKnob_rotation + normalizedRotation * rotationDiff;
     }
