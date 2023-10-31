@@ -26,17 +26,17 @@ public class HoseDetector : MonoBehaviour
         if (playerController.primaryTouchPerformed)
         {
             onAttachAttempt = StartCoroutine(AttachInitiate());
-            Debug.Log($"detector= {name}");
+
         }
         isConnected = true;
-        // Debug.Log($"isConnected = {isConnected}");
-    }
-
-    //
-    private void OnTriggerStay(Collider other)
-    {
 
     }
+
+
+    // private void OnTriggerStay(Collider other)
+    // {
+
+    // }
 
     private void OnTriggerExit(Collider other)
     {
@@ -52,15 +52,12 @@ public class HoseDetector : MonoBehaviour
         if (isConnected == true)
         {
 
-            Debug.Log($"wait completed");
+
             Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
         }
 
 
     }
 
-    void Update()
-    {
-        // Debug.Log($"isConnected = {isConnected}");
-    }
+
 }

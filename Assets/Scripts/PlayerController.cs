@@ -309,9 +309,7 @@ public class PlayerController : MonoBehaviour
     //THIS ONLY OPERATES ASSEMBY COMPONENTS! NOT TESTGAUGE COMPONENTS
     private void Operate()
     {
-        //_operableObjectRotation = _operableObject.transform.rotation.eulerAngles;
 
-        //Vector2 primaryFingerPos = playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>();
         if (operableObject != null)
         {
             if (
@@ -353,7 +351,7 @@ public class PlayerController : MonoBehaviour
                     ///End Click/press and drag--------------------------------------------------------------------
                 }
                 /// <summary>
-                /// For Click Operations, see LeftMouseClicked_performed() && 
+                /// For Click Operations, see LeftMouseClicked_performed() 
                 /// </summary>
 
 
@@ -374,7 +372,7 @@ public class PlayerController : MonoBehaviour
             _operableObjectRotation.z = 90;
 
         }
-        // _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+
         ///End Click/press------------------------------------------------------------------------------
     }
 
@@ -385,11 +383,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OperateCheck()
     {
-        // if (isOperableObject == true && primaryTouchStarted > 0)
-        // {
-        //     Operate();
-        // }
-
         if (primaryTouchStarted > 0)
         {
             Operate();

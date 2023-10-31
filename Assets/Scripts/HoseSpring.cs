@@ -57,12 +57,6 @@ public class HoseSpring : MonoBehaviour
     /// </summary>
     /// <param name="testCock"></param>
     /// <param name="description"></param>
-    private void CheckTestCockContact(GameObject testCock, OperableComponentDescription description)
-    {
-        // Debug.Log(
-        //     $" testCock.name = {testCock.name} |  testCock.transform.position = {testCock.transform.position} | description = {description.componentId}"
-        // );
-    }
 
     private void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
     {
@@ -72,29 +66,29 @@ public class HoseSpring : MonoBehaviour
         {
             case OperableComponentDescription.ComponentId.HighHose:
                 Destroy(HighHoseBib.GetComponent<ConfigurableJoint>());
-                Debug.Log($"High config joint destroyed");
+
                 break;
             case OperableComponentDescription.ComponentId.LowHose:
                 Destroy(LowHoseBib.GetComponent<ConfigurableJoint>());
-                Debug.Log($"Low config joint destroyed");
+
                 break;
             case OperableComponentDescription.ComponentId.BypassHose:
                 Destroy(BypassHoseBib.GetComponent<ConfigurableJoint>());
-                Debug.Log($"Bypass config joint destroyed");
+
                 break;
             default:
-                Debug.Log($"No config. joint to destroy");
+
                 break;
         }
         currentHoseBibObj.transform.position = testCock.transform.position;
 
-        Debug.Log($"connection attempt");
+
     }
 
     public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
         isAttaching = false;
-        Debug.Log($"grabbing hose..");
+
         switch (description.componentId)
         {
             case OperableComponentDescription.ComponentId.HighHose:
@@ -107,7 +101,7 @@ public class HoseSpring : MonoBehaviour
                 currentHoseBibObj = BypassHoseBib;
                 break;
             default:
-                Debug.Log($"Not the HoseBib you're looking for");
+
                 break;
         }
 
@@ -122,7 +116,7 @@ public class HoseSpring : MonoBehaviour
 
     public void DropHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
-        // isAttaching = false;
+
         if (isAttaching != true)
         {
             if (currentHoseBibObj)
@@ -132,15 +126,6 @@ public class HoseSpring : MonoBehaviour
                 currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
 
                 currentConfigurableJoint.autoConfigureConnectedAnchor = false;
-
-
-
-
-                // CongfigurableJointPreset.ApplyTo(currentConfigurableJoint);
-
-
-
-
 
 
                 switch (description.componentId)
@@ -159,7 +144,7 @@ public class HoseSpring : MonoBehaviour
                         currentConfigurableJoint.connectedBody = BypassHoseConfigJointConnectedBody;
                         break;
                     default:
-                        Debug.Log($"Not the HoseBib you're looking for");
+
                         break;
                 }
                 currentConfigurableJoint.xMotion = jointPreset.xMotion;
@@ -176,7 +161,7 @@ public class HoseSpring : MonoBehaviour
         isAttaching = false;
         if (HoseRb != null)
             HoseRb.isKinematic = false;
-        //Debug.Log($"hose dropped");
+
     }
 
     Vector3 GetPointerPos()
@@ -230,6 +215,5 @@ public class HoseSpring : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update() { }
+
 }

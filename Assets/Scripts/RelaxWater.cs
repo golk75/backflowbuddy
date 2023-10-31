@@ -148,8 +148,7 @@ public class RelaxWater : MonoBehaviour
     /// </summary>
     private void checkRelax()
     {
-        //supplyVolume = shutOffValveController.mainSupplyEmitter.VolumePerSimTime;
-        //_operatingTestCock = testCockController.OperatingTestCock;
+
 
         /// <summary>
         /// //close supply end with collider if shutoff is closed, to keep current volume of water at time of shutoff (protect water from supply void)

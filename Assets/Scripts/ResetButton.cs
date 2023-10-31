@@ -126,6 +126,4 @@ public class ResetButton : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update() { }
 }

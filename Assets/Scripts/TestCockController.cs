@@ -103,10 +103,10 @@ public class TestCockController : MonoBehaviour
 
     public float testCockValveScaleFactor;
 
-    //Vector3 testCockClosedScale = new Vector3(0.00886263326f,0.0028f,0.000265074486f);
+
     Vector3 testCockClosedScale;
 
-    //Open Vector3(0.010200086,0.00762913516,0.000314917503)
+
     public Vector3 testCockOpenScale = new Vector3(0.010200086f, 0.00762913516f, 0.000314917503f);
 
     Vector3 _operableTestCockVoidScale;
@@ -150,7 +150,6 @@ public class TestCockController : MonoBehaviour
         playerController = PlayerManager.GetComponent<PlayerController>();
         relaxWater = WaterManager.GetComponent<RelaxWater>();
         testCockClosedScale = TestCockVoid1.transform.localScale;
-        // TestCockList = new List<GameObject>();
     }
 
     private void TestCockValveOperationCheck()
@@ -213,8 +212,8 @@ public class TestCockController : MonoBehaviour
                                 playerController.OperableObjectRotation;
                             break;
                     }
-                    //assign the associated test cock valve/collider to currently operating test cock;
 
+                    //assign the associated test cock valve/collider to currently operating test cock;
                     _operableTestCockColliderScale = _operableTestCockVoidScale =
                         _operableTestCockVoid.transform.localScale;
 

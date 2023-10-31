@@ -15,25 +15,20 @@ public class HoseManager : MonoBehaviour
     Rigidbody connectedAbove;
     Rigidbody connectedBelow;
 
-    // HingeJoint connectedAbove;
-    // HingeJoint connectedBelow;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        //create hinge joints for hose armature
         hingeJointConnections = hoseArmature.GetComponentsInChildren<Rigidbody>();
         for (int i = 1; i < hingeJointConnections.Length; i++)
         {
             hingeJointConnections[i].GetComponent<FixedJoint>().connectedBody =
                 hingeJointConnections[i - 1];
-            // hingeJointConnections[i].GetComponent<ConfigurableJoint>().connectedBody =
-            //     hingeJointConnections[i - 1];
 
-            // hingeJointConnections[i].GetComponent<HingeJoint>().connectedBody =
-            //     hingeJointConnections[i - 1];
         }
     }
 
-    // Update is called once per frame
-    void Update() { }
+
 }
