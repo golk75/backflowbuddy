@@ -61,14 +61,14 @@ public class CameraController : MonoBehaviour
     {
         playerInput.Enable();
         PlayerController.onZoomStop += Zoom_canceled;
-        PlayerController.onPanCanceled += Pan_cancled;
+        PlayerController.OnPanCanceled += Pan_cancled;
     }
 
     void OnDisable()
     {
         playerInput.Disable();
         PlayerController.onZoomStop -= Zoom_canceled;
-        PlayerController.onPanCanceled -= Pan_cancled;
+        PlayerController.OnPanCanceled -= Pan_cancled;
     }
 
     private void Pan_started()

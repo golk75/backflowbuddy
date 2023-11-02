@@ -7,20 +7,19 @@ public class BleedHoseController : MonoBehaviour
 {
     ZibraLiquidEmitter bleederHoseEmitter;
     float controlKnobRotation;
-    float bleederHoseEmitterVolume;
     public TestKitController testKitController;
     float currentFlow = 0;
     float appliedKnobRotation = 0;
+    [SerializeField]
+    GameObject highBleedKnob;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+
         bleederHoseEmitter = GetComponentInChildren<ZibraLiquidEmitter>();
-        bleederHoseEmitterVolume = bleederHoseEmitter.VolumePerSimTime;
-
-
 
     }
 
@@ -30,12 +29,13 @@ public class BleedHoseController : MonoBehaviour
     void Update()
     {
         //reset cached knob rotation to not reset after rotating 180 degress--> zRot is rotating from 0 -> 180 -> -180 -> 0 -> 180..and so on
+        if (testKitController.currentKnob == highBleedKnob)
+        {
+            appliedKnobRotation = testKitController.knobRotation;
 
-        appliedKnobRotation = testKitController.knobRotation;
+            bleederHoseEmitter.VolumePerSimTime = appliedKnobRotation / 10000;
 
-
-
-        Debug.Log($"appliedKnobRotation = {appliedKnobRotation}; controlKnobRotation = {controlKnobRotation}");
+        }
 
 
 

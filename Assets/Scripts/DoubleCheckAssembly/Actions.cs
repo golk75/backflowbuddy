@@ -26,6 +26,8 @@ public static class Actions
     public static Action onTestCock3Closed;
     public static Action onTestCock4Opened;
     public static Action onTestCock4Closed;
+    public static Action onHighBleedOpen;
+    public static Action onHighBleedClosed;
     public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
     public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;
 }

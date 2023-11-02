@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class TestKitController : MonoBehaviour
@@ -14,17 +17,18 @@ public class TestKitController : MonoBehaviour
     public ShutOffValveController shutOffValveController;
     public TestCockController testCockController;
     public CheckValveStatus checkValveStatus;
-    public GameObject lowBleed;
-    public GameObject lowControl;
+    public Animator openKnobAnimation;
+
     public ZibraLiquid liquid;
     public GameObject highBleed;
     public GameObject highControl;
-
+    public GameObject lowBleed;
+    public GameObject lowControl;
     public GameObject bypassControl;
 
     public GameObject needle;
     public GameObject digitalKitNeedle;
-    private GameObject currentKnob;
+    public GameObject currentKnob;
 
     [SerializeField]
     GameObject LowHose;
@@ -112,14 +116,13 @@ public class TestKitController : MonoBehaviour
     public float highHosePressure;
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
-
-    [SerializeField]
+    public float knobRotationFactor = 0;
     public List<GameObject> TestCockList;
-
-    [SerializeField]
+    Coroutine KnobClickOperate;
     public List<ZibraLiquidDetector> TestCockDetectorList;
     Coroutine Check1ClosingPoint;
     float needleVelRef = 0;
+    public bool knobOpened;
 
     //ui toolkit
     public UIDocument _root;
@@ -131,6 +134,7 @@ public class TestKitController : MonoBehaviour
     private float MaxFillPos = 100;
     public float knobRotation;
 
+    int rot = 0;
     void OnEnable()
     {
 
@@ -144,8 +148,20 @@ public class TestKitController : MonoBehaviour
         Actions.onTestCock3Closed += TestCock3Closed;
         Actions.onTestCock4Opened += TestCoc4Opened;
         Actions.onTestCock4Closed += TestCock4Closed;
+        Actions.onHighBleedOpen += HighBleedKnobOpened;
+        Actions.onHighBleedClosed += HighBleedKnobClosed;
 
 
+    }
+
+    private void HighBleedKnobClosed()
+    {
+        knobOpened = false;
+    }
+
+    private void HighBleedKnobOpened()
+    {
+        knobOpened = true;
     }
 
     void OnDisable()
@@ -219,7 +235,7 @@ public class TestKitController : MonoBehaviour
         float normalizedRotation = currentKnobRotation / maxKnobRotation;
         knobRotation = MinKnob_rotation + normalizedRotation * rotationDiff;
         //return MinKnob_rotation + normalizedRotation * rotationDiff;
-        return MinKnob_rotation + normalizedRotation * rotationDiff;
+        return MinKnob_rotation + normalizedRotation * rotationDiff * knobRotationFactor;
     }
 
     private void OperateControls()
@@ -230,28 +246,101 @@ public class TestKitController : MonoBehaviour
                 playerController.operableComponentDescription.partsType
                 == OperableComponentDescription.PartsType.TestKitValve
             )
-                currentKnob = playerController.OperableTestGaugeObject;
-
-            currentKnobRotation +=
-                (
-                    playerController.touchStart.x
-                    - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
-                ) / 5;
-
-            //currentKnobRotation += 1 * Time.deltaTime;
-
-            if (currentKnobRotation > maxKnobRotation)
             {
-                currentKnobRotation = maxKnobRotation;
+                switch (playerController.operableComponentDescription.componentId)
+                {
+                    case OperableComponentDescription.ComponentId.HighBleed:
+                        currentKnob = highBleed;
+                        break;
+                    case OperableComponentDescription.ComponentId.LowBleed:
+                        currentKnob = lowBleed;
+                        break;
+                    case OperableComponentDescription.ComponentId.LowControl:
+                        currentKnob = lowControl;
+                        break;
+                    case OperableComponentDescription.ComponentId.HighControl:
+                        currentKnob = highControl;
+                        break;
+                    case OperableComponentDescription.ComponentId.BypassControl:
+                        currentKnob = bypassControl;
+                        break;
+                    default:
+                        currentKnob = null;
+                        break;
+                }
+
+                if (playerController.ClickOperationEnabled == false)
+                {
+
+                    // currentKnob = playerController.OperableTestGaugeObject;
+
+                    //check click operation status
+
+                    //if disabled, use click and drag
+
+                    currentKnobRotation +=
+                        (
+                            playerController.touchStart.x
+                            - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
+                        ) / 5;
+
+
+                    if (currentKnobRotation > maxKnobRotation)
+                    {
+                        currentKnobRotation = maxKnobRotation;
+                    }
+                    if (currentKnobRotation < minKnobRotation)
+                    {
+                        currentKnobRotation = minKnobRotation;
+                    }
+                    if (currentKnob != null)
+                        currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
+                }
+                //if enabled, spin to max rotation
+                else if (playerController.ClickOperationEnabled == true)
+                {
+
+                    //Debug.Log($"obj.transform.eulerAngles = {currentKnob.transform.eulerAngles}");
+                    if (!knobOpened)
+                    {
+                        HighBleedKnobOpened();
+                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+                    }
+                    else
+                    {
+                        HighBleedKnobClosed();
+                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, -180)));
+                    }
+                    Debug.Log($"knobOpened: {knobOpened}");
+                }
+
+
+
             }
-            if (currentKnobRotation < minKnobRotation)
-            {
-                currentKnobRotation = minKnobRotation;
-            }
-            if (currentKnob != null)
-            {
-                currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
-            }
+
+
+        }
+    }
+    IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
+    {
+        float timeLerped = 0.0f;
+        var startPos = transform.position;
+        while (timeLerped < 1.0)
+        {
+            timeLerped += Time.deltaTime;
+            obj.transform.eulerAngles = Vector3.Lerp(startPos, targetRotation, timeLerped) * 10;
+            yield return null;
+        }
+    }
+    IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
+    {
+        float timeLerped = 0.0f;
+        var startPos = transform.position;
+        while (timeLerped < 1.0)
+        {
+            timeLerped += Time.deltaTime;
+            obj.transform.eulerAngles = Vector3.Lerp(startPos, targetRotation, timeLerped) * 10;
+            yield return null;
         }
     }
 
@@ -541,6 +630,7 @@ public class TestKitController : MonoBehaviour
         OperateControls();
         NeedleControl();
         DigitalNeedleControl();
+
 
     }
 

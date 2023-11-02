@@ -20,13 +20,12 @@ public class PlayerController : MonoBehaviour
     public InputAction Touch0Position;
     public Vector3 touchStart;
 
-    [SerializeField]
     public Vector2 primaryTouchStartPos;
 
     //Camera events
     public static event Action onZoomStop;
 
-    public static event Action onPanCanceled;
+    public static event Action OnPanCanceled;
 
     public bool isOperableObject = false;
     public float primaryTouchStarted;
@@ -60,10 +59,8 @@ public class PlayerController : MonoBehaviour
 
     public float deviceRotSensitivity;
 
-    [SerializeField]
     public GameObject operableObject;
 
-    [SerializeField]
     public GameObject _operableTestGaugeObject;
     public GameObject OperableTestGaugeObject
     {
@@ -131,7 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             ClickOperate();
         }
-
+        // DetectObjectWithRaycast();
     }
 
     private void LeftMouseClick_canceled(InputAction.CallbackContext context)
@@ -139,7 +136,7 @@ public class PlayerController : MonoBehaviour
         primaryClickStarted = context.ReadValue<float>();
         primaryTouchStarted = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
-        onPanCanceled?.Invoke();
+        OnPanCanceled?.Invoke();
 
         if (
             isOperableObject == true
@@ -151,6 +148,7 @@ public class PlayerController : MonoBehaviour
         }
         isOperableObject = false;
         operableObject = null;
+        _operableTestGaugeObject = null;
         primaryTouchStartPos = Vector3.zero;
         touchStart = Vector3.zero;
     }
@@ -199,7 +197,7 @@ public class PlayerController : MonoBehaviour
         primaryClickStarted = context.ReadValue<float>();
         primaryTouchStarted = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
-        onPanCanceled?.Invoke();
+        OnPanCanceled?.Invoke();
 
         if (
             isOperableObject == true
@@ -227,7 +225,7 @@ public class PlayerController : MonoBehaviour
         {
             ClickOperate();
         }
-
+        DetectObjectWithRaycast();
     }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
@@ -362,16 +360,26 @@ public class PlayerController : MonoBehaviour
     private void ClickOperate()
     {
         ///Click/press---------------------------------------------------------------------------------
-
-        if (_operableObjectRotation.z > 0)
+        if (OperableObject != null)
         {
-            _operableObjectRotation.z = 0;
-        }
-        else if (_operableObjectRotation.z <= 0)
-        {
-            _operableObjectRotation.z = 90;
 
+            if (_operableObjectRotation.z > 0)
+            {
+                _operableObjectRotation.z = 0;
+            }
+            else if (_operableObjectRotation.z <= 0)
+            {
+                _operableObjectRotation.z = 90;
+
+            }
         }
+        // if (OperableTestGaugeObject != null)
+        // {
+        //     Debug.Log($"OperableTestGaugeObject: {OperableTestGaugeObject}");
+
+        // }
+
+
 
         ///End Click/press------------------------------------------------------------------------------
     }
@@ -393,5 +401,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         OperateCheck();
+
     }
 }
