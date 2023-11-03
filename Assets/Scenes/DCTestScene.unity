@@ -321,6 +321,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 519896914}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 197d9fbdf860d4c8fa7478e63c4b483e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 519896917}
   m_SourcePrefab: {fileID: 100100000, guid: 197d9fbdf860d4c8fa7478e63c4b483e, type: 3}
 --- !u!4 &166056153 stripped
 Transform:
@@ -527,8 +531,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentId: 10
+  componentId: 13
   partsType: 4
+--- !u!65 &519896917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519896913}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0062169307, y: 0.006219681, z: 0.004478669}
+  m_Center: {x: -0.0000016838894, y: -0.0000018025748, z: 0.0022005797}
 --- !u!114 &630631940 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 378496651292828143, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -655,6 +680,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1148582267}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 197d9fbdf860d4c8fa7478e63c4b483e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1148582270}
   m_SourcePrefab: {fileID: 100100000, guid: 197d9fbdf860d4c8fa7478e63c4b483e, type: 3}
 --- !u!4 &1111067044 stripped
 Transform:
@@ -682,6 +711,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 9
   partsType: 4
+--- !u!65 &1148582270
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148582266}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0062169307, y: 0.006219681, z: 0.004478669}
+  m_Center: {x: -0.0000016877893, y: -0.0000018011779, z: 0.0022005797}
 --- !u!1001 &1248594049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,6 +823,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1248594051}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 197d9fbdf860d4c8fa7478e63c4b483e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1248594054}
   m_SourcePrefab: {fileID: 100100000, guid: 197d9fbdf860d4c8fa7478e63c4b483e, type: 3}
 --- !u!4 &1248594050 stripped
 Transform:
@@ -794,6 +848,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 11
   partsType: 4
+--- !u!65 &1248594054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032487122}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0062169307, y: 0.006219681, z: 0.004478669}
+  m_Center: {x: -0.0000016849954, y: -0.0000018011779, z: 0.002200579}
 --- !u!20 &1372113974 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7975887091541937799, guid: 06b5c138c781448b2ac79ddf44aff99e,
@@ -1123,6 +1198,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2036811359}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 197d9fbdf860d4c8fa7478e63c4b483e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2036811362}
   m_SourcePrefab: {fileID: 100100000, guid: 197d9fbdf860d4c8fa7478e63c4b483e, type: 3}
 --- !u!4 &2036811358 stripped
 Transform:
@@ -1144,6 +1223,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 10
   partsType: 4
+--- !u!65 &2036811362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613671802}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0062169307, y: 0.006219681, z: 0.004478669}
+  m_Center: {x: -0.0000016831327, y: -0.0000018025748, z: 0.0022005783}
 --- !u!1001 &2065615094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1235,6 +1335,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2065615096}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 197d9fbdf860d4c8fa7478e63c4b483e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2065615099}
   m_SourcePrefab: {fileID: 100100000, guid: 197d9fbdf860d4c8fa7478e63c4b483e, type: 3}
 --- !u!4 &2065615095 stripped
 Transform:
@@ -1256,6 +1360,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 12
   partsType: 4
+--- !u!65 &2065615099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770964668}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0062169307, y: 0.006219681, z: 0.004478669}
+  m_Center: {x: -0.000001684064, y: -0.0000018025748, z: 0.0022005797}
 --- !u!114 &2100975872 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8150445344521148052, guid: b9242a77ce9b24fab85cddfa72914f01,

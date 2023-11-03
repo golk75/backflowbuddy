@@ -324,22 +324,22 @@ public class TestKitController : MonoBehaviour
     IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
         float timeLerped = 0.0f;
-        var startPos = transform.position;
+
         while (timeLerped < 1.0)
         {
             timeLerped += Time.deltaTime;
-            obj.transform.eulerAngles = Vector3.Lerp(startPos, targetRotation, timeLerped) * 10;
+            obj.transform.eulerAngles = Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
             yield return null;
         }
     }
     IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
         float timeLerped = 0.0f;
-        var startPos = transform.position;
+
         while (timeLerped < 1.0)
         {
             timeLerped += Time.deltaTime;
-            obj.transform.eulerAngles = Vector3.Lerp(startPos, targetRotation, timeLerped) * 10;
+            obj.transform.eulerAngles = Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
             yield return null;
         }
     }
