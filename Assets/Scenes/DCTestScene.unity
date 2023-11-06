@@ -6095,6 +6095,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 630056093349557419, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 47332c127836d4d0994b370e077c9aff, type: 2}
     - target: {fileID: 1015636773445691800, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6170,6 +6175,16 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 2451056851075105703, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564132485703131199, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0101
+      objectReference: {fileID: 0}
     - target: {fileID: 3247251146356766156, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: hoseSpring
@@ -6180,6 +6195,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 3714154059635090058, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4657695335378183965, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: liquid
@@ -6300,6 +6320,21 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 8898165258805504864, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898165258805504864, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 47332c127836d4d0994b370e077c9aff, type: 2}
+    - target: {fileID: 8909897950456464007, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

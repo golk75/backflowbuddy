@@ -381,6 +381,11 @@ public class PlayerController : MonoBehaviour
                 _operableObjectRotation.z = 90;
 
             }
+            if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.HighBleed)
+            {
+
+                Actions.onHighBleedOperate?.Invoke();
+            }
         }
         // if (OperableTestGaugeObject != null)
         // {
@@ -388,11 +393,7 @@ public class PlayerController : MonoBehaviour
 
         // }
 
-        if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.HighBleed)
-        {
 
-            Actions.onHighBleedOperate?.Invoke();
-        }
 
         ///End Click/press------------------------------------------------------------------------------
     }
