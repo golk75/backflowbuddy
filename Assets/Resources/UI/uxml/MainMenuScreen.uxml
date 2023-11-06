@@ -1,9 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/MainMenu.uss?fileID=7433441132597879392&amp;guid=c5bd34c57e0dc4d5f9c34d52ef006148&amp;type=3#MainMenu" />
+    <Style src="project://database/Assets/Resources/UI/uss/MainMenu.uss?fileID=7433441132597879392&amp;guid=c5bd34c57e0dc4d5f9c34d52ef006148&amp;type=3#MainMenu" />
     <ui:VisualElement name="MainMenu_container" style="flex-grow: 1; background-color: rgb(255, 255, 255); width: 100%; height: 100%; align-items: center; align-self: center; justify-content: flex-start;">
-        <ui:VisualElement name="MainMenu_title_container" class="main-menu-title main-menu-title-container">
-            <ui:Label tabindex="-1" text="BackflowBuddy" display-tooltip-when-elided="true" name="MainMenu_title_label" class="main-menu-title-label" />
-        </ui:VisualElement>
+        <ui:VisualElement name="MainMenu_title_container" class="main-menu-title main-menu-title-container2 main-menu-title-container" style="background-image: resource(&apos;UI/Textures/Backflow_Buddy_Title 2&apos;); translate: 0 -22%;" />
         <ui:VisualElement name="MainMenu_panel" class="main-menu-panel">
             <ui:Button text="Play" display-tooltip-when-elided="true" name="PlayButton" focusable="false" class="main-menu-button" />
             <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" focusable="false" class="main-menu-button" />

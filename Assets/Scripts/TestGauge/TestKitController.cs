@@ -50,6 +50,8 @@ public class TestKitController : MonoBehaviour
     Vector3 initBypassHosePosition;
 
     [SerializeField]
+    ZibraLiquidEmitter bleederHoseEmitter;
+    [SerializeField]
     ZibraLiquidDetector LowHoseDetector;
 
     [SerializeField]
@@ -122,7 +124,7 @@ public class TestKitController : MonoBehaviour
     public List<ZibraLiquidDetector> TestCockDetectorList;
     Coroutine Check1ClosingPoint;
     float needleVelRef = 0;
-    public bool knobOpened;
+    public bool knobOpened = false;
 
     //ui toolkit
     public UIDocument _root;
@@ -148,21 +150,21 @@ public class TestKitController : MonoBehaviour
         Actions.onTestCock3Closed += TestCock3Closed;
         Actions.onTestCock4Opened += TestCoc4Opened;
         Actions.onTestCock4Closed += TestCock4Closed;
-        Actions.onHighBleedOpen += HighBleedKnobOpened;
-        Actions.onHighBleedClosed += HighBleedKnobClosed;
+        // Actions.onHighBleedOpen += HighBleedKnobOpened;
+        // Actions.onHighBleedClosed += HighBleedKnobClosed;
 
 
     }
 
-    private void HighBleedKnobClosed()
-    {
-        knobOpened = false;
-    }
+    // private void HighBleedKnobClosed()
+    // {
+    //     knobOpened = false;
+    // }
 
-    private void HighBleedKnobOpened()
-    {
-        knobOpened = true;
-    }
+    // private void HighBleedKnobOpened()
+    // {
+    //     knobOpened = true;
+    // }
 
     void OnDisable()
     {
@@ -176,6 +178,8 @@ public class TestKitController : MonoBehaviour
         Actions.onTestCock3Closed -= TestCock3Closed;
         Actions.onTestCock4Opened -= TestCoc4Opened;
         Actions.onTestCock4Closed -= TestCock4Closed;
+        // Actions.onHighBleedOpen -= HighBleedKnobOpened;
+        // Actions.onHighBleedClosed -= HighBleedKnobClosed;
 
         //Actions.onTestCockOpen -= DetectTestCockOpen;
     }
@@ -233,6 +237,7 @@ public class TestKitController : MonoBehaviour
         float rotationDiff = MaxKnob_rotation - MinKnob_rotation;
 
         float normalizedRotation = currentKnobRotation / maxKnobRotation;
+
         knobRotation = MinKnob_rotation + normalizedRotation * rotationDiff;
         //return MinKnob_rotation + normalizedRotation * rotationDiff;
         return MinKnob_rotation + normalizedRotation * rotationDiff * knobRotationFactor;
@@ -299,28 +304,27 @@ public class TestKitController : MonoBehaviour
                 //if enabled, spin to max rotation
                 else if (playerController.ClickOperationEnabled == true)
                 {
-
-                    //Debug.Log($"obj.transform.eulerAngles = {currentKnob.transform.eulerAngles}");
-                    if (!knobOpened)
+                    if (bleederHoseEmitter.VolumePerSimTime > 0)
                     {
-                        HighBleedKnobOpened();
-                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+
                     }
                     else
                     {
-                        HighBleedKnobClosed();
-                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, -180)));
+                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+
                     }
-                    Debug.Log($"knobOpened: {knobOpened}");
+
+                    // KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, -180)));
+
                 }
-
-
 
             }
 
 
         }
     }
+
     IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
         float timeLerped = 0.0f;
@@ -334,8 +338,9 @@ public class TestKitController : MonoBehaviour
     }
     IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
-        float timeLerped = 0.0f;
 
+        float timeLerped = 0.0f;
+        knobOpened = true;
         while (timeLerped < 1.0)
         {
             timeLerped += Time.deltaTime;
@@ -630,7 +635,7 @@ public class TestKitController : MonoBehaviour
         OperateControls();
         NeedleControl();
         DigitalNeedleControl();
-
+        knobRotation = highBleed.transform.eulerAngles.z;
 
     }
 

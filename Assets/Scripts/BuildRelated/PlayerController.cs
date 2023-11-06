@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
     public bool ClickOperationEnabled;
     public UIDocument root;
     public Toggle toggle;
+    public bool clickPerformed;
     // Start is called before the first frame update
     void Awake()
     {
@@ -127,8 +128,10 @@ public class PlayerController : MonoBehaviour
         if (ClickOperationEnabled == true)
         {
             ClickOperate();
+
         }
-        // DetectObjectWithRaycast();
+
+
     }
 
     private void LeftMouseClick_canceled(InputAction.CallbackContext context)
@@ -226,6 +229,7 @@ public class PlayerController : MonoBehaviour
             ClickOperate();
         }
         DetectObjectWithRaycast();
+
     }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
@@ -275,7 +279,7 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null && ray2DHit.collider == null)
         {
 
-            _operableTestGaugeObject = null;
+            // _operableTestGaugeObject = null;
             isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked
             if (hit.collider.transform.GetComponent<OperableComponentDescription>())
@@ -355,6 +359,11 @@ public class PlayerController : MonoBehaviour
 
 
             }
+            else if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitValve)
+            {
+                _operableTestGaugeObject = operableObject;
+                operableObject = null;
+            }
         }
     }
     private void ClickOperate()
@@ -379,7 +388,11 @@ public class PlayerController : MonoBehaviour
 
         // }
 
+        if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.HighBleed)
+        {
 
+            Actions.onHighBleedOperate?.Invoke();
+        }
 
         ///End Click/press------------------------------------------------------------------------------
     }

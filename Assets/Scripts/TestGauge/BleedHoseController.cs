@@ -15,12 +15,39 @@ public class BleedHoseController : MonoBehaviour
 
 
 
+
+
+    private void OnEnable()
+    {
+
+        Actions.onHighBleedOperate += HighBleedKnobOperate;
+
+    }
+    private void OnDisable()
+    {
+        Actions.onHighBleedOperate -= HighBleedKnobOperate;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
 
         bleederHoseEmitter = GetComponentInChildren<ZibraLiquidEmitter>();
 
+    }
+    void HighBleedKnobOperate()
+    {
+        if (bleederHoseEmitter.VolumePerSimTime == 0)
+        {
+            bleederHoseEmitter.VolumePerSimTime = 1;
+            Debug.Log($"High bleed opened");
+        }
+        else
+        {
+
+            bleederHoseEmitter.VolumePerSimTime = 0;
+            Debug.Log($"High bleed closed");
+        }
     }
 
 
@@ -29,13 +56,13 @@ public class BleedHoseController : MonoBehaviour
     void Update()
     {
         //reset cached knob rotation to not reset after rotating 180 degress--> zRot is rotating from 0 -> 180 -> -180 -> 0 -> 180..and so on
-        if (testKitController.currentKnob == highBleedKnob)
-        {
-            appliedKnobRotation = testKitController.knobRotation;
+        // if (testKitController.currentKnob == highBleedKnob)
+        // {
+        //     appliedKnobRotation = testKitController.knobRotation;
 
-            bleederHoseEmitter.VolumePerSimTime = appliedKnobRotation / 10000;
+        //     bleederHoseEmitter.VolumePerSimTime = appliedKnobRotation / 10000;
 
-        }
+        // }
 
 
 
