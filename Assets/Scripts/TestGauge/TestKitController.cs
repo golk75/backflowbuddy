@@ -344,7 +344,7 @@ public class TestKitController : MonoBehaviour
         while (timeLerped < 1.0)
         {
             timeLerped += Time.deltaTime;
-            obj.transform.eulerAngles = Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
+            obj.transform.eulerAngles = -Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
             yield return null;
         }
     }
