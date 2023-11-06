@@ -14,15 +14,15 @@ public class ShutOffValveController : MonoBehaviour
     [SerializeField]
     GameObject playerManager;
 
-    [SerializeField]
+
     public GameObject ShutOffValve1;
+    public GameObject ShutOffValve2;
 
     [SerializeField]
     ZibraLiquidCollider supplyCollider;
     Vector3 supplyColliderPos;
 
-    [SerializeField]
-    GameObject ShutOffValve2;
+
 
     [SerializeField]
     ZibraLiquidDetector zone1Detector;
@@ -51,6 +51,13 @@ public class ShutOffValveController : MonoBehaviour
         set { value = _isSupplyOn; }
     }
 
+    private bool _isSecondShutOffOpen;
+
+    public bool IsSecondShutOffOpen
+    {
+        get { return _isSecondShutOffOpen; }
+        set { value = _isSecondShutOffOpen; }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -128,11 +135,20 @@ public class ShutOffValveController : MonoBehaviour
         {
             _isSupplyOn = true;
         }
+        if (ShutOffValve2.transform.rotation.eulerAngles.z == 90)
+        {
+            _isSecondShutOffOpen = false;
+        }
+        else
+        {
+            _isSecondShutOffOpen = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         ShutOffValveOperationCheck();
+        Debug.Log($"_isSecondShutOffOpen: {_isSecondShutOffOpen}");
     }
 }
