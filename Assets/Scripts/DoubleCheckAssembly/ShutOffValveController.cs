@@ -149,6 +149,6 @@ public class ShutOffValveController : MonoBehaviour
     void Update()
     {
         ShutOffValveOperationCheck();
-        Debug.Log($"_isSecondShutOffOpen: {_isSecondShutOffOpen}");
+
     }
 }
