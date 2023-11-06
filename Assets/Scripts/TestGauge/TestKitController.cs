@@ -315,7 +315,6 @@ public class TestKitController : MonoBehaviour
 
                     }
 
-                    // KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, -180)));
 
                 }
 
