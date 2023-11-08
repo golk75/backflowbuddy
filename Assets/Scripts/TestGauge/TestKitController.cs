@@ -6,6 +6,7 @@ using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -507,16 +508,17 @@ public class TestKitController : MonoBehaviour
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
+                // differnce ratio between windows to mac = 1:15
                 //Windows----------------
 
                 if (liquid.UseFixedTimestep == true)
                 {
-                    hosePressure -= 0.02f;
+                    hosePressure -= 0.04f;
                 }
                 //!Windows----------------
                 else
                 {
-                    hosePressure -= 0.3f;
+                    hosePressure -= 0.65f;
                 }
 
             }

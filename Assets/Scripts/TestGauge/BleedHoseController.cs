@@ -40,17 +40,12 @@ public class BleedHoseController : MonoBehaviour
         if (bleederHoseEmitter.VolumePerSimTime == 0)
         {
             bleederHoseEmitter.VolumePerSimTime = 1;
-            Debug.Log($"High bleed opened");
         }
         else
         {
-
             bleederHoseEmitter.VolumePerSimTime = 0;
-            Debug.Log($"High bleed closed");
         }
     }
-
-
 
     // Update is called once per frame
     void Update()
