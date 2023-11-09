@@ -298,7 +298,6 @@ public class WaterController : MonoBehaviour
 
         //end test cock #1 pressure regulation---------------------------------
 
-
         /// <summary>
         /// Testing Procedures-----------------------------------------
         /// </summary>
@@ -310,15 +309,6 @@ public class WaterController : MonoBehaviour
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
             }
-            //     if (liquid.UseFixedTimestep == true)
-            //     {
-            //         Void_Check1.transform.localScale = Vector3.SmoothDamp(
-            //       Void_Check1.transform.localScale,
-            //       check1VoidMaxSize * TestCockFF3.Strength,
-            //       ref check1VoidRef,
-            //       6f
-            //   );
-            //     }
             Void_Check1.transform.localScale = Vector3.SmoothDamp(
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
@@ -332,33 +322,6 @@ public class WaterController : MonoBehaviour
                 ref check2VoidRef,
                 8f
             );
-
-            //Regulate check housing force fields while shut off is closed (or testing is in progress)
-
-            // if (checkValveStatus.isCheck1Closed || checkValveStatus.isCheck2Closed)
-            // {
-
-            //     check1housingForceField.Strength = 0;
-            //     check2housingForceField.Strength = 0;
-
-            // }
-
-            // else
-            // {
-            //     check1housingForceField.Strength = Mathf.SmoothDamp(
-            //         check1housingForceField.Strength,
-            //         1.2f,
-            //         ref check1FFref.x,
-            //         0.2f
-            //     );
-            //     check2housingForceField.Strength = Mathf.SmoothDamp(
-            //         check2housingForceField.Strength,
-            //         1f,
-            //         ref check2FFref.x,
-            //         1f
-            //     );
-
-            // }
 
 
         }
@@ -391,15 +354,15 @@ public class WaterController : MonoBehaviour
 
         }
 
-
-
     }
-    // /// <summary>
-    // /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
-    // /// </summary>
+
     private void FixedUpdate()
     {
 
+
+        /// <summary>
+        ///Testing procedures------------------------------------------------------
+        /// </summary>
         if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
         {
             check1housingForceField.Strength = 0;
@@ -508,7 +471,8 @@ public class WaterController : MonoBehaviour
 
                 TestCockFF3.Strength = 0;
             }
-            //tc #4
+            //test cock #3 pressure regulation
+            //static conditions and testkit hooked up
             if (
                        testCockController.isTestCock4Open == true
                        && TestCockHoseDetect4.isConnected == false
@@ -559,7 +523,10 @@ public class WaterController : MonoBehaviour
             }
 
         }
-        //not testing--------------------------------------------------------
+        /// <summary>
+        ///End testing procedures------------------------------------------------------
+        /// </summary>
+        //non testing ops--------------------------------------------------------
         else
         {
             //tc2 non-static condition pressure
