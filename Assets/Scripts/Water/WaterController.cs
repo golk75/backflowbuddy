@@ -513,6 +513,7 @@ public class WaterController : MonoBehaviour
                     if (checkValveStatus.isCheck2Closed == true)
                     {
                         TestCockFF4.Strength = 0;
+                        checkValve2.transform.position = CheckValve2StartingPos;
                     }
 
                 }

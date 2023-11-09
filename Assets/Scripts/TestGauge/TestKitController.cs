@@ -201,7 +201,7 @@ public class TestKitController : MonoBehaviour
 
         currentPSID = 0;
         minPSID = 0;
-        maxPSID = 55;
+        maxPSID = 58;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
@@ -217,8 +217,9 @@ public class TestKitController : MonoBehaviour
         float PsidDiff = MinNeedle_rotation - MaxNeedle_rotation;
 
         float normalizedPsid = hosePressure / maxPSID;
-
+        Debug.Log($"normalizedPsid: {normalizedPsid}");
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
+
     }
     private float GetPsidDigitalNeedle()
     {
