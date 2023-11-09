@@ -2723,6 +2723,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: cube
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: CheckValve1
       value: 
       objectReference: {fileID: 2102190765}
@@ -2771,6 +2776,21 @@ PrefabInstance:
       propertyPath: check2Detector
       value: 
       objectReference: {fileID: 6423705231874470771}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock3MaxStr
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock4MaxStr
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock4MinStr
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCockManager
