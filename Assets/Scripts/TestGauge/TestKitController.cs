@@ -217,7 +217,7 @@ public class TestKitController : MonoBehaviour
         float PsidDiff = MinNeedle_rotation - MaxNeedle_rotation;
 
         float normalizedPsid = hosePressure / maxPSID;
-        Debug.Log($"normalizedPsid: {normalizedPsid}");
+        // Debug.Log($"normalizedPsid: {normalizedPsid}");
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
 
     }
@@ -638,7 +638,7 @@ public class TestKitController : MonoBehaviour
         NeedleControl();
         DigitalNeedleControl();
         knobRotation = highBleed.transform.eulerAngles.z;
-        Debug.Log($"hosePressure: {hosePressure}");
+        // Debug.Log($"hosePressure: {hosePressure}");
     }
 
 
