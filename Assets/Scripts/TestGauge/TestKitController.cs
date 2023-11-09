@@ -637,7 +637,7 @@ public class TestKitController : MonoBehaviour
         NeedleControl();
         DigitalNeedleControl();
         knobRotation = highBleed.transform.eulerAngles.z;
-
+        Debug.Log($"hosePressure: {hosePressure}");
     }
 
 

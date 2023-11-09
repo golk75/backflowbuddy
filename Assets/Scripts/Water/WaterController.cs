@@ -100,13 +100,14 @@ public class WaterController : MonoBehaviour
     Coroutine MaxParticleNumberRegulation;
 
 
-    public float Void_check2ScaleUpSpeed;
-    public float Void_check2ScaleDownSpeed;
+    float tc4ffScaleUpSpeed;
+    float tc4ffScaleDownSpeed;
 
     //Vector3 Zone2VoidMaxSize = new Vector3(0.045f, 0.035f, 0.02f);
-    Vector3 check1VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
-
+    public Vector3 check1VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
     public Vector3 check2VoidMaxSize = new Vector3(0.045f, 0.0354f, 0.0201f);
+    public float Check1VoidGrowSpeed = 2.5f;
+    public float Check2VoidGrowSpeed = 8.0f;
 
     private ZibraLiquidDetector _testCockDetector;
     public ZibraLiquidDetector TestCockDetector
@@ -313,14 +314,14 @@ public class WaterController : MonoBehaviour
                 Void_Check1.transform.localScale,
                 check1VoidMaxSize * TestCockFF3.Strength,
                 ref check1VoidRef,
-                5f
+                Check1VoidGrowSpeed
             );
 
             Void_Check2.transform.localScale = Vector3.SmoothDamp(
                 Void_Check2.transform.localScale,
                 check2VoidMaxSize * TestCockFF4.Strength,
                 ref check2VoidRef,
-                8f
+                Check2VoidGrowSpeed
             );
 
 
@@ -493,7 +494,7 @@ public class WaterController : MonoBehaviour
                   TestCockFF4.Strength,
                   Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
                   ref testCockFF4Ref.x,
-                  Void_check2ScaleUpSpeed
+                  tc4ffScaleUpSpeed
                   );
                 }
                 else
@@ -502,7 +503,7 @@ public class WaterController : MonoBehaviour
                     TestCockFF4.Strength,
                     0,
                     ref testCockFF4Ref.x,
-                    Void_check2ScaleDownSpeed
+                    tc4ffScaleDownSpeed
                     );
 
                     check1housingForceField.Strength = 0;
@@ -530,7 +531,7 @@ public class WaterController : MonoBehaviour
         else
         {
             //tc2 non-static condition pressure
-            Debug.Log($"not testing");
+
             if (
                     testCockController.isTestCock2Open == true
                     && TestCockHoseDetect2.isConnected == false
@@ -585,7 +586,7 @@ public class WaterController : MonoBehaviour
                      TestCockFF4.Strength,
                      Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
                      ref testCockFF4Ref.x,
-                     Void_check2ScaleUpSpeed
+                     tc4ffScaleUpSpeed
                  );
 
                 }
