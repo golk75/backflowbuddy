@@ -154,7 +154,7 @@ public class TestCockController : MonoBehaviour
 
     private void TestCockValveOperationCheck()
     {
-        if (playerController.OperableObject != null)
+        if (playerController.isOperableObject == true)
         {
             if (
                 playerController.OperableObject.TryGetComponent<OperableComponentDescription>(

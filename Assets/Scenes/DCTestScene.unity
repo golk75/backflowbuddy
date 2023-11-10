@@ -2721,10 +2721,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
-      propertyPath: cube
-      value: 
+      propertyPath: ObjectVersion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -2900,11 +2900,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4588077
-      objectReference: {fileID: 0}
-    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
-        type: 3}
-      propertyPath: MaxNumParticles
-      value: 699904
       objectReference: {fileID: 0}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -3274,11 +3269,6 @@ PrefabInstance:
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: SDFColliders.Array.data[12]
-      value: 
-      objectReference: {fileID: 8890744075525250647}
-    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
-        type: 3}
-      propertyPath: SDFColliders.Array.data[13]
       value: 
       objectReference: {fileID: 8890744075525250647}
     - target: {fileID: 7512974105099244331, guid: b9242a77ce9b24fab85cddfa72914f01,

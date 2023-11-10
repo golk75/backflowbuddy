@@ -473,6 +473,7 @@ public class WaterController : MonoBehaviour
                     {
                         TestCockFF4.Strength = 0;
                         checkValve2.transform.position = CheckValve2StartingPos;
+
                     }
 
                 }
@@ -672,7 +673,7 @@ public class WaterController : MonoBehaviour
         }
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
-            Debug.Log($"hererere");
+
             foreach (GameObject testCock in testCockController.TestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;

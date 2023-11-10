@@ -6,7 +6,7 @@ using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
-using UnityEditorInternal;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;

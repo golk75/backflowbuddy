@@ -215,6 +215,7 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
+        DetectObjectWithRaycast();
         primaryTouchPerformed = context.ReadValueAsButton();
         if (
             isOperableObject == true
@@ -228,7 +229,7 @@ public class PlayerController : MonoBehaviour
         {
             ClickOperate();
         }
-        DetectObjectWithRaycast();
+
 
     }
 
