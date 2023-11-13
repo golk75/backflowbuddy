@@ -346,7 +346,18 @@ public class WaterController : MonoBehaviour
           )
             {
 
-                check1housingForceField.Strength = 1.2f;
+                check1housingForceField.Strength = Mathf.SmoothDamp(
+                   check1housingForceField.Strength,
+                   1.2f,
+                   ref check1FFref.x,
+                   0.2f
+               );
+                check2housingForceField.Strength = Mathf.SmoothDamp(
+                    check2housingForceField.Strength,
+                    1f,
+                    ref check2FFref.x,
+                    1f
+                );
 
 
                 //release initial pressure
@@ -386,7 +397,18 @@ public class WaterController : MonoBehaviour
              )
             {
 
-                check1housingForceField.Strength = 1.2f;
+                check1housingForceField.Strength = Mathf.SmoothDamp(
+                       check1housingForceField.Strength,
+                       1.2f,
+                       ref check1FFref.x,
+                       0.2f
+                   );
+                check2housingForceField.Strength = Mathf.SmoothDamp(
+                    check2housingForceField.Strength,
+                    1f,
+                    ref check2FFref.x,
+                    1f
+                );
                 if (!oneTime)
                 {
                     check1Rb.AddForce(new Vector3(1.0f, 1.0f, 0) * 10, ForceMode.Impulse);
@@ -431,14 +453,25 @@ public class WaterController : MonoBehaviour
 
                 TestCockFF3.Strength = 0;
             }
-            //test cock #3 pressure regulation
+            //test cock #4 pressure regulation
             //static conditions and testkit hooked up
             if (
                        testCockController.isTestCock4Open == true
                        && TestCockHoseDetect4.isConnected == false
                       )
             {
-                check2housingForceField.Strength = 1.2f;
+                check1housingForceField.Strength = Mathf.SmoothDamp(
+                    check1housingForceField.Strength,
+                    1.2f,
+                    ref check1FFref.x,
+                    0.2f
+                );
+                check2housingForceField.Strength = Mathf.SmoothDamp(
+                    check2housingForceField.Strength,
+                    1f,
+                    ref check2FFref.x,
+                    1f
+                );
                 if (!oneTime)
                 {
                     check2Rb.AddForce(new Vector3(1.0f, 1.0f, 0) * 8, ForceMode.Impulse);
