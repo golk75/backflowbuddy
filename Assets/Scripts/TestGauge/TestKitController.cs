@@ -389,7 +389,7 @@ public class TestKitController : MonoBehaviour
     {
         isTestCock1Open = true;
     }
-
+    // object detected to attach to tc NOT JUST HOSE BIB (could be sight tube) ------>
     public void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
     {
         isConnectedToAssembly = true;
@@ -398,13 +398,13 @@ public class TestKitController : MonoBehaviour
         {
             TestCockList.Add(testCock);
         }
-        if (
-            TestCockDetectorList.Contains(testCock.GetComponentInChildren<ZibraLiquidDetector>())
-            != true
-        )
-        {
-            TestCockDetectorList.Add(testCock.GetComponentInChildren<ZibraLiquidDetector>());
-        }
+        // if (
+        //     TestCockDetectorList.Contains(testCock.GetComponentInChildren<ZibraLiquidDetector>())
+        //     != true
+        // )
+        // {
+        //     TestCockDetectorList.Add(testCock.GetComponentInChildren<ZibraLiquidDetector>());
+        // }
 
     }
 

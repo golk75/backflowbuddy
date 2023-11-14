@@ -23,21 +23,23 @@ public class HoseDetector : MonoBehaviour
     {
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
 
-        switch (operableComponentDescription.partsType)
-        {
-            case OperableComponentDescription.PartsType.TestKitHose:
-                Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
-                Debug.Log($"1");
-                break;
-            case OperableComponentDescription.PartsType.TestKitSightTube:
-                Actions.onSightTubeAttach?.Invoke(testCock);
-                Debug.Log($"2");
-                break;
-            default:
-                Debug.Log($"operableComponentDescription: {operableComponentDescription} not valid");
-                break;
-        }
-
+        // switch (operableComponentDescription.partsType)
+        // {
+        //     case OperableComponentDescription.PartsType.TestKitHose:
+        //         ///Actions.onHoseAttach is used to add the test cock to a list in TestCockController
+        //         Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+        //         Debug.Log($"1");
+        //         break;
+        //     case OperableComponentDescription.PartsType.TestKitSightTube:
+        //         ///Actions.onSightTubeAttach is used to add the test cock to a list in TestCockController
+        //         Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+        //         Debug.Log($"2");
+        //         break;
+        //     default:
+        //         Debug.Log($"operableComponentDescription: {operableComponentDescription} not valid");
+        //         break;
+        // }
+        Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
         if (playerController.primaryTouchPerformed)
         {
             onAttachAttempt = StartCoroutine(AttachInitiate());
@@ -56,6 +58,8 @@ public class HoseDetector : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isConnected = false;
+        if (operableComponentDescription)
+            operableComponentDescription = null;
 
         Actions.onHoseDetach?.Invoke(testCock, operableComponentDescription);
     }
@@ -66,8 +70,14 @@ public class HoseDetector : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         if (isConnected == true)
         {
-            Debug.Log($"attaching");
-            Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
+            if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitHose)
+            {
+                Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
+            }
+            else if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitHose)
+            {
+
+            }
         }
 
 
