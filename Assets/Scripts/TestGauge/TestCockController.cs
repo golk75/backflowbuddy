@@ -156,79 +156,79 @@ public class TestCockController : MonoBehaviour
     {
         if (playerController.isOperableObject == true)
         {
+            // if (
+            //     playerController.OperableObject.TryGetComponent<OperableComponentDescription>(
+            //         out OperableComponentDescription component
+            //     )
+            // )
             if (
-                playerController.OperableObject.TryGetComponent<OperableComponentDescription>(
-                    out OperableComponentDescription component
-                )
+                playerController.operableComponentDescription.partsType
+                == OperableComponentDescription.PartsType.TestCock
             )
-                if (
-                    playerController.operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestCock
-                )
+            {
+                testCockComponentDescription =
+                    playerController.OperableObject.GetComponent<OperableComponentDescription>();
+
+                switch (testCockComponentDescription.componentId)
                 {
-                    testCockComponentDescription =
-                        playerController.OperableObject.GetComponent<OperableComponentDescription>();
-
-                    switch (testCockComponentDescription.componentId)
-                    {
-                        case OperableComponentDescription.ComponentId.TestCock1:
-                            _operatingTestCock = TestCock1;
-                            _operableTestCockVoid = TestCockVoid1;
-                            _operableTestCockCollider = TestCockCollider1;
-                            _operatingTestCock.transform.eulerAngles =
-                                playerController.OperableObjectRotation;
-                            if (!liquid.Initialized)
+                    case OperableComponentDescription.ComponentId.TestCock1:
+                        _operatingTestCock = TestCock1;
+                        _operableTestCockVoid = TestCockVoid1;
+                        _operableTestCockCollider = TestCockCollider1;
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        if (!liquid.Initialized)
+                        {
+                            liquid.InitialState = ZibraLiquid.InitialStateType.NoParticles;
+                            liquid.InitializeSimulation();
+                            if (liquid.enabled != true)
                             {
-                                liquid.InitialState = ZibraLiquid.InitialStateType.NoParticles;
-                                liquid.InitializeSimulation();
-                                if (liquid.enabled != true)
-                                {
-                                    liquid.enabled = true;
-                                }
+                                liquid.enabled = true;
                             }
+                        }
 
-                            break;
-                        case OperableComponentDescription.ComponentId.TestCock2:
-                            _operatingTestCock = TestCock2;
-                            _operableTestCockVoid = TestCockVoid2;
-                            _operableTestCockCollider = TestCockCollider2;
-                            _operatingTestCock.transform.eulerAngles =
-                                playerController.OperableObjectRotation;
-                            break;
-                        case OperableComponentDescription.ComponentId.TestCock3:
-                            _operatingTestCock = TestCock3;
-                            _operableTestCockVoid = TestCockVoid3;
-                            _operableTestCockCollider = TestCockCollider3;
-                            TestCockDetector = TestCockDetector3;
-                            _checkZoneDetector = check1Detector;
-                            _operatingTestCock.transform.eulerAngles =
-                                playerController.OperableObjectRotation;
-                            break;
-                        case OperableComponentDescription.ComponentId.TestCock4:
-                            _operatingTestCock = TestCock4;
-                            _operableTestCockVoid = TestCockVoid4;
-                            _operableTestCockCollider = TestCockCollider4;
-                            _operatingTestCock.transform.eulerAngles =
-                                playerController.OperableObjectRotation;
-                            break;
-                    }
-
-                    //assign the associated test cock valve/collider to currently operating test cock;
-                    _operableTestCockColliderScale = _operableTestCockVoidScale =
-                        _operableTestCockVoid.transform.localScale;
-
-                    _operableTestCockVoidScale.y = Mathf.Lerp(
-                        testCockClosedScale.y,
-                        testCockOpenScale.y,
-                        _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
-                    );
-
-                    _operableTestCockCollider.transform.localScale = _operableTestCockVoid
-                        .transform
-                        .localScale = _operableTestCockVoidScale;
-                    //cache test cock status
-
+                        break;
+                    case OperableComponentDescription.ComponentId.TestCock2:
+                        _operatingTestCock = TestCock2;
+                        _operableTestCockVoid = TestCockVoid2;
+                        _operableTestCockCollider = TestCockCollider2;
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        break;
+                    case OperableComponentDescription.ComponentId.TestCock3:
+                        _operatingTestCock = TestCock3;
+                        _operableTestCockVoid = TestCockVoid3;
+                        _operableTestCockCollider = TestCockCollider3;
+                        TestCockDetector = TestCockDetector3;
+                        _checkZoneDetector = check1Detector;
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        break;
+                    case OperableComponentDescription.ComponentId.TestCock4:
+                        _operatingTestCock = TestCock4;
+                        _operableTestCockVoid = TestCockVoid4;
+                        _operableTestCockCollider = TestCockCollider4;
+                        _operatingTestCock.transform.eulerAngles =
+                            playerController.OperableObjectRotation;
+                        break;
                 }
+
+                //assign the associated test cock valve/collider to currently operating test cock;
+                _operableTestCockColliderScale = _operableTestCockVoidScale =
+                    _operableTestCockVoid.transform.localScale;
+
+                _operableTestCockVoidScale.y = Mathf.Lerp(
+                    testCockClosedScale.y,
+                    testCockOpenScale.y,
+                    _operatingTestCock.transform.eulerAngles.z / 90 * testCockValveScaleFactor
+                );
+
+                _operableTestCockCollider.transform.localScale = _operableTestCockVoid
+                    .transform
+                    .localScale = _operableTestCockVoidScale;
+                //cache test cock status
+
+            }
         }
         if (TestCock1.transform.eulerAngles.z > 0)
         {
