@@ -27,9 +27,11 @@ public class HoseDetector : MonoBehaviour
         {
             case OperableComponentDescription.PartsType.TestKitHose:
                 Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+                Debug.Log($"1");
                 break;
             case OperableComponentDescription.PartsType.TestKitSightTube:
-                Actions.onSightTubeAttach?.Invoke(sightTube);
+                Actions.onSightTubeAttach?.Invoke(testCock);
+                Debug.Log($"2");
                 break;
             default:
                 Debug.Log($"operableComponentDescription: {operableComponentDescription} not valid");
@@ -64,7 +66,7 @@ public class HoseDetector : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         if (isConnected == true)
         {
-
+            Debug.Log($"attaching");
             Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
         }
 

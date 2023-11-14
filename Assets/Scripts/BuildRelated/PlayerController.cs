@@ -125,6 +125,14 @@ public class PlayerController : MonoBehaviour
         {
             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
         }
+        if (
+          isOperableObject == true
+          && operableComponentDescription.partsType
+              == OperableComponentDescription.PartsType.TestKitSightTube
+      )
+        {
+            Actions.onSightTubeGrab?.Invoke(operableObject);
+        }
         if (ClickOperationEnabled == true)
         {
             ClickOperate();
@@ -148,6 +156,14 @@ public class PlayerController : MonoBehaviour
         )
         {
             Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+        }
+        if (
+           isOperableObject == true
+           && operableComponentDescription.partsType
+               == OperableComponentDescription.PartsType.TestKitSightTube
+       )
+        {
+            Actions.onSightTubeDrop?.Invoke(operableObject);
         }
         isOperableObject = false;
         operableObject = null;
@@ -368,6 +384,7 @@ public class PlayerController : MonoBehaviour
             else if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
             {
                 _operableTestGaugeObject = operableObject;
+
                 operableObject = null;
             }
         }

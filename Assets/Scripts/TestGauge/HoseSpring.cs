@@ -87,6 +87,7 @@ public class HoseSpring : MonoBehaviour
 
     public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
+
         isAttaching = false;
 
         switch (description.componentId)
@@ -164,12 +165,7 @@ public class HoseSpring : MonoBehaviour
 
     }
 
-    Vector3 GetPointerPos()
-    {
-        Vector3 screenPosition = Input.mousePosition;
 
-        return Camera.main.ScreenToWorldPoint(screenPosition);
-    }
 
     IEnumerator MoveAnchor()
     {
