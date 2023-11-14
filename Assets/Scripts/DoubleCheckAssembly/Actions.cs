@@ -5,6 +5,10 @@ using UnityEngine;
 
 public static class Actions
 {
+    public static Action<GameObject, OperableComponentDescription> onObjectConnect;
+    public static Action<GameObject, OperableComponentDescription> onObjectDisconnect;
+
+
     public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
     public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;
     public static Action<GameObject, OperableComponentDescription> onHoseAttach;
@@ -17,7 +21,7 @@ public static class Actions
     public static Action<GameObject> onSightTubeDrop;
     public static Action<GameObject> onSightTubeAttach;
     public static Action<GameObject> onSightTubeDettach;
-    public static Action<GameObject> onSightTubeConnect;
+    public static Action<GameObject, OperableComponentDescription> onSightTubeConnect;
     // public static Action<GameObject, OperableComponentDescription> onHoseBibDisconnect;
     public static Action<GameObject> onCheckClosed;
     public static Action<GameObject> onCheckOpened;

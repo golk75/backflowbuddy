@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     Camera mainCam;
 
-    private bool isZooming;
-    private bool isPanning;
+    public bool isZooming;
+    public bool isPanning;
 
     [SerializeField]
     float maxZoom;
@@ -74,6 +74,7 @@ public class CameraController : MonoBehaviour
     private void Pan_started()
     {
         panCoroutine = StartCoroutine(PanDectection());
+        isPanning = true;
         //Debug.Log($"Pan started");
     }
 
@@ -82,6 +83,7 @@ public class CameraController : MonoBehaviour
         //Debug.Log($"Pan canceled");
 
         StopCoroutine(PanDectection());
+        isPanning = false;
     }
 
     private void Zoom_started()
@@ -122,8 +124,11 @@ public class CameraController : MonoBehaviour
             && playerController.secondaryTouchStarted == false
         )
         {
+
             Vector3 currentPointerPos = GetPointerPos();
             Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
+
+
 
             //placing bounderies on camera panning
             //Debug.Log($"targetPointerPos = {targetPointerPosition}");

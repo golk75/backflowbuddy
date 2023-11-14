@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class SightTubeController : MonoBehaviour
@@ -10,27 +10,67 @@ public class SightTubeController : MonoBehaviour
     public bool sightTubeGrabbed = false;
     public bool isAttaching = false;
     public Coroutine SightTubeMovement;
+    public bool isConnected = false;
+    public Vector3 connectionPoint;
 
     void OnEnable()
     {
         Actions.onSightTubeGrab += GrabSightTube;
         Actions.onSightTubeDrop += DropSightTube;
-        Actions.onSightTubeAttach += AttachSightTube;
-        Actions.onSightTubeDettach += DettachSightTube;
+        // Actions.onSightTubeAttach += AttachSightTube;
+        // Actions.onSightTubeDettach += DettachSightTube;
 
+        Actions.onObjectConnect += ConnectionAttempt;
     }
+
 
     void OnDisable()
     {
         Actions.onSightTubeGrab -= GrabSightTube;
         Actions.onSightTubeDrop -= DropSightTube;
-        Actions.onSightTubeAttach -= AttachSightTube;
-        Actions.onSightTubeDettach -= DettachSightTube;
+        // // Actions.onSightTubeAttach -= AttachSightTube;
+        // // Actions.onSightTubeDettach -= DettachSightTube;
+        // Actions.onSightTubeConnect -= DisconnectSightTube;
+
+
+        Actions.onObjectConnect -= ConnectionAttempt;
     }
+
+
+
+    private void ConnectionAttempt(GameObject obj, OperableComponentDescription description)
+    {
+
+        if (description.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
+        {
+            connectionPoint = obj.transform.position;
+            transform.position = connectionPoint;
+            isConnected = true;
+
+        }
+    }
+
+
+
+
+    private void ConnectSightTube(GameObject testcock, OperableComponentDescription description)
+    {
+        if (playerController.primaryTouchPerformed)
+        {
+            gameObject.transform.position = testcock.transform.position;
+        }
+
+    }
+    private void DisconnectSightTube(GameObject testcock, OperableComponentDescription description)
+    {
+        throw new NotImplementedException();
+    }
+
     private void DropSightTube(GameObject obj)
     {
         sightTubeGrabbed = false;
         isAttaching = false;
+        // StopCoroutine(MovingSightTube(obj));
     }
 
     private void GrabSightTube(GameObject obj)
@@ -42,23 +82,12 @@ public class SightTubeController : MonoBehaviour
 
     }
 
-    private void DettachSightTube(GameObject @object)
-    {
-
-    }
-
-    private void AttachSightTube(GameObject @object)
-    {
-
-    }
-
-
     IEnumerator MovingSightTube(GameObject go)
     {
 
         while (
-            playerController.primaryTouchStarted > 0 && sightTubeGrabbed == true && isAttaching == false
-            || playerController.primaryClickStarted > 0 && sightTubeGrabbed == true && isAttaching == false
+            playerController.primaryTouchStarted > 0 && sightTubeGrabbed == true && isConnected == false
+            || playerController.primaryClickStarted > 0 && sightTubeGrabbed == true && isConnected == false
         )
         {
             Vector3 direction =
@@ -72,9 +101,13 @@ public class SightTubeController : MonoBehaviour
         }
 
     }
+
     // Update is called once per frame
     void Update()
     {
-
+        if (isConnected)
+        {
+            transform.position = connectionPoint;
+        }
     }
 }

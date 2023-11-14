@@ -164,7 +164,7 @@ public class WaterController : MonoBehaviour
     bool oneTime = false;
     public ZibraLiquid liquid;
     ZibraLiquidSolverParameters liquidSolverParameters;
-
+    public bool randomizePressure = true;
     [SerializeField]
     bool isAttachedToGauge;
 
@@ -221,9 +221,13 @@ public class WaterController : MonoBehaviour
         OperableComponentDescription description
     )
     {
+
         isAttachedToGauge = true;
-        testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
-        testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
+        if (randomizePressure == true)
+        {
+            testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
+            testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
+        }
 
 
     }

@@ -27,6 +27,7 @@ public class HoseSpring : MonoBehaviour
     public GameObject jointPresetParent;
     private OperableComponentDescription currentHoseDescription;
     private GameObject currentTestCock;
+    public GameObject sightTube;
     Rigidbody HoseRb;
     // public Preset CongfigurableJointPreset;
     bool pointerDown;
@@ -40,7 +41,8 @@ public class HoseSpring : MonoBehaviour
     {
         Actions.onHoseBibGrab += GrabHoseBib;
         Actions.onHoseBibDrop += DropHoseBib;
-        Actions.onHoseBibConnect += AttachHoseBib;
+        // Actions.onHoseBibConnect += AttachHoseBib;
+        Actions.onObjectConnect += HoseBibConnectionAttempt;
 
     }
 
@@ -48,7 +50,8 @@ public class HoseSpring : MonoBehaviour
     {
         Actions.onHoseBibGrab -= GrabHoseBib;
         Actions.onHoseBibDrop -= DropHoseBib;
-        Actions.onHoseBibConnect -= AttachHoseBib;
+        //Actions.onHoseBibConnect -= AttachHoseBib;
+        Actions.onObjectConnect -= HoseBibConnectionAttempt;
 
     }
 
@@ -58,7 +61,7 @@ public class HoseSpring : MonoBehaviour
     /// <param name="testCock"></param>
     /// <param name="description"></param>
 
-    private void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
+    private void HoseBibConnectionAttempt(GameObject testCock, OperableComponentDescription description)
     {
         isAttaching = true;
 
@@ -80,7 +83,11 @@ public class HoseSpring : MonoBehaviour
 
                 break;
         }
-        currentHoseBibObj.transform.position = testCock.transform.position;
+        if (currentHoseBibObj != null)
+        {
+            currentHoseBibObj.transform.position = testCock.transform.position;
+
+        }
 
 
     }
@@ -162,7 +169,7 @@ public class HoseSpring : MonoBehaviour
         isAttaching = false;
         if (HoseRb != null)
             HoseRb.isKinematic = false;
-
+        currentHoseBibObj = null;
     }
 
 

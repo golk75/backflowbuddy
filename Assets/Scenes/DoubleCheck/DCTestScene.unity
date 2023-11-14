@@ -612,6 +612,18 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 4087588046862974516}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1372113979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4087588046862974516}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2b33d10e79348928f83991f26cb06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1446278363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3130206605340565032, guid: e6f20a08661774fbc9fa6c2efdef3a81,
@@ -830,7 +842,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1639,6 +1651,7 @@ MonoBehaviour:
   currentJoint: {fileID: 0}
   jointPreset: {fileID: 0}
   jointPresetParent: {fileID: 9064048382242759609}
+  sightTube: {fileID: 2001235575}
   isAttaching: 0
   hoseDetector: {fileID: 0}
 --- !u!1 &753978615707022301
@@ -5952,11 +5965,21 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.00000006510506
       objectReference: {fileID: 0}
+    - target: {fileID: 1224528875731223181, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1318351934377700086, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: hoseSpring
       value: 
       objectReference: {fileID: 746981164190540200}
+    - target: {fileID: 1318351934377700086, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1372113979}
     - target: {fileID: 1318351934377700086, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: playerController
@@ -5972,6 +5995,11 @@ PrefabInstance:
       propertyPath: hoseSpring
       value: 
       objectReference: {fileID: 746981164190540200}
+    - target: {fileID: 1342067078008908108, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1372113979}
     - target: {fileID: 1342067078008908108, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: playerController
@@ -6022,6 +6050,11 @@ PrefabInstance:
       propertyPath: hoseSpring
       value: 
       objectReference: {fileID: 746981164190540200}
+    - target: {fileID: 3247251146356766156, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1372113979}
     - target: {fileID: 3247251146356766156, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: playerController
@@ -6227,6 +6260,11 @@ PrefabInstance:
       propertyPath: hoseSpring
       value: 
       objectReference: {fileID: 746981164190540200}
+    - target: {fileID: 8839683529836183491, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1372113979}
     - target: {fileID: 8839683529836183491, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: playerController
