@@ -22,7 +22,8 @@ public class OperableComponentDescription : MonoBehaviour
         BypassControl,
         HighHose,
         LowHose,
-        BypassHose
+        BypassHose,
+        SightTube
     }
 
     public enum PartsType
@@ -32,7 +33,8 @@ public class OperableComponentDescription : MonoBehaviour
         TestCock,
         CheckValve,
         TestKitValve,
-        TestKitHose
+        TestKitHose,
+        TestKitSightTube
     }
 
     public ComponentId componentId;

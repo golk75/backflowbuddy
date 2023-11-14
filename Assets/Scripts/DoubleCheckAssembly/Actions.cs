@@ -5,11 +5,18 @@ using UnityEngine;
 
 public static class Actions
 {
+    public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
+    public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;
     public static Action<GameObject, OperableComponentDescription> onHoseAttach;
     public static Action<GameObject, OperableComponentDescription> onHoseDetach;
     public static Action<GameObject, OperableComponentDescription> onHoseBibConnect;
     public static Action<GameObject, OperableComponentDescription> onHoseContact;
 
+
+    public static Action<GameObject> onSightTubeGrab;
+    public static Action<GameObject> onSightTubeDrop;
+    public static Action<GameObject> onSightTubeAttach;
+    public static Action<GameObject> onSightTubeDetach;
     // public static Action<GameObject, OperableComponentDescription> onHoseBibDisconnect;
     public static Action<GameObject> onCheckClosed;
     public static Action<GameObject> onCheckOpened;
@@ -28,7 +35,7 @@ public static class Actions
     public static Action onTestCock4Closed;
     public static Action onHighBleedOperate;
     public static Action onHighBleedClosed;
-    public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
-    public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;
+
+
 
 }

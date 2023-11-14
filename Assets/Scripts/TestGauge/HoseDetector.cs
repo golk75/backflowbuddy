@@ -9,6 +9,7 @@ public class HoseDetector : MonoBehaviour
 {
     public HoseSpring hoseSpring;
     public GameObject testCock;
+    public GameObject sightTube;
     public bool isConnected;
     Coroutine onAttachAttempt;
     public GameObject Hose;
@@ -21,7 +22,19 @@ public class HoseDetector : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
-        Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+
+        switch (operableComponentDescription.partsType)
+        {
+            case OperableComponentDescription.PartsType.TestKitHose:
+                Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+                break;
+            case OperableComponentDescription.PartsType.TestKitSightTube:
+                Actions.onSightTubeAttach?.Invoke(sightTube);
+                break;
+            default:
+                Debug.Log($"operableComponentDescription: {operableComponentDescription} not valid");
+                break;
+        }
 
         if (playerController.primaryTouchPerformed)
         {
