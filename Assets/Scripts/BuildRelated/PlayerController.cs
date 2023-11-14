@@ -365,6 +365,11 @@ public class PlayerController : MonoBehaviour
                 _operableTestGaugeObject = operableObject;
                 operableObject = null;
             }
+            else if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
+            {
+                _operableTestGaugeObject = operableObject;
+                operableObject = null;
+            }
         }
     }
     private void ClickOperate()

@@ -23,7 +23,7 @@ public class SightTubeController : MonoBehaviour
 
     private void GrabSightTube(GameObject obj)
     {
-        throw new NotImplementedException();
+        Debug.Log($"object: {obj}");
     }
 
     // Update is called once per frame

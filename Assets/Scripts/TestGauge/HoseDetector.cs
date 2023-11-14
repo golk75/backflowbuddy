@@ -65,7 +65,6 @@ public class HoseDetector : MonoBehaviour
         if (isConnected == true)
         {
 
-
             Actions.onHoseBibConnect?.Invoke(gameObject, operableComponentDescription);
         }
 
