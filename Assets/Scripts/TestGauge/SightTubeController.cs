@@ -12,6 +12,7 @@ public class SightTubeController : MonoBehaviour
     public Coroutine SightTubeMovement;
     public bool isConnected = false;
     public Vector3 connectionPoint;
+    public Vector3 sightTubeHomePos;
 
     void OnEnable()
     {
@@ -21,6 +22,8 @@ public class SightTubeController : MonoBehaviour
         // Actions.onSightTubeDettach += DettachSightTube;
 
         Actions.onObjectConnect += ConnectionAttempt;
+        sightTubeHomePos = transform.localPosition;
+
     }
 
 
@@ -30,7 +33,7 @@ public class SightTubeController : MonoBehaviour
         Actions.onSightTubeDrop -= DropSightTube;
         // // Actions.onSightTubeAttach -= AttachSightTube;
         // // Actions.onSightTubeDettach -= DettachSightTube;
-        // Actions.onSightTubeConnect -= DisconnectSightTube;
+
 
 
         Actions.onObjectConnect -= ConnectionAttempt;
@@ -61,16 +64,23 @@ public class SightTubeController : MonoBehaviour
         }
 
     }
-    private void DisconnectSightTube(GameObject testcock, OperableComponentDescription description)
-    {
-        throw new NotImplementedException();
-    }
+    // private void DisconnectSightTube(GameObject testcock, OperableComponentDescription description)
+    // {
+    //     if (playerController.primaryTouchPerformed)
+    //     {
+    //         transform.position = sightTubeHomePos;
+    //         isConnected = false;
+    //     }
+
+    // }
 
     private void DropSightTube(GameObject obj)
     {
         sightTubeGrabbed = false;
         isAttaching = false;
-        // StopCoroutine(MovingSightTube(obj));
+        transform.localPosition = sightTubeHomePos;
+        StopCoroutine(MovingSightTube(obj));
+
     }
 
     private void GrabSightTube(GameObject obj)
@@ -84,7 +94,7 @@ public class SightTubeController : MonoBehaviour
 
     IEnumerator MovingSightTube(GameObject go)
     {
-
+        isConnected = false;
         while (
             playerController.primaryTouchStarted > 0 && sightTubeGrabbed == true && isConnected == false
             || playerController.primaryClickStarted > 0 && sightTubeGrabbed == true && isConnected == false
