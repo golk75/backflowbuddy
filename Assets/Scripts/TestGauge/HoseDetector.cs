@@ -48,10 +48,10 @@ public class HoseDetector : MonoBehaviour
 
 
         // operableComponentDescription = other.GetComponent<OperableComponentDescription>();
-        // if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitHose)
-        // {
-        //     Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
-        // }
+        if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitHose)
+        {
+            Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+        }
 
 
         // if (playerController.primaryTouchPerformed)
