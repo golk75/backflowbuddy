@@ -4271,6 +4271,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1357697479322454688, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357697479322454688, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357697479322454688, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1509502454849931194, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_Name
@@ -4291,11 +4306,41 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 26.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1662941543189982188, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662941543189982188, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662941543189982188, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2592640261754679527, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 2650413851699407450, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650413851699407450, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650413851699407450, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_IsTrigger
@@ -4356,6 +4401,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5201735922456282909, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201735922456282909, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201735922456282909, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5968162058526832525, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4395,6 +4455,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
       value: 1.02e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696570596705732595, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696570596705732595, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696570596705732595, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.2
       objectReference: {fileID: 0}
     - target: {fileID: 7975887091541937799, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
