@@ -4,6 +4,7 @@ using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class ResetButton : MonoBehaviour
@@ -17,6 +18,9 @@ public class ResetButton : MonoBehaviour
     public GameObject Tc1;
     public TestCockController testCockController;
     public WaterController waterController;
+    public SightTubeController sightTubeController;
+
+    public GameObject sightTube;
     OperableComponentDescription ShutOff1OperableDescription;
     OperableComponentDescription Tc1OperableDescription;
     public PlayerController playerController;
@@ -43,6 +47,7 @@ public class ResetButton : MonoBehaviour
         public GameObject alteredObject;
         public Quaternion initRotation;
         public Vector3 initScale;
+        public Vector3 initPos;
 
 
 
@@ -60,6 +65,7 @@ public class ResetButton : MonoBehaviour
         this.resetableObject = resetableObject;
         resetableObject.initRotation = resetableObject.alteredObject.transform.rotation;
         resetableObject.initScale = resetableObject.alteredObject.transform.localScale;
+        resetableObject.initPos = resetableObject.alteredObject.transform.localPosition;
 
     }
     private void ResetTransforms()
@@ -68,6 +74,7 @@ public class ResetButton : MonoBehaviour
         {
             item.alteredObject.transform.rotation = item.initRotation;
             item.alteredObject.transform.localScale = item.initScale;
+            item.alteredObject.transform.localPosition = item.initPos;
         }
     }
 
@@ -110,20 +117,31 @@ public class ResetButton : MonoBehaviour
 
 
         //remove attached hoses
-        for (int i = 0; i < hoseList.Count; i++)
-        {
-            Actions.onHoseBibDrop?.Invoke(hoseList[i], hoseList[i].GetComponent<OperableComponentDescription>());
-        }
+        // for (int i = 0; i < hoseList.Count; i++)
+        // {
+        //     Actions.onHoseBibDrop?.Invoke(hoseList[i], hoseList[i].GetComponent<OperableComponentDescription>());
+
+        // }
+        // foreach (var hose in hoseList)
+        // {
+        //     Actions.onHoseBibDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
+        // }
 
 
-
-        foreach (GameObject testCock in testCockController.StaticTestCockList)
+        foreach (GameObject testCock in testKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
 
         }
+        foreach (var hose in hoseList)
+        {
 
+        }
+        testKitController.AttachedTestCockList.Clear();
+        testKitController.AttachedHoseList.Clear();
+
+        sightTubeController.isConnected = false;
     }
 
 }

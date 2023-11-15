@@ -66,6 +66,7 @@ public class SightTubeController : MonoBehaviour
 
     private void DropSightTube(GameObject obj)
     {
+
         sightTubeGrabbed = false;
         isAttaching = false;
         transform.localPosition = sightTubeHomePos;

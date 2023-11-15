@@ -11,6 +11,8 @@ public static class Actions
     public static Action<GameObject, OperableComponentDescription> onAddTestCockToList;
     public static Action<GameObject, OperableComponentDescription> onRemoveTestCockFromList;
 
+    public static Action<GameObject, OperableComponentDescription> onAddHoseToList;
+    public static Action<GameObject, OperableComponentDescription> onRemoveHoseFromList;
     public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
     public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;
     public static Action<GameObject, OperableComponentDescription> onHoseAttach;

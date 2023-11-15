@@ -72,7 +72,7 @@ public class FillButton : MonoBehaviour
         playerController._operableObjectRotation.y = 180;
         // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
-        foreach (GameObject testCock in testCockController.StaticTestCockList)
+        foreach (GameObject testCock in testKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;

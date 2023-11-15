@@ -120,9 +120,9 @@ public class TestKitController : MonoBehaviour
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
     public float knobRotationFactor = 0;
-    public List<GameObject> TestCockList;
+
     Coroutine KnobClickOperate;
-    public List<ZibraLiquidDetector> TestCockDetectorList;
+
     Coroutine Check1ClosingPoint;
     float needleVelRef = 0;
     public bool knobOpened = false;
@@ -136,7 +136,10 @@ public class TestKitController : MonoBehaviour
     private float MinFillPos = 0;
     private float MaxFillPos = 100;
     public float knobRotation;
-
+    public List<GameObject> StaticTestCockList;
+    public List<GameObject> TestCockList;
+    public List<GameObject> AttachedTestCockList;
+    public List<GameObject> AttachedHoseList;
     int rot = 0;
     void OnEnable()
     {
@@ -151,21 +154,16 @@ public class TestKitController : MonoBehaviour
         Actions.onTestCock3Closed += TestCock3Closed;
         Actions.onTestCock4Opened += TestCoc4Opened;
         Actions.onTestCock4Closed += TestCock4Closed;
+        Actions.onAddTestCockToList += AddTestCockToList;
+        Actions.onRemoveTestCockFromList += RemoveTestCockFromList;
+        Actions.onAddHoseToList += AddHoseToList;
+        Actions.onRemoveHoseFromList += RemoveHoseFromList;
         // Actions.onHighBleedOpen += HighBleedKnobOpened;
         // Actions.onHighBleedClosed += HighBleedKnobClosed;
 
 
     }
 
-    // private void HighBleedKnobClosed()
-    // {
-    //     knobOpened = false;
-    // }
-
-    // private void HighBleedKnobOpened()
-    // {
-    //     knobOpened = true;
-    // }
 
     void OnDisable()
     {
@@ -179,6 +177,10 @@ public class TestKitController : MonoBehaviour
         Actions.onTestCock3Closed -= TestCock3Closed;
         Actions.onTestCock4Opened -= TestCoc4Opened;
         Actions.onTestCock4Closed -= TestCock4Closed;
+        Actions.onAddTestCockToList -= AddTestCockToList;
+        Actions.onRemoveTestCockFromList -= RemoveTestCockFromList;
+        Actions.onAddHoseToList -= AddHoseToList;
+        Actions.onRemoveHoseFromList -= RemoveHoseFromList;
         // Actions.onHighBleedOpen -= HighBleedKnobOpened;
         // Actions.onHighBleedClosed -= HighBleedKnobClosed;
 
@@ -210,6 +212,40 @@ public class TestKitController : MonoBehaviour
         initLowHosePosition = LowHose.transform.position;
         initHighHosePosition = HighHose.transform.position;
         initBypassHosePosition = BypassHose.transform.position;
+    }
+
+
+    private void AddHoseToList(GameObject @object, OperableComponentDescription description)
+    {
+        if (!AttachedHoseList.Contains(@object))
+        {
+            AttachedHoseList.Add(@object);
+        }
+    }
+    private void RemoveHoseFromList(GameObject @object, OperableComponentDescription description)
+    {
+        if (AttachedHoseList.Contains(@object))
+        {
+            AttachedHoseList.Remove(@object);
+        }
+    }
+
+
+    private void AddTestCockToList(GameObject @object, OperableComponentDescription description)
+    {
+        if (!AttachedTestCockList.Contains(@object))
+        {
+            AttachedTestCockList.Add(@object);
+        }
+    }
+
+    private void RemoveTestCockFromList(GameObject @object, OperableComponentDescription description)
+    {
+
+        if (AttachedTestCockList.Contains(@object))
+        {
+            AttachedTestCockList.Remove(@object);
+        }
     }
 
     private float GetPsidNeedleRotation()
@@ -398,13 +434,6 @@ public class TestKitController : MonoBehaviour
         {
             TestCockList.Add(testCock);
         }
-        // if (
-        //     TestCockDetectorList.Contains(testCock.GetComponentInChildren<ZibraLiquidDetector>())
-        //     != true
-        // )
-        // {
-        //     TestCockDetectorList.Add(testCock.GetComponentInChildren<ZibraLiquidDetector>());
-        // }
 
     }
 

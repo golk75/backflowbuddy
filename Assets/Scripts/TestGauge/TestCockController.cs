@@ -144,19 +144,14 @@ public class TestCockController : MonoBehaviour
     }
 
 
-
-    public List<GameObject> AttachedTestCockList;
-    public List<GameObject> StaticTestCockList;
     void OnEnable()
     {
-        Actions.onAddTestCockToList += AddTestCockToList;
-        Actions.onRemoveTestCockFromList += RemoveTestCockFromList;
+
     }
 
     void OnDisable()
     {
-        Actions.onAddTestCockToList -= AddTestCockToList;
-        Actions.onRemoveTestCockFromList -= RemoveTestCockFromList;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -167,22 +162,7 @@ public class TestCockController : MonoBehaviour
     }
 
 
-    private void AddTestCockToList(GameObject @object, OperableComponentDescription description)
-    {
-        if (!AttachedTestCockList.Contains(@object))
-        {
-            AttachedTestCockList.Add(@object);
-        }
-    }
 
-    private void RemoveTestCockFromList(GameObject @object, OperableComponentDescription description)
-    {
-
-        if (AttachedTestCockList.Contains(@object))
-        {
-            AttachedTestCockList.Remove(@object);
-        }
-    }
 
 
     private void TestCockValveOperationCheck()

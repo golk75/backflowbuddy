@@ -21,13 +21,17 @@ public class HoseSpring : MonoBehaviour
     public Rigidbody HighHoseConfigJointConnectedBody;
     public Rigidbody LowHoseConfigJointConnectedBody;
     public Rigidbody BypassHoseConfigJointConnectedBody;
-    private GameObject currentHoseBibObj;
+    public GameObject currentHoseBibObj;
     public ConfigurableJoint currentJoint;
     public ConfigurableJoint jointPreset;
     public GameObject jointPresetParent;
     private OperableComponentDescription currentHoseDescription;
     private GameObject currentTestCock;
     public GameObject sightTube;
+    public GameObject highHoseBibTipHandle;
+    public GameObject lowHoseBibTipHandle;
+    public GameObject bypassHoseBibTipHandle;
+    public GameObject currentTipHandle;
     Rigidbody HoseRb;
     // public Preset CongfigurableJointPreset;
     bool pointerDown;
@@ -87,12 +91,13 @@ public class HoseSpring : MonoBehaviour
         if (currentHoseBibObj != null)
         {
             currentHoseBibObj.transform.position = testCock.transform.position;
+            // currentTipHandle.transform.position = testCock.transform.position;
             //identifying current test cock being hooked up to, for tracking/listing purposes
 
             currentTestCock = testCock;
             //add test cock thats being connected to, to TestCockList @TestCockController
             Actions.onAddTestCockToList?.Invoke(testCock, GetComponent<OperableComponentDescription>());
-
+            Actions.onAddHoseToList?.Invoke(currentHoseBibObj, description);
         }
 
 
@@ -107,12 +112,15 @@ public class HoseSpring : MonoBehaviour
         {
             case OperableComponentDescription.ComponentId.HighHose:
                 currentHoseBibObj = HighHoseBib;
+                currentTipHandle = highHoseBibTipHandle;
                 break;
             case OperableComponentDescription.ComponentId.LowHose:
                 currentHoseBibObj = LowHoseBib;
+                currentTipHandle = lowHoseBibTipHandle;
                 break;
             case OperableComponentDescription.ComponentId.BypassHose:
                 currentHoseBibObj = BypassHoseBib;
+                currentTipHandle = bypassHoseBibTipHandle;
                 break;
             default:
 
@@ -124,7 +132,7 @@ public class HoseSpring : MonoBehaviour
         HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
         HoseRb.isKinematic = true;
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
-
+        Actions.onRemoveHoseFromList?.Invoke(currentHoseBibObj, description);
 
 
     }
@@ -177,6 +185,7 @@ public class HoseSpring : MonoBehaviour
         if (HoseRb != null)
             HoseRb.isKinematic = false;
         currentHoseBibObj = null;
+        currentTipHandle = null;
     }
 
 

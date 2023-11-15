@@ -51,6 +51,7 @@ public class HoseDetector : MonoBehaviour
         if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitHose)
         {
             Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
+
         }
 
 
@@ -87,7 +88,7 @@ public class HoseDetector : MonoBehaviour
     IEnumerator AttachInitiate()
     {
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.25f);
         if (isConnected == true)
         {
             OperableComponentDescription connectedObjectDescription = operableComponentDescription;
