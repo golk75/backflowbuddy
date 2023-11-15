@@ -46,7 +46,7 @@ public class SightTubeController : MonoBehaviour
 
         if (description.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
         {
-            connectionPoint = obj.transform.position;
+            connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + 1.2f, obj.transform.position.z);
             transform.position = connectionPoint;
             isConnected = true;
 
@@ -60,7 +60,8 @@ public class SightTubeController : MonoBehaviour
     {
         if (playerController.primaryTouchPerformed)
         {
-            gameObject.transform.position = testcock.transform.position;
+            // gameObject.transform.position = testcock.transform.position;
+            gameObject.transform.position = connectionPoint;
         }
 
     }
