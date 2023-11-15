@@ -92,7 +92,7 @@ public class HoseDetector : MonoBehaviour
         {
             OperableComponentDescription connectedObjectDescription = operableComponentDescription;
             Actions.onObjectConnect?.Invoke(gameObject, operableComponentDescription);
-            Actions.onAddTestCockToList?.Invoke(this.gameObject, connectedObjectDescription);
+
 
         }
 

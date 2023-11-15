@@ -8,7 +8,7 @@ public class SightTubeController : MonoBehaviour
 {
     public PlayerController playerController;
     public TestCockController testCockController;
-    public GameObject connectedTestCock;
+    public GameObject currentTestCock;
     public bool sightTubeGrabbed = false;
     public bool isAttaching = false;
     public Coroutine SightTubeMovement;
@@ -45,9 +45,11 @@ public class SightTubeController : MonoBehaviour
     }
 
 
-    //listening to HoseDetector(s)
+    //listening to HoseDetector(s)--> obj = test cock and/or hose detector
     private void ConnectionAttempt(GameObject obj, OperableComponentDescription description)
     {
+
+        Actions.onAddTestCockToList?.Invoke(obj, description);
 
         if (description.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
         {
@@ -55,7 +57,7 @@ public class SightTubeController : MonoBehaviour
             connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + testCockPositionOffset, obj.transform.position.z);
             transform.position = connectionPoint;
             isConnected = true;
-            connectedTestCock = obj;
+            currentTestCock = obj;
 
         }
 
@@ -94,9 +96,9 @@ public class SightTubeController : MonoBehaviour
 
 
             go.transform.position = new Vector3(direction.x, direction.y, go.transform.position.z);
-            if (connectedTestCock)
+            if (currentTestCock)
             {
-                Actions.onRemoveTestCockFromList?.Invoke(connectedTestCock, connectedTestCock.GetComponent<OperableComponentDescription>());
+                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
             }
             yield return null;
         }

@@ -4326,6 +4326,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 2592640261754679527, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: testCockController
+      value: 
+      objectReference: {fileID: 2275129408291974312}
     - target: {fileID: 2650413851699407450, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -33,6 +33,7 @@ public class HoseSpring : MonoBehaviour
     bool pointerDown;
 
     public bool isAttaching;
+
     Vector3 testCockPosition;
     Vector3 testCockTransform;
     public HoseDetector hoseDetector;
@@ -86,6 +87,11 @@ public class HoseSpring : MonoBehaviour
         if (currentHoseBibObj != null)
         {
             currentHoseBibObj.transform.position = testCock.transform.position;
+            //identifying current test cock being hooked up to, for tracking/listing purposes
+
+            currentTestCock = testCock;
+            //add test cock thats being connected to, to TestCockList @TestCockController
+            Actions.onAddTestCockToList?.Invoke(testCock, GetComponent<OperableComponentDescription>());
 
         }
 
@@ -118,6 +124,7 @@ public class HoseSpring : MonoBehaviour
         HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
         HoseRb.isKinematic = true;
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
+
 
 
     }
@@ -199,7 +206,10 @@ public class HoseSpring : MonoBehaviour
                     currentHoseBibObj.transform.eulerAngles.z
                 )
             );
-
+            if (currentTestCock)
+            {
+                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
+            }
             yield return null;
         }
     }

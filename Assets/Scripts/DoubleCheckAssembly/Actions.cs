@@ -7,6 +7,7 @@ public static class Actions
 {
     public static Action<GameObject, OperableComponentDescription> onObjectConnect;
     public static Action<GameObject, OperableComponentDescription> onObjectDisconnect;
+    //adding component descriptions with these list manipulations, although they are not being used at the moment, may comeback and remove these Action parameters in the future if they are causing issues
     public static Action<GameObject, OperableComponentDescription> onAddTestCockToList;
     public static Action<GameObject, OperableComponentDescription> onRemoveTestCockFromList;
 
