@@ -7,7 +7,8 @@ public static class Actions
 {
     public static Action<GameObject, OperableComponentDescription> onObjectConnect;
     public static Action<GameObject, OperableComponentDescription> onObjectDisconnect;
-
+    public static Action<GameObject, OperableComponentDescription> onAddTestCockToList;
+    public static Action<GameObject, OperableComponentDescription> onRemoveTestCockFromList;
 
     public static Action<GameObject, OperableComponentDescription> onHoseBibGrab;
     public static Action<GameObject, OperableComponentDescription> onHoseBibDrop;

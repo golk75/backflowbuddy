@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestCockController : MonoBehaviour
@@ -141,9 +143,20 @@ public class TestCockController : MonoBehaviour
         private set { value = _checkZoneDetector; }
     }
 
-    [SerializeField]
-    public List<GameObject> TestCockList;
 
+    public List<GameObject> TestCockList;
+    public List<GameObject> AttachedTestCockList;
+    void OnEnable()
+    {
+        Actions.onAddTestCockToList += AddTestCockToList;
+        Actions.onRemoveTestCockFromList += RemoveTestCockFromList;
+    }
+
+    void OnDisable()
+    {
+        Actions.onAddTestCockToList -= AddTestCockToList;
+        Actions.onRemoveTestCockFromList -= RemoveTestCockFromList;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -151,6 +164,25 @@ public class TestCockController : MonoBehaviour
         relaxWater = WaterManager.GetComponent<RelaxWater>();
         testCockClosedScale = TestCockVoid1.transform.localScale;
     }
+
+
+    private void AddTestCockToList(GameObject @object, OperableComponentDescription description)
+    {
+        if (!AttachedTestCockList.Contains(@object))
+        {
+            AttachedTestCockList.Add(@object);
+        }
+    }
+
+    private void RemoveTestCockFromList(GameObject @object, OperableComponentDescription description)
+    {
+
+        if (AttachedTestCockList.Contains(@object))
+        {
+            AttachedTestCockList.Remove(@object);
+        }
+    }
+
 
     private void TestCockValveOperationCheck()
     {

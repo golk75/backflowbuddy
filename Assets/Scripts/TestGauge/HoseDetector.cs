@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class HoseDetector : MonoBehaviour
 {
+    public TestCockController testCockController;
     public HoseSpring hoseSpring;
     public GameObject testCock;
     public bool isConnected;
@@ -89,8 +90,9 @@ public class HoseDetector : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         if (isConnected == true)
         {
-
+            OperableComponentDescription connectedObjectDescription = operableComponentDescription;
             Actions.onObjectConnect?.Invoke(gameObject, operableComponentDescription);
+            Actions.onAddTestCockToList?.Invoke(this.gameObject, connectedObjectDescription);
 
         }
 

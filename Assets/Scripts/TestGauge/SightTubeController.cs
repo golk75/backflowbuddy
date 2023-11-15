@@ -7,12 +7,16 @@ using UnityEngine;
 public class SightTubeController : MonoBehaviour
 {
     public PlayerController playerController;
+    public TestCockController testCockController;
+    public GameObject connectedTestCock;
     public bool sightTubeGrabbed = false;
     public bool isAttaching = false;
     public Coroutine SightTubeMovement;
     public bool isConnected = false;
     public Vector3 connectionPoint;
     public Vector3 sightTubeHomePos;
+    public float testCockPositionOffset = 1.2f;
+    public bool isTestCockBeingUsed;
 
     void OnEnable()
     {
@@ -23,6 +27,7 @@ public class SightTubeController : MonoBehaviour
 
         Actions.onObjectConnect += ConnectionAttempt;
         sightTubeHomePos = transform.localPosition;
+
 
     }
 
@@ -40,40 +45,22 @@ public class SightTubeController : MonoBehaviour
     }
 
 
-
+    //listening to HoseDetector(s)
     private void ConnectionAttempt(GameObject obj, OperableComponentDescription description)
     {
 
         if (description.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
         {
-            connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + 1.2f, obj.transform.position.z);
+
+            connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + testCockPositionOffset, obj.transform.position.z);
             transform.position = connectionPoint;
             isConnected = true;
+            connectedTestCock = obj;
 
-        }
-    }
-
-
-
-
-    private void ConnectSightTube(GameObject testcock, OperableComponentDescription description)
-    {
-        if (playerController.primaryTouchPerformed)
-        {
-            // gameObject.transform.position = testcock.transform.position;
-            gameObject.transform.position = connectionPoint;
         }
 
     }
-    // private void DisconnectSightTube(GameObject testcock, OperableComponentDescription description)
-    // {
-    //     if (playerController.primaryTouchPerformed)
-    //     {
-    //         transform.position = sightTubeHomePos;
-    //         isConnected = false;
-    //     }
 
-    // }
 
     private void DropSightTube(GameObject obj)
     {
@@ -107,7 +94,10 @@ public class SightTubeController : MonoBehaviour
 
 
             go.transform.position = new Vector3(direction.x, direction.y, go.transform.position.z);
-
+            if (connectedTestCock)
+            {
+                Actions.onRemoveTestCockFromList?.Invoke(connectedTestCock, connectedTestCock.GetComponent<OperableComponentDescription>());
+            }
             yield return null;
         }
 
