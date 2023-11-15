@@ -117,7 +117,7 @@ public class ResetButton : MonoBehaviour
 
 
 
-        foreach (GameObject testCock in testCockController.TestCockList)
+        foreach (GameObject testCock in testCockController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;

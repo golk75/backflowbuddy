@@ -144,8 +144,9 @@ public class TestCockController : MonoBehaviour
     }
 
 
-    public List<GameObject> TestCockList;
+
     public List<GameObject> AttachedTestCockList;
+    public List<GameObject> StaticTestCockList;
     void OnEnable()
     {
         Actions.onAddTestCockToList += AddTestCockToList;

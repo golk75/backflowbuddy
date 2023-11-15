@@ -325,7 +325,7 @@ public class WaterController : MonoBehaviour
             check1housingForceField.Strength = 0;
             check2housingForceField.Strength = 0;
 
-            foreach (GameObject testCock in testCockController.TestCockList)
+            foreach (GameObject testCock in testCockController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -533,7 +533,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
-            foreach (GameObject testCock in testCockController.TestCockList)
+            foreach (GameObject testCock in testCockController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
@@ -625,7 +625,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
-            foreach (GameObject testCock in testCockController.TestCockList)
+            foreach (GameObject testCock in testCockController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -711,7 +711,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
 
-            foreach (GameObject testCock in testCockController.TestCockList)
+            foreach (GameObject testCock in testCockController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
