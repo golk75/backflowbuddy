@@ -8,6 +8,7 @@ public class SightTubeController : MonoBehaviour
 {
     public PlayerController playerController;
     public TestCockController testCockController;
+    public CameraController cameraController;
     public GameObject currentTestCock;
     public bool sightTubeGrabbed = false;
     public bool isAttaching = false;
@@ -17,48 +18,63 @@ public class SightTubeController : MonoBehaviour
     public Vector3 sightTubeHomePos;
     public float testCockPositionOffset = 1.2f;
     public bool isTestCockBeingUsed;
+    public bool isCurrentTestCockAttached;
 
     void OnEnable()
     {
         Actions.onSightTubeGrab += GrabSightTube;
         Actions.onSightTubeDrop += DropSightTube;
-        // Actions.onSightTubeAttach += AttachSightTube;
-        // Actions.onSightTubeDettach += DettachSightTube;
-
         Actions.onObjectConnect += ConnectionAttempt;
+        Actions.onTestCockColliderEnter += GetCurrentTestCockColliderEntry;
+        Actions.onTestCockColliderExit += GetCurrentTestCockColliderExit;
         sightTubeHomePos = transform.localPosition;
 
 
     }
 
 
+
     void OnDisable()
     {
         Actions.onSightTubeGrab -= GrabSightTube;
         Actions.onSightTubeDrop -= DropSightTube;
-        // // Actions.onSightTubeAttach -= AttachSightTube;
-        // // Actions.onSightTubeDettach -= DettachSightTube;
-
-
-
         Actions.onObjectConnect -= ConnectionAttempt;
+        Actions.onTestCockColliderEnter -= GetCurrentTestCockColliderEntry;
+        Actions.onTestCockColliderExit -= GetCurrentTestCockColliderExit;
+    }
+
+
+    private void GetCurrentTestCockColliderEntry(GameObject testCockDetector, OperableComponentDescription description)
+    {
+        currentTestCock = testCockDetector;
+    }
+    private void GetCurrentTestCockColliderExit(GameObject testCockDetector)
+    {
+        currentTestCock = testCockDetector;
+        if (!isCurrentTestCockAttached)
+        {
+
+            if (!cameraController.isPanning)
+            {
+                //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively/ fast
+                // Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
+                Actions.onRemoveHoseFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
+            }
+        }
     }
 
 
     //listening to HoseDetector(s)--> obj = test cock and/or hose detector
     private void ConnectionAttempt(GameObject obj, OperableComponentDescription description)
     {
-
-        Actions.onAddTestCockToList?.Invoke(obj, description);
-
         if (description.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
         {
+            Actions.onAddTestCockToList?.Invoke(obj, description);
+            Actions.onAddHoseToList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
 
             connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + testCockPositionOffset, obj.transform.position.z);
-            transform.position = connectionPoint;
+            transform.position = obj.transform.position;
             isConnected = true;
-            currentTestCock = obj;
-
         }
 
     }
@@ -71,6 +87,7 @@ public class SightTubeController : MonoBehaviour
         isAttaching = false;
         transform.localPosition = sightTubeHomePos;
         StopCoroutine(MovingSightTube(obj));
+        currentTestCock = null;
 
     }
 
@@ -97,10 +114,7 @@ public class SightTubeController : MonoBehaviour
 
 
             go.transform.position = new Vector3(direction.x, direction.y, go.transform.position.z);
-            if (currentTestCock)
-            {
-                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
-            }
+
             yield return null;
         }
 
@@ -113,5 +127,6 @@ public class SightTubeController : MonoBehaviour
         {
             transform.position = connectionPoint;
         }
+
     }
 }

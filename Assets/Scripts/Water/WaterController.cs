@@ -194,8 +194,8 @@ public class WaterController : MonoBehaviour
     {
         //Actions.onCheckClosed += DetectCheckClosure;
         //Actions.onCheckOpened += DetectCheckOpening;
-        Actions.onHoseBibConnect += DetectHoseAttachment;
-        Actions.onHoseDetach += DetectHoseDetachment;
+        // Actions.onHoseBibConnect += DetectHoseAttachment;
+        // Actions.onHoseDetach += DetectHoseDetachment;
         testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
         testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
         CheckValve1StartingPos = checkValve1.transform.position;
@@ -210,35 +210,35 @@ public class WaterController : MonoBehaviour
     {
         //Actions.onCheckClosed -= DetectCheckClosure;
         //Actions.onCheckOpened -= DetectCheckOpening;
-        Actions.onHoseAttach -= DetectHoseAttachment;
-        Actions.onHoseDetach -= DetectHoseDetachment;
+        // Actions.onHoseBibConnect -= DetectHoseAttachment;
+        // Actions.onHoseDetach -= DetectHoseDetachment;
     }
 
 
 
-    private void DetectHoseAttachment(
-        GameObject gameObject,
-        OperableComponentDescription description
-    )
-    {
+    // private void DetectHoseAttachment(
+    //     GameObject gameObject,
+    //     OperableComponentDescription description
+    // )
+    // {
 
-        isAttachedToGauge = true;
-        if (randomizePressure == true)
-        {
-            testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
-            testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
-        }
+    //     isAttachedToGauge = true;
+    //     if (randomizePressure == true)
+    //     {
+    //         testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
+    //         testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
+    //     }
 
 
-    }
+    // }
 
-    private void DetectHoseDetachment(
-        GameObject gameObject,
-        OperableComponentDescription description
-    )
-    {
-        isAttachedToGauge = false;
-    }
+    // private void DetectHoseDetachment(
+    //     GameObject gameObject,
+    //     OperableComponentDescription description
+    // )
+    // {
+    //     isAttachedToGauge = false;
+    // }
 
     // Update is called once per frame
     void Update()

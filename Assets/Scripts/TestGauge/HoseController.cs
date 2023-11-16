@@ -3,11 +3,13 @@ using System.Collections;
 using Unity.VisualScripting;
 // using UnityEditor.Presets;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HoseController : MonoBehaviour
 {
     public ConfigurableJoint currentConfigurableJoint;
     public PlayerController playerController;
+    public CameraController cameraController;
     private Vector3 initHighHosePos;
     private Vector3 initAnchorPos_highHose;
     private Vector3 initAnchorPos_lowHose;
@@ -26,17 +28,18 @@ public class HoseController : MonoBehaviour
     public ConfigurableJoint jointPreset;
     public GameObject jointPresetParent;
     private OperableComponentDescription currentHoseDescription;
-    private GameObject currentTestCock;
+    public GameObject currentTestCock;
     public GameObject sightTube;
     public GameObject highHoseBibTipHandle;
     public GameObject lowHoseBibTipHandle;
     public GameObject bypassHoseBibTipHandle;
     public GameObject currentTipHandle;
     Rigidbody HoseRb;
-    // public Preset CongfigurableJointPreset;
     bool pointerDown;
-
     public bool isAttaching;
+    public bool isCurrentTestCockAttached;
+
+
 
     Vector3 testCockPosition;
     Vector3 testCockTransform;
@@ -48,6 +51,8 @@ public class HoseController : MonoBehaviour
         Actions.onHoseBibDrop += DropHoseBib;
         // Actions.onHoseBibConnect += AttachHoseBib;
         Actions.onObjectConnect += HoseBibConnectionAttempt;
+        Actions.onTestCockColliderEnter += GetCurrentTestCockColliderEntry;
+        Actions.onTestCockColliderExit += GetCurrentTestCockColliderExit;
 
     }
 
@@ -57,6 +62,7 @@ public class HoseController : MonoBehaviour
         Actions.onHoseBibDrop -= DropHoseBib;
         //Actions.onHoseBibConnect -= AttachHoseBib;
         Actions.onObjectConnect -= HoseBibConnectionAttempt;
+        Actions.onTestCockColliderExit -= GetCurrentTestCockColliderExit;
 
     }
 
@@ -65,7 +71,29 @@ public class HoseController : MonoBehaviour
     /// </summary>
     /// <param name="testCock"></param>
     /// <param name="description"></param>
+    private void GetCurrentTestCockColliderEntry(GameObject testCockDetector, OperableComponentDescription description)
+    {
+        //identifying current test cock being hooked up to, for tracking/listing purposes
 
+        currentTestCock = testCockDetector;
+        isCurrentTestCockAttached = currentTestCock.GetComponent<HoseDetector>().isConnected;
+        if (currentHoseBibObj)
+        {
+            Debug.Log($"{currentHoseBibObj} has entered {testCockDetector}'s collider");
+        }
+
+    }
+    private void GetCurrentTestCockColliderExit(GameObject testCockDetector)
+    {
+        currentTestCock = testCockDetector;
+        Debug.Log($"{currentHoseBibObj} has left {currentTestCock}'s collider");
+        if (!isCurrentTestCockAttached)
+        {
+            if (!cameraController.isPanning)
+                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
+        }
+
+    }
     private void HoseBibConnectionAttempt(GameObject testCock, OperableComponentDescription description)
     {
         isAttaching = true;
@@ -82,7 +110,6 @@ public class HoseController : MonoBehaviour
                 break;
             case OperableComponentDescription.ComponentId.BypassHose:
                 Destroy(BypassHoseBib.GetComponent<ConfigurableJoint>());
-
                 break;
             default:
 
@@ -90,14 +117,12 @@ public class HoseController : MonoBehaviour
         }
         if (currentHoseBibObj != null)
         {
-            currentHoseBibObj.transform.position = testCock.transform.position;
-            // currentTipHandle.transform.position = testCock.transform.position;
-            //identifying current test cock being hooked up to, for tracking/listing purposes
 
-            currentTestCock = testCock;
-            //add test cock thats being connected to, to TestCockList @TestCockController
-            Actions.onAddTestCockToList?.Invoke(testCock, GetComponent<OperableComponentDescription>());
+            currentHoseBibObj.transform.position = currentTestCock.transform.position;
+            Actions.onAddTestCockToList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
             Actions.onAddHoseToList?.Invoke(currentHoseBibObj, description);
+
+
         }
 
 
@@ -133,11 +158,18 @@ public class HoseController : MonoBehaviour
         HoseRb.isKinematic = true;
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
         if (currentHoseBibObj)
+        {
             Actions.onRemoveHoseFromList?.Invoke(currentHoseBibObj, description);
-        if (currentTestCock)
 
-            Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
-        Debug.Log($"currentTestCock: {currentTestCock}");
+
+
+            // LayerMask layerMask = LayerMask.GetMask("OperableObject");
+            // RaycastHit hit;
+            // Physics.Raycast(currentHoseBibObj.transform.position, currentHoseBibObj.transform.forward, out hit, 0.01f, layerMask);
+            // Debug.Log($"hit.collider: {hit.collider.name}");
+
+
+        }
 
 
     }
@@ -185,13 +217,15 @@ public class HoseController : MonoBehaviour
                 currentConfigurableJoint.yDrive = jointPreset.yDrive;
 
             }
+
         }
         isAttaching = false;
         if (HoseRb != null)
             HoseRb.isKinematic = false;
         currentHoseBibObj = null;
         currentTipHandle = null;
-        // currentTestCock = null;
+
+
     }
 
 
@@ -221,11 +255,7 @@ public class HoseController : MonoBehaviour
                     currentHoseBibObj.transform.eulerAngles.z
                 )
             );
-            if (currentTestCock)
-            {
 
-                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
-            }
             yield return null;
         }
     }

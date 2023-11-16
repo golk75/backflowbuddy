@@ -44,29 +44,11 @@ public class HoseDetector : MonoBehaviour
     {
         operableComponentDescription = other.GetComponent<OperableComponentDescription>();
 
-
-
-        // operableComponentDescription = other.GetComponent<OperableComponentDescription>();
-        if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitHose)
-        {
-            Actions.onHoseAttach?.Invoke(testCock, operableComponentDescription);
-
-        }
-
-
-        // if (playerController.primaryTouchPerformed)
-        // {
-        //     onAttachAttempt = StartCoroutine(AttachInitiate());
-
-        // }
-
-
         if (cameraController.isPanning == false)
         {
             onAttachAttempt = StartCoroutine(AttachInitiate());
+            Actions.onTestCockColliderEnter?.Invoke(this.gameObject, other.GetComponent<OperableComponentDescription>());
         }
-
-
 
         isConnected = true;
     }
@@ -81,7 +63,8 @@ public class HoseDetector : MonoBehaviour
     {
         isConnected = false;
 
-        Actions.onHoseDetach?.Invoke(testCock, operableComponentDescription);
+        Actions.onTestCockColliderExit?.Invoke(this.gameObject);
+
     }
 
     IEnumerator AttachInitiate()
@@ -91,8 +74,7 @@ public class HoseDetector : MonoBehaviour
         if (isConnected == true)
         {
             OperableComponentDescription connectedObjectDescription = operableComponentDescription;
-            Actions.onObjectConnect?.Invoke(gameObject, operableComponentDescription);
-
+            Actions.onObjectConnect?.Invoke(this.gameObject, operableComponentDescription);
 
         }
 
