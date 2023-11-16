@@ -14,13 +14,13 @@ public class HoseDetector : MonoBehaviour
     public GameObject Hose;
     public PlayerController playerController;
     public OperableComponentDescription operableComponentDescription;
-    private Collider collider;
+    private Collider boxCollider;
     private Coroutine InitialColliderBlock;
 
     public CameraController cameraController;
     void OnEnable()
     {
-        collider = GetComponent<Collider>();
+        boxCollider = GetComponent<Collider>();
     }
     void Start()
     {
@@ -34,9 +34,9 @@ public class HoseDetector : MonoBehaviour
     private IEnumerator HideCollider()
     {
         yield return new WaitForSeconds(1);
-        if (collider.enabled == false)
+        if (boxCollider.enabled == false)
         {
-            collider.enabled = true;
+            boxCollider.enabled = true;
         }
 
     }
