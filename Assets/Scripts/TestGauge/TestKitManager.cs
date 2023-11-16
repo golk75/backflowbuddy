@@ -425,26 +425,7 @@ public class TestKitManager : MonoBehaviour
     {
         isTestCock1Open = true;
     }
-    // object detected to attach to tc NOT JUST HOSE BIB (could be sight tube) ------>
-    // public void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
-    // {
-    //     isConnectedToAssembly = true;
 
-    //     if (TestCockList.Contains(testCock) != true)
-    //     {
-    //         TestCockList.Add(testCock);
-    //     }
-
-    // }
-
-    // public void DetachHoseBib(GameObject testCock, OperableComponentDescription description)
-    // {
-    //     isConnectedToAssembly = false;
-
-    //     TestCockList.Remove(testCock);
-
-
-    // }
 
     private void NeedleControl()
     {
@@ -602,14 +583,6 @@ public class TestKitManager : MonoBehaviour
                 {
                     hosePressure -= 0.4f;
                 }
-                // if (liquid.UseFixedTimestep == true)
-                // {
-                //     hosePressure -= 0.05f;
-                // }
-                // else
-                // {
-                //     hosePressure -= 0.4f;
-                // }
 
 
             }
@@ -660,7 +633,7 @@ public class TestKitManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isCheck1Open = checkValveStatus.isCheck1Open;
+
         if (AttachedHoseList.Count > 0)
         {
             isConnectedToAssembly = true;
@@ -674,7 +647,7 @@ public class TestKitManager : MonoBehaviour
         NeedleControl();
         DigitalNeedleControl();
         knobRotation = highBleed.transform.eulerAngles.z;
-        // Debug.Log($"hosePressure: {hosePressure}");
+
     }
 
 
