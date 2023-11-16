@@ -62,6 +62,8 @@ public class HoseController : MonoBehaviour
         Actions.onHoseBibDrop -= DropHoseBib;
         //Actions.onHoseBibConnect -= AttachHoseBib;
         Actions.onObjectConnect -= HoseBibConnectionAttempt;
+
+        Actions.onTestCockColliderEnter -= GetCurrentTestCockColliderEntry;
         Actions.onTestCockColliderExit -= GetCurrentTestCockColliderExit;
 
     }
@@ -76,7 +78,7 @@ public class HoseController : MonoBehaviour
         //identifying current test cock being hooked up to, for tracking/listing purposes
 
         currentTestCock = testCockDetector;
-        isCurrentTestCockAttached = currentTestCock.GetComponent<HoseDetector>().isConnected;
+
         if (currentHoseBibObj)
         {
             Debug.Log($"{currentHoseBibObj} has entered {testCockDetector}'s collider");
@@ -85,13 +87,12 @@ public class HoseController : MonoBehaviour
     }
     private void GetCurrentTestCockColliderExit(GameObject testCockDetector)
     {
-        currentTestCock = testCockDetector;
+        // currentTestCock = testCockDetector;
         Debug.Log($"{currentHoseBibObj} has left {currentTestCock}'s collider");
-        if (!isCurrentTestCockAttached)
-        {
-            if (!cameraController.isPanning)
-                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
-        }
+
+        if (!cameraController.isPanning)
+            Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
+
 
     }
     private void HoseBibConnectionAttempt(GameObject testCock, OperableComponentDescription description)
@@ -161,15 +162,9 @@ public class HoseController : MonoBehaviour
         {
             Actions.onRemoveHoseFromList?.Invoke(currentHoseBibObj, description);
 
-
-
-            // LayerMask layerMask = LayerMask.GetMask("OperableObject");
-            // RaycastHit hit;
-            // Physics.Raycast(currentHoseBibObj.transform.position, currentHoseBibObj.transform.forward, out hit, 0.01f, layerMask);
-            // Debug.Log($"hit.collider: {hit.collider.name}");
-
-
         }
+
+
 
 
     }
