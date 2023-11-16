@@ -661,7 +661,14 @@ public class TestKitManager : MonoBehaviour
     void Update()
     {
         //isCheck1Open = checkValveStatus.isCheck1Open;
-
+        if (AttachedHoseList.Count > 0)
+        {
+            isConnectedToAssembly = true;
+        }
+        else
+        {
+            isConnectedToAssembly = false;
+        }
         PressureControl();
         OperateControls();
         NeedleControl();
