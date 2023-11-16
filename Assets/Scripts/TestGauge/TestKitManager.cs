@@ -137,15 +137,15 @@ public class TestKitManager : MonoBehaviour
     private float MaxFillPos = 100;
     public float knobRotation;
     public List<GameObject> StaticTestCockList;
-    public List<GameObject> TestCockList;
+    // public List<GameObject> TestCockList;
     public List<GameObject> AttachedTestCockList;
     public List<GameObject> AttachedHoseList;
     int rot = 0;
     void OnEnable()
     {
 
-        Actions.onHoseAttach += AttachHoseBib;
-        Actions.onHoseDetach += DetachHoseBib;
+        // Actions.onHoseAttach += AttachHoseBib;
+        // Actions.onHoseDetach += DetachHoseBib;
         Actions.onTestCock1Opened += TestCock1Opened;
         Actions.onTestCock1Closed += TestCock1Closed;
         Actions.onTestCock2Opened += TestCoc2Opened;
@@ -167,8 +167,8 @@ public class TestKitManager : MonoBehaviour
 
     void OnDisable()
     {
-        Actions.onHoseAttach -= AttachHoseBib;
-        Actions.onHoseDetach -= DetachHoseBib;
+        // Actions.onHoseAttach -= AttachHoseBib;
+        // Actions.onHoseDetach -= DetachHoseBib;
         Actions.onTestCock1Opened -= TestCock1Opened;
         Actions.onTestCock1Closed -= TestCock1Closed;
         Actions.onTestCock2Opened -= TestCoc2Opened;
@@ -426,25 +426,25 @@ public class TestKitManager : MonoBehaviour
         isTestCock1Open = true;
     }
     // object detected to attach to tc NOT JUST HOSE BIB (could be sight tube) ------>
-    public void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
-    {
-        isConnectedToAssembly = true;
+    // public void AttachHoseBib(GameObject testCock, OperableComponentDescription description)
+    // {
+    //     isConnectedToAssembly = true;
 
-        if (TestCockList.Contains(testCock) != true)
-        {
-            TestCockList.Add(testCock);
-        }
+    //     if (TestCockList.Contains(testCock) != true)
+    //     {
+    //         TestCockList.Add(testCock);
+    //     }
 
-    }
+    // }
 
-    public void DetachHoseBib(GameObject testCock, OperableComponentDescription description)
-    {
-        isConnectedToAssembly = false;
+    // public void DetachHoseBib(GameObject testCock, OperableComponentDescription description)
+    // {
+    //     isConnectedToAssembly = false;
 
-        TestCockList.Remove(testCock);
+    //     TestCockList.Remove(testCock);
 
 
-    }
+    // }
 
     private void NeedleControl()
     {
@@ -465,7 +465,7 @@ public class TestKitManager : MonoBehaviour
             //checking if hose/ test kit is connected to test cock while supply is open
 
             //test cock #1 will have continuous pressure whether the supply is open or closed, as it sits upstream of #1 shut off valve
-            if (TestCockList.Contains(TestCock1) && isTestCock1Open)
+            if (AttachedTestCockList.Contains(TestCock1) && isTestCock1Open)
             {
                 //supply is open and test cock is open
                 hosePressure = Mathf.SmoothStep(
@@ -477,7 +477,7 @@ public class TestKitManager : MonoBehaviour
             }
 
             else if (
-                TestCockList.Contains(TestCock3)
+                AttachedTestCockList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock3Open
             )
@@ -491,7 +491,7 @@ public class TestKitManager : MonoBehaviour
                 // Debug.Log($"supply is open and test cock 3 is connected & open");
             }
             else if (
-                TestCockList.Contains(TestCock4)
+                AttachedTestCockList.Contains(TestCock4)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock4Open
             )
@@ -514,7 +514,7 @@ public class TestKitManager : MonoBehaviour
             //========================================
 
             else if (
-                TestCockList.Contains(TestCock2)
+                AttachedTestCockList.Contains(TestCock2)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock2Open
                 && !isTestCock3Open
@@ -530,7 +530,7 @@ public class TestKitManager : MonoBehaviour
                 // );
             }
             else if (
-                TestCockList.Contains(TestCock2)
+                AttachedTestCockList.Contains(TestCock2)
                 && isTestCock2Open
                 && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
@@ -553,7 +553,7 @@ public class TestKitManager : MonoBehaviour
 
             }
             else if (
-                TestCockList.Contains(TestCock2)
+                AttachedTestCockList.Contains(TestCock2)
                 && isTestCock2Open
                 && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
@@ -570,7 +570,7 @@ public class TestKitManager : MonoBehaviour
             // #2 Check Test//========================>
             //========================================
             else if (
-                TestCockList.Contains(TestCock3)
+                AttachedTestCockList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock3Open
                 && !isTestCock4Open
@@ -584,7 +584,7 @@ public class TestKitManager : MonoBehaviour
 
             }
             else if (
-                TestCockList.Contains(TestCock3)
+                AttachedTestCockList.Contains(TestCock3)
                 && isTestCock3Open
                 && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false
@@ -614,7 +614,7 @@ public class TestKitManager : MonoBehaviour
 
             }
             else if (
-                TestCockList.Contains(TestCock3)
+                AttachedTestCockList.Contains(TestCock3)
                 && isTestCock3Open
                 && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false

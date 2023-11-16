@@ -132,7 +132,12 @@ public class HoseController : MonoBehaviour
         HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
         HoseRb.isKinematic = true;
         DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
-        Actions.onRemoveHoseFromList?.Invoke(currentHoseBibObj, description);
+        if (currentHoseBibObj)
+            Actions.onRemoveHoseFromList?.Invoke(currentHoseBibObj, description);
+        if (currentTestCock)
+
+            Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
+        Debug.Log($"currentTestCock: {currentTestCock}");
 
 
     }
@@ -186,7 +191,7 @@ public class HoseController : MonoBehaviour
             HoseRb.isKinematic = false;
         currentHoseBibObj = null;
         currentTipHandle = null;
-        currentTestCock = null;
+        // currentTestCock = null;
     }
 
 

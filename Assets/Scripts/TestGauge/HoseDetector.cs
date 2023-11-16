@@ -87,7 +87,7 @@ public class HoseDetector : MonoBehaviour
     IEnumerator AttachInitiate()
     {
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         if (isConnected == true)
         {
             OperableComponentDescription connectedObjectDescription = operableComponentDescription;
@@ -95,6 +95,7 @@ public class HoseDetector : MonoBehaviour
 
 
         }
+
 
     }
 }
