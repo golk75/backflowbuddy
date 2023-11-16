@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 // using UnityEditor.Presets;
 using UnityEngine;
 
-public class HoseSpring : MonoBehaviour
+public class HoseController : MonoBehaviour
 {
     public ConfigurableJoint currentConfigurableJoint;
     public PlayerController playerController;
@@ -186,6 +186,7 @@ public class HoseSpring : MonoBehaviour
             HoseRb.isKinematic = false;
         currentHoseBibObj = null;
         currentTipHandle = null;
+        currentTestCock = null;
     }
 
 
@@ -217,6 +218,7 @@ public class HoseSpring : MonoBehaviour
             );
             if (currentTestCock)
             {
+
                 Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, GetComponent<OperableComponentDescription>());
             }
             yield return null;

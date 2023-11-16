@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HoseManager : MonoBehaviour
+public class HoseJointConfig : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody[] hingeJointConnections;
