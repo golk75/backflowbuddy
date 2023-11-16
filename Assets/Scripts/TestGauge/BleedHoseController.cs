@@ -7,7 +7,7 @@ public class BleedHoseController : MonoBehaviour
 {
     ZibraLiquidEmitter bleederHoseEmitter;
     float controlKnobRotation;
-    public TestKitController testKitController;
+    public TestKitManager testKitManager;
     float currentFlow = 0;
     float appliedKnobRotation = 0;
     [SerializeField]
@@ -51,9 +51,9 @@ public class BleedHoseController : MonoBehaviour
     void Update()
     {
         //reset cached knob rotation to not reset after rotating 180 degress--> zRot is rotating from 0 -> 180 -> -180 -> 0 -> 180..and so on
-        // if (testKitController.currentKnob == highBleedKnob)
+        // if (testKitManager.currentKnob == highBleedKnob)
         // {
-        //     appliedKnobRotation = testKitController.knobRotation;
+        //     appliedKnobRotation = testKitManager.knobRotation;
 
         //     bleederHoseEmitter.VolumePerSimTime = appliedKnobRotation / 10000;
 

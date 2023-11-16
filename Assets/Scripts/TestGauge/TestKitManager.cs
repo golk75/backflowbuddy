@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class TestKitController : MonoBehaviour
+public class TestKitManager : MonoBehaviour
 {
     public WaterController waterController;
     public PlayerController playerController;

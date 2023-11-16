@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject TestCockManager;
     TestCockController testCockController;
-    public TestKitController testKitController;
+    public TestKitManager testKitManager;
     public GameObject FillButton;
 
     [SerializeField]

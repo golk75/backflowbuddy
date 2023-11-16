@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class HoseDetector : MonoBehaviour
 {
     public TestCockController testCockController;
-    public HoseSpring hoseSpring;
     public GameObject testCock;
     public bool isConnected;
     Coroutine onAttachAttempt;

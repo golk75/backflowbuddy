@@ -17,7 +17,7 @@ public class FillButton : MonoBehaviour
     OperableComponentDescription ShutOff1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
-    public TestKitController testKitController;
+    public TestKitManager testKitManager;
     public GameObject SO1;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
@@ -35,7 +35,7 @@ public class FillButton : MonoBehaviour
     Vector3 supplyColliderTargetPos = new Vector3(-15f, 0, 0);
     Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
     Vector3 initSupplyVoidPos;
-    HoseSpring hoseSpring;
+    HoseController hoseController;
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -72,13 +72,13 @@ public class FillButton : MonoBehaviour
         playerController._operableObjectRotation.y = 180;
         // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
-        foreach (GameObject testCock in testKitController.StaticTestCockList)
+        foreach (GameObject testCock in testKitManager.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
         }
-        // hoseSpring.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
-        // testKitController.DetachHoseBib();
+        // hoseController.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
+        // testKitManager.DetachHoseBib();
     }
 
     // Update is called once per frame

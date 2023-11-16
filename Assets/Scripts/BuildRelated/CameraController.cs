@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     PlayerInputAction playerInput;
 
     private PlayerController playerController;
-    public TestKitController testKitController;
+    public TestKitManager testKitManager;
 
     [SerializeField]
     GameObject playerManager;
@@ -231,7 +231,7 @@ public class CameraController : MonoBehaviour
     {
         if (
             playerController.isOperableObject == false
-            && testKitController.isOperableObject == false
+            && testKitManager.isOperableObject == false
         )
         {
             if (
