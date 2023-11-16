@@ -233,7 +233,6 @@ public class HoseController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         //configurableJoint.autoConfigureConnectedAnchor = true;
         initAnchorPos_highHose = HighHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
         initAnchorPos_lowHose = LowHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
