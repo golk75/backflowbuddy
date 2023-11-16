@@ -1625,7 +1625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ffae3f0ef0a4a939c34e2ec923e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testKitController: {fileID: 2769071947225662792}
+  testKitManager: {fileID: 0}
   highBleedKnob: {fileID: 1032487122}
 --- !u!4 &744900688229994192
 Transform:
@@ -2172,6 +2172,11 @@ PrefabInstance:
       propertyPath: check2Detector
       value: 
       objectReference: {fileID: 6423705231874470771}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testKitManager
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock3MaxStr
@@ -4489,6 +4494,11 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1446278363}
+    - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: testKitManager
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: testKitController
