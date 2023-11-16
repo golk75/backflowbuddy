@@ -3586,7 +3586,6 @@ MonoBehaviour:
   - {fileID: 2850636662131477855}
   - {fileID: 4613488893464780279}
   - {fileID: 390608882774367305}
-  TestCockList: []
   AttachedTestCockList: []
   AttachedHoseList: []
 --- !u!114 &2820352474242559008 stripped
@@ -8480,6 +8479,11 @@ PrefabInstance:
       objectReference: {fileID: 7335953754005364542}
     - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
+      propertyPath: testKitManager
+      value: 
+      objectReference: {fileID: 2769071947225662792}
+    - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
       propertyPath: check1HousingFF
       value: 
       objectReference: {fileID: 1325016448483182097}
@@ -8538,6 +8542,11 @@ PrefabInstance:
       propertyPath: sightTube
       value: 
       objectReference: {fileID: 2001235575}
+    - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: testKitManager
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: waterController
