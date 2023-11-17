@@ -257,9 +257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2b33d10e79348928f83991f26cb06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testKitController: {fileID: 0}
+  testKitManager: {fileID: 0}
   playerManager: {fileID: 0}
   mainCam: {fileID: 7975887091541937799}
+  isZooming: 0
+  isPanning: 0
   maxZoom: 3
   minZoom: 15
   zoomingSpeed: 0.00012
@@ -617,10 +619,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2037264882999018419, guid: 9c0445fbe3048468d8666fde96520bcd,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2592640261754679527}
-    - targetCorrespondingSourceObject: {fileID: 2037264882999018419, guid: 9c0445fbe3048468d8666fde96520bcd,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3114091474741178274}
   m_SourcePrefab: {fileID: 100100000, guid: 9c0445fbe3048468d8666fde96520bcd, type: 3}
 --- !u!4 &1531741249013338705 stripped
@@ -656,18 +654,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.117030546, y: 0.034663484, z: 0.07142562}
   m_Center: {x: 0.029856738, y: -0.0000000027939677, z: 0.029177122}
---- !u!114 &2592640261754679527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2164549307325253867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbaadd9651a34e00a001f0abe3cffb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3114091474741178274
 MonoBehaviour:
   m_ObjectHideFlags: 0

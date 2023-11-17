@@ -864,18 +864,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2001235585 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2592640261754679527, guid: 06b5c138c781448b2ac79ddf44aff99e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4087588046862974516}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001235575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbaadd9651a34e00a001f0abe3cffb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2007149931 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6110806226473013448, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -1682,6 +1670,9 @@ MonoBehaviour:
   currentConfigurableJoint: {fileID: 0}
   playerController: {fileID: 1446278365}
   cameraController: {fileID: 1372113979}
+  testKitManager: {fileID: 2769071947225662792}
+  connectionPoint: {x: 0, y: 0, z: 0}
+  sightTubeHomePos: {x: 0, y: 0, z: 0}
   HighHoseBib: {fileID: 5347396328354856675}
   LowHoseBib: {fileID: 2714726752660854250}
   BypassHoseBib: {fileID: 7312082773050160459}
@@ -1700,9 +1691,12 @@ MonoBehaviour:
   currentTipHandle: {fileID: 0}
   isAttaching: 0
   isCurrentTestCockAttached: 0
+  sightTubeGrabbed: 0
+  isSightTubeConnected: 0
   currentHoseTipCollider: {fileID: 0}
   lastHoseTipCollider: {fileID: 0}
   testCockToRemove: {fileID: 0}
+  testCockPositionOffset: 1.2
   hoseDetector: {fileID: 0}
 --- !u!1 &753978615707022301
 GameObject:
@@ -4364,6 +4358,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2592640261754679527, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592640261754679527, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: testKitManager
+      value: 
+      objectReference: {fileID: 2769071947225662792}
+    - target: {fileID: 2592640261754679527, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 1372113979}
@@ -6338,6 +6342,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153282587239659678, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.008591333
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153282587239659678, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0023080679
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153282587239659678, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.012060376
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153282587239659678, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.03179
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153282587239659678, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.014053
       objectReference: {fileID: 0}
     - target: {fileID: 4657695335378183965, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
@@ -8838,7 +8867,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sightTubeController
       value: 
-      objectReference: {fileID: 2001235585}
+      objectReference: {fileID: 0}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: hoseList.Array.data[0]

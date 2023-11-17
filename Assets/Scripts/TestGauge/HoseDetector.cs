@@ -104,9 +104,19 @@ public class HoseDetector : MonoBehaviour
 
                 Actions.onAddTestCockToList?.Invoke(this.gameObject, currentTestCockDescription);
                 Actions.onAddHoseToList?.Invoke(currentHoseConnection, currentHoseDescription);
-                // and do not set their position------------
-                Actions.onObjectConnect?.Invoke(this.gameObject, currentTestCockDescription);
                 isConnected = true;
+
+                if (currentHoseConnection.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitHose)
+                {
+                    // and do not set their position------------
+                    Actions.onHoseConnect?.Invoke(this.gameObject, currentTestCockDescription);
+                }
+                else if (currentHoseConnection.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitSightTube)
+                {
+
+                    Actions.onSightTubeConnect?.Invoke(currentHoseConnection, currentTestCockDescription);
+                }
+
 
             }
 

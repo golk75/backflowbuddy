@@ -10,11 +10,14 @@ public class HoseController : MonoBehaviour
     public ConfigurableJoint currentConfigurableJoint;
     public PlayerController playerController;
     public CameraController cameraController;
+    public TestKitManager testKitManager;
     private Vector3 initHighHosePos;
     private Vector3 initAnchorPos_highHose;
     private Vector3 initAnchorPos_lowHose;
     private Vector3 initAnchorPos_bypassHose;
     private Vector3 targetAnchorPos;
+    public Vector3 connectionPoint;
+    public Vector3 sightTubeHomePos;
     private Coroutine DetectHoseBibManipulation;
     private Coroutine AttachHose;
     public GameObject HighHoseBib;
@@ -38,14 +41,17 @@ public class HoseController : MonoBehaviour
     bool pointerDown;
     public bool isAttaching;
     public bool isCurrentTestCockAttached;
+    public bool sightTubeGrabbed = false;
+    public bool isSightTubeConnected = false;
     public GameObject currentHoseTipCollider;
     public GameObject lastHoseTipCollider;
     public GameObject testCockToRemove;
-
+    public Coroutine SightTubeMovement;
 
 
     Vector3 testCockPosition;
     Vector3 testCockTransform;
+    public float testCockPositionOffset;
     public HoseDetector hoseDetector;
 
     private void OnEnable()
@@ -53,18 +59,23 @@ public class HoseController : MonoBehaviour
         Actions.onHoseBibGrab += GrabHoseBib;
         Actions.onHoseBibDrop += DropHoseBib;
         // Actions.onHoseBibConnect += AttachHoseBib;
-        Actions.onObjectConnect += HoseBibConnectionAttempt;
+        Actions.onHoseConnect += HoseBibConnectionAttempt;
+        Actions.onSightTubeConnect += SightTubeConnectionAttempt;
         Actions.onTestCockColliderEnter += GetCurrentTestCockColliderEntry;
-
+        Actions.onSightTubeGrab += GrabSightTube;
+        Actions.onSightTubeDrop += DropSightTube;
 
     }
 
     public void OnDisable()
     {
+        Actions.onSightTubeGrab -= GrabSightTube;
+        Actions.onSightTubeDrop -= DropSightTube;
         Actions.onHoseBibGrab -= GrabHoseBib;
         Actions.onHoseBibDrop -= DropHoseBib;
         //Actions.onHoseBibConnect -= AttachHoseBib;
-        Actions.onObjectConnect -= HoseBibConnectionAttempt;
+        Actions.onHoseConnect -= HoseBibConnectionAttempt;
+        Actions.onSightTubeConnect -= SightTubeConnectionAttempt;
         Actions.onTestCockColliderEnter -= GetCurrentTestCockColliderEntry;
     }
 
@@ -77,13 +88,15 @@ public class HoseController : MonoBehaviour
     {
         //identifying current test cock being hooked up to, for connection positioning
         currentTestCock = testCockDetector;
+
     }
 
 
     private void HoseBibConnectionAttempt(GameObject testCock, OperableComponentDescription description)
     {
-        isAttaching = true;
 
+
+        isAttaching = true;
         switch (description.componentId)
         {
             case OperableComponentDescription.ComponentId.HighHose:
@@ -112,6 +125,7 @@ public class HoseController : MonoBehaviour
     public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
     {
 
+
         isAttaching = false;
 
         switch (description.componentId)
@@ -129,7 +143,6 @@ public class HoseController : MonoBehaviour
                 currentTipHandle = bypassHoseBibTipHandle;
                 break;
             default:
-
                 break;
         }
 
@@ -199,6 +212,7 @@ public class HoseController : MonoBehaviour
             HoseRb.isKinematic = false;
         currentHoseBibObj = null;
         currentTipHandle = null;
+        currentTestCock = null;
 
 
     }
@@ -207,6 +221,7 @@ public class HoseController : MonoBehaviour
 
     IEnumerator MoveAnchor()
     {
+
         //check is mouse left button or screen is being pressed down
         while (
             playerController.primaryTouchStarted > 0 && isAttaching == false
@@ -234,7 +249,82 @@ public class HoseController : MonoBehaviour
             yield return null;
         }
     }
+    /// <summary>
+    /// Sight Tube
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="description"></param>
+    private void SightTubeConnectionAttempt(GameObject sightTubeObj, OperableComponentDescription description)
+    {
+        connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
 
+        if (sightTube.GetComponent<OperableComponentDescription>().componentId == OperableComponentDescription.ComponentId.SightTube)
+        {
+            Vector3 currentDampVelocity = Vector3.zero;
+            Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
+            Actions.onAddHoseToList?.Invoke(sightTubeObj, sightTubeObj.GetComponent<OperableComponentDescription>());
+            // connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
+            sightTubeObj.transform.position = connectionPoint;
+            isSightTubeConnected = true;
+
+        }
+
+
+
+    }
+
+    private void DropSightTube(GameObject sightTubeObj)
+    {
+
+        sightTubeGrabbed = false;
+        isAttaching = false;
+        sightTubeObj.transform.localPosition = sightTubeHomePos;
+        StopCoroutine(MovingSightTube(sightTubeObj));
+
+
+    }
+
+    private void GrabSightTube(GameObject sightTubeObj)
+    {
+
+        sightTubeGrabbed = true;
+        isAttaching = false;
+
+        SightTubeMovement = StartCoroutine(MovingSightTube(sightTubeObj));
+        if (!cameraController.isPanning)
+        {
+            if (currentTestCock != null)
+            {
+                if (testKitManager.AttachedHoseList.Contains(sightTubeObj) && testKitManager.AttachedTestCockList.Contains(currentTestCock))
+                    //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively / fast
+                    Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
+                Actions.onRemoveHoseFromList?.Invoke(sightTubeObj, sightTube.GetComponent<OperableComponentDescription>());
+            }
+        }
+
+
+    }
+
+    IEnumerator MovingSightTube(GameObject go)
+    {
+
+        isSightTubeConnected = false;
+        while (
+            playerController.primaryTouchStarted > 0 && sightTubeGrabbed == true && isSightTubeConnected == false
+            || playerController.primaryClickStarted > 0 && sightTubeGrabbed == true && isSightTubeConnected == false
+        )
+        {
+            Vector3 direction =
+              Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+
+            go.transform.position = new Vector3(direction.x, direction.y, go.transform.position.z);
+
+            yield return null;
+        }
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -242,11 +332,17 @@ public class HoseController : MonoBehaviour
         initAnchorPos_highHose = HighHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
         initAnchorPos_lowHose = LowHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
         initAnchorPos_bypassHose = BypassHoseBib.GetComponent<ConfigurableJoint>().connectedAnchor;
-
+        sightTubeHomePos = sightTube.transform.localPosition;
         jointPreset = jointPresetParent.GetComponent<ConfigurableJoint>();
 
 
     }
 
-
+    void Update()
+    {
+        if (isSightTubeConnected)
+        {
+            sightTube.transform.position = connectionPoint;
+        }
+    }
 }

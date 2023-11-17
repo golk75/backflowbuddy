@@ -7,7 +7,7 @@ using UnityEngine;
 public class SightTubeController : MonoBehaviour
 {
     public PlayerController playerController;
-    public TestCockController testCockController;
+    public TestKitManager testKitManager;
     public CameraController cameraController;
     public GameObject currentTestCock;
     public bool sightTubeGrabbed = false;
@@ -24,8 +24,9 @@ public class SightTubeController : MonoBehaviour
     {
         Actions.onSightTubeGrab += GrabSightTube;
         Actions.onSightTubeDrop += DropSightTube;
-        // Actions.onObjectConnect += ConnectionAttempt;
-        // Actions.onTestCockColliderEnter += GetCurrentTestCockColliderEntry;
+        Actions.onHoseConnect += ConnectionAttempt;
+        Actions.onSightTubeConnect += ConnectionAttempt;
+        Actions.onTestCockColliderEnter += GetCurrentTestCockColliderEntry;
         // Actions.onTestCockColliderExit += GetCurrentTestCockColliderExit;
         sightTubeHomePos = transform.localPosition;
 
@@ -38,8 +39,8 @@ public class SightTubeController : MonoBehaviour
     {
         Actions.onSightTubeGrab -= GrabSightTube;
         Actions.onSightTubeDrop -= DropSightTube;
-        // Actions.onObjectConnect -= ConnectionAttempt;
-        // Actions.onTestCockColliderEnter -= GetCurrentTestCockColliderEntry;
+        Actions.onHoseConnect -= ConnectionAttempt;
+        Actions.onTestCockColliderEnter -= GetCurrentTestCockColliderEntry;
         // Actions.onTestCockColliderExit -= GetCurrentTestCockColliderExit;
     }
 
@@ -48,32 +49,25 @@ public class SightTubeController : MonoBehaviour
     {
         currentTestCock = testCockDetector;
     }
-    private void GetCurrentTestCockColliderExit(GameObject testCockDetector)
-    {
-        currentTestCock = testCockDetector;
-        if (!isCurrentTestCockAttached)
-        {
-
-
-        }
-    }
 
 
     //listening to HoseDetector(s)--> obj = test cock and/or hose detector
     private void ConnectionAttempt(GameObject obj, OperableComponentDescription description)
     {
 
-
-        currentTestCock = obj;
-        if (description.partsType == OperableComponentDescription.PartsType.TestKitSightTube)
+        if (description.componentId == OperableComponentDescription.ComponentId.SightTube)
         {
-            Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
-            Actions.onAddHoseToList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
+            if (!testKitManager.AttachedHoseList.Contains(this.gameObject) && !testKitManager.AttachedTestCockList.Contains(currentTestCock))
+            {
+                Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
+                Actions.onAddHoseToList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
+                connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + testCockPositionOffset, obj.transform.position.z);
+                transform.position = currentTestCock.transform.position;
+                isConnected = true;
+            }
 
-            connectionPoint = new Vector3(obj.transform.position.x, obj.transform.position.y + testCockPositionOffset, obj.transform.position.z);
-            transform.position = obj.transform.position;
-            isConnected = true;
         }
+
 
     }
 
@@ -99,9 +93,9 @@ public class SightTubeController : MonoBehaviour
         {
             if (currentTestCock != null)
             {
-
-                //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively/ fast
-                Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
+                if (testKitManager.AttachedHoseList.Contains(this.gameObject) && testKitManager.AttachedTestCockList.Contains(obj.gameObject))
+                    //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively/ fast
+                    Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
                 Actions.onRemoveHoseFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
             }
         }
@@ -111,6 +105,7 @@ public class SightTubeController : MonoBehaviour
 
     IEnumerator MovingSightTube(GameObject go)
     {
+
         isConnected = false;
         while (
             playerController.primaryTouchStarted > 0 && sightTubeGrabbed == true && isConnected == false
