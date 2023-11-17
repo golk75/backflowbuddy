@@ -158,6 +158,7 @@ public class TestKitManager : MonoBehaviour
         Actions.onRemoveTestCockFromList += RemoveTestCockFromList;
         Actions.onAddHoseToList += AddHoseToList;
         Actions.onRemoveHoseFromList += RemoveHoseFromList;
+
         // Actions.onHighBleedOpen += HighBleedKnobOpened;
         // Actions.onHighBleedClosed += HighBleedKnobClosed;
 
@@ -181,6 +182,7 @@ public class TestKitManager : MonoBehaviour
         Actions.onRemoveTestCockFromList -= RemoveTestCockFromList;
         Actions.onAddHoseToList -= AddHoseToList;
         Actions.onRemoveHoseFromList -= RemoveHoseFromList;
+
         // Actions.onHighBleedOpen -= HighBleedKnobOpened;
         // Actions.onHighBleedClosed -= HighBleedKnobClosed;
 
@@ -224,6 +226,7 @@ public class TestKitManager : MonoBehaviour
     }
     private void RemoveHoseFromList(GameObject @object, OperableComponentDescription description)
     {
+
         if (AttachedHoseList.Contains(@object))
         {
             AttachedHoseList.Remove(@object);

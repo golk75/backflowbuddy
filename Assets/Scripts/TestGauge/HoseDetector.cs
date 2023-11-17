@@ -8,12 +8,17 @@ using UnityEngine.Events;
 public class HoseDetector : MonoBehaviour
 {
     public TestCockController testCockController;
+    public TestKitManager testKitManager;
     public GameObject testCock;
-    public bool isConnected;
+    public GameObject currentHoseConnection;
+    public GameObject currentHose;
+    public bool isConnectionAttempting;
+    public bool isConnected = false;
     Coroutine onAttachAttempt;
-    public GameObject Hose;
+
     public PlayerController playerController;
-    public OperableComponentDescription operableComponentDescription;
+    public OperableComponentDescription currentTestCockDescription;
+    public OperableComponentDescription currentHoseDescription;
     private Collider boxCollider;
     private Coroutine InitialColliderBlock;
 
@@ -25,7 +30,7 @@ public class HoseDetector : MonoBehaviour
     void Start()
     {
         InitialColliderBlock = StartCoroutine(HideCollider());
-
+        currentTestCockDescription = GetComponent<OperableComponentDescription>();
     }
     /// <summary>
     /// If collider is enabled at opening of scene, the hosebib gets thrown around due to the hosbib config joint moving the bib through the collider @Start
@@ -42,39 +47,68 @@ public class HoseDetector : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        operableComponentDescription = other.GetComponent<OperableComponentDescription>();
+        currentHoseDescription = other.GetComponent<OperableComponentDescription>();
+
+        if (
+            currentHoseDescription.partsType == OperableComponentDescription.PartsType.TestKitHose ||
+            currentHoseDescription.partsType == OperableComponentDescription.PartsType.TestKitSightTube
+           )
+        {
+            //this will keep the connected hose for this test cock protected from changing when other hoses/ colliders enter.
+            //currentHoseConnection will only become null after a hose is removed from this.gameObject (testCockDetector).
+            if (currentHoseConnection == null)
+                currentHoseConnection = other.gameObject;
+        }
 
         if (cameraController.isPanning == false)
         {
+
             onAttachAttempt = StartCoroutine(AttachInitiate());
-            Actions.onTestCockColliderEnter?.Invoke(this.gameObject, other.GetComponent<OperableComponentDescription>());
+            Actions.onTestCockColliderEnter?.Invoke(this.gameObject, currentTestCockDescription);
+
         }
 
-        isConnected = true;
+        isConnectionAttempting = true;
     }
-
-
-    // private void OnTriggerStay(Collider other)
-    // {
-
-    // }
 
     private void OnTriggerExit(Collider other)
     {
-        isConnected = false;
+        isConnectionAttempting = false;
 
-        Actions.onTestCockColliderExit?.Invoke(this.gameObject);
+        /// <summary>
+        ///     THESE WILL NOT WORK CORRECTLY IF TESTKITMANAGER'S LISTS ARE EXPANDED IN THE EDITOR ISNPECTOR! ---------------------------------------------->>
+        /// </summary>
+
+        // check if the hose is removable or just passing through or is being mistakenly attached to a test cock that is alreay hooked up to another hose
+        if (testKitManager.AttachedHoseList.Contains(other.gameObject) && testKitManager.AttachedTestCockList.Contains(this.gameObject))
+        {
+            Actions.onRemoveHoseFromList?.Invoke(currentHoseConnection, other.GetComponent<OperableComponentDescription>());
+            Actions.onRemoveTestCockFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
+            currentHoseConnection = null;
+            isConnected = false;
+        }
+
+
+
 
     }
 
     IEnumerator AttachInitiate()
     {
-
-        yield return new WaitForSeconds(0.5f);
-        if (isConnected == true)
+        //check if test cock and hose are already in lists @TestKitManager, if they are, then do not add them again ---->
+        if (!testKitManager.AttachedTestCockList.Contains(this.gameObject) && !testKitManager.AttachedHoseList.Contains(currentHoseConnection))
         {
-            OperableComponentDescription connectedObjectDescription = operableComponentDescription;
-            Actions.onObjectConnect?.Invoke(this.gameObject, operableComponentDescription);
+            yield return new WaitForSeconds(0.5f);
+            if (isConnectionAttempting == true)
+            {
+
+                Actions.onAddTestCockToList?.Invoke(this.gameObject, currentTestCockDescription);
+                Actions.onAddHoseToList?.Invoke(currentHoseConnection, currentHoseDescription);
+                // and do not set their position------------
+                Actions.onObjectConnect?.Invoke(this.gameObject, currentTestCockDescription);
+                isConnected = true;
+
+            }
 
         }
 
