@@ -136,7 +136,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8729645426441557071}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 354497734}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
@@ -426,6 +426,25 @@ Light:
     type: 3}
   m_PrefabInstance: {fileID: 4087588046862974516}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &354497734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 8729645426441557071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &354497742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354497734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb869cb4421c4425ab0e5d7d2af8fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterController: {fileID: 4261158086632363316}
 --- !u!1 &448393510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
@@ -2148,6 +2167,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: inputForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: CheckValve1
       value: 
       objectReference: {fileID: 2102190765}
@@ -2186,6 +2210,11 @@ PrefabInstance:
       propertyPath: ShutOffValve2
       value: 
       objectReference: {fileID: 291841097159207565}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: zone1Pressure
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: check1Detector
@@ -2231,6 +2260,16 @@ PrefabInstance:
       propertyPath: checkValveStatus
       value: 
       objectReference: {fileID: 873336866102218116}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check1SpringForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check2SpringForce
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testKitController
@@ -6518,6 +6557,16 @@ PrefabInstance:
       propertyPath: mainSupplyEmitter
       value: 
       objectReference: {fileID: 782735541171284341}
+    - target: {fileID: 7294633820452055744, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294633820452055744, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7645227112155087364, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_Layer
@@ -9062,6 +9111,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 354497742}
     - targetCorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       insertIndex: -1
