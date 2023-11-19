@@ -149,10 +149,15 @@ public class WaterController : MonoBehaviour
     Vector3 testCockFF2Ref = Vector3.zero;
     Vector3 testCockFF3Ref = Vector3.zero;
     Vector3 testCockFF4Ref = Vector3.zero;
+
     public float testCock1MaxStr;
+
     public float testCock2MaxStr;
+
     public float testCock3MaxStr;
+
     public float testCock3MinStr;
+
     public float testCock3Str;
 
     public int testCock4MinStr;
@@ -173,7 +178,8 @@ public class WaterController : MonoBehaviour
     //check 1 open= Vector3(-0.0897347033, 1.77071377e-06, -0.085896723)
     Vector3 check1OpenPos = new Vector3(-0.0897347033f, 1.77071377e-06f, -0.085896723f);
     Vector3 check2openPos = new Vector3(-0.18547225f, 1.49199536e-06f, -0.178497031f);
-
+    public float initialCheck1Mass;
+    public float initialCheck2Mass;
     public float inputForce;
     public float zone1Pressure;
     public float zone2Pressure;
@@ -191,6 +197,8 @@ public class WaterController : MonoBehaviour
         initSupplyColliderPos = supplyCollider.transform.localPosition;
         check1Rb = checkValve1.GetComponent<Rigidbody>();
         check2Rb = checkValve2.GetComponent<Rigidbody>();
+        initialCheck1Mass = check1Rb.mass;
+        initialCheck2Mass = check1Rb.mass;
     }
 
     /// <summary>
@@ -225,7 +233,8 @@ public class WaterController : MonoBehaviour
         /// <summary>
         /// Regulate pressure zones
         /// </summary>
-        PressureZoneRegulate();
+
+        //PressureZoneRegulate();
 
         /// <summary>
         /// Regulate supply pressure
@@ -296,12 +305,12 @@ public class WaterController : MonoBehaviour
     }
     void TeachingWaterOperations()
     {
-        if (zone1Pressure <= (check1SpringForce + zone2Pressure))
+        if (zone1Pressure < (check1SpringForce + zone2Pressure))
         {
             // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
             check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
         }
-        if (zone2Pressure <= (check2SpringForce + zone3Pressure))
+        if (zone2Pressure < (check2SpringForce + zone3Pressure))
         {
             // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
             check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
@@ -795,16 +804,16 @@ public class WaterController : MonoBehaviour
     }
     void WaterOperations()
     {
-        if (zone1Pressure <= (check1SpringForce + zone2Pressure))
-        {
-            // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-            check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-        }
-        if (zone2Pressure <= (check2SpringForce + zone3Pressure))
-        {
-            // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-            check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-        }
+        // if (zone1Pressure <= (check1SpringForce + zone2Pressure))
+        // {
+        //     // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+        //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+        // }
+        // if (zone2Pressure <= (check2SpringForce + zone3Pressure))
+        // {
+        //     // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+        //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+        // }
 
         /// <summary>
         ///Testing procedures---------------------------------------------------------------------------------------------
@@ -842,6 +851,7 @@ public class WaterController : MonoBehaviour
           )
             {
 
+
                 check1housingForceField.Strength = Mathf.SmoothDamp(
                    check1housingForceField.Strength,
                    1.2f,
@@ -865,6 +875,7 @@ public class WaterController : MonoBehaviour
                         ref testCockFF2Ref.x,
                         0.005f
                     );
+
                 }
                 //pressure decrease
                 else
@@ -921,6 +932,9 @@ public class WaterController : MonoBehaviour
                         ref testCockFF3Ref.x,
                         0.005f
                     );
+                    //Open check valve when tc is open and testing
+                    check1Rb.mass = 10;
+                    check1Rb.AddForce(new Vector3(1, 1, 0) * 100, ForceMode.Impulse);
                 }
                 //pressure decrease
                 else
@@ -938,7 +952,10 @@ public class WaterController : MonoBehaviour
                     //pressure stop
                     if (checkValveStatus.isCheck1Closed == true)
                     {
+                        //after opening for test, reset check valve mass to its initial value and keep check valve closed using initial position
+                        check1Rb.mass = initialCheck1Mass;
                         TestCockFF3.Strength = 0;
+                        checkValve1.transform.position = CheckValve1StartingPos;
                     }
 
 
@@ -984,7 +1001,11 @@ public class WaterController : MonoBehaviour
                   ref testCockFF4Ref.x,
                   tc4ffScaleUpSpeed
                   );
+                    //Open check valve when tc is open and testing
+                    check2Rb.mass = 10;
+                    check2Rb.AddForce(new Vector3(1, 1, 0) * 100, ForceMode.Impulse);
                 }
+
                 else
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
@@ -1000,9 +1021,10 @@ public class WaterController : MonoBehaviour
                     //pressure stop
                     if (checkValveStatus.isCheck2Closed == true)
                     {
+                        //after opening for test, reset check valve mass to its initial value and keep check valve closed using initial position
+                        check2Rb.mass = initialCheck2Mass;
                         TestCockFF4.Strength = 0;
                         checkValve2.transform.position = CheckValve2StartingPos;
-
                     }
 
                 }
@@ -1294,6 +1316,7 @@ public class WaterController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         if (isTeachingModeEnabled)
         {
             TeachingWaterOperations();

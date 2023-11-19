@@ -501,7 +501,7 @@ public class TestKitManager : MonoBehaviour
                 AttachedTestCockList.Contains(TestCock2)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock2Open
-                && !isTestCock3Open
+            // && !isTestCock3Open
             )
             {
                 hosePressure = Mathf.SmoothStep(
@@ -557,7 +557,7 @@ public class TestKitManager : MonoBehaviour
                 AttachedTestCockList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock3Open
-                && !isTestCock4Open
+            // && !isTestCock4Open
             )
             {
                 hosePressure = Mathf.SmoothStep(

@@ -2277,6 +2277,11 @@ PrefabInstance:
       objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: Check2VoidGrowSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: TestCockHoseDetect1
       value: 
       objectReference: {fileID: 2710404239225386102}
@@ -2295,6 +2300,16 @@ PrefabInstance:
       propertyPath: TestCockHoseDetect4
       value: 
       objectReference: {fileID: 5597532315951293177}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check2VoidMaxSize.x
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check2VoidMaxSize.y
+      value: 0.0254
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: shutOffValveManager
@@ -6302,6 +6317,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 7.778912e-11
       objectReference: {fileID: 0}
+    - target: {fileID: 1893855252929389203, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893855252929389203, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2451056851075105703, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_IsActive
@@ -6311,6 +6336,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0101
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564974851058053392, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_TagString
+      value: CV02
       objectReference: {fileID: 0}
     - target: {fileID: 3119602493956845058, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
