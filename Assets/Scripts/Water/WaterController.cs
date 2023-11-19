@@ -187,7 +187,7 @@ public class WaterController : MonoBehaviour
     public float check1SpringForce;
     public float check2SpringForce;
 
-    // Start is called before the first frame update
+
     void Start()
     {
 
