@@ -252,22 +252,23 @@ public class HoseController : MonoBehaviour
     /// <param name="description"></param>
     private void SightTubeConnectionAttempt(GameObject sightTubeObj, OperableComponentDescription description)
     {
-        //not allowing sight tube connection to test cock #1 (for now), since there is no reason in real life that this would be the case.
-        if (currentTestCock.GetComponent<OperableComponentDescription>().componentId != OperableComponentDescription.ComponentId.TestCock1)
-        {
-            connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
-
-            if (sightTube.GetComponent<OperableComponentDescription>().componentId == OperableComponentDescription.ComponentId.SightTube)
+        if (currentTestCock != null)
+            //not allowing sight tube connection to test cock #1 (for now), since there is no reason in real life that this would be the case.
+            if (currentTestCock.GetComponent<OperableComponentDescription>().componentId != OperableComponentDescription.ComponentId.TestCock1)
             {
-                Vector3 currentDampVelocity = Vector3.zero;
-                Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
-                Actions.onAddHoseToList?.Invoke(sightTubeObj, sightTubeObj.GetComponent<OperableComponentDescription>());
-                // connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
-                sightTubeObj.transform.position = connectionPoint;
-                isSightTubeConnected = true;
+                connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
 
+                if (sightTube.GetComponent<OperableComponentDescription>().componentId == OperableComponentDescription.ComponentId.SightTube)
+                {
+                    Vector3 currentDampVelocity = Vector3.zero;
+                    Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
+                    Actions.onAddHoseToList?.Invoke(sightTubeObj, sightTubeObj.GetComponent<OperableComponentDescription>());
+                    // connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
+                    sightTubeObj.transform.position = connectionPoint;
+                    isSightTubeConnected = true;
+
+                }
             }
-        }
 
 
 
@@ -279,6 +280,9 @@ public class HoseController : MonoBehaviour
         sightTubeGrabbed = false;
         isAttaching = false;
         sightTubeObj.transform.localPosition = sightTubeHomePos;
+        currentHoseBibObj = null;
+        currentTipHandle = null;
+        currentTestCock = null;
         StopCoroutine(MovingSightTube(sightTubeObj));
 
 

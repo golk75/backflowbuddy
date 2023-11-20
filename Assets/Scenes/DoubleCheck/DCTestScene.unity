@@ -2232,6 +2232,11 @@ PrefabInstance:
       objectReference: {fileID: 6423705231874470771}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: hoseController
+      value: 
+      objectReference: {fileID: 13952955817977042}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: testKitManager
       value: 
       objectReference: {fileID: 2769071947225662792}
@@ -2265,6 +2270,11 @@ PrefabInstance:
       propertyPath: checkValveStatus
       value: 
       objectReference: {fileID: 873336866102218116}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: sightTubeEmitter
+      value: 
+      objectReference: {fileID: 1578613353}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: check1SpringForce
@@ -4454,6 +4464,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 18.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.12899883
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.081897885
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.02387259
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.0000000036126802
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.023940986
       objectReference: {fileID: 0}
     - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}

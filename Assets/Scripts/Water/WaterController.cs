@@ -564,17 +564,18 @@ public class WaterController : MonoBehaviour
         //tc3 non-static condition pressure
         if (
                 testCockController.isTestCock3Open
-                && TestCockHoseDetect3.isConnected == false
+                && TestCockHoseDetect3.isConnected == true
             )
         {
             if (check1Detector.ParticlesInside > 3000)
             {
-                TestCockFF3.Strength = Mathf.SmoothDamp(
-                    TestCockFF3.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                    ref testCockFF3Ref.x,
-                    0.005f
-                );
+                sightTubeEmitter.enabled = true;
+                // TestCockFF3.Strength = Mathf.SmoothDamp(
+                //     TestCockFF3.Strength,
+                //     Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
+                //     ref testCockFF3Ref.x,
+                //     0.005f
+                // );
             }
 
         }

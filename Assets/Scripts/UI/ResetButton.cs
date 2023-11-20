@@ -144,8 +144,8 @@ public class ResetButton : MonoBehaviour
         }
         Actions.onSightTubeGrab?.Invoke(sightTube);
         Actions.onSightTubeDrop?.Invoke(sightTube);
-        // testKitManager.AttachedTestCockList.Clear();
-        // testKitManager.AttachedHoseList.Clear();
+        testKitManager.AttachedTestCockList.Clear();
+        testKitManager.AttachedHoseList.Clear();
 
 
     }
