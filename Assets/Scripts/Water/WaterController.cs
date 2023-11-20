@@ -17,6 +17,8 @@ public class WaterController : MonoBehaviour
     [SerializeField]
     GameObject shutOffValveManager;
     [SerializeField]
+    GameObject hoseController;
+    [SerializeField]
     GameObject sightTube;
     public CheckValveStatus checkValveStatus;
 
@@ -83,6 +85,9 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidForceField TestCockFF4;
+
+    [SerializeField]
+    ZibraLiquidEmitter sightTubeEmitter;
 
     [SerializeField]
     public ZibraLiquidForceField check1housingForceField;
@@ -530,6 +535,11 @@ public class WaterController : MonoBehaviour
         Void_Check1.transform.localScale = Vector3.zero;
 
         Void_Check2.transform.localScale = Vector3.zero;
+
+        ///
+        /// Not entirely sure if I need to change anything here just yet. Sight tube will not be connected to test cock #2 irl. Might disallow connection in HoseController
+        /// 
+
         //tc2 non-static condition pressure
         if (
                 testCockController.isTestCock2Open == true
@@ -1006,9 +1016,11 @@ public class WaterController : MonoBehaviour
         {
             NoSightTubeConnected();
         }
+        /// <summary>
+        /// Sight Tube IS connected----------------------------------------
+        /// </summary>
         else
         {
-            Debug.Log($"sightTube is present");
             SightTubeConnected();
         }
 
