@@ -25,11 +25,17 @@ public class HoseDetector : MonoBehaviour
     public CameraController cameraController;
     void OnEnable()
     {
+
         boxCollider = GetComponent<Collider>();
+
+        InitialColliderBlock = StartCoroutine(HideCollider());
     }
     void Start()
     {
-        InitialColliderBlock = StartCoroutine(HideCollider());
+        if (boxCollider.enabled != false)
+        {
+            boxCollider.enabled = false;
+        }
         currentTestCockDescription = GetComponent<OperableComponentDescription>();
     }
     /// <summary>
@@ -38,7 +44,7 @@ public class HoseDetector : MonoBehaviour
     /// <returns></returns>
     private IEnumerator HideCollider()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         if (boxCollider.enabled == false)
         {
             boxCollider.enabled = true;
