@@ -34,9 +34,10 @@ public class ResetButton : MonoBehaviour
     ResetableObject resetableObject;
     ZibraLiquid resetVoid;
 
-    public List<GameObject> hoseList;
+
     [SerializeField]
     List<GameObject> testCockValveList;
+
 
 
     [System.Serializable]
@@ -134,14 +135,15 @@ public class ResetButton : MonoBehaviour
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
 
         }
-        foreach (var hose in hoseList)
+        foreach (var hose in testKitManager.AttachedHoseList)
         {
+            Actions.onHoseBibGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
 
         }
-        testKitManager.AttachedTestCockList.Clear();
-        testKitManager.AttachedHoseList.Clear();
+        // testKitManager.AttachedTestCockList.Clear();
+        // testKitManager.AttachedHoseList.Clear();
 
-        sightTubeController.isConnected = false;
+
     }
 
 }

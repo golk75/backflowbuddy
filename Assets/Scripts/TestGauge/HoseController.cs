@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
-// using UnityEditor.Presets;
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 
 public class HoseController : MonoBehaviour
 {
@@ -43,6 +40,7 @@ public class HoseController : MonoBehaviour
     public bool isCurrentTestCockAttached;
     public bool sightTubeGrabbed = false;
     public bool isSightTubeConnected = false;
+
     public GameObject currentHoseTipCollider;
     public GameObject lastHoseTipCollider;
     public GameObject testCockToRemove;
@@ -116,6 +114,7 @@ public class HoseController : MonoBehaviour
         }
         if (currentHoseBibObj != null)
         {
+
             currentHoseBibObj.transform.position = currentTestCock.transform.position;
         }
 
@@ -145,7 +144,7 @@ public class HoseController : MonoBehaviour
             default:
                 break;
         }
-
+        // Debug.Log($"currentHoseBibObj: {currentHoseBibObj}");
         currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
         Destroy(currentConfigurableJoint);
         HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
