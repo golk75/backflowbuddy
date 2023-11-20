@@ -230,17 +230,6 @@ public class WaterController : MonoBehaviour
 
     void WaterOperations()
     {
-        // if (zone1Pressure <= (check1SpringForce + zone2Pressure))
-        // {
-        //     // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-        //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-        // }
-        // if (zone2Pressure <= (check2SpringForce + zone3Pressure))
-        // {
-        //     // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-        //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-        // }
-
         /// <summary>
         ///Testing procedures---------------------------------------------------------------------------------------------
         /// Static conditions and testkit hooked up || not hooked up------------------------------------------------------
