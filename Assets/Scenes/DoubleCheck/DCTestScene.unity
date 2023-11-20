@@ -883,6 +883,40 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2001235590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001235575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbaadd9651a34e00a001f0abe3cffb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTestCockConnection: {fileID: 0}
+--- !u!65 &2001235591
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001235575}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.117030546, y: 0.03466349, z: 0.071425624}
+  m_Center: {x: 0.029856715, y: 0.0000000017593464, z: 0.029177122}
 --- !u!1 &2007149931 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6110806226473013448, guid: 5cb0acac16e984deab4d687da8d483d5,
@@ -1702,6 +1736,7 @@ MonoBehaviour:
   currentJoint: {fileID: 0}
   jointPreset: {fileID: 0}
   jointPresetParent: {fileID: 9064048382242759609}
+  sightTubeCurrentConnection: {fileID: 0}
   currentTestCock: {fileID: 0}
   sightTube: {fileID: 2001235575}
   highHoseBibTipHandle: {fileID: 465822009263529420}
@@ -2222,6 +2257,26 @@ PrefabInstance:
       objectReference: {fileID: 291841097159207565}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: hoseDetector1
+      value: 
+      objectReference: {fileID: 2710404239225386102}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: hoseDetector2
+      value: 
+      objectReference: {fileID: 5582824196569063747}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: hoseDetector3
+      value: 
+      objectReference: {fileID: 8223883707261353593}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: hoseDetector4
+      value: 
+      objectReference: {fileID: 5597532315951293177}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: sightTubeVoid
       value: 
       objectReference: {fileID: 1781930379}
@@ -2345,6 +2400,11 @@ PrefabInstance:
       propertyPath: shutOffValveManager
       value: 
       objectReference: {fileID: 4573864958915425051}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: sightTubeController
+      value: 
+      objectReference: {fileID: 2001235590}
     - target: {fileID: 6562516706392596113, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4565,6 +4625,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5197038834172220381, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0169053
+      objectReference: {fileID: 0}
     - target: {fileID: 5201735922456282909, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4716,8 +4781,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2164549307325253867, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 2001235590}
+    - targetCorrespondingSourceObject: {fileID: 2164549307325253867, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 2001235583}
+    - targetCorrespondingSourceObject: {fileID: 2164549307325253867, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2001235591}
   m_SourcePrefab: {fileID: 100100000, guid: 06b5c138c781448b2ac79ddf44aff99e, type: 3}
 --- !u!114 &4104274653618716174 stripped
 MonoBehaviour:

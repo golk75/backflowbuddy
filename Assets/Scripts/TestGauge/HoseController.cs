@@ -28,6 +28,7 @@ public class HoseController : MonoBehaviour
     public ConfigurableJoint jointPreset;
     public GameObject jointPresetParent;
     private OperableComponentDescription currentHoseDescription;
+    public GameObject sightTubeCurrentConnection;
     public GameObject currentTestCock;
     public GameObject sightTube;
     public GameObject highHoseBibTipHandle;

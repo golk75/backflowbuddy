@@ -2,6 +2,7 @@
 using System.Collections;
 using com.zibra.liquid.DataStructures;
 using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.SDFObjects;
 using com.zibra.liquid.Solver;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,7 +26,8 @@ public class WaterController : MonoBehaviour
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
     public TestKitManager testKitManager;
-
+    [SerializeField]
+    SightTubeController sightTubeController;
     [SerializeField]
     public GameObject ShutOffValve1;
 
@@ -85,11 +87,17 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidForceField TestCockFF4;
-
+    public HoseDetector hoseDetector1;
+    public HoseDetector hoseDetector2;
+    public HoseDetector hoseDetector3;
+    public HoseDetector hoseDetector4;
     [SerializeField]
     ZibraLiquidEmitter sightTubeEmitter;
     [SerializeField]
     ZibraLiquidVoid sightTubeVoid;
+
+
+    float sightTubeVoidInitSurfaceDist;
     [SerializeField]
     ZibraLiquidVoid bleederCatchVoid;
     [SerializeField]
@@ -134,7 +142,7 @@ public class WaterController : MonoBehaviour
 
     public GameObject CheckValve1;
     public GameObject CheckValve2;
-
+    public GameObject sightTubeCurrentConnection;
 
     Vector3 CheckValve1StartingPos;
     Vector3 CheckValve2StartingPos;
@@ -208,6 +216,7 @@ public class WaterController : MonoBehaviour
         check2Rb = checkValve2.GetComponent<Rigidbody>();
         initialCheck1Mass = check1Rb.mass;
         initialCheck2Mass = check1Rb.mass;
+        sightTubeVoidInitSurfaceDist = sightTubeVoid.GetComponent<AnalyticSDF>().SurfaceDistance;
     }
 
     /// <summary>
@@ -546,7 +555,7 @@ public class WaterController : MonoBehaviour
         //tc2 non-static condition pressure
         if (
                 testCockController.isTestCock2Open
-                && TestCockHoseDetect2.isConnected == true
+                && hoseDetector2.currentHoseConnection == sightTube
             )
         {
             if (check1Detector.ParticlesInside > 3000)
@@ -570,11 +579,18 @@ public class WaterController : MonoBehaviour
             }
 
         }
+        else if (!testCockController.isTestCock2Open
+                && hoseDetector2.currentHoseConnection == sightTube)
+        {
+            sightTubeEmitter.enabled = false;
+            sightTubeVoid.enabled = false;
+        }
+
 
         //tc3 non-static condition pressure
         else if (
                  testCockController.isTestCock3Open
-                 && TestCockHoseDetect3.isConnected == true
+                 && hoseDetector3.currentHoseConnection == sightTube
              )
         {
             if (check1Detector.ParticlesInside > 3000)
@@ -589,37 +605,56 @@ public class WaterController : MonoBehaviour
                 //     0.005f
                 // );
             }
+            else
+            {
+                // TestCockFF3.Strength = 0;
+                sightTubeEmitter.enabled = false;
+                sightTubeVoid.enabled = false;
+            }
 
         }
-        else
+        else if (!testCockController.isTestCock3Open
+                 && hoseDetector3.currentHoseConnection == sightTube
+                 )
         {
-            // TestCockFF3.Strength = 0;
             sightTubeEmitter.enabled = false;
             sightTubeVoid.enabled = false;
         }
 
+
         //tc4 non-static condition pressure
-        if (
-                testCockController.isTestCock4Open
-                && TestCockHoseDetect4.isConnected == false
-            )
+        else if (
+                 testCockController.isTestCock4Open
+                 && hoseDetector4.currentHoseConnection == sightTube
+             )
         {
             if (check2Detector.ParticlesInside > 3000)
             {
-                TestCockFF4.Strength = Mathf.SmoothDamp(
-                 TestCockFF4.Strength,
-                 Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                 ref testCockFF4Ref.x,
-                 tc4ffScaleUpSpeed
-             );
+                //     TestCockFF4.Strength = Mathf.SmoothDamp(
+                //      TestCockFF4.Strength,
+                //      Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
+                //      ref testCockFF4Ref.x,
+                //      tc4ffScaleUpSpeed
+                //  );
+                sightTubeEmitter.enabled = true;
+                sightTubeVoid.enabled = true;
 
             }
-
+            else
+            {
+                sightTubeEmitter.enabled = false;
+                sightTubeVoid.enabled = false;
+            }
         }
-        else
+        else if (!testCockController.isTestCock4Open
+                 && hoseDetector4.currentHoseConnection == sightTube
+                 )
         {
-            TestCockFF4.Strength = 0;
+            sightTubeEmitter.enabled = false;
+            sightTubeVoid.enabled = false;
         }
+
+
         if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
@@ -1030,6 +1065,7 @@ public class WaterController : MonoBehaviour
         if (!testKitManager.AttachedHoseList.Contains(sightTube))
         {
             NoSightTubeConnected();
+            Debug.Log($"Sight tube not connected!");
         }
         /// <summary>
         /// Sight Tube IS connected----------------------------------------
@@ -1037,6 +1073,7 @@ public class WaterController : MonoBehaviour
         else
         {
             SightTubeConnected();
+            Debug.Log($"Sight tube IS connected!");
         }
 
     }
@@ -1055,10 +1092,11 @@ public class WaterController : MonoBehaviour
         /// <summary>
         ///Non-Testing conditions operation---------------------------------------------------
         /// </summary>
-        else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
+        else
         {
             NonTestingProceduresNonTeaching();
         }
+
 
     }
     void TeachingWaterOperations()
@@ -1563,7 +1601,7 @@ public class WaterController : MonoBehaviour
 
     void Update()
     {
-
+        // sightTube.GetComponent<AnalyticSDF>().SurfaceDistance = -1;
         /// <summary>
         /// Regulate pressure zones
         /// </summary>
@@ -1592,7 +1630,6 @@ public class WaterController : MonoBehaviour
             )
         {
             //both shutoffs closed
-            Debug.Log($"here");
             TestCockFF1.Strength = 0f;
             TestCock1Emitter.enabled = true;
 
@@ -1649,7 +1686,7 @@ public class WaterController : MonoBehaviour
         }
 
 
-
+        // Debug.Log($"sightTubeController.currentTestCockConnection: {sightTubeController.currentTestCockConnection == hoseDetector2}");
     }
     void FixedUpdate()
     {

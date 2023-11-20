@@ -93,9 +93,8 @@ public class HoseDetector : MonoBehaviour
             currentHoseConnection = null;
             isConnected = false;
         }
-
-
-
+        Actions.onTestCockColliderExit?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
+        currentHoseConnection = null;
 
     }
 
