@@ -137,9 +137,13 @@ public class ResetButton : MonoBehaviour
         }
         foreach (var hose in testKitManager.AttachedHoseList)
         {
+
             Actions.onHoseBibGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
+            Actions.onHoseBibDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
 
         }
+        Actions.onSightTubeGrab?.Invoke(sightTube);
+        Actions.onSightTubeDrop?.Invoke(sightTube);
         // testKitManager.AttachedTestCockList.Clear();
         // testKitManager.AttachedHoseList.Clear();
 

@@ -144,20 +144,17 @@ public class HoseController : MonoBehaviour
             default:
                 break;
         }
-        // Debug.Log($"currentHoseBibObj: {currentHoseBibObj}");
-        currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
-        Destroy(currentConfigurableJoint);
-        HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
-        HoseRb.isKinematic = true;
-        DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
-        currentTestCock = null;
-        /// Moved to HoseDetector.cs
-        // Actions.onRemoveHoseFromList?.Invoke(currentHoseBibObj, description);
-        // Actions.onRemoveTestCockFromList?.Invoke(testCockToRemove, testCockToRemove.GetComponent<OperableComponentDescription>());
 
-
-
-
+        //checking for null, due to reset button call if there is at least the sight tube connected with no hoses
+        if (currentHoseBibObj != null)
+        {
+            currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
+            Destroy(currentConfigurableJoint);
+            HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
+            HoseRb.isKinematic = true;
+            DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
+            currentTestCock = null;
+        }
 
     }
 
