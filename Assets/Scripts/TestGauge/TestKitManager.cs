@@ -449,7 +449,7 @@ public class TestKitManager : MonoBehaviour
             //checking if hose/ test kit is connected to test cock while supply is open
 
             //test cock #1 will have continuous pressure whether the supply is open or closed, as it sits upstream of #1 shut off valve
-            if (AttachedTestCockList.Contains(TestCock1) && isTestCock1Open)
+            if (AttachedHoseList.Contains(TestCock1) && isTestCock1Open)
             {
                 //supply is open and test cock is open
                 hosePressure = Mathf.SmoothStep(
@@ -461,7 +461,7 @@ public class TestKitManager : MonoBehaviour
             }
 
             else if (
-                AttachedTestCockList.Contains(TestCock3)
+                AttachedHoseList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock3Open
             )
@@ -475,7 +475,7 @@ public class TestKitManager : MonoBehaviour
                 // Debug.Log($"supply is open and test cock 3 is connected & open");
             }
             else if (
-                AttachedTestCockList.Contains(TestCock4)
+                AttachedHoseList.Contains(TestCock4)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock4Open
             )
@@ -498,7 +498,7 @@ public class TestKitManager : MonoBehaviour
             //========================================
 
             else if (
-                AttachedTestCockList.Contains(TestCock2)
+                AttachedHoseList.Contains(TestCock2)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock2Open
             // && !isTestCock3Open
@@ -514,7 +514,7 @@ public class TestKitManager : MonoBehaviour
                 // );
             }
             else if (
-                AttachedTestCockList.Contains(TestCock2)
+                AttachedHoseList.Contains(TestCock2)
                 && isTestCock2Open
                 && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
@@ -537,7 +537,7 @@ public class TestKitManager : MonoBehaviour
 
             }
             else if (
-                AttachedTestCockList.Contains(TestCock2)
+                AttachedHoseList.Contains(TestCock2)
                 && isTestCock2Open
                 && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
@@ -554,7 +554,7 @@ public class TestKitManager : MonoBehaviour
             // #2 Check Test//========================>
             //========================================
             else if (
-                AttachedTestCockList.Contains(TestCock3)
+                AttachedHoseList.Contains(TestCock3)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock3Open
             // && !isTestCock4Open
@@ -568,7 +568,7 @@ public class TestKitManager : MonoBehaviour
 
             }
             else if (
-                AttachedTestCockList.Contains(TestCock3)
+                AttachedHoseList.Contains(TestCock3)
                 && isTestCock3Open
                 && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false
@@ -590,7 +590,7 @@ public class TestKitManager : MonoBehaviour
 
             }
             else if (
-                AttachedTestCockList.Contains(TestCock3)
+                AttachedHoseList.Contains(TestCock3)
                 && isTestCock3Open
                 && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false
