@@ -88,7 +88,10 @@ public class WaterController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidEmitter sightTubeEmitter;
-
+    [SerializeField]
+    ZibraLiquidVoid sightTubeVoid;
+    [SerializeField]
+    ZibraLiquidVoid bleederCatchVoid;
     [SerializeField]
     public ZibraLiquidForceField check1housingForceField;
 
@@ -165,7 +168,7 @@ public class WaterController : MonoBehaviour
     public float testCock3MinStr;
 
     public float testCock3Str;
-
+    public HoseDetector HoseDetector2;
     public int testCock4MinStr;
     public int testCock4MaxStr;
     public float testCock4Str;
@@ -542,34 +545,43 @@ public class WaterController : MonoBehaviour
 
         //tc2 non-static condition pressure
         if (
-                testCockController.isTestCock2Open == true
-                && TestCockHoseDetect2.isConnected == false
+                testCockController.isTestCock2Open
+                && TestCockHoseDetect2.isConnected == true
             )
         {
             if (check1Detector.ParticlesInside > 3000)
             {
-                TestCockFF2.Strength = Mathf.SmoothDamp(
-                    TestCockFF2.Strength,
-                    Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                    ref testCockFF2Ref.x,
-                    0.005f
-                );
+                // TestCockFF2.Strength = Mathf.SmoothDamp(
+                //     TestCockFF2.Strength,
+                //     Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                //     ref testCockFF2Ref.x,
+                //     0.005f
+                // );
+
+                sightTubeEmitter.enabled = true;
+                sightTubeVoid.enabled = true;
             }
-        }
-        else
-        {
-            TestCockFF2.Strength = 0;
+            else
+            {
+                // TestCockFF2.Strength = 0;
+
+                sightTubeEmitter.enabled = false;
+                sightTubeVoid.enabled = false;
+            }
+
         }
 
         //tc3 non-static condition pressure
-        if (
-                testCockController.isTestCock3Open
-                && TestCockHoseDetect3.isConnected == true
-            )
+        else if (
+                 testCockController.isTestCock3Open
+                 && TestCockHoseDetect3.isConnected == true
+             )
         {
             if (check1Detector.ParticlesInside > 3000)
             {
+
                 sightTubeEmitter.enabled = true;
+                sightTubeVoid.enabled = true;
                 // TestCockFF3.Strength = Mathf.SmoothDamp(
                 //     TestCockFF3.Strength,
                 //     Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
@@ -581,7 +593,9 @@ public class WaterController : MonoBehaviour
         }
         else
         {
-            TestCockFF3.Strength = 0;
+            // TestCockFF3.Strength = 0;
+            sightTubeEmitter.enabled = false;
+            sightTubeVoid.enabled = false;
         }
 
         //tc4 non-static condition pressure
@@ -1622,7 +1636,17 @@ public class WaterController : MonoBehaviour
         /// </summary>
 
 
-
+        /// <summary>
+        /// regulate bleeder hose void catch to allow water to fill sight tube when connected to test cock #2
+        /// </summary>
+        if (HoseDetector2.currentHoseConnection == sightTube)
+        {
+            bleederCatchVoid.enabled = false;
+        }
+        else
+        {
+            bleederCatchVoid.enabled = true;
+        }
 
 
 

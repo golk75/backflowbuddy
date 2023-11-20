@@ -915,13 +915,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012908867}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.39274707, z: 0.000000044703487, w: 0.91964656}
-  m_LocalPosition: {x: -14.27, y: 4.39, z: -14.36}
-  m_LocalScale: {x: 1, y: 2.3379, z: 0.96076226}
+  m_LocalRotation: {x: -0.011296778, y: 0.39280427, z: 0.0137628, w: 0.91944975}
+  m_LocalPosition: {x: -14.230006, y: 4.3999996, z: -14.660004}
+  m_LocalScale: {x: 1, y: 3.1330197, z: 2.9101667}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 684817881941632138}
-  m_LocalEulerAnglesHint: {x: 0, y: 46.251, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.81, y: 46.251, z: 0.942}
 --- !u!114 &2012908869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2207,6 +2207,11 @@ PrefabInstance:
       objectReference: {fileID: 908969837}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: HoseDetector2
+      value: 
+      objectReference: {fileID: 5582824196569063747}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: ShutOffValve1
       value: 
       objectReference: {fileID: 4005733787468232117}
@@ -2215,6 +2220,11 @@ PrefabInstance:
       propertyPath: ShutOffValve2
       value: 
       objectReference: {fileID: 291841097159207565}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: sightTubeVoid
+      value: 
+      objectReference: {fileID: 1781930379}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: zone1Pressure
@@ -2265,6 +2275,11 @@ PrefabInstance:
       propertyPath: testCockManager
       value: 
       objectReference: {fileID: 2614389505626383443}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: bleederCatchVoid
+      value: 
+      objectReference: {fileID: 2012908870}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: checkValveStatus
