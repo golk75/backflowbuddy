@@ -97,23 +97,19 @@ public class ShutOffValveController : MonoBehaviour
                                 liquid.enabled = true;
                             }
                         }
-                        ShutOffValve1.transform.eulerAngles =
-                            playerController._operableObjectRotation;
-                        shutOffValveScaleFactor = (
-                            playerController.OperableObjectRotation.z * 0.1f
-                        );
+                        ShutOffValve1.transform.eulerAngles = playerController._operableObjectRotation;
 
-                        volume = Mathf.Lerp(
-                            supplyVolume,
-                            0,
-                            ShutOffValve1.transform.eulerAngles.z / 90f
-                        );
+                        // volume = Mathf.Lerp(
+                        //     supplyVolume,
+                        //     0,
+                        //     ShutOffValve1.transform.eulerAngles.z / 90f
+                        // );
 
-                        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
-                            mainSupplyEmitter.VolumePerSimTime,
-                            volume,
-                            1f
-                        );
+                        // mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
+                        //     mainSupplyEmitter.VolumePerSimTime,
+                        //     volume,
+                        //     1f
+                        // );
                     }
                     else if (
                         operableComponentDescription.componentId

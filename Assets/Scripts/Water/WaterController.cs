@@ -29,7 +29,10 @@ public class WaterController : MonoBehaviour
     [SerializeField]
     SightTubeController sightTubeController;
     [SerializeField]
-    public GameObject ShutOffValve1;
+    GameObject ShutOffValve1;
+
+    [SerializeField]
+    ZibraLiquidEmitter mainSupplyEmitter;
 
     [SerializeField]
     GameObject ShutOffValve2;
@@ -193,7 +196,7 @@ public class WaterController : MonoBehaviour
     public float initialCheck1Mass;
     public float initialCheck2Mass;
     public float inputForce = 1;
-
+    public float volume;
     public float supplyPsi = 80f;
     public float zone1Pressure;
     public float zone2Pressure;
@@ -228,6 +231,7 @@ public class WaterController : MonoBehaviour
         CheckValve1StartingPos = checkValve1.transform.position;
         CheckValve2StartingPos = checkValve2.transform.position;
         liquidSolverParameters = liquid.GetComponent<ZibraLiquidSolverParameters>();
+        mainSupplyEmitter.VolumePerSimTime = 0;
 
     }
     void SupplyRegulate()
@@ -240,6 +244,19 @@ public class WaterController : MonoBehaviour
         supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
+
+        volume = Mathf.Lerp(
+                          supplyPsi,
+                          0,
+                          ShutOffValve1.transform.eulerAngles.z / 90f
+                      );
+
+        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
+            mainSupplyEmitter.VolumePerSimTime,
+            volume,
+            1f
+        );
+
     }
     void BleedHoseVoidRegulate()
     {
@@ -297,6 +314,11 @@ public class WaterController : MonoBehaviour
                 0.5f
             );
         }
+        else
+        {
+            check1housingForceField.Strength = 0;
+            check2housingForceField.Strength = 0;
+        }
 
     }
     void TestCock1Regulate()
@@ -347,10 +369,6 @@ public class WaterController : MonoBehaviour
             TestCockFF1.Strength = 0f;
         }
     }
-
-
-    // Update is called once per frame
-
     void WaterOperations()
     {
 
