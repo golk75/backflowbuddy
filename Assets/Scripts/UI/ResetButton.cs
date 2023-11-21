@@ -19,7 +19,7 @@ public class ResetButton : MonoBehaviour
     public TestCockController testCockController;
     public WaterController waterController;
     public SightTubeController sightTubeController;
-
+    public TestKitManager testKitManager;
     public GameObject sightTube;
     OperableComponentDescription ShutOff1OperableDescription;
     OperableComponentDescription Tc1OperableDescription;
@@ -146,7 +146,11 @@ public class ResetButton : MonoBehaviour
         Actions.onSightTubeDrop?.Invoke(sightTube);
         doubleCheckTestKitController.AttachedTestCockList.Clear();
         doubleCheckTestKitController.AttachedHoseList.Clear();
-
+        if (testKitManager.isDoubleCheckTesting)
+        {
+            waterController.testCock4Str = UnityEngine.Random.Range(waterController.testCock4MinStr, waterController.testCock4MaxStr);
+            waterController.testCock3Str = UnityEngine.Random.Range(waterController.testCock3MinStr, waterController.testCock3MaxStr);
+        }
 
     }
 

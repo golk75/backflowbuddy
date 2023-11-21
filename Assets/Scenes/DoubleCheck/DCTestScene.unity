@@ -2318,16 +2318,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
-      propertyPath: testCock4MaxStr
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
-        type: 3}
-      propertyPath: testCock4MinStr
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
-        type: 3}
       propertyPath: testCockManager
       value: 
       objectReference: {fileID: 2614389505626383443}
@@ -8123,6 +8113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23690c059bf1d4e64a8ce4595cc7b55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDoubleCheckTesting: 1
 --- !u!114 &7984859842168483180 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1137537553735368402, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -8972,7 +8963,7 @@ PrefabInstance:
         type: 3}
       propertyPath: testKitManager
       value: 
-      objectReference: {fileID: 2769071947225662792}
+      objectReference: {fileID: 7979768276041640513}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: waterController
@@ -9013,6 +9004,11 @@ PrefabInstance:
       propertyPath: objectsToReset.Array.size
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: objectsToReset.Array.data[0].alteredObject
