@@ -1065,7 +1065,7 @@ public class WaterController : MonoBehaviour
         if (!testKitManager.AttachedHoseList.Contains(sightTube))
         {
             NoSightTubeConnected();
-            Debug.Log($"Sight tube not connected!");
+
         }
         /// <summary>
         /// Sight Tube IS connected----------------------------------------
@@ -1073,7 +1073,7 @@ public class WaterController : MonoBehaviour
         else
         {
             SightTubeConnected();
-            Debug.Log($"Sight tube IS connected!");
+
         }
 
     }

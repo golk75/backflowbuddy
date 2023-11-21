@@ -54,22 +54,24 @@ public class HoseDetector : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         currentHoseDescription = other.GetComponent<OperableComponentDescription>();
-
-        if (
-            currentHoseDescription.partsType == OperableComponentDescription.PartsType.TestKitHose ||
-            currentHoseDescription.partsType == OperableComponentDescription.PartsType.TestKitSightTube
-           )
+        if (!testKitManager.AttachedHoseList.Contains(other.gameObject))
         {
-            //this will keep the connected hose for this test cock protected from changing when other hoses/ colliders enter.
-            //currentHoseConnection will only become null after a hose is removed from this.gameObject (testCockDetector).
-            if (currentHoseConnection == null)
-                currentHoseConnection = other.gameObject;
+            currentHose = other.gameObject;
         }
+        else
+        {
+            currentHose = null;
+        }
+
+
 
         if (cameraController.isPanning == false)
         {
+            if (currentHose != null)
+            {
+                onAttachAttempt = StartCoroutine(AttachInitiate(currentHose));
+            }
 
-            onAttachAttempt = StartCoroutine(AttachInitiate());
             Actions.onTestCockColliderEnter?.Invoke(this.gameObject, currentTestCockDescription);
 
         }
@@ -81,24 +83,22 @@ public class HoseDetector : MonoBehaviour
     {
         isConnectionAttempting = false;
 
-        /// <summary>
-        ///     THESE WILL NOT WORK CORRECTLY IF TESTKITMANAGER'S LISTS ARE EXPANDED IN THE EDITOR ISNPECTOR! ---------------------------------------------->>
-        /// </summary>
 
-        // check if the hose is removable or just passing through or is being mistakenly attached to a test cock that is alreay hooked up to another hose
-        if (testKitManager.AttachedHoseList.Contains(other.gameObject) && testKitManager.AttachedTestCockList.Contains(this.gameObject))
+        //check if exiting collider is connected or just passing through
+        if (testKitManager.AttachedHoseList.Contains(currentHoseConnection) && testKitManager.AttachedTestCockList.Contains(this.gameObject) && currentHoseConnection == other.gameObject)
         {
-            Actions.onRemoveHoseFromList?.Invoke(currentHoseConnection, other.GetComponent<OperableComponentDescription>());
+            Actions.onRemoveHoseFromList?.Invoke(currentHoseConnection, GetComponent<OperableComponentDescription>());
             Actions.onRemoveTestCockFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
             currentHoseConnection = null;
-            isConnected = false;
+            currentHose = null;
         }
+        //for SightTubeController
         Actions.onTestCockColliderExit?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
-        currentHoseConnection = null;
+
 
     }
 
-    IEnumerator AttachInitiate()
+    IEnumerator AttachInitiate(GameObject currentAttachment)
     {
         //check if test cock and hose are already in lists @TestKitManager, if they are, then do not add them again ---->
         if (!testKitManager.AttachedTestCockList.Contains(this.gameObject) && !testKitManager.AttachedHoseList.Contains(currentHoseConnection))
@@ -106,20 +106,20 @@ public class HoseDetector : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             if (isConnectionAttempting == true)
             {
-
+                currentHoseConnection = currentAttachment;
                 Actions.onAddTestCockToList?.Invoke(this.gameObject, currentTestCockDescription);
-                Actions.onAddHoseToList?.Invoke(currentHoseConnection, currentHoseDescription);
+                Actions.onAddHoseToList?.Invoke(currentAttachment, currentHoseDescription);
                 isConnected = true;
 
-                if (currentHoseConnection.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitHose)
+                if (currentAttachment.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitHose)
                 {
                     // and do not set their position------------
                     Actions.onHoseConnect?.Invoke(this.gameObject, currentTestCockDescription);
                 }
-                else if (currentHoseConnection.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitSightTube)
+                else if (currentAttachment.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitSightTube)
                 {
 
-                    Actions.onSightTubeConnect?.Invoke(currentHoseConnection, currentTestCockDescription);
+                    Actions.onSightTubeConnect?.Invoke(currentAttachment, currentTestCockDescription);
                 }
 
 

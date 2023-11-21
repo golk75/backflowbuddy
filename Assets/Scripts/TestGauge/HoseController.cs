@@ -122,7 +122,7 @@ public class HoseController : MonoBehaviour
 
     }
 
-    public void GrabHoseBib(GameObject gameObject, OperableComponentDescription description)
+    public void GrabHoseBib(GameObject hoseBibHandle, OperableComponentDescription description)
     {
 
 
@@ -149,12 +149,15 @@ public class HoseController : MonoBehaviour
         //checking for null, due to reset button call if there is at least the sight tube connected with no hoses
         if (currentHoseBibObj != null)
         {
+            // Actions.onRemoveHoseFromList?.Invoke(hoseBibHandle, hoseBibHandle.GetComponent<OperableComponentDescription>());
+
             currentConfigurableJoint = currentHoseBibObj.GetComponent<ConfigurableJoint>();
             Destroy(currentConfigurableJoint);
             HoseRb = currentHoseBibObj.GetComponent<Rigidbody>();
             HoseRb.isKinematic = true;
             DetectHoseBibManipulation = StartCoroutine(MoveAnchor());
             currentTestCock = null;
+
         }
 
     }
@@ -261,9 +264,9 @@ public class HoseController : MonoBehaviour
 
                 if (sightTube.GetComponent<OperableComponentDescription>().componentId == OperableComponentDescription.ComponentId.SightTube)
                 {
-                    Vector3 currentDampVelocity = Vector3.zero;
-                    Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
-                    Actions.onAddHoseToList?.Invoke(sightTubeObj, sightTubeObj.GetComponent<OperableComponentDescription>());
+                    // Vector3 currentDampVelocity = Vector3.zero;
+                    // Actions.onAddTestCockToList?.Invoke(currentTestCock, description);
+                    // Actions.onAddHoseToList?.Invoke(sightTubeObj, sightTubeObj.GetComponent<OperableComponentDescription>());
                     // connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
                     sightTubeObj.transform.position = connectionPoint;
                     isSightTubeConnected = true;
@@ -301,9 +304,12 @@ public class HoseController : MonoBehaviour
             if (currentTestCock != null)
             {
                 if (testKitManager.AttachedHoseList.Contains(sightTubeObj) && testKitManager.AttachedTestCockList.Contains(currentTestCock))
+                {
                     //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively / fast
-                    Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
-                Actions.onRemoveHoseFromList?.Invoke(sightTubeObj, sightTube.GetComponent<OperableComponentDescription>());
+                    //     Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
+                    // Actions.onRemoveHoseFromList?.Invoke(sightTubeObj, sightTube.GetComponent<OperableComponentDescription>());
+                }
+
             }
         }
 
