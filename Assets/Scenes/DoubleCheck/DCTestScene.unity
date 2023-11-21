@@ -1111,6 +1111,7 @@ GameObject:
   - component: {fileID: 7979768276041640512}
   - component: {fileID: 2769071947225662792}
   - component: {fileID: 746981164190540200}
+  - component: {fileID: 7979768276041640513}
   m_Layer: 5
   m_Name: TestKitManager
   m_TagString: Untagged
@@ -1690,7 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ffae3f0ef0a4a939c34e2ec923e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testKitManager: {fileID: 0}
+  doubleCheckTestKitController: {fileID: 0}
   highBleedKnob: {fileID: 1032487122}
 --- !u!4 &744900688229994192
 Transform:
@@ -1723,7 +1724,7 @@ MonoBehaviour:
   currentConfigurableJoint: {fileID: 0}
   playerController: {fileID: 1446278365}
   cameraController: {fileID: 1372113979}
-  testKitManager: {fileID: 2769071947225662792}
+  doubleCheckTestKitController: {fileID: 0}
   connectionPoint: {x: 0, y: 0, z: 0}
   sightTubeHomePos: {x: 0, y: 0, z: 0}
   HighHoseBib: {fileID: 5347396328354856675}
@@ -2405,6 +2406,11 @@ PrefabInstance:
       propertyPath: sightTubeController
       value: 
       objectReference: {fileID: 2001235590}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 6562516706392596113, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3730,9 +3736,9 @@ MonoBehaviour:
   needle: {fileID: 1577289242}
   digitalKitNeedle: {fileID: 0}
   currentKnob: {fileID: 0}
-  LowHose: {fileID: 4154698058030179530}
-  HighHose: {fileID: 6210766145065897923}
-  BypassHose: {fileID: 8754270676637254763}
+  LowHose: {fileID: 7633477802536089285}
+  HighHose: {fileID: 465822009263529420}
+  BypassHose: {fileID: 2970852437638764132}
   Check1: {fileID: 5802997508446611150}
   Check1Pos: {x: 0, y: 0, z: 0}
   bleederHoseEmitter: {fileID: 2023966569}
@@ -4728,6 +4734,11 @@ PrefabInstance:
     - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: testKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
+    - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
       value: 
       objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 8723532734697943511, guid: 06b5c138c781448b2ac79ddf44aff99e,
@@ -6370,6 +6381,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 1318351934377700086, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 1342067078008908108, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: sightTube
@@ -6395,6 +6411,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 1342067078008908108, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 1500830159783469785, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6470,6 +6491,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 3247251146356766156, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 3714154059635090058, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_IsActive
@@ -6720,6 +6746,11 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
+    - target: {fileID: 8839683529836183491, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 8881855260585685743, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8080,6 +8111,18 @@ Transform:
   - {fileID: 684817881941632138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7979768276041640513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13952955817977042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23690c059bf1d4e64a8ce4595cc7b55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7984859842168483180 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1137537553735368402, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -8890,6 +8933,11 @@ PrefabInstance:
       propertyPath: shutOffValveController
       value: 
       objectReference: {fileID: 637003913549386116}
+    - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: Tc1
@@ -8949,7 +8997,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sightTubeController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2001235590}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: hoseList.Array.data[0]
