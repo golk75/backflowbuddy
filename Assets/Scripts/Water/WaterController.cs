@@ -25,7 +25,7 @@ public class WaterController : MonoBehaviour
 
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
-    public TestKitManager testKitManager;
+    public DoubleCheckTestKitController doubleCheckTestKitController;
     [SerializeField]
     SightTubeController sightTubeController;
     [SerializeField]
@@ -251,7 +251,7 @@ public class WaterController : MonoBehaviour
         /// <summary>
         /// Sight Tube NOT connected----------------------------------------
         /// </summary>
-        foreach (GameObject testCock in testKitManager.StaticTestCockList)
+        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
@@ -343,7 +343,7 @@ public class WaterController : MonoBehaviour
         if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -361,6 +361,10 @@ public class WaterController : MonoBehaviour
                 ref check2VoidRef,
                 Check2VoidGrowSpeed
             );
+
+            check1housingForceField.Strength = 0;
+            check2housingForceField.Strength = 0;
+
             if (
              testCockController.isTestCock2Open == true
              && TestCockHoseDetect2.isConnected == false
@@ -429,7 +433,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
@@ -523,7 +527,7 @@ public class WaterController : MonoBehaviour
     /// </summary>
     void SightTubeConnected()
     {
-        foreach (GameObject testCock in testKitManager.StaticTestCockList)
+        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
@@ -658,7 +662,7 @@ public class WaterController : MonoBehaviour
         if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -676,6 +680,10 @@ public class WaterController : MonoBehaviour
                 ref check2VoidRef,
                 Check2VoidGrowSpeed
             );
+
+            check1housingForceField.Strength = 0;
+            check2housingForceField.Strength = 0;
+
             if (
              testCockController.isTestCock2Open == true
              && TestCockHoseDetect2.isConnected == false
@@ -744,7 +752,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
@@ -842,7 +850,7 @@ public class WaterController : MonoBehaviour
         check1housingForceField.Strength = 0;
         check2housingForceField.Strength = 0;
 
-        foreach (GameObject testCock in testKitManager.StaticTestCockList)
+        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -1062,7 +1070,7 @@ public class WaterController : MonoBehaviour
         /// <summary>
         /// Sight Tube NOT connected----------------------------------------
         /// </summary>
-        if (!testKitManager.AttachedHoseList.Contains(sightTube))
+        if (!doubleCheckTestKitController.AttachedHoseList.Contains(sightTube))
         {
             NoSightTubeConnected();
 
@@ -1123,7 +1131,7 @@ public class WaterController : MonoBehaviour
             check1housingForceField.Strength = 0;
             check2housingForceField.Strength = 0;
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -1331,7 +1339,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
@@ -1423,7 +1431,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
@@ -1441,6 +1449,10 @@ public class WaterController : MonoBehaviour
                 ref check2VoidRef,
                 Check2VoidGrowSpeed
             );
+
+            check1housingForceField.Strength = 0;
+            check2housingForceField.Strength = 0;
+
             if (
              testCockController.isTestCock2Open == true
              && TestCockHoseDetect2.isConnected == false
@@ -1509,7 +1521,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
 
-            foreach (GameObject testCock in testKitManager.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
