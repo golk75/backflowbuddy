@@ -184,26 +184,25 @@ public class WaterController : MonoBehaviour
     public GameObject checkValve2;
     Rigidbody check1Rb;
     Rigidbody check2Rb;
-    bool oneTime = false;
+
     public ZibraLiquid liquid;
     ZibraLiquidSolverParameters liquidSolverParameters;
     public bool randomizePressure = true;
-    [SerializeField]
-    bool isAttachedToGauge;
+
     public bool isTeachingModeEnabled = false;
-    //check 2 open= Vector3(-0.18547225,1.49199536e-06,-0.178497031)
-    //check 1 open= Vector3(-0.0897347033, 1.77071377e-06, -0.085896723)
-    Vector3 check1OpenPos = new Vector3(-0.0897347033f, 1.77071377e-06f, -0.085896723f);
-    Vector3 check2openPos = new Vector3(-0.18547225f, 1.49199536e-06f, -0.178497031f);
     public float initialCheck1Mass;
     public float initialCheck2Mass;
-    public float inputForce;
+    public float inputForce = 1;
+
+    public float supplyPsi = 80f;
     public float zone1Pressure;
     public float zone2Pressure;
     public float zone3Pressure;
     public float check1SpringForce;
     public float check2SpringForce;
-
+    public float zone1PsiChange;
+    public float zone2PsiChange;
+    public float zone3PsiChange;
 
     void Start()
     {
@@ -242,12 +241,7 @@ public class WaterController : MonoBehaviour
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
     }
-    void PressureZoneRegulate()
-    {
-        zone2Pressure = zone1Pressure - check1SpringForce;
-        zone3Pressure = zone2Pressure - check2SpringForce;
-    }
-    void BleedHoseRegulate()
+    void BleedHoseVoidRegulate()
     {
         if (HoseDetector2.currentHoseConnection == sightTube)
         {
@@ -257,6 +251,21 @@ public class WaterController : MonoBehaviour
         {
             bleederCatchVoid.enabled = true;
         }
+    }
+    void PressureZoneRegulate()
+    {
+        zone1Pressure = supplyPsi;
+        zone2Pressure = (zone1Pressure - check1SpringForce) * zone2PsiChange;
+        zone3Pressure = (zone2Pressure - check2SpringForce) * zone3PsiChange;
+        if (zone2Pressure <= 0)
+        {
+            zone2Pressure = 0;
+        }
+        if (zone3Pressure <= 0)
+        {
+            zone3Pressure = 0;
+        }
+
     }
     void CheckValveRegulate()
     {
@@ -268,9 +277,11 @@ public class WaterController : MonoBehaviour
         if (zone2Pressure < (check2SpringForce + zone3Pressure))
         {
             // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-            check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            check2Rb.AddForce(
+                new Vector3(-1, -1, 0) * inputForce, ForceMode.Force
+                );
         }
-        PressureZoneRegulate();
+
         if (shutOffValveController.IsSupplyOn == true)
         {
             check1housingForceField.Strength = Mathf.SmoothDamp(
@@ -286,6 +297,7 @@ public class WaterController : MonoBehaviour
                 0.5f
             );
         }
+
     }
     void TestCock1Regulate()
     {
@@ -623,6 +635,7 @@ public class WaterController : MonoBehaviour
         else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
         {
 
+
             foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
@@ -747,7 +760,6 @@ public class WaterController : MonoBehaviour
                     if (checkValveStatus.isCheck2Closed == true)
                     {
                         TestCockFF4.Strength = 0;
-                        checkValve2.transform.position = CheckValve2StartingPos;
 
                     }
 
@@ -1183,6 +1195,11 @@ public class WaterController : MonoBehaviour
         SupplyRegulate();
 
         /// <summary>
+        /// Regulate Pressure Zones
+        /// </summary>
+        PressureZoneRegulate();
+
+        /// <summary>
         /// Regulate Check Valves
         /// </summary>
         CheckValveRegulate();
@@ -1195,7 +1212,7 @@ public class WaterController : MonoBehaviour
         /// <summary>
         /// regulate bleeder hose void catch to allow water to fill sight tube when connected to test cock #2
         /// </summary>
-        BleedHoseRegulate();
+        BleedHoseVoidRegulate();
 
         /// <summary>
         /// Regulate pressure zones

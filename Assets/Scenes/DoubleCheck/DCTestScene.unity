@@ -2203,14 +2203,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: liquid
+      value: 
+      objectReference: {fileID: 567161191454459828}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: psiChange
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: sightTube
       value: 
       objectReference: {fileID: 2001235575}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
-      propertyPath: inputForce
-      value: 1000
+      propertyPath: supplyPsi
+      value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: inputForce
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: supplyVoid
+      value: 
+      objectReference: {fileID: 3988808428047433649}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: CheckValve1
@@ -2221,6 +2241,26 @@ PrefabInstance:
       propertyPath: CheckValve2
       value: 
       objectReference: {fileID: 908969837}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockFF1
+      value: 
+      objectReference: {fileID: 7130610064417184008}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockFF2
+      value: 
+      objectReference: {fileID: 8322080369575344339}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockFF3
+      value: 
+      objectReference: {fileID: 8840743255874745565}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockFF4
+      value: 
+      objectReference: {fileID: 2820352474242559008}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Void_Check1
@@ -2241,6 +2281,11 @@ PrefabInstance:
       propertyPath: checkValve2
       value: 
       objectReference: {fileID: 908969837}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock3Str
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: HoseDetector2
@@ -2284,7 +2329,7 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: zone1Pressure
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -2303,9 +2348,39 @@ PrefabInstance:
       objectReference: {fileID: 13952955817977042}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: supplyCollider
+      value: 
+      objectReference: {fileID: 7335953754005364542}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: testKitManager
       value: 
       objectReference: {fileID: 2769071947225662792}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: zone1PsiChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: zone2PsiChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: zone3PsiChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock1MaxStr
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock2MaxStr
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: testCock3MaxStr
@@ -2318,9 +2393,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: testCock4MaxStr
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: testCock4MinStr
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: testCockManager
       value: 
       objectReference: {fileID: 2614389505626383443}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCock1Emitter
+      value: 
+      objectReference: {fileID: 8473313176201090410}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: bleederCatchVoid
@@ -2336,6 +2426,31 @@ PrefabInstance:
       propertyPath: sightTubeEmitter
       value: 
       objectReference: {fileID: 1578613353}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: BodyDetectorZone1
+      value: 
+      objectReference: {fileID: 4942904296374559711}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockDetector1
+      value: 
+      objectReference: {fileID: 7816050952135590976}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockDetector2
+      value: 
+      objectReference: {fileID: 8509112450976049417}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockDetector3
+      value: 
+      objectReference: {fileID: 7920659318016628878}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: TestCockDetector4
+      value: 
+      objectReference: {fileID: 1865283365669192022}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: check1SpringForce
@@ -2396,6 +2511,16 @@ PrefabInstance:
       propertyPath: sightTubeController
       value: 
       objectReference: {fileID: 2001235590}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check1housingForceField
+      value: 
+      objectReference: {fileID: 1325016448483182097}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check2housingForceField
+      value: 
+      objectReference: {fileID: 4250161185260362811}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: doubleCheckTestKitController
