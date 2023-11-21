@@ -25,7 +25,7 @@ public class ResetButton : MonoBehaviour
     OperableComponentDescription Tc1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
-    public TestKitManager testKitManager;
+    public DoubleCheckTestKitController doubleCheckTestKitController;
 
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
@@ -129,13 +129,13 @@ public class ResetButton : MonoBehaviour
         // }
 
 
-        foreach (GameObject testCock in testKitManager.StaticTestCockList)
+        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
 
         }
-        foreach (var hose in testKitManager.AttachedHoseList)
+        foreach (var hose in doubleCheckTestKitController.AttachedHoseList)
         {
 
             Actions.onHoseBibGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
@@ -144,8 +144,8 @@ public class ResetButton : MonoBehaviour
         }
         Actions.onSightTubeGrab?.Invoke(sightTube);
         Actions.onSightTubeDrop?.Invoke(sightTube);
-        testKitManager.AttachedTestCockList.Clear();
-        testKitManager.AttachedHoseList.Clear();
+        doubleCheckTestKitController.AttachedTestCockList.Clear();
+        doubleCheckTestKitController.AttachedHoseList.Clear();
 
 
     }

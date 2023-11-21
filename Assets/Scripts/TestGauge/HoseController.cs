@@ -7,7 +7,7 @@ public class HoseController : MonoBehaviour
     public ConfigurableJoint currentConfigurableJoint;
     public PlayerController playerController;
     public CameraController cameraController;
-    public TestKitManager testKitManager;
+    public DoubleCheckTestKitController doubleCheckTestKitController;
     private Vector3 initHighHosePos;
     private Vector3 initAnchorPos_highHose;
     private Vector3 initAnchorPos_lowHose;
@@ -303,7 +303,7 @@ public class HoseController : MonoBehaviour
         {
             if (currentTestCock != null)
             {
-                if (testKitManager.AttachedHoseList.Contains(sightTubeObj) && testKitManager.AttachedTestCockList.Contains(currentTestCock))
+                if (doubleCheckTestKitController.AttachedHoseList.Contains(sightTubeObj) && doubleCheckTestKitController.AttachedTestCockList.Contains(currentTestCock))
                 {
                     //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively / fast
                     //     Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());

@@ -17,7 +17,7 @@ public class FillButton : MonoBehaviour
     OperableComponentDescription ShutOff1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
-    public TestKitManager testKitManager;
+    public DoubleCheckTestKitController doubleCheckTestKitController;
     public GameObject SO1;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
@@ -72,13 +72,13 @@ public class FillButton : MonoBehaviour
         playerController._operableObjectRotation.y = 180;
         // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
-        foreach (GameObject testCock in testKitManager.StaticTestCockList)
+        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
             testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
         }
         // hoseController.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
-        // testKitManager.DetachHoseBib();
+        // doubleCheckTestKitController.DetachHoseBib();
     }
 
     // Update is called once per frame
