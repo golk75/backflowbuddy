@@ -198,15 +198,16 @@ public class WaterController : MonoBehaviour
     public float inputForce = 1;
     public float volume;
     public float supplyPsi = 80f;
-    public float zone1Pressure;
+    float zone1Pressure;
     public float zone2Pressure;
     public float zone3Pressure;
     public float check1SpringForce;
     public float check2SpringForce;
-    public float zone1PsiChange;
+    float zone1PsiChange;
     public float zone2PsiChange;
     public float zone3PsiChange;
-
+    public float zone2to3PsiDiff;
+    public float zone3to4PsiDiff;
     void Start()
     {
 
@@ -271,6 +272,9 @@ public class WaterController : MonoBehaviour
     }
     void PressureZoneRegulate()
     {
+
+        zone2to3PsiDiff = zone2Pressure - (zone1Pressure - check1SpringForce) * zone2PsiChange;
+        zone3to4PsiDiff = zone3Pressure - (zone2Pressure - check2SpringForce) * zone3PsiChange;
         zone1Pressure = supplyPsi;
         zone2Pressure = (zone1Pressure - check1SpringForce) * zone2PsiChange;
         zone3Pressure = (zone2Pressure - check2SpringForce) * zone3PsiChange;
