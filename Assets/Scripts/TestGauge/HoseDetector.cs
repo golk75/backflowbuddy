@@ -91,6 +91,7 @@ public class HoseDetector : MonoBehaviour
             Actions.onRemoveTestCockFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
             currentHoseConnection = null;
             currentHose = null;
+            isConnected = false;
         }
         //for SightTubeController
         Actions.onTestCockColliderExit?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());

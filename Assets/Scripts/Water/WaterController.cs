@@ -201,13 +201,15 @@ public class WaterController : MonoBehaviour
     float zone1Pressure;
     public float zone2Pressure;
     public float zone3Pressure;
+
     public float check1SpringForce;
     public float check2SpringForce;
     float zone1PsiChange;
     public float zone2PsiChange;
     public float zone3PsiChange;
+    public float zone1to2PsiDiff;
     public float zone2to3PsiDiff;
-    public float zone3to4PsiDiff;
+
     void Start()
     {
 
@@ -273,11 +275,13 @@ public class WaterController : MonoBehaviour
     void PressureZoneRegulate()
     {
 
-        zone2to3PsiDiff = zone2Pressure - (zone1Pressure - check1SpringForce) * zone2PsiChange;
-        zone3to4PsiDiff = zone3Pressure - (zone2Pressure - check2SpringForce) * zone3PsiChange;
+
         zone1Pressure = supplyPsi;
         zone2Pressure = (zone1Pressure - check1SpringForce) * zone2PsiChange;
         zone3Pressure = (zone2Pressure - check2SpringForce) * zone3PsiChange;
+
+        zone1to2PsiDiff = zone1Pressure - zone2Pressure;
+        zone2to3PsiDiff = zone2Pressure - zone3Pressure;
         if (zone2Pressure <= 0)
         {
             zone2Pressure = 0;
@@ -423,6 +427,7 @@ public class WaterController : MonoBehaviour
             {
                 if (check1Detector.ParticlesInside > 3000)
                 {
+                    Debug.Log($"here");
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
                         Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
