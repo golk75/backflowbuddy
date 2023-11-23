@@ -2305,22 +2305,22 @@ PrefabInstance:
         type: 3}
       propertyPath: hoseDetector1
       value: 
-      objectReference: {fileID: 2710404239225386102}
+      objectReference: {fileID: 1354698777}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: hoseDetector2
       value: 
-      objectReference: {fileID: 5582824196569063747}
+      objectReference: {fileID: 41788560}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: hoseDetector3
       value: 
-      objectReference: {fileID: 8223883707261353593}
+      objectReference: {fileID: 2007149931}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: hoseDetector4
       value: 
-      objectReference: {fileID: 5597532315951293177}
+      objectReference: {fileID: 1128289294}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: sightTubeVoid
@@ -2364,12 +2364,12 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: zone2PsiChange
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: zone3PsiChange
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -6780,6 +6780,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7645227112155087364, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_TagString
+      value: TC02
       objectReference: {fileID: 0}
     - target: {fileID: 7806352222530832437, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
