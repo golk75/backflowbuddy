@@ -18,6 +18,6 @@
             <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
         </ui:Instance>
         <ui:Instance template="GameMenuScreen" name="GameMenuScreen" picking-mode="Ignore" style="position: absolute; display: none; width: 100%; height: 100%;" />
-        <ui:Instance template="PressureZoneHud" name="PressureZoneContainer" />
+        <ui:Instance template="PressureZoneHud" name="PressureZoneContainer" style="align-self: stretch; flex-direction: column; margin-bottom: 27%;" />
     </ui:VisualElement>
 </ui:UXML>

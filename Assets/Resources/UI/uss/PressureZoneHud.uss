@@ -1,8 +1,12 @@
 .pressure-zone-container {
-    position: absolute;
+    position: relative;
     align-self: auto;
     align-items: auto;
     flex-direction: row;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+    padding-right: 0;
 }
 
 .pressure-zone-overlay {
@@ -13,15 +17,38 @@
 }
 
 .pressure-zone-panel {
-    position: relative;
+    align-items: center;
+    align-self: center;
+    flex-direction: column;
+    flex-grow: 0;
+    justify-content: center;
+    height: auto;
+    width: 25%;
+}
+
+.pressure-zone-panel-background {
+    background-color: rgb(255, 64, 64);
+    flex-grow: 0;
+    align-items: center;
     align-self: auto;
-    align-items: auto;
-    flex-direction: row;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .pressure-zone-header {
-    position: relative;
-    align-self: auto;
+    flex-grow: 0;
     align-items: auto;
+    align-self: auto;
+    justify-content: center;
     flex-direction: row;
+}
+
+.pressure-zone-input {
+    width: 50%;
+    height: auto;
+    font-size: 20px;
+    display: flex;
+    padding-bottom: 0;
+    align-self: auto;
+    justify-content: flex-start;
 }

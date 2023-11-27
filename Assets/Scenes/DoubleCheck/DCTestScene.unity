@@ -2345,7 +2345,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hoseController
       value: 
-      objectReference: {fileID: 13952955817977042}
+      objectReference: {fileID: 746981164190540200}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: supplyCollider
