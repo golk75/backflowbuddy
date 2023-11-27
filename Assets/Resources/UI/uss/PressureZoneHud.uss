@@ -1,0 +1,27 @@
+.pressure-zone-container {
+    position: absolute;
+    align-self: auto;
+    align-items: auto;
+    flex-direction: row;
+}
+
+.pressure-zone-overlay {
+    position: relative;
+    align-self: auto;
+    align-items: auto;
+    flex-direction: row;
+}
+
+.pressure-zone-panel {
+    position: relative;
+    align-self: auto;
+    align-items: auto;
+    flex-direction: row;
+}
+
+.pressure-zone-header {
+    position: relative;
+    align-self: auto;
+    align-items: auto;
+    flex-direction: row;
+}

@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="GaugeReading" src="project://database/Assets/Resources/UI/uxml/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
+    <ui:Template name="PressureZoneHud" src="project://database/Assets/Resources/UI/uxml/PressureZoneHud.uxml?fileID=9197481963319205126&amp;guid=e5a98a97ba5674f739ff121bd1b72bde&amp;type=3#PressureZoneHud" />
     <Style src="project://database/Assets/Resources/UI/uss/DCTestScreen.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DCTestScreen" />
     <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
         <ui:VisualElement name="ButtonWrapper" class="button-wrapper">
@@ -17,5 +18,6 @@
             <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
         </ui:Instance>
         <ui:Instance template="GameMenuScreen" name="GameMenuScreen" picking-mode="Ignore" style="position: absolute; display: none; width: 100%; height: 100%;" />
+        <ui:Instance template="PressureZoneHud" name="PressureZoneContainer" />
     </ui:VisualElement>
 </ui:UXML>
