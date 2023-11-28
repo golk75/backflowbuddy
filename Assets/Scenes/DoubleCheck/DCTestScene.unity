@@ -457,8 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59cce0be7363b453fb94531cc9ac1b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 1446278365}
-  uiClickFilter: {fileID: 354497751}
+  waterController: {fileID: 4261158086632363316}
 --- !u!114 &354497751
 MonoBehaviour:
   m_ObjectHideFlags: 0

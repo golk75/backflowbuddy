@@ -1,4 +1,5 @@
 
+using System;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,13 +8,12 @@ using UnityEngine.UIElements;
 
 public class PressureZoneHUDController : MonoBehaviour
 {
+    public WaterController waterController;
+    const string SupplyPressureTextString = "SupplyPressure__value";
+    const string PressureZone2TextString = "SupplyPressure__value";
+    const string PressureZone3TextString = "SupplyPressure__value";
 
-    public UiClickFilter uiClickFilter;
-    const string SupplyZonePanelString = "SupplyPressure__panel";
-    const string SupplyPressureTestString = "PressureZone1__value";
-    const string PressureZone2 = "PressureZone2__panel";
-    const string PressureZone3 = "PressureZone3__panel";
-    VisualElement SupplyZonePanel;
+
     TextField SupplyPressureTextField;
     TextField PressureZone2Text;
     TextField PressureZone3Text;
@@ -23,10 +23,25 @@ public class PressureZoneHUDController : MonoBehaviour
     void Start()
     {
         var root = GetComponent<UIDocument>();
-        SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTestString);
-        SupplyZonePanel = root.rootVisualElement.Q<VisualElement>(SupplyZonePanelString);
+        SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
+
+
+        //Register callbacks
+        SupplyPressureTextField.RegisterValueChangedCallback(evt =>
+        {
+            InputValueChanged(evt);
+        });
 
     }
+
+    private void InputValueChanged(ChangeEvent<string> evt)
+    {
+        int result;
+        bool isInt = Int32.TryParse(evt.newValue, out result);
+        // Debug.Log($"evt: {evt.newValue.GetType()}");
+        waterController.supplyPsi = result;
+    }
+
     void OnEnable()
     {
 
@@ -35,6 +50,7 @@ public class PressureZoneHUDController : MonoBehaviour
     {
 
     }
+
 
 
     // Update is called once per frame

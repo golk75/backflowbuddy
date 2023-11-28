@@ -9,7 +9,7 @@ public class UiClickFilter : MonoBehaviour
     [SerializeField] UIDocument _uiDocument = null;
     public PlayerController playerController;
 
-    const string SupplyPressureTextFieldString = "PressureZone1__value";
+    const string SupplyPressureTextFieldString = "SupplyPressure__value";
     const string PressureZone2TextFieldString = "PressureZone2__value";
     const string PressureZone3TextFieldString = "PressureZone3__value";
     TextField SupplyPressureTextField;
