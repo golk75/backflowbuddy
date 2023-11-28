@@ -48,8 +48,8 @@
 }
 
 .button-wrapper {
-    align-items: auto;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     flex-grow: 0;
     align-self: flex-start;
     flex-direction: row;
@@ -91,6 +91,8 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     cursor: resource('UI/Textures/icons8-hand-33');
+    flex-grow: 0;
+    flex-shrink: 1;
 }
 
 .toggle > .unity-toggle__label {

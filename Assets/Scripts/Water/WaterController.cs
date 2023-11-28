@@ -386,7 +386,7 @@ public class WaterController : MonoBehaviour
         /// </summary>
         if (hoseController.isSightTubeConnected == true)
         {
-            Debug.Log($"Sight tube connected");
+            //Debug.Log($"Sight tube connected");
             if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
             {
 
@@ -805,7 +805,7 @@ public class WaterController : MonoBehaviour
         }
         else if (hoseController.isSightTubeConnected == false)
         {
-            Debug.Log($"Sight tube disconnected");
+            // Debug.Log($"Sight tube disconnected");
             if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
             {
 
