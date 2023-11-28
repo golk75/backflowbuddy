@@ -8,6 +8,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="PressureZone2__panel" picking-mode="Ignore" class="pressure-zone-panel">
+            <ui:SliderInt name="PressureZone2__slider" picking-mode="Ignore" class="pressure-zone-slider" style="cursor: initial;" />
             <ui:VisualElement name="PressureZone2__panel_background" class="pressure-zone-panel-background">
                 <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2__label" class="pressure-zone-header" />
                 <ui:TextField picking-mode="Ignore" name="PressureZone2__value" class="pressure-zone-input" />

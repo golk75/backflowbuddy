@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     GameObject playerManager;
-
+    public UiClickFilter uiClickFilter;
     private Coroutine zoomCoroutine;
     private Coroutine panCoroutine;
 
@@ -73,8 +73,14 @@ public class CameraController : MonoBehaviour
 
     private void Pan_started()
     {
+
+
+
+
         panCoroutine = StartCoroutine(PanDectection());
         isPanning = true;
+
+
         //Debug.Log($"Pan started");
     }
 
@@ -119,9 +125,11 @@ public class CameraController : MonoBehaviour
     {
         Vector3 pointerOrigin = GetPointerPos();
 
+
         while (
             playerController.primaryTouchStarted > 0
             && playerController.secondaryTouchStarted == false
+        // && uiClickFilter.IsPointerOverUI(pointerOrigin) == false
         )
         {
 
@@ -232,6 +240,7 @@ public class CameraController : MonoBehaviour
         if (
             playerController.isOperableObject == false
             && doubleCheckTestKitController.isOperableObject == false
+            && uiClickFilter.isUiClicked == false
         )
         {
             if (
@@ -239,6 +248,7 @@ public class CameraController : MonoBehaviour
                 && playerController.primaryTouchStarted > 0
             )
             {
+
                 Pan_started();
             }
             else if (playerController.secondaryTouchStarted)
@@ -253,5 +263,6 @@ public class CameraController : MonoBehaviour
     {
         //Debug.Log(playerController.Touch0Position.ReadValue<Vector2>());
         CameraMovement();
+
     }
 }

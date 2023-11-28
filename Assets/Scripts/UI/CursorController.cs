@@ -17,6 +17,7 @@ public class CursorController : MonoBehaviour
         root = GetComponent<UIDocument>();
         buttonWrapper = root.rootVisualElement.Q<VisualElement>("ButtonWrapper");
         sceneContainer = root.rootVisualElement.Q<VisualElement>("SceneContainer");
+
         cursor_grab = new()
         {
             texture = Resources.Load<Texture2D>("UI/Textures/icons8-hand-34"),

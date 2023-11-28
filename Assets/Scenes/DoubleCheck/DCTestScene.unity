@@ -2246,7 +2246,7 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: supplyPsi
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -4870,9 +4870,19 @@ PrefabInstance:
       objectReference: {fileID: 1372113974}
     - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
+      propertyPath: uIDocument
+      value: 
+      objectReference: {fileID: 64299822}
+    - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1446278363}
+    - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: uiClickFilter
+      value: 
+      objectReference: {fileID: 354497751}
     - target: {fileID: 8398648902125059293, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: testKitManager
