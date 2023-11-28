@@ -1,15 +1,17 @@
 .pressure-zone-container {
-    position: relative;
+    position: absolute;
     align-self: auto;
     align-items: auto;
     flex-direction: row;
-    flex-grow: 1;
+    flex-grow: 0;
     justify-content: space-between;
     width: 100%;
-    padding-right: 0;
-    margin-top: 10%;
-    cursor: resource('UI/Textures/icons8-hand-33');
+    cursor: initial;
+    height: auto;
+    margin-top: 1%;
+    margin-right: 0;
     margin-bottom: 0;
+    margin-left: 0;
 }
 
 .pressure-zone-overlay {
@@ -17,16 +19,6 @@
     align-self: auto;
     align-items: auto;
     flex-direction: row;
-}
-
-.pressure-zone-panel {
-    align-items: center;
-    align-self: center;
-    flex-direction: column;
-    flex-grow: 0;
-    justify-content: center;
-    height: auto;
-    width: 25%;
 }
 
 .pressure-zone-panel-background {
@@ -116,9 +108,5 @@
 
 .pressure-zone-slider {
     flex-grow: 1;
-}
-
-.pressure-zone-slider:hover {
-    flex-grow: 1;
-    cursor: resource('UI/Textures/icons8-hand-33');
+    max-width: 44%;
 }
