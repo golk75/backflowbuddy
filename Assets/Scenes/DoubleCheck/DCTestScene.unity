@@ -472,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 64299822}
   playerController: {fileID: 1446278365}
+  isUiClicked: 0
 --- !u!1 &448393510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
@@ -6598,6 +6599,11 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1893855252929389203, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 2451056851075105703, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_IsActive
@@ -6812,6 +6818,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AngularDrag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294633820452055744, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294633820452055744, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 7645227112155087364, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
