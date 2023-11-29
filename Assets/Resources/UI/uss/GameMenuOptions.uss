@@ -1,0 +1,61 @@
+.toggle {
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.toggle > .unity-toggle__label {
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.game-menu-options-button {
+    cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(54, 55, 63);
+    -unity-font-style: bold;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -unity-text-align: upper-center;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.unity-toggle__label {
+    -unity-font-style: bold;
+    color: rgb(54, 55, 63);
+    cursor: resource('UI/Textures/icons8-hand-33');
+    -unity-text-align: upper-left;
+}
+
+.unity-toggle__input {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.unity-toggle__checkmark {
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    align-items: auto;
+    align-self: auto;
+    justify-content: flex-start;
+    margin-right: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+}

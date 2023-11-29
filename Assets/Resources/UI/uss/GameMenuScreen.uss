@@ -1,8 +1,8 @@
 .game-menu-panel {
     align-items: center;
     justify-content: space-between;
-    width: 15%;
-    height: 40%;
+    width: 200px;
+    height: 250px;
     cursor: resource('UI/Textures/icons8-hand-32');
     background-image: none;
     background-color: rgb(54, 55, 63);
@@ -18,6 +18,7 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    margin-top: 0;
 }
 
 .game-menu-overlay {
@@ -31,8 +32,6 @@
 }
 
 .game-menu-button {
-    align-self: center;
-    width: 100%;
     cursor: resource('UI/Textures/icons8-hand-33');
     color: rgb(54, 55, 63);
     -unity-font-style: bold;
@@ -41,6 +40,7 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    -unity-text-align: upper-center;
 }
 
 .game-menu-button:hover {
@@ -136,17 +136,28 @@
 }
 
 .game-menu-body {
-    flex-shrink: 0;
-    width: auto;
-    height: auto;
+    flex-shrink: 1;
     align-items: center;
-    justify-content: center;
-    align-self: center;
+    justify-content: flex-end;
+    align-self: auto;
     flex-direction: column;
     position: absolute;
     top: 25%;
+    flex-grow: 0;
 }
 
 .game-menu-screen-anchor:active {
     cursor: initial;
+}
+
+.game-menu-screen-anchor {
+    flex-grow: 0;
+    background-color: rgba(0, 0, 0, 0);
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-self: auto;
+    justify-content: center;
+    cursor: resource('UI/Textures/icons8-hand-32');
 }
