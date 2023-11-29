@@ -1,8 +1,4 @@
 .game-menu-panel {
-    align-items: center;
-    justify-content: space-between;
-    width: 200px;
-    height: 250px;
     cursor: resource('UI/Textures/icons8-hand-32');
     background-image: none;
     background-color: rgb(54, 55, 63);
@@ -18,7 +14,9 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    margin-top: 0;
+    flex-grow: 0;
+    height: auto;
+    align-items: center;
 }
 
 .game-menu-overlay {
@@ -41,6 +39,10 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     -unity-text-align: upper-center;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
 }
 
 .game-menu-button:hover {
@@ -91,7 +93,7 @@
     -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
-.game-menu-label {
+.game-menu-header-label {
     flex-shrink: 0;
     width: auto;
     height: auto;
@@ -122,28 +124,14 @@
 }
 
 .game-menu-header {
-    align-items: center;
-    justify-content: flex-start;
-    align-self: auto;
-    width: 100%;
-    height: 55px;
-    margin-bottom: 0;
-    position: absolute;
-    top: 5%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
 }
 
 .game-menu-body {
-    flex-shrink: 1;
-    align-items: center;
-    justify-content: flex-end;
-    align-self: auto;
-    flex-direction: column;
-    position: absolute;
-    top: 25%;
     flex-grow: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .game-menu-screen-anchor:active {
@@ -151,13 +139,13 @@
 }
 
 .game-menu-screen-anchor {
-    flex-grow: 0;
     background-color: rgba(0, 0, 0, 0);
-    align-items: center;
-    position: relative;
     width: 100%;
     height: 100%;
-    align-self: auto;
-    justify-content: center;
     cursor: resource('UI/Textures/icons8-hand-32');
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    flex-grow: 1;
 }

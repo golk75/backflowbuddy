@@ -19,7 +19,7 @@
             <AttributeOverrides element-name="Gauge_bar" picking-mode="Ignore" />
             <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
         </ui:Instance>
-        <ui:Instance template="GameMenuScreen" name="GameMenuScreen" picking-mode="Ignore" style="position: absolute; display: none; width: 100%; height: 100%;" />
-        <ui:Instance template="GameMenuOptions" name="GameMenuOptions" style="position: absolute; left: 410px; top: 31px;" />
+        <ui:Instance template="GameMenuScreen" name="GameMenuScreen" class="game-menu-modal" style="display: none;" />
+        <ui:Instance template="GameMenuOptions" name="GameMenuOptions" class="game-menu-modal" style="display: none;" />
     </ui:VisualElement>
 </ui:UXML>

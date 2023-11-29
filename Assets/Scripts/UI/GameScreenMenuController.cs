@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class GameScreenController : MonoBehaviour
+
+
+public class GameScreenMenuController : MonoBehaviour
 {
 
     [Header("Scenes")]
@@ -13,7 +15,7 @@ public class GameScreenController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        GameScreen.GameQuit += OnGameQuit;
+        GameScreenMenu.GameQuit += OnGameQuit;
     }
     /// <summary>
     /// This function is called when the behaviour becomes disabled or inactive.
