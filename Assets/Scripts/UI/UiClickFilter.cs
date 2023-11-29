@@ -14,17 +14,20 @@ public class UiClickFilter : MonoBehaviour
     //string ids
     const string GameMenuScreenName = "GameMenuScreen";
     const string GameMenuOptionsScreenName = "GameMenuOptionsScreen";
-    const string SupplyPressureTextFieldName = "SupplyPressure__value";
-    const string PressureZone2TextFieldName = "PressureZone2__value";
-    const string PressureZone3TextFieldName = "PressureZone3__value";
+    const string SupplyPressurePanelName = "SupplyPressure__panel";
+    const string PressureZone2PanelName = "PressureZone2__panel";
+    const string PressureZone3PanelName = "PressureZone3__panel";
     const string PressureZone2SliderName = "PressureZone2__slider";
 
-    TextField SupplyPressureTextField;
-    TextField PressureZone2TextField;
-    TextField PressureZone3TextField;
+
+
     SliderInt PressureZone2Slider;
+
     VisualElement m_GameMenuScreen;
     VisualElement m_GameMenuOptionsScreen;
+    VisualElement m_SupplyPressurePanel;
+    VisualElement m_PressureZone2Panel;
+    VisualElement m_PressureZone3Panel;
 
     public bool isUiClicked = false;
     // Start is called before the first frame update
@@ -32,27 +35,30 @@ public class UiClickFilter : MonoBehaviour
     {
         //set visual elements
         var root = GetComponent<UIDocument>();
-        SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextFieldName);
-        PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextFieldName);
-        PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextFieldName);
+        m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelName);
+        m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelName);
+        m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelName);
         PressureZone2Slider = root.rootVisualElement.Q<SliderInt>(PressureZone2SliderName);
         m_GameMenuScreen = root.rootVisualElement.Q<VisualElement>(GameMenuScreenName);
         m_GameMenuOptionsScreen = root.rootVisualElement.Q<VisualElement>(GameMenuOptionsScreenName);
 
 
         //Register callbacks
-        SupplyPressureTextField.RegisterCallback<MouseDownEvent>(MouseDown);
-        PressureZone2TextField.RegisterCallback<MouseDownEvent>(MouseDown);
-        PressureZone3TextField.RegisterCallback<MouseDownEvent>(MouseDown);
+        m_SupplyPressurePanel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
         PressureZone2Slider.RegisterCallback<MouseDownEvent>(MouseDown);
-        m_GameMenuScreen.Q("GameMenuScreen_anchor").RegisterCallback<MouseDownEvent>(MouseDown);
+        m_GameMenuScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
         m_GameMenuOptionsScreen.RegisterCallback<MouseDownEvent>(MouseDown);
 
 
-        SupplyPressureTextField.RegisterCallback<MouseUpEvent>(MouseUp);
-        PressureZone2TextField.RegisterCallback<MouseUpEvent>(MouseUp);
-        PressureZone3TextField.RegisterCallback<MouseUpEvent>(MouseUp);
-        m_GameMenuScreen.Q("GameMenuScreen_anchor").RegisterCallback<MouseUpEvent>(MouseUp);
+        // SupplyPressureTextField.RegisterCallback<MouseUpEvent>(MouseUp);
+        // PressureZone2TextField.RegisterCallback<MouseUpEvent>(MouseUp);
+        // PressureZone3TextField.RegisterCallback<MouseUpEvent>(MouseUp);
+        m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        m_GameMenuScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_GameMenuOptionsScreen.RegisterCallback<MouseUpEvent>(MouseUp);
         PressureZone2Slider.Q("unity-drag-container").RegisterCallback<MouseUpEvent>(MouseUp);
     }
@@ -82,13 +88,16 @@ public class UiClickFilter : MonoBehaviour
     {
 
         isUiClicked = true;
-        Vector2 pointerScreenPos = Pointer.current.position.ReadValue();
-        if (IsPointerOverUI(pointerScreenPos))
-        {
-            playerController.isOperableObject = false;
-            playerController.operableObject = null;
+        playerController.isOperableObject = false;
+        playerController.operableObject = null;
+        // Vector2 pointerScreenPos = Pointer.current.position.ReadValue();
+        // if (IsPointerOverUI(pointerScreenPos))
+        // {
 
-        }
+        //     playerController.isOperableObject = false;
+        //     playerController.operableObject = null;
+
+        // }
 
 
     }

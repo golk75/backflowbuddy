@@ -118,21 +118,24 @@ public class PlayerController : MonoBehaviour
     private void LeftMouseClick_performed(InputAction.CallbackContext context)
     {
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (
-            isOperableObject == true
-            && operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitHose
-        )
+        if (operableComponentDescription != null)
         {
-            Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-        }
-        if (
-          isOperableObject == true
-          && operableComponentDescription.partsType
-              == OperableComponentDescription.PartsType.TestKitSightTube
-      )
-        {
-            Actions.onSightTubeGrab?.Invoke(operableObject);
+            if (
+                 // isOperableObject == true
+                 operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitHose
+            )
+            {
+                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+            }
+            if (
+               //   isOperableObject == true
+               operableComponentDescription.partsType
+                  == OperableComponentDescription.PartsType.TestKitSightTube
+          )
+            {
+                Actions.onSightTubeGrab?.Invoke(operableObject);
+            }
         }
         if (ClickOperationEnabled == true)
         {
@@ -149,28 +152,32 @@ public class PlayerController : MonoBehaviour
         primaryTouchStarted = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
         OnPanCanceled?.Invoke();
-
-        if (
-            isOperableObject == true
-            && operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitHose
-        )
+        if (operableComponentDescription != null)
         {
-            Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+            if (
+                 // isOperableObject == true
+                 operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitHose
+            )
+            {
+                Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+            }
+            if (
+             //    isOperableObject == true
+             operableComponentDescription.partsType
+                   == OperableComponentDescription.PartsType.TestKitSightTube
+           )
+            {
+                Actions.onSightTubeDrop?.Invoke(operableObject);
+            }
+            isOperableObject = false;
+            operableObject = null;
+            _operableTestGaugeObject = null;
+            primaryTouchStartPos = Vector3.zero;
+            touchStart = Vector3.zero;
+            operableComponentDescription = null;
+            uiClickFilter.isUiClicked = false;
         }
-        if (
-           isOperableObject == true
-           && operableComponentDescription.partsType
-               == OperableComponentDescription.PartsType.TestKitSightTube
-       )
-        {
-            Actions.onSightTubeDrop?.Invoke(operableObject);
-        }
-        isOperableObject = false;
-        operableObject = null;
-        _operableTestGaugeObject = null;
-        primaryTouchStartPos = Vector3.zero;
-        touchStart = Vector3.zero;
     }
 
     private void LeftMouseClick_started(InputAction.CallbackContext context)
@@ -218,44 +225,48 @@ public class PlayerController : MonoBehaviour
         primaryTouchStarted = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
         OnPanCanceled?.Invoke();
+        if (operableComponentDescription != null)
+        {
+            if (
 
-        if (
-            isOperableObject == true
-            && operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitHose
-        )
-        {
-            Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+                operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitHose
+            )
+            {
+                Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+            }
+            else if (
+               operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitSightTube
+            )
+            {
+                Actions.onSightTubeDrop?.Invoke(operableObject);
+            }
         }
-        else if (
-            isOperableObject == true
-            && operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitSightTube
-        )
-        {
-            Actions.onSightTubeDrop?.Invoke(operableObject);
-        }
+        operableComponentDescription = null;
+        uiClickFilter.isUiClicked = false;
     }
 
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
         DetectObjectWithRaycast();
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (
-            isOperableObject == true
-            && operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitHose
-        )
+        if (operableComponentDescription != null)
         {
-            Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-        }
-        else if (
-           isOperableObject == true
-           && operableComponentDescription.partsType
-               == OperableComponentDescription.PartsType.TestKitSightTube
-       )
-        {
-            Actions.onSightTubeGrab?.Invoke(operableObject);
+            if (
+                 operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitHose
+            )
+            {
+                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+            }
+            else if (
+                operableComponentDescription.partsType
+                   == OperableComponentDescription.PartsType.TestKitSightTube
+           )
+            {
+                Actions.onSightTubeGrab?.Invoke(operableObject);
+            }
         }
         if (ClickOperationEnabled == true)
         {
@@ -310,11 +321,12 @@ public class PlayerController : MonoBehaviour
         /// (if it has an OperableComponentDescription component, then it is operable)
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
 
-        if (hit.collider != null && ray2DHit.collider == null && !uiClickFilter.isUiClicked)
+        if (hit.collider != null && ray2DHit.collider == null)
         {
-            Debug.Log($"here");
+
             // _operableTestGaugeObject = null;
-            isOperableObject = true;
+            if (uiClickFilter.isUiClicked == false)
+                isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked
             if (hit.collider.transform.GetComponent<OperableComponentDescription>())
             {
@@ -332,6 +344,7 @@ public class PlayerController : MonoBehaviour
             _operableTestGaugeObject = null;
             operableObject = null;
             isOperableObject = false;
+            operableComponentDescription = null;
         }
     }
 
