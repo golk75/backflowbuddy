@@ -13,7 +13,7 @@
                 <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="OptionsMenuScreen_main-menu-button" class="game-menu-options-button" />
                 <ui:Button text="Save" display-tooltip-when-elided="true" name="OptionsMenuScreen_save-button" class="game-menu-options-button" />
             </ui:VisualElement>
-            <ui:Button display-tooltip-when-elided="true" name="GameMenuScreen_close-button" class="game-menu-close-button" />
+            <ui:Button display-tooltip-when-elided="true" name="OptionsMenuScreen_close-button" class="game-menu-close-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

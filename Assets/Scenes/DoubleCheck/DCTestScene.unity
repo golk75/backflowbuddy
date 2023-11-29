@@ -473,6 +473,20 @@ MonoBehaviour:
   _uiDocument: {fileID: 64299822}
   playerController: {fileID: 1446278365}
   isUiClicked: 0
+--- !u!114 &354497752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354497734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adec644b2f27841a390be2222fdf5671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuScreenName: GameMenuScreen
+  m_OptionsScreenName: GameMenuOptions
 --- !u!1 &448393510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
@@ -9388,6 +9402,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 354497751}
+    - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 354497752}
     - targetCorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       insertIndex: -1

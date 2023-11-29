@@ -74,9 +74,6 @@ public class GameScreenMenu : MonoBehaviour
         m_CloseMenuButton = root.Q<Button>(CloseMenuButtonString);
         m_QuitToMenuButton = root.Q<Button>(QuitToMenuButtonString);
 
-
-
-
     }
     void RegisterButtonCallBacks()
     {
@@ -105,7 +102,6 @@ public class GameScreenMenu : MonoBehaviour
     private void ShowGameMenuScreen(ClickEvent evt)
     {
         ShowVisualElement(m_MenuScreen, true);
-
 
     }
     void QuitGame(ClickEvent evt)
