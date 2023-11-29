@@ -11,9 +11,10 @@ public class PlayerController : MonoBehaviour
     TestCockController testCockController;
     public DoubleCheckTestKitController doubleCheckTestKitController;
     public GameObject FillButton;
-
+    public UiClickFilter uiClickFilter;
     [SerializeField]
     GameObject WaterManager;
+
     private WaterController waterController;
 
     PlayerInputAction playerInput;
@@ -324,14 +325,7 @@ public class PlayerController : MonoBehaviour
 
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
         }
-        else if (hit.collider == null && ray2DHit.collider != null)
-        {
-            operableObject = null;
-            isOperableObject = true;
-            operableComponentDescription =
-                ray2DHit.collider.transform.GetComponent<OperableComponentDescription>();
-            _operableTestGaugeObject = ray2DHit.collider.transform.gameObject;
-        }
+
         else
         {
             _operableTestGaugeObject = null;

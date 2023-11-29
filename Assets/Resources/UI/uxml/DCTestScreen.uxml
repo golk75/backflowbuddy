@@ -20,6 +20,6 @@
             <AttributeOverrides element-name="Tick_group" picking-mode="Ignore" />
         </ui:Instance>
         <ui:Instance template="GameMenuScreen" name="GameMenuScreen" class="game-menu-modal" style="display: none;" />
-        <ui:Instance template="GameMenuOptions" name="GameMenuOptions" class="game-menu-modal" style="display: none;" />
+        <ui:Instance template="GameMenuOptions" name="GameMenuOptionsScreen" class="game-menu-modal" style="display: none;" />
     </ui:VisualElement>
 </ui:UXML>

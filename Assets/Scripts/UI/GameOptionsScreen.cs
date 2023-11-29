@@ -11,7 +11,7 @@ public class GameOptionsScreen : MonoBehaviour
     [Header("Menu Screen elements")]
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_MenuScreenName = "GameMenuScreen";
-    [SerializeField] string m_OptionsScreenName = "GameMenuOptions";
+    [SerializeField] string m_OptionsScreenName = "GameMenuOptionsScreen";
     const string m_OptionsScreenMainMenuButtonName = "OptionsMenuScreen_main-menu-button";
     const string m_OptionsScreenSaveButtonName = "OptionsMenuScreen_save-button";
     const string CloseMenuButtonString = "OptionsMenuScreen_close-button";
