@@ -246,6 +246,7 @@ public class CameraController : MonoBehaviour
             if (
                 playerController.secondaryTouchStarted == false
                 && playerController.primaryTouchStarted > 0
+                || playerController.primaryTouchPerformed == true
             )
             {
 

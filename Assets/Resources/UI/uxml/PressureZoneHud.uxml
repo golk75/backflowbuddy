@@ -3,7 +3,7 @@
     <ui:VisualElement name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container" style="transform-origin: center; margin-top: 0;">
         <ui:VisualElement name="SupplyPressure__panel" class="pressure-zone-panel">
             <ui:VisualElement name="SupplyPressure__panel_background" class="pressure-zone-panel-background">
-                <ui:Label tabindex="-1" text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__label" class="pressure-zone-header" />
+                <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__label" class="pressure-zone-header" />
                 <ui:TextField name="SupplyPressure__value" max-length="-1" class="pressure-zone-input" />
             </ui:VisualElement>
         </ui:VisualElement>

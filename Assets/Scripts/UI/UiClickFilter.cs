@@ -15,6 +15,7 @@ public class UiClickFilter : MonoBehaviour
     const string GameMenuScreenName = "GameMenuScreen";
     const string GameMenuOptionsScreenName = "GameMenuOptionsScreen";
     const string SupplyPressurePanelName = "SupplyPressure__panel";
+    const string PressureZoneBackgroundName = "pressure-zone-panel-background";
     const string PressureZone2PanelName = "PressureZone2__panel";
     const string PressureZone3PanelName = "PressureZone3__panel";
     const string PressureZone2SliderName = "PressureZone2__slider";
@@ -28,8 +29,10 @@ public class UiClickFilter : MonoBehaviour
     VisualElement m_SupplyPressurePanel;
     VisualElement m_PressureZone2Panel;
     VisualElement m_PressureZone3Panel;
+    VisualElement m_PressureZoneBackground;
 
     public bool isUiClicked = false;
+    public bool isUiHovered = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,66 +47,78 @@ public class UiClickFilter : MonoBehaviour
 
 
         //Register callbacks
-        m_SupplyPressurePanel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        PressureZone2Slider.RegisterCallback<MouseDownEvent>(MouseDown);
+        //MouseDown
+        // m_SupplyPressurePanel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        // m_PressureZone2Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        // m_PressureZone3Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
         m_GameMenuScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<MouseDownEvent>(MouseDown);
+        m_GameMenuOptionsScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        PressureZone2Slider.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
 
 
-        // SupplyPressureTextField.RegisterCallback<MouseUpEvent>(MouseUp);
-        // PressureZone2TextField.RegisterCallback<MouseUpEvent>(MouseUp);
-        // PressureZone3TextField.RegisterCallback<MouseUpEvent>(MouseUp);
-        m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+
+        //MouseUp
+        // m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        // m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        // m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_GameMenuScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<MouseUpEvent>(MouseUp);
-        PressureZone2Slider.Q("unity-drag-container").RegisterCallback<MouseUpEvent>(MouseUp);
+        m_GameMenuOptionsScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        PressureZone2Slider.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+
+
+        //MouseEnter
+        // m_SupplyPressurePanel.RegisterCallback<MouseEnterEvent>(MouseEnter, TrickleDown.TrickleDown);
+        // m_PressureZone2Panel.RegisterCallback<MouseEnterEvent>(MouseEnter, TrickleDown.TrickleDown);
+        // m_PressureZone3Panel.RegisterCallback<MouseEnterEvent>(MouseEnter, TrickleDown.TrickleDown);
+        // m_GameMenuScreen.RegisterCallback<MouseEnterEvent>(MouseEnter, TrickleDown.TrickleDown);
+        // m_GameMenuOptionsScreen.RegisterCallback<MouseEnterEvent>(MouseEnter, TrickleDown.TrickleDown);
+        // PressureZone2Slider.RegisterCallback<MouseEnterEvent>(MouseEnter, TrickleDown.TrickleDown);
+
+
+        // //MouseOut
+        m_SupplyPressurePanel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        m_GameMenuScreen.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        m_GameMenuOptionsScreen.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        PressureZone2Slider.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+
+        //MouseOver
+        m_SupplyPressurePanel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        m_GameMenuScreen.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        m_GameMenuOptionsScreen.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        PressureZone2Slider.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+
     }
-
-
-
-    public bool IsPointerOverUI(Vector2 screenPos)
+    private void MouseOver(MouseOverEvent evt)
     {
-
-        Vector2 pointerUiPos = new Vector2 { x = screenPos.x, y = Screen.height - screenPos.y };
-        List<VisualElement> picked = new List<VisualElement>();
-        _uiDocument.rootVisualElement.panel.PickAll(pointerUiPos, picked);
-
-        if (picked.Count <= 0)
-        {
-            return false;
-
-        }
-        else
-        {
-            return true;
-        }
+        isUiClicked = true;
+        isUiHovered = true;
     }
-
-
+    private void MouseEnter(MouseEnterEvent evt)
+    {
+        isUiClicked = true;
+        isUiHovered = true;
+    }
+    private void MouseOut(MouseOutEvent evt)
+    {
+        isUiHovered = false;
+        isUiClicked = false;
+    }
     private void MouseDown(MouseDownEvent evt)
     {
 
         isUiClicked = true;
         playerController.isOperableObject = false;
         playerController.operableObject = null;
-        // Vector2 pointerScreenPos = Pointer.current.position.ReadValue();
-        // if (IsPointerOverUI(pointerScreenPos))
-        // {
-
-        //     playerController.isOperableObject = false;
-        //     playerController.operableObject = null;
-
-        // }
-
 
     }
     private void MouseUp(MouseUpEvent evt)
     {
-        isUiClicked = false;
+        if (isUiHovered == false)
+            isUiClicked = false;
     }
     // Update is called once per frame
     void Update()

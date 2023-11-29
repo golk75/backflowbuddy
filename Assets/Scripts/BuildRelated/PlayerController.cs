@@ -118,30 +118,32 @@ public class PlayerController : MonoBehaviour
     private void LeftMouseClick_performed(InputAction.CallbackContext context)
     {
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (operableComponentDescription != null)
-        {
-            if (
-                 // isOperableObject == true
-                 operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestKitHose
-            )
+        if (uiClickFilter.isUiClicked == false && uiClickFilter.isUiHovered == false)
+            if (operableComponentDescription != null)
             {
-                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-            }
-            if (
-               //   isOperableObject == true
-               operableComponentDescription.partsType
-                  == OperableComponentDescription.PartsType.TestKitSightTube
-          )
-            {
-                Actions.onSightTubeGrab?.Invoke(operableObject);
-            }
-        }
-        if (ClickOperationEnabled == true)
-        {
-            ClickOperate();
+                if (
+                     // isOperableObject == true
+                     operableComponentDescription.partsType
+                        == OperableComponentDescription.PartsType.TestKitHose
+                )
+                {
+                    Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+                }
+                if (
+                   //   isOperableObject == true
+                   operableComponentDescription.partsType
+                      == OperableComponentDescription.PartsType.TestKitSightTube
+              )
+                {
+                    Actions.onSightTubeGrab?.Invoke(operableObject);
+                }
+                if (ClickOperationEnabled == true)
+                {
+                    ClickOperate();
 
-        }
+                }
+            }
+
 
 
     }
@@ -176,8 +178,9 @@ public class PlayerController : MonoBehaviour
             primaryTouchStartPos = Vector3.zero;
             touchStart = Vector3.zero;
             operableComponentDescription = null;
-            uiClickFilter.isUiClicked = false;
+
         }
+        uiClickFilter.isUiClicked = false;
     }
 
     private void LeftMouseClick_started(InputAction.CallbackContext context)
@@ -188,7 +191,8 @@ public class PlayerController : MonoBehaviour
         );
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         primaryTouchStarted = context.ReadValue<float>();
-        DetectObjectWithRaycast();
+        if (uiClickFilter.isUiClicked == false)
+            DetectObjectWithRaycast();
     }
 
     void OnEnable()
@@ -251,7 +255,7 @@ public class PlayerController : MonoBehaviour
     {
         DetectObjectWithRaycast();
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (operableComponentDescription != null)
+        if (operableComponentDescription != null && uiClickFilter.isUiHovered == false)
         {
             if (
                  operableComponentDescription.partsType
@@ -325,8 +329,8 @@ public class PlayerController : MonoBehaviour
         {
 
             // _operableTestGaugeObject = null;
-            if (uiClickFilter.isUiClicked == false)
-                isOperableObject = true;
+
+            isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked
             if (hit.collider.transform.GetComponent<OperableComponentDescription>())
             {
