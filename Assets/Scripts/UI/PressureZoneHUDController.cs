@@ -29,6 +29,9 @@ public class PressureZoneHUDController : MonoBehaviour
 
         PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextString);
         PressureZone2TextField.isDelayed = false;
+
+        PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextString);
+        PressureZone3TextField.isDelayed = false;
         //Register callbacks
         // SupplyPressureTextField.RegisterCallback<ChangeEvent<string>>((evt) =>
         // {
@@ -76,6 +79,7 @@ public class PressureZoneHUDController : MonoBehaviour
     void Update()
     {
         PressureZone2TextField.value = waterController.zone2Pressure.ToString();
+        PressureZone3TextField.value = waterController.zone3Pressure.ToString();
 
     }
 }
