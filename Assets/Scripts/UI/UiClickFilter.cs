@@ -67,7 +67,7 @@ public class UiClickFilter : MonoBehaviour
 
     private void MouseDown(MouseDownEvent evt)
     {
-        Debug.Log($"mouse down");
+
         isUiClicked = true;
         Vector2 pointerScreenPos = Pointer.current.position.ReadValue();
         if (IsPointerOverUI(pointerScreenPos))
@@ -78,21 +78,9 @@ public class UiClickFilter : MonoBehaviour
         }
 
 
-
-        // Vector2 pointerScreenPos = Pointer.current.position.ReadValue();
-        // if (!uiClickFilter.IsPointerOverUI(pointerScreenPos))
-        // {
-        //     Debug.Log($"Ui Element clicked");
-        // }
-        // else
-        // {
-        //     Debug.Log($"Ui Element not clicked");
-        // }
-
     }
     private void MouseUp(MouseUpEvent evt)
     {
-        Debug.Log($"mouse up");
         isUiClicked = false;
     }
     // Update is called once per frame
