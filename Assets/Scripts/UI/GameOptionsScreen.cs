@@ -52,7 +52,7 @@ public class GameOptionsScreen : MonoBehaviour
 
     private void ResumeGame(ClickEvent evt)
     {
-        Debug.Log($"here");
+
         ShowVisualElement(m_OptionsScreen, false);
 
     }
@@ -61,6 +61,7 @@ public class GameOptionsScreen : MonoBehaviour
     {
         ShowVisualElement(m_OptionsScreen, false);
         ShowVisualElement(m_MenuScreen, true);
+        Debug.Log($"here");
     }
 
     void ShowVisualElement(VisualElement visualElement, bool state)

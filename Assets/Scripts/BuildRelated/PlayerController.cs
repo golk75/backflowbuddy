@@ -309,9 +309,10 @@ public class PlayerController : MonoBehaviour
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
-        if (hit.collider != null && ray2DHit.collider == null)
-        {
 
+        if (hit.collider != null && ray2DHit.collider == null && !uiClickFilter.isUiClicked)
+        {
+            Debug.Log($"here");
             // _operableTestGaugeObject = null;
             isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked

@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MenuScreenName: GameMenuScreen
-  m_OptionsScreenName: GameMenuOptions
+  m_OptionsScreenName: GameMenuOptionsScreen
 --- !u!1 &448393510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
@@ -8910,6 +8910,11 @@ PrefabInstance:
       objectReference: {fileID: 8094791870444064191}
     - target: {fileID: 2188251840394604002, guid: e6f20a08661774fbc9fa6c2efdef3a81,
         type: 3}
+      propertyPath: uiClickFilter
+      value: 
+      objectReference: {fileID: 354497751}
+    - target: {fileID: 2188251840394604002, guid: e6f20a08661774fbc9fa6c2efdef3a81,
+        type: 3}
       propertyPath: TestCockManager
       value: 
       objectReference: {fileID: 2614389505626383443}
@@ -9295,6 +9300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LayerOverridePriority
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223085132162842862, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_OptionsScreenName
+      value: GameMenuOptionsScreen
       objectReference: {fileID: 0}
     - target: {fileID: 6106803842771581355, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
