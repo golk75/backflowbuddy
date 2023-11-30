@@ -8,53 +8,50 @@ using UnityEngine.UIElements;
 
 public class PressureZoneHUDController : MonoBehaviour
 {
+    //game objects
     public WaterController waterController;
+
+    //string ids
     const string SupplyPressureTextString = "SupplyPressure__value";
     const string PressureZone2TextString = "PressureZone2__value";
     const string PressureZone3TextString = "PressureZone3__value";
-    const string PressureZone2Slider = "PressureZone2__slider";
+    const string PressureZone2SliderString = "PressureZone2__slider";
 
 
-    TextField SupplyPressureTextField;
-    TextField PressureZone2TextField;
-    TextField PressureZone3TextField;
-    bool zone2PressureFocused = false;
-    float zone2PressureOnFocus;
+    //visual elements
+    TextField m_SupplyPressureTextField;
+    TextField m_PressureZone2TextField;
+    TextField m_PressureZone3TextField;
+    Slider m_PressureZone2Slider;
+
+
+    //booleans
+
 
     // Start is called before the first frame update
     void Start()
     {
         SetVisualElements();
         RegisterTextFieldCallBacks();
-        SupplyPressureTextField.isDelayed = false;
-        PressureZone2TextField.isDelayed = false;
-        PressureZone3TextField.isDelayed = false;
+        m_SupplyPressureTextField.isDelayed = false;
+        m_PressureZone2TextField.isDelayed = false;
+        m_PressureZone3TextField.isDelayed = false;
     }
-
-
-    void OnEnable()
-    {
-
-    }
-    void OnDisable()
-    {
-
-    }
-
 
     void SetVisualElements()
     {
         var root = GetComponent<UIDocument>();
-        SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
-        PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextString);
-        PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextString);
+        m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
+        m_PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextString);
+        m_PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextString);
+        m_PressureZone2Slider = root.rootVisualElement.Q<Slider>(PressureZone2SliderString);
 
     }
 
 
     void RegisterTextFieldCallBacks()
     {
-        SupplyPressureTextField.RegisterCallback<ChangeEvent<string>>(InputValueChanged);
+        m_SupplyPressureTextField.RegisterCallback<ChangeEvent<string>>(InputValueChanged);
     }
 
 
@@ -69,8 +66,8 @@ public class PressureZoneHUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PressureZone2TextField.value = waterController.zone2Pressure.ToString();
-        PressureZone3TextField.value = waterController.zone3Pressure.ToString();
+        m_PressureZone2TextField.value = waterController.zone2Pressure.ToString();
+        m_PressureZone3TextField.value = waterController.zone3Pressure.ToString();
 
     }
 }
