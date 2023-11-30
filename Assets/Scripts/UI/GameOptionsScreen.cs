@@ -48,6 +48,7 @@ public class GameOptionsScreen : MonoBehaviour
     {
         m_CloseMenuButton?.RegisterCallback<ClickEvent>(ResumeGame);
         m_MenuScreenButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
+        m_OptionsSaveButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
     }
 
     private void ResumeGame(ClickEvent evt)
@@ -61,7 +62,7 @@ public class GameOptionsScreen : MonoBehaviour
     {
         ShowVisualElement(m_OptionsScreen, false);
         ShowVisualElement(m_MenuScreen, true);
-        Debug.Log($"here");
+
     }
 
     void ShowVisualElement(VisualElement visualElement, bool state)
