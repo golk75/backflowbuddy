@@ -473,6 +473,7 @@ MonoBehaviour:
   _uiDocument: {fileID: 64299822}
   playerController: {fileID: 1446278365}
   isUiClicked: 0
+  isUiHovered: 1
 --- !u!114 &354497752
 MonoBehaviour:
   m_ObjectHideFlags: 0
