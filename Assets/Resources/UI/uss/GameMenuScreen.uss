@@ -134,10 +134,6 @@
     margin-left: 10px;
 }
 
-.game-menu-screen-anchor:active {
-    cursor: initial;
-}
-
 .game-menu-screen-anchor {
     background-color: rgba(0, 0, 0, 0);
     width: 100%;

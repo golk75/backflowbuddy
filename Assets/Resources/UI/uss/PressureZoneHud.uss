@@ -21,82 +21,56 @@
     flex-direction: row;
 }
 
-.pressure-zone-panel-background {
-    background-color: rgb(54, 55, 63);
-    flex-grow: 0;
-    align-items: center;
-    align-self: auto;
-    justify-content: flex-start;
-    flex-direction: column;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-width: 2px;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    height: 100px;
-    opacity: 0.87;
-}
-
 .pressure-zone-header {
     flex-grow: 0;
     align-items: auto;
     align-self: auto;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
     color: rgb(255, 255, 255);
+    font-size: 11px;
 }
 
-.pressure-zone-input {
-    width: 50px;
-    height: 50px;
-    font-size: 18px;
-    display: flex;
-    align-self: center;
-    justify-content: flex-start;
-    position: relative;
-    flex-grow: 0;
-    flex-shrink: 1;
-    -unity-text-align: middle-left;
-    align-items: center;
-    text-overflow: clip;
-    white-space: normal;
-}
-
-.game-menu-panel {
-    align-items: center;
-    justify-content: space-between;
-    width: 15%;
-    height: 40%;
-    cursor: resource('UI/Textures/icons8-hand-32');
-    background-image: none;
+.pressure-zone-panel {
     background-color: rgb(54, 55, 63);
     border-left-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
     border-top-color: rgb(255, 255, 255);
     border-bottom-color: rgb(255, 255, 255);
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+}
+
+#PressureZoneContainer #unity-text-input {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    flex-grow: 0;
-    flex-direction: column;
-}
-
-.pressure-zone-slider {
-    flex-grow: 1;
-}
-
-.pressure-zone-panel {
-    flex-direction: row;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+    -unity-text-align: middle-center;
 }

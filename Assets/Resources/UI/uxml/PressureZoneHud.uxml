@@ -1,24 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
-    <ui:VisualElement name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container" style="transform-origin: center; margin-top: 0;">
+    <ui:VisualElement name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container" style="transform-origin: center; margin-top: 0; top: 0; left: 0;">
         <ui:VisualElement name="SupplyPressure__panel" class="pressure-zone-panel">
-            <ui:VisualElement name="SupplyPressure__panel_background" class="pressure-zone-panel-background">
-                <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__label" class="pressure-zone-header" />
-                <ui:TextField name="SupplyPressure__value" max-length="-1" class="pressure-zone-input" />
-            </ui:VisualElement>
+            <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__label" class="pressure-zone-header" />
+            <ui:TextField name="SupplyPressure__value" max-length="2" />
         </ui:VisualElement>
         <ui:VisualElement name="PressureZone2__panel" picking-mode="Ignore" class="pressure-zone-panel">
-            <ui:SliderInt name="PressureZone2__slider" high-value="2" value="1" direction="Vertical" class="pressure-zone-slider" />
-            <ui:VisualElement name="PressureZone2__panel_background" class="pressure-zone-panel-background">
-                <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2__label" class="pressure-zone-header" />
-                <ui:TextField picking-mode="Ignore" name="PressureZone2__value" class="pressure-zone-input" />
-            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2__label" class="pressure-zone-header" />
+            <ui:TextField picking-mode="Ignore" name="PressureZone2__value" />
         </ui:VisualElement>
         <ui:VisualElement name="PressureZone3__panel" class="pressure-zone-panel">
-            <ui:VisualElement name="PressureZone3__panel_background" class="pressure-zone-panel-background">
-                <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3__label" class="pressure-zone-header" />
-                <ui:TextField picking-mode="Ignore" name="PressureZone3__value" class="pressure-zone-input" />
-            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3__label" class="pressure-zone-header" />
+            <ui:TextField picking-mode="Ignore" name="PressureZone3__value" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
