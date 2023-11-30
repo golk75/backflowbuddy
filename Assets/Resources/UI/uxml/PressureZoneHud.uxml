@@ -7,8 +7,8 @@
                 <ui:TextField name="SupplyPressure__value" max-length="-1" class="pressure-zone-input" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="PressureZone2__panel" picking-mode="Ignore" class="pressure-zone-panel" style="translate: 0 0;">
-            <ui:SliderInt name="PressureZone2__slider" picking-mode="Ignore" class="pressure-zone-slider" style="cursor: initial;" />
+        <ui:VisualElement name="PressureZone2__panel" picking-mode="Ignore" class="pressure-zone-panel">
+            <ui:SliderInt name="PressureZone2__slider" high-value="2" value="1" direction="Vertical" class="pressure-zone-slider" />
             <ui:VisualElement name="PressureZone2__panel_background" class="pressure-zone-panel-background">
                 <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2__label" class="pressure-zone-header" />
                 <ui:TextField picking-mode="Ignore" name="PressureZone2__value" class="pressure-zone-input" />

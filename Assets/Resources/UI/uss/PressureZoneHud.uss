@@ -90,10 +90,13 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     flex-grow: 0;
+    flex-direction: column;
 }
 
 .pressure-zone-slider {
     flex-grow: 1;
-    max-width: 44%;
 }
 
+.pressure-zone-panel {
+    flex-direction: row;
+}
