@@ -48,22 +48,22 @@ public class UiClickFilter : MonoBehaviour
 
         //Register callbacks
         //MouseDown
-        // m_SupplyPressurePanel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        // m_PressureZone2Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        // m_PressureZone3Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        m_SupplyPressurePanel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
         m_GameMenuScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
         m_GameMenuOptionsScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        PressureZone2Slider.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
+        // PressureZone2Slider.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
 
 
 
         //MouseUp
-        // m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        // m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        // m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_GameMenuScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_GameMenuOptionsScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        PressureZone2Slider.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+        // PressureZone2Slider.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
 
 
         //MouseEnter
@@ -79,33 +79,34 @@ public class UiClickFilter : MonoBehaviour
         m_SupplyPressurePanel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
         m_PressureZone2Panel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
         m_PressureZone3Panel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
-        m_GameMenuScreen.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
-        PressureZone2Slider.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        // m_GameMenuScreen.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        // m_GameMenuOptionsScreen.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
+        // PressureZone2Slider.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
 
         //MouseOver
         m_SupplyPressurePanel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
         m_PressureZone2Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
         m_PressureZone3Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
-        m_GameMenuScreen.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
-        PressureZone2Slider.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        // m_GameMenuScreen.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        // m_GameMenuOptionsScreen.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
+        // PressureZone2Slider.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
 
     }
     private void MouseOver(MouseOverEvent evt)
     {
-        isUiClicked = true;
+
         isUiHovered = true;
     }
     private void MouseEnter(MouseEnterEvent evt)
     {
-        isUiClicked = true;
+
         isUiHovered = true;
     }
     private void MouseOut(MouseOutEvent evt)
     {
+        Debug.Log($"here");
         isUiHovered = false;
-        isUiClicked = false;
+
     }
     private void MouseDown(MouseDownEvent evt)
     {
