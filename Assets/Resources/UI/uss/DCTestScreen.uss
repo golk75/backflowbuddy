@@ -141,3 +141,12 @@
     width: 100%;
     height: 100%;
 }
+
+.fill-bar {
+    background-color: rgb(255, 0, 0);
+    height: 100%;
+    align-self: stretch;
+    width: auto;
+    position: relative;
+    justify-content: flex-start;
+}

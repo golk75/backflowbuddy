@@ -29,6 +29,7 @@ public class PressureZoneHUDController : MonoBehaviour
     VisualElement m_PressureZoneSliderBar;
     VisualElement m_PressureZoneSliderTracker;
     VisualElement m_PressureZoneSliderHandle;
+    VisualElement m_SliderFillBar;
 
 
     //booleans
@@ -40,7 +41,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
     //lists
 
-    List<VisualElement> result;
+    List<VisualElement> SliderHandleList;
 
     // Start is called before the first frame update
     void Start()
@@ -59,17 +60,23 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextString);
         m_PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextString);
         m_PressureZoneSliderBar = root.rootVisualElement.Query<VisualElement>(PressureZoneSliderBarString);
-        // m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
-        result = root.rootVisualElement.Query(name: "unity-dragger").ToList();
+        m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
+        SliderHandleList = root.rootVisualElement.Query(name: "unity-dragger").ToList();
 
 
-        // foreach (var dragger in result)
-        // {
-        //     dragger.style.backgroundColor = Color.red;
+        foreach (var dragger in SliderHandleList)
+        {
+            AddElements(dragger);
+        }
 
-        // }
 
-
+    }
+    void AddElements(VisualElement sliderHandle)
+    {
+        m_SliderFillBar = new VisualElement();
+        sliderHandle.Add(m_SliderFillBar);
+        m_SliderFillBar.name = "SliderFillBar";
+        m_SliderFillBar.AddToClassList("fill-bar");
     }
 
 
