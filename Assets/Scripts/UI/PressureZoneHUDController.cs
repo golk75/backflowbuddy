@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,18 +16,31 @@ public class PressureZoneHUDController : MonoBehaviour
     const string SupplyPressureTextString = "SupplyPressure__value";
     const string PressureZone2TextString = "PressureZone2__value";
     const string PressureZone3TextString = "PressureZone3__value";
-    const string PressureZone2SliderString = "PressureZone2__slider";
+    const string PressureZoneSliderBarString = "PressureZoneSlider";
+    const string PressureZoneSliderTrackerString = "unity-tracker";
+    const string PressureZoneSliderHandleString = "unity-dragger";
 
 
     //visual elements
     TextField m_SupplyPressureTextField;
     TextField m_PressureZone2TextField;
     TextField m_PressureZone3TextField;
-    Slider m_PressureZone2Slider;
+
+    VisualElement m_PressureZoneSliderBar;
+    VisualElement m_PressureZoneSliderTracker;
+    VisualElement m_PressureZoneSliderHandle;
 
 
     //booleans
 
+
+    //root
+    UIDocument root;
+
+
+    //lists
+
+    List<VisualElement> result;
 
     // Start is called before the first frame update
     void Start()
@@ -40,11 +54,21 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void SetVisualElements()
     {
-        var root = GetComponent<UIDocument>();
+        root = GetComponent<UIDocument>();
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextString);
         m_PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextString);
-        m_PressureZone2Slider = root.rootVisualElement.Q<Slider>(PressureZone2SliderString);
+        m_PressureZoneSliderBar = root.rootVisualElement.Query<VisualElement>(PressureZoneSliderBarString);
+        // m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
+        result = root.rootVisualElement.Query(name: "unity-dragger").ToList();
+
+
+        // foreach (var dragger in result)
+        // {
+        //     dragger.style.backgroundColor = Color.red;
+
+        // }
+
 
     }
 

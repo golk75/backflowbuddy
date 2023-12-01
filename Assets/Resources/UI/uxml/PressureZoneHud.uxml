@@ -3,21 +3,21 @@
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
     <ui:VisualElement name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container">
         <ui:VisualElement name="SupplyPressure__panel" class="pressure-zone-panel">
-            <ui:Instance template="PressureZoneSlider" name="PressureZoneSlider" />
+            <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
             <ui:VisualElement name="PressureZone_input_panel" style="flex-grow: 1;">
                 <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__label" class="pressure-zone-header" />
                 <ui:TextField name="SupplyPressure__value" max-length="2" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="PressureZone2__panel" picking-mode="Ignore" class="pressure-zone-panel">
-            <ui:Instance template="PressureZoneSlider" name="PressureZoneSlider" />
+            <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
             <ui:VisualElement name="PressureZone_input_panel" style="flex-grow: 1;">
                 <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2__label" class="pressure-zone-header" />
                 <ui:TextField picking-mode="Ignore" name="PressureZone2__value" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="PressureZone3__panel" class="pressure-zone-panel">
-            <ui:Instance template="PressureZoneSlider" name="PressureZoneSlider" />
+            <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
             <ui:VisualElement name="PressureZone_input_panel" style="flex-grow: 1;">
                 <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3__label" class="pressure-zone-header" />
                 <ui:TextField picking-mode="Ignore" name="PressureZone3__value" />
