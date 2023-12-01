@@ -1,17 +1,17 @@
-.pressure-zone-container {
-    position: absolute;
+#PressureZoneContainer {
+    position: relative;
     align-self: auto;
     align-items: auto;
     flex-direction: row;
     flex-grow: 0;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     cursor: initial;
     height: auto;
-    margin-top: 1%;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: 50%;
 }
 
 .pressure-zone-overlay {
@@ -32,7 +32,7 @@
 }
 
 .pressure-zone-panel {
-    background-color: rgb(54, 55, 63);
+    background-color: rgba(54, 55, 63, 0.63);
     border-left-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
     border-top-color: rgb(255, 255, 255);

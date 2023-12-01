@@ -473,7 +473,7 @@ MonoBehaviour:
   _uiDocument: {fileID: 64299822}
   playerController: {fileID: 1446278365}
   isUiClicked: 0
-  isUiHovered: 1
+  isUiHovered: 0
 --- !u!114 &354497752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4642,12 +4642,12 @@ PrefabInstance:
     - target: {fileID: 1531741249013338705, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24.24
+      value: -14.34
       objectReference: {fileID: 0}
     - target: {fileID: 1531741249013338705, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.75
+      value: 8.21
       objectReference: {fileID: 0}
     - target: {fileID: 1531741249013338705, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}

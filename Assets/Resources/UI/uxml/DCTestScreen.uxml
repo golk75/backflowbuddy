@@ -12,7 +12,7 @@
             <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" style="display: none;" />
             <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" style="display: none;" />
         </ui:VisualElement>
-        <ui:Instance template="PressureZoneHud" name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container" style="display: flex;" />
+        <ui:Instance template="PressureZoneHud" name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container" />
         <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper" style="display: none;">
             <AttributeOverrides element-name="Container" picking-mode="Ignore" />
             <AttributeOverrides element-name="Gauge_tick_container" picking-mode="Ignore" />
