@@ -49,6 +49,6 @@ public static class Actions
     public static Action onHighBleedOperate;
     public static Action onHighBleedClosed;
 
-
+    public static Action<float> onSupplyPressureInputChange;
 
 }

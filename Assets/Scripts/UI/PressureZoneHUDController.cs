@@ -19,6 +19,9 @@ public class PressureZoneHUDController : MonoBehaviour
     const string PressureZoneSliderBarString = "PressureZoneSlider";
     const string PressureZoneSliderTrackerString = "unity-tracker";
     const string PressureZoneSliderHandleString = "unity-dragger";
+    const string PressureZone2Panel = "PressureZone2__panel";
+    const string PressureZone3Panel = "PressureZone3__panel";
+    const string SupplyPressurePanel = "SupplyPressure__panel";
 
 
     //visual elements
@@ -35,7 +38,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //booleans
-
+    bool alteringZonePressure;
 
     //root
     UIDocument root;
@@ -57,6 +60,18 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone2TextField.isDelayed = false;
         m_PressureZone3TextField.isDelayed = false;
     }
+
+
+    void OnEnable()
+    {
+        Actions.onSupplyPressureInputChange += SupplyInputChange;
+    }
+
+    void OnDisable()
+    {
+        Actions.onSupplyPressureInputChange -= SupplyInputChange;
+    }
+
 
     void SetVisualElements()
     {
@@ -112,9 +127,19 @@ public class PressureZoneHUDController : MonoBehaviour
     }
 
 
+    private void SupplyInputChange(float value)
+    {
+
+        // m_SupplyPressureTextField.value = value.ToString();
+        float currentPsi = waterController.supplyPsi;
+        waterController.supplyPsi = value;
+    }
+
+
     void RegisterTextFieldCallBacks()
     {
         m_SupplyPressureTextField.RegisterCallback<ChangeEvent<string>>(InputValueChanged);
+
     }
     void RegisterSliderCallBacks(VisualElement slider)
     {
@@ -147,21 +172,48 @@ public class PressureZoneHUDController : MonoBehaviour
         Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
 
         currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
-
+        // Debug.Log($"evt: {evt.newValue}");
+        ZonePressureOperations(evt.newValue, currentSliderBar.parent.parent);
 
     }
 
     private void InputValueChanged(ChangeEvent<string> evt)
     {
+
         int result;
         bool isInt = Int32.TryParse(evt.newValue, out result);
-        waterController.supplyPsi = result;
+        Actions.onSupplyPressureInputChange?.Invoke(result);
+        // waterController.supplyPsi = result;
     }
 
+    void ZonePressureOperations(float zonePressureSliderValue, VisualElement zonePressureSlider)
+    {
 
+        switch (zonePressureSlider.name)
+        {
+            case SupplyPressurePanel:
+                // Debug.Log($"Supply slider operated");
+                Actions.onSupplyPressureInputChange?.Invoke(waterController.supplyPsi + zonePressureSliderValue);
+
+                break;
+            case PressureZone2Panel:
+                waterController.zone2PsiChange = zonePressureSliderValue;
+                // Debug.Log($"Zone2 slider operated");
+                break;
+            case PressureZone3Panel:
+
+                // Debug.Log($"Zone3 slider operated");
+                break;
+            default:
+                throw new Exception($"{zonePressureSlider.name} does not match the name of slider being used");
+
+        }
+        // Debug.Log($"zonePressureValue: {zonePressureValue} ; zonePressureSlider: {zonePressureSlider.name}");
+    }
     // Update is called once per frame
     void Update()
     {
+
         m_PressureZone2TextField.value = waterController.zone2Pressure.ToString();
         m_PressureZone3TextField.value = waterController.zone3Pressure.ToString();
 
