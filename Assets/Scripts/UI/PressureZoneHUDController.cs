@@ -86,7 +86,10 @@ public class PressureZoneHUDController : MonoBehaviour
         //     AddNewDraggerElements(tracker);
         // }
 
+
     }
+
+
     void AddFillBarElements(VisualElement sliderHandle)
     {
         m_SliderFillBar = new VisualElement();
@@ -96,12 +99,16 @@ public class PressureZoneHUDController : MonoBehaviour
     }
     void AddNewDraggerElements(VisualElement sliderBar)
     {
+
         //new dragger handle
         m_NewDragger = new VisualElement();
         sliderBar.Add(m_NewDragger);
         m_NewDragger.name = "NewDragger";
         m_NewDragger.AddToClassList("new-dragger");
         m_NewDragger.pickingMode = PickingMode.Ignore;
+
+
+
     }
 
 
@@ -112,18 +119,34 @@ public class PressureZoneHUDController : MonoBehaviour
     void RegisterSliderCallBacks(VisualElement slider)
     {
         slider.RegisterCallback<ChangeEvent<float>>(SliderValueChanged);
+        slider.RegisterCallback<GeometryChangedEvent>(SliderInitialPositioning);
 
 
     }
 
-    private void SliderValueChanged(ChangeEvent<float> evt)
+    private void SliderInitialPositioning(GeometryChangedEvent evt)
     {
         VisualElement currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
         VisualElement currentNewDragger = currentSliderBar.Query(name: "NewDragger");
 
+        Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
         Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
-        currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position);
+
+        currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
+    }
+
+    private void SliderValueChanged(ChangeEvent<float> evt)
+    {
+
+        VisualElement currentSliderBar = (VisualElement)evt.target;
+        VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
+        VisualElement currentNewDragger = currentSliderBar.Query(name: "NewDragger");
+
+        Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
+        Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
+
+        currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
 
 
     }
