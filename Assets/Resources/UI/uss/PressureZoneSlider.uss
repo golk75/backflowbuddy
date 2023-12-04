@@ -3,27 +3,24 @@
 }
 
 #PressureZoneSlider #unity-drag-container {
-    flex-grow: 0;
-    flex-direction: column;
-    height: 100%;
+    overflow: hidden;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #PressureZoneSlider #unity-tracker {
+    width: 10px;
+    height: 100%;
+    align-self: center;
+    left: auto;
     background-color: rgb(255, 255, 255);
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    width: 10px;
-    left: 0;
-    height: auto;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-left: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -31,18 +28,31 @@
 }
 
 #PressureZoneSlider #unity-dragger {
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    background-color: rgb(70, 71, 81);
-    align-items: auto;
-    justify-content: flex-end;
+    width: 66%;
+    height: 10px;
+    flex-direction: row-reverse;
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: none;
+    max-height: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.fill-bar {
+    background-color: rgb(212, 0, 0);
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 1000px;
     align-self: flex-start;
-    flex-direction: column;
-    flex-grow: 1;
 }

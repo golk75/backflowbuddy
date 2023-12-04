@@ -77,6 +77,9 @@ public class PressureZoneHUDController : MonoBehaviour
         sliderHandle.Add(m_SliderFillBar);
         m_SliderFillBar.name = "SliderFillBar";
         m_SliderFillBar.AddToClassList("fill-bar");
+
+
+
     }
 
 
