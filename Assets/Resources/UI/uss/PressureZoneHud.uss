@@ -1,17 +1,92 @@
 #PressureZoneContainer {
     position: relative;
     align-self: auto;
-    align-items: auto;
+    align-items: center;
     flex-direction: row;
-    flex-grow: 0;
+    flex-grow: 1;
     justify-content: space-around;
     width: 100%;
     cursor: initial;
-    height: auto;
+    height: 100%;
     left: auto;
     top: auto;
-    right: auto;
-    bottom: 50%;
+    right: 2%;
+    bottom: auto;
+    max-width: none;
+    max-height: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 10%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#PressureZoneContainer #unity-text-input {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 16px;
+    -unity-text-align: middle-center;
+}
+
+#SupplyPressure__value {
+    width: 25%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    align-self: center;
+}
+
+#SupplyPressure_input_panel {
+    flex-direction: row;
+}
+
+#SupplyPressure_value_container {
+    width: 100%;
+    height: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+}
+
+#CheckSpring_value_container {
 }
 
 .pressure-zone-overlay {
@@ -28,7 +103,7 @@
     justify-content: flex-start;
     flex-direction: row;
     color: rgb(255, 255, 255);
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .pressure-zone-panel {
@@ -57,24 +132,66 @@
     flex-direction: row;
 }
 
-#PressureZoneContainer #unity-text-input {
+.pressure-zone-value-label {
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+    width: 75%;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
-    margin-bottom: 10px;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    width: 50px;
-    height: 50px;
+    margin-bottom: 0;
     font-size: 16px;
+    align-self: center;
+}
+
+.pressure-zone-value-container {
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
     -unity-text-align: middle-center;
 }
 
-#PressureZone_input_panel {
+.check-spring-value-container {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+#CheckSpring1_value_header {
+}
+
+#CheckSpring2_value_header {
+}
+
+.check-spring-value-label {
+    background-color: rgb(255, 255, 255);
+}
+
+.value_container {
+    width: 100%;
+    height: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
 }

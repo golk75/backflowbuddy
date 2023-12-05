@@ -27,8 +27,8 @@ public class PressureZoneHUDController : MonoBehaviour
 
     //visual elements
     TextField m_SupplyPressureTextField;
-    TextField m_PressureZone2TextField;
-    TextField m_PressureZone3TextField;
+    Label m_PressureZone2TextField;
+    Label m_PressureZone3TextField;
     //slider elementså
     VisualElement m_PressureZoneSliderBar;
     VisualElement m_PressureZoneSliderTracker;
@@ -56,6 +56,8 @@ public class PressureZoneHUDController : MonoBehaviour
     float supplySliderInput = 0;
     float supplyTextInput = 0;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,19 +65,17 @@ public class PressureZoneHUDController : MonoBehaviour
         RegisterTextFieldCallBacks();
 
         m_SupplyPressureTextField.isDelayed = false;
-        m_PressureZone2TextField.isDelayed = false;
-        m_PressureZone3TextField.isDelayed = false;
+        // m_PressureZone2TextField.isDelayed = false;
+        // m_PressureZone3TextField.isDelayed = false;
     }
-
-
 
 
     void SetVisualElements()
     {
         root = GetComponent<UIDocument>();
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
-        m_PressureZone2TextField = root.rootVisualElement.Q<TextField>(PressureZone2TextString);
-        m_PressureZone3TextField = root.rootVisualElement.Q<TextField>(PressureZone3TextString);
+        m_PressureZone2TextField = root.rootVisualElement.Q<Label>(PressureZone2TextString);
+        m_PressureZone3TextField = root.rootVisualElement.Q<Label>(PressureZone3TextString);
         m_PressureZoneSliderBar = root.rootVisualElement.Query(name: PressureZoneSliderBarString);
         m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
         SliderHandleList = root.rootVisualElement.Query(name: "unity-dragger").ToList();
@@ -119,11 +119,7 @@ public class PressureZoneHUDController : MonoBehaviour
         m_NewDragger.AddToClassList("new-dragger");
         m_NewDragger.pickingMode = PickingMode.Ignore;
 
-
-
     }
-
-
 
 
     void RegisterTextFieldCallBacks()
@@ -131,13 +127,15 @@ public class PressureZoneHUDController : MonoBehaviour
         m_SupplyPressureTextField.RegisterCallback<ChangeEvent<string>>(InputValueChanged);
 
     }
+
+
     void RegisterSliderCallBacks(VisualElement slider)
     {
         slider.RegisterCallback<ChangeEvent<float>>(SliderValueChanged);
         slider.RegisterCallback<GeometryChangedEvent>(SliderInitialPositioning);
 
-
     }
+
 
     private void SliderInitialPositioning(GeometryChangedEvent evt)
     {
@@ -150,6 +148,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
         currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
     }
+
 
     private void SliderValueChanged(ChangeEvent<float> evt)
     {
@@ -166,6 +165,7 @@ public class PressureZoneHUDController : MonoBehaviour
         ZonePressureOperations(evt.newValue, currentSliderBar.parent.parent);
 
     }
+
 
     private void InputValueChanged(ChangeEvent<string> evt)
     {
@@ -190,7 +190,7 @@ public class PressureZoneHUDController : MonoBehaviour
                 // Debug.Log($"Zone2 slider operated");
                 break;
             case PressureZone3Panel:
-
+                waterController.zone3PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone3 slider operated");
                 break;
             default:
@@ -199,12 +199,14 @@ public class PressureZoneHUDController : MonoBehaviour
         }
         // Debug.Log($"zonePressureValue: {zonePressureValue} ; zonePressureSlider: {zonePressureSlider.name}");
     }
+
+
     // Update is called once per frame
     void Update()
     {
 
-        m_PressureZone2TextField.value = waterController.zone2Pressure.ToString();
-        m_PressureZone3TextField.value = waterController.zone3Pressure.ToString();
+        m_PressureZone2TextField.text = waterController.zone2Pressure.ToString();
+        m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
 
     }
 }

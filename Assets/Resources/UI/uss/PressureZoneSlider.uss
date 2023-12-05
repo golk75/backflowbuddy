@@ -10,7 +10,7 @@
     bottom: 0;
     align-items: center;
     margin-bottom: 5px;
-    margin-top: 4px;
+    margin-top: 5px;
     overflow: hidden;
     margin-right: 5px;
     margin-left: 5px;
@@ -92,14 +92,7 @@
     width: 20px;
     min-width: auto;
     overflow: hidden;
-    margin-left: 4px;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
     max-width: none;
     max-height: none;
+    margin-right: 0;
 }
