@@ -3,7 +3,6 @@
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
     <ui:VisualElement name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container">
         <ui:VisualElement name="SupplyPressure__panel" class="pressure-zone-panel">
-            <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
             <ui:VisualElement name="PressureZone_input_panel" style="flex-grow: 1;">
                 <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__label" class="pressure-zone-header" />
                 <ui:TextField name="SupplyPressure__value" max-length="2" />

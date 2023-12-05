@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -50,6 +51,11 @@ public class PressureZoneHUDController : MonoBehaviour
     List<VisualElement> SliderBarList;
     List<VisualElement> SliderTrackerList;
 
+
+    //floats
+    float supplySliderInput = 0;
+    float supplyTextInput = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,15 +68,6 @@ public class PressureZoneHUDController : MonoBehaviour
     }
 
 
-    void OnEnable()
-    {
-        Actions.onSupplyPressureInputChange += SupplyInputChange;
-    }
-
-    void OnDisable()
-    {
-        Actions.onSupplyPressureInputChange -= SupplyInputChange;
-    }
 
 
     void SetVisualElements()
@@ -89,7 +86,7 @@ public class PressureZoneHUDController : MonoBehaviour
         {
             AddFillBarElements(dragger);
         }
-
+        //
 
         foreach (var sliderBar in SliderBarList)
         {
@@ -127,13 +124,6 @@ public class PressureZoneHUDController : MonoBehaviour
     }
 
 
-    private void SupplyInputChange(float value)
-    {
-
-        // m_SupplyPressureTextField.value = value.ToString();
-        float currentPsi = waterController.supplyPsi;
-        waterController.supplyPsi = value;
-    }
 
 
     void RegisterTextFieldCallBacks()
@@ -179,12 +169,13 @@ public class PressureZoneHUDController : MonoBehaviour
 
     private void InputValueChanged(ChangeEvent<string> evt)
     {
+        supplyTextInput = waterController.supplyPsi;
+        bool isInt = Int32.TryParse(evt.newValue, out int result);
 
-        int result;
-        bool isInt = Int32.TryParse(evt.newValue, out result);
-        Actions.onSupplyPressureInputChange?.Invoke(result);
-        // waterController.supplyPsi = result;
+
+        waterController.supplyPsi = result;
     }
+
 
     void ZonePressureOperations(float zonePressureSliderValue, VisualElement zonePressureSlider)
     {
@@ -192,8 +183,6 @@ public class PressureZoneHUDController : MonoBehaviour
         switch (zonePressureSlider.name)
         {
             case SupplyPressurePanel:
-                // Debug.Log($"Supply slider operated");
-                Actions.onSupplyPressureInputChange?.Invoke(waterController.supplyPsi + zonePressureSliderValue);
 
                 break;
             case PressureZone2Panel:
