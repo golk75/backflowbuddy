@@ -13,6 +13,7 @@ public class FillButton : MonoBehaviour
     public GameObject Check1;
     public GameObject Check2;
     public GameObject ShutOff1;
+    public WaterController waterController;
     public TestCockController testCockController;
     OperableComponentDescription ShutOff1OperableDescription;
     public PlayerController playerController;
@@ -53,32 +54,35 @@ public class FillButton : MonoBehaviour
 
     public void FillDevice()
     {
-        liquid.ReleaseSimulation();
-        liquid.InitialState = ZibraLiquid.InitialStateType.BakedLiquidState;
-        liquid.enabled = false;
-        liquid.enabled = true;
-        liquid.InitializeSimulation();
-
-        Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
-        Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
-
-        //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 180, 360);
-        playerController.operableObject = ShutOff1;
-        playerController.operableComponentDescription = ShutOff1OperableDescription;
-
-
-
-        playerController._operableObjectRotation.z = 0;
-        playerController._operableObjectRotation.y = 180;
-        // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
-
-        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+        if (waterController.supplyPsi > 0)
         {
-            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+            liquid.ReleaseSimulation();
+            liquid.InitialState = ZibraLiquid.InitialStateType.BakedLiquidState;
+            liquid.enabled = false;
+            liquid.enabled = true;
+            liquid.InitializeSimulation();
+
+            Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
+            Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
+
+            //shutOffValveController.ShutOffValve1.transform.eulerAngles = new Vector3(0, 180, 360);
+            playerController.operableObject = ShutOff1;
+            playerController.operableComponentDescription = ShutOff1OperableDescription;
+
+
+
+            playerController._operableObjectRotation.z = 0;
+            playerController._operableObjectRotation.y = 180;
+            // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
+
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+            {
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+            }
+            // hoseController.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
+            // doubleCheckTestKitController.DetachHoseBib();
         }
-        // hoseController.DropHoseBib(GameObject gameObject, OperableComponentDescription description)
-        // doubleCheckTestKitController.DetachHoseBib();
     }
 
     // Update is called once per frame

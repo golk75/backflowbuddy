@@ -9114,6 +9114,11 @@ PrefabInstance:
       objectReference: {fileID: 4250161185260362811}
     - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
+      propertyPath: waterController
+      value: 
+      objectReference: {fileID: 4261158086632363316}
+    - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1446278365}
