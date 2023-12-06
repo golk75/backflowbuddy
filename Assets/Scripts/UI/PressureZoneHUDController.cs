@@ -12,23 +12,37 @@ public class PressureZoneHUDController : MonoBehaviour
 {
     //game objects
     public WaterController waterController;
+    public PlayerController playerController;
 
     //string ids
     const string SupplyPressureTextString = "SupplyPressure__value";
-    const string PressureZone2TextString = "PressureZone2__value";
-    const string PressureZone3TextString = "PressureZone3__value";
+    const string PressureZone2LabelString = "PressureZone2_value_label";
+    const string PressureZone3LabelString = "PressureZone3_value_label";
     const string PressureZoneSliderBarString = "PressureZoneSlider";
     const string PressureZoneSliderTrackerString = "unity-tracker";
     const string PressureZoneSliderHandleString = "unity-dragger";
     const string PressureZone2Panel = "PressureZone2__panel";
     const string PressureZone3Panel = "PressureZone3__panel";
     const string SupplyPressurePanel = "SupplyPressure__panel";
-
+    const string CheckSpring1ValueLabelString = "CheckSpring1_value_label";
+    const string CheckSpring2ValueLabelString = "CheckSpring2_value_label";
+    const string CheckSpring1AddButtonString = "CheckSpring1_add_button";
+    const string CheckSpring2AddButtonString = "CheckSpring2_add_button";
+    const string CheckSpring1SubtractButtonString = "CheckSpring1_subtract_button";
+    const string CheckSpring2SubtractButtonString = "CheckSpring2_subtract_button";
 
     //visual elements
     TextField m_SupplyPressureTextField;
-    Label m_PressureZone2TextField;
+    Label m_PressureZone2TextLabel;
     Label m_PressureZone3TextField;
+    Label m_CheckSpring1Value;
+    Label m_CheckSpring2Value;
+    Button m_CheckSpring1AddButton;
+    Button m_CheckSpring1SubtractButton;
+    Button m_CheckSpring2AddButton;
+    Button m_CheckSpring2SubtractButton;
+
+
     //slider elementså
     VisualElement m_PressureZoneSliderBar;
     VisualElement m_PressureZoneSliderTracker;
@@ -39,7 +53,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //booleans
-    bool alteringZonePressure;
+
 
     //root
     UIDocument root;
@@ -53,8 +67,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //floats
-    float supplySliderInput = 0;
-    float supplyTextInput = 0;
+
 
 
 
@@ -63,9 +76,9 @@ public class PressureZoneHUDController : MonoBehaviour
     {
         SetVisualElements();
         RegisterTextFieldCallBacks();
-
+        RegisterButtonCallBacks();
         m_SupplyPressureTextField.isDelayed = false;
-        // m_PressureZone2TextField.isDelayed = false;
+        // m_PressureZone2TextLabel.isDelayed = false;
         // m_PressureZone3TextField.isDelayed = false;
     }
 
@@ -74,13 +87,22 @@ public class PressureZoneHUDController : MonoBehaviour
     {
         root = GetComponent<UIDocument>();
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
-        m_PressureZone2TextField = root.rootVisualElement.Q<Label>(PressureZone2TextString);
-        m_PressureZone3TextField = root.rootVisualElement.Q<Label>(PressureZone3TextString);
+        m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
+        m_PressureZone3TextField = root.rootVisualElement.Q<Label>(PressureZone3LabelString);
         m_PressureZoneSliderBar = root.rootVisualElement.Query(name: PressureZoneSliderBarString);
         m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
         SliderHandleList = root.rootVisualElement.Query(name: "unity-dragger").ToList();
         SliderBarList = root.rootVisualElement.Query(className: "pressure-zone-slider").ToList();
         SliderTrackerList = root.rootVisualElement.Query(name: "unity-tracker").ToList();
+        m_CheckSpring1Value = root.rootVisualElement.Q<Label>(CheckSpring1ValueLabelString);
+        m_CheckSpring2Value = root.rootVisualElement.Q<Label>(CheckSpring2ValueLabelString);
+        m_CheckSpring1AddButton = root.rootVisualElement.Q<Button>(CheckSpring1AddButtonString);
+        m_CheckSpring1SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring1SubtractButtonString);
+        m_CheckSpring2AddButton = root.rootVisualElement.Q<Button>(CheckSpring2AddButtonString);
+        m_CheckSpring2SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring2SubtractButtonString);
+
+
+
 
         foreach (var dragger in SliderHandleList)
         {
@@ -128,6 +150,54 @@ public class PressureZoneHUDController : MonoBehaviour
 
     }
 
+    void RegisterButtonCallBacks()
+    {
+        m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure);
+        m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
+        m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
+        m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
+
+
+        m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure);
+        m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
+        m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
+        m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
+    }
+
+
+    //increase individual spring pressures
+    private void IncreaseSpring1Pressure(ClickEvent evt)
+    {
+        // Debug.Log($"evt: {evt.target}");
+        if (playerController.primaryClickStarted > 0)
+        {
+            waterController.check1SpringForce += 1;
+        }
+        // waterController.check1SpringForce += 1;
+    }
+
+    private void DecreaseSpring1Pressure(ClickEvent evt)
+    {
+        // Debug.Log($"evt: {evt.target}");
+        waterController.check1SpringForce -= 1;
+    }
+
+
+
+    private void IncreaseSpring2Pressure(ClickEvent evt)
+    {
+        // Debug.Log($"evt: {evt.target}");
+        waterController.check2SpringForce += 1;
+    }
+
+    private void DecreaseSpring2Pressure(ClickEvent evt)
+    {
+        // Debug.Log($"evt: {evt.target}");
+        waterController.check2SpringForce -= 1;
+    }
+
+
+
 
     void RegisterSliderCallBacks(VisualElement slider)
     {
@@ -169,7 +239,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
     private void InputValueChanged(ChangeEvent<string> evt)
     {
-        supplyTextInput = waterController.supplyPsi;
+
         bool isInt = Int32.TryParse(evt.newValue, out int result);
 
 
@@ -205,8 +275,10 @@ public class PressureZoneHUDController : MonoBehaviour
     void Update()
     {
 
-        m_PressureZone2TextField.text = waterController.zone2Pressure.ToString();
+        m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
         m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
+        m_CheckSpring1Value.text = waterController.check1SpringForce.ToString();
+        m_CheckSpring2Value.text = waterController.check2SpringForce.ToString();
 
     }
 }

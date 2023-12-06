@@ -89,6 +89,12 @@
 #CheckSpring_value_container {
 }
 
+#CheckSpring2_value_header {
+}
+
+#CheckSpring1_value_header {
+}
+
 .pressure-zone-overlay {
     position: relative;
     align-self: auto;
@@ -104,6 +110,14 @@
     flex-direction: row;
     color: rgb(255, 255, 255);
     font-size: 14px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 1px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .pressure-zone-panel {
@@ -128,8 +142,11 @@
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
-    align-items: center;
     flex-direction: row;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .pressure-zone-value-label {
@@ -146,13 +163,21 @@
     margin-bottom: 0;
     font-size: 16px;
     align-self: center;
+    -unity-text-align: middle-center;
 }
 
 .pressure-zone-value-container {
-    height: 100%;
-    margin-right: 0;
-    margin-left: 0;
     -unity-text-align: middle-center;
+    align-items: auto;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .check-spring-value-container {
@@ -161,17 +186,27 @@
     justify-content: center;
 }
 
-#CheckSpring1_value_header {
-}
-
-#CheckSpring2_value_header {
-}
-
 .check-spring-value-label {
     background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    top: auto;
+    bottom: auto;
+    left: 16px;
+    -unity-text-align: middle-center;
+    right: auto;
+    width: 35%;
+    height: 32px;
+    align-self: flex-end;
 }
 
-.value_container {
+.sub-container {
     width: 100%;
     height: auto;
     left: 0;
@@ -191,7 +226,68 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: 4px;
-    margin-right: 4px;
+    margin-right: 5px;
     margin-bottom: 4px;
+    margin-left: 2px;
+    align-items: center;
+    justify-content: center;
+    align-self: auto;
+}
+
+.checkspringx-container {
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    margin-right: 4px;
     margin-left: 4px;
+    align-self: center;
+    flex-grow: 0;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.check-spring-value-button-container {
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 4px;
+}
+
+.checkspring-button-sub-container {
+    flex-direction: row;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    justify-content: center;
+    align-self: center;
+    left: 11px;
+}
+
+.check-spring-value-button {
+    margin-left: 0;
+    margin-right: 4px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 17px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 17px;
 }
