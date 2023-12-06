@@ -1,15 +1,14 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
-
-using System.Runtime.Serialization;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 using UnityEngine.UIElements;
 
 public class PressureZoneHUDController : MonoBehaviour
 {
+
     //game objects
     public WaterController waterController;
     public PlayerController playerController;
@@ -53,7 +52,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //booleans
-
+    public bool isPointerDown = false;
 
     //root
     UIDocument root;
@@ -70,6 +69,18 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
 
+    //coroutines
+    Coroutine OnIncreaseValue;
+    Coroutine OnDecreaseValue;
+
+    void OnEnable()
+    {
+
+    }
+    void OnDisable()
+    {
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -152,28 +163,50 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void RegisterButtonCallBacks()
     {
-        m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure);
+
+        m_CheckSpring1AddButton.RegisterCallback<PointerDownEvent>(SpringButtonAddition_down, TrickleDown.TrickleDown);
+        m_CheckSpring1AddButton.RegisterCallback<PointerUpEvent>(SpringButtonAddition_up);
+
+        m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure, TrickleDown.TrickleDown);
         m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
         m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
         m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
 
 
-        m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure);
-        m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
-        m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
-        m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
+
+
     }
+
+    private void SpringButtonAddition_up(PointerUpEvent evt)
+    {
+        isPointerDown = false;
+
+    }
+
+    private void SpringButtonAddition_down(PointerDownEvent evt)
+    {
+        isPointerDown = true;
+        OnIncreaseValue = StartCoroutine(IncreaseValue());
+        // waterController.check1SpringForce += 1;
+    }
+
+    IEnumerator IncreaseValue()
+    {
+        while (isPointerDown == true)
+        {
+            waterController.check1SpringForce += 1;
+        }
+        yield return null;
+
+    }
+
 
 
     //increase individual spring pressures
     private void IncreaseSpring1Pressure(ClickEvent evt)
     {
-        // Debug.Log($"evt: {evt.target}");
-        if (playerController.primaryClickStarted > 0)
-        {
-            waterController.check1SpringForce += 1;
-        }
-        // waterController.check1SpringForce += 1;
+
+
     }
 
     private void DecreaseSpring1Pressure(ClickEvent evt)
@@ -281,4 +314,6 @@ public class PressureZoneHUDController : MonoBehaviour
         m_CheckSpring2Value.text = waterController.check2SpringForce.ToString();
 
     }
+
+
 }

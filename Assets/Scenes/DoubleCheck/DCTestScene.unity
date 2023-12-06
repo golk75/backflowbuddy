@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
+  playerController: {fileID: 1446278365}
 --- !u!114 &354497751
 MonoBehaviour:
   m_ObjectHideFlags: 0
