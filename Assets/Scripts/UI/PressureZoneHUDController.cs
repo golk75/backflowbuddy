@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using UnityEngine.UIElements;
@@ -12,6 +13,7 @@ public class PressureZoneHUDController : MonoBehaviour
     //game objects
     public WaterController waterController;
     public PlayerController playerController;
+
 
     //string ids
     const string SupplyPressureTextString = "SupplyPressure__value";
@@ -59,13 +61,16 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //lists
-
     List<VisualElement> SliderHandleList;
     List<VisualElement> SliderBarList;
     List<VisualElement> SliderTrackerList;
 
 
     //floats
+    float maxSpringPressure = 20f;
+    float check1SpringPressure;
+    float check2SpringPressure;
+
 
 
 
@@ -164,70 +169,198 @@ public class PressureZoneHUDController : MonoBehaviour
     void RegisterButtonCallBacks()
     {
 
-        m_CheckSpring1AddButton.RegisterCallback<PointerDownEvent>(SpringButtonAddition_down, TrickleDown.TrickleDown);
-        m_CheckSpring1AddButton.RegisterCallback<PointerUpEvent>(SpringButtonAddition_up);
+        //addition down and up
+        m_CheckSpring1AddButton.RegisterCallback<PointerDownEvent>(SpringCheck1AdditionButton_down, TrickleDown.TrickleDown);
+        m_CheckSpring1AddButton.RegisterCallback<PointerUpEvent>(SpringCheck1Addition_up);
+        m_CheckSpring2AddButton.RegisterCallback<PointerDownEvent>(SpringCheck2AdditionButton_down, TrickleDown.TrickleDown);
+        m_CheckSpring2AddButton.RegisterCallback<PointerUpEvent>(SpringCheck2AdditionButton_up);
 
-        m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure, TrickleDown.TrickleDown);
-        m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
-        m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
-        m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
+        //subtract down and up
+        m_CheckSpring1SubtractButton.RegisterCallback<PointerDownEvent>(SpringCheck1SubtractButton_down, TrickleDown.TrickleDown);
+        m_CheckSpring1SubtractButton.RegisterCallback<PointerUpEvent>(SpringCheck1SubtractButton_up);
+        m_CheckSpring2SubtractButton.RegisterCallback<PointerDownEvent>(SpringCheck2SubtractButton_down, TrickleDown.TrickleDown);
+        m_CheckSpring2SubtractButton.RegisterCallback<PointerUpEvent>(SpringCheck2SubtractButton_up);
+
+
+
+
+
+
+        // m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure, TrickleDown.TrickleDown);
+        // m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
+        // m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
+        // m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
 
 
 
 
     }
 
-    private void SpringButtonAddition_up(PointerUpEvent evt)
+
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// Check Spring #2 button events
+    /// </summary>
+    /// <param name="evt"></param>
+
+    //add
+    private void SpringCheck2AdditionButton_down(PointerDownEvent evt)
+    {
+        isPointerDown = true;
+
+        OnIncreaseValue = StartCoroutine(IncreaseCheckSpring2Value());
+    }
+
+    private void SpringCheck2AdditionButton_up(PointerUpEvent evt)
     {
         isPointerDown = false;
 
     }
 
-    private void SpringButtonAddition_down(PointerDownEvent evt)
+    //subtract
+    private void SpringCheck2SubtractButton_down(PointerDownEvent evt)
     {
         isPointerDown = true;
-        OnIncreaseValue = StartCoroutine(IncreaseValue());
+
+        OnDecreaseValue = StartCoroutine(DecreaseCheckSpring2Value());
+    }
+
+    private void SpringCheck2SubtractButton_up(PointerUpEvent evt)
+    {
+        isPointerDown = false;
+    }
+
+
+
+
+    /// <summary>
+    /// Check Spring #1 button events
+    /// </summary>
+    /// <param name="evt"></param>
+
+
+    //add
+    private void SpringCheck1AdditionButton_down(PointerDownEvent evt)
+    {
+        isPointerDown = true;
+
+        OnIncreaseValue = StartCoroutine(IncreaseCheckSpring1Value());
+
+    }
+
+    private void SpringCheck1Addition_up(PointerUpEvent evt)
+    {
+        isPointerDown = false;
+    }
+
+    //subtract
+    private void SpringCheck1SubtractButton_down(PointerDownEvent evt)
+    {
+        isPointerDown = true;
+
+        OnDecreaseValue = StartCoroutine(DecreaseCheckSpring1Value());
         // waterController.check1SpringForce += 1;
     }
 
-    IEnumerator IncreaseValue()
+    private void SpringCheck1SubtractButton_up(PointerUpEvent evt)
     {
+        isPointerDown = false;
+
+    }
+
+
+
+
+    //increase spring 1 pressure on "add" button click and/or hold
+    IEnumerator IncreaseCheckSpring1Value()
+    {
+        check1SpringPressure += 1;
+        yield return new WaitForSeconds(1);
+
         while (isPointerDown == true)
         {
-            waterController.check1SpringForce += 1;
+            check1SpringPressure += 0.1f;
+
+            yield return null;
         }
-        yield return null;
+
 
     }
-
-
-
-    //increase individual spring pressures
-    private void IncreaseSpring1Pressure(ClickEvent evt)
+    IEnumerator DecreaseCheckSpring1Value()
     {
+        check1SpringPressure -= 1;
+        yield return new WaitForSeconds(1);
+
+        while (isPointerDown == true && check1SpringPressure > 0)
+        {
+            check1SpringPressure -= 0.1f;
+            yield return null;
+        }
 
 
     }
-
-    private void DecreaseSpring1Pressure(ClickEvent evt)
+    IEnumerator IncreaseCheckSpring2Value()
     {
-        // Debug.Log($"evt: {evt.target}");
-        waterController.check1SpringForce -= 1;
+        check2SpringPressure += 1;
+        yield return new WaitForSeconds(1);
+
+        while (isPointerDown == true)
+        {
+            check2SpringPressure += 0.1f;
+            yield return null;
+        }
+
+
     }
-
-
-
-    private void IncreaseSpring2Pressure(ClickEvent evt)
+    IEnumerator DecreaseCheckSpring2Value()
     {
-        // Debug.Log($"evt: {evt.target}");
-        waterController.check2SpringForce += 1;
+        check2SpringPressure -= 1;
+        yield return new WaitForSeconds(1);
+
+        while (isPointerDown == true && check2SpringPressure > 0)
+        {
+            check2SpringPressure -= 0.1f;
+            yield return null;
+        }
+
+
     }
 
-    private void DecreaseSpring2Pressure(ClickEvent evt)
-    {
-        // Debug.Log($"evt: {evt.target}");
-        waterController.check2SpringForce -= 1;
-    }
+
+    // //increase individual spring pressures
+    // private void IncreaseSpring1Pressure(ClickEvent evt)
+    // {
+
+
+    // }
+
+    // private void DecreaseSpring1Pressure(ClickEvent evt)
+    // {
+    //     // Debug.Log($"evt: {evt.target}");
+    //     waterController.check1SpringForce -= 1;
+    // }
+
+
+
+    // private void IncreaseSpring2Pressure(ClickEvent evt)
+    // {
+    //     // Debug.Log($"evt: {evt.target}");
+    //     waterController.check2SpringForce += 1;
+    // }
+
+    // private void DecreaseSpring2Pressure(ClickEvent evt)
+    // {
+    //     // Debug.Log($"evt: {evt.target}");
+    //     waterController.check2SpringForce -= 1;
+    // }
 
 
 
@@ -304,14 +437,63 @@ public class PressureZoneHUDController : MonoBehaviour
     }
 
 
+
+    //regulate min-max values as well as setting text in ui label
+    void CheckSpring1Regulate()
+    {
+        waterController.check1SpringForce = check1SpringPressure;
+        if (check1SpringPressure >= maxSpringPressure)
+        {
+
+
+            check1SpringPressure = maxSpringPressure;
+            m_CheckSpring1Value.text = maxSpringPressure.ToString();
+        }
+        else if (check1SpringPressure > 0 && check1SpringPressure < maxSpringPressure)
+        {
+            m_CheckSpring1Value.text = ((short)check1SpringPressure).ToString();
+        }
+        else
+        {
+            check1SpringPressure = 0;
+            m_CheckSpring1Value.text = check1SpringPressure.ToString();
+        }
+    }
+
+
+    void CheckSpring2Regulate()
+    {
+        waterController.check2SpringForce = check2SpringPressure;
+        if (check2SpringPressure >= maxSpringPressure)
+        {
+
+
+            check2SpringPressure = maxSpringPressure;
+            m_CheckSpring2Value.text = maxSpringPressure.ToString();
+        }
+        else if (check2SpringPressure > 0 && check2SpringPressure < maxSpringPressure)
+        {
+            m_CheckSpring2Value.text = ((short)check2SpringPressure).ToString();
+        }
+        else
+        {
+            check2SpringPressure = 0;
+            m_CheckSpring2Value.text = check2SpringPressure.ToString();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        CheckSpring1Regulate();
+        CheckSpring2Regulate();
+
 
         m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
         m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
-        m_CheckSpring1Value.text = waterController.check1SpringForce.ToString();
-        m_CheckSpring2Value.text = waterController.check2SpringForce.ToString();
+
+
+
 
     }
 
