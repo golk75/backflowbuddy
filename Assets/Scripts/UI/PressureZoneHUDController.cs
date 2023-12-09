@@ -67,9 +67,9 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //floats
-    float maxSpringPressure = 20f;
-    float check1SpringPressure;
-    float check2SpringPressure;
+    public float maxSpringPressure = 20f;
+    public float check1SpringPressure = 10;
+    public float check2SpringPressure = 5;
 
 
 

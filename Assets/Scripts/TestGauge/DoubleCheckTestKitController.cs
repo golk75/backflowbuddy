@@ -26,6 +26,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public GameObject lowBleed;
     public GameObject lowControl;
     public GameObject bypassControl;
+    public PressureZoneHUDController pressureZoneHUDController;
 
     public GameObject needle;
     public GameObject digitalKitNeedle;
@@ -88,8 +89,10 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
     // private const float MinNeedle_rotation = 55;
     // private const float MaxNeedle_rotation = -55;
-    private const float MinNeedle_rotation = 61;
-    private const float MaxNeedle_rotation = -58;
+    public float MinNeedle_rotation = 61;
+    public float MaxNeedle_rotation = -61;
+    public float hosePressure;
+    public float maxPSID;
     private const float MinKnob_rotation = 0;
 
     //limit knobs to 4 complete rotations (x1 rotation = 360;)->
@@ -102,7 +105,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
     [SerializeField]
     private float currentPSID;
-    private float maxPSID;
+
     private float minPSID;
     float closingPoint = 0;
     public bool isOperableObject;
@@ -116,7 +119,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public bool isTestCock2Open;
     public bool isTestCock3Open;
     public bool isTestCock4Open;
-    public float hosePressure;
+
     public float highHosePressure;
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
@@ -206,7 +209,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
         currentPSID = 0;
         minPSID = 0;
-        maxPSID = 58;
+        maxPSID = 20;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
@@ -264,11 +267,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private float GetPsidDigitalNeedle()
     {
         float PsiDiff = MinFillPos - MaxFillPos;
-        float percentChange = hosePressure;
+
         float normalizedPsid = hosePressure / maxPSID;
 
         return MinFillPos - normalizedPsid * PsiDiff;
-        // Debug.Log($"hosePressure = {hosePressure}|| progressBar = {_gaugeProgressBar.style.width} || MinFillPos - percentChange = {MinFillPos - percentChange}");
+
 
     }
 
@@ -455,11 +458,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
             {
 
                 //supply is open and test cock is open
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    Zone1Detector.ParticlesInside,
-                    needleSpeedDamp
-                );
+                // hosePressure = Mathf.SmoothStep(
+                //     hosePressure,
+                //     Zone2Detector.ParticlesInside,
+                //     needleSpeedDamp
+                // );
                 // Debug.Log($"test cock #1 is connected & open");
             }
 
@@ -472,11 +475,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
 
                 //supply is open and test cock is open
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    Zone2Detector.ParticlesInside,
-                    needleSpeedDamp
-                );
+                // hosePressure = Mathf.SmoothStep(
+                //     hosePressure,
+                //     Zone2Detector.ParticlesInside,
+                //     needleSpeedDamp
+                // );
                 // Debug.Log($"supply is open and test cock 3 is connected & open");
             }
             else if (
@@ -486,11 +489,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
             )
             {
                 //supply is open and test cock is open
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    Zone3Detector.ParticlesInside,
-                    needleSpeedDamp
-                );
+                // hosePressure = Mathf.SmoothStep(
+                //     hosePressure,
+                //     Zone3Detector.ParticlesInside,
+                //     needleSpeedDamp
+                // );
                 // Debug.Log($"supply is open and test cock 4 is connected & open");
             }
             //END CHECKING IS TC IS HOOKED UP TO MOVE GAUGE WHILE DEVICE IS OPEN
@@ -509,11 +512,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
             // && !isTestCock3Open
             )
             {
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    TestCock2Detector.ParticlesInside,
-                    0.015f
-                );
+                // hosePressure = Mathf.SmoothStep(
+                //     hosePressure,
+                //     TestCock2Detector.ParticlesInside,
+                //     0.015f
+                // );
                 // Debug.Log(
                 //     $"supply is open & test cock #2 is connected & open & test cock #3 is closed"
                 // );
@@ -565,11 +568,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
             // && !isTestCock4Open
             )
             {
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    TestCock2Detector.ParticlesInside,
-                    0.1f
-                );
+                // hosePressure = Mathf.SmoothStep(
+                //     hosePressure,
+                //     TestCock2Detector.ParticlesInside,
+                //     0.1f
+                // );
 
             }
             else if (
@@ -584,12 +587,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 //Windows----------------
                 if (Application.platform == RuntimePlatform.WindowsPlayer)
                 {
-                    hosePressure -= 0.025f;
+                    // hosePressure -= 0.025f;
                 }
                 //OSX--------------------
                 else
                 {
-                    hosePressure -= 0.4f;
+                    // hosePressure -= 0.4f;
                 }
 
 
@@ -602,7 +605,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 && checkValveStatus.isCheck2Closed == true
             )
             {
-                hosePressure += 0;
+                // hosePressure += 0;
 
             }
             //========================================
@@ -611,7 +614,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         }
         if (isConnectedToAssembly == false)
         {
-            hosePressure -= 5;
+            // hosePressure -= 5;
         }
         if (hosePressure <= minPSID)
         {
@@ -655,7 +658,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         NeedleControl();
         DigitalNeedleControl();
         knobRotation = highBleed.transform.eulerAngles.z;
-
+        Debug.Log($"GetPsidDigitalNeedle(): {GetPsidNeedleRotation()}");
     }
 
 

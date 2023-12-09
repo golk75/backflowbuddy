@@ -459,6 +459,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
   playerController: {fileID: 1446278365}
+  isPointerDown: 0
+  maxSpringPressure: 20
+  check1SpringPressure: 10
+  check2SpringPressure: 5
 --- !u!114 &354497751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2498,12 +2502,12 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: check1SpringForce
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: check2SpringForce
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -3897,6 +3901,7 @@ MonoBehaviour:
   lowBleed: {fileID: 1148582266}
   lowControl: {fileID: 1613671802}
   bypassControl: {fileID: 519896913}
+  pressureZoneHUDController: {fileID: 0}
   needle: {fileID: 1577289242}
   digitalKitNeedle: {fileID: 0}
   currentKnob: {fileID: 0}
@@ -3918,6 +3923,10 @@ MonoBehaviour:
   TestCock4: {fileID: 1128289294}
   connectedTestCock: {fileID: 0}
   TestCock2Detector: {fileID: 8509112450976049417}
+  MinNeedle_rotation: 61
+  MaxNeedle_rotation: -61
+  hosePressure: 0
+  maxPSID: 0
   currentPSID: 0
   isOperableObject: 0
   isConnectedToAssembly: 0
@@ -3928,7 +3937,6 @@ MonoBehaviour:
   isTestCock2Open: 0
   isTestCock3Open: 0
   isTestCock4Open: 0
-  hosePressure: 0
   highHosePressure: 0
   knobRotationFactor: 2
   knobOpened: 0
@@ -9043,6 +9051,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 225
       objectReference: {fileID: 0}
+    - target: {fileID: 1680872827219115542, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 847a63921849f4a6a81511a5cdd24a26, type: 2}
     - target: {fileID: 1852412595173293568, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: m_IsActive
@@ -9306,6 +9319,11 @@ PrefabInstance:
     - target: {fileID: 4641607313565979751, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: m_LayerOverridePriority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654846283602375133, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5223085132162842862, guid: e8e079197ce4f417e91c42a2a0cca0c9,
