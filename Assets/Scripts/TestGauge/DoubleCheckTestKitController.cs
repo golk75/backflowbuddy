@@ -529,8 +529,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 AttachedHoseList.Contains(HighHose)
                 && isTestCock2Open
                 && isTestCock3Open
-                && shutOffValveController.IsSupplyOn == false
-                && checkValveStatus.isCheck1Closed == false
+                && waterController.isDeviceInStaticCondition == true
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
@@ -549,7 +548,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
                 hosePressure = Mathf.SmoothStep(
                   hosePressure,
-                  waterController.zone1to2PsiDiff / 10,
+                  waterController.zone1to2PsiDiff,
                   0.1f
               );
 
