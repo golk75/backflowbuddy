@@ -671,7 +671,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         NeedleControl();
         DigitalNeedleControl();
         knobRotation = highBleed.transform.eulerAngles.z;
-        Debug.Log($"GetPsidDigitalNeedle(): {GetPsidNeedleRotation()}");
+
     }
 
 

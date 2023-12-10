@@ -384,851 +384,530 @@ public class WaterController : MonoBehaviour
         /// <summary>
         ///Non-Testing conditions operation---------------------------------------------------
         /// </summary>
-        if (hoseController.isSightTubeConnected == true)
+        /// 
+        if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
-            //Debug.Log($"Sight tube connected");
-            if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
+
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-                {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
-                        false;
-                }
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
+                    false;
+            }
 
 
-                Void_Check1.transform.localScale = Vector3.zero;
+            Void_Check1.transform.localScale = Vector3.zero;
 
-                Void_Check2.transform.localScale = Vector3.zero;
-
-
-                //sigh tube
+            Void_Check2.transform.localScale = Vector3.zero;
 
 
 
-                //tc2 non-static condition pressure
+            /// <summary>
+            ///Sight tube operation---------------------------------------------------
+            /// </summary>
+
+            //tc2 non-static condition pressure
+            if (sightTubeController.currentTestCockConnection == hoseDetector2)
+            {
                 if (
                         testCockController.isTestCock2Open == true
                         && TestCockHoseDetect2.isConnected == true
                     )
                 {
+
                     if (check1Detector.ParticlesInside > 3000)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
                     }
+
                 }
                 else
                 {
                     sightTubeEmitter.enabled = false;
 
                 }
+            }
+            //tc3 non-static condition pressure
+            else if (sightTubeController.currentTestCockConnection == hoseDetector3)
+            {
 
-
-                //tc3 non-static condition pressure
                 if (
                          testCockController.isTestCock3Open == true
                          && TestCockHoseDetect3.isConnected == true
                      )
                 {
+
+
                     if (check1Detector.ParticlesInside > 3000)
                     {
+
                         TestCockFF3.Strength = 0;
                         sightTubeEmitter.enabled = true;
                     }
+
+                }
+                else
+                {
+
+                    sightTubeEmitter.enabled = false;
+
+                }
+            }
+            //tc4 non-static condition pressure
+            else if (sightTubeController.currentTestCockConnection == hoseDetector4)
+            {
+
+                if (
+                          testCockController.isTestCock4Open == true
+                          && TestCockHoseDetect4.isConnected == true
+                      )
+                {
+
+                    if (check2Detector.ParticlesInside > 3000)
+                    {
+                        TestCockFF4.Strength = 0;
+                        sightTubeEmitter.enabled = true;
+                    }
+
                 }
                 else
                 {
                     sightTubeEmitter.enabled = false;
 
                 }
-
-                //tc4 non-static condition pressure
-                if (
-                        testCockController.isTestCock4Open
-                        && TestCockHoseDetect4.isConnected == false
-                    )
-                {
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                         TestCockFF4.Strength,
-                         Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                         ref testCockFF4Ref.x,
-                         tc4ffScaleUpSpeed
-                     );
-
-                    }
-
-                }
-                else
-                {
-                    TestCockFF4.Strength = 0;
-                }
             }
-            else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
+            //sight tube not connected to anything
+            else
             {
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-                {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
-                        false;
-                }
-                //while shutoff valve is open regulate ff in check housing according to amount of water being supplied supply
-
-
-                // Void_Check1.transform.localScale = Vector3.zero;
-
-                // Void_Check2.transform.localScale = Vector3.zero;
-                if (
-                     testCockController.isTestCock2Open == true
-                     && TestCockHoseDetect2.isConnected == false
-                 )
-                {
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                }
-                else
-                {
-                    TestCockFF2.Strength = 0;
-                }
-
-                //tc3 non-static condition pressure
-                if (
-                        testCockController.isTestCock3Open
-                        && TestCockHoseDetect3.isConnected == false
-                    )
-                {
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
-
-                }
-                else
-                {
-                    TestCockFF3.Strength = 0;
-                }
-
-                //tc4 non-static condition pressure
-                if (
-                        testCockController.isTestCock4Open
-                        && TestCockHoseDetect4.isConnected == false
-                    )
-                {
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                         TestCockFF4.Strength,
-                         Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                         ref testCockFF4Ref.x,
-                         tc4ffScaleUpSpeed
-                     );
-
-                    }
-
-                }
-                else
-                {
-                    TestCockFF4.Strength = 0;
-                }
+                sightTubeEmitter.enabled = false;
             }
-            else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
-            {
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-                {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
-                }
-                if (
-                 testCockController.isTestCock2Open == true
-                 && TestCockHoseDetect2.isConnected == false
-                )
-                {
-                    check1housingForceField.Strength = 0;
-                    check2housingForceField.Strength = 0;
-                    Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check1.transform.localScale,
-                    check1VoidMaxSize * TestCockFF1.Strength,
-                    ref check1VoidRef,
-                    Check1VoidGrowSpeed
-                    );
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                    if (checkValveStatus.isCheck1Closed)
-                    {
-                        TestCockFF2.Strength = 0;
-                    }
-                }
-                else
-                {
-                    TestCockFF2.Strength = 0;
-                }
-
-                //tc3 non-static condition pressure
-                if (
-                        testCockController.isTestCock3Open
-                        && TestCockHoseDetect3.isConnected == false
-                    )
-                {
-                    check1housingForceField.Strength = 0;
-                    check2housingForceField.Strength = 0;
-                    Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check1.transform.localScale,
-                    check1VoidMaxSize * TestCockFF3.Strength,
-                    ref check1VoidRef,
-                    Check1VoidGrowSpeed
-                    );
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
-
-                    if (checkValveStatus.isCheck1Closed)
-                    {
-                        TestCockFF3.Strength = 0;
-                    }
-                }
-                else
-                {
-                    TestCockFF3.Strength = 0;
-                }
-
-                //tc4 non-static condition pressure
-                if (
-                        testCockController.isTestCock4Open
-                        && TestCockHoseDetect4.isConnected == false
-                    )
-                {
-                    check1housingForceField.Strength = 0;
-                    check2housingForceField.Strength = 0;
-                    Void_Check2.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check2.transform.localScale,
-                    check2VoidMaxSize * TestCockFF4.Strength,
-                    ref check2VoidRef,
-                    Check2VoidGrowSpeed
-                    );
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                         TestCockFF4.Strength,
-                         Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                         ref testCockFF4Ref.x,
-                         tc4ffScaleUpSpeed
-                     );
-
-                    }
-                    if (checkValveStatus.isCheck1Closed)
-                    {
-                        TestCockFF4.Strength = 0;
-                    }
-
-                }
-                else
-                {
-                    TestCockFF4.Strength = 0;
-                }
-            }
+            /// <summary>
+            /// End sight tube operation---------------------------------------------------------------------------------
+            /// </summary>
 
 
             /// <summary>
-            ///Testing procedures---------------------------------------------------------------------------------------------
-            /// Static conditions and testkit hooked up || not hooked up------------------------------------------------------
+            /// No sight tube or hose connected
             /// </summary>
-            else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
+
+            if (
+                    testCockController.isTestCock2Open == true
+                    && TestCockHoseDetect2.isConnected == false
+                // && sightTubeController.currentTestCockConnection != hoseDetector2
+                )
             {
 
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+                if (check1Detector.ParticlesInside > 3000)
                 {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+                    TestCockFF2.Strength = Mathf.SmoothDamp(
+                        TestCockFF2.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                        ref testCockFF2Ref.x,
+                        0.005f
+                    );
+
                 }
-                // Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                //     Void_Check1.transform.localScale,
-                //     check1VoidMaxSize * TestCockFF3.Strength,
-                //     ref check1VoidRef,
-                //     Check1VoidGrowSpeed
-                // );
 
-                // Void_Check2.transform.localScale = Vector3.SmoothDamp(
-                //     Void_Check2.transform.localScale,
-                //     check2VoidMaxSize * TestCockFF4.Strength,
-                //     ref check2VoidRef,
-                //     Check2VoidGrowSpeed
-                // );
+            }
+            else
+            {
 
-                if (
-                     testCockController.isTestCock2Open == true
-                     && TestCockHoseDetect2.isConnected == false
-              )
+                TestCockFF2.Strength = 0;
+            }
+
+            //tc3 non-static condition pressure
+
+
+            if (
+                   testCockController.isTestCock3Open == true
+                   && TestCockHoseDetect3.isConnected == false
+               // && sightTubeController.currentTestCockConnection != hoseDetector2
+               )
+            {
+
+                if (check1Detector.ParticlesInside > 3000)
                 {
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                        ref testCockFF3Ref.x,
+                        0.005f
+                    );
 
-                    //release initial pressure
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                    //pressure decrease
-                    else
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            0,
-                            ref testCockFF2Ref.x,
-                            3f
-                        );
-
-                    }
                 }
-                else
-                {
 
-                    TestCockFF2.Strength = 0;
-                }
-                //test cock #3 pressure regulation
-                //static conditions and testkit hooked up
-                if (
-                  testCockController.isTestCock3Open == true
-                  && TestCockHoseDetect3.isConnected == false
+            }
+            else
+            {
+
+                TestCockFF3.Strength = 0;
+            }
+
+            //tc4 non-static condition pressure
+
+
+            if (
+                     testCockController.isTestCock4Open == true
+                     && TestCockHoseDetect4.isConnected == false
+                 // && sightTubeController.currentTestCockConnection != hoseDetector2
                  )
+            {
+
+                if (check2Detector.ParticlesInside > 3000)
                 {
-                    //release initial pressure
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
-                    //pressure decrease
-                    else
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            0,
-                            ref testCockFF3Ref.x,
-                            1f
-                        );
-
-                        //pressure stop
-                        if (checkValveStatus.isCheck1Closed == true)
-                        {
-                            TestCockFF3.Strength = 0;
-                        }
-
-
-                    }
-                }
-                else
-                {
-
-                    TestCockFF3.Strength = 0;
-                }
-                //test cock #4 pressure regulation
-                //static conditions and testkit hooked up
-                if (
-                           testCockController.isTestCock4Open == true
-                           && TestCockHoseDetect4.isConnected == false
-                          )
-                {
-
-                    //release initial pressure
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                      TestCockFF4.Strength,
-                      Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                      ref testCockFF4Ref.x,
-                      tc4ffScaleUpSpeed
-                      );
-                    }
-                    else
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
-                        0,
+                        Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
                         ref testCockFF4Ref.x,
-                        tc4ffScaleDownSpeed
-                        );
+                        0.005f
+                    );
 
-                        //pressure stop
-                        if (checkValveStatus.isCheck2Closed == true)
-                        {
-                            TestCockFF4.Strength = 0;
-
-                        }
-
-                    }
-                }
-                else
-                {
-
-                    TestCockFF4.Strength = 0;
                 }
 
+            }
+            else
+            {
+
+                TestCockFF4.Strength = 0;
             }
         }
-        else if (hoseController.isSightTubeConnected == false)
+        /// <summary>
+        /// End no sight tube or hose operation---------------------------------------------------------------------------------
+        /// </summary>
+
+
+        else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
-            // Debug.Log($"Sight tube disconnected");
-            if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
+
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-                {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
-                        false;
-                }
-
-
-                Void_Check1.transform.localScale = Vector3.zero;
-
-                Void_Check2.transform.localScale = Vector3.zero;
-
-
-                //sigh tube
-
-
-
-                //tc2 non-static condition pressure
-                if (
-                        testCockController.isTestCock2Open == true
-                        && TestCockHoseDetect2.isConnected == false
-                    )
-                {
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                }
-                else
-                {
-                    TestCockFF2.Strength = 0;
-
-                }
-
-
-                //tc3 non-static condition pressure
-                if (
-                        testCockController.isTestCock3Open
-                        && TestCockHoseDetect3.isConnected == false
-                    )
-                {
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
-
-                }
-                else
-                {
-                    TestCockFF3.Strength = 0;
-                }
-
-                //tc4 non-static condition pressure
-                if (
-                        testCockController.isTestCock4Open
-                        && TestCockHoseDetect4.isConnected == false
-                    )
-                {
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                         TestCockFF4.Strength,
-                         Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                         ref testCockFF4Ref.x,
-                         tc4ffScaleUpSpeed
-                     );
-
-                    }
-
-                }
-                else
-                {
-                    TestCockFF4.Strength = 0;
-                }
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
+                    false;
             }
-            else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
-            {
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-                {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
-                        false;
-                }
-                //while shutoff valve is open regulate ff in check housing according to amount of water being supplied supply
+            //while shutoff valve is open regulate ff in check housing according to amount of water being supplied supply
 
 
-                // Void_Check1.transform.localScale = Vector3.zero;
+            // Void_Check1.transform.localScale = Vector3.zero;
 
-                // Void_Check2.transform.localScale = Vector3.zero;
-                if (
-                     testCockController.isTestCock2Open == true
-                     && TestCockHoseDetect2.isConnected == false
-                 )
-                {
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                }
-                else
-                {
-                    TestCockFF2.Strength = 0;
-                }
-
-                //tc3 non-static condition pressure
-                if (
-                        testCockController.isTestCock3Open
-                        && TestCockHoseDetect3.isConnected == false
-                    )
-                {
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
-
-                }
-                else
-                {
-                    TestCockFF3.Strength = 0;
-                }
-
-                //tc4 non-static condition pressure
-                if (
-                        testCockController.isTestCock4Open
-                        && TestCockHoseDetect4.isConnected == false
-                    )
-                {
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                         TestCockFF4.Strength,
-                         Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                         ref testCockFF4Ref.x,
-                         tc4ffScaleUpSpeed
-                     );
-
-                    }
-
-                }
-                else
-                {
-                    TestCockFF4.Strength = 0;
-                }
-            }
-            else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
-            {
-
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-                {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
-                }
-                if (
+            // Void_Check2.transform.localScale = Vector3.zero;
+            if (
                  testCockController.isTestCock2Open == true
                  && TestCockHoseDetect2.isConnected == false
-                )
+             )
+            {
+                if (check1Detector.ParticlesInside > 3000)
                 {
-                    check1housingForceField.Strength = 0;
-                    check2housingForceField.Strength = 0;
-                    Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check1.transform.localScale,
-                    check1VoidMaxSize * TestCockFF1.Strength,
-                    ref check1VoidRef,
-                    Check1VoidGrowSpeed
+                    TestCockFF2.Strength = Mathf.SmoothDamp(
+                        TestCockFF2.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                        ref testCockFF2Ref.x,
+                        0.005f
                     );
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                    if (checkValveStatus.isCheck1Closed)
-                    {
-                        TestCockFF2.Strength = 0;
-                    }
                 }
-                else
+            }
+            else
+            {
+                TestCockFF2.Strength = 0;
+            }
+
+            //tc3 non-static condition pressure
+            if (
+                    testCockController.isTestCock3Open
+                    && TestCockHoseDetect3.isConnected == false
+                )
+            {
+                if (check1Detector.ParticlesInside > 3000)
+                {
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
+                        ref testCockFF3Ref.x,
+                        0.005f
+                    );
+                }
+
+            }
+            else
+            {
+                TestCockFF3.Strength = 0;
+            }
+
+            //tc4 non-static condition pressure
+            if (
+                    testCockController.isTestCock4Open
+                    && TestCockHoseDetect4.isConnected == false
+                )
+            {
+                if (check2Detector.ParticlesInside > 3000)
+                {
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
+                     TestCockFF4.Strength,
+                     Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
+                     ref testCockFF4Ref.x,
+                     tc4ffScaleUpSpeed
+                 );
+
+                }
+
+            }
+            else
+            {
+                TestCockFF4.Strength = 0;
+            }
+        }
+        else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
+        {
+
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+            {
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+            }
+            if (
+             testCockController.isTestCock2Open == true
+             && TestCockHoseDetect2.isConnected == false
+            )
+            {
+                check1housingForceField.Strength = 0;
+                check2housingForceField.Strength = 0;
+                Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                Void_Check1.transform.localScale,
+                check1VoidMaxSize * TestCockFF1.Strength,
+                ref check1VoidRef,
+                Check1VoidGrowSpeed
+                );
+                if (check1Detector.ParticlesInside > 3000)
+                {
+                    TestCockFF2.Strength = Mathf.SmoothDamp(
+                        TestCockFF2.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                        ref testCockFF2Ref.x,
+                        0.005f
+                    );
+                }
+                if (checkValveStatus.isCheck1Closed)
                 {
                     TestCockFF2.Strength = 0;
                 }
+            }
+            else
+            {
+                TestCockFF2.Strength = 0;
+            }
 
-                //tc3 non-static condition pressure
-                if (
-                        testCockController.isTestCock3Open
-                        && TestCockHoseDetect3.isConnected == false
-                    )
+            //tc3 non-static condition pressure
+            if (
+                    testCockController.isTestCock3Open
+                    && TestCockHoseDetect3.isConnected == false
+                )
+            {
+                check1housingForceField.Strength = 0;
+                check2housingForceField.Strength = 0;
+                Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                Void_Check1.transform.localScale,
+                check1VoidMaxSize * TestCockFF3.Strength,
+                ref check1VoidRef,
+                Check1VoidGrowSpeed
+                );
+                if (check1Detector.ParticlesInside > 3000)
                 {
-                    check1housingForceField.Strength = 0;
-                    check2housingForceField.Strength = 0;
-                    Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check1.transform.localScale,
-                    check1VoidMaxSize * TestCockFF3.Strength,
-                    ref check1VoidRef,
-                    Check1VoidGrowSpeed
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
+                        ref testCockFF3Ref.x,
+                        0.005f
                     );
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
+                }
 
-                    if (checkValveStatus.isCheck1Closed)
+                if (checkValveStatus.isCheck1Closed)
+                {
+                    TestCockFF3.Strength = 0;
+                }
+            }
+            else
+            {
+                TestCockFF3.Strength = 0;
+            }
+
+            //tc4 non-static condition pressure
+            if (
+                    testCockController.isTestCock4Open
+                    && TestCockHoseDetect4.isConnected == false
+                )
+            {
+                check1housingForceField.Strength = 0;
+                check2housingForceField.Strength = 0;
+                Void_Check2.transform.localScale = Vector3.SmoothDamp(
+                Void_Check2.transform.localScale,
+                check2VoidMaxSize * TestCockFF4.Strength,
+                ref check2VoidRef,
+                Check2VoidGrowSpeed
+                );
+                if (check2Detector.ParticlesInside > 3000)
+                {
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
+                     TestCockFF4.Strength,
+                     Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
+                     ref testCockFF4Ref.x,
+                     tc4ffScaleUpSpeed
+                 );
+
+                }
+                if (checkValveStatus.isCheck1Closed)
+                {
+                    TestCockFF4.Strength = 0;
+                }
+
+            }
+            else
+            {
+                TestCockFF4.Strength = 0;
+            }
+        }
+
+        /// <summary>
+        ///Testing procedures---------------------------------------------------------------------------------------------
+        /// Static conditions and testkit hooked up || not hooked up------------------------------------------------------
+        /// </summary>
+        else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
+        {
+
+
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+            {
+                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+            }
+            Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                Void_Check1.transform.localScale,
+                check1VoidMaxSize * TestCockFF3.Strength,
+                ref check1VoidRef,
+                Check1VoidGrowSpeed
+            );
+
+            Void_Check2.transform.localScale = Vector3.SmoothDamp(
+                Void_Check2.transform.localScale,
+                check2VoidMaxSize * TestCockFF4.Strength,
+                ref check2VoidRef,
+                Check2VoidGrowSpeed
+            );
+
+            if (
+                 testCockController.isTestCock2Open == true
+                 && TestCockHoseDetect2.isConnected == false
+          )
+            {
+
+                //release initial pressure
+                if (check1Detector.ParticlesInside > 3000)
+                {
+                    TestCockFF2.Strength = Mathf.SmoothDamp(
+                        TestCockFF2.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                        ref testCockFF2Ref.x,
+                        0.005f
+                    );
+                }
+                //pressure decrease
+                else
+                {
+                    TestCockFF2.Strength = Mathf.SmoothDamp(
+                        TestCockFF2.Strength,
+                        0,
+                        ref testCockFF2Ref.x,
+                        3f
+                    );
+
+                }
+            }
+            else
+            {
+
+                TestCockFF2.Strength = 0;
+            }
+            //test cock #3 pressure regulation
+            //static conditions and testkit hooked up
+            if (
+              testCockController.isTestCock3Open == true
+              && TestCockHoseDetect3.isConnected == false
+             )
+            {
+                //release initial pressure
+                if (check1Detector.ParticlesInside > 3000)
+                {
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
+                        ref testCockFF3Ref.x,
+                        0.005f
+                    );
+                }
+                //pressure decrease
+                else
+                {
+                    TestCockFF3.Strength = Mathf.SmoothDamp(
+                        TestCockFF3.Strength,
+                        0,
+                        ref testCockFF3Ref.x,
+                        1f
+                    );
+
+                    //pressure stop
+                    if (checkValveStatus.isCheck1Closed == true)
                     {
                         TestCockFF3.Strength = 0;
                     }
-                }
-                else
-                {
-                    TestCockFF3.Strength = 0;
-                }
 
-                //tc4 non-static condition pressure
-                if (
-                        testCockController.isTestCock4Open
-                        && TestCockHoseDetect4.isConnected == false
-                    )
-                {
-                    check1housingForceField.Strength = 0;
-                    check2housingForceField.Strength = 0;
-                    Void_Check2.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check2.transform.localScale,
-                    check2VoidMaxSize * TestCockFF4.Strength,
-                    ref check2VoidRef,
-                    Check2VoidGrowSpeed
-                    );
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                         TestCockFF4.Strength,
-                         Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                         ref testCockFF4Ref.x,
-                         tc4ffScaleUpSpeed
-                     );
 
-                    }
-                    if (checkValveStatus.isCheck1Closed)
-                    {
-                        TestCockFF4.Strength = 0;
-                    }
-
-                }
-                else
-                {
-                    TestCockFF4.Strength = 0;
                 }
             }
-
-
-            /// <summary>
-            ///Testing procedures---------------------------------------------------------------------------------------------
-            /// Static conditions and testkit hooked up || not hooked up------------------------------------------------------
-            /// </summary>
-            else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
+            else
             {
 
+                TestCockFF3.Strength = 0;
+            }
+            //test cock #4 pressure regulation
+            //static conditions and testkit hooked up
+            if (
+                       testCockController.isTestCock4Open == true
+                       && TestCockHoseDetect4.isConnected == false
+                      )
+            {
 
-                foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+                //release initial pressure
+                if (check2Detector.ParticlesInside > 3000)
                 {
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-                    testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
-                }
-                Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check1.transform.localScale,
-                    check1VoidMaxSize * TestCockFF3.Strength,
-                    ref check1VoidRef,
-                    Check1VoidGrowSpeed
-                );
-
-                Void_Check2.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check2.transform.localScale,
-                    check2VoidMaxSize * TestCockFF4.Strength,
-                    ref check2VoidRef,
-                    Check2VoidGrowSpeed
-                );
-
-                if (
-                     testCockController.isTestCock2Open == true
-                     && TestCockHoseDetect2.isConnected == false
-              )
-                {
-
-                    //release initial pressure
-                    if (check1Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                            ref testCockFF2Ref.x,
-                            0.005f
-                        );
-                    }
-                    //pressure decrease
-                    else
-                    {
-                        TestCockFF2.Strength = Mathf.SmoothDamp(
-                            TestCockFF2.Strength,
-                            0,
-                            ref testCockFF2Ref.x,
-                            3f
-                        );
-
-                    }
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
+                  TestCockFF4.Strength,
+                  Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
+                  ref testCockFF4Ref.x,
+                  tc4ffScaleUpSpeed
+                  );
                 }
                 else
                 {
+                    TestCockFF4.Strength = Mathf.SmoothDamp(
+                    TestCockFF4.Strength,
+                    0,
+                    ref testCockFF4Ref.x,
+                    tc4ffScaleDownSpeed
+                    );
 
-                    TestCockFF2.Strength = 0;
-                }
-                //test cock #3 pressure regulation
-                //static conditions and testkit hooked up
-                if (
-                  testCockController.isTestCock3Open == true
-                  && TestCockHoseDetect3.isConnected == false
-                 )
-                {
-                    //release initial pressure
-                    if (check1Detector.ParticlesInside > 3000)
+                    //pressure stop
+                    if (checkValveStatus.isCheck2Closed == true)
                     {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3Str),
-                            ref testCockFF3Ref.x,
-                            0.005f
-                        );
-                    }
-                    //pressure decrease
-                    else
-                    {
-                        TestCockFF3.Strength = Mathf.SmoothDamp(
-                            TestCockFF3.Strength,
-                            0,
-                            ref testCockFF3Ref.x,
-                            1f
-                        );
-
-                        //pressure stop
-                        if (checkValveStatus.isCheck1Closed == true)
-                        {
-                            TestCockFF3.Strength = 0;
-                        }
-
+                        TestCockFF4.Strength = 0;
 
                     }
+
                 }
-                else
-                {
+            }
+            else
+            {
 
-                    TestCockFF3.Strength = 0;
-                }
-                //test cock #4 pressure regulation
-                //static conditions and testkit hooked up
-                if (
-                           testCockController.isTestCock4Open == true
-                           && TestCockHoseDetect4.isConnected == false
-                          )
-                {
-
-                    //release initial pressure
-                    if (check2Detector.ParticlesInside > 3000)
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                      TestCockFF4.Strength,
-                      Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4Str),
-                      ref testCockFF4Ref.x,
-                      tc4ffScaleUpSpeed
-                      );
-                    }
-                    else
-                    {
-                        TestCockFF4.Strength = Mathf.SmoothDamp(
-                        TestCockFF4.Strength,
-                        0,
-                        ref testCockFF4Ref.x,
-                        tc4ffScaleDownSpeed
-                        );
-
-                        //pressure stop
-                        if (checkValveStatus.isCheck2Closed == true)
-                        {
-                            TestCockFF4.Strength = 0;
-
-                        }
-
-                    }
-                }
-                else
-                {
-
-                    TestCockFF4.Strength = 0;
-                }
-
+                TestCockFF4.Strength = 0;
             }
 
         }
