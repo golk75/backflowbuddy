@@ -671,19 +671,19 @@ public class WaterController : MonoBehaviour
                     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
                     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
                 }
-                Void_Check1.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check1.transform.localScale,
-                    check1VoidMaxSize * TestCockFF3.Strength,
-                    ref check1VoidRef,
-                    Check1VoidGrowSpeed
-                );
+                // Void_Check1.transform.localScale = Vector3.SmoothDamp(
+                //     Void_Check1.transform.localScale,
+                //     check1VoidMaxSize * TestCockFF3.Strength,
+                //     ref check1VoidRef,
+                //     Check1VoidGrowSpeed
+                // );
 
-                Void_Check2.transform.localScale = Vector3.SmoothDamp(
-                    Void_Check2.transform.localScale,
-                    check2VoidMaxSize * TestCockFF4.Strength,
-                    ref check2VoidRef,
-                    Check2VoidGrowSpeed
-                );
+                // Void_Check2.transform.localScale = Vector3.SmoothDamp(
+                //     Void_Check2.transform.localScale,
+                //     check2VoidMaxSize * TestCockFF4.Strength,
+                //     ref check2VoidRef,
+                //     Check2VoidGrowSpeed
+                // );
 
                 if (
                      testCockController.isTestCock2Open == true

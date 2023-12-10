@@ -283,11 +283,11 @@ public class PressureZoneHUDController : MonoBehaviour
     IEnumerator IncreaseCheckSpring1Value()
     {
         check1SpringPressure += 1;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         while (isPointerDown == true)
         {
-            check1SpringPressure += 0.1f;
+            check1SpringPressure += 1;
 
             yield return null;
         }
@@ -297,11 +297,11 @@ public class PressureZoneHUDController : MonoBehaviour
     IEnumerator DecreaseCheckSpring1Value()
     {
         check1SpringPressure -= 1;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         while (isPointerDown == true && check1SpringPressure > 0)
         {
-            check1SpringPressure -= 0.1f;
+            check1SpringPressure -= 1;
             yield return null;
         }
         //
@@ -310,11 +310,11 @@ public class PressureZoneHUDController : MonoBehaviour
     IEnumerator IncreaseCheckSpring2Value()
     {
         check2SpringPressure += 1;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         while (isPointerDown == true)
         {
-            check2SpringPressure += 0.1f;
+            check2SpringPressure += 1;
             yield return null;
         }
 
@@ -323,11 +323,11 @@ public class PressureZoneHUDController : MonoBehaviour
     IEnumerator DecreaseCheckSpring2Value()
     {
         check2SpringPressure -= 1;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         while (isPointerDown == true && check2SpringPressure > 0)
         {
-            check2SpringPressure -= 0.1f;
+            check2SpringPressure -= 1;
             yield return null;
         }
 

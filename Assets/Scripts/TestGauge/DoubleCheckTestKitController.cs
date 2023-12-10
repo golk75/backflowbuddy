@@ -87,10 +87,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
     [SerializeField]
     ZibraLiquidDetector TestCock2Detector;
 
+
+
     // private const float MinNeedle_rotation = 55;
     // private const float MaxNeedle_rotation = -55;
-    public float MinNeedle_rotation = 61;
-    public float MaxNeedle_rotation = -61;
+    public float MinNeedle_rotation = 135;
+    public float MaxNeedle_rotation = -135;
     public float hosePressure;
     public float maxPSID;
     private const float MinKnob_rotation = 0;
@@ -140,6 +142,8 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private float MinFillPos = 0;
     private float MaxFillPos = 100;
     public float knobRotation;
+
+    public float needleRiseSpeed = 0.25f;
     public List<GameObject> StaticTestCockList;
     // public List<GameObject> TestCockList;
     public List<GameObject> AttachedTestCockList;
@@ -209,7 +213,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
         currentPSID = 0;
         minPSID = 0;
-        maxPSID = 20;
+        maxPSID = 1;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
@@ -464,6 +468,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 //     needleSpeedDamp
                 // );
                 // Debug.Log($"test cock #1 is connected & open");
+
             }
 
             else if (
@@ -509,17 +514,16 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 AttachedHoseList.Contains(HighHose)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock2Open
-            // && !isTestCock3Open
+                && !isTestCock3Open
             )
             {
-                // hosePressure = Mathf.SmoothStep(
-                //     hosePressure,
-                //     TestCock2Detector.ParticlesInside,
-                //     0.015f
-                // );
-                // Debug.Log(
-                //     $"supply is open & test cock #2 is connected & open & test cock #3 is closed"
-                // );
+                //maxed out psid (needle pinned out)
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
+                    maxPSID,
+                    needleRiseSpeed
+                );
+
             }
             else if (
                 AttachedHoseList.Contains(HighHose)
@@ -533,15 +537,24 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 // differnce ratio between windows to mac = 1:15
                 //Windows----------------
 
-                if (liquid.UseFixedTimestep == true)
-                {
-                    hosePressure -= 0.04f;
-                }
-                //!Windows----------------
-                else
-                {
-                    hosePressure -= 0.65f;
-                }
+                // if (liquid.UseFixedTimestep == true)
+                // {
+                //     hosePressure -= 0.04f;
+                // }
+                // //!Windows----------------
+                // else
+                // {
+                //     hosePressure -= 0.65f;
+                // }
+
+                hosePressure = Mathf.SmoothStep(
+                  hosePressure,
+                  waterController.zone1to2PsiDiff / 10,
+                  0.1f
+              );
+
+
+
 
             }
             else if (
