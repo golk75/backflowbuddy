@@ -635,9 +635,15 @@ public class DoubleCheckTestKitController : MonoBehaviour
             // END - #2 Check Test//==================>
             //========================================
         }
-        if (isConnectedToAssembly == false)
+        //if hose is disconnected, drop pressure on gauge
+        if (!AttachedHoseList.Contains(HighHose))
         {
             // hosePressure -= 5;
+            hosePressure = Mathf.SmoothStep(
+              hosePressure,
+              0,
+              0.5f
+          );
         }
         if (hosePressure <= minPSID)
         {
