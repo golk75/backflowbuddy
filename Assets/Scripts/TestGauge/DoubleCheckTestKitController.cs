@@ -455,65 +455,15 @@ public class DoubleCheckTestKitController : MonoBehaviour
         if (isConnectedToAssembly == true)
         {
 
-            //checking if hose/ test kit is connected to test cock while supply is open
-
-            //test cock #1 will have continuous pressure whether the supply is open or closed, as it sits upstream of #1 shut off valve
-            if (AttachedHoseList.Contains(HighHose) && isTestCock1Open)
-            {
-
-                //supply is open and test cock is open
-                // hosePressure = Mathf.SmoothStep(
-                //     hosePressure,
-                //     Zone2Detector.ParticlesInside,
-                //     needleSpeedDamp
-                // );
-                // Debug.Log($"test cock #1 is connected & open");
-
-            }
-
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock3Open
-            )
-            {
-
-
-                //supply is open and test cock is open
-                // hosePressure = Mathf.SmoothStep(
-                //     hosePressure,
-                //     Zone2Detector.ParticlesInside,
-                //     needleSpeedDamp
-                // );
-                // Debug.Log($"supply is open and test cock 3 is connected & open");
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock4Open
-            )
-            {
-                //supply is open and test cock is open
-                // hosePressure = Mathf.SmoothStep(
-                //     hosePressure,
-                //     Zone3Detector.ParticlesInside,
-                //     needleSpeedDamp
-                // );
-                // Debug.Log($"supply is open and test cock 4 is connected & open");
-            }
-            //END CHECKING IS TC IS HOOKED UP TO MOVE GAUGE WHILE DEVICE IS OPEN
-
-
-
-
             //========================================
             // #1 Check Test//========================>
             //========================================
 
-            else if (
+            if (
                 AttachedHoseList.Contains(HighHose)
                 && shutOffValveController.IsSupplyOn == true
                 && isTestCock2Open
+                && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
                 && !isTestCock3Open
             )
             {
@@ -574,13 +524,15 @@ public class DoubleCheckTestKitController : MonoBehaviour
             // #2 Check Test//========================>
             //========================================
 
-            else if (
-                 AttachedHoseList.Contains(HighHose)
-                 && shutOffValveController.IsSupplyOn == true
-                 && isTestCock3Open
-                 && !isTestCock4Open
-             )
+            if (
+                AttachedHoseList.Contains(HighHose)
+                && shutOffValveController.IsSupplyOn == true
+                && isTestCock3Open
+                && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+                && !isTestCock4Open
+            )
             {
+
                 //maxed out psid (needle pinned out)
                 hosePressure = Mathf.SmoothStep(
                     hosePressure,

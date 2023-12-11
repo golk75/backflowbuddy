@@ -12,6 +12,7 @@ public class BleedHoseController : MonoBehaviour
     float appliedKnobRotation = 0;
     [SerializeField]
     GameObject highBleedKnob;
+    public bool isHighBleedOpen;
 
 
 
@@ -39,10 +40,12 @@ public class BleedHoseController : MonoBehaviour
     {
         if (bleederHoseEmitter.VolumePerSimTime == 0)
         {
+            isHighBleedOpen = true;
             bleederHoseEmitter.VolumePerSimTime = 1;
         }
         else
         {
+            isHighBleedOpen = false;
             bleederHoseEmitter.VolumePerSimTime = 0;
         }
     }

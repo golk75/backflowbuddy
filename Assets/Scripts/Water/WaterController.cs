@@ -386,14 +386,22 @@ public class WaterController : MonoBehaviour
                 if (check2Detector.ParticlesInside > zone3primedParticleCount)
                 {
                     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
                 }
-                check2housingForceField.Strength = 0;
-                // check2housingForceField.Strength = Mathf.SmoothDamp(
-                //      check2housingForceField.Strength,
-                //      1f,
-                //      ref check2FFref.x,
-                //      0.5f
-                //  );
+                if (check1Detector.ParticlesInside > zone2primedParticleCount)
+                {
+                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                }
+                else
+                {
+                    check1housingForceField.Strength = Mathf.SmoothDamp(
+                     check1housingForceField.Strength,
+                     1f,
+                     ref check1FFref.x,
+                     0.5f);
+                }
+
+
             }
             if (testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
             {
@@ -441,17 +449,46 @@ public class WaterController : MonoBehaviour
         else
         {
 
-            //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
 
-            if (!testCockController.isTestCock3Open)
+            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
             {
 
                 if (check1Detector.ParticlesInside > zone2primedParticleCount)
                 {
                     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                 }
+                else
+                {
+                    check1housingForceField.Strength = Mathf.SmoothDamp(
+                      check1housingForceField.Strength,
+                      1f,
+                      ref check1FFref.x,
+                      0.5f
+                  );
+                }
+
+                if (check2Detector.ParticlesInside > zone3primedParticleCount)
+                {
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                }
+                else
+                {
+                    check2housingForceField.Strength = Mathf.SmoothDamp(
+                        check2housingForceField.Strength,
+                        1f,
+                        ref check2FFref.x,
+                        0.5f
+                    );
+                }
             }
-            else
+            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
+            {
+                check1housingForceField.Strength = 0;
+                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                check2housingForceField.Strength = 0;
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            }
+            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
             {
                 if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
@@ -461,30 +498,39 @@ public class WaterController : MonoBehaviour
                     ref check1FFref.x,
                     0.2f
                     );
-
+                    check2housingForceField.Strength = 0;
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                 }
                 else
                 {
                     check1housingForceField.Strength = 0;
                     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                    check2housingForceField.Strength = 0;
-                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
 
                 }
 
             }
-
-            if (!testCockController.isTestCock4Open)
+            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
             {
-                if (check2Detector.ParticlesInside > zone3primedParticleCount)
-                {
-                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                }
+
+                check1housingForceField.Strength = 0;
+                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                check2housingForceField.Strength = 0;
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
             }
-            else
+            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true)
             {
                 if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
                 {
+
+                    check1housingForceField.Strength = Mathf.SmoothDamp(
+                    check1housingForceField.Strength,
+                    1.2f,
+                    ref check1FFref.x,
+                    0.2f
+                    );
+
                     check2housingForceField.Strength = Mathf.SmoothDamp(
                     check2housingForceField.Strength,
                     1.2f,
@@ -492,6 +538,7 @@ public class WaterController : MonoBehaviour
                     0.2f
                     );
 
+
                 }
                 else
                 {
@@ -502,6 +549,75 @@ public class WaterController : MonoBehaviour
 
                 }
             }
+            if (testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
+            {
+
+            }
+            //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
+
+            // if (testCockController.isTestCock3Open == false)
+            // {
+
+            //     if (check1Detector.ParticlesInside > zone2primedParticleCount)
+            //     {
+            //         check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            //     }
+            // }
+            // else
+            // {
+            //     if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+            //     {
+            //         check1housingForceField.Strength = Mathf.SmoothDamp(
+            //         check1housingForceField.Strength,
+            //         1.2f,
+            //         ref check1FFref.x,
+            //         0.2f
+            //         );
+            //         if (check1Detector.ParticlesInside > zone2primedParticleCount)
+            //         {
+            //             check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            //         }
+
+            //     }
+            //     else
+            //     {
+            //         check1housingForceField.Strength = 0;
+            //         check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            //         check2housingForceField.Strength = 0;
+            //         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+            //     }
+
+            // }
+
+            // if (testCockController.isTestCock4Open == false)
+            // {
+            //     if (check2Detector.ParticlesInside > zone3primedParticleCount)
+            //     {
+            //         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            //     }
+            // }
+            // else
+            // {
+            //     if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+            //     {
+            //         check2housingForceField.Strength = Mathf.SmoothDamp(
+            //         check2housingForceField.Strength,
+            //         1.2f,
+            //         ref check2FFref.x,
+            //         0.2f
+            //         );
+
+            //     }
+            //     else
+            //     {
+            //         check1housingForceField.Strength = 0;
+            //         check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            //         check2housingForceField.Strength = 0;
+            //         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+            //     }
+            // }
 
 
         }
