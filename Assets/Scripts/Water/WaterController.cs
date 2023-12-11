@@ -843,7 +843,7 @@ public class WaterController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"here");
+
                     sightTubeEmitter.enabled = false;
 
                 }
