@@ -5036,6 +5036,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 18.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7797527223639911429, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797527223639911429, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797527223639911429, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.046
+      objectReference: {fileID: 0}
     - target: {fileID: 7975887091541937799, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: near clip plane

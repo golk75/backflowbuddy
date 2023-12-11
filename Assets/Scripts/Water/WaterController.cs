@@ -832,8 +832,6 @@ public class WaterController : MonoBehaviour
 
                     if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                     {
-                        Debug.Log($"doubleCheckTestKitController.hosePressure: {doubleCheckTestKitController.hosePressure - 0.1f} ; zone1to2PsiDiff: {zone1to2PsiDiff}");
-
                         TestCockFF3.Strength = 0;
                         sightTubeEmitter.enabled = true;
                     }
@@ -860,12 +858,15 @@ public class WaterController : MonoBehaviour
                       )
                 {
 
-                    if (check2Detector.ParticlesInside > 3000)
+                    if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
                     {
                         TestCockFF4.Strength = 0;
                         sightTubeEmitter.enabled = true;
                     }
-
+                    else
+                    {
+                        sightTubeEmitter.enabled = false;
+                    }
                 }
                 else
                 {
@@ -882,6 +883,101 @@ public class WaterController : MonoBehaviour
             /// End sight tube operation---------------------------------------------------------------------------------
             /// </summary>
 
+            /// <summary>
+            /// No sight tube 1 hose connected
+            /// </summary>
+            if (sightTubeController.currentTestCockConnection == null)
+            {
+                if (
+                        testCockController.isTestCock2Open == true
+                        && TestCockHoseDetect2.isConnected == true
+
+                    )
+                {
+
+                    if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                    {
+                        TestCockFF2.Strength = Mathf.SmoothDamp(
+                            TestCockFF2.Strength,
+                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                            ref testCockFF2Ref.x,
+                            0.005f
+                        );
+
+                    }
+                    else
+                    {
+                        TestCockFF2.Strength = 0;
+                    }
+
+                }
+                else
+                {
+
+                    TestCockFF2.Strength = 0;
+                }
+
+                //tc3 static condition pressure
+
+
+                if (
+                       testCockController.isTestCock3Open == true
+                       && TestCockHoseDetect3.isConnected == true
+                   )
+                {
+
+                    if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                    {
+                        TestCockFF3.Strength = Mathf.SmoothDamp(
+                            TestCockFF3.Strength,
+                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                            ref testCockFF3Ref.x,
+                            0.005f
+                        );
+
+                    }
+
+                }
+                else
+                {
+
+                    TestCockFF3.Strength = 0;
+                }
+
+                //tc4 static condition pressure
+
+
+                if (
+                         testCockController.isTestCock4Open == true
+                         && TestCockHoseDetect4.isConnected == true
+
+                     )
+                {
+
+                    if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+                    {
+                        TestCockFF4.Strength = Mathf.SmoothDamp(
+                            TestCockFF4.Strength,
+                            Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
+                            ref testCockFF4Ref.x,
+                            0.005f
+                        );
+
+                    }
+
+                }
+                else
+                {
+
+                    TestCockFF4.Strength = 0;
+                }
+            }
+            /// <summary>
+            /// End no sight tube 1 hose operation---------------------------------------------------------------------------------
+            /// </summary>
+
+
+
 
             /// <summary>
             /// No sight tube or hose connected
@@ -890,11 +986,11 @@ public class WaterController : MonoBehaviour
             if (
                     testCockController.isTestCock2Open == true
                     && TestCockHoseDetect2.isConnected == false
-                // && sightTubeController.currentTestCockConnection != hoseDetector2
+
                 )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -922,11 +1018,10 @@ public class WaterController : MonoBehaviour
             if (
                    testCockController.isTestCock3Open == true
                    && TestCockHoseDetect3.isConnected == false
-               // && sightTubeController.currentTestCockConnection != hoseDetector2
                )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -950,11 +1045,11 @@ public class WaterController : MonoBehaviour
             if (
                      testCockController.isTestCock4Open == true
                      && TestCockHoseDetect4.isConnected == false
-                 // && sightTubeController.currentTestCockConnection != hoseDetector2
+
                  )
             {
 
-                if (check2Detector.ParticlesInside > 3000)
+                if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
