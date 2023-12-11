@@ -24,7 +24,7 @@ public class PressureZoneHUDController : MonoBehaviour
     const string PressureZoneSliderHandleString = "unity-dragger";
     const string PressureZone2Panel = "PressureZone2__panel";
     const string PressureZone3Panel = "PressureZone3__panel";
-    const string SupplyPressurePanel = "SupplyPressure__panel";
+    const string SupplyPressurePanelString = "SupplyPressure__panel";
     const string CheckSpring1ValueLabelString = "CheckSpring1_value_label";
     const string CheckSpring2ValueLabelString = "CheckSpring2_value_label";
     const string CheckSpring1AddButtonString = "CheckSpring1_add_button";
@@ -42,9 +42,10 @@ public class PressureZoneHUDController : MonoBehaviour
     Button m_CheckSpring1SubtractButton;
     Button m_CheckSpring2AddButton;
     Button m_CheckSpring2SubtractButton;
+    VisualElement m_SupplyPressurePanel;
 
 
-    //slider elementså
+    //slider elements
     VisualElement m_PressureZoneSliderBar;
     VisualElement m_PressureZoneSliderTracker;
     VisualElement m_PressureZoneSliderHandle;
@@ -77,6 +78,7 @@ public class PressureZoneHUDController : MonoBehaviour
     //coroutines
     Coroutine OnIncreaseValue;
     Coroutine OnDecreaseValue;
+    Coroutine OnSupplyPanelMove;
 
     void OnEnable()
     {
@@ -93,6 +95,8 @@ public class PressureZoneHUDController : MonoBehaviour
         SetVisualElements();
         RegisterTextFieldCallBacks();
         RegisterButtonCallBacks();
+        RegisterPanelCallBacks();
+
         m_SupplyPressureTextField.isDelayed = false;
         m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
 
@@ -103,6 +107,7 @@ public class PressureZoneHUDController : MonoBehaviour
     void SetVisualElements()
     {
         root = GetComponent<UIDocument>();
+        m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
         m_PressureZone3TextField = root.rootVisualElement.Q<Label>(PressureZone3LabelString);
@@ -169,6 +174,8 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void RegisterButtonCallBacks()
     {
+
+
 
         //addition down and up
         m_CheckSpring1AddButton.RegisterCallback<PointerDownEvent>(SpringCheck1AdditionButton_down, TrickleDown.TrickleDown);
@@ -312,14 +319,49 @@ public class PressureZoneHUDController : MonoBehaviour
 
     }
 
+    Vector3 GetPointerPos()
+    {
+        Vector3 screenPosition = Input.mousePosition;
 
+        // If you're using a perspective camera for parallax,
+        // be sure to assign a depth to this point.
+        // screenPosition.z = 1f;
+
+        return Camera.main.ScreenToWorldPoint(screenPosition);
+    }
     void RegisterSliderCallBacks(VisualElement slider)
     {
         slider.RegisterCallback<ChangeEvent<float>>(SliderValueChanged);
         slider.RegisterCallback<GeometryChangedEvent>(SliderInitialPositioning);
 
     }
+    void RegisterPanelCallBacks()
+    {
+        m_SupplyPressurePanel.RegisterCallback<PointerDownEvent>(PanelMoveEvent);
+    }
 
+    private void PanelMoveEvent(PointerDownEvent evt)
+    {
+        // Vector3 pointerOrigin = m_SupplyPressurePanel.parent.LocalToWorld(m_SupplyPressurePanel.transform.position);
+        // Vector3 currentPointerPos = GetPointerPos();
+        // // Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
+        // m_SupplyPressurePanel.transform.position = m_SupplyPressurePanel.parent.WorldToLocal(pointerOrigin - currentPointerPos);
+        OnSupplyPanelMove = StartCoroutine(MovePanel());
+
+    }
+
+    private IEnumerator MovePanel()
+    {
+        Vector3 pointerOrigin = m_SupplyPressurePanel.parent.LocalToWorld(m_SupplyPressurePanel.transform.position);
+        Vector3 currentPointerPos = GetPointerPos();
+        // Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
+        while (playerController.primaryTouchStarted > 0)
+        {
+            m_SupplyPressurePanel.transform.position = m_SupplyPressurePanel.parent.WorldToLocal(pointerOrigin - currentPointerPos);
+            yield return null;
+        }
+
+    }
 
     private void SliderInitialPositioning(GeometryChangedEvent evt)
     {
@@ -366,7 +408,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
         switch (zonePressureSlider.name)
         {
-            case SupplyPressurePanel:
+            case SupplyPressurePanelString:
 
                 break;
             case PressureZone2Panel:
