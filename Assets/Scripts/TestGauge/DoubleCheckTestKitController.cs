@@ -574,12 +574,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
             // #2 Check Test//========================>
             //========================================
 
-            if (
-               AttachedHoseList.Contains(HighHose)
-               && shutOffValveController.IsSupplyOn == true
-               && isTestCock3Open
-               && !isTestCock4Open
-           )
+            else if (
+                 AttachedHoseList.Contains(HighHose)
+                 && shutOffValveController.IsSupplyOn == true
+                 && isTestCock3Open
+                 && !isTestCock4Open
+             )
             {
                 //maxed out psid (needle pinned out)
                 hosePressure = Mathf.SmoothStep(

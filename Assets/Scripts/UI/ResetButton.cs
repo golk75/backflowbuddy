@@ -20,6 +20,7 @@ public class ResetButton : MonoBehaviour
     public WaterController waterController;
     public SightTubeController sightTubeController;
     public TestKitManager testKitManager;
+    public PressureZoneHUDController pressureZoneHUDController;
     public GameObject sightTube;
     OperableComponentDescription ShutOff1OperableDescription;
     OperableComponentDescription Tc1OperableDescription;
@@ -115,20 +116,6 @@ public class ResetButton : MonoBehaviour
 
         ResetTransforms();
 
-
-
-        //remove attached hoses
-        // for (int i = 0; i < hoseList.Count; i++)
-        // {
-        //     Actions.onHoseBibDrop?.Invoke(hoseList[i], hoseList[i].GetComponent<OperableComponentDescription>());
-
-        // }
-        // foreach (var hose in hoseList)
-        // {
-        //     Actions.onHoseBibDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
-        // }
-
-
         foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
         {
             testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
@@ -146,11 +133,18 @@ public class ResetButton : MonoBehaviour
         Actions.onSightTubeDrop?.Invoke(sightTube);
         doubleCheckTestKitController.AttachedTestCockList.Clear();
         doubleCheckTestKitController.AttachedHoseList.Clear();
-        if (testKitManager.isDoubleCheckTesting)
-        {
-            waterController.testCock4Str = UnityEngine.Random.Range(waterController.testCock4MinStr, waterController.testCock4MaxStr);
-            waterController.testCock3Str = UnityEngine.Random.Range(waterController.testCock3MinStr, waterController.testCock3MaxStr);
-        }
+        // if (testKitManager.isDoubleCheckTesting)
+        // {
+        //     waterController.testCock4Str = UnityEngine.Random.Range(waterController.testCock4MinStr, waterController.testCock4MaxStr);
+        //     waterController.testCock3Str = UnityEngine.Random.Range(waterController.testCock3MinStr, waterController.testCock3MaxStr);
+        // }
+
+
+        //reset ui pressure values to 0
+        pressureZoneHUDController.check1SpringPressure = 0;
+        pressureZoneHUDController.check2SpringPressure = 0;
+        waterController.supplyPsi = 0;
+        pressureZoneHUDController.m_SupplyPressureTextField.value = "0";
 
     }
 

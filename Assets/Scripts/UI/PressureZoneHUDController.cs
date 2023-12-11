@@ -33,7 +33,7 @@ public class PressureZoneHUDController : MonoBehaviour
     const string CheckSpring2SubtractButtonString = "CheckSpring2_subtract_button";
 
     //visual elements
-    TextField m_SupplyPressureTextField;
+    public TextField m_SupplyPressureTextField;
     Label m_PressureZone2TextLabel;
     Label m_PressureZone3TextField;
     Label m_CheckSpring1Value;
@@ -94,8 +94,9 @@ public class PressureZoneHUDController : MonoBehaviour
         RegisterTextFieldCallBacks();
         RegisterButtonCallBacks();
         m_SupplyPressureTextField.isDelayed = false;
-        // m_PressureZone2TextLabel.isDelayed = false;
-        // m_PressureZone3TextField.isDelayed = false;
+        m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
+
+
     }
 
 
@@ -181,30 +182,7 @@ public class PressureZoneHUDController : MonoBehaviour
         m_CheckSpring2SubtractButton.RegisterCallback<PointerDownEvent>(SpringCheck2SubtractButton_down, TrickleDown.TrickleDown);
         m_CheckSpring2SubtractButton.RegisterCallback<PointerUpEvent>(SpringCheck2SubtractButton_up);
 
-
-
-
-
-
-        // m_CheckSpring1AddButton.RegisterCallback<ClickEvent>(IncreaseSpring1Pressure, TrickleDown.TrickleDown);
-        // m_CheckSpring1SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring1Pressure);
-        // m_CheckSpring2AddButton.RegisterCallback<ClickEvent>(IncreaseSpring2Pressure);
-        // m_CheckSpring2SubtractButton.RegisterCallback<ClickEvent>(DecreaseSpring2Pressure);
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
 
     /// <summary>
     /// Check Spring #2 button events
@@ -333,36 +311,6 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     }
-
-
-    // //increase individual spring pressures
-    // private void IncreaseSpring1Pressure(ClickEvent evt)
-    // {
-
-
-    // }
-
-    // private void DecreaseSpring1Pressure(ClickEvent evt)
-    // {
-    //     // Debug.Log($"evt: {evt.target}");
-    //     waterController.check1SpringForce -= 1;
-    // }
-
-
-
-    // private void IncreaseSpring2Pressure(ClickEvent evt)
-    // {
-    //     // Debug.Log($"evt: {evt.target}");
-    //     waterController.check2SpringForce += 1;
-    // }
-
-    // private void DecreaseSpring2Pressure(ClickEvent evt)
-    // {
-    //     // Debug.Log($"evt: {evt.target}");
-    //     waterController.check2SpringForce -= 1;
-    // }
-
-
 
 
     void RegisterSliderCallBacks(VisualElement slider)

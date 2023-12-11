@@ -1,4 +1,5 @@
 using System;
+using com.zibra.liquid.Manipulators;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,8 +22,12 @@ public class SightTubeController : MonoBehaviour
         if (other.GetComponent<OperableComponentDescription>() != null)
         {
             if (other.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestCock)
-            { currentTestCockConnection = other.gameObject; }
+            {
+                currentTestCockConnection = other.gameObject;
+            }
+
         }
+
 
 
     }
