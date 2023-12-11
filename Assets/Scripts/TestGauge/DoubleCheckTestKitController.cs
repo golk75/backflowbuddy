@@ -561,7 +561,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 && isTestCock2Open
                 && isTestCock3Open
                 && shutOffValveController.IsSupplyOn == false
-                && checkValveStatus.isCheck1Closed == true
+
             )
             {
                 hosePressure += 0;
@@ -573,39 +573,50 @@ public class DoubleCheckTestKitController : MonoBehaviour
             //========================================
             // #2 Check Test//========================>
             //========================================
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock3Open
-            // && !isTestCock4Open
-            )
+
+            if (
+               AttachedHoseList.Contains(HighHose)
+               && shutOffValveController.IsSupplyOn == true
+               && isTestCock3Open
+               && !isTestCock4Open
+           )
             {
-                // hosePressure = Mathf.SmoothStep(
-                //     hosePressure,
-                //     TestCock2Detector.ParticlesInside,
-                //     0.1f
-                // );
+                //maxed out psid (needle pinned out)
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
+                    maxPSID,
+                    needleRiseSpeed
+                );
 
             }
             else if (
                 AttachedHoseList.Contains(HighHose)
                 && isTestCock3Open
                 && isTestCock4Open
-                && shutOffValveController.IsSupplyOn == false
-                && checkValveStatus.isCheck2Closed == false
+                && waterController.isDeviceInStaticCondition == true
             )
             {
                 //best looking psid drop so far is: hosePressure -= 0.3f;
+                // differnce ratio between windows to mac = 1:15
                 //Windows----------------
-                if (Application.platform == RuntimePlatform.WindowsPlayer)
-                {
-                    // hosePressure -= 0.025f;
-                }
-                //OSX--------------------
-                else
-                {
-                    // hosePressure -= 0.4f;
-                }
+
+                // if (liquid.UseFixedTimestep == true)
+                // {
+                //     hosePressure -= 0.04f;
+                // }
+                // //!Windows----------------
+                // else
+                // {
+                //     hosePressure -= 0.65f;
+                // }
+
+                hosePressure = Mathf.SmoothStep(
+                  hosePressure,
+                  waterController.zone2to3PsiDiff,
+                  0.1f
+              );
+
+
 
 
             }
@@ -614,10 +625,10 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 && isTestCock3Open
                 && isTestCock4Open
                 && shutOffValveController.IsSupplyOn == false
-                && checkValveStatus.isCheck2Closed == true
+
             )
             {
-                // hosePressure += 0;
+                hosePressure += 0;
 
             }
             //========================================
