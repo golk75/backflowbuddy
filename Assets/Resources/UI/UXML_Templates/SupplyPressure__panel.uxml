@@ -1,5 +1,5 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="SupplyPressure__panel" class="pressure-zone-panel">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="SupplyPressure__panel" picking-mode="Ignore" class="pressure-zone-panel">
         <ui:VisualElement name="SupplyPressure_input_panel">
             <ui:VisualElement name="SupplyPressure_value_container" class="sub-container">
                 <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="pressure-zone-header" />

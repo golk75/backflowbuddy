@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 using UnityEngine.UIElements;
@@ -23,8 +24,8 @@ public class PressureZoneHUDController : MonoBehaviour
     const string PressureZoneSliderBarString = "PressureZoneSlider";
     const string PressureZoneSliderTrackerString = "unity-tracker";
     const string PressureZoneSliderHandleString = "unity-dragger";
-    const string PressureZone2Panel = "PressureZone2__panel";
-    const string PressureZone3Panel = "PressureZone3__panel";
+    const string PressureZone2PanelString = "PressureZone2__panel";
+    const string PressureZone3PanelString = "PressureZone3__panel";
     const string SupplyPressurePanelString = "SupplyPressure__panel";
     const string CheckSpring1ValueLabelString = "CheckSpring1_value_label";
     const string CheckSpring2ValueLabelString = "CheckSpring2_value_label";
@@ -44,6 +45,8 @@ public class PressureZoneHUDController : MonoBehaviour
     Button m_CheckSpring2AddButton;
     Button m_CheckSpring2SubtractButton;
     VisualElement m_SupplyPressurePanel;
+    VisualElement m_PressureZone2Panel;
+    VisualElement m_PressureZone3Panel;
     VisualElement target;
 
     //slider elements
@@ -104,7 +107,9 @@ public class PressureZoneHUDController : MonoBehaviour
 
         m_SupplyPressureTextField.isDelayed = false;
         m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
-
+        m_SupplyPressurePanel.pickingMode = PickingMode.Ignore;
+        m_PressureZone2Panel.pickingMode = PickingMode.Ignore;
+        m_PressureZone3Panel.pickingMode = PickingMode.Ignore;
 
     }
 
@@ -113,6 +118,8 @@ public class PressureZoneHUDController : MonoBehaviour
     {
         root = GetComponent<UIDocument>();
         m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelString);
+        m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelString);
+        m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
         m_PressureZone3TextField = root.rootVisualElement.Q<Label>(PressureZone3LabelString);
@@ -127,7 +134,12 @@ public class PressureZoneHUDController : MonoBehaviour
         m_CheckSpring1SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring1SubtractButtonString);
         m_CheckSpring2AddButton = root.rootVisualElement.Q<Button>(CheckSpring2AddButtonString);
         m_CheckSpring2SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring2SubtractButtonString);
+        VisualElement newVisEle = new VisualElement();
+        newVisEle.name = "new_VisEle";
+        m_SupplyPressurePanel.parent.Add(newVisEle);
+        newVisEle.AddToClassList("pressure-zone-visEle");
 
+        newVisEle.AddManipulator(new ExampleDragger());
 
 
 
@@ -375,10 +387,10 @@ public class PressureZoneHUDController : MonoBehaviour
     {
         var target = evtTarget;
         var newPos = target.ChangeCoordinatesTo(m_SupplyPressurePanel.parent, evtPos);
-        m_SupplyPressurePanel.style.position = Position.Absolute;
+
         m_SupplyPressurePanel.style.top = newPos.y - m_SupplyPressurePanel.layout.height / 2;
         m_SupplyPressurePanel.style.left = newPos.x - m_SupplyPressurePanel.layout.width / 2;
-
+        m_SupplyPressurePanel.style.position = Position.Absolute;
 
 
 
@@ -448,11 +460,11 @@ public class PressureZoneHUDController : MonoBehaviour
             case SupplyPressurePanelString:
 
                 break;
-            case PressureZone2Panel:
+            case PressureZone2PanelString:
                 waterController.zone2PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone2 slider operated");
                 break;
-            case PressureZone3Panel:
+            case PressureZone3PanelString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone3 slider operated");
                 break;

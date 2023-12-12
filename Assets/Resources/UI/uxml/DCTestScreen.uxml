@@ -2,7 +2,6 @@
     <ui:Template name="SupplyPressure__panel" src="project://database/Assets/Resources/UI/UXML_Templates/SupplyPressure__panel.uxml?fileID=9197481963319205126&amp;guid=bf4fb24e84d564ce191da3e1ee25a1f6&amp;type=3#SupplyPressure__panel" />
     <ui:Template name="PressureZone2__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone2__panel.uxml?fileID=9197481963319205126&amp;guid=2ad926603d204450ca9e593c72d45904&amp;type=3#PressureZone2__panel" />
     <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panel.uxml?fileID=9197481963319205126&amp;guid=545e3da22844f490ca25947045e93a4e&amp;type=3#PressureZone3__panel" />
-    <ui:Template name="PressureZoneHud" src="project://database/Assets/Resources/UI/uxml/PressureZoneHud.uxml?fileID=9197481963319205126&amp;guid=e5a98a97ba5674f739ff121bd1b72bde&amp;type=3#PressureZoneHud" />
     <ui:Template name="GaugeReading" src="project://database/Assets/Resources/UI/uxml/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
@@ -16,12 +15,11 @@
             <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" style="display: none;" />
             <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" style="display: none;" />
         </ui:VisualElement>
-        <ui:VisualElement name="PressureZoneHudContainer" picking-mode="Ignore" class="pressure-zone-hud-containter">
-            <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" picking-mode="Ignore" class="pressure-zone-panel-supply" />
-            <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" picking-mode="Ignore" />
-            <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" picking-mode="Ignore" />
+        <ui:VisualElement name="PressureZoneHudWrapper" picking-mode="Ignore" class="pressure-zone-hud-wrapper" style="width: 844px;">
+            <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-supply" />
+            <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" />
+            <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" />
         </ui:VisualElement>
-        <ui:Instance template="PressureZoneHud" name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container" style="display: none;" />
         <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper" style="display: none;">
             <AttributeOverrides element-name="Container" picking-mode="Ignore" />
             <AttributeOverrides element-name="Gauge_tick_container" picking-mode="Ignore" />

@@ -143,3 +143,28 @@
 
 .tick-group-start {
 }
+.pressure-zone-wrapper{
+  position: relative;
+    align-self: auto;
+    align-items: center;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-around;
+    width: 100%;
+    cursor: initial;
+    height: 100%;
+    left: auto;
+    top: auto;
+    right: 2%;
+    bottom: auto;
+    max-width: none;
+    max-height: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 10%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
