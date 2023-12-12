@@ -292,7 +292,7 @@
     height: 17px;
 }
 
-.pressure-zone-panel-supply {
+.pressure-zone-panel-move {
     position: relative;
     left: 0;
     top: 0;

@@ -16,9 +16,9 @@
             <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" style="display: none;" />
         </ui:VisualElement>
         <ui:VisualElement name="PressureZoneHudWrapper" picking-mode="Ignore" class="pressure-zone-hud-wrapper" style="width: 844px;">
-            <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-supply" />
-            <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" />
-            <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" />
+            <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-move" />
+            <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="pressure-zone-panel-move" />
+            <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" class="pressure-zone-panel-move" />
         </ui:VisualElement>
         <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper" style="display: none;">
             <AttributeOverrides element-name="Container" picking-mode="Ignore" />

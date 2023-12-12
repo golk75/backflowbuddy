@@ -103,7 +103,7 @@ public class PressureZoneHUDController : MonoBehaviour
         SetVisualElements();
         RegisterTextFieldCallBacks();
         RegisterButtonCallBacks();
-        RegisterPanelCallBacks();
+
 
         m_SupplyPressureTextField.isDelayed = false;
         m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
@@ -134,13 +134,13 @@ public class PressureZoneHUDController : MonoBehaviour
         m_CheckSpring1SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring1SubtractButtonString);
         m_CheckSpring2AddButton = root.rootVisualElement.Q<Button>(CheckSpring2AddButtonString);
         m_CheckSpring2SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring2SubtractButtonString);
-        VisualElement newVisEle = new VisualElement();
-        newVisEle.name = "new_VisEle";
-        m_SupplyPressurePanel.parent.Add(newVisEle);
-        newVisEle.AddToClassList("pressure-zone-visEle");
 
-        newVisEle.AddManipulator(new ExampleDragger());
 
+
+        //add manipulators
+        m_SupplyPressurePanel.AddManipulator(new ExampleDragger());
+        m_PressureZone2Panel.AddManipulator(new ExampleDragger());
+        m_PressureZone3Panel.AddManipulator(new ExampleDragger());
 
 
         foreach (var dragger in SliderHandleList)
@@ -191,9 +191,6 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void RegisterButtonCallBacks()
     {
-
-
-
         //addition down and up
         m_CheckSpring1AddButton.RegisterCallback<PointerDownEvent>(SpringCheck1AdditionButton_down, TrickleDown.TrickleDown);
         m_CheckSpring1AddButton.RegisterCallback<PointerUpEvent>(SpringCheck1Addition_up);
@@ -336,81 +333,11 @@ public class PressureZoneHUDController : MonoBehaviour
 
     }
 
-    Vector3 GetPointerPos()
-    {
-        Vector3 screenPosition = Input.mousePosition;
-
-        // If you're using a perspective camera for parallax,
-        // be sure to assign a depth to this point.
-        // screenPosition.z = 1f;
-
-        return Camera.main.ScreenToWorldPoint(screenPosition);
-    }
     void RegisterSliderCallBacks(VisualElement slider)
     {
         slider.RegisterCallback<ChangeEvent<float>>(SliderValueChanged);
         slider.RegisterCallback<GeometryChangedEvent>(SliderInitialPositioning);
-
     }
-    void RegisterPanelCallBacks()
-    {
-        m_SupplyPressurePanel.RegisterCallback<PointerDownEvent>(PanelPointerDownEvent);
-        m_SupplyPressurePanel.RegisterCallback<PointerMoveEvent>(PanelPointerMoveEvent);
-        m_SupplyPressurePanel.RegisterCallback<PointerUpEvent>(PanelPointerUpEvent);
-    }
-
-    private void PanelPointerUpEvent(PointerUpEvent evt)
-    {
-        if (isPointerDown != false)
-        {
-            isPointerDown = false;
-        }
-    }
-
-    private void PanelPointerDownEvent(PointerDownEvent evt)
-    {
-        isPointerDown = true;
-
-        //Start the drag
-        var target = (VisualElement)evt.currentTarget;
-        StartDrag(evt.localPosition, target);
-
-        // enabled = true;
-        // Vector3 pointerOrigin = m_SupplyPressurePanel.parent.LocalToWorld(m_SupplyPressurePanel.transform.position);
-        // Vector3 currentPointerPos = GetPointerPos();
-        // // Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
-        // m_SupplyPressurePanel.transform.position = m_SupplyPressurePanel.parent.WorldToLocal(pointerOrigin - currentPointerPos);
-        // OnSupplyPanelMove = StartCoroutine(MovePanel(m_SupplyPressurePanel, m_SupplyPressurePanel.transform.position));
-
-    }
-    private void StartDrag(Vector2 evtPos, VisualElement evtTarget)
-    {
-        var target = evtTarget;
-        var newPos = target.ChangeCoordinatesTo(m_SupplyPressurePanel.parent, evtPos);
-
-        m_SupplyPressurePanel.style.top = newPos.y - m_SupplyPressurePanel.layout.height / 2;
-        m_SupplyPressurePanel.style.left = newPos.x - m_SupplyPressurePanel.layout.width / 2;
-        m_SupplyPressurePanel.style.position = Position.Absolute;
-
-
-
-    }
-    private void PanelPointerMoveEvent(PointerMoveEvent evt)
-    {
-        if (isPointerDown)
-        {
-            var target = (VisualElement)evt.currentTarget;
-            var newPos = target.ChangeCoordinatesTo(m_SupplyPressurePanel.parent, evt.localPosition);
-            m_SupplyPressurePanel.style.top = newPos.y - m_SupplyPressurePanel.layout.height / 2;
-            m_SupplyPressurePanel.style.left = newPos.x - m_SupplyPressurePanel.layout.width / 2;
-            // m_SupplyPressurePanel.style.top = evt.position.y - m_SupplyPressurePanel.layout.height / 2;
-            // m_SupplyPressurePanel.style.left = evt.position.x - m_SupplyPressurePanel.layout.width / 2;
-        }
-    }
-
-
-
-
 
     private void SliderInitialPositioning(GeometryChangedEvent evt)
     {

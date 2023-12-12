@@ -159,20 +159,3 @@
     padding-bottom: 0;
     justify-content: space-between;
 }
-
-.pressure-zone-visEle {
-    width: 250px;
-    align-self: auto;
-    align-items: center;
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 123px;
-    border-left-color: rgb(255, 0, 0);
-    border-right-color: rgb(255, 0, 0);
-    border-top-color: rgb(255, 0, 0);
-    border-bottom-color: rgb(255, 0, 0);
-    background-color: rgb(255, 0, 0);
-}
