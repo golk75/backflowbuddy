@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 using UnityEngine.UIElements;
@@ -43,7 +44,7 @@ public class PressureZoneHUDController : MonoBehaviour
     Button m_CheckSpring2AddButton;
     Button m_CheckSpring2SubtractButton;
     VisualElement m_SupplyPressurePanel;
-
+    VisualElement target;
 
     //slider elements
     VisualElement m_PressureZoneSliderBar;
@@ -80,6 +81,10 @@ public class PressureZoneHUDController : MonoBehaviour
     Coroutine OnDecreaseValue;
     Coroutine OnSupplyPanelMove;
 
+
+    private Vector2 targetStartPosition { get; set; }
+
+    private Vector3 pointerStartPosition { get; set; }
     void OnEnable()
     {
 
@@ -337,31 +342,63 @@ public class PressureZoneHUDController : MonoBehaviour
     }
     void RegisterPanelCallBacks()
     {
-        m_SupplyPressurePanel.RegisterCallback<PointerDownEvent>(PanelMoveEvent);
+        m_SupplyPressurePanel.RegisterCallback<PointerDownEvent>(PanelPointerDownEvent);
+        m_SupplyPressurePanel.RegisterCallback<PointerMoveEvent>(PanelPointerMoveEvent);
+        m_SupplyPressurePanel.RegisterCallback<PointerUpEvent>(PanelPointerUpEvent);
     }
 
-    private void PanelMoveEvent(PointerDownEvent evt)
+    private void PanelPointerUpEvent(PointerUpEvent evt)
     {
+        if (isPointerDown != false)
+        {
+            isPointerDown = false;
+        }
+    }
+
+    private void PanelPointerDownEvent(PointerDownEvent evt)
+    {
+        isPointerDown = true;
+
+        //Start the drag
+        var target = (VisualElement)evt.currentTarget;
+        StartDrag(evt.localPosition, target);
+
+        // enabled = true;
         // Vector3 pointerOrigin = m_SupplyPressurePanel.parent.LocalToWorld(m_SupplyPressurePanel.transform.position);
         // Vector3 currentPointerPos = GetPointerPos();
         // // Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
         // m_SupplyPressurePanel.transform.position = m_SupplyPressurePanel.parent.WorldToLocal(pointerOrigin - currentPointerPos);
-        OnSupplyPanelMove = StartCoroutine(MovePanel());
+        // OnSupplyPanelMove = StartCoroutine(MovePanel(m_SupplyPressurePanel, m_SupplyPressurePanel.transform.position));
 
     }
-
-    private IEnumerator MovePanel()
+    private void StartDrag(Vector2 evtPos, VisualElement evtTarget)
     {
-        Vector3 pointerOrigin = m_SupplyPressurePanel.parent.LocalToWorld(m_SupplyPressurePanel.transform.position);
-        Vector3 currentPointerPos = GetPointerPos();
-        // Vector3 targetPointerPosition = currentPointerPos - pointerOrigin;
-        while (playerController.primaryTouchStarted > 0)
-        {
-            m_SupplyPressurePanel.transform.position = m_SupplyPressurePanel.parent.WorldToLocal(pointerOrigin - currentPointerPos);
-            yield return null;
-        }
+        var target = evtTarget;
+        var newPos = target.ChangeCoordinatesTo(m_SupplyPressurePanel.parent, evtPos);
+        m_SupplyPressurePanel.style.position = Position.Absolute;
+        m_SupplyPressurePanel.style.top = newPos.y - m_SupplyPressurePanel.layout.height / 2;
+        m_SupplyPressurePanel.style.left = newPos.x - m_SupplyPressurePanel.layout.width / 2;
+
+
+
 
     }
+    private void PanelPointerMoveEvent(PointerMoveEvent evt)
+    {
+        if (isPointerDown)
+        {
+            var target = (VisualElement)evt.currentTarget;
+            var newPos = target.ChangeCoordinatesTo(m_SupplyPressurePanel.parent, evt.localPosition);
+            m_SupplyPressurePanel.style.top = newPos.y - m_SupplyPressurePanel.layout.height / 2;
+            m_SupplyPressurePanel.style.left = newPos.x - m_SupplyPressurePanel.layout.width / 2;
+            // m_SupplyPressurePanel.style.top = evt.position.y - m_SupplyPressurePanel.layout.height / 2;
+            // m_SupplyPressurePanel.style.left = evt.position.x - m_SupplyPressurePanel.layout.width / 2;
+        }
+    }
+
+
+
+
 
     private void SliderInitialPositioning(GeometryChangedEvent evt)
     {

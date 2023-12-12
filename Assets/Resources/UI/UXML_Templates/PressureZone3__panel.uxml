@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Template name="PressureZoneSlider" src="project://database/Assets/Resources/UI/uxml/PressureZoneSlider.uxml?fileID=9197481963319205126&amp;guid=eede08432da9d4042ba725e9a47f0c99&amp;type=3#PressureZoneSlider" />
+    <ui:VisualElement name="PressureZone3__panel" class="pressure-zone-panel">
+        <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
+        <ui:VisualElement name="PressureZone3_value_container" class="checkspringx-container">
+            <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_header" class="pressure-zone-header" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_label" class="pressure-zone-value-label" style="width: 50%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

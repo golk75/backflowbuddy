@@ -1,50 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="PressureZoneSlider" src="project://database/Assets/Resources/UI/uxml/PressureZoneSlider.uxml?fileID=9197481963319205126&amp;guid=eede08432da9d4042ba725e9a47f0c99&amp;type=3#PressureZoneSlider" />
+    <ui:Template name="SupplyPressure__panel" src="project://database/Assets/Resources/UI/UXML_Templates/SupplyPressure__panel.uxml?fileID=9197481963319205126&amp;guid=bf4fb24e84d564ce191da3e1ee25a1f6&amp;type=3#SupplyPressure__panel" />
+    <ui:Template name="PressureZone2__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone2__panel.uxml?fileID=9197481963319205126&amp;guid=2ad926603d204450ca9e593c72d45904&amp;type=3#PressureZone2__panel" />
+    <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panel.uxml?fileID=9197481963319205126&amp;guid=545e3da22844f490ca25947045e93a4e&amp;type=3#PressureZone3__panel" />
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
     <ui:VisualElement name="PressureZoneContainer" picking-mode="Ignore" class="pressure-zone-container">
-        <ui:VisualElement name="SupplyPressure__panel" class="pressure-zone-panel">
-            <ui:VisualElement name="SupplyPressure_input_panel">
-                <ui:VisualElement name="SupplyPressure_value_container" class="sub-container">
-                    <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="pressure-zone-header" />
-                    <ui:TextField name="SupplyPressure__value" max-length="2" style="width: 50%;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="CheckSpring_value_container" class="sub-container">
-                    <ui:VisualElement name="CheckSpring1_value_container" class="checkspringx-container">
-                        <ui:Label tabindex="-1" text="Check #1 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_header" class="pressure-zone-header" />
-                        <ui:VisualElement name="CheckSpring1_value_button_container" class="check-spring-value-button-container">
-                            <ui:VisualElement name="CheckSpring1_value_button_subcontainer" class="check-spring-value-button-container checkspring-button-sub-container">
-                                <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_add_button" class="check-spring-value-button" />
-                                <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_subtract_button" class="check-spring-value-button" />
-                            </ui:VisualElement>
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_label" class="check-spring-value-label" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="CheckSpring2_value_container" class="checkspringx-container">
-                        <ui:Label tabindex="-1" text="Check #2 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_header" class="pressure-zone-header" />
-                        <ui:VisualElement name="CheckSpring2_value_button_container" class="check-spring-value-button-container">
-                            <ui:VisualElement name="CheckSpring2_value_button_subcontainer" class="check-spring-value-button-container checkspring-button-sub-container">
-                                <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_add_button" class="check-spring-value-button" />
-                                <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_subtract_button" class="check-spring-value-button" />
-                            </ui:VisualElement>
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_label" class="check-spring-value-label" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="PressureZone2__panel" picking-mode="Ignore" class="pressure-zone-panel">
-            <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
-            <ui:VisualElement name="PressureZone2_value_container" class="checkspringx-container">
-                <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_header" class="pressure-zone-header" />
-                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label" style="width: 50%;" />
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="PressureZone3__panel" class="pressure-zone-panel">
-            <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" />
-            <ui:VisualElement name="PressureZone3_value_container" class="checkspringx-container">
-                <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_header" class="pressure-zone-header" />
-                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_label" class="pressure-zone-value-label" style="width: 50%;" />
-            </ui:VisualElement>
-        </ui:VisualElement>
+        <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" />
+        <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" />
+        <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" />
     </ui:VisualElement>
 </ui:UXML>
