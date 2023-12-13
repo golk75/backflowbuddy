@@ -1,7 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="SupplyPressure__panel" src="project://database/Assets/Resources/UI/UXML_Templates/SupplyPressure__panel.uxml?fileID=9197481963319205126&amp;guid=bf4fb24e84d564ce191da3e1ee25a1f6&amp;type=3#SupplyPressure__panel" />
-    <ui:Template name="PressureZone2__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone2__panel.uxml?fileID=9197481963319205126&amp;guid=2ad926603d204450ca9e593c72d45904&amp;type=3#PressureZone2__panel" />
-    <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panel.uxml?fileID=9197481963319205126&amp;guid=545e3da22844f490ca25947045e93a4e&amp;type=3#PressureZone3__panel" />
+    <ui:Template name="PanelDropArea_Temp" src="project://database/Assets/Resources/UI/UXML_Templates/PanelDropArea_Temp.uxml?fileID=9197481963319205126&amp;guid=01100cd62af25443da32168c81ce294e&amp;type=3#PanelDropArea_Temp" />
+    <ui:Template name="SupplyPressure__panel" src="project://database/Assets/Resources/UI/UXML_Templates/SupplyPressure__panelTemp.uxml?fileID=9197481963319205126&amp;guid=bf4fb24e84d564ce191da3e1ee25a1f6&amp;type=3#SupplyPressure__panelTemp" />
+    <ui:Template name="PressureZone2__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone2__panelTemp.uxml?fileID=9197481963319205126&amp;guid=2ad926603d204450ca9e593c72d45904&amp;type=3#PressureZone2__panelTemp" />
+    <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panelTemp.uxml?fileID=9197481963319205126&amp;guid=545e3da22844f490ca25947045e93a4e&amp;type=3#PressureZone3__panelTemp" />
     <ui:Template name="GaugeReading" src="project://database/Assets/Resources/UI/uxml/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
@@ -15,10 +16,11 @@
             <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" style="display: none;" />
             <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" style="display: none;" />
         </ui:VisualElement>
+        <ui:Instance template="PanelDropArea_Temp" name="PanelDropArea_Temp" class="panel-drop-area-container" style="display: none;" />
         <ui:VisualElement name="PressureZoneHudWrapper" picking-mode="Ignore" class="pressure-zone-hud-wrapper" style="width: 844px;">
-            <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-move" />
-            <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="pressure-zone-panel-move" />
-            <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" class="pressure-zone-panel-move" />
+            <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-static" />
+            <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="pressure-zone-panel-static" />
+            <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" class="pressure-zone-panel-static" />
         </ui:VisualElement>
         <ui:Instance template="GaugeReading" name="GaugeReading" picking-mode="Ignore" class="gauge-reading-wrapper" style="display: none;">
             <AttributeOverrides element-name="Container" picking-mode="Ignore" />

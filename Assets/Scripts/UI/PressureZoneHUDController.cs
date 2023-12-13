@@ -56,7 +56,7 @@ public class PressureZoneHUDController : MonoBehaviour
     VisualElement m_SliderFillBar;
     VisualElement m_NewDragger;
     VisualElement m_CurrentSlider;
-
+    VisualElement m_ResizePanel;
 
     //booleans
     public bool isPointerDown = false;
@@ -137,10 +137,15 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
 
-        //add manipulators
-        m_SupplyPressurePanel.AddManipulator(new ExampleDragger());
-        m_PressureZone2Panel.AddManipulator(new ExampleDragger());
-        m_PressureZone3Panel.AddManipulator(new ExampleDragger());
+        //add dragger manipulator
+        m_SupplyPressurePanel.AddManipulator(new PanelDragger());
+        m_PressureZone2Panel.AddManipulator(new PanelDragger());
+        m_PressureZone3Panel.AddManipulator(new PanelDragger());
+
+        //add resizer manipulator
+        // m_SupplyPressurePanel.AddManipulator(new ExampleResizer());
+        // m_PressureZone2Panel.AddManipulator(new ExampleResizer());
+        // m_PressureZone3Panel.AddManipulator(new ExampleResizer());
 
 
         foreach (var dragger in SliderHandleList)

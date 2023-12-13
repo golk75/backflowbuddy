@@ -159,3 +159,48 @@
     padding-bottom: 0;
     justify-content: space-between;
 }
+
+.pressure-zone-panel-resize {
+}
+
+.pressure-zone-panel-static {
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 250px;
+    align-self: auto;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 123px;
+}
+
+.pressure-zone-panel-move {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 250px;
+    align-self: auto;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 123px;
+}
+
+.panel-drop-area-container {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-self: flex-start;
+}

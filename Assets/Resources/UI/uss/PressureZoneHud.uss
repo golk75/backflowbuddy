@@ -292,23 +292,6 @@
     height: 17px;
 }
 
-.pressure-zone-panel-move {
-    position: relative;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 250px;
-    align-self: auto;
-    align-items: center;
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 123px;
-}
-
 .pressure-zone-panel-parent {
     background-color: rgba(54, 55, 63, 0.63);
     border-left-color: rgb(255, 255, 255);
