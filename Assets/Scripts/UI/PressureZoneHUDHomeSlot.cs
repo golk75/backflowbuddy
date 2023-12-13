@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PressureZoneHUDHomeSlot : VisualElement
+public class PressureZoneHUDHomeSlot : MonoBehaviour
 {
 
+    void Awake()
+    {
 
+    }
 }

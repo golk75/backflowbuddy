@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +10,18 @@ public class PanelDragger : PointerManipulator
     protected bool m_Active;
     private int m_PointerId;
     private Vector2 m_StartSize;
+
+
+
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    private void Awake()
+    {
+
+    }
+
     public PanelDragger()
     {
         activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
@@ -36,10 +50,17 @@ public class PanelDragger : PointerManipulator
 
         if (!m_Active || !target.HasPointerCapture(m_PointerId) || !CanStopManipulation(evt))
             return;
+        // IEnumerable<VisualElement> HoveredSlots = PressureZoneHUDController.DropAreaSlotList.Where(x =>
+        //         x.worldBound.Overlaps(target.worldBound));
+        //Set panel in DropArea slot if panel has been dragged over and mouse was released
 
+        Actions.onPanelDrop?.Invoke(target);
         m_Active = false;
         target.ReleaseMouse();
         evt.StopPropagation();
+
+
+
     }
 
 

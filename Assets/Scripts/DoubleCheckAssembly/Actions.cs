@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public static class Actions
 {
@@ -48,6 +49,9 @@ public static class Actions
     public static Action onTestCock4Closed;
     public static Action onHighBleedOperate;
     public static Action onHighBleedClosed;
+
+    //ui
+    public static Action<VisualElement> onPanelDrop;
 
     public static Action<float> onSupplyPressureInputChange;
 

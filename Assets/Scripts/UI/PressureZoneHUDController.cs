@@ -33,6 +33,9 @@ public class PressureZoneHUDController : MonoBehaviour
     const string CheckSpring2AddButtonString = "CheckSpring2_add_button";
     const string CheckSpring1SubtractButtonString = "CheckSpring1_subtract_button";
     const string CheckSpring2SubtractButtonString = "CheckSpring2_subtract_button";
+    const string DropAreaTopSlotString = "DropArea_top_slot";
+    const string DropAreaMidSlotString = "DropArea_middle_slot";
+    const string DropAreaBotSlotString = "DropArea_bottom_slot";
 
     //visual elements
     public TextField m_SupplyPressureTextField;
@@ -47,7 +50,7 @@ public class PressureZoneHUDController : MonoBehaviour
     VisualElement m_SupplyPressurePanel;
     VisualElement m_PressureZone2Panel;
     VisualElement m_PressureZone3Panel;
-    VisualElement target;
+    VisualElement currentPanelDragging;
 
     //slider elements
     VisualElement m_PressureZoneSliderBar;
@@ -57,10 +60,14 @@ public class PressureZoneHUDController : MonoBehaviour
     VisualElement m_NewDragger;
     VisualElement m_CurrentSlider;
     VisualElement m_ResizePanel;
+    public VisualElement m_DropAreaTopSlot;
+    public VisualElement m_DropAreaMidSlot;
+    public VisualElement m_DropAreaBotSlot;
+
 
     //booleans
     public bool isPointerDown = false;
-
+    bool isSlotHovered;
     //root
     UIDocument root;
 
@@ -69,6 +76,7 @@ public class PressureZoneHUDController : MonoBehaviour
     List<VisualElement> SliderHandleList;
     List<VisualElement> SliderBarList;
     List<VisualElement> SliderTrackerList;
+    public List<VisualElement> DropAreaSlotList = new List<VisualElement>();
 
 
     //floats
@@ -90,19 +98,18 @@ public class PressureZoneHUDController : MonoBehaviour
     private Vector3 pointerStartPosition { get; set; }
     void OnEnable()
     {
-
+        Actions.onPanelDrop += PanelSlotDrop;
     }
     void OnDisable()
     {
-
+        Actions.onPanelDrop -= PanelSlotDrop;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         SetVisualElements();
-        RegisterTextFieldCallBacks();
-        RegisterButtonCallBacks();
+        RegisterCallBacks();
 
 
         m_SupplyPressureTextField.isDelayed = false;
@@ -134,8 +141,13 @@ public class PressureZoneHUDController : MonoBehaviour
         m_CheckSpring1SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring1SubtractButtonString);
         m_CheckSpring2AddButton = root.rootVisualElement.Q<Button>(CheckSpring2AddButtonString);
         m_CheckSpring2SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring2SubtractButtonString);
+        m_DropAreaTopSlot = root.rootVisualElement.Q<VisualElement>(DropAreaTopSlotString);
+        m_DropAreaMidSlot = root.rootVisualElement.Q<VisualElement>(DropAreaMidSlotString);
+        m_DropAreaBotSlot = root.rootVisualElement.Q<VisualElement>(DropAreaBotSlotString);
 
-
+        DropAreaSlotList.Add(m_DropAreaTopSlot);
+        DropAreaSlotList.Add(m_DropAreaMidSlot);
+        DropAreaSlotList.Add(m_DropAreaBotSlot);
 
         //add dragger manipulator
         m_SupplyPressurePanel.AddManipulator(new PanelDragger());
@@ -188,14 +200,12 @@ public class PressureZoneHUDController : MonoBehaviour
     }
 
 
-    void RegisterTextFieldCallBacks()
+    void RegisterCallBacks()
     {
+        //text fields
         m_SupplyPressureTextField.RegisterCallback<ChangeEvent<string>>(InputValueChanged);
 
-    }
-
-    void RegisterButtonCallBacks()
-    {
+        //buttons
         //addition down and up
         m_CheckSpring1AddButton.RegisterCallback<PointerDownEvent>(SpringCheck1AdditionButton_down, TrickleDown.TrickleDown);
         m_CheckSpring1AddButton.RegisterCallback<PointerUpEvent>(SpringCheck1Addition_up);
@@ -208,7 +218,14 @@ public class PressureZoneHUDController : MonoBehaviour
         m_CheckSpring2SubtractButton.RegisterCallback<PointerDownEvent>(SpringCheck2SubtractButton_down, TrickleDown.TrickleDown);
         m_CheckSpring2SubtractButton.RegisterCallback<PointerUpEvent>(SpringCheck2SubtractButton_up);
 
+
+
     }
+
+
+
+
+
 
     /// <summary>
     /// Check Spring #2 button events
@@ -453,6 +470,25 @@ public class PressureZoneHUDController : MonoBehaviour
         }
     }
 
+    private void PanelSlotDrop(VisualElement target)
+    {
+
+        IEnumerable<VisualElement> slots = DropAreaSlotList.Where(x =>
+                 x.worldBound.Overlaps(target.worldBound));
+        Debug.Log($"DropAreaSlotList.Count(): {slots.Count()}");
+        Debug.Log($"slots.Count(): {slots.Count()}");
+        if (slots.Count() != 0)
+        {
+
+            var closestSlot = DropAreaSlotList.OrderBy(x => Vector2.Distance
+            (x.worldBound.position, target.worldBound.position)).First();
+            target.RemoveFromHierarchy();
+            closestSlot.Add(target);
+            target.style.position = Position.Relative;
+        }
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -462,6 +498,10 @@ public class PressureZoneHUDController : MonoBehaviour
 
         m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
         m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
+
+
+
+
 
 
 
