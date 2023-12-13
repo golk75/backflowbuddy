@@ -16,7 +16,7 @@
             <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" style="display: none;" />
             <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" style="display: none;" />
         </ui:VisualElement>
-        <ui:Instance template="PanelDropArea_Temp" name="PanelDropArea_Temp" class="panel-drop-area-container" style="display: flex;" />
+        <ui:Instance template="PanelDropArea_Temp" name="PanelDropArea_Temp" class="panel-drop-area-container" />
         <ui:VisualElement name="PressureZoneHudWrapper" picking-mode="Ignore" class="pressure-zone-hud-wrapper" style="width: 844px;">
             <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-static" />
             <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="pressure-zone-panel-static" />

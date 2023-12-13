@@ -1,56 +1,29 @@
 .container {
-    background-color: rgb(0, 0, 0);
-    flex-grow: 1;
-    height: 2922px;
-    opacity: 0.37;
-    top: 31px;
-}
-
-.header {
+    background-color: rgb(96, 10, 10);
+    width: 51%;
+    height: 2143px;
+    align-self: auto;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: rgb(112, 128, 144);
-    border-left-color: rgb(211, 211, 211);
-    border-right-color: rgb(211, 211, 211);
-    border-top-color: rgb(211, 211, 211);
-    border-bottom-color: rgb(211, 211, 211);
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: relative;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    justify-content: space-around;
 }
 
 .drop-area {
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: rgb(112, 128, 144);
-    border-left-color: rgb(211, 211, 211);
-    border-right-color: rgb(211, 211, 211);
-    border-top-color: rgb(211, 211, 211);
-    border-bottom-color: rgb(211, 211, 211);
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    width: 181px;
+    width: 100%;
+    height: 100%;
+}
+
+.pressure-zone-panel-parked-test {
 }

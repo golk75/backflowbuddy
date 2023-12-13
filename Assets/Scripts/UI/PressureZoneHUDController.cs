@@ -484,7 +484,9 @@ public class PressureZoneHUDController : MonoBehaviour
             (x.worldBound.position, target.worldBound.position)).First();
             target.RemoveFromHierarchy();
             closestSlot.Add(target);
-            target.style.position = Position.Relative;
+            target.RemoveFromClassList("pressure-zone-panel-static");
+            target.AddToClassList("pressure-zone-panel-parked");
+            // target.style.position = Position.Relative;
         }
 
     }
