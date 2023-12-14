@@ -4,8 +4,8 @@
     <ui:VisualElement name="PressureZone__panel" picking-mode="Ignore" class="pressure-zone-panel pressure-zone-panel-parked">
         <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" />
         <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container pressure-zone-value-container-parked">
-            <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
-            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
+            <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

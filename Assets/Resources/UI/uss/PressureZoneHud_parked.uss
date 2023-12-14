@@ -33,9 +33,9 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     align-items: center;
-    align-self: center;
+    align-self: flex-start;
     flex-direction: row;
-    flex-grow: 1;
+    flex-grow: 0;
 }
 
 .pressure-zone-header {
