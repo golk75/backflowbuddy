@@ -1,7 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
     <ui:VisualElement name="SupplyPressure__panel" picking-mode="Ignore" class="pressure-zone-panel">
         <ui:VisualElement name="SupplyPressure_input_panel">
-            <ui:VisualElement name="SupplyPressure_value_container" class="sub-container">
+            <ui:VisualElement name="SupplyPressure_value_container">
                 <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="pressure-zone-header" />
                 <ui:TextField name="SupplyPressure__value" max-length="2" style="width: 50%;" />
             </ui:VisualElement>

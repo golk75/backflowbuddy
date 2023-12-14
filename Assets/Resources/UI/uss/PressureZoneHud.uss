@@ -102,70 +102,6 @@
     flex-direction: row;
 }
 
-.pressure-zone-header {
-    flex-grow: 0;
-    align-items: auto;
-    align-self: auto;
-    justify-content: flex-start;
-    flex-direction: row;
-    color: rgb(255, 255, 255);
-    font-size: 14px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 1px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.pressure-zone-panel {
-    background-color: rgba(54, 55, 63, 0.63);
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    flex-direction: row;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.pressure-zone-value-label {
-    background-color: rgb(255, 255, 255);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    height: 100%;
-    width: 75%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 16px;
-    align-self: center;
-    -unity-text-align: middle-center;
-}
-
 .pressure-zone-value-container {
     -unity-text-align: middle-center;
     align-items: auto;
@@ -186,27 +122,7 @@
     justify-content: center;
 }
 
-.check-spring-value-label {
-    background-color: rgb(255, 255, 255);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    top: auto;
-    bottom: auto;
-    left: 16px;
-    -unity-text-align: middle-center;
-    right: auto;
-    width: 35%;
-    height: 32px;
-    align-self: flex-end;
-}
-
-.sub-container {
+.supply-pressure-sub-container {
     width: 100%;
     height: auto;
     left: 0;
@@ -232,25 +148,6 @@
     align-items: center;
     justify-content: center;
     align-self: auto;
-}
-
-.checkspringx-container {
-    align-items: center;
-    justify-content: center;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    margin-right: 4px;
-    margin-left: 4px;
-    align-self: center;
-    flex-grow: 0;
-    position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
 }
 
 .check-spring-value-button-container {
@@ -319,4 +216,166 @@
     top: 0;
     right: 0;
     bottom: 0;
+}
+
+.pressure-zone-panel {
+    background-color: rgba(54, 55, 63, 0.63);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex-direction: row;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.pressure-zone-panel-parked {
+    background-color: rgba(54, 55, 63, 0.63);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    flex-direction: row;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    display: flex;
+}
+
+.checkspringx-container {
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    margin-right: 4px;
+    margin-left: 4px;
+    align-self: center;
+    flex-grow: 0;
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.checkspringx-container-parked {
+    width: 100%;
+    height: 55%;
+}
+
+.pressure-zone-header {
+    flex-grow: 0;
+    align-items: auto;
+    align-self: auto;
+    justify-content: flex-start;
+    flex-direction: row;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 1px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.pressure-zone-header-parked {
+    color: rgb(255, 255, 255);
+}
+
+.check-spring-value-label {
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    top: auto;
+    bottom: auto;
+    left: 16px;
+    -unity-text-align: middle-center;
+    right: auto;
+    width: 35%;
+    height: 32px;
+    align-self: flex-end;
+}
+
+.check-spring-value-label-parked {
+}
+
+.pressure-zone-value-label {
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+    width: 75%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    align-self: center;
+    -unity-text-align: middle-center;
+}
+
+.pressure-zone-value-label-parked {
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+    width: 75%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    align-self: center;
+    -unity-text-align: middle-center;
 }

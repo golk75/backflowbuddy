@@ -129,13 +129,13 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
-        m_PressureZone3TextField = root.rootVisualElement.Q<Label>(PressureZone3LabelString);
+        m_PressureZone3TextField = m_PressureZone3Panel.Q<Label>("PressureZone2_value_label");
         m_PressureZoneSliderBar = root.rootVisualElement.Query(name: PressureZoneSliderBarString);
         m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
         SliderHandleList = root.rootVisualElement.Query(name: "unity-dragger").ToList();
         SliderBarList = root.rootVisualElement.Query(className: "pressure-zone-slider").ToList();
         SliderTrackerList = root.rootVisualElement.Query(name: "unity-tracker").ToList();
-        m_CheckSpring1Value = root.rootVisualElement.Q<Label>(CheckSpring1ValueLabelString);
+        m_CheckSpring1Value = m_SupplyPressurePanel.Q<Label>(CheckSpring1ValueLabelString);
         m_CheckSpring2Value = root.rootVisualElement.Q<Label>(CheckSpring2ValueLabelString);
         m_CheckSpring1AddButton = root.rootVisualElement.Q<Button>(CheckSpring1AddButtonString);
         m_CheckSpring1SubtractButton = root.rootVisualElement.Q<Button>(CheckSpring1SubtractButtonString);
