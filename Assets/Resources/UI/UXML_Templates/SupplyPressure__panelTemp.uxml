@@ -1,26 +1,26 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
-    <ui:VisualElement name="SupplyPressure__panel" picking-mode="Ignore" class="pressure-zone-panel">
-        <ui:VisualElement name="SupplyPressure_input_panel">
-            <ui:VisualElement name="SupplyPressure_value_container">
-                <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="pressure-zone-header" />
-                <ui:TextField name="SupplyPressure__value" max-length="2" style="width: 50%;" />
+    <ui:VisualElement name="SupplyPressure__panel" picking-mode="Ignore" class="supply-pressure-zone-panel">
+        <ui:VisualElement name="SupplyPressure_input_panel" class="supply-pressure-input-panel">
+            <ui:VisualElement name="SupplyPressure_value_container" class="supply-pressure-value-container">
+                <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="supply-pressure-zone-header" />
+                <ui:TextField name="SupplyPressure__value" max-length="2" class="supply-pressure-value-label" style="width: 50%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="CheckSpring_value_container" class="sub-container">
-                <ui:VisualElement name="CheckSpring1_value_container" class="checkspringx-container">
-                    <ui:Label tabindex="-1" text="Check #1 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_header" class="pressure-zone-header" />
+            <ui:VisualElement name="CheckSpring_value_container" class="check-spring-value-container">
+                <ui:VisualElement name="CheckSpring1_value_container" class="check-spring-value-sub-container">
+                    <ui:Label tabindex="-1" text="Check #1 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_header" class="check-spring-value-header" />
                     <ui:VisualElement name="CheckSpring1_value_button_container" class="check-spring-value-button-container">
-                        <ui:VisualElement name="CheckSpring1_value_button_subcontainer" class="check-spring-value-button-container checkspring-button-sub-container">
+                        <ui:VisualElement name="CheckSpring1_value_button_subcontainer" class="check-spring-button-sub-container">
                             <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_add_button" class="check-spring-value-button" />
                             <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_subtract_button" class="check-spring-value-button" />
                         </ui:VisualElement>
                         <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_label" class="check-spring-value-label" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="CheckSpring2_value_container" class="checkspringx-container">
-                    <ui:Label tabindex="-1" text="Check #2 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_header" class="pressure-zone-header" />
+                <ui:VisualElement name="CheckSpring2_value_container" class="check-spring-value-sub-container">
+                    <ui:Label tabindex="-1" text="Check #2 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_header" class="check-spring-value-header" />
                     <ui:VisualElement name="CheckSpring2_value_button_container" class="check-spring-value-button-container">
-                        <ui:VisualElement name="CheckSpring2_value_button_subcontainer" class="check-spring-value-button-container checkspring-button-sub-container">
+                        <ui:VisualElement name="CheckSpring2_value_button_subcontainer" class="check-spring-button-sub-container">
                             <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_add_button" class="check-spring-value-button" />
                             <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_subtract_button" class="check-spring-value-button" />
                         </ui:VisualElement>

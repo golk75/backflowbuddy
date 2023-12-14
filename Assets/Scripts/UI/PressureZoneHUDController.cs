@@ -129,7 +129,7 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
-        m_PressureZone3TextField = m_PressureZone3Panel.Q<Label>("PressureZone2_value_label");
+        m_PressureZone3TextField = m_PressureZone3Panel.Q<Label>(PressureZone3LabelString);
         m_PressureZoneSliderBar = root.rootVisualElement.Query(name: PressureZoneSliderBarString);
         m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
         SliderHandleList = root.rootVisualElement.Query(name: "unity-dragger").ToList();
