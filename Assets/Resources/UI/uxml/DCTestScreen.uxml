@@ -7,7 +7,7 @@
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
     <Style src="project://database/Assets/Resources/UI/uss/DCTestScreen.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DCTestScreen" />
-    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud" />
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud_move.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud_move" />
     <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" picking-mode="Ignore" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
         <ui:VisualElement name="ButtonWrapper" picking-mode="Ignore" class="button-wrapper">
             <ui:Button name="MenuButton" focusable="false" class="menu-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_15_list_.png?fileID=2800000&amp;guid=32a4f33563139ce4da97630a9d7a3722&amp;type=3#T_15_list_&apos;);" />
