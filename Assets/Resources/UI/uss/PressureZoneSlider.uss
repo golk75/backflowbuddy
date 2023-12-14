@@ -87,7 +87,6 @@
 }
 
 .pressure-zone-slider {
-    height: 100px;
     background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
     width: 20px;
     min-width: auto;
@@ -95,4 +94,16 @@
     max-width: none;
     max-height: none;
     margin-right: 0;
+    height: 100px;
+}
+
+.pressure-zone-slider-parked {
+    background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
+    width: 20px;
+    min-width: auto;
+    overflow: hidden;
+    max-width: none;
+    max-height: none;
+    margin-right: 0;
+    height: 75px;
 }

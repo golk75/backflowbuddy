@@ -1,4 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneSlider.uss?fileID=7433441132597879392&amp;guid=b928e6a2ee3824672bcb593bd1e09328&amp;type=3#PressureZoneSlider" />
-    <ui:Slider picking-mode="Ignore" label="Slider" high-value="2" name="PressureZoneSlider" direction="Vertical" class="pressure-zone-slider" style="background-image: resource(&apos;UI/Textures/Custom Size&apos;);" />
+    <ui:Slider picking-mode="Ignore" label="Slider" high-value="2" name="PressureZoneSlider" direction="Vertical" class="pressure-zone-slider-parked" style="background-image: resource(&apos;UI/Textures/Custom Size&apos;);" />
 </ui:UXML>
