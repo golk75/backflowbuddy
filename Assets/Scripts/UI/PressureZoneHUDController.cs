@@ -33,9 +33,9 @@ public class PressureZoneHUDController : MonoBehaviour
     const string CheckSpring2AddButtonString = "CheckSpring2_add_button";
     const string CheckSpring1SubtractButtonString = "CheckSpring1_subtract_button";
     const string CheckSpring2SubtractButtonString = "CheckSpring2_subtract_button";
-    const string DropAreaTopSlotString = "DropArea_top_slot";
-    const string DropAreaMidSlotString = "DropArea_middle_slot";
-    const string DropAreaBotSlotString = "DropArea_bottom_slot";
+    const string DropAreaTopSlotString = "PressurePanel_slot_top";
+    const string DropAreaMidSlotString = "PressurePanel_slot_middle";
+    const string DropAreaBotSlotString = "PressurePanel_slot_bottom";
 
     //visual elements
     public TextField m_SupplyPressureTextField;

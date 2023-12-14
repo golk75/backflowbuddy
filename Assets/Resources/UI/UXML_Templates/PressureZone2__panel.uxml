@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Template name="PressureZoneSlider" src="project://database/Assets/Resources/UI/uxml/PressureZoneSlider.uxml?fileID=9197481963319205126&amp;guid=eede08432da9d4042ba725e9a47f0c99&amp;type=3#PressureZoneSlider" />
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud_move.uss?fileID=7433441132597879392&amp;guid=6b0939dcd40f4412686584d4e88a1b09&amp;type=3#PressureZoneHud_move" />
-    <ui:VisualElement name="PressureZone__panel" picking-mode="Ignore" class="pressure-zone-panel-parked pressure-zone-panel">
+    <ui:VisualElement name="PressureZone__panel" picking-mode="Ignore" class="pressure-zone-panel pressure-zone-panel-parked">
         <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" />
-        <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container-parked">
-            <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header-parked" />
-            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label-parked" style="width: 50%;" />
+        <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container pressure-zone-value-container-parked">
+            <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

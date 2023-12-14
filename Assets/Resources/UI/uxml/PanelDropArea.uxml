@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="PanelDropArea_containerTemp" src="project://database/Assets/Resources/UI/UXML_Templates/PanelDropArea_Temp.uxml?fileID=9197481963319205126&amp;guid=01100cd62af25443da32168c81ce294e&amp;type=3#PanelDropArea_Temp" />
-    <Style src="project://database/Assets/Resources/UI/uss/DragAndDrop.uss?fileID=7433441132597879392&amp;guid=00a1fdf3be12e4f71931fe6f810e4cc8&amp;type=3#DragAndDrop" />
-    <ui:Instance template="PanelDropArea_containerTemp" name="PanelDropArea_Temp" />
-</ui:UXML>
