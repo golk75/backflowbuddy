@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="SupplyPressure__panel" src="project://database/Assets/Resources/UI/UXML_Templates/SupplyPressure__panelTemp.uxml?fileID=9197481963319205126&amp;guid=bf4fb24e84d564ce191da3e1ee25a1f6&amp;type=3#SupplyPressure__panelTemp" />
     <ui:Template name="PressureZone2__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone2__panel.uxml?fileID=9197481963319205126&amp;guid=da5b3a5e3acfb4d949e83750c59b098e&amp;type=3#PressureZone2__panel" />
+    <ui:Template name="SupplyPressure__panelTemp" src="project://database/Assets/Resources/UI/UXML_Templates/SupplyPressure__panelTemp.uxml?fileID=9197481963319205126&amp;guid=bf4fb24e84d564ce191da3e1ee25a1f6&amp;type=3#SupplyPressure__panelTemp" />
+    <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panel.uxml?fileID=9197481963319205126&amp;guid=2695a4a2da628412ea90981ce07b80df&amp;type=3#PressureZone3__panel" />
     <ui:Template name="GaugeReading" src="project://database/Assets/Resources/UI/uxml/GaugeReading.uxml?fileID=9197481963319205126&amp;guid=27458618d10684dc6874f8e6d01ec91a&amp;type=3#GaugeReading" />
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
-    <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panel.uxml?fileID=9197481963319205126&amp;guid=2695a4a2da628412ea90981ce07b80df&amp;type=3#PressureZone3__panel" />
     <Style src="project://database/Assets/Resources/UI/uss/DCTestScreen.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DCTestScreen" />
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud_parked.uss?fileID=7433441132597879392&amp;guid=52141e1763a324a00b382ca1bd2d11b0&amp;type=3#PressureZoneHud_parked" />
     <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" picking-mode="Ignore" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
@@ -19,18 +19,18 @@
         </ui:VisualElement>
         <ui:VisualElement name="Middle_container" style="flex-direction: row; height: 80%;">
             <ui:VisualElement name="PressurePanel_slot_container" class="pressure-panel-slot-container">
-                <ui:VisualElement name="PressurePanel_slot_top" style="flex-grow: 1; justify-content: flex-end;">
-                    <ui:Instance template="SupplyPressure__panel" name="SupplyPressure__panel" class="pressure-zone-panel-static" style="display: flex;" />
+                <ui:VisualElement name="PressurePanel_slot_top" class="pressure-panel-slot">
+                    <ui:Instance template="SupplyPressure__panelTemp" name="SupplyPressure__panelTemp" />
                 </ui:VisualElement>
-                <ui:VisualElement name="PressurePanel_slot_middle" style="flex-grow: 1;">
+                <ui:VisualElement name="PressurePanel_slot_middle" class="pressure-panel-slot">
                     <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" />
                 </ui:VisualElement>
-                <ui:VisualElement name="PressurePanel_slot_bottom" style="flex-grow: 1;">
-                    <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" />
-                </ui:VisualElement>
+                <ui:VisualElement name="PressurePanel_slot_bottom" class="pressure-panel-slot" />
             </ui:VisualElement>
             <ui:VisualElement name="PressureZoneHudWrapper" picking-mode="Ignore" class="pressure-zone-hud-wrapper">
-                <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" style="display: none;" />
+                <ui:Instance template="SupplyPressure__panelTemp" name="SupplyPressure__panelTemp" />
+                <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" />
+                <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Bottom_container" style="flex-direction: row; height: 10%;" />

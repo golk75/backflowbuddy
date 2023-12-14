@@ -154,9 +154,9 @@
 }
 
 .pressure-panel-slot-container {
-    background-color: rgba(226, 59, 59, 0.79);
-    margin-top: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
+    background-color: rgba(229, 89, 89, 0.77);
+}
+
+.pressure-panel-slot {
+    width: 235px;
 }

@@ -161,15 +161,11 @@
     height: 75px;
     width: 100px;
 }
-.supply-pressure-value-label-parked > #unity-text-input {
 
+.supply-pressure-value-label-parked > #unity-text-input {
 }
+
 .supply-pressure-value-label {
-    align-self: center;
-    margin-top: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
 }
 
 .supply-pressure-value-label-parked {
@@ -226,13 +222,12 @@
 }
 
 .check-spring-button-sub-container {
-    flex-direction: row;  
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
 .check-spring-button-sub-container-parked {
-  
 }
 
 .check-spring-value-button {

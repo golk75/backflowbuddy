@@ -1,8 +1,0 @@
-@import url("/Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss");
-
-@import url("Styles/DC-Test-Scene.uss");
-@import url("/Assets/GameUI/Styles/TooltipStyleSheet/tooltip.uss");
-
-
-
-VisualElement {}

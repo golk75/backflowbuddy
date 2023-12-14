@@ -65,6 +65,11 @@ public class PressureZoneHUDController : MonoBehaviour
     public VisualElement m_DropAreaBotSlot;
 
 
+    //style sheets
+    public ThemeStyleSheet move;
+    public ThemeStyleSheet parked;
+
+
     //booleans
     public bool isPointerDown = false;
     bool isSlotHovered;
@@ -484,8 +489,18 @@ public class PressureZoneHUDController : MonoBehaviour
             (x.worldBound.position, target.worldBound.position)).First();
             target.RemoveFromHierarchy();
             closestSlot.Add(target);
-            target.RemoveFromClassList("pressure-zone-panel-static");
-            target.AddToClassList("pressure-zone-panel-parked");
+            if (!root.rootVisualElement.styleSheets.Contains(parked))
+            {
+                root.rootVisualElement.styleSheets.Remove(move);
+                root.rootVisualElement.styleSheets.Add(parked);
+
+            }
+            // else
+            // {
+            //     root.rootVisualElement.styleSheets.Remove(parked);
+            //     root.rootVisualElement.styleSheets.Add(move);
+            // }
+
             // target.style.position = Position.Relative;
         }
 
@@ -501,7 +516,19 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
         m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
 
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (root.rootVisualElement.styleSheets.Contains(move))
+            {
+                root.rootVisualElement.styleSheets.Remove(move);
+                root.rootVisualElement.styleSheets.Add(parked);
+            }
+            else
+            {
+                root.rootVisualElement.styleSheets.Remove(parked);
+                root.rootVisualElement.styleSheets.Add(move);
+            }
+        }
 
 
 

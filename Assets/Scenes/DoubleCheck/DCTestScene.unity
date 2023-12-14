@@ -459,6 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
   playerController: {fileID: 1446278365}
+  move: {fileID: -4733365628477956816, guid: 8c67cfcd514844aa39bbbaafff2f2a1c, type: 3}
+  parked: {fileID: -4733365628477956816, guid: 65cf7bb6fad4b4cae98921fd5ddb23d1, type: 3}
   isPointerDown: 0
   maxSpringPressure: 3
   check1SpringPressure: 2
