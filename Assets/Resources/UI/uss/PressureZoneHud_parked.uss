@@ -106,7 +106,6 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     flex-direction: row;
-    flex-grow: 0;
     border-left-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
     border-top-color: rgb(255, 255, 255);
@@ -116,24 +115,6 @@
     border-bottom-width: 1px;
     border-left-width: 1px;
     align-self: flex-start;
-}
-
-.supply-pressure-zone-Input-panel-parked {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    flex-direction: row;
-    background-color: rgba(0, 0, 0, 0);
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    align-self: center;
 }
 
 .supply-pressure-value-container-parked {
@@ -192,7 +173,6 @@
     flex-direction: column;
     margin-bottom: 5px;
     align-items: stretch;
-    align-self: center;
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;

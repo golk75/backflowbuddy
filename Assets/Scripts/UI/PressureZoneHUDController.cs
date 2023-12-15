@@ -159,9 +159,9 @@ public class PressureZoneHUDController : MonoBehaviour
         DropAreaSlotList.Add(m_DropAreaBotSlot);
 
         //add dragger manipulator
-        m_SupplyPressurePanel.AddManipulator(new PanelDragger());
-        m_PressureZone2Panel.AddManipulator(new PanelDragger());
-        m_PressureZone3Panel.AddManipulator(new PanelDragger());
+        m_SupplyPressurePanel.AddManipulator(new PanelDragger(m_SupplyPressurePanel));
+        m_PressureZone2Panel.AddManipulator(new PanelDragger(m_PressureZone2Panel));
+        m_PressureZone3Panel.AddManipulator(new PanelDragger(m_PressureZone3Panel));
 
         //add resizer manipulator
         // m_SupplyPressurePanel.AddManipulator(new ExampleResizer());
@@ -485,7 +485,7 @@ public class PressureZoneHUDController : MonoBehaviour
         // root.rootVisualElement.Add(element);
         // root.rootVisualElement.Remove(element);
         // var parent = root.rootVisualElement.Q<TemplateContainer>(element.name).parent;
-        root.rootVisualElement.Add(element);
+
 
 
 
@@ -493,27 +493,27 @@ public class PressureZoneHUDController : MonoBehaviour
     private void PanelSlotDrop(VisualElement target)
     {
 
-        IEnumerable<VisualElement> slots = DropAreaSlotList.Where(x =>
-                 x.worldBound.Overlaps(target.worldBound));
+        // IEnumerable<VisualElement> slots = DropAreaSlotList.Where(x =>
+        //          x.worldBound.Overlaps(target.worldBound));
 
 
-        if (slots.Count() != 0)
-        {
+        // if (slots.Count() != 0)
+        // {
 
-            var closestSlot = DropAreaSlotList.OrderBy(x => Vector2.Distance
-            (x.worldBound.position, target.worldBound.position)).First();
-            //target.RemoveFromHierarchy();
-            target.style.position = Position.Relative;
-            target.style.top = 0;
-            target.style.bottom = 0;
-            target.style.left = 0;
-            target.style.right = 0;
-            // target.AddToClassList("pressure-panel-default");
-            closestSlot.Add(target);
+        //     var closestSlot = DropAreaSlotList.OrderBy(x => Vector2.Distance
+        //     (x.worldBound.position, target.worldBound.position)).First();
+        //     //target.RemoveFromHierarchy();
+        //     target.style.position = Position.Relative;
+        //     target.style.top = 0;
+        //     target.style.bottom = 0;
+        //     target.style.left = 0;
+        //     target.style.right = 0;
+        //     // target.AddToClassList("pressure-panel-default");
+        //     closestSlot.Add(target);
 
 
 
-        }
+        // }
 
     }
 

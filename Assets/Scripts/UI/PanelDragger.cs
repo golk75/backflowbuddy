@@ -9,8 +9,10 @@ public class PanelDragger : PointerManipulator
     private Vector3 m_Start;
     protected bool m_Active;
     private int m_PointerId;
-
-
+    private VisualElement root { get; }
+    private bool enabled { get; set; }
+    private Vector2 targetStartPosition { get; set; }
+    private Vector3 pointerStartPosition { get; set; }
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -19,11 +21,14 @@ public class PanelDragger : PointerManipulator
 
     }
 
-    public PanelDragger()
+    public PanelDragger(VisualElement target)
     {
         activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
         m_PointerId = -1;
         m_Active = false;
+        this.target = target;
+        root = target.parent;
+
     }
 
     protected override void RegisterCallbacksOnTarget()
@@ -31,6 +36,7 @@ public class PanelDragger : PointerManipulator
         target.RegisterCallback<PointerDownEvent>(OnPointerDown);
         target.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         target.RegisterCallback<PointerUpEvent>(OnPointerUp);
+        target.RegisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
     }
 
 
@@ -39,6 +45,7 @@ public class PanelDragger : PointerManipulator
         target.UnregisterCallback<PointerDownEvent>(OnPointerDown);
         target.UnregisterCallback<PointerMoveEvent>(OnPointerMove);
         target.UnregisterCallback<PointerUpEvent>(OnPointerUp);
+        target.UnregisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
     }
 
 
@@ -66,12 +73,18 @@ public class PanelDragger : PointerManipulator
         if (!m_Active || !target.HasPointerCapture(m_PointerId))
             return;
 
-        Vector2 diff = evt.localPosition - m_Start;
+        Vector3 pointerDelta = evt.position - pointerStartPosition;
 
-        target.style.top = target.layout.y + diff.y;
-        target.style.left = target.layout.x + diff.x;
+        target.transform.position = new Vector2(
+              Mathf.Clamp(targetStartPosition.x + pointerDelta.x, 0, target.panel.visualTree.worldBound.width),
+              Mathf.Clamp(targetStartPosition.y + pointerDelta.y, 0, target.panel.visualTree.worldBound.height));
+        // target.style.position = Position.Absolute;
+        // Vector2 diff = evt.localPosition - m_Start;
 
-        evt.StopPropagation();
+        // target.style.top = target.layout.y + diff.y;
+        // target.style.left = target.layout.x + diff.x;
+
+        // evt.StopPropagation();
 
     }
 
@@ -86,16 +99,77 @@ public class PanelDragger : PointerManipulator
         }
         if (CanStartManipulation(evt))
         {
+            targetStartPosition = target.transform.position;
+            pointerStartPosition = evt.position;
             m_Start = evt.localPosition;
             m_PointerId = evt.pointerId;
             m_Active = true;
-            target.CapturePointer(m_PointerId);
-            Actions.onPanelGrab?.Invoke(target);
-            target.style.position = Position.Absolute;
-            evt.StopPropagation();
+            target.CapturePointer(evt.pointerId);
+            enabled = true;
+            // target.CapturePointer(m_PointerId);
+            // target.style.position = Position.Absolute;
+            // Vector2 diff = evt.localPosition - m_Start;
+
+            // target.style.top = target.layout.y + diff.y;
+            // target.style.left = target.layout.x + diff.x;
+            // Actions.onPanelGrab?.Invoke(target);
+            // enabled = true;
+            // evt.StopPropagation();
         }
     }
+    private void PointerCaptureOutHandler(PointerCaptureOutEvent evt)
+    {
+        if (enabled)
+        {
+            VisualElement slotsContainer = root.Q<VisualElement>("slots");
+            UQueryBuilder<VisualElement> allSlots =
+                slotsContainer.Query<VisualElement>("slot");
+            UQueryBuilder<VisualElement> overlappingSlots =
+                allSlots.Where(OverlapsTarget);
+            VisualElement closestOverlappingSlot =
+                FindClosestSlot(overlappingSlots);
+            Vector3 closestPos = Vector3.zero;
+            if (closestOverlappingSlot != null)
+            {
+                closestPos = RootSpaceOfSlot(closestOverlappingSlot);
+                closestPos = new Vector2(closestPos.x - 5, closestPos.y - 5);
+            }
+            target.transform.position =
+                closestOverlappingSlot != null ?
+                closestPos :
+                targetStartPosition;
 
+            enabled = false;
+        }
+    }
+    private Vector3 RootSpaceOfSlot(VisualElement slot)
+    {
+        Vector2 slotWorldSpace = slot.parent.LocalToWorld(slot.layout.position);
+        return root.WorldToLocal(slotWorldSpace);
+    }
+
+    private VisualElement FindClosestSlot(UQueryBuilder<VisualElement> slots)
+    {
+        List<VisualElement> slotsList = slots.ToList();
+        float bestDistanceSq = float.MaxValue;
+        VisualElement closest = null;
+        foreach (VisualElement slot in slotsList)
+        {
+            Vector3 displacement =
+                RootSpaceOfSlot(slot) - target.transform.position;
+            float distanceSq = displacement.sqrMagnitude;
+            if (distanceSq < bestDistanceSq)
+            {
+                bestDistanceSq = distanceSq;
+                closest = slot;
+            }
+        }
+        return closest;
+    }
+    private bool OverlapsTarget(VisualElement slot)
+    {
+        return target.worldBound.Overlaps(slot.worldBound);
+    }
     private void ModifyPanelStyle(VisualElement visualElement)
     {
         if (visualElement.resolvedStyle.position == Position.Relative)
