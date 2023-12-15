@@ -24,9 +24,9 @@ public class PressureZoneHUDController : MonoBehaviour
     const string PressureZoneSliderBarString = "PressureZoneSlider";
     const string PressureZoneSliderTrackerString = "unity-tracker";
     const string PressureZoneSliderHandleString = "unity-dragger";
-    const string PressureZone2PanelString = "PressureZone2__panel";
-    const string PressureZone3PanelString = "PressureZone3__panel";
-    const string SupplyPressurePanelString = "SupplyPressure__panel";
+    const string PressureZone2PanelTemplateString = "PressureZone2__panel";
+    const string PressureZone3PanelTemplateString = "PressureZone3__panel";
+    const string SupplyPressurePanelTemplateString = "SupplyPressure__panelTemp";
     const string CheckSpring1ValueLabelString = "CheckSpring1_value_label";
     const string CheckSpring2ValueLabelString = "CheckSpring2_value_label";
     const string CheckSpring1AddButtonString = "CheckSpring1_add_button";
@@ -63,7 +63,7 @@ public class PressureZoneHUDController : MonoBehaviour
     public VisualElement m_DropAreaTopSlot;
     public VisualElement m_DropAreaMidSlot;
     public VisualElement m_DropAreaBotSlot;
-
+    VisualElement m_PressureZoneHudWrapper;
 
     //style sheets
     public ThemeStyleSheet move;
@@ -104,11 +104,14 @@ public class PressureZoneHUDController : MonoBehaviour
     void OnEnable()
     {
         Actions.onPanelDrop += PanelSlotDrop;
+        Actions.onPanelGrab += PanelSlotGrab;
     }
     void OnDisable()
     {
         Actions.onPanelDrop -= PanelSlotDrop;
+        Actions.onPanelGrab -= PanelSlotGrab;
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -129,9 +132,9 @@ public class PressureZoneHUDController : MonoBehaviour
     void SetVisualElements()
     {
         root = GetComponent<UIDocument>();
-        m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelString);
-        m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelString);
-        m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelString);
+        m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelTemplateString);
+        m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelTemplateString);
+        m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelTemplateString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
         m_PressureZone3TextField = m_PressureZone3Panel.Q<Label>(PressureZone3LabelString);
@@ -149,6 +152,7 @@ public class PressureZoneHUDController : MonoBehaviour
         m_DropAreaTopSlot = root.rootVisualElement.Q<VisualElement>(DropAreaTopSlotString);
         m_DropAreaMidSlot = root.rootVisualElement.Q<VisualElement>(DropAreaMidSlotString);
         m_DropAreaBotSlot = root.rootVisualElement.Q<VisualElement>(DropAreaBotSlotString);
+
 
         DropAreaSlotList.Add(m_DropAreaTopSlot);
         DropAreaSlotList.Add(m_DropAreaMidSlot);
@@ -391,10 +395,10 @@ public class PressureZoneHUDController : MonoBehaviour
 
         currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
         // Debug.Log($"evt: {evt.newValue}");
-        ZonePressureOperations(evt.newValue, currentSliderBar.parent.parent);
+        // ZonePressureOperations(evt.newValue, currentSliderBar.parent.parent.parent);
+        ZonePressureOperations(evt.newValue, PressurePanel.GetFirstAncestorWithClass(currentSliderBar, "panel-template"));
 
     }
-
 
     private void InputValueChanged(ChangeEvent<string> evt)
     {
@@ -411,14 +415,14 @@ public class PressureZoneHUDController : MonoBehaviour
 
         switch (zonePressureSlider.name)
         {
-            case SupplyPressurePanelString:
+            case SupplyPressurePanelTemplateString:
 
                 break;
-            case PressureZone2PanelString:
+            case PressureZone2PanelTemplateString:
                 waterController.zone2PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone2 slider operated");
                 break;
-            case PressureZone3PanelString:
+            case PressureZone3PanelTemplateString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone3 slider operated");
                 break;
@@ -475,33 +479,40 @@ public class PressureZoneHUDController : MonoBehaviour
         }
     }
 
+    private void PanelSlotGrab(VisualElement element)
+    {
+        Debug.Log($"element: {element}");
+        // root.rootVisualElement.Add(element);
+        // root.rootVisualElement.Remove(element);
+        // var parent = root.rootVisualElement.Q<TemplateContainer>(element.name).parent;
+        root.rootVisualElement.Add(element);
+
+
+
+    }
     private void PanelSlotDrop(VisualElement target)
     {
 
         IEnumerable<VisualElement> slots = DropAreaSlotList.Where(x =>
                  x.worldBound.Overlaps(target.worldBound));
-        Debug.Log($"DropAreaSlotList.Count(): {slots.Count()}");
-        Debug.Log($"slots.Count(): {slots.Count()}");
+
+
         if (slots.Count() != 0)
         {
 
             var closestSlot = DropAreaSlotList.OrderBy(x => Vector2.Distance
             (x.worldBound.position, target.worldBound.position)).First();
-            target.RemoveFromHierarchy();
+            //target.RemoveFromHierarchy();
+            target.style.position = Position.Relative;
+            target.style.top = 0;
+            target.style.bottom = 0;
+            target.style.left = 0;
+            target.style.right = 0;
+            // target.AddToClassList("pressure-panel-default");
             closestSlot.Add(target);
-            if (!root.rootVisualElement.styleSheets.Contains(parked))
-            {
-                root.rootVisualElement.styleSheets.Remove(move);
-                root.rootVisualElement.styleSheets.Add(parked);
 
-            }
-            // else
-            // {
-            //     root.rootVisualElement.styleSheets.Remove(parked);
-            //     root.rootVisualElement.styleSheets.Add(move);
-            // }
 
-            // target.style.position = Position.Relative;
+
         }
 
     }
@@ -515,24 +526,6 @@ public class PressureZoneHUDController : MonoBehaviour
 
         m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
         m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (root.rootVisualElement.styleSheets.Contains(move))
-            {
-                root.rootVisualElement.styleSheets.Remove(move);
-                root.rootVisualElement.styleSheets.Add(parked);
-            }
-            else
-            {
-                root.rootVisualElement.styleSheets.Remove(parked);
-                root.rootVisualElement.styleSheets.Add(move);
-            }
-        }
-
-
-
-
 
 
     }

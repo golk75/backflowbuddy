@@ -9,9 +9,6 @@ public class PanelDragger : PointerManipulator
     private Vector3 m_Start;
     protected bool m_Active;
     private int m_PointerId;
-    private Vector2 m_StartSize;
-
-
 
 
     /// <summary>
@@ -68,9 +65,9 @@ public class PanelDragger : PointerManipulator
     {
         if (!m_Active || !target.HasPointerCapture(m_PointerId))
             return;
-        ;
+
         Vector2 diff = evt.localPosition - m_Start;
-        ModifyPanelStyle((VisualElement)evt.currentTarget);
+
         target.style.top = target.layout.y + diff.y;
         target.style.left = target.layout.x + diff.x;
 
@@ -89,19 +86,19 @@ public class PanelDragger : PointerManipulator
         }
         if (CanStartManipulation(evt))
         {
-
             m_Start = evt.localPosition;
             m_PointerId = evt.pointerId;
             m_Active = true;
             target.CapturePointer(m_PointerId);
-
+            Actions.onPanelGrab?.Invoke(target);
+            target.style.position = Position.Absolute;
             evt.StopPropagation();
         }
     }
 
     private void ModifyPanelStyle(VisualElement visualElement)
     {
-        if (visualElement.style.position != Position.Absolute)
+        if (visualElement.resolvedStyle.position == Position.Relative)
         {
             visualElement.style.position = Position.Absolute;
         }

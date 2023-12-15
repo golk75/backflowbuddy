@@ -52,7 +52,7 @@ public static class Actions
 
     //ui
     public static Action<VisualElement> onPanelDrop;
-
+    public static Action<VisualElement> onPanelGrab;
     public static Action<float> onSupplyPressureInputChange;
 
 }
