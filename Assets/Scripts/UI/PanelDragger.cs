@@ -125,7 +125,7 @@ public class PanelDragger : PointerManipulator
     {
         if (enabled)
         {
-            Vector3 prevPos = targetStartPosition;
+
             VisualElement slotsContainer = root.Q<VisualElement>("PanelSlots");
             UQueryBuilder<VisualElement> allSlots =
                 slotsContainer.Query<VisualElement>(className: "pressure-panel-slot");
@@ -159,7 +159,7 @@ public class PanelDragger : PointerManipulator
     }
     private Vector3 RootSpaceOfSlot(VisualElement slot)
     {
-        Vector2 slotWorldSpace = slot.parent.LocalToWorld(slot.layout.position);
+        Vector2 slotWorldSpace = slot.parent.parent.parent.LocalToWorld(slot.layout.position);
         Vector2 dist = target.parent.WorldToLocal(target.layout.position);
         Vector2 diff = new Vector2(slotWorldSpace.x - dist.x, slotWorldSpace.y - dist.y);
         // Debug.Log($"{target.parent.WorldToLocal(target.layout.position)}");
