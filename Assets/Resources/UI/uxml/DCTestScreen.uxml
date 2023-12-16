@@ -18,10 +18,10 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Middle_container" picking-mode="Ignore" style="flex-direction: row; height: 80%;">
-            <ui:VisualElement name="slots" picking-mode="Ignore" class="pressure-panel-slot-container">
-                <ui:VisualElement name="slot" class="pressure-panel-slot" />
-                <ui:VisualElement name="slot" class="pressure-panel-slot" />
-                <ui:VisualElement name="slot" class="pressure-panel-slot" />
+            <ui:VisualElement name="PanelSlots" picking-mode="Ignore" class="pressure-panel-slot-container">
+                <ui:VisualElement name="TopSlot" class="pressure-panel-slot" />
+                <ui:VisualElement name="MidSlot" class="pressure-panel-slot" />
+                <ui:VisualElement name="BotSlot" class="pressure-panel-slot" />
             </ui:VisualElement>
             <ui:VisualElement name="PressureZoneHudWrapper" picking-mode="Ignore" class="pressure-zone-hud-wrapper" />
         </ui:VisualElement>
@@ -34,8 +34,8 @@
         </ui:Instance>
         <ui:Instance template="GameMenuScreen" name="GameMenuScreen" class="game-menu-modal" style="display: none;" />
         <ui:Instance template="GameMenuOptions" name="GameMenuOptionsScreen" class="game-menu-modal" style="display: none;" />
+        <ui:Instance template="SupplyPressure__panelTemp" name="SupplyPressure__panelTemp" class="pressure-panel-supply" style="left: 210px; top: 250px;" />
+        <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="pressure-panel-2" style="left: 525px; top: 250px;" />
+        <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" class="pressure-panel-3" style="left: 750px; top: 250px;" />
     </ui:VisualElement>
-    <ui:Instance template="SupplyPressure__panelTemp" name="SupplyPressure__panelTemp" class="panel-template" />
-    <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="panel-template" />
-    <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" class="panel-template" />
 </ui:UXML>

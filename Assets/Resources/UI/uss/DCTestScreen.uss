@@ -175,5 +175,26 @@
 }
 
 .panel-template {
+}
+
+.pressure-panel-3 {
     position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+.pressure-panel-2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+.pressure-panel-supply {
+    position: absolute;
+    left: 509px;
+    top: 63px;
+    right: 0;
+    bottom: 0;
 }

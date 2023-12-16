@@ -98,18 +98,14 @@ public class PressureZoneHUDController : MonoBehaviour
     Coroutine OnSupplyPanelMove;
 
 
-    private Vector2 targetStartPosition { get; set; }
 
-    private Vector3 pointerStartPosition { get; set; }
     void OnEnable()
     {
-        Actions.onPanelDrop += PanelSlotDrop;
-        Actions.onPanelGrab += PanelSlotGrab;
+
     }
     void OnDisable()
     {
-        Actions.onPanelDrop -= PanelSlotDrop;
-        Actions.onPanelGrab -= PanelSlotGrab;
+
     }
 
 
@@ -463,8 +459,6 @@ public class PressureZoneHUDController : MonoBehaviour
         waterController.check2SpringForce = check2SpringPressure;
         if (check2SpringPressure >= maxSpringPressure)
         {
-
-
             check2SpringPressure = maxSpringPressure;
             m_CheckSpring2Value.text = maxSpringPressure.ToString();
         }
@@ -479,43 +473,6 @@ public class PressureZoneHUDController : MonoBehaviour
         }
     }
 
-    private void PanelSlotGrab(VisualElement element)
-    {
-        Debug.Log($"element: {element}");
-        // root.rootVisualElement.Add(element);
-        // root.rootVisualElement.Remove(element);
-        // var parent = root.rootVisualElement.Q<TemplateContainer>(element.name).parent;
-
-
-
-
-    }
-    private void PanelSlotDrop(VisualElement target)
-    {
-
-        // IEnumerable<VisualElement> slots = DropAreaSlotList.Where(x =>
-        //          x.worldBound.Overlaps(target.worldBound));
-
-
-        // if (slots.Count() != 0)
-        // {
-
-        //     var closestSlot = DropAreaSlotList.OrderBy(x => Vector2.Distance
-        //     (x.worldBound.position, target.worldBound.position)).First();
-        //     //target.RemoveFromHierarchy();
-        //     target.style.position = Position.Relative;
-        //     target.style.top = 0;
-        //     target.style.bottom = 0;
-        //     target.style.left = 0;
-        //     target.style.right = 0;
-        //     // target.AddToClassList("pressure-panel-default");
-        //     closestSlot.Add(target);
-
-
-
-        // }
-
-    }
 
     // Update is called once per frame
     void Update()
