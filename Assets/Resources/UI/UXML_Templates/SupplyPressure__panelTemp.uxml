@@ -2,7 +2,7 @@
     <ui:VisualElement name="SupplyPressure__panel" picking-mode="Ignore" class="supply-pressure-zone-panel supply-pressure-zone-panel-parked">
         <ui:VisualElement name="SupplyPressure_value_container" class="supply-pressure-value-container supply-pressure-value-container-parked">
             <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="supply-pressure-zone-header supply-pressure-zone-header-parked" />
-            <ui:TextField name="SupplyPressure__value" max-length="2" class="supply-pressure-value-label parked" />
+            <ui:TextField name="SupplyPressure__value" max-length="2" />
         </ui:VisualElement>
         <ui:VisualElement name="CheckSpring_value_container" class="check-spring-value-container check-spring-value-container-parked">
             <ui:VisualElement name="CheckSpring1_value_container" class="check-spring-value-sub-container check-spring-value-sub-container-parked">

@@ -1,18 +1,16 @@
-#PressureZoneContainer #unity-text-input {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 10px;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
+#unity-text-input {
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
     border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    font-size: 16px;
+    border-bottom-left-radius: 5px;
+    height: 75px;
+    width: 100px;
     -unity-text-align: middle-center;
+    font-size: 25px;
 }
 
 .pressure-zone-panel {
@@ -133,26 +131,6 @@
     color: rgb(255, 255, 255);
     font-size: 12px;
     -unity-text-align: middle-center;
-}
-
-.supply-pressure-value-label > #unity-text-input {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.supply-pressure-value-label-parked > #unity-text-input {
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    height: 75px;
-    width: 100px;
 }
 
 .supply-pressure-value-label {
@@ -346,17 +324,15 @@
 }
 
 .new-dragger {
-    width: 20px;
-    height: 20px;
     background-color: rgba(0, 0, 0, 0);
     position: absolute;
     background-image: resource('UI/Textures/Custom_slider_handle 1');
 }
 
 .pressure-zone-slider {
-    margin-left: 4px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-left: 6px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 .pressure-zone-slider-parked {

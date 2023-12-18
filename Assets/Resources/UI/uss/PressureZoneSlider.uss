@@ -79,8 +79,8 @@
 }
 
 .new-dragger {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     background-color: rgba(0, 0, 0, 0);
     position: absolute;
     background-image: resource('UI/Textures/Custom_slider_handle 1');

@@ -360,8 +360,8 @@
 }
 
 .new-dragger {
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
     background-color: rgba(0, 0, 0, 0);
     position: absolute;
     background-image: resource('UI/Textures/Custom_slider_handle 1');
@@ -371,7 +371,7 @@
     background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
     width: 20px;
     min-width: auto;
-    overflow: hidden;
+    overflow: visible;
     max-width: none;
     max-height: none;
     margin-right: 0;
