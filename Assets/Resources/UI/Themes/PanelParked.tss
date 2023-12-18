@@ -1,7 +1,0 @@
-@import url("/Assets/UnityDefaultRuntimeTheme 1.tss");
-
-@import url("/Assets/Resources/UI/uss/PressureZoneHud_parked.uss");
-
-
-
-VisualElement {}

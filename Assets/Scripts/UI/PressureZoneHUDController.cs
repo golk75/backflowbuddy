@@ -65,10 +65,6 @@ public class PressureZoneHUDController : MonoBehaviour
     public VisualElement m_DropAreaBotSlot;
     VisualElement m_PressureZoneHudWrapper;
 
-    //style sheets
-    public ThemeStyleSheet move;
-    public ThemeStyleSheet parked;
-
 
     //booleans
     public bool isPointerDown = false;

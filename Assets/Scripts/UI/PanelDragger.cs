@@ -15,13 +15,7 @@ public class PanelDragger : PointerManipulator
     private Vector3 pointerStartPosition { get; set; }
     Vector3 pointerDelta = Vector3.zero;
     public bool isDraggingOverPanel;
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    private void Awake()
-    {
 
-    }
 
     public PanelDragger(VisualElement target)
     {
@@ -32,6 +26,7 @@ public class PanelDragger : PointerManipulator
         root = target.parent;
 
     }
+
 
     protected override void RegisterCallbacksOnTarget()
     {
@@ -57,12 +52,9 @@ public class PanelDragger : PointerManipulator
         if (!m_Active || !target.HasPointerCapture(m_PointerId) || !CanStopManipulation(evt))
             return;
 
-
         m_Active = false;
         target.ReleaseMouse();
         evt.StopPropagation();
-
-
 
     }
 
@@ -75,14 +67,7 @@ public class PanelDragger : PointerManipulator
         //Vector3 pointerDelta = evt.position - pointerStartPosition;
         pointerDelta = evt.position - pointerStartPosition;
 
-
-
-
-        // target.transform.position = new Vector2(
-        //       Mathf.Clamp(pos.x + pointerDelta.x, 0, target.panel.visualTree.worldBound.width),
-        //       Mathf.Clamp(pos.y + pointerDelta.y, 0, target.panel.visualTree.worldBound.height));
         target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y);
-
 
         evt.StopPropagation();
 
@@ -109,18 +94,10 @@ public class PanelDragger : PointerManipulator
             target.CapturePointer(evt.pointerId);
             enabled = true;
 
-            // Debug.Log($"targetStartPosition: {targetStartPosition} ; pointerStartPosition: {pointerStartPosition} ; pointerDelta.x: {pointerDelta.x} ; target.transform.position: {target.transform.position} ; pos: {pos})");
-            // target.CapturePointer(m_PointerId);
-            // target.style.position = Position.Absolute;
-            // Vector2 diff = evt.localPosition - m_Start;
-
-            // target.style.top = target.layout.y + diff.y;
-            // target.style.left = target.layout.x + diff.x;
-
-            // enabled = true;
-            // evt.StopPropagation();
         }
     }
+
+
     private void PointerCaptureOutHandler(PointerCaptureOutEvent evt)
     {
         if (enabled)
@@ -134,7 +111,7 @@ public class PanelDragger : PointerManipulator
             VisualElement closestOverlappingSlot =
                 FindClosestSlot(overlappingSlots);
             Vector3 closestPos = Vector3.zero;
-            Debug.Log($"closestOverlappingSlot: {closestOverlappingSlot}");
+
             if (closestOverlappingSlot != null)
             {
                 closestPos = RootSpaceOfSlot(closestOverlappingSlot);
@@ -146,26 +123,23 @@ public class PanelDragger : PointerManipulator
             }
             else
             {
-                // target.transform.position = targetStartPosition;
+
                 target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y); ;
             }
-            // target.transform.position =
-            //     closestOverlappingSlot != null ?
-            //     closestPos :
-            //     targetStartPosition;
 
             enabled = false;
         }
     }
+
+
     private Vector3 RootSpaceOfSlot(VisualElement slot)
     {
         Vector2 slotWorldSpace = slot.parent.parent.parent.LocalToWorld(slot.layout.position);
         Vector2 dist = target.parent.WorldToLocal(target.layout.position);
         Vector2 diff = new Vector2(slotWorldSpace.x - dist.x, slotWorldSpace.y - dist.y);
-        // Debug.Log($"{target.parent.WorldToLocal(target.layout.position)}");
-        // return root.WorldToLocal(slotWorldSpace);
         return root.WorldToLocal(diff);
     }
+
 
     private VisualElement FindClosestSlot(UQueryBuilder<VisualElement> slots)
     {
@@ -185,6 +159,8 @@ public class PanelDragger : PointerManipulator
         }
         return closest;
     }
+
+
     private bool OverlapsTarget(VisualElement slot)
     {
         return target.worldBound.Overlaps(slot.worldBound);
