@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class FillButton : MonoBehaviour
 {
 
-    Button fillButton;
+    Button m_FillButton;
     public ZibraLiquid liquid;
     public GameObject Check1;
     public GameObject Check2;
@@ -46,15 +46,15 @@ public class FillButton : MonoBehaviour
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement.Q<Button>("FillButton");
-        fillButton = root.Q<Button>("FillButton");
-        fillButton.clicked += FillDevice;
+        m_FillButton = root.Q<Button>("FillButton");
+        m_FillButton.clicked += FillDevice;
 
         ShutOff1OperableDescription = ShutOff1.GetComponent<OperableComponentDescription>();
     }
 
     public void FillDevice()
     {
-        if (waterController.supplyPsi > 0)
+        if (waterController.supplyPsi >= 0)
         {
             liquid.ReleaseSimulation();
             liquid.InitialState = ZibraLiquid.InitialStateType.BakedLiquidState;

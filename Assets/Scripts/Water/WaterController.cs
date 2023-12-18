@@ -325,6 +325,7 @@ public class WaterController : MonoBehaviour
                     0.5f
                 );
             }
+
             //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
 
             if (testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false && shutOffValveController.IsSecondShutOffOpen == false)
@@ -386,20 +387,26 @@ public class WaterController : MonoBehaviour
                 if (check2Detector.ParticlesInside > zone3primedParticleCount)
                 {
                     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
-                }
-                if (check1Detector.ParticlesInside > zone2primedParticleCount)
-                {
-                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                }
-                else
-                {
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                      check1housingForceField.Strength,
                      1f,
                      ref check1FFref.x,
                      0.5f);
+
                 }
+
+                // if (check1Detector.ParticlesInside > zone2primedParticleCount)
+                // {
+                //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                // }
+                // else
+                // {
+                //     check1housingForceField.Strength = Mathf.SmoothDamp(
+                //      check1housingForceField.Strength,
+                //      1f,
+                //      ref check1FFref.x,
+                //      0.5f);
+                // }
 
 
             }
@@ -420,6 +427,13 @@ public class WaterController : MonoBehaviour
 
             }
 
+            else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
+            {
+                check1housingForceField.Strength = 0;
+                check2housingForceField.Strength = 0;
+                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            }
         }
 
 
@@ -429,6 +443,8 @@ public class WaterController : MonoBehaviour
         /// <value></value>
         else
         {
+
+
 
 
             if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
@@ -1611,12 +1627,6 @@ public class WaterController : MonoBehaviour
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
                     false;
             }
-            //while shutoff valve is open regulate ff in check housing according to amount of water being supplied supply
-
-
-            // Void_Check1.transform.localScale = Vector3.zero;
-
-            // Void_Check2.transform.localScale = Vector3.zero;
             if (
                  testCockController.isTestCock2Open == true
                  && TestCockHoseDetect2.isConnected == false
