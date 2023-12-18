@@ -37,10 +37,7 @@ public class FillButton : MonoBehaviour
     Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
     Vector3 initSupplyVoidPos;
     HoseController hoseController;
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    private void Awake() { }
+
 
     // Start is called before the first frame update
     void Start()

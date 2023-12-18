@@ -459,8 +459,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
   playerController: {fileID: 1446278365}
-  move: {fileID: -4733365628477956816, guid: 8c67cfcd514844aa39bbbaafff2f2a1c, type: 3}
-  parked: {fileID: -4733365628477956816, guid: 65cf7bb6fad4b4cae98921fd5ddb23d1, type: 3}
   isPointerDown: 0
   maxSpringPressure: 3
   check1SpringPressure: 2
@@ -495,6 +493,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MenuScreenName: GameMenuScreen
   m_OptionsScreenName: GameMenuOptionsScreen
+--- !u!114 &354497760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354497734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f37f0e4015840278d559f67cf57c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &354497761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354497734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5934d61874240ac99153ec058ef982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &448393510 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
@@ -9889,6 +9911,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 354497752}
+    - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 354497761}
+    - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 354497760}
     - targetCorrespondingSourceObject: {fileID: 6948127828985918668, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       insertIndex: -1
