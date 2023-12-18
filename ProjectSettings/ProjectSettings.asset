@@ -157,8 +157,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.Snippy-Mouse.BackflowBuddy
-    iPhone: com.Doc-s-Co.BackflowBuddy
+    Standalone: com.devdoc.backflowbuddy
+    iPhone: com.devdoc.backflowbuddy
   buildNumber:
     Bratwurst: 0
     Standalone: 0
@@ -233,7 +233,7 @@ PlayerSettings:
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
-  appleDeveloperTeamID: odddoc44@gmail.com
+  appleDeveloperTeamID: 56G2U3XMRP
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   VisionOSManualSigningProvisioningProfileID: 
@@ -884,11 +884,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: c8e47763-dc89-4713-82b2-e0bcc714de95
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: BackflowBuddy
+  organizationId: odd_doc
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
