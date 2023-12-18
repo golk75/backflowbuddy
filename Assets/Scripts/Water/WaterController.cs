@@ -420,25 +420,6 @@ public class WaterController : MonoBehaviour
 
             }
 
-
-            // if (testCockController.isTestCock4Open == false)
-            // {
-            //     if (check2Detector.ParticlesInside > zone3primedParticleCount)
-            //     {
-
-            //         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
-            //     }
-            // }
-            // else
-            // {
-            //     check2housingForceField.Strength = Mathf.SmoothDamp(
-            //       check2housingForceField.Strength,
-            //       1f,
-            //       ref check2FFref.x,
-            //       0.5f
-            //   );
-            // }
         }
 
 
