@@ -13,9 +13,6 @@
     font-size: 25px;
 }
 
-.pressure-zone-panel {
-}
-
 .pressure-zone-panel-parked {
     background-color: rgba(54, 55, 63, 0.63);
     border-left-color: rgb(255, 255, 255);
@@ -36,9 +33,6 @@
     flex-grow: 0;
 }
 
-.pressure-zone-header {
-}
-
 .pressure-zone-header-parked {
     flex-grow: 0;
     align-items: auto;
@@ -55,9 +49,7 @@
     padding-top: 0;
     padding-bottom: 0;
     margin-bottom: 5px;
-}
-
-.pressure-zone-value-container {
+    -unity-font-style: bold;
 }
 
 .pressure-zone-value-container-parked {
@@ -67,9 +59,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-
-.pressure-zone-value-label {
 }
 
 .pressure-zone-value-label-parked {
@@ -94,9 +83,6 @@
     flex-grow: 0;
 }
 
-.supply-pressure-zone-panel {
-}
-
 .supply-pressure-zone-panel-parked {
     background-color: rgba(54, 55, 63, 0.63);
     border-top-left-radius: 5px;
@@ -118,33 +104,18 @@
 .supply-pressure-value-container-parked {
     justify-content: flex-start;
     align-items: center;
+    -unity-text-align: upper-center;
+}
+
+.supply-pressure-zone-header-parked {
+    margin-left: 4px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    -unity-font-style: bold;
 }
 
 .check-spring-value-container {
     justify-content: space-around;
-}
-
-.supply-pressure-zone-header {
-}
-
-.supply-pressure-zone-header-parked {
-    color: rgb(255, 255, 255);
-    font-size: 12px;
-    -unity-text-align: middle-center;
-}
-
-.supply-pressure-value-label {
-    flex-grow: 0;
-    height: 60%;
-    width: 71%;
-}
-
-.supply-pressure-value-label-parked {
-    align-self: center;
-    margin-top: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
 }
 
 .check-spring-value-container-parked {
@@ -168,9 +139,6 @@
     align-items: center;
 }
 
-.check-spring-value-button-container {
-}
-
 .check-spring-value-button-container-parked {
     flex-direction: row;
     align-items: center;
@@ -183,16 +151,10 @@
     margin-bottom: 0;
 }
 
-.check-spring-button-sub-container {
-}
-
 .check-spring-button-sub-container-parked {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
-
-.check-spring-value-button {
 }
 
 .check-spring-value-button-parked {
@@ -207,9 +169,6 @@
     -unity-text-align: middle-center;
 }
 
-.check-spring-value-label {
-}
-
 .check-spring-value-label-parked {
     background-color: rgb(255, 255, 255);
     border-top-left-radius: 5px;
@@ -222,9 +181,6 @@
     margin-right: 5px;
     margin-top: 0;
     margin-bottom: 0;
-}
-
-.check-spring-value-header {
 }
 
 .check-spring-value-header-parked {
