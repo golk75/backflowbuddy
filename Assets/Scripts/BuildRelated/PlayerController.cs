@@ -115,38 +115,32 @@ public class PlayerController : MonoBehaviour
         _operableTestGaugeObject = initialTestGaugeOperableObject;
     }
 
-    private void LeftMouseClick_performed(InputAction.CallbackContext context)
+
+    void OnEnable()
     {
-        primaryTouchPerformed = context.ReadValueAsButton();
-        if (uiClickFilter.isUiClicked == false && uiClickFilter.isUiHovered == false)
-            if (operableComponentDescription != null)
-            {
-                if (
-                     // isOperableObject == true
-                     operableComponentDescription.partsType
-                        == OperableComponentDescription.PartsType.TestKitHose
-                )
-                {
-                    Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-                }
-                if (
-                   //   isOperableObject == true
-                   operableComponentDescription.partsType
-                      == OperableComponentDescription.PartsType.TestKitSightTube
-              )
-                {
-                    Actions.onSightTubeGrab?.Invoke(operableObject);
-                }
-                if (ClickOperationEnabled == true)
-                {
-                    ClickOperate();
-
-                }
-            }
-
-
+        playerInput.Enable();
 
     }
+
+
+    void OnDisable()
+    {
+        playerInput.Disable();
+    }
+
+
+    private void LeftMouseClick_started(InputAction.CallbackContext context)
+    {
+        primaryClickStarted = context.ReadValue<float>();
+        touchStart = Camera.main.ScreenToWorldPoint(
+            playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
+        );
+        primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        primaryTouchStarted = context.ReadValue<float>();
+        if (uiClickFilter.isUiClicked == false)
+            DetectObjectWithRaycast();
+    }
+
 
     private void LeftMouseClick_canceled(InputAction.CallbackContext context)
     {
@@ -183,7 +177,42 @@ public class PlayerController : MonoBehaviour
         uiClickFilter.isUiClicked = false;
     }
 
-    private void LeftMouseClick_started(InputAction.CallbackContext context)
+
+    private void LeftMouseClick_performed(InputAction.CallbackContext context)
+    {
+        primaryTouchPerformed = context.ReadValueAsButton();
+        if (uiClickFilter.isUiClicked == false && uiClickFilter.isUiHovered == false)
+            if (operableComponentDescription != null)
+            {
+                if (
+                     // isOperableObject == true
+                     operableComponentDescription.partsType
+                        == OperableComponentDescription.PartsType.TestKitHose
+                )
+                {
+                    Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+                }
+                if (
+                   //   isOperableObject == true
+                   operableComponentDescription.partsType
+                      == OperableComponentDescription.PartsType.TestKitSightTube
+              )
+                {
+                    Actions.onSightTubeGrab?.Invoke(operableObject);
+                }
+                if (ClickOperationEnabled == true)
+                {
+                    ClickOperate();
+
+                }
+            }
+    }
+
+    /// <summary>
+    ///Input-------------------
+    /// </summary>
+
+    public void Touch0Contact_started(InputAction.CallbackContext context)
     {
         primaryClickStarted = context.ReadValue<float>();
         touchStart = Camera.main.ScreenToWorldPoint(
@@ -195,34 +224,6 @@ public class PlayerController : MonoBehaviour
             DetectObjectWithRaycast();
     }
 
-    void OnEnable()
-    {
-        playerInput.Enable();
-
-    }
-
-    void OnDisable()
-    {
-        playerInput.Disable();
-    }
-
-    /// <summary>
-    ///Input-------------------
-    /// </summary>
-
-
-    public void Touch0Contact_started(InputAction.CallbackContext context)
-    {
-        isInit = true;
-        touchStart = Camera.main.ScreenToWorldPoint(
-            playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
-        );
-        primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        primaryTouchStarted = context.ReadValue<float>();
-
-        DetectObjectWithRaycast();
-    }
-
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
         primaryClickStarted = context.ReadValue<float>();
@@ -232,53 +233,132 @@ public class PlayerController : MonoBehaviour
         if (operableComponentDescription != null)
         {
             if (
-
-                operableComponentDescription.partsType
+                 // isOperableObject == true
+                 operableComponentDescription.partsType
                     == OperableComponentDescription.PartsType.TestKitHose
             )
             {
                 Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
             }
-            else if (
-               operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestKitSightTube
-            )
+            if (
+             //    isOperableObject == true
+             operableComponentDescription.partsType
+                   == OperableComponentDescription.PartsType.TestKitSightTube
+           )
             {
                 Actions.onSightTubeDrop?.Invoke(operableObject);
             }
+            isOperableObject = false;
+            operableObject = null;
+            _operableTestGaugeObject = null;
+            primaryTouchStartPos = Vector3.zero;
+            touchStart = Vector3.zero;
+            operableComponentDescription = null;
+
         }
-        operableComponentDescription = null;
         uiClickFilter.isUiClicked = false;
     }
 
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
-        DetectObjectWithRaycast();
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (operableComponentDescription != null && uiClickFilter.isUiHovered == false)
-        {
-            if (
-                 operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestKitHose
-            )
+        if (uiClickFilter.isUiClicked == false && uiClickFilter.isUiHovered == false)
+            if (operableComponentDescription != null)
             {
-                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-            }
-            else if (
-                operableComponentDescription.partsType
-                   == OperableComponentDescription.PartsType.TestKitSightTube
-           )
-            {
-                Actions.onSightTubeGrab?.Invoke(operableObject);
-            }
-        }
-        if (ClickOperationEnabled == true)
-        {
-            ClickOperate();
-        }
+                if (
+                     // isOperableObject == true
+                     operableComponentDescription.partsType
+                        == OperableComponentDescription.PartsType.TestKitHose
+                )
+                {
+                    Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+                }
+                if (
+                   //   isOperableObject == true
+                   operableComponentDescription.partsType
+                      == OperableComponentDescription.PartsType.TestKitSightTube
+              )
+                {
+                    Actions.onSightTubeGrab?.Invoke(operableObject);
+                }
+                if (ClickOperationEnabled == true)
+                {
+                    ClickOperate();
 
+                }
+            }
 
     }
+
+
+    // public void Touch0Contact_started(InputAction.CallbackContext context)
+    // {
+    //     isInit = true;
+    //     touchStart = Camera.main.ScreenToWorldPoint(
+    //         playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
+    //     );
+    //     primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //     primaryTouchStarted = context.ReadValue<float>();
+
+    //     DetectObjectWithRaycast();
+    // }
+
+    // private void Touch0Contact_canceled(InputAction.CallbackContext context)
+    // {
+    //     primaryClickStarted = context.ReadValue<float>();
+    //     primaryTouchStarted = context.ReadValue<float>();
+    //     primaryTouchPerformed = context.ReadValueAsButton();
+    //     OnPanCanceled?.Invoke();
+    //     if (operableComponentDescription != null)
+    //     {
+    //         if (
+
+    //             operableComponentDescription.partsType
+    //                 == OperableComponentDescription.PartsType.TestKitHose
+    //         )
+    //         {
+    //             Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+    //         }
+    //         else if (
+    //            operableComponentDescription.partsType
+    //                 == OperableComponentDescription.PartsType.TestKitSightTube
+    //         )
+    //         {
+    //             Actions.onSightTubeDrop?.Invoke(operableObject);
+    //         }
+    //     }
+    //     operableComponentDescription = null;
+    //     uiClickFilter.isUiClicked = false;
+    // }
+
+    // private void Touch0Contact_performed(InputAction.CallbackContext context)
+    // {
+    //     DetectObjectWithRaycast();
+    //     primaryTouchPerformed = context.ReadValueAsButton();
+    //     if (operableComponentDescription != null && uiClickFilter.isUiHovered == false)
+    //     {
+    //         if (
+    //              operableComponentDescription.partsType
+    //                 == OperableComponentDescription.PartsType.TestKitHose
+    //         )
+    //         {
+    //             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+    //         }
+    //         else if (
+    //             operableComponentDescription.partsType
+    //                == OperableComponentDescription.PartsType.TestKitSightTube
+    //        )
+    //         {
+    //             Actions.onSightTubeGrab?.Invoke(operableObject);
+    //         }
+    //     }
+    //     if (ClickOperationEnabled == true)
+    //     {
+    //         ClickOperate();
+    //     }
+
+
+    // }
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
     {
