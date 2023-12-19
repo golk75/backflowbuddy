@@ -96,7 +96,16 @@ public class PlayerController : MonoBehaviour
         testCockController = TestCockManager.GetComponent<TestCockController>();
         waterController = WaterManager.GetComponent<WaterController>();
         //Touch Input
-        playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
+#if UNITY_EDITOR
+        Debug.Log("Unity Editor");
+#endif
+
+#if UNITY_IOS
+      Debug.Log("iOS"); 
+   
+
+        operableObject = initialOperableObject;
+      playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
         playerInput.Touchscreen.Touch0Contact.performed += Touch0Contact_performed;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
@@ -105,13 +114,26 @@ public class PlayerController : MonoBehaviour
         playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
         Touch0Position = playerInput.Touchscreen.Touch0Position;
+#endif
 
-        //Mouse Input
+#if UNITY_STANDALONE_OSX
+        Debug.Log("Standalone OSX");
         playerInput.MouseOperate.Click.started += LeftMouseClick_started;
         playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
         playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
 
-        operableObject = initialOperableObject;
+#endif
+
+#if UNITY_STANDALONE_WIN
+      Debug.Log("Standalone Windows");
+          //Mouse Input
+        playerInput.MouseOperate.Click.started += LeftMouseClick_started;
+        playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+        playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
+#endif
+
+
+
         _operableTestGaugeObject = initialTestGaugeOperableObject;
     }
 
@@ -181,7 +203,7 @@ public class PlayerController : MonoBehaviour
     private void LeftMouseClick_performed(InputAction.CallbackContext context)
     {
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (uiClickFilter.isUiClicked == false && uiClickFilter.isUiHovered == false)
+        if (uiClickFilter.isUiClicked == false || uiClickFilter.isUiHovered == false)
             if (operableComponentDescription != null)
             {
                 if (
@@ -262,7 +284,7 @@ public class PlayerController : MonoBehaviour
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
         primaryTouchPerformed = context.ReadValueAsButton();
-        if (uiClickFilter.isUiClicked == false && uiClickFilter.isUiHovered == false)
+        if (uiClickFilter.isUiClicked == false || uiClickFilter.isUiHovered == false)
             if (operableComponentDescription != null)
             {
                 if (
@@ -290,6 +312,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //------------------------------------>//------------------------------------>//------------------------------------>//------------------------------------>
 
     // public void Touch0Contact_started(InputAction.CallbackContext context)
     // {
@@ -359,7 +382,7 @@ public class PlayerController : MonoBehaviour
 
 
     // }
-
+    //------------------------------------>//------------------------------------>//------------------------------------>//------------------------------------>
     private void Touch1Contact_started(InputAction.CallbackContext context)
     {
         //Debug.Log($"Touch1 started");

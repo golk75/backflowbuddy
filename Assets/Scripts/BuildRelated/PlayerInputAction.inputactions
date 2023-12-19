@@ -50,6 +50,134 @@
             ]
         },
         {
+            "name": "Touchscreen",
+            "id": "5570213d-7c3c-4f51-9e25-4daad906ab39",
+            "actions": [
+                {
+                    "name": "Touch0Contact",
+                    "type": "Button",
+                    "id": "1c5de36f-5f6c-491e-8fa9-da647359202d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Touch0Position",
+                    "type": "Value",
+                    "id": "49a3f909-2738-4209-8ca4-6e97f5d2e98f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch0Delta",
+                    "type": "Value",
+                    "id": "d767c849-3845-4a31-a874-f760891061d3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch1Contact",
+                    "type": "Button",
+                    "id": "bdbc4e1a-31ac-4108-b910-13aeaf7b6a0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Touch1Position",
+                    "type": "Value",
+                    "id": "8c146922-4d5f-41f5-b8c5-070d9922b2a9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch1Delta",
+                    "type": "Value",
+                    "id": "90f0da96-d25f-4555-938d-2aa29fefd8bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2fe14a81-973f-4bde-ac97-61e1bcd74864",
+                    "path": "<Touchscreen>/touch1/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch1Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52bcf45b-9e52-47a2-89ca-ebce38f075b7",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch0Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ad20a88-dd63-4831-b76f-ddbe973f9ab3",
+                    "path": "<Touchscreen>/touch1/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch1Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6cfef7d3-b7bd-4a8a-acb4-e0b008d6fc18",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch0Contact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50aa1845-fece-45ea-9f25-d93389aa7ac5",
+                    "path": "<Touchscreen>/touch1/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch1Contact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5aa63fdc-7961-45bd-bd27-15710f8cffca",
+                    "path": "<Touchscreen>/primaryTouch/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch0Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "CameraMap",
             "id": "6cc00a72-f569-4d7d-9b92-fb6b0ed6850c",
             "actions": [
@@ -200,134 +328,6 @@
                     "action": "DragCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Touchscreen",
-            "id": "5570213d-7c3c-4f51-9e25-4daad906ab39",
-            "actions": [
-                {
-                    "name": "Touch0Contact",
-                    "type": "Button",
-                    "id": "1c5de36f-5f6c-491e-8fa9-da647359202d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Touch0Position",
-                    "type": "Value",
-                    "id": "49a3f909-2738-4209-8ca4-6e97f5d2e98f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Touch0Delta",
-                    "type": "Value",
-                    "id": "d767c849-3845-4a31-a874-f760891061d3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Touch1Contact",
-                    "type": "Button",
-                    "id": "bdbc4e1a-31ac-4108-b910-13aeaf7b6a0d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Touch1Position",
-                    "type": "Value",
-                    "id": "8c146922-4d5f-41f5-b8c5-070d9922b2a9",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Touch1Delta",
-                    "type": "Value",
-                    "id": "90f0da96-d25f-4555-938d-2aa29fefd8bb",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "2fe14a81-973f-4bde-ac97-61e1bcd74864",
-                    "path": "<Touchscreen>/touch1/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch1Position",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "52bcf45b-9e52-47a2-89ca-ebce38f075b7",
-                    "path": "<Touchscreen>/primaryTouch/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch0Position",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7ad20a88-dd63-4831-b76f-ddbe973f9ab3",
-                    "path": "<Touchscreen>/touch1/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch1Delta",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6cfef7d3-b7bd-4a8a-acb4-e0b008d6fc18",
-                    "path": "<Touchscreen>/primaryTouch/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch0Contact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "50aa1845-fece-45ea-9f25-d93389aa7ac5",
-                    "path": "<Touchscreen>/touch1/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch1Contact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5aa63fdc-7961-45bd-bd27-15710f8cffca",
-                    "path": "<Touchscreen>/primaryTouch/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch0Delta",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
