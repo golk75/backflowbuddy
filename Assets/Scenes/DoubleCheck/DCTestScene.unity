@@ -2500,6 +2500,31 @@ PrefabInstance:
       propertyPath: ObjectVersion
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: IsoSurfaceLevel
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: RayMarchStepSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: UnderwaterRender
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: RefractionBounces
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390271845604411435, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: RayMarchIsoSurface
+      value: 0.89
+      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: liquid
@@ -2895,10 +2920,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.767
       objectReference: {fileID: 0}
+    - target: {fileID: 6828038483337374221, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6995767192493118712, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4588077
+      objectReference: {fileID: 0}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: EnableDownscale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
@@ -4894,6 +4929,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 363377942658492734, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1357697479322454688, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
