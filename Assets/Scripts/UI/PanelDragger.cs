@@ -33,7 +33,7 @@ public class PanelDragger : PointerManipulator
         target.RegisterCallback<PointerDownEvent>(OnPointerDown);
         target.RegisterCallback<PointerMoveEvent>(OnPointerMove);
         target.RegisterCallback<PointerUpEvent>(OnPointerUp);
-        target.RegisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
+        // target.RegisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
     }
 
 
@@ -42,7 +42,7 @@ public class PanelDragger : PointerManipulator
         target.UnregisterCallback<PointerDownEvent>(OnPointerDown);
         target.UnregisterCallback<PointerMoveEvent>(OnPointerMove);
         target.UnregisterCallback<PointerUpEvent>(OnPointerUp);
-        target.UnregisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
+        // target.UnregisterCallback<PointerCaptureOutEvent>(PointerCaptureOutHandler);
     }
 
 
@@ -84,7 +84,7 @@ public class PanelDragger : PointerManipulator
         }
         if (CanStartManipulation(evt))
         {
-            Vector3 pointerDelta = evt.position - pointerStartPosition;
+            // pointerDelta = evt.position - pointerStartPosition;
             var pos = target.parent.LocalToWorld(target.layout.position);
             targetStartPosition = target.parent.LocalToWorld(target.transform.position);
             pointerStartPosition = evt.position;
@@ -98,38 +98,38 @@ public class PanelDragger : PointerManipulator
     }
 
 
-    private void PointerCaptureOutHandler(PointerCaptureOutEvent evt)
-    {
-        if (enabled)
-        {
+    // private void PointerCaptureOutHandler(PointerCaptureOutEvent evt)
+    // {
+    //     if (enabled)
+    //     {
 
-            VisualElement slotsContainer = root.Q<VisualElement>("PanelSlots");
-            UQueryBuilder<VisualElement> allSlots =
-                slotsContainer.Query<VisualElement>(className: "pressure-panel-slot");
-            UQueryBuilder<VisualElement> overlappingSlots =
-                allSlots.Where(OverlapsTarget);
-            VisualElement closestOverlappingSlot =
-                FindClosestSlot(overlappingSlots);
-            Vector3 closestPos = Vector3.zero;
+    //         VisualElement slotsContainer = root.Q<VisualElement>("PanelSlots");
+    //         UQueryBuilder<VisualElement> allSlots =
+    //             slotsContainer.Query<VisualElement>(className: "pressure-panel-slot");
+    //         UQueryBuilder<VisualElement> overlappingSlots =
+    //             allSlots.Where(OverlapsTarget);
+    //         VisualElement closestOverlappingSlot =
+    //             FindClosestSlot(overlappingSlots);
+    //         Vector3 closestPos = Vector3.zero;
 
-            if (closestOverlappingSlot != null)
-            {
-                closestPos = RootSpaceOfSlot(closestOverlappingSlot);
-                // closestPos = new Vector2(closestPos.x - 5, closestPos.y - 5);
-            }
-            if (closestOverlappingSlot != null)
-            {
-                target.transform.position = closestPos;
-            }
-            else
-            {
+    //         if (closestOverlappingSlot != null)
+    //         {
+    //             closestPos = RootSpaceOfSlot(closestOverlappingSlot);
+    //             // closestPos = new Vector2(closestPos.x - 5, closestPos.y - 5);
+    //         }
+    //         if (closestOverlappingSlot != null)
+    //         {
+    //             target.transform.position = closestPos;
+    //         }
+    //         else
+    //         {
 
-                target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y); ;
-            }
+    //             target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y); ;
+    //         }
 
-            enabled = false;
-        }
-    }
+    //         enabled = false;
+    //     }
+    // }
 
 
     private Vector3 RootSpaceOfSlot(VisualElement slot)
