@@ -212,6 +212,8 @@ public class WaterController : MonoBehaviour
     public float zone2primedParticleCount = 10000;
     public float zone3primedParticleCount = 10000;
     public bool test1InProgress = false;
+    public float check1FFStrength;
+    public float check2FFStrength;
     void Start()
     {
 
@@ -314,13 +316,13 @@ public class WaterController : MonoBehaviour
             {
                 check1housingForceField.Strength = Mathf.SmoothDamp(
                  check1housingForceField.Strength,
-                   1.2f,
+                   check1FFStrength,
                    ref check1FFref.x,
                    0.2f
                 );
                 check2housingForceField.Strength = Mathf.SmoothDamp(
                     check2housingForceField.Strength,
-                    1f,
+                    check2FFStrength,
                     ref check2FFref.x,
                     0.5f
                 );
@@ -339,7 +341,7 @@ public class WaterController : MonoBehaviour
                 {
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                       check1housingForceField.Strength,
-                      1f,
+                      check1FFStrength,
                       ref check1FFref.x,
                       0.5f
                   );
@@ -353,7 +355,7 @@ public class WaterController : MonoBehaviour
                 {
                     check2housingForceField.Strength = Mathf.SmoothDamp(
                         check2housingForceField.Strength,
-                        1f,
+                        check1FFStrength,
                         ref check2FFref.x,
                         0.5f
                     );
@@ -369,13 +371,13 @@ public class WaterController : MonoBehaviour
                 // }
                 check1housingForceField.Strength = Mathf.SmoothDamp(
                        check1housingForceField.Strength,
-                       1f,
+                       check1FFStrength,
                        ref check1FFref.x,
                        0.5f
                    );
                 check2housingForceField.Strength = Mathf.SmoothDamp(
                         check2housingForceField.Strength,
-                        1f,
+                        check2FFStrength,
                         ref check2FFref.x,
                         0.5f
                     );
@@ -389,7 +391,7 @@ public class WaterController : MonoBehaviour
                     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                      check1housingForceField.Strength,
-                     1f,
+                     check1FFStrength,
                      ref check1FFref.x,
                      0.5f);
 
@@ -414,13 +416,13 @@ public class WaterController : MonoBehaviour
             {
                 check1housingForceField.Strength = Mathf.SmoothDamp(
                                      check1housingForceField.Strength,
-                                     1f,
+                                     check1FFStrength,
                                      ref check1FFref.x,
                                      0.5f
                                  );
                 check2housingForceField.Strength = Mathf.SmoothDamp(
                         check2housingForceField.Strength,
-                        1f,
+                        check2FFStrength,
                         ref check2FFref.x,
                         0.5f
                     );
@@ -458,7 +460,7 @@ public class WaterController : MonoBehaviour
                 {
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                       check1housingForceField.Strength,
-                      1f,
+                      check1FFStrength,
                       ref check1FFref.x,
                       0.5f
                   );
@@ -472,7 +474,7 @@ public class WaterController : MonoBehaviour
                 {
                     check2housingForceField.Strength = Mathf.SmoothDamp(
                         check2housingForceField.Strength,
-                        1f,
+                        check2FFStrength,
                         ref check2FFref.x,
                         0.5f
                     );
@@ -491,7 +493,7 @@ public class WaterController : MonoBehaviour
                 {
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                     check1housingForceField.Strength,
-                    1.2f,
+                    check1FFStrength,
                     ref check1FFref.x,
                     0.2f
                     );
@@ -502,7 +504,7 @@ public class WaterController : MonoBehaviour
                 {
                     check1housingForceField.Strength = 0;
                     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
 
                 }
 
@@ -523,14 +525,14 @@ public class WaterController : MonoBehaviour
 
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                     check1housingForceField.Strength,
-                    1.2f,
+                    check1FFStrength,
                     ref check1FFref.x,
                     0.2f
                     );
 
                     check2housingForceField.Strength = Mathf.SmoothDamp(
                     check2housingForceField.Strength,
-                    1.2f,
+                    check2FFStrength,
                     ref check2FFref.x,
                     0.2f
                     );

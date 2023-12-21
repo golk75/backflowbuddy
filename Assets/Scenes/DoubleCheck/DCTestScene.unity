@@ -2440,6 +2440,31 @@ PrefabInstance:
       propertyPath: VolumePerSimTime
       value: 0.09
       objectReference: {fileID: 0}
+    - target: {fileID: 1618390522394576248, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877132831674561590, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: MaximumVelocity
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877132831674561590, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: ParticleDensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877132831674561590, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: ForceInteractionStrength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109544570463248858, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2418398903546465266, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: m_IsActive
@@ -2540,11 +2565,6 @@ PrefabInstance:
       propertyPath: sightTube
       value: 
       objectReference: {fileID: 2001235575}
-    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
-        type: 3}
-      propertyPath: supplyPsi
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: inputForce
@@ -2742,6 +2762,16 @@ PrefabInstance:
       objectReference: {fileID: 2012908870}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: check1FFStrength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: check2FFStrength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: checkValveStatus
       value: 
       objectReference: {fileID: 873336866102218116}
@@ -2937,9 +2967,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: MaxNumParticles
+      value: 366336
+      objectReference: {fileID: 0}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: UseFixedTimestep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: ReflectionProbeBRP
       value: 
       objectReference: {fileID: 746076937}
+    - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: SimulationTimeScale
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 7410749882533417994, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: Manipulators.Array.size
@@ -6889,6 +6934,21 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.00000006510506
       objectReference: {fileID: 0}
+    - target: {fileID: 1302018117229102950, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_XDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302018117229102950, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_XDrive.positionDamper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302018117229102950, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_XDrive.positionSpring
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1318351934377700086, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: hoseSpring
@@ -7191,6 +7251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7294633820452055744, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294633820452055744, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
       propertyPath: m_AngularDrag
       value: 0
       objectReference: {fileID: 0}
@@ -7333,6 +7398,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057919428796995263, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_XDrive.maximumForce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057919428796995263, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_XDrive.positionDamper
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057919428796995263, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_XDrive.positionSpring
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
