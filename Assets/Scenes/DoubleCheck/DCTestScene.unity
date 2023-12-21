@@ -4975,6 +4975,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 181146499920178594, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
+      propertyPath: VolumePerSimTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 363377942658492734, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_Enabled
@@ -5168,7 +5173,7 @@ PrefabInstance:
     - target: {fileID: 5197038834172220381, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00036273184
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5197038834172220381, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
