@@ -53,18 +53,6 @@ public class BleedHoseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //reset cached knob rotation to not reset after rotating 180 degress--> zRot is rotating from 0 -> 180 -> -180 -> 0 -> 180..and so on
-        // if (doubleCheckTestKitController.currentKnob == highBleedKnob)
-        // {
-        //     appliedKnobRotation = doubleCheckTestKitController.knobRotation;
-
-        //     bleederHoseEmitter.VolumePerSimTime = appliedKnobRotation / 10000;
-
-        // }
-
-
-
-
 
     }
 }

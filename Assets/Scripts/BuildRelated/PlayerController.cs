@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public static event Action OnPanCanceled;
 
     public bool isOperableObject = false;
-    public float primaryTouchStarted;
+    public float primaryClickPerformed;
     public float primaryClickStarted;
     public bool secondaryTouchStarted = false;
     public bool primaryTouchPerformed = false;
@@ -101,11 +101,11 @@ public class PlayerController : MonoBehaviour
 #endif
 
 #if UNITY_IOS
-      Debug.Log("iOS"); 
-   
+        Debug.Log("iOS");
+
 
         operableObject = initialOperableObject;
-      playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
+        playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
         playerInput.Touchscreen.Touch0Contact.performed += Touch0Contact_performed;
         playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
             playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
         );
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        primaryTouchStarted = context.ReadValue<float>();
+        primaryClickPerformed = context.ReadValue<float>();
         if (uiClickFilter.isUiClicked == false)
             DetectObjectWithRaycast();
     }
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
     private void LeftMouseClick_canceled(InputAction.CallbackContext context)
     {
         primaryClickStarted = context.ReadValue<float>();
-        primaryTouchStarted = context.ReadValue<float>();
+        primaryClickPerformed = context.ReadValue<float>();
         primaryTouchPerformed = context.ReadValueAsButton();
         OnPanCanceled?.Invoke();
         if (operableComponentDescription != null)
@@ -241,16 +241,36 @@ public class PlayerController : MonoBehaviour
             playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
         );
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        primaryTouchStarted = context.ReadValue<float>();
-        if (uiClickFilter.isUiClicked == false)
-            DetectObjectWithRaycast();
+        DetectObjectWithRaycast();
+
+        if (operableComponentDescription != null)
+        {
+            ///Click/press and drag-----------------------------------------------------------------------
+            if (ClickOperationEnabled == false)
+            {
+                _operableObjectRotation.z +=
+                    (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                    * deviceRotSensitivity
+                    * -1;
+
+                //rotation clamp for parts that rotate around center mass(i.e.test cock valves)
+
+                _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
+                ///End Click/press and drag--------------------------------------------------------------------
+            }
+            else if (ClickOperationEnabled == true)
+            {
+                ClickOperate();
+
+            }
+
+        }
     }
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
         primaryClickStarted = context.ReadValue<float>();
-        primaryTouchStarted = context.ReadValue<float>();
-        primaryTouchPerformed = context.ReadValueAsButton();
+        primaryClickPerformed = context.ReadValue<float>();
         OnPanCanceled?.Invoke();
         if (operableComponentDescription != null)
         {
@@ -270,6 +290,8 @@ public class PlayerController : MonoBehaviour
             {
                 Actions.onSightTubeDrop?.Invoke(operableObject);
             }
+
+
             isOperableObject = false;
             operableObject = null;
             _operableTestGaugeObject = null;
@@ -283,32 +305,8 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
-        primaryTouchPerformed = context.ReadValueAsButton();
-        if (uiClickFilter.isUiClicked == false || uiClickFilter.isUiHovered == false)
-            if (operableComponentDescription != null)
-            {
-                if (
-                     // isOperableObject == true
-                     operableComponentDescription.partsType
-                        == OperableComponentDescription.PartsType.TestKitHose
-                )
-                {
-                    Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-                }
-                if (
-                   //   isOperableObject == true
-                   operableComponentDescription.partsType
-                      == OperableComponentDescription.PartsType.TestKitSightTube
-              )
-                {
-                    Actions.onSightTubeGrab?.Invoke(operableObject);
-                }
-                if (ClickOperationEnabled == true)
-                {
-                    ClickOperate();
 
-                }
-            }
+        primaryClickPerformed = context.ReadValue<float>();
 
     }
 
@@ -461,55 +459,22 @@ public class PlayerController : MonoBehaviour
 
         if (operableObject != null)
         {
+
             if (
-                operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.ShutOff
-                || operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestCock
+                 // isOperableObject == true
+                 operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitHose
             )
             {
-
-                // may come back to this after building out to mobile and testing on actual phone/ tablet
-                // if (Input.GetMouseButtonDown(0))
-                // {
-                //     _operableObjectRotation.z +=
-                //         (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                //         * deviceRotSensitivity
-                //         * -1;
-                // }
-                // else
-                // {
-                //     _operableObjectRotation.z +=
-                //         (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                //         * deviceRotSensitivity
-                //         * -1;
-                // }
-
-
-                ///Click/press and drag-----------------------------------------------------------------------
-                if (ClickOperationEnabled == false)
-                {
-                    _operableObjectRotation.z +=
-                        (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                        * deviceRotSensitivity
-                        * -1;
-
-                    //rotation clamp for parts that rotate around center mass(i.e.test cock valves)
-
-                    _operableObjectRotation.z = Mathf.Clamp(_operableObjectRotation.z, 0.0f, 90.0f);
-                    ///End Click/press and drag--------------------------------------------------------------------
-                }
-                /// <summary>
-                /// For Click Operations, see LeftMouseClicked_performed() 
-                /// </summary>
-
-
-
+                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
             }
-            else if (operableComponentDescription.partsType == OperableComponentDescription.PartsType.TestKitValve)
+            if (
+               //   isOperableObject == true
+               operableComponentDescription.partsType
+                  == OperableComponentDescription.PartsType.TestKitSightTube
+          )
             {
-                _operableTestGaugeObject = operableObject;
-                operableObject = null;
+                Actions.onSightTubeGrab?.Invoke(operableObject);
             }
 
         }
@@ -553,7 +518,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OperateCheck()
     {
-        if (primaryTouchStarted > 0)
+        if (primaryClickPerformed > 0)
         {
             Operate();
         }

@@ -114,13 +114,16 @@ public class HoseDetector : MonoBehaviour
 
                 if (currentAttachment.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitHose)
                 {
+
                     // and do not set their position------------
                     Actions.onHoseConnect?.Invoke(this.gameObject, currentTestCockDescription);
+
+
                 }
                 else if (currentAttachment.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitSightTube)
                 {
 
-                    Actions.onSightTubeConnect?.Invoke(currentAttachment, currentTestCockDescription);
+                    Actions.onSightTubeConnect?.Invoke(currentAttachment, this.gameObject, currentTestCockDescription);
                 }
 
 

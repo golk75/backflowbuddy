@@ -88,6 +88,7 @@ public class HoseController : MonoBehaviour
         //identifying current test cock being hooked up to, for connection positioning
         currentTestCock = testCockDetector;
 
+
     }
 
 
@@ -113,11 +114,10 @@ public class HoseController : MonoBehaviour
 
                 break;
         }
-        if (currentHoseBibObj != null)
-        {
 
-            currentHoseBibObj.transform.position = currentTestCock.transform.position;
-        }
+
+        currentHoseBibObj.transform.position = testCock.transform.position;
+
 
 
     }
@@ -126,7 +126,7 @@ public class HoseController : MonoBehaviour
     {
 
 
-        isAttaching = false;
+        // isAttaching = false;
 
         switch (description.componentId)
         {
@@ -224,7 +224,7 @@ public class HoseController : MonoBehaviour
 
         //check is mouse left button or screen is being pressed down
         while (
-            playerController.primaryTouchStarted > 0 && isAttaching == false
+            playerController.primaryClickPerformed > 0 && isAttaching == false
             || playerController.primaryClickStarted > 0 && isAttaching == false
         )
         {
@@ -254,14 +254,14 @@ public class HoseController : MonoBehaviour
     /// </summary>
     /// <param name="obj"></param>
     /// <param name="description"></param>
-    private void SightTubeConnectionAttempt(GameObject sightTubeObj, OperableComponentDescription description)
+    private void SightTubeConnectionAttempt(GameObject sightTubeObj, GameObject testCock, OperableComponentDescription description)
     {
         if (currentTestCock != null)
             //not allowing sight tube connection to test cock #1 (for now), since there is no reason in real life that this would be the case.
             if (currentTestCock.GetComponent<OperableComponentDescription>().componentId != OperableComponentDescription.ComponentId.TestCock1)
             {
-                connectionPoint = new Vector3(currentTestCock.transform.position.x, currentTestCock.transform.position.y + testCockPositionOffset, currentTestCock.transform.position.z);
-
+                connectionPoint = new Vector3(testCock.transform.position.x, testCock.transform.position.y + testCockPositionOffset, testCock.transform.position.z);
+                Debug.Log($"connectionPoint: {connectionPoint}");
                 if (sightTube.GetComponent<OperableComponentDescription>().componentId == OperableComponentDescription.ComponentId.SightTube)
                 {
                     // Vector3 currentDampVelocity = Vector3.zero;
@@ -287,7 +287,7 @@ public class HoseController : MonoBehaviour
         currentHoseBibObj = null;
         currentTipHandle = null;
         currentTestCock = null;
-        StopCoroutine(MovingSightTube(sightTubeObj));
+        // StopCoroutine(MovingSightTube(sightTubeObj));
 
 
     }
@@ -299,19 +299,19 @@ public class HoseController : MonoBehaviour
         isAttaching = false;
 
         SightTubeMovement = StartCoroutine(MovingSightTube(sightTubeObj));
-        if (!cameraController.isPanning)
-        {
-            if (currentTestCock != null)
-            {
-                if (doubleCheckTestKitController.AttachedHoseList.Contains(sightTubeObj) && doubleCheckTestKitController.AttachedTestCockList.Contains(currentTestCock))
-                {
-                    //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively / fast
-                    //     Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
-                    // Actions.onRemoveHoseFromList?.Invoke(sightTubeObj, sightTube.GetComponent<OperableComponentDescription>());
-                }
+        // if (!cameraController.isPanning)
+        // {
+        //     if (currentTestCock != null)
+        //     {
+        //         if (doubleCheckTestKitController.AttachedHoseList.Contains(sightTubeObj) && doubleCheckTestKitController.AttachedTestCockList.Contains(currentTestCock))
+        //         {
+        //             //add check for panning camera since sight tube floats a little offset from test cock if camera is panned aggressively / fast
+        //             //     Actions.onRemoveTestCockFromList?.Invoke(currentTestCock, currentTestCock.GetComponent<OperableComponentDescription>());
+        //             // Actions.onRemoveHoseFromList?.Invoke(sightTubeObj, sightTube.GetComponent<OperableComponentDescription>());
+        //         }
 
-            }
-        }
+        //     }
+        // }
 
 
     }
@@ -321,7 +321,7 @@ public class HoseController : MonoBehaviour
 
         isSightTubeConnected = false;
         while (
-            playerController.primaryTouchStarted > 0 && sightTubeGrabbed == true && isSightTubeConnected == false
+            playerController.primaryClickPerformed > 0 && sightTubeGrabbed == true && isSightTubeConnected == false
             || playerController.primaryClickStarted > 0 && sightTubeGrabbed == true && isSightTubeConnected == false
         )
         {
@@ -355,5 +355,7 @@ public class HoseController : MonoBehaviour
         {
             sightTube.transform.position = connectionPoint;
         }
+
+
     }
 }

@@ -30,7 +30,7 @@ public static class Actions
     public static Action<GameObject> onSightTubeDrop;
     public static Action<GameObject> onSightTubeAttach;
     public static Action<GameObject> onSightTubeDettach;
-    public static Action<GameObject, OperableComponentDescription> onSightTubeConnect;
+    public static Action<GameObject, GameObject, OperableComponentDescription> onSightTubeConnect;
     // public static Action<GameObject, OperableComponentDescription> onHoseBibDisconnect;
     public static Action<GameObject> onCheckClosed;
     public static Action<GameObject> onCheckOpened;
