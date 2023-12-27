@@ -111,21 +111,8 @@ public class HoseDetector : MonoBehaviour
                 Actions.onAddTestCockToList?.Invoke(this.gameObject, currentTestCockDescription);
                 Actions.onAddHoseToList?.Invoke(currentAttachment, currentHoseDescription);
                 isConnected = true;
-
-                if (currentAttachment.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitHose)
-                {
-
-                    // and do not set their position------------
-                    Actions.onHoseConnect?.Invoke(this.gameObject, currentTestCockDescription);
-
-
-                }
-                else if (currentAttachment.GetComponent<OperableComponentDescription>().partsType == OperableComponentDescription.PartsType.TestKitSightTube)
-                {
-
-                    Actions.onSightTubeConnect?.Invoke(currentAttachment, this.gameObject, currentTestCockDescription);
-                }
-
+                //send data on test cock that is having an attachment added
+                Actions.onComponentConnect?.Invoke(this.gameObject, currentTestCockDescription, currentHose);
 
             }
 

@@ -1258,27 +1258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTestCockConnection: {fileID: 0}
---- !u!65 &2001235591
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001235575}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.117030546, y: 0.03466349, z: 0.071425624}
-  m_Center: {x: 0.029856715, y: 0.0000000017593464, z: 0.029177122}
 --- !u!4 &2001235592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1531741249013338705, guid: 06b5c138c781448b2ac79ddf44aff99e,
@@ -2185,6 +2164,7 @@ MonoBehaviour:
   testCockToRemove: {fileID: 0}
   testCockPositionOffset: 1.2
   hoseDetector: {fileID: 0}
+  componentGrabbed: 0
 --- !u!1 &753978615707022301
 GameObject:
   m_ObjectHideFlags: 0
@@ -5244,6 +5224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714777216034110682, guid: 06b5c138c781448b2ac79ddf44aff99e,
+        type: 3}
       propertyPath: m_Center.x
       value: 0.02387259
       objectReference: {fileID: 0}
@@ -5537,10 +5522,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2001235583}
-    - targetCorrespondingSourceObject: {fileID: 2164549307325253867, guid: 06b5c138c781448b2ac79ddf44aff99e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2001235591}
   m_SourcePrefab: {fileID: 100100000, guid: 06b5c138c781448b2ac79ddf44aff99e, type: 3}
 --- !u!114 &4104274653618716174 stripped
 MonoBehaviour:

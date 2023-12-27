@@ -125,8 +125,8 @@ public class ResetButton : MonoBehaviour
         foreach (var hose in doubleCheckTestKitController.AttachedHoseList)
         {
 
-            Actions.onHoseBibGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
-            Actions.onHoseBibDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
+            Actions.onComponentGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
+            Actions.onComponentDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
 
         }
         Actions.onSightTubeGrab?.Invoke(sightTube);

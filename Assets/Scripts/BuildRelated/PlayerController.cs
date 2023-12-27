@@ -118,18 +118,18 @@ public class PlayerController : MonoBehaviour
 
 #if UNITY_STANDALONE_OSX
         Debug.Log("Standalone OSX");
-        playerInput.MouseOperate.Click.started += LeftMouseClick_started;
-        playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
-        playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
+        // playerInput.MouseOperate.Click.started += LeftMouseClick_started;
+        // playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+        // playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
 
 #endif
 
 #if UNITY_STANDALONE_WIN
       Debug.Log("Standalone Windows");
           //Mouse Input
-        playerInput.MouseOperate.Click.started += LeftMouseClick_started;
-        playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
-        playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
+        // playerInput.MouseOperate.Click.started += LeftMouseClick_started;
+        // playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+        // playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
 #endif
 
 
@@ -176,18 +176,14 @@ public class PlayerController : MonoBehaviour
                  // isOperableObject == true
                  operableComponentDescription.partsType
                     == OperableComponentDescription.PartsType.TestKitHose
+                    ||
+                    operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitSightTube
             )
             {
-                Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+                Actions.onComponentDrop?.Invoke(operableObject, operableComponentDescription);
             }
-            if (
-             //    isOperableObject == true
-             operableComponentDescription.partsType
-                   == OperableComponentDescription.PartsType.TestKitSightTube
-           )
-            {
-                Actions.onSightTubeDrop?.Invoke(operableObject);
-            }
+
             isOperableObject = false;
             operableObject = null;
             _operableTestGaugeObject = null;
@@ -212,7 +208,7 @@ public class PlayerController : MonoBehaviour
                         == OperableComponentDescription.PartsType.TestKitHose
                 )
                 {
-                    Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+                    Actions.onComponentGrab?.Invoke(operableObject, operableComponentDescription);
                 }
                 if (
                    //   isOperableObject == true
@@ -278,18 +274,14 @@ public class PlayerController : MonoBehaviour
                  // isOperableObject == true
                  operableComponentDescription.partsType
                     == OperableComponentDescription.PartsType.TestKitHose
+                         ||
+                    operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitSightTube
             )
             {
-                Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
+                Actions.onComponentDrop?.Invoke(operableObject, operableComponentDescription);
             }
-            if (
-             //    isOperableObject == true
-             operableComponentDescription.partsType
-                   == OperableComponentDescription.PartsType.TestKitSightTube
-           )
-            {
-                Actions.onSightTubeDrop?.Invoke(operableObject);
-            }
+
 
 
             isOperableObject = false;
@@ -307,6 +299,14 @@ public class PlayerController : MonoBehaviour
     {
 
         primaryClickPerformed = context.ReadValue<float>();
+        if (primaryTouchPerformed == false)
+        {
+            primaryTouchPerformed = true;
+        }
+        else
+        {
+            primaryTouchPerformed = false;
+        }
 
     }
 
@@ -464,18 +464,16 @@ public class PlayerController : MonoBehaviour
                  // isOperableObject == true
                  operableComponentDescription.partsType
                     == OperableComponentDescription.PartsType.TestKitHose
+                || operableComponentDescription.partsType
+                    == OperableComponentDescription.PartsType.TestKitSightTube
             )
             {
-                Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
+                Actions.onComponentGrab?.Invoke(operableObject, operableComponentDescription);
             }
-            if (
-               //   isOperableObject == true
-               operableComponentDescription.partsType
-                  == OperableComponentDescription.PartsType.TestKitSightTube
-          )
-            {
-                Actions.onSightTubeGrab?.Invoke(operableObject);
-            }
+
+        }
+        else
+        {
 
         }
     }
