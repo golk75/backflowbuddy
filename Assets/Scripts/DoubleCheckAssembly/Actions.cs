@@ -20,15 +20,12 @@ public static class Actions
     public static Action<GameObject, OperableComponentDescription> onRemoveHoseFromList;
     public static Action<GameObject, OperableComponentDescription> onComponentGrab;
     public static Action<GameObject, OperableComponentDescription> onComponentDrop;
-    public static Action<GameObject, OperableComponentDescription> onHoseAttach;
-    public static Action<GameObject, OperableComponentDescription> onHoseDetach;
-    public static Action<GameObject, OperableComponentDescription> onHoseBibConnect;
-    public static Action<GameObject, OperableComponentDescription> onHoseContact;
+
 
 
     public static Action<GameObject> onSightTubeGrab;
     public static Action<GameObject> onSightTubeDrop;
-    public static Action<GameObject> onSightTubeAttach;
+
     public static Action<GameObject> onSightTubeDettach;
     public static Action<GameObject, GameObject, OperableComponentDescription> onSightTubeConnect;
     // public static Action<GameObject, OperableComponentDescription> onHoseBibDisconnect;

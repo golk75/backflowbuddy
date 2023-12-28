@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         testCockController = TestCockManager.GetComponent<TestCockController>();
         waterController = WaterManager.GetComponent<WaterController>();
-        //Touch Input
+
 #if UNITY_EDITOR
         Debug.Log("Unity Editor");
 #endif
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
 #if UNITY_IOS
         Debug.Log("iOS");
 
-
+        //Touch Input
         operableObject = initialOperableObject;
         playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
         playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
@@ -118,18 +118,18 @@ public class PlayerController : MonoBehaviour
 
 #if UNITY_STANDALONE_OSX
         Debug.Log("Standalone OSX");
-        // playerInput.MouseOperate.Click.started += LeftMouseClick_started;
-        // playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
-        // playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
+         playerInput.MouseOperate.Click.started += LeftMouseClick_started;
+         playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+         playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
 
 #endif
 
 #if UNITY_STANDALONE_WIN
       Debug.Log("Standalone Windows");
           //Mouse Input
-        // playerInput.MouseOperate.Click.started += LeftMouseClick_started;
-        // playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
-        // playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
+         playerInput.MouseOperate.Click.started += LeftMouseClick_started;
+         playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
+         playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
 #endif
 
 
@@ -345,12 +345,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D ray2DHit = Physics2D.Raycast(primaryTouchStartPos, Vector2.zero);
         RaycastHit hit;
-        // RaycastHit hit2;
 
-        //current distance to device is about 60-70
-        //Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
-
-        //Debug.Log($"hit.collider = {hit.collider}; ray2DHit = {ray2DHit.collider}");
         ///check if anything is hit, then if something was hit, check whether it is an operable component or not
         /// (if it has an OperableComponentDescription component, then it is operable)
         Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
@@ -358,7 +353,7 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null && ray2DHit.collider == null)
         {
 
-            // _operableTestGaugeObject = null;
+
 
             isOperableObject = true;
             //This is to differentiate between operable component types if an operable component is pressed/ clicked
@@ -427,11 +422,6 @@ public class PlayerController : MonoBehaviour
                 Actions.onHighBleedOperate?.Invoke();
             }
         }
-        // if (OperableTestGaugeObject != null)
-        // {
-        //     Debug.Log($"OperableTestGaugeObject: {OperableTestGaugeObject}");
-
-        // }
 
 
 

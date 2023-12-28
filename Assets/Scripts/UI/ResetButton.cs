@@ -22,18 +22,15 @@ public class ResetButton : MonoBehaviour
     public TestKitManager testKitManager;
     public PressureZoneHUDController pressureZoneHUDController;
     public GameObject sightTube;
-    OperableComponentDescription ShutOff1OperableDescription;
-    OperableComponentDescription Tc1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public DoubleCheckTestKitController doubleCheckTestKitController;
-
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
     [SerializeField]
     List<ResetableObject> objectsToReset;
     ResetableObject resetableObject;
-    ZibraLiquid resetVoid;
+
 
 
     [SerializeField]
@@ -87,8 +84,7 @@ public class ResetButton : MonoBehaviour
         resetButton = root.rootVisualElement.Q<Button>("ResetButton");
         resetButton.clicked += ResetDevice;
 
-        ShutOff1OperableDescription = ShutOff1.GetComponent<OperableComponentDescription>();
-        Tc1OperableDescription = Tc1.GetComponent<OperableComponentDescription>();
+
 
     }
     //SO OPEN -->
@@ -133,11 +129,7 @@ public class ResetButton : MonoBehaviour
         Actions.onSightTubeDrop?.Invoke(sightTube);
         doubleCheckTestKitController.AttachedTestCockList.Clear();
         doubleCheckTestKitController.AttachedHoseList.Clear();
-        // if (testKitManager.isDoubleCheckTesting)
-        // {
-        //     waterController.testCock4Str = UnityEngine.Random.Range(waterController.testCock4MinStr, waterController.testCock4MaxStr);
-        //     waterController.testCock3Str = UnityEngine.Random.Range(waterController.testCock3MinStr, waterController.testCock3MaxStr);
-        // }
+
 
 
         //reset ui pressure values to 0

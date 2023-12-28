@@ -2135,12 +2135,14 @@ MonoBehaviour:
   currentConfigurableJoint: {fileID: 0}
   playerController: {fileID: 1446278365}
   cameraController: {fileID: 1372113979}
+  uiClickFilter: {fileID: 0}
   doubleCheckTestKitController: {fileID: 0}
   connectionPoint: {x: 0, y: 0, z: 0}
   sightTubeHomePos: {x: 0, y: 0, z: 0}
   HighHoseBib: {fileID: 5347396328354856675}
   LowHoseBib: {fileID: 2714726752660854250}
   BypassHoseBib: {fileID: 7312082773050160459}
+  m_ComponentToConnect: {fileID: 0}
   HighHoseConfigJointConnectedBody: {fileID: 4334395646030552086}
   LowHoseConfigJointConnectedBody: {fileID: 2194922202752206992}
   BypassHoseConfigJointConnectedBody: {fileID: 2007314106307692782}
@@ -4353,6 +4355,7 @@ GameObject:
   - component: {fileID: 5602754415451025900}
   - component: {fileID: 1850749843454098603}
   - component: {fileID: 131062633348571792}
+  - component: {fileID: 5602754415451025901}
   m_Layer: 9
   m_Name: LowHoseTipHandle
   m_TagString: HoseBib
@@ -4505,12 +4508,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4959760521603951707}
-  - component: {fileID: 4959760521603951710}
-  - component: {fileID: 4959760521603951709}
-  - component: {fileID: 4959760521603951708}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BypassHoseTIP_end
-  m_TagString: HoseBib
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6167,68 +6167,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3383641953223918420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4959760521603951708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970852437638764132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentId: 16
-  partsType: 5
---- !u!54 &4959760521603951709
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970852437638764132}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &4959760521603951710
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970852437638764132}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.018157661, y: 0.023310997, z: 0.01347002}
-  m_Center: {x: 0.00044625162, y: -0.009036942, z: -0.0009805203}
 --- !u!114 &5012427211475698928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6643,6 +6581,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5602754415451025901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714726752660854250}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.018157661, y: 0.023310997, z: 0.01347002}
+  m_Center: {x: 0.00044625162, y: -0.009036942, z: -0.0009805203}
 --- !u!4 &5633054468403842728
 Transform:
   m_ObjectHideFlags: 0
@@ -8159,6 +8118,7 @@ GameObject:
   - component: {fileID: 1272583462896970105}
   - component: {fileID: 6937398546582608226}
   - component: {fileID: 4195918012964146559}
+  - component: {fileID: 7312082773050160460}
   m_Layer: 9
   m_Name: BypassHoseTipHandle
   m_TagString: HoseBib
@@ -8166,6 +8126,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &7312082773050160460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312082773050160459}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.018157661, y: 0.023310997, z: 0.01347002}
+  m_Center: {x: 0.00044625162, y: -0.009036942, z: -0.0009805203}
 --- !u!114 &7335953754005364542 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 344587811804220544, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -8489,93 +8470,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 288655860446809338}
-  - component: {fileID: 7633477802536089286}
-  - component: {fileID: 7633477802536089287}
-  - component: {fileID: 7633477802536089288}
-  - component: {fileID: 7633477802536089289}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LowHoseTIP_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &7633477802536089286
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633477802536089285}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.018157661, y: 0.023310997, z: 0.01347002}
-  m_Center: {x: 0.00044625162, y: -0.009036942, z: -0.0009805203}
---- !u!114 &7633477802536089287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633477802536089285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ef1fbe579b0477eadb01adc0ab2b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentId: 15
-  partsType: 5
---- !u!54 &7633477802536089288
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633477802536089285}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7633477802536089289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7633477802536089285}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba59014b3b8044af8a7d0369a67984e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isConnectedToTestCock: 0
-  currentTestCockConnection: {fileID: 0}
 --- !u!95 &7692779250148687681
 Animator:
   serializedVersion: 5
