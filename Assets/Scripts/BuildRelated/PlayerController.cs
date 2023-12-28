@@ -312,7 +312,7 @@ public class PlayerController : MonoBehaviour
 
     private void Touch1Contact_started(InputAction.CallbackContext context)
     {
-        //Debug.Log($"Touch1 started");
+
         secondaryTouchStarted = context.ReadValueAsButton();
     }
 
@@ -320,7 +320,7 @@ public class PlayerController : MonoBehaviour
     {
         secondaryTouchStarted = context.ReadValueAsButton();
 
-        //Debug.Log($"Touch1 canceled");
+
         onZoomStop?.Invoke();
     }
 
@@ -339,8 +339,7 @@ public class PlayerController : MonoBehaviour
 
     public void DetectObjectWithRaycast()
     {
-        // int layerMaskInt = 1 << 8;
-        // layerMaskInt = ~layerMaskInt;
+
         LayerMask layerMask = LayerMask.GetMask("OperableObject");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D ray2DHit = Physics2D.Raycast(primaryTouchStartPos, Vector2.zero);
