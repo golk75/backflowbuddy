@@ -21,17 +21,12 @@ public static class Actions
     public static Action<GameObject, OperableComponentDescription> onComponentGrab;
     public static Action<GameObject, OperableComponentDescription> onComponentDrop;
 
-
-
+    //only being used in reset button
     public static Action<GameObject> onSightTubeGrab;
     public static Action<GameObject> onSightTubeDrop;
 
-    public static Action<GameObject> onSightTubeDettach;
-    public static Action<GameObject, GameObject, OperableComponentDescription> onSightTubeConnect;
-    // public static Action<GameObject, OperableComponentDescription> onHoseBibDisconnect;
-    public static Action<GameObject> onCheckClosed;
-    public static Action<GameObject> onCheckOpened;
-    public static Action<bool, GameObject> onTestCockOpen;
+
+
     public static Action<GameObject> onCheck1Closed;
     public static Action<GameObject> onCheck1Opened;
     public static Action<GameObject> onCheck2Closed;
@@ -47,9 +42,5 @@ public static class Actions
     public static Action onHighBleedOperate;
     public static Action onHighBleedClosed;
 
-    //ui
-    public static Action<VisualElement> onPanelDrop;
-    public static Action<VisualElement> onPanelGrab;
-    public static Action<float> onSupplyPressureInputChange;
 
 }

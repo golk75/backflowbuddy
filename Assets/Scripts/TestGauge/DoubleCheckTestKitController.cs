@@ -152,8 +152,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     void OnEnable()
     {
 
-        // Actions.onHoseAttach += AttachHoseBib;
-        // Actions.onHoseDetach += DetachHoseBib;
+
         Actions.onTestCock1Opened += TestCock1Opened;
         Actions.onTestCock1Closed += TestCock1Closed;
         Actions.onTestCock2Opened += TestCoc2Opened;
@@ -167,8 +166,6 @@ public class DoubleCheckTestKitController : MonoBehaviour
         Actions.onAddHoseToList += AddHoseToList;
         Actions.onRemoveHoseFromList += RemoveHoseFromList;
 
-        // Actions.onHighBleedOpen += HighBleedKnobOpened;
-        // Actions.onHighBleedClosed += HighBleedKnobClosed;
 
 
     }
@@ -176,8 +173,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
     void OnDisable()
     {
-        // Actions.onHoseAttach -= AttachHoseBib;
-        // Actions.onHoseDetach -= DetachHoseBib;
+
         Actions.onTestCock1Opened -= TestCock1Opened;
         Actions.onTestCock1Closed -= TestCock1Closed;
         Actions.onTestCock2Opened -= TestCoc2Opened;
@@ -191,10 +187,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         Actions.onAddHoseToList -= AddHoseToList;
         Actions.onRemoveHoseFromList -= RemoveHoseFromList;
 
-        // Actions.onHighBleedOpen -= HighBleedKnobOpened;
-        // Actions.onHighBleedClosed -= HighBleedKnobClosed;
 
-        //Actions.onTestCockOpen -= DetectTestCockOpen;
     }
 
     // Start is called before the first frame update
@@ -264,7 +257,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         float PsidDiff = MinNeedle_rotation - MaxNeedle_rotation;
 
         float normalizedPsid = hosePressure / maxPSID;
-        // Debug.Log($"normalizedPsid: {normalizedPsid}");
+
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
 
     }
@@ -288,7 +281,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         float normalizedRotation = currentKnobRotation / maxKnobRotation;
 
         knobRotation = MinKnob_rotation + normalizedRotation * rotationDiff;
-        //return MinKnob_rotation + normalizedRotation * rotationDiff;
+
         return MinKnob_rotation + normalizedRotation * rotationDiff * knobRotationFactor;
     }
 
@@ -326,7 +319,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
                 if (playerController.ClickOperationEnabled == false)
                 {
 
-                    // currentKnob = playerController.OperableTestGaugeObject;
+
 
                     //check click operation status
 
