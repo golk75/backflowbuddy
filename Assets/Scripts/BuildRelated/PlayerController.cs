@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         DetectObjectWithRaycast();
 
-        if (operableComponentDescription != null)
+        if (operableComponentDescription != null && uiClickFilter.isUiClicked == false)
         {
             ///Click/press and drag-----------------------------------------------------------------------
             if (ClickOperationEnabled == false)
@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
         primaryClickStarted = context.ReadValue<float>();
         primaryClickPerformed = context.ReadValue<float>();
         OnPanCanceled?.Invoke();
-        if (operableComponentDescription != null)
+        if (operableComponentDescription != null && uiClickFilter.isUiClicked == false)
         {
             if (
                  // isOperableObject == true
@@ -310,77 +310,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //------------------------------------>//------------------------------------>//------------------------------------>//------------------------------------>
-
-    // public void Touch0Contact_started(InputAction.CallbackContext context)
-    // {
-    //     isInit = true;
-    //     touchStart = Camera.main.ScreenToWorldPoint(
-    //         playerInput.Touchscreen.Touch0Position.ReadValue<Vector2>()
-    //     );
-    //     primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //     primaryTouchStarted = context.ReadValue<float>();
-
-    //     DetectObjectWithRaycast();
-    // }
-
-    // private void Touch0Contact_canceled(InputAction.CallbackContext context)
-    // {
-    //     primaryClickStarted = context.ReadValue<float>();
-    //     primaryTouchStarted = context.ReadValue<float>();
-    //     primaryTouchPerformed = context.ReadValueAsButton();
-    //     OnPanCanceled?.Invoke();
-    //     if (operableComponentDescription != null)
-    //     {
-    //         if (
-
-    //             operableComponentDescription.partsType
-    //                 == OperableComponentDescription.PartsType.TestKitHose
-    //         )
-    //         {
-    //             Actions.onHoseBibDrop?.Invoke(operableObject, operableComponentDescription);
-    //         }
-    //         else if (
-    //            operableComponentDescription.partsType
-    //                 == OperableComponentDescription.PartsType.TestKitSightTube
-    //         )
-    //         {
-    //             Actions.onSightTubeDrop?.Invoke(operableObject);
-    //         }
-    //     }
-    //     operableComponentDescription = null;
-    //     uiClickFilter.isUiClicked = false;
-    // }
-
-    // private void Touch0Contact_performed(InputAction.CallbackContext context)
-    // {
-    //     DetectObjectWithRaycast();
-    //     primaryTouchPerformed = context.ReadValueAsButton();
-    //     if (operableComponentDescription != null && uiClickFilter.isUiHovered == false)
-    //     {
-    //         if (
-    //              operableComponentDescription.partsType
-    //                 == OperableComponentDescription.PartsType.TestKitHose
-    //         )
-    //         {
-    //             Actions.onHoseBibGrab?.Invoke(operableObject, operableComponentDescription);
-    //         }
-    //         else if (
-    //             operableComponentDescription.partsType
-    //                == OperableComponentDescription.PartsType.TestKitSightTube
-    //        )
-    //         {
-    //             Actions.onSightTubeGrab?.Invoke(operableObject);
-    //         }
-    //     }
-    //     if (ClickOperationEnabled == true)
-    //     {
-    //         ClickOperate();
-    //     }
-
-
-    // }
-    //------------------------------------>//------------------------------------>//------------------------------------>//------------------------------------>
     private void Touch1Contact_started(InputAction.CallbackContext context)
     {
         //Debug.Log($"Touch1 started");
@@ -398,7 +327,7 @@ public class PlayerController : MonoBehaviour
     private void Touch0Delta_started(InputAction.CallbackContext context)
     {
         primaryFingerDelta = new Vector2(
-            (touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x),
+            touchStart.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
             touchStart.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y
         );
     }
