@@ -21,9 +21,8 @@ public class PressureZoneHUDController : MonoBehaviour
     const string SupplyPressureTextString = "SupplyPressure__value";
     const string PressureZone2LabelString = "PressureZone2_value_label";
     const string PressureZone3LabelString = "PressureZone3_value_label";
-    const string PressureZoneSliderBarString = "PressureZoneSlider";
-    const string PressureZoneSliderTrackerString = "unity-tracker";
-    const string PressureZoneSliderHandleString = "unity-dragger";
+
+
     const string PressureZone2PanelTemplateString = "PressureZone2__panel";
     const string PressureZone3PanelTemplateString = "PressureZone3__panel";
     const string SupplyPressurePanelTemplateString = "SupplyPressure__panelTemp";
@@ -50,25 +49,19 @@ public class PressureZoneHUDController : MonoBehaviour
     VisualElement m_SupplyPressurePanel;
     VisualElement m_PressureZone2Panel;
     VisualElement m_PressureZone3Panel;
-    VisualElement currentPanelDragging;
+
 
     //slider elements
-    VisualElement m_PressureZoneSliderBar;
-    VisualElement m_PressureZoneSliderTracker;
-    VisualElement m_PressureZoneSliderHandle;
     VisualElement m_SliderFillBar;
     VisualElement m_NewDragger;
-    VisualElement m_CurrentSlider;
-    VisualElement m_ResizePanel;
     public VisualElement m_DropAreaTopSlot;
     public VisualElement m_DropAreaMidSlot;
     public VisualElement m_DropAreaBotSlot;
-    VisualElement m_PressureZoneHudWrapper;
 
 
     //booleans
     public bool isPointerDown = false;
-    bool isSlotHovered;
+
     //root
     UIDocument root;
 
@@ -92,17 +85,6 @@ public class PressureZoneHUDController : MonoBehaviour
     Coroutine OnIncreaseValue;
     Coroutine OnDecreaseValue;
     Coroutine OnSupplyPanelMove;
-
-
-
-    void OnEnable()
-    {
-
-    }
-    void OnDisable()
-    {
-
-    }
 
 
     // Start is called before the first frame update
@@ -130,8 +112,6 @@ public class PressureZoneHUDController : MonoBehaviour
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);
         m_PressureZone3TextField = m_PressureZone3Panel.Q<Label>(PressureZone3LabelString);
-        m_PressureZoneSliderBar = root.rootVisualElement.Query(name: PressureZoneSliderBarString);
-        m_PressureZoneSliderTracker = root.rootVisualElement.Q<VisualElement>(PressureZoneSliderTrackerString);
         SliderHandleList = root.rootVisualElement.Query(name: "unity-dragger").ToList();
         SliderBarList = root.rootVisualElement.Query(className: "pressure-zone-slider").ToList();
         SliderTrackerList = root.rootVisualElement.Query(name: "unity-tracker").ToList();
@@ -155,10 +135,7 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone2Panel.AddManipulator(new PanelDragger(m_PressureZone2Panel));
         m_PressureZone3Panel.AddManipulator(new PanelDragger(m_PressureZone3Panel));
 
-        //add resizer manipulator
-        // m_SupplyPressurePanel.AddManipulator(new ExampleResizer());
-        // m_PressureZone2Panel.AddManipulator(new ExampleResizer());
-        // m_PressureZone3Panel.AddManipulator(new ExampleResizer());
+
 
 
         foreach (var dragger in SliderHandleList)
@@ -172,10 +149,7 @@ public class PressureZoneHUDController : MonoBehaviour
             AddNewDraggerElements(sliderBar);
             RegisterSliderCallBacks(sliderBar);
         }
-        // foreach (var tracker in SliderTrackerList)
-        // {
-        //     AddNewDraggerElements(tracker);
-        // }
+
 
 
     }
@@ -386,8 +360,7 @@ public class PressureZoneHUDController : MonoBehaviour
         Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
 
         currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
-        // Debug.Log($"evt: {evt.newValue}");
-        // ZonePressureOperations(evt.newValue, currentSliderBar.parent.parent.parent);
+
         ZonePressureOperations(evt.newValue, PressurePanel.GetFirstAncestorWithClass(currentSliderBar, "panel-template"));
 
     }
@@ -422,7 +395,7 @@ public class PressureZoneHUDController : MonoBehaviour
                 throw new Exception($"{zonePressureSlider.name} does not match the name of slider being used");
 
         }
-        // Debug.Log($"zonePressureValue: {zonePressureValue} ; zonePressureSlider: {zonePressureSlider.name}");
+
     }
 
 
