@@ -2136,6 +2136,7 @@ MonoBehaviour:
   currentConfigurableJoint: {fileID: 0}
   playerController: {fileID: 1446278365}
   cameraController: {fileID: 1372113979}
+  uiClickFilter: {fileID: 354497751}
   doubleCheckTestKitController: {fileID: 0}
   connectionPoint: {x: 0, y: 0, z: 0}
   sightTubeHomePos: {x: 0, y: 0, z: 0}
@@ -9643,7 +9644,7 @@ PrefabInstance:
     - target: {fileID: 3433128533771041299, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3576821270845810049, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
