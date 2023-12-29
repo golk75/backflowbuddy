@@ -24,6 +24,7 @@ public class UiClickFilter : MonoBehaviour
     VisualElement m_SupplyPressurePanel;
     VisualElement m_PressureZone2Panel;
     VisualElement m_PressureZone3Panel;
+    VisualElement m_Slider;
 
 
     public bool isUiClicked = false;
@@ -33,6 +34,7 @@ public class UiClickFilter : MonoBehaviour
     {
         //set visual elements
         var root = GetComponent<UIDocument>();
+
         m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelName);
         m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelName);
         m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelName);
@@ -49,12 +51,14 @@ public class UiClickFilter : MonoBehaviour
         m_GameMenuOptionsScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
 
 
+
         //MouseUp
         m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_GameMenuScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
         m_GameMenuOptionsScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
+
 
 
         // //MouseOut
@@ -69,10 +73,15 @@ public class UiClickFilter : MonoBehaviour
         m_PressureZone3Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
 
     }
+    void OnEnable()
+    {
+
+    }
     private void MouseOver(MouseOverEvent evt)
     {
 
         isUiHovered = true;
+
     }
     private void MouseEnter(MouseEnterEvent evt)
     {
@@ -92,11 +101,11 @@ public class UiClickFilter : MonoBehaviour
         playerController.isOperableObject = false;
         playerController.operableObject = null;
 
+
     }
     private void MouseUp(MouseUpEvent evt)
     {
-        if (isUiHovered == false)
-            isUiClicked = false;
+        isUiClicked = false;
     }
     // Update is called once per frame
     void Update()

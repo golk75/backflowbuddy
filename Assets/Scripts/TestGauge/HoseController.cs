@@ -229,23 +229,24 @@ public class HoseController : MonoBehaviour
     private void GrabComponent(GameObject @object, OperableComponentDescription description)
     {
 
-
-
-        componentGrabbed = true;
-
-        // Debug.Log($"@object: {@object}");
-        switch (description.partsType)
+        if (uiClickFilter.isUiClicked == false)
         {
-            case OperableComponentDescription.PartsType.TestKitHose:
-                HandleHoseGrab(@object);
-                break;
-            case OperableComponentDescription.PartsType.TestKitSightTube:
-                HandleSightTubeGrab(@object);
-                break;
-            default:
-                break;
-        }
 
+            componentGrabbed = true;
+
+            // Debug.Log($"@object: {@object}");
+            switch (description.partsType)
+            {
+                case OperableComponentDescription.PartsType.TestKitHose:
+                    HandleHoseGrab(@object);
+                    break;
+                case OperableComponentDescription.PartsType.TestKitSightTube:
+                    HandleSightTubeGrab(@object);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 

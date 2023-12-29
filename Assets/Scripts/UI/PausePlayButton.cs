@@ -9,10 +9,7 @@ public class PausePlayButton : MonoBehaviour
     Button m_PlayButton;
     const string PauseButtonString = "PauseButton";
     const string PlayButtonString = "PlayButton";
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
+
     private void Start()
     {
         var root = GetComponent<UIDocument>();

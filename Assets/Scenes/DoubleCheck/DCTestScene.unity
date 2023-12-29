@@ -459,6 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
   playerController: {fileID: 1446278365}
+  uiClickFilter: {fileID: 354497751}
   isPointerDown: 0
   maxSpringPressure: 3
   check1SpringPressure: 2
@@ -2135,7 +2136,7 @@ MonoBehaviour:
   currentConfigurableJoint: {fileID: 0}
   playerController: {fileID: 1446278365}
   cameraController: {fileID: 1372113979}
-  uiClickFilter: {fileID: 0}
+  uiClickFilter: {fileID: 354497751}
   doubleCheckTestKitController: {fileID: 0}
   connectionPoint: {x: 0, y: 0, z: 0}
   sightTubeHomePos: {x: 0, y: 0, z: 0}

@@ -15,7 +15,7 @@ public class PressureZoneHUDController : MonoBehaviour
     //game objects
     public WaterController waterController;
     public PlayerController playerController;
-
+    public UiClickFilter uiClickFilter;
 
     //string ids
     const string SupplyPressureTextString = "SupplyPressure__value";
@@ -351,6 +351,8 @@ public class PressureZoneHUDController : MonoBehaviour
 
     private void SliderValueChanged(ChangeEvent<float> evt)
     {
+
+        uiClickFilter.isUiClicked = true;
 
         VisualElement currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");

@@ -129,7 +129,7 @@ public class CameraController : MonoBehaviour
         while (
             playerController.primaryClickPerformed > 0
             && playerController.secondaryTouchStarted == false
-        // && uiClickFilter.IsPointerOverUI(pointerOrigin) == false
+            && uiClickFilter.isUiClicked == false
         )
         {
 
