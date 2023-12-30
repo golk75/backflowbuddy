@@ -14,8 +14,6 @@
                 <ui:Button display-tooltip-when-elided="false" name="ResetButton" focusable="false" class="button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_19_previoust2_.png?fileID=2800000&amp;guid=ce5dfcf0b45530443bd2fbf805c38d52&amp;type=3#T_19_previoust2_&apos;);" />
                 <ui:Button name="PauseButton" focusable="false" class="fill-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_8_pause_.png?fileID=2800000&amp;guid=a1bda28f797f71c4db09f6a0d4af4759&amp;type=3#T_8_pause_&apos;);" />
                 <ui:Button name="PlayButton" focusable="false" class="fill-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_6_continue_.png?fileID=2800000&amp;guid=d42cfe7bed8439c439378d1a7e76f4e3&amp;type=3#T_6_continue_&apos;);" />
-                <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" style="display: none;" />
-                <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" style="display: none;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Middle_container" picking-mode="Ignore" style="flex-direction: row; width: 126px;">
@@ -30,6 +28,8 @@
         <ui:Instance template="PressureZone2__panel" name="PressureZone2__panel" class="pressure-panel-2 panel-template" />
         <ui:Instance template="PressureZone3__panel" name="PressureZone3__panel" class="pressure-panel-3 panel-template" style="left: 750px; top: 250px;" />
         <ui:Instance template="GameMenuScreen" name="GameMenuScreen" class="game-menu-modal" style="display: none;" />
-        <ui:Instance template="GameMenuOptions" name="GameMenuOptionsScreen" class="game-menu-modal" style="display: none;" />
+        <ui:Instance template="GameMenuOptions" name="GameMenuOptionsScreen" class="game-menu-modal" style="display: none;">
+            <AttributeOverrides element-name="TeachingMode_toggle" value="true" />
+        </ui:Instance>
     </ui:VisualElement>
 </ui:UXML>

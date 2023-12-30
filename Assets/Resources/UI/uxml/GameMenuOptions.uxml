@@ -9,7 +9,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="GameMenuScreen_body" class="game-menu-body">
                 <ui:Toggle label="Click Operation" focusable="false" name="ClickEnable_toggle" tabindex="0" picking-mode="Ignore" value="true" class="toggle" />
-                <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" tabindex="0" picking-mode="Ignore" value="false" class="toggle" />
+                <ui:Toggle label="Teaching Mode" focusable="false" name="TeachingMode_toggle" picking-mode="Ignore" value="false" class="toggle" />
                 <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="OptionsMenuScreen_main-menu-button" class="game-menu-options-button" />
                 <ui:Button text="Save" display-tooltip-when-elided="true" name="OptionsMenuScreen_save-button" class="game-menu-options-button" />
             </ui:VisualElement>

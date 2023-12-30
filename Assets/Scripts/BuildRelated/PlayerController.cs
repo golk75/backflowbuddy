@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Unity Editor");
 #endif
 
-#if UNITY_IOS
+#if UNITY_IOS || UNITY_ANDROID
         Debug.Log("iOS");
 
         //Touch Input
