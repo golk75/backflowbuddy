@@ -144,7 +144,8 @@ public class HoseController : MonoBehaviour
         {
             isAttaching = true;
             connectionPoint = new Vector3(@object.transform.position.x, @object.transform.position.y + testCockPositionOffset, @object.transform.position.z);
-            m_ComponentToConnect.transform.position = connectionPoint;
+            isSightTubeConnected = true;
+            // m_ComponentToConnect.transform.position = connectionPoint;
         }
 
 
@@ -154,7 +155,7 @@ public class HoseController : MonoBehaviour
     private void DropComponent(GameObject @object, OperableComponentDescription description)
     {
         componentGrabbed = false;
-
+        //check if its not the sight tube
         if (@object != sightTube)
         {
 
@@ -207,18 +208,17 @@ public class HoseController : MonoBehaviour
 
                 if (HoseRb != null)
                     HoseRb.isKinematic = false;
-                // isAttaching = false;
-                // currentHoseBibObj = null;
             }
             isAttaching = false;
         }
+
         else
         {
 
             if (!isAttaching)
             {
                 @object.transform.localPosition = sightTubeHomePos;
-
+                isSightTubeConnected = false;
             }
             isAttaching = false;
         }
@@ -345,17 +345,14 @@ public class HoseController : MonoBehaviour
 
         }
     }
-    void HandleHoming()
-    {
-
-    }
-
 
 
     void Update()
     {
-
-
+        if (isSightTubeConnected)
+        {
+            sightTube.transform.position = connectionPoint;
+        }
 
     }
 }
