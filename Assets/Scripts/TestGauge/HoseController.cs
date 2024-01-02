@@ -347,7 +347,7 @@ public class HoseController : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         if (isSightTubeConnected)
         {
