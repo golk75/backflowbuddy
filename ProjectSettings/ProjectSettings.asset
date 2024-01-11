@@ -874,7 +874,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -894,7 +900,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: c8e47763-dc89-4713-82b2-e0bcc714de95
+  cloudProjectId: de01cc4e-5bf7-48fc-9ea1-2819cf1b2dbf
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: BackflowBuddy
