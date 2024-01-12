@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class AdController : MonoBehaviour
+// Example for IronSource Unity.
+public class IronSourceDemoScript : MonoBehaviour
 {
     public void Start()
     {
 #if UNITY_ANDROID
-        string appKey = "5524032";
+        string appKey = "85460dcd";
 #elif UNITY_IPHONE
-        string appKey = "5524033";
+        string appKey = "8545d445";
 #else
         string appKey = "unexpected_platform";
 #endif
@@ -32,7 +32,7 @@ public class AdController : MonoBehaviour
 
         //Add ImpressionSuccess Event
         IronSourceEvents.onImpressionDataReadyEvent += ImpressionDataReadyEvent;
-
+        
         //Add AdInfo Rewarded Video Events
         IronSourceRewardedVideoEvents.onAdOpenedEvent += RewardedVideoOnAdOpenedEvent;
         IronSourceRewardedVideoEvents.onAdClosedEvent += RewardedVideoOnAdClosedEvent;
@@ -168,7 +168,7 @@ public class AdController : MonoBehaviour
     }
 
     #endregion
-
+    
     #region AdInfo Interstitial
 
     void InterstitialOnAdReadyEvent(IronSourceAdInfo adInfo)
@@ -241,7 +241,7 @@ public class AdController : MonoBehaviour
     }
 
     #endregion
-
+    
     #region ImpressionSuccess callback handler
 
     void ImpressionDataReadyEvent(IronSourceImpressionData impressionData)
