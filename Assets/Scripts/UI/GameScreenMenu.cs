@@ -50,10 +50,11 @@ public class GameScreenMenu : MonoBehaviour
 
     UIDocument m_DCTestScreen;
 
+    public BannerViewController _bannerViewController;
 
     private void OnEnable()
     {
-        // SetVisualElements();
+        _bannerViewController.LoadAd();
 
     }
 
@@ -105,9 +106,11 @@ public class GameScreenMenu : MonoBehaviour
     }
     void QuitGame(ClickEvent evt)
     {
-        // AudioManager.PlayDefaultButtonSound();
-        // GameQuit?.Invoke();
+
+
         SceneManager.LoadSceneAsync(m_MenuMenuSceneName);
+        _bannerViewController.DestroyAd();
+
     }
     void ShowVisualElement(VisualElement visualElement, bool state)
     {
@@ -126,10 +129,7 @@ public class GameScreenMenu : MonoBehaviour
         RegisterButtonCallBacks();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
+
 
 }

@@ -1,7 +1,7 @@
 using System;
-using UnityEngine;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using UnityEngine;
 
 namespace GoogleMobileAds.Sample
 {
@@ -29,6 +29,7 @@ namespace GoogleMobileAds.Sample
         private readonly TimeSpan TIMEOUT = TimeSpan.FromHours(4);
         private DateTime _expireTime;
         private AppOpenAd _appOpenAd;
+
 
         private void Awake()
         {
@@ -81,10 +82,15 @@ namespace GoogleMobileAds.Sample
 
                     // The operation completed successfully.
                     Debug.Log("App open ad loaded with response : " + ad.GetResponseInfo());
+
                     _appOpenAd = ad;
 
                     // App open ads can be preloaded for up to 4 hours.
                     _expireTime = DateTime.Now + TIMEOUT;
+
+                    //customize ad
+
+
 
                     // Register to ad events to extend functionality.
                     RegisterEventHandlers(ad);
@@ -102,7 +108,7 @@ namespace GoogleMobileAds.Sample
             // App open ads can be preloaded for up to 4 hours.
             if (_appOpenAd != null && _appOpenAd.CanShowAd() && DateTime.Now < _expireTime)
             {
-               Debug.Log("Showing app open ad.");
+                Debug.Log("Showing app open ad.");
                 _appOpenAd.Show();
             }
             else
@@ -114,6 +120,7 @@ namespace GoogleMobileAds.Sample
             AdLoadedStatus?.SetActive(false);
         }
 
+
         /// <summary>
         /// Destroys the ad.
         /// </summary>
@@ -122,6 +129,7 @@ namespace GoogleMobileAds.Sample
             if (_appOpenAd != null)
             {
                 Debug.Log("Destroying app open ad.");
+
                 _appOpenAd.Destroy();
                 _appOpenAd = null;
             }
@@ -150,6 +158,7 @@ namespace GoogleMobileAds.Sample
             if (state == AppState.Foreground)
             {
                 ShowAd();
+
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GoogleMobileAds.Sample;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,13 +22,11 @@ public class MainMenuScreen : MonoBehaviour
     Button m_MainMenuPlayButton;
     Button m_MainMenuQuitButton;
 
+
+
     UIDocument m_MainMenuScreen;
 
-    private void OnEnable()
-    {
 
-
-    }
     void SetVisualElements()
     {
         m_MainMenuScreen = GetComponent<UIDocument>();
@@ -56,18 +55,12 @@ public class MainMenuScreen : MonoBehaviour
 
     void PlayGame(ClickEvent evt)
     {
-        // GamePlayed?.Invoke();
+
 
         SceneManager.LoadSceneAsync(m_DCTestScene);
-    }
-    // void PlayGame(PointerDownEvent evt)
-    // {
-    //     GamePlayed?.Invoke();
-    // }
-    private void OnDisable()
-    {
 
     }
+
     void Start()
     {
         SetVisualElements();

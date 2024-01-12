@@ -303,7 +303,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 142734918}
-  - component: {fileID: 142734919}
   - component: {fileID: 142734920}
   m_Layer: 0
   m_Name: AdsManager
@@ -327,18 +326,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &142734919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142734917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da029fd0fda94641a2e364a5adb40be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &142734920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,10 +335,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 142734917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2275cc0e67378436198393103a0e2774, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a2d90b8992b64e07b12ef028c0acffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdLoadedStatus: {fileID: 0}
+  AdLoadedStatus: {fileID: 142734917}
 --- !u!1 &191555461
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,6 +9995,11 @@ PrefabInstance:
       propertyPath: m_OptionsScreenName
       value: GameMenuOptionsScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5223085132162842862, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: _bannerViewController
+      value: 
+      objectReference: {fileID: 142734920}
     - target: {fileID: 5867538463896440699, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -10087,6 +10079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617159004870569065, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6653288536532356118, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}

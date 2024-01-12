@@ -18,6 +18,7 @@ public class PausePlayButton : MonoBehaviour
 
         m_PauseButton.clicked += PauseGame;
         m_PlayButton.clicked += ResumeGame;
+
     }
     void PauseGame()
     {
@@ -26,5 +27,6 @@ public class PausePlayButton : MonoBehaviour
     void ResumeGame()
     {
         Time.timeScale = 1;
+
     }
 }
