@@ -19,7 +19,7 @@ public class BannerViewController : MonoBehaviour
 #if UNITY_ANDROID
         private const string _adUnitId = "ca-app-pub-3940256099942544/6300978111";
 #elif UNITY_IPHONE
-    private const string _adUnitId = "ca-app-pub-3940256099942544/2934735716";
+    private const string _adUnitId = "ca-app-pub-5585646785227848/7734746098";
 #else
         private const string _adUnitId = "unused";
 #endif
@@ -41,7 +41,7 @@ public class BannerViewController : MonoBehaviour
         }
 
         // Create a 320x50 banner at top of the screen.
-        _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.Top);
+        _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.BottomRight);
 
 
         // Listen to events the banner may raise.
