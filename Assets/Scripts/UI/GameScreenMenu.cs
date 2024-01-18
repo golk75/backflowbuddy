@@ -50,11 +50,11 @@ public class GameScreenMenu : MonoBehaviour
 
     UIDocument m_DCTestScreen;
 
-    public BannerViewController _bannerViewController;
+    // public BannerViewController _bannerViewController;
 
     private void OnEnable()
     {
-        _bannerViewController.LoadAd();
+        // _bannerViewController.LoadAd();
 
     }
 
@@ -109,7 +109,7 @@ public class GameScreenMenu : MonoBehaviour
 
 
         SceneManager.LoadSceneAsync(m_MenuMenuSceneName);
-        _bannerViewController.DestroyAd();
+        // _bannerViewController.DestroyAd();
 
     }
     void ShowVisualElement(VisualElement visualElement, bool state)
