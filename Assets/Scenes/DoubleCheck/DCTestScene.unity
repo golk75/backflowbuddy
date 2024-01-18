@@ -303,14 +303,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 142734918}
-  - component: {fileID: 142734920}
+  - component: {fileID: 142734921}
+  - component: {fileID: 142734922}
+  - component: {fileID: 142734923}
   m_Layer: 0
   m_Name: AdsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &142734918
 Transform:
   m_ObjectHideFlags: 0
@@ -326,7 +328,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &142734920
+--- !u!114 &142734921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -335,7 +337,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 142734917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a2d90b8992b64e07b12ef028c0acffb, type: 3}
+  m_Script: {fileID: 11500000, guid: 8686f0ff4fdc94e84906a75844ef88d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AdLoadedStatus: {fileID: 142734917}
+--- !u!114 &142734922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142734917}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5914da61b2b774edcbed1a1a01efcc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _privacyButton: {fileID: 0}
+  _errorPopup: {fileID: 0}
+  _errorText: {fileID: 0}
+--- !u!114 &142734923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142734917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdb88fb48a3f4f33949d5af790f1600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AdLoadedStatus: {fileID: 142734917}
@@ -9847,6 +9877,11 @@ PrefabInstance:
       objectReference: {fileID: 2001235575}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
+      propertyPath: m_adsManager
+      value: 
+      objectReference: {fileID: 142734917}
+    - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
       propertyPath: testKitManager
       value: 
       objectReference: {fileID: 7979768276041640513}
@@ -9880,6 +9915,11 @@ PrefabInstance:
       propertyPath: hoseList.Array.data[0]
       value: 
       objectReference: {fileID: 5347396328354856675}
+    - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
+      propertyPath: m_bannerViewController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: shutOffValveController
@@ -9999,7 +10039,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _bannerViewController
       value: 
-      objectReference: {fileID: 142734920}
+      objectReference: {fileID: 0}
     - target: {fileID: 5867538463896440699, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: m_LocalScale.x

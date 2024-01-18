@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
+using GoogleMobileAds.Sample;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -27,6 +28,9 @@ public class ResetButton : MonoBehaviour
     public DoubleCheckTestKitController doubleCheckTestKitController;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
+    public GameObject m_adsManager;
+    MyBannerViewController m_bannerViewController;
+    MyInterstitialAdController m_interstitialAdController;
     [SerializeField]
     List<ResetableObject> objectsToReset;
     ResetableObject resetableObject;
@@ -57,6 +61,11 @@ public class ResetButton : MonoBehaviour
         {
             SetResetables(objectsToReset[i]);
         }
+
+        // m_bannerViewController = m_adsManager.GetComponent<MyBannerViewController>();
+        // m_interstitialAdController = m_adsManager.GetComponent<MyInterstitialAdController>();
+        // m_bannerViewController.LoadAd();
+        // m_interstitialAdController.LoadAd();
 
     }
     private void SetResetables(ResetableObject resetableObject)
@@ -99,6 +108,9 @@ public class ResetButton : MonoBehaviour
     public void ResetDevice()
     {
 
+        // m_interstitialAdController.ShowAd();
+
+
         // liquid.enabled = false;
         liquid.ReleaseSimulation();
         liquid.enabled = false;
@@ -137,6 +149,9 @@ public class ResetButton : MonoBehaviour
         pressureZoneHUDController.check2SpringPressure = 0;
         waterController.supplyPsi = 0;
         pressureZoneHUDController.m_SupplyPressureTextField.value = "0";
+
+        //ads control
+
 
     }
 

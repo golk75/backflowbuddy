@@ -55,8 +55,6 @@ public class MainMenuScreen : MonoBehaviour
 
     void PlayGame(ClickEvent evt)
     {
-
-
         SceneManager.LoadSceneAsync(m_DCTestScene);
 
     }

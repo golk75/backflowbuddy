@@ -17,7 +17,8 @@ public class HoseController : MonoBehaviour
     private Vector3 initAnchorPos_lowHose;
     private Vector3 initAnchorPos_bypassHose;
     private Vector3 targetAnchorPos;
-    public Vector3 connectionPoint;
+    public Vector3 hoseConnectionPoint;
+    public Vector3 sightTubeConnectionPoint;
     public Vector3 sightTubeHomePos;
     private Coroutine DetectHoseBibManipulation;
     private Coroutine HoseMovement;
@@ -106,7 +107,7 @@ public class HoseController : MonoBehaviour
         //handle hose connect
         if (m_ComponentToConnect != sightTube)
         {
-            Debug.Log($"2");
+
             isAttaching = true;
             switch (description.componentId)
             {
@@ -129,11 +130,12 @@ public class HoseController : MonoBehaviour
                     break;
             }
             //sight tube will use connection point; see Update()
-            connectionPoint = @object.transform.position;
+            Debug.Log($"description: {description}");
+            hoseConnectionPoint = @object.transform.position;
 
 
 
-            currentHoseBibObj.transform.position = connectionPoint;
+            currentHoseBibObj.transform.position = hoseConnectionPoint;
             //Debug.Log($"currentHoseBibObj: {currentHoseBibObj.transform.position} | @object.transform.position: {@object.transform.position}");
 
 
@@ -143,7 +145,7 @@ public class HoseController : MonoBehaviour
         else
         {
             isAttaching = true;
-            connectionPoint = new Vector3(@object.transform.position.x, @object.transform.position.y + testCockPositionOffset, @object.transform.position.z);
+            sightTubeConnectionPoint = new Vector3(@object.transform.position.x, @object.transform.position.y + testCockPositionOffset, @object.transform.position.z);
             isSightTubeConnected = true;
             // m_ComponentToConnect.transform.position = connectionPoint;
         }
@@ -351,7 +353,7 @@ public class HoseController : MonoBehaviour
     {
         if (isSightTubeConnected)
         {
-            sightTube.transform.position = connectionPoint;
+            sightTube.transform.position = sightTubeConnectionPoint;
         }
 
     }
