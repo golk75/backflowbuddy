@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID
-        Debug.Log("iOS");
+
 
         //Touch Input
         operableObject = initialOperableObject;
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 #endif
 
 #if UNITY_STANDALONE_OSX
-        Debug.Log("Standalone OSX");
+       
          playerInput.MouseOperate.Click.started += LeftMouseClick_started;
          playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
          playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 #endif
 
 #if UNITY_STANDALONE_WIN
-      Debug.Log("Standalone Windows");
+     
           //Mouse Input
          playerInput.MouseOperate.Click.started += LeftMouseClick_started;
          playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;

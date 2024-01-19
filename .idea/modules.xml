@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BackflowBuddy.iml" filepath="$PROJECT_DIR$/BackflowBuddy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BackflowBuddy.iml" filepath="$PROJECT_DIR$/.idea/BackflowBuddy.iml" />
     </modules>
   </component>
 </project>

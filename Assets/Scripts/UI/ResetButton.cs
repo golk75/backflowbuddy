@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
-using GoogleMobileAds.Sample;
+// using GoogleMobileAds.Sample;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -29,8 +29,8 @@ public class ResetButton : MonoBehaviour
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
     public GameObject m_adsManager;
-    MyBannerViewController m_bannerViewController;
-    MyInterstitialAdController m_interstitialAdController;
+    // MyBannerViewController m_bannerViewController;
+    // MyInterstitialAdController m_interstitialAdController;
     [SerializeField]
     List<ResetableObject> objectsToReset;
     ResetableObject resetableObject;
