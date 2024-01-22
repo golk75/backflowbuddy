@@ -13,11 +13,11 @@ public class TutorialSystem : MonoBehaviour
     int popUpIndex;
 
     //constants
-    private const string PopUpString = "TutorialPopUp";
+    private const string PopupPanelString = "TutorialPopup_panel";
     public GameObject m_GameUi;
     public UIDocument root;
 
-    public VisualElement m_PopUp;
+    public VisualElement m_Popup_panel;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -25,15 +25,15 @@ public class TutorialSystem : MonoBehaviour
     private void Awake()
     {
         root = m_GameUi.GetComponent<UIDocument>();
-        m_PopUp = root.rootVisualElement.Q<VisualElement>(PopUpString);
+        m_Popup_panel = root.rootVisualElement.Q<VisualElement>(PopupPanelString);
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Debug.Log($"{m_PopUp.ElementAt(0)}");
-            // m_PopUp.style.visibility = Visibility.Visible;
+
+            m_Popup_panel.style.visibility = Visibility.Visible;
         }
         //come back to visit array loop
         // {
