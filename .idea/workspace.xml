@@ -5,16 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2961c1b0-9d42-4064-b8ee-130ff48ddcc6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/PlayServicesResolver_scripts_gradle_template.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/unity_classes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/AndroidResolverDependencies.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/AndroidResolverDependencies.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.IOSResolver.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.IOSResolver.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.JarResolver.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.JarResolver.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.PackageManagerResolver.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.PackageManagerResolver.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.VersionHandlerImpl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.177/Google.VersionHandlerImpl.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/CHANGELOG.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/LICENSE.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/README.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/external-dependency-manager_version-1.2.177_manifest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/external-dependency-manager_version-1.2.177_manifest.txt.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,15 +49,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
