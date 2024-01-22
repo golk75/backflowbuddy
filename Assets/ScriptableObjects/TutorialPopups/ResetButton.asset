@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
-  m_Name: TutorialPopUpScriptableObject
+  m_Name: ResetButton
   m_EditorClassIdentifier: 
-  header: 
-  content: 
+  header: Reset current simulation
+  content: Click here to reset device and water back to orignal state (ie. Supply
+    pressure back to 0, remove all water from device, disconnect any connected tools
+    and/or hoses).
