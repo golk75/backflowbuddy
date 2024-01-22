@@ -187,5 +187,8 @@
     bottom: 0;
 }
 
-.tutorial-popup-next-button {
+.tutorial-container {
+    position: absolute;
+    width: 100%;
+    height: 10000px;
 }
