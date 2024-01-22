@@ -1,3 +1,35 @@
-.Panel {
-    display: none;
+.tutorial-popup-panel {
+    background-color: rgba(54, 54, 62, 0.76);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    align-items: center;
+    width: 25%;
+    left: 287px;
+    top: 135px;
+    position: absolute;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.tutorial-popup-label-container {
+    width: 100%;
+    align-items: center;
+}
+
+#TutorialPopup_header_container {
+    border-bottom-width: 2px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
 }

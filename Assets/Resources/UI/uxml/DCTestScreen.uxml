@@ -9,12 +9,16 @@
     <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
     <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" picking-mode="Ignore" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
         <ui:VisualElement name="TutorialPopup">
-            <ui:VisualElement name="TutorialPopup_panel">
-                <ui:VisualElement name="TutorialPopup_header" style="flex-grow: 1;">
-                    <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" />
+            <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel">
+                <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
+                    <ui:VisualElement name="TutorialPopup_header">
+                        <ui:Label tabindex="-1" text="This the Popup HEADER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="TutorialPopup_header" style="flex-grow: 1;">
-                    <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" />
+                <ui:VisualElement name="TutorialPopup_body_container" class="tutorial-popup-label-container" style="flex-grow: 1;">
+                    <ui:VisualElement name="TutorialPopup_header">
+                        <ui:Label tabindex="-1" text="This is the popup BODY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
