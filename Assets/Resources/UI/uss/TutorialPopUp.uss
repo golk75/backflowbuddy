@@ -1,3 +1,10 @@
+.tutorial-popup-next-button {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
 .tutorial-container {
     position: absolute;
     width: 100%;

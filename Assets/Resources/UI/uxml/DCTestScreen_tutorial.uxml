@@ -20,6 +20,7 @@
                         <ui:Label tabindex="-1" text="This is the popup BODY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" />
                     </ui:VisualElement>
                 </ui:VisualElement>
+                <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-next-button" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Top_container" style="flex-direction: row; height: 10%;">
