@@ -9,9 +9,10 @@
     <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
     <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" picking-mode="Ignore" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
         <ui:VisualElement name="TutorialPopup" style="flex-grow: 1;">
-            <ui:VisualElement name="TutorialPopup_panel" style="flex-grow: 1;" />
-            <ui:VisualElement name="TutorialPopup_header" style="flex-grow: 1;" />
-            <ui:VisualElement name="TutorialPopup_header" style="flex-grow: 1;" />
+            <ui:VisualElement name="TutorialPopup_panel" style="flex-grow: 1;">
+                <ui:VisualElement name="TutorialPopup_header" style="flex-grow: 1;" />
+                <ui:VisualElement name="TutorialPopup_header" style="flex-grow: 1;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Top_container" style="flex-direction: row; height: 10%;">
             <ui:VisualElement name="ButtonWrapper" picking-mode="Ignore" class="button-wrapper">
