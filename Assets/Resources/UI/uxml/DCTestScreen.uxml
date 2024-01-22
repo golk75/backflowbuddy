@@ -8,7 +8,7 @@
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud_parked.uss?fileID=7433441132597879392&amp;guid=52141e1763a324a00b382ca1bd2d11b0&amp;type=3#PressureZoneHud_parked" />
     <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
     <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" picking-mode="Ignore" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
-        <ui:VisualElement name="TutorialPopup">
+        <ui:VisualElement name="TutorialPopup" class="tutorial-container" style="background-color: rgba(75, 75, 75, 0.47);">
             <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel">
                 <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
                     <ui:VisualElement name="TutorialPopup_header">

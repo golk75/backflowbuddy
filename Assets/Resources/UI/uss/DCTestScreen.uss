@@ -186,3 +186,9 @@
     right: 0;
     bottom: 0;
 }
+
+.tutorial-container {
+    position: absolute;
+    width: 100%;
+    height: 10000px;
+}
