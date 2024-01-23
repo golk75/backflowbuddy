@@ -292,7 +292,7 @@
 }
 
 .pressure-zone-slider-parked {
-    background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
+    background-image: resource('Assets/Resources/UI/Textures/Custom Size.png');
     width: 20px;
     min-width: auto;
     overflow: hidden;

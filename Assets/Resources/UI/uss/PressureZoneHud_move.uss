@@ -368,7 +368,7 @@
 }
 
 .pressure-zone-slider {
-    background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
+    background-image: resource('UI/Textures/Custom Size');
     width: 20px;
     min-width: auto;
     overflow: visible;
