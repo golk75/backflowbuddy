@@ -930,6 +930,12 @@ MonoBehaviour:
   pauseButtonTutorial: {fileID: 11400000, guid: bfb54d86dc05344b28a031fc313fa980,
     type: 2}
   playButtonTutorial: {fileID: 11400000, guid: c8eed8ca7a9694a038cc53635ef9d995, type: 2}
+  PopupScriptableObjects:
+  - {fileID: 11400000, guid: dc1f45a2f6f7641818595c22036cac4d, type: 2}
+  - {fileID: 11400000, guid: 21b6888ce53ad452682e2c215e79409a, type: 2}
+  - {fileID: 11400000, guid: bfb54d86dc05344b28a031fc313fa980, type: 2}
+  - {fileID: 11400000, guid: c8eed8ca7a9694a038cc53635ef9d995, type: 2}
+  - {fileID: 11400000, guid: da046bdcdc9134af2a47627e5148aab4, type: 2}
 --- !u!1 &908969837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2564974851058053392, guid: 5cb0acac16e984deab4d687da8d483d5,

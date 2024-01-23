@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,6 +19,9 @@ public class TutorialPopupTrigger : MonoBehaviour
     public TutorialPopUpScriptableObject pauseButtonTutorial;
     public TutorialPopUpScriptableObject playButtonTutorial;
 
+    public TutorialPopUpScriptableObject[] PopupScriptableObjects;
+
+    private int popupIndex = 0;
 
     private void Awake()
     {
@@ -47,6 +51,9 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     void Update()
     {
-
+        if (popupIndex == 0)
+        {
+            TutorialSystem.Show(PopupScriptableObjects[0].content, PopupScriptableObjects[0].header);
+        }
     }
 }

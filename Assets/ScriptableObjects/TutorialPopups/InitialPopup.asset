@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
+  m_Name: InitialPopup
+  m_EditorClassIdentifier: 
+  header: Welcome to Backflow Buddy's 'Play' mode.
+  content: Click here to reset device and water back to orignal state (ie. Supply
+    pressure back to 0, remove all water from device, disconnect any connected tools
+    and/or hoses).
