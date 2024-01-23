@@ -34,7 +34,7 @@
             <AttributeOverrides element-name="TeachingMode_toggle" value="true" />
         </ui:Instance>
         <ui:VisualElement name="QuickTourContainer" style="position: absolute; width: 100%; height: 100%;">
-            <ui:Instance template="TutorialPopup" name="TutorialPopup" class="tutorial-container" />
+            <ui:Instance template="TutorialPopup" name="TutorialPopup" class="tutorial-container" style="width: 1184px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

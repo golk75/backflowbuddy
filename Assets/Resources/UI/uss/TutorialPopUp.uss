@@ -16,7 +16,15 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    align-self: auto;
+    width: 25%;
+}
+
+.tutorial-popup-button-max {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    align-self: center;
 }
 
 .tutorial-container {

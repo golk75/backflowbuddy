@@ -18,6 +18,12 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
     private const string TutorialButtonContainerString = "TutorialPopup_button_container";
+
+    //style classes
+    private const string PopupButtonStyleString = "tutorial-popup-button";
+    private const string PopupButtonMaxStyleString = "tutorial-popup-button-max";
+
+
     //visual elements
     public VisualElement m_Tutorial_container;
     //private VisualElement m_Tutorial_container;
@@ -152,18 +158,25 @@ public class TutorialPopupTrigger : MonoBehaviour
         TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
         if (popupIndex == 0)
         {
+            m_NextButton.RemoveFromClassList(PopupButtonStyleString);
+            m_NextButton.AddToClassList(PopupButtonMaxStyleString);
+            m_SkipButton.AddToClassList(PopupButtonMaxStyleString);
+            m_SkipButton.RemoveFromClassList(PopupButtonStyleString);
             m_NextButton.text = "Start A Quick Tour";
             m_ButtonContainer.style.flexDirection = FlexDirection.ColumnReverse;
             m_PreviousButton.style.display = DisplayStyle.None;
         }
         else
         {
+            m_NextButton.RemoveFromClassList(PopupButtonStyleString);
+            m_NextButton.AddToClassList(PopupButtonMaxStyleString);
             m_NextButton.text = "Next";
             m_ButtonContainer.style.flexDirection = FlexDirection.Row;
             m_PreviousButton.style.display = DisplayStyle.Flex;
         }
         if (popupIndex == PopupScriptableObjects.Length - 1)
         {
+
             m_NextButton.style.display = DisplayStyle.None;
             m_PopupHeader.style.display = DisplayStyle.None;
 
