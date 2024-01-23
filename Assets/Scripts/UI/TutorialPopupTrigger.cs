@@ -12,16 +12,9 @@ public class TutorialPopupTrigger : MonoBehaviour
     public GameObject m_GameUi;
     private UIDocument root;
 
-    public TutorialPopUpScriptableObject fillButtonTutorial;
-    public TutorialPopUpScriptableObject menuButtonTutorial;
-    public TutorialPopUpScriptableObject resetButtonTutorial;
-    public TutorialPopUpScriptableObject clickEnableTutorial;
-    public TutorialPopUpScriptableObject pauseButtonTutorial;
-    public TutorialPopUpScriptableObject playButtonTutorial;
-
     public TutorialPopUpScriptableObject[] PopupScriptableObjects;
 
-    public int popupIndex = 1;
+    public int popupIndex = 0;
 
     private void Awake()
     {
@@ -39,22 +32,21 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     }
 
-    // public GameObject[] popUps;
 
-    // public VisualElement[] popUps;
-
-    // int popUpIndex;
-
-    //constants
 
 
 
     void Update()
     {
-        if (popupIndex == 1)
-        {
-            TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
-        }
+        // if (popupIndex == 1)
+        // {
+        //     TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
+        // }
 
+        if (Input.GetKeyDown(KeyCode.Space) && popupIndex < PopupScriptableObjects.Length - 1)
+        {
+            popupIndex++;
+        }
+        TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
     }
 }

@@ -27,8 +27,6 @@
 
 .tutorial-popup-panel {
     background-color: rgba(54, 54, 62, 0.76);
-    left: 287px;
-    top: 135px;
     border-left-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
     border-top-color: rgb(255, 255, 255);
@@ -42,6 +40,8 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     width: 279px;
+    left: 38%;
+    top: 17%;
 }
 
 .tutorial-popup-label-container {
