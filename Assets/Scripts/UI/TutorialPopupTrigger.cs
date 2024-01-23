@@ -21,7 +21,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     public TutorialPopUpScriptableObject[] PopupScriptableObjects;
 
-    private int popupIndex = 0;
+    private int popupIndex = 1;
 
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     void Update()
     {
-        if (popupIndex == 0)
+        if (popupIndex == 1)
         {
             TutorialSystem.Show(PopupScriptableObjects[0].content, PopupScriptableObjects[0].header);
         }
