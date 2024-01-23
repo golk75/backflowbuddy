@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class TutorialPopupTrigger : MonoBehaviour
 {
     //visual element constants
-    private const string TutorialContainerString = "TutorialPopup";
+    private const string QuickTourContainerString = "QuickTourContainer";
     private const string TutorialNextButtonString = "Tutotial_next_button";
     private const string TutorialPrevButtonString = "Tutotial_previous_button";
     private const string TutorialSkipButtonString = "Tutotial_skip_button";
@@ -18,7 +18,8 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
     //visual elements
-    private VisualElement m_Tutorial_container;
+    public VisualElement m_Tutorial_container;
+    //private VisualElement m_Tutorial_container;
     private VisualElement m_PopupHeader;
     private Button m_NextButton;
     private Button m_PreviousButton;
@@ -29,6 +30,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     //scene management
     [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
     [SerializeField] string m_DCTestScene = "DCTestScene";
+
 
 
     //gameobjects
@@ -50,10 +52,15 @@ public class TutorialPopupTrigger : MonoBehaviour
     private void Awake()
     {
         root = m_GameUi.GetComponent<UIDocument>();
+
         AssignVisualElements();
         RegisterCallbacks();
         popupIndex = 0;
 
+        if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 0)
+        {
+            m_Tutorial_container.style.display = DisplayStyle.Flex;
+        }
 
     }
 
@@ -63,7 +70,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
         m_OptionsTutorialButton = root.rootVisualElement.Q<Button>(OptionsTutorialButtonString);
-        m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(TutorialContainerString);
+        m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(QuickTourContainerString);
         m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
 
     }

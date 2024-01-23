@@ -4,6 +4,7 @@
     <ui:Template name="PressureZone3__panel" src="project://database/Assets/Resources/UI/UXML_Templates/PressureZone3__panel.uxml?fileID=9197481963319205126&amp;guid=2695a4a2da628412ea90981ce07b80df&amp;type=3#PressureZone3__panel" />
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
+    <ui:Template name="TutorialPopup" src="project://database/Assets/Resources/UI/UXML_Templates/TutorialPopup.uxml?fileID=9197481963319205126&amp;guid=b7f6de83c470e4033b4619c6264c23e9&amp;type=3#TutorialPopup" />
     <Style src="project://database/Assets/Resources/UI/uss/DCTestScreen.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DCTestScreen" />
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud_parked.uss?fileID=7433441132597879392&amp;guid=52141e1763a324a00b382ca1bd2d11b0&amp;type=3#PressureZoneHud_parked" />
     <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
@@ -32,22 +33,8 @@
         <ui:Instance template="GameMenuOptions" name="GameMenuOptionsScreen" class="game-menu-modal" style="display: none;">
             <AttributeOverrides element-name="TeachingMode_toggle" value="true" />
         </ui:Instance>
-        <ui:VisualElement name="TutorialPopup" class="tutorial-container">
-            <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel">
-                <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
-                    <ui:VisualElement name="TutorialPopup_header">
-                        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_header_label" text="This is the Header" class="tutorial-popup-label" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:VisualElement name="TutorialPopup_content_container" class="tutorial-popup-label-container">
-                    <ui:VisualElement name="TutorialPopup_content">
-                        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_content_label" text="This is the content" class="tutorial-popup-label" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-next-button" />
-                <ui:Button text="Previous" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_previous_button" class="tutorial-popup-next-button" />
-                <ui:Button text="Skip All" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_skip_button" class="tutorial-popup-next-button" />
-            </ui:VisualElement>
+        <ui:VisualElement name="QuickTourContainer" style="position: absolute; width: 100%; height: 100%;">
+            <ui:Instance template="TutorialPopup" name="TutorialPopup" class="tutorial-container" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

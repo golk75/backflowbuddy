@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="TutorialPopup" class="tutorial-container">
+        <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel">
+            <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
+                <ui:VisualElement name="TutorialPopup_header">
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_header_label" text="This is the Header" class="tutorial-popup-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="TutorialPopup_content_container" class="tutorial-popup-label-container">
+                <ui:VisualElement name="TutorialPopup_content">
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_content_label" text="This is the content" class="tutorial-popup-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-next-button" />
+            <ui:Button text="Previous" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_previous_button" class="tutorial-popup-next-button" />
+            <ui:Button text="Skip All" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_skip_button" class="tutorial-popup-next-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

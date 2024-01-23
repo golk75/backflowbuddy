@@ -20,7 +20,7 @@
 
 .tutorial-container {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.71);
+    background-color: rgba(0, 0, 0, 0.39);
     width: 100%;
     height: 100%;
     display: flex;
