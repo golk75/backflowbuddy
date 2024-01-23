@@ -10,7 +10,7 @@
     font-size: 41px;
 }
 
-.tutorial-popup-next-button {
+.tutorial-popup-button {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;

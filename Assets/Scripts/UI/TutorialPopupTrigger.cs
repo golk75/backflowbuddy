@@ -13,6 +13,8 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     //visual elements
     private VisualElement m_Tutorial_container;
+    private VisualElement m_NextButton;
+    private VisualElement m_SkipButton;
 
     //gameobjects
     public GameObject m_GameUi;
