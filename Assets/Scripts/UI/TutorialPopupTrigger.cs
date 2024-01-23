@@ -17,10 +17,12 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string TutorialPopupHeaderString = "TutorialPopup_header";
     private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
+    private const string TutorialButtonContainerString = "TutorialPopup_button_container";
     //visual elements
     public VisualElement m_Tutorial_container;
     //private VisualElement m_Tutorial_container;
     private VisualElement m_PopupHeader;
+    private VisualElement m_ButtonContainer;
     private Button m_NextButton;
     private Button m_PreviousButton;
     private Button m_SkipButton;
@@ -72,6 +74,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_OptionsTutorialButton = root.rootVisualElement.Q<Button>(OptionsTutorialButtonString);
         m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(QuickTourContainerString);
         m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
+        m_ButtonContainer = root.rootVisualElement.Q<VisualElement>(TutorialButtonContainerString);
 
     }
 
@@ -150,11 +153,13 @@ public class TutorialPopupTrigger : MonoBehaviour
         if (popupIndex == 0)
         {
             m_NextButton.text = "Start A Quick Tour";
+            m_ButtonContainer.style.flexDirection = FlexDirection.ColumnReverse;
             m_PreviousButton.style.display = DisplayStyle.None;
         }
         else
         {
             m_NextButton.text = "Next";
+            m_ButtonContainer.style.flexDirection = FlexDirection.Row;
             m_PreviousButton.style.display = DisplayStyle.Flex;
         }
         if (popupIndex == PopupScriptableObjects.Length - 1)
