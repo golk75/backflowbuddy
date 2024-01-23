@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
   m_Name: PlayButton
   m_EditorClassIdentifier: 
-  header: Play/ Resume simulation
-  content: Click here to resume the current water simulation and all moving components.
+  header: Play
+  content: Click here to resume movement of the current water simulation and all
+    moving components.

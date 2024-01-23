@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
   m_Name: FillButton
   m_EditorClassIdentifier: 
-  header: Instantly fill up the device
-  content: You have the option to allow hte device to fill up naturally or you can
-    simply click this button to instantly prime the device wth water.
+  header: Instant Fill
+  content: Allow the device to fill up naturally or you can simply click this button
+    to instantly prime the device wth water.

@@ -14,9 +14,9 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string TutorialNextButtonString = "Tutotial_next_button";
     private const string TutorialPrevButtonString = "Tutotial_previous_button";
     private const string TutorialSkipButtonString = "Tutotial_skip_button";
-    private const string TutorialPlayerPrefString = "Skip Tutorial";
     private const string TutorialPopupHeaderString = "TutorialPopup_header";
     private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
+    private const string TutorialPlayerPrefString = "Skip Tutorial";
     //visual elements
     private VisualElement m_Tutorial_container;
     private VisualElement m_PopupHeader;
@@ -52,7 +52,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         root = m_GameUi.GetComponent<UIDocument>();
         AssignVisualElements();
         RegisterCallbacks();
-        LoadTutorialPrefs();
+        popupIndex = 0;
 
 
     }
@@ -62,8 +62,10 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_NextButton = root.rootVisualElement.Q<Button>(TutorialNextButtonString);
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
+        m_OptionsTutorialButton = root.rootVisualElement.Q<Button>(OptionsTutorialButtonString);
         m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(TutorialContainerString);
         m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
+
     }
 
     //register call backs
@@ -78,7 +80,9 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void OnOptionsTutorialButtonClicked()
     {
+        SaveTutorialPrefs(0);
         SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
+
     }
 
 
@@ -104,28 +108,13 @@ public class TutorialPopupTrigger : MonoBehaviour
     private void OnSkipButtonClicked()
     {
         SaveTutorialPrefs(1);
-        SceneManager.LoadScene(m_DCTestScene);
+
     }
 
 
     public void SaveTutorialPrefs(int pref)
     {
         PlayerPrefs.SetInt(TutorialPlayerPrefString, pref);
-    }
-
-
-    public void LoadTutorialPrefs()
-    {
-        popupIndex = 0;
-        PlayerPrefs.GetInt(TutorialPlayerPrefString);
-        if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 0)
-        {
-            m_Tutorial_container.style.display = DisplayStyle.Flex;
-        }
-        else
-        {
-            m_Tutorial_container.style.display = DisplayStyle.None;
-        }
     }
 
 
@@ -151,10 +140,18 @@ public class TutorialPopupTrigger : MonoBehaviour
         //     TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
         // }
         TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
-
+        if (popupIndex == 0)
+        {
+            m_NextButton.text = "Start A Quick Tour";
+            m_PreviousButton.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            m_NextButton.text = "Next";
+            m_PreviousButton.style.display = DisplayStyle.Flex;
+        }
         if (popupIndex == PopupScriptableObjects.Length - 1)
         {
-            // Debug.Log($"create close button");
             m_NextButton.style.display = DisplayStyle.None;
             m_PopupHeader.style.display = DisplayStyle.None;
 
@@ -165,11 +162,8 @@ public class TutorialPopupTrigger : MonoBehaviour
             m_NextButton.style.display = DisplayStyle.Flex;
             m_PopupHeader.style.display = DisplayStyle.Flex;
         }
-        //player has pressed the skip button
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 1)
-        {
-            m_Tutorial_container.style.display = DisplayStyle.None;
-        }
+            SceneManager.LoadScene(m_DCTestScene);
     }
 
 
@@ -177,24 +171,6 @@ public class TutorialPopupTrigger : MonoBehaviour
     {
         UpdatePopup();
 
-        //delete after testing skip button
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 0)
-            {
-                SaveTutorialPrefs(1);
-
-                LoadTutorialPrefs();
-            }
-            else
-            {
-                SaveTutorialPrefs(0);
-
-                LoadTutorialPrefs();
-            }
-
-
-        }
 
     }
 }

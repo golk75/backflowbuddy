@@ -18,11 +18,15 @@ public class MainMenuScreen : MonoBehaviour
 
     const string MainMenuPlayButtonString = "PlayButton";
     const string MainMenuQuitButtonString = "QuitButton";
-    [SerializeField] string m_DCTestScene = "DCTestScene";
+    private const string TutorialPlayerPrefString = "Skip Tutorial";
+
+    //visual elements
     Button m_MainMenuPlayButton;
     Button m_MainMenuQuitButton;
 
-
+    //scene management
+    [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
+    [SerializeField] string m_DCTestScene = "DCTestScene";
 
     UIDocument m_MainMenuScreen;
 
@@ -55,7 +59,19 @@ public class MainMenuScreen : MonoBehaviour
 
     void PlayGame(ClickEvent evt)
     {
-        SceneManager.LoadSceneAsync(m_DCTestScene);
+#if UNITY_EDITOR
+        PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+#endif
+        if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 0)
+        {
+            SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync(m_DCTestScene);
+        }
+
+
 
     }
 

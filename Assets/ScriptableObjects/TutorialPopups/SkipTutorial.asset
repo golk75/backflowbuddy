@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
   m_Name: SkipTutorial
   m_EditorClassIdentifier: 
-  header: 
-  content: If you want to re visit this walk through click on the walk through button
-    in the game menu.
+  header: Thats It!
+  content: If you wish to re-visit this quick tour, click on the 'Quick Tour' button
+    in Options. Happy Testing!

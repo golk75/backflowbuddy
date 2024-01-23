@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
   m_Name: PauseButton
   m_EditorClassIdentifier: 
-  header: Pause the simulation
+  header: Pause
   content: Click here to pause the current water simulation and all moving components.

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
   m_Name: OptionsButton
   m_EditorClassIdentifier: 
-  header: Options
-  content: Click here to open up user options or quit to the main menu.
+  header: Menu
+  content: Click here to see options or quit to the main menu.

@@ -1,5 +1,7 @@
 
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GameOptionsScreen : MonoBehaviour
@@ -11,9 +13,12 @@ public class GameOptionsScreen : MonoBehaviour
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_MenuScreenName = "GameMenuScreen";
     [SerializeField] string m_OptionsScreenName = "GameMenuOptionsScreen";
+    [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
     const string m_OptionsScreenMainMenuButtonName = "OptionsMenuScreen_main-menu-button";
     const string m_OptionsScreenSaveButtonName = "OptionsMenuScreen_save-button";
     const string CloseMenuButtonString = "OptionsMenuScreen_close-button";
+    const string TutorialButtonString = "OptionsMenuScreen_tutorial_button";
+    private const string TutorialPlayerPrefString = "Skip Tutorial";
 
     //visual elements
     VisualElement m_MenuScreen;
@@ -23,6 +28,7 @@ public class GameOptionsScreen : MonoBehaviour
     Button m_MenuScreenButton;
     Button m_CloseMenuButton;
     Button m_OptionsSaveButton;
+    Button m_TutorialButton;
 
     //root element
     UIDocument m_DCTestScreen;
@@ -41,6 +47,7 @@ public class GameOptionsScreen : MonoBehaviour
         m_MenuScreenButton = root.Q<Button>(m_OptionsScreenMainMenuButtonName);
         m_CloseMenuButton = root.Q<Button>(CloseMenuButtonString);
         m_OptionsSaveButton = root.Q<Button>(m_OptionsScreenSaveButtonName);
+        m_TutorialButton = root.Q<Button>(TutorialButtonString);
 
     }
     void RegisterButtonCallBacks()
@@ -48,6 +55,14 @@ public class GameOptionsScreen : MonoBehaviour
         m_CloseMenuButton?.RegisterCallback<ClickEvent>(ResumeGame);
         m_MenuScreenButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
         m_OptionsSaveButton?.RegisterCallback<ClickEvent>(ShowGameMenuScreen);
+        m_TutorialButton?.RegisterCallback<ClickEvent>(TutorialButtonClicked);
+
+    }
+
+    private void TutorialButtonClicked(ClickEvent evt)
+    {
+        PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+        SceneManager.LoadScene(m_DCTestScene_tutorial);
     }
 
     private void ResumeGame(ClickEvent evt)
