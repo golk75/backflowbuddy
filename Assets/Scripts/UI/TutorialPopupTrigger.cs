@@ -15,19 +15,22 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string TutorialPrevButtonString = "Tutotial_previous_button";
     private const string TutorialSkipButtonString = "Tutotial_skip_button";
     private const string TutorialPopupHeaderString = "TutorialPopup_header";
+    private const string TutorialPopupContentString = "TutorialPopup_content";
     private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
     private const string TutorialButtonContainerString = "TutorialPopup_button_container";
 
     //style classes
-    private const string PopupButtonStyleString = "tutorial-popup-button";
-    private const string PopupButtonMaxStyleString = "tutorial-popup-button-max";
+    private const string StartQuickTourButtonString = "tutorial-popup-button-start";
+    private const string QuickTourContainerDarkStyle = "quick-tour-container-light";
+    private const string QuickTourContainerLightStyle = "quick-tour-container-dark";
+
 
 
     //visual elements
-    public VisualElement m_Tutorial_container;
-    //private VisualElement m_Tutorial_container;
+    public VisualElement m_QuickTourContainer;
     private VisualElement m_PopupHeader;
+    private VisualElement m_PopupContent;
     private VisualElement m_ButtonContainer;
     private Button m_NextButton;
     private Button m_PreviousButton;
@@ -67,7 +70,8 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 0)
         {
-            m_Tutorial_container.style.display = DisplayStyle.Flex;
+            m_QuickTourContainer.style.display = DisplayStyle.Flex;
+
         }
 
     }
@@ -78,8 +82,9 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
         m_OptionsTutorialButton = root.rootVisualElement.Q<Button>(OptionsTutorialButtonString);
-        m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(QuickTourContainerString);
+        m_QuickTourContainer = root.rootVisualElement.Q<VisualElement>(QuickTourContainerString);
         m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
+        m_PopupContent = root.rootVisualElement.Q<VisualElement>(TutorialPopupContentString);
         m_ButtonContainer = root.rootVisualElement.Q<VisualElement>(TutorialButtonContainerString);
 
     }
@@ -158,21 +163,26 @@ public class TutorialPopupTrigger : MonoBehaviour
         TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
         if (popupIndex == 0)
         {
-            m_NextButton.RemoveFromClassList(PopupButtonStyleString);
-            m_NextButton.AddToClassList(PopupButtonMaxStyleString);
-            m_SkipButton.AddToClassList(PopupButtonMaxStyleString);
-            m_SkipButton.RemoveFromClassList(PopupButtonStyleString);
+
+            m_PopupContent.style.display = DisplayStyle.None;
+            m_NextButton.AddToClassList(StartQuickTourButtonString);
             m_NextButton.text = "Start A Quick Tour";
             m_ButtonContainer.style.flexDirection = FlexDirection.ColumnReverse;
             m_PreviousButton.style.display = DisplayStyle.None;
+
+        }
+        else if (popupIndex == PopupScriptableObjects.Length - 1)
+        {
+            m_NextButton.style.display = DisplayStyle.None;
+            m_SkipButton.RemoveFromClassList("skip-button");
         }
         else
         {
-            m_NextButton.RemoveFromClassList(PopupButtonStyleString);
-            m_NextButton.AddToClassList(PopupButtonMaxStyleString);
+            m_NextButton.RemoveFromClassList(StartQuickTourButtonString);
             m_NextButton.text = "Next";
             m_ButtonContainer.style.flexDirection = FlexDirection.Row;
             m_PreviousButton.style.display = DisplayStyle.Flex;
+            m_PopupContent.style.display = DisplayStyle.Flex;
         }
         if (popupIndex == PopupScriptableObjects.Length - 1)
         {

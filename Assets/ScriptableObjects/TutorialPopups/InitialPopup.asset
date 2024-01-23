@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: InitialPopup
   m_EditorClassIdentifier: 
   header: Welcome to Play mode!
-  content: Want a quick tour?
+  content: 

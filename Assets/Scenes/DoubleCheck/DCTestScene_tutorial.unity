@@ -494,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MenuScreenName: GameMenuScreen
   m_OptionsScreenName: GameMenuOptionsScreen
+  m_DCTestScene_tutorial: DCTestScene_tutorial
 --- !u!114 &354497761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +921,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad8032e8e22347ae97df90832fa1339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DCTestScene_tutorial: DCTestScene_tutorial
+  m_DCTestScene: DCTestScene
   m_GameUi: {fileID: 354497734}
   PopupScriptableObjects:
   - {fileID: 11400000, guid: dc1f45a2f6f7641818595c22036cac4d, type: 2}

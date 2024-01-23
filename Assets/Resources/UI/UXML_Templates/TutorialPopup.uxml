@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
     <ui:VisualElement name="TutorialPopup" class="tutorial-container">
-        <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel" style="width: 25%;">
+        <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel">
             <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
                 <ui:VisualElement name="TutorialPopup_header">
                     <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_header_label" text="This is the Header" class="tutorial-popup-label" />
@@ -13,9 +13,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="TutorialPopup_button_container" class="tutorial-popup-button-container">
-                <ui:Button text="Previous" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_previous_button" class="tutorial-popup-next-button tutorial-popup-button" />
-                <ui:Button text="Skip All" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_skip_button" class="tutorial-popup-next-button tutorial-popup-button" />
-                <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-next-button tutorial-popup-button" />
+                <ui:Button text="Previous" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_previous_button" class="tutorial-popup-button" />
+                <ui:Button text="Skip All" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_skip_button" class="skip-button tutorial-popup-button" />
+                <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
