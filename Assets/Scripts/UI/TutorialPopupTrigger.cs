@@ -14,9 +14,10 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string TutorialPrevButtonString = "Tutotial_previous_button";
     private const string TutorialSkipButtonString = "Tutotial_skip_button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
-
+    private const string TutorialPopupHeaderString = "TutorialPopup_header";
     //visual elements
     private VisualElement m_Tutorial_container;
+    private VisualElement m_PopupHeader;
     private Button m_NextButton;
     private Button m_PreviousButton;
     private Button m_SkipButton;
@@ -116,6 +117,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
         m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(TutorialContainerString);
+        m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
     }
 
     private void UpdatePopup()
@@ -130,7 +132,14 @@ public class TutorialPopupTrigger : MonoBehaviour
         {
             // Debug.Log($"create close button");
             m_NextButton.style.display = DisplayStyle.None;
+            m_PopupHeader.style.display = DisplayStyle.None;
+
             m_SkipButton.text = "Close";
+        }
+        else
+        {
+            m_NextButton.style.display = DisplayStyle.Flex;
+            m_PopupHeader.style.display = DisplayStyle.Flex;
         }
         //player has pressed the skip button
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 1)
