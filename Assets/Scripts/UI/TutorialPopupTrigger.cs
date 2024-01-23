@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class TutorialPopupTrigger : MonoBehaviour
@@ -15,13 +16,19 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string TutorialSkipButtonString = "Tutotial_skip_button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
     private const string TutorialPopupHeaderString = "TutorialPopup_header";
+    private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
     //visual elements
     private VisualElement m_Tutorial_container;
     private VisualElement m_PopupHeader;
     private Button m_NextButton;
     private Button m_PreviousButton;
     private Button m_SkipButton;
+    private Button m_OptionsTutorialButton;
 
+
+    //scene management
+    [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
+    [SerializeField] string m_DCTestScene = "DCTestScene";
 
 
     //gameobjects
@@ -49,24 +56,31 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
     }
-    void OnDisable()
+
+    private void AssignVisualElements()
     {
-        UnRegisterCallbacks();
+        m_NextButton = root.rootVisualElement.Q<Button>(TutorialNextButtonString);
+        m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
+        m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
+        m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(TutorialContainerString);
+        m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
     }
 
-    private void UnRegisterCallbacks()
-    {
-        m_NextButton.clicked -= OnNextButtonClicked;
-        m_SkipButton.clicked -= OnSkipButtonClicked;
-        m_PreviousButton.clicked -= OnPrevButtonClicked;
-    }
     //register call backs
     private void RegisterCallbacks()
     {
         m_NextButton.clicked += OnNextButtonClicked;
         m_SkipButton.clicked += OnSkipButtonClicked;
         m_PreviousButton.clicked += OnPrevButtonClicked;
+        m_OptionsTutorialButton.clicked += OnOptionsTutorialButtonClicked;
     }
+
+
+    private void OnOptionsTutorialButtonClicked()
+    {
+        SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
+    }
+
 
     private void OnNextButtonClicked()
     {
@@ -76,6 +90,8 @@ public class TutorialPopupTrigger : MonoBehaviour
         }
 
     }
+
+
     private void OnPrevButtonClicked()
     {
         if (popupIndex >= 1)
@@ -84,9 +100,11 @@ public class TutorialPopupTrigger : MonoBehaviour
         }
     }
 
+
     private void OnSkipButtonClicked()
     {
         SaveTutorialPrefs(1);
+        SceneManager.LoadScene(m_DCTestScene);
     }
 
 
@@ -94,6 +112,8 @@ public class TutorialPopupTrigger : MonoBehaviour
     {
         PlayerPrefs.SetInt(TutorialPlayerPrefString, pref);
     }
+
+
     public void LoadTutorialPrefs()
     {
         popupIndex = 0;
@@ -109,16 +129,20 @@ public class TutorialPopupTrigger : MonoBehaviour
     }
 
 
-
-
-    private void AssignVisualElements()
+    void OnDisable()
     {
-        m_NextButton = root.rootVisualElement.Q<Button>(TutorialNextButtonString);
-        m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
-        m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
-        m_Tutorial_container = root.rootVisualElement.Q<VisualElement>(TutorialContainerString);
-        m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
+        UnRegisterCallbacks();
     }
+
+
+    private void UnRegisterCallbacks()
+    {
+        m_NextButton.clicked -= OnNextButtonClicked;
+        m_SkipButton.clicked -= OnSkipButtonClicked;
+        m_PreviousButton.clicked -= OnPrevButtonClicked;
+        m_OptionsTutorialButton.clicked -= OnOptionsTutorialButtonClicked;
+    }
+
 
     private void UpdatePopup()
     {
