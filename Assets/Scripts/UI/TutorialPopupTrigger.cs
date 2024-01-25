@@ -228,32 +228,34 @@ public class TutorialPopupTrigger : MonoBehaviour
 
             //hide origianl element
             if (elementToAnimate != null)
+            {
                 elementToAnimate.style.display = DisplayStyle.Flex;
 
-            // Debug.Log($"elementToAnimate.style.display: {elementToAnimate.style.display}");
+                // Debug.Log($"elementToAnimate.style.display: {elementToAnimate.style.display}");
 
 
-            //Tween scale (may explore other properties later)
-            GrowTween = DOTween.To(()
-               => elementToAnimate.transform.scale,
-               x => elementToAnimate.transform.scale = x,
-               new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
-               .SetEase(Ease.Linear);
+                //Tween scale (may explore other properties later)
+                GrowTween = DOTween.To(()
+                   => elementToAnimate.transform.scale,
+                   x => elementToAnimate.transform.scale = x,
+                   new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
+                   .SetEase(Ease.Linear);
 
-            ShrinkTween = DOTween.To(()
-                            => elementToAnimate.transform.scale,
-                            x => elementToAnimate.transform.scale = x,
-                            new Vector3(1f, 1f, 1f), 0.5f)
-                            .SetEase(Ease.Linear);
-
-
-
+                ShrinkTween = DOTween.To(()
+                                => elementToAnimate.transform.scale,
+                                x => elementToAnimate.transform.scale = x,
+                                new Vector3(1f, 1f, 1f), 0.5f)
+                                .SetEase(Ease.Linear);
 
 
 
 
-            //animate flashing element    
-            StartCoroutine(AnimateUi());
+
+
+
+                //animate flashing element    
+                StartCoroutine(AnimateUi());
+            }
         }
 
     }
@@ -347,7 +349,11 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 1)
+        {
+            DOTween.KillAll();
             SceneManager.LoadScene(m_DCTestScene);
+
+        }
     }
 
 
