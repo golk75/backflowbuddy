@@ -136,12 +136,13 @@ public class TutorialPopupTrigger : MonoBehaviour
     //proceed to next popup window
     private void OnNextButtonClicked()
     {
+
+        if (elementToAnimate != null)
+            elementToAnimate.transform.scale = initElementScale;
         if (popupIndex < PopupScriptableObjects.Length - 1)
         {
             //move to next scriptable object
             popupIndex++;
-
-
 
 
             //change 'element to animate' data to Tween within AnimateUI() (Coroutine)
@@ -172,13 +173,13 @@ public class TutorialPopupTrigger : MonoBehaviour
             GrowTween = DOTween.To(()
                => elementToAnimate.transform.scale,
                x => elementToAnimate.transform.scale = x,
-               new Vector3(2f, 2f, 2f), 0.25f)
+               new Vector3(2f, 2f, 2f), 0.5f)
                .SetEase(Ease.Linear);
 
             ShrinkTween = DOTween.To(()
                             => elementToAnimate.transform.scale,
                             x => elementToAnimate.transform.scale = x,
-                            new Vector3(1f, 1f, 1f), 0.25f)
+                            new Vector3(1f, 1f, 1f), 0.5f)
                             .SetEase(Ease.Linear);
 
 
@@ -193,7 +194,50 @@ public class TutorialPopupTrigger : MonoBehaviour
     {
         if (popupIndex >= 1)
         {
+
+
             popupIndex--;
+
+
+            switch (popupIndex)
+            {
+
+                case 1:
+                    elementToAnimate = m_FillButton;
+                    break;
+                case 2:
+                    elementToAnimate = m_PauseButton;
+                    break;
+                case 3:
+                    elementToAnimate = m_PlayButton;
+                    break;
+                case 4:
+                    elementToAnimate = m_MenuButton;
+                    break;
+
+
+            }
+
+
+            //cache initial scale for reseting after moving to next element    
+            initElementScale = elementToAnimate.transform.scale;
+
+
+            //Tween scale (may explore other properties later)
+            GrowTween = DOTween.To(()
+               => elementToAnimate.transform.scale,
+               x => elementToAnimate.transform.scale = x,
+               new Vector3(2f, 2f, 2f), 0.5f)
+               .SetEase(Ease.Linear);
+
+            ShrinkTween = DOTween.To(()
+                            => elementToAnimate.transform.scale,
+                            x => elementToAnimate.transform.scale = x,
+                            new Vector3(1f, 1f, 1f), 0.5f)
+                            .SetEase(Ease.Linear);
+
+
+            StartCoroutine(AnimateUi());
         }
     }
 
@@ -285,7 +329,6 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         yield return mySequence.WaitForKill();
 
-
     }
 
 
@@ -346,13 +389,13 @@ public class TutorialPopupTrigger : MonoBehaviour
     //         GrowTween = DOTween.To(()
     //            => testBox.transform.scale,
     //            x => testBox.transform.scale = x,
-    //            new Vector3(2f, 2f, 2f), 0.25f)
+    //            new Vector3(2f, 2f, 2f), 0.5f)
     //            .SetEase(Ease.Linear);
 
     //         ShrinkTween = DOTween.To(()
     //                         => testBox.transform.scale,
     //                         x => testBox.transform.scale = x,
-    //                         new Vector3(1f, 1f, 1f), 0.25f)
+    //                         new Vector3(1f, 1f, 1f), 0.5f)
     //                         .SetEase(Ease.Linear);
 
 
