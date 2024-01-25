@@ -156,7 +156,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         var pos = originalEle.parent.LocalToWorld(originalEle.transform.position);
         // m_TestFillButton.transform.position = new Vector2(10, 10);
         flashingEle.transform.position = originalEle.LocalToWorld(pos);
-        Debug.Log($"originalEle: {originalEle}; flashingEle: {flashingEle}");
+
 
     }
     //register call backs
