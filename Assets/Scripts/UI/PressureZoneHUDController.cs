@@ -140,13 +140,13 @@ public class PressureZoneHUDController : MonoBehaviour
 
         foreach (var dragger in SliderHandleList)
         {
-            AddFillBarElements(dragger);
+            // AddFillBarElements(dragger);
         }
         //
 
         foreach (var sliderBar in SliderBarList)
         {
-            AddNewDraggerElements(sliderBar);
+            // AddNewDraggerElements(sliderBar);
             RegisterSliderCallBacks(sliderBar);
         }
 
@@ -157,22 +157,24 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void AddFillBarElements(VisualElement sliderHandle)
     {
-        m_SliderFillBar = new VisualElement();
-        sliderHandle.Add(m_SliderFillBar);
-        m_SliderFillBar.name = "SliderFillBar";
-        m_SliderFillBar.AddToClassList("fill-bar");
+        // m_SliderFillBar = new VisualElement();
+        // sliderHandle.Add(m_SliderFillBar);
+        // m_SliderFillBar.name = "SliderFillBar";
+        // m_SliderFillBar.AddToClassList("fill-bar");
     }
-    void AddNewDraggerElements(VisualElement sliderBar)
-    {
 
-        //new dragger handle
-        m_NewDragger = new VisualElement();
-        sliderBar.Add(m_NewDragger);
-        m_NewDragger.name = "NewDragger";
-        m_NewDragger.AddToClassList("new-dragger");
-        m_NewDragger.pickingMode = PickingMode.Ignore;
+    //CUSTOM SLIDER DRAGGER
+    // void AddNewDraggerElements(VisualElement sliderBar)
+    // {
 
-    }
+    //     //new dragger handle
+    //     m_NewDragger = new VisualElement();
+    //     sliderBar.Add(m_NewDragger);
+    //     m_NewDragger.name = "NewDragger";
+    //     m_NewDragger.AddToClassList("new-dragger");
+    //     m_NewDragger.pickingMode = PickingMode.Ignore;
+
+    // }
 
 
     void RegisterCallBacks()
@@ -338,15 +340,26 @@ public class PressureZoneHUDController : MonoBehaviour
 
     private void SliderInitialPositioning(GeometryChangedEvent evt)
     {
-        VisualElement currentSliderBar = (VisualElement)evt.target;
-        VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
-        VisualElement currentNewDragger = currentSliderBar.Query(name: "NewDragger");
-
-        Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
-        Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
-
-        currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
+        throw new NotImplementedException();
     }
+
+
+
+
+    ///
+    /// CUSTOM SLIDER
+    /// 
+    ///    // private void SliderInitialPositioning(GeometryChangedEvent evt)
+    // {
+    //     VisualElement currentSliderBar = (VisualElement)evt.target;
+    //     VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
+    //     VisualElement currentNewDragger = currentSliderBar.Query(name: "NewDragger");
+
+    //     Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
+    //     Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
+
+    //     currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
+    // }
 
 
     private void SliderValueChanged(ChangeEvent<float> evt)
@@ -356,12 +369,12 @@ public class PressureZoneHUDController : MonoBehaviour
 
         VisualElement currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
-        VisualElement currentNewDragger = currentSliderBar.Query(name: "NewDragger");
 
-        Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
-        Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
 
-        currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
+        // Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
+        // Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
+
+        // currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
 
         ZonePressureOperations(evt.newValue, PressurePanel.GetFirstAncestorWithClass(currentSliderBar, "panel-template"));
 

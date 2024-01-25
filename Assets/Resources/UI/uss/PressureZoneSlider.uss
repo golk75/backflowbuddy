@@ -1,109 +1,14 @@
-#PressureZoneSlider Label {
+.pressure-zone-slider {
+    height: 103px;
+}
+
+.unity-slider__label {
     display: none;
 }
 
-#PressureZoneSlider #unity-drag-container {
-    position: relative;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    align-items: center;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    overflow: hidden;
-    margin-right: 5px;
-    margin-left: 5px;
+.unity-base-slider__drag-container {
 }
 
-#PressureZoneSlider #unity-tracker {
-    width: 10px;
-    height: 100%;
-    background-color: rgb(51, 53, 55);
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    position: relative;
-    left: 0;
-    top: 0;
-    right: 0;
-    align-items: auto;
-    align-self: center;
-}
-
-#PressureZoneSlider #unity-dragger {
-    width: 100%;
-    height: 10px;
-    flex-direction: row-reverse;
-    max-width: none;
-    max-height: none;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    background-color: rgba(0, 74, 255, 0);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    left: 0;
-    right: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    visibility: visible;
-}
-
-.fill-bar {
-    background-color: rgb(0, 212, 77);
-    max-width: none;
-    max-height: none;
-    width: 100%;
-    height: 2000px;
-    align-self: flex-start;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    bottom: 0;
-}
-
-.new-dragger {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0);
-    position: absolute;
-    background-image: resource('UI/Textures/Custom_slider_handle 1');
-}
-
-.pressure-zone-slider {
-    background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
-    width: 20px;
-    min-width: auto;
-    overflow: hidden;
-    max-width: none;
-    max-height: none;
-    margin-right: 0;
-    height: 100px;
-}
-
-.pressure-zone-slider-parked {
-    background-image: resource('UI/Textures/Custom_slider_bar_blue_flip');
-    width: 20px;
-    min-width: auto;
-    overflow: hidden;
-    max-width: none;
-    max-height: none;
-    margin-right: 0;
-    height: 75px;
+#unity-tracker {
+    background-color: rgb(255, 255, 255);
 }
