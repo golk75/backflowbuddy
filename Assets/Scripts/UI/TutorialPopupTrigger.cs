@@ -218,6 +218,14 @@ public class TutorialPopupTrigger : MonoBehaviour
                     originalElementToCopy = m_MenuButton;
                     break;
                 case 6:
+                    elementToAnimate = m_MenuButton_flashing;
+                    originalElementToCopy = m_MenuButton;
+                    break;
+                case 7:
+                    elementToAnimate = m_MenuButton_flashing;
+                    originalElementToCopy = m_MenuButton;
+                    break;
+                case 8:
                     elementToAnimate = null;
                     break;
 
