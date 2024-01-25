@@ -186,3 +186,16 @@
     right: 0;
     bottom: 0;
 }
+
+.button-flashing {
+    position: absolute;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    display: none;
+}

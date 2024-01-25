@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+
 using DG.Tweening;
 // using Unity.VisualScripting;
 using UnityEngine;
@@ -24,9 +25,15 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string ResetButtonString = "ResetButton";
     private const string PauseButtonString = "PauseButton";
     private const string PlayButtonString = "PlayButton";
+    //visual elements to animate 
+    private const string MenuButtonFlashingString = "MenuButton-flashing";
+    private const string FillButtonFlashingString = "FillButton-flashing";
+    private const string ResetButtonFlashingString = "ResetButton-flashing";
+    private const string PauseButtonFlashingString = "PauseButton-flashing";
+    private const string PlayButtonFlashingString = "PlayButton-flashing";
 
 
-
+    private const string TestFillButtonString = "TestFillButton";
 
     //style classes
     private const string StartQuickTourButtonString = "tutorial-popup-button-start";
@@ -49,7 +56,19 @@ public class TutorialPopupTrigger : MonoBehaviour
     private Button m_ResetButton;
     private Button m_PauseButton;
     private Button m_PlayButton;
+    private Button m_MenuButton_flashing;
+    private Button m_FillButton_flashing;
+    private Button m_ResetButton_flashing;
+    private Button m_PauseButton_flashing;
+    private Button m_PlayButton_flashing;
+
+
+    private VisualElement originalElementToCopy;
     private VisualElement elementToAnimate;
+
+
+    private Button m_TestFillButton;
+
 
     //scene management
     [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
@@ -70,6 +89,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     //Vectors
     Vector3 initElementScale;
+    Vector2 initTestFillButtonPos;
 
     //throw away
     public int popupIndex = 0;
@@ -99,6 +119,12 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void AssignVisualElements()
     {
+        //delete test fill button after testing
+        m_TestFillButton = root.rootVisualElement.Q<Button>(TestFillButtonString);
+        //
+
+
+
         m_NextButton = root.rootVisualElement.Q<Button>(TutorialNextButtonString);
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
@@ -113,9 +139,25 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_PauseButton = root.rootVisualElement.Q<Button>(PauseButtonString);
         m_PlayButton = root.rootVisualElement.Q<Button>(PlayButtonString);
 
+        //flashing elements
+        m_MenuButton_flashing = root.rootVisualElement.Q<Button>(MenuButtonFlashingString);
+        m_FillButton_flashing = root.rootVisualElement.Q<Button>(FillButtonFlashingString);
+        m_ResetButton_flashing = root.rootVisualElement.Q<Button>(ResetButtonFlashingString);
+        m_PauseButton_flashing = root.rootVisualElement.Q<Button>(PauseButtonFlashingString);
+        m_PlayButton_flashing = root.rootVisualElement.Q<Button>(PlayButtonFlashingString);
+
+
+
 
     }
 
+    private void PositionFlashingElement(VisualElement originalEle, VisualElement flashingEle)
+    {
+        initTestFillButtonPos = originalEle.parent.LocalToWorld(originalEle.transform.position);
+        // m_TestFillButton.transform.position = new Vector2(10, 10);
+        flashingEle.transform.position = originalEle.LocalToWorld(initTestFillButtonPos);
+
+    }
     //register call backs
     private void RegisterCallbacks()
     {
@@ -137,6 +179,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private void OnNextButtonClicked()
     {
 
+
         if (elementToAnimate != null)
             elementToAnimate.transform.scale = initElementScale;
         if (popupIndex < PopupScriptableObjects.Length - 1)
@@ -149,7 +192,9 @@ public class TutorialPopupTrigger : MonoBehaviour
             switch (popupIndex)
             {
                 case 1:
-                    elementToAnimate = m_FillButton;
+                    // elementToAnimate = m_FillButton;
+                    elementToAnimate = m_TestFillButton;
+                    originalElementToCopy = m_FillButton;
                     break;
                 case 2:
                     elementToAnimate = m_PauseButton;
@@ -165,10 +210,6 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
 
-            //cache initial scale for reseting after moving to next element    
-            initElementScale = elementToAnimate.transform.scale;
-
-
             //Tween scale (may explore other properties later)
             GrowTween = DOTween.To(()
                => elementToAnimate.transform.scale,
@@ -181,8 +222,15 @@ public class TutorialPopupTrigger : MonoBehaviour
                             x => elementToAnimate.transform.scale = x,
                             new Vector3(1f, 1f, 1f), 0.5f)
                             .SetEase(Ease.Linear);
+            //hide origianl element
+            originalElementToCopy.style.display = DisplayStyle.None;
 
 
+            //re-position flashing element to match origianl element position
+            PositionFlashingElement(originalElementToCopy, elementToAnimate);
+
+
+            //animate flashing element    
             StartCoroutine(AnimateUi());
 
         }
@@ -198,46 +246,6 @@ public class TutorialPopupTrigger : MonoBehaviour
 
             popupIndex--;
 
-
-            switch (popupIndex)
-            {
-
-                case 1:
-                    elementToAnimate = m_FillButton;
-                    break;
-                case 2:
-                    elementToAnimate = m_PauseButton;
-                    break;
-                case 3:
-                    elementToAnimate = m_PlayButton;
-                    break;
-                case 4:
-                    elementToAnimate = m_MenuButton;
-                    break;
-
-
-            }
-
-
-            //cache initial scale for reseting after moving to next element    
-            initElementScale = elementToAnimate.transform.scale;
-
-
-            //Tween scale (may explore other properties later)
-            GrowTween = DOTween.To(()
-               => elementToAnimate.transform.scale,
-               x => elementToAnimate.transform.scale = x,
-               new Vector3(2f, 2f, 2f), 0.5f)
-               .SetEase(Ease.Linear);
-
-            ShrinkTween = DOTween.To(()
-                            => elementToAnimate.transform.scale,
-                            x => elementToAnimate.transform.scale = x,
-                            new Vector3(1f, 1f, 1f), 0.5f)
-                            .SetEase(Ease.Linear);
-
-
-            StartCoroutine(AnimateUi());
         }
     }
 
