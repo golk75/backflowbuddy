@@ -69,7 +69,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
     //Vectors
-    Vector3 initTestBoxPoss;
+    Vector3 initElementScale;
 
     //throw away
     public int popupIndex = 0;
@@ -163,12 +163,17 @@ public class TutorialPopupTrigger : MonoBehaviour
             }
 
 
-            if (elementToAnimate != null)
-                GrowTween = DOTween.To(()
-                   => elementToAnimate.transform.scale,
-                   x => elementToAnimate.transform.scale = x,
-                   new Vector3(2f, 2f, 2f), 0.25f)
-                   .SetEase(Ease.Linear);
+
+            //cache initial scale for reseting after moving to next element    
+            initElementScale = elementToAnimate.transform.scale;
+
+
+            //Tween scale (may explore other properties later)
+            GrowTween = DOTween.To(()
+               => elementToAnimate.transform.scale,
+               x => elementToAnimate.transform.scale = x,
+               new Vector3(2f, 2f, 2f), 0.25f)
+               .SetEase(Ease.Linear);
 
             ShrinkTween = DOTween.To(()
                             => elementToAnimate.transform.scale,
