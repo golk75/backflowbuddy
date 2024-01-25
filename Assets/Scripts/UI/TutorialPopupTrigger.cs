@@ -26,11 +26,11 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string PauseButtonString = "PauseButton";
     private const string PlayButtonString = "PlayButton";
     //visual elements to animate 
-    private const string MenuButtonFlashingString = "MenuButton-flashing";
-    private const string FillButtonFlashingString = "FillButton-flashing";
-    private const string ResetButtonFlashingString = "ResetButton-flashing";
-    private const string PauseButtonFlashingString = "PauseButton-flashing";
-    private const string PlayButtonFlashingString = "PlayButton-flashing";
+    private const string MenuButtonFlashingString = "MenuButton-flash";
+    private const string FillButtonFlashingString = "FillButton-flash";
+    private const string ResetButtonFlashingString = "ResetButton-flash";
+    private const string PauseButtonFlashingString = "PauseButton-flash";
+    private const string PlayButtonFlashingString = "PlayButton-flash";
 
 
     private const string TestFillButtonString = "TestFillButton";
@@ -67,7 +67,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private VisualElement elementToAnimate;
 
 
-    private Button m_TestFillButton;
+
 
 
     //scene management
@@ -88,8 +88,8 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
     //Vectors
-    Vector3 initElementScale;
-    Vector2 initTestFillButtonPos;
+
+    Vector2 originalElementToCopyPos;
 
     //throw away
     public int popupIndex = 0;
@@ -119,9 +119,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void AssignVisualElements()
     {
-        //delete test fill button after testing
-        m_TestFillButton = root.rootVisualElement.Q<Button>(TestFillButtonString);
-        //
+
 
 
 
@@ -153,9 +151,12 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void PositionFlashingElement(VisualElement originalEle, VisualElement flashingEle)
     {
-        initTestFillButtonPos = originalEle.parent.LocalToWorld(originalEle.transform.position);
+        if (originalEle == null || flashingEle == null)
+            return;
+        var pos = originalEle.parent.LocalToWorld(originalEle.transform.position);
         // m_TestFillButton.transform.position = new Vector2(10, 10);
-        flashingEle.transform.position = originalEle.LocalToWorld(initTestFillButtonPos);
+        flashingEle.transform.position = originalEle.LocalToWorld(pos);
+        Debug.Log($"originalEle: {originalEle}; flashingEle: {flashingEle}");
 
     }
     //register call backs
@@ -178,43 +179,65 @@ public class TutorialPopupTrigger : MonoBehaviour
     //proceed to next popup window
     private void OnNextButtonClicked()
     {
-
-
+        DOTween.KillAll();
         if (elementToAnimate != null)
-            elementToAnimate.transform.scale = initElementScale;
+        {
+            elementToAnimate.transform.scale = new Vector3(1, 1, 1);
+            elementToAnimate.style.display = DisplayStyle.None;
+        }
         if (popupIndex < PopupScriptableObjects.Length - 1)
         {
             //move to next scriptable object
             popupIndex++;
 
 
+
             //change 'element to animate' data to Tween within AnimateUI() (Coroutine)
             switch (popupIndex)
             {
+
+
                 case 1:
-                    // elementToAnimate = m_FillButton;
-                    elementToAnimate = m_TestFillButton;
+                    elementToAnimate = m_FillButton_flashing;
                     originalElementToCopy = m_FillButton;
                     break;
                 case 2:
-                    elementToAnimate = m_PauseButton;
+                    elementToAnimate = m_PauseButton_flashing;
+                    originalElementToCopy = m_PauseButton;
                     break;
                 case 3:
-                    elementToAnimate = m_PlayButton;
+                    elementToAnimate = m_PlayButton_flashing;
+                    originalElementToCopy = m_PlayButton;
                     break;
                 case 4:
-                    elementToAnimate = m_MenuButton;
+                    elementToAnimate = m_ResetButton_flashing;
+                    originalElementToCopy = m_ResetButton;
+                    break;
+                case 5:
+                    elementToAnimate = m_MenuButton_flashing;
+                    originalElementToCopy = m_MenuButton;
+                    break;
+                case 6:
+                    elementToAnimate = null;
                     break;
 
             }
 
+            //re-position flashing element to match origianl element position
+            PositionFlashingElement(originalElementToCopy, elementToAnimate);
+
+            //hide origianl element
+            if (elementToAnimate != null)
+                elementToAnimate.style.display = DisplayStyle.Flex;
+
+            // Debug.Log($"elementToAnimate.style.display: {elementToAnimate.style.display}");
 
 
             //Tween scale (may explore other properties later)
             GrowTween = DOTween.To(()
                => elementToAnimate.transform.scale,
                x => elementToAnimate.transform.scale = x,
-               new Vector3(2f, 2f, 2f), 0.5f)
+               new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
                .SetEase(Ease.Linear);
 
             ShrinkTween = DOTween.To(()
@@ -222,20 +245,19 @@ public class TutorialPopupTrigger : MonoBehaviour
                             x => elementToAnimate.transform.scale = x,
                             new Vector3(1f, 1f, 1f), 0.5f)
                             .SetEase(Ease.Linear);
-            //hide origianl element
-            originalElementToCopy.style.display = DisplayStyle.None;
 
 
-            //re-position flashing element to match origianl element position
-            PositionFlashingElement(originalElementToCopy, elementToAnimate);
+
+
+
 
 
             //animate flashing element    
             StartCoroutine(AnimateUi());
-
         }
 
     }
+
 
     //go back to previous popup window
     private void OnPrevButtonClicked()
@@ -310,7 +332,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
             m_NextButton.style.display = DisplayStyle.None;
             m_PopupHeader.style.display = DisplayStyle.None;
-
+            DOTween.KillAll();
             m_SkipButton.text = "Close";
         }
         else
@@ -333,7 +355,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     {
 
         Sequence mySequence = DOTween.Sequence();
-        mySequence.Append(GrowTween).Append(ShrinkTween).SetLoops(-1);
+        mySequence.Append(GrowTween).Append(ShrinkTween).SetLoops(-1).SetEase(Ease.Linear);
 
         yield return mySequence.WaitForKill();
 
