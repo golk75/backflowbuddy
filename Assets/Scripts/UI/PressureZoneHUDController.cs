@@ -335,13 +335,9 @@ public class PressureZoneHUDController : MonoBehaviour
     void RegisterSliderCallBacks(VisualElement slider)
     {
         slider.RegisterCallback<ChangeEvent<float>>(SliderValueChanged);
-        slider.RegisterCallback<GeometryChangedEvent>(SliderInitialPositioning);
     }
 
-    private void SliderInitialPositioning(GeometryChangedEvent evt)
-    {
-        throw new NotImplementedException();
-    }
+
 
 
 
