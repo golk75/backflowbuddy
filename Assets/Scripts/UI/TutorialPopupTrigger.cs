@@ -27,7 +27,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string PlayButtonString = "PlayButton";
     private const string SupplyPanelString = "SupplyPressure__panel";
     private const string Zone2PanelString = "PressureZone__two_panel";
-    private const string Zone3PanelString = "PressureZone3__three_panel";
+    private const string Zone3PanelString = "PressureZone__three_panel";
     //visual elements to animate 
     private const string MenuButtonFlashingString = "MenuButton-flash";
     private const string FillButtonFlashingString = "FillButton-flash";
@@ -96,20 +96,27 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     //arrays
     public TutorialPopUpScriptableObject[] PopupScriptableObjects;
-    public VisualElement[] ElemensToAnimate;
+    public VisualElement[,] ElementsToAnimateArr;
+
+    //lists\
+    public List<VisualElement> ElementsToAnimate = new();
+    public List<VisualElement> OriginalElementsToAnimateCopy = new();
+
 
     //Vectors
-
     Vector2 originalElementToCopyPos;
 
     //throw away
-    public int popupIndex = 0;
+    public int m_popupIndex = 0;
     public int skipTutPlayerPrefTestInt = 0;
 
 
     //DOTween
     Tween GrowTween;
     Tween ShrinkTween;
+    Tween GrowTween2;
+    Tween ShrinkTween2;
+
 
 
     private void Awake()
@@ -118,13 +125,17 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         AssignVisualElements();
         RegisterCallbacks();
-        popupIndex = 0;
+        m_popupIndex = 0;
 
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 0)
         {
             m_QuickTourContainer.style.display = DisplayStyle.Flex;
 
         }
+
+        ElementsToAnimateArr = new VisualElement[2, 2];
+
+
 
     }
 
@@ -166,13 +177,31 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     }
 
-    private void PositionFlashingElement(VisualElement originalEle, VisualElement flashingEle)
+    private void PositionFlashingElement(List<VisualElement> originalElementList, List<VisualElement> flashingElementList)
     {
-        if (originalEle == null || flashingEle == null)
+        Debug.Log($"here");
+
+        if (originalElementList.Count <= 0 || flashingElementList.Count <= 0)
             return;
-        var pos = originalEle.parent.parent.LocalToWorld(originalEle.transform.position);
+        Vector2 o_pos;
+
+        for (int i = 0; i < originalElementList.Count; i++)
+        {
+
+            o_pos = originalElementList[i].parent.parent.LocalToWorld(originalElementList[i].transform.position);
+
+            for (int j = 0; j < flashingElementList.Count; j++)
+            {
+                flashingElementList[j].transform.position = originalElementList[j].LocalToWorld(o_pos);
+
+            }
+
+
+        }
+
+        // var pos = originalEle.parent.parent.LocalToWorld(originalEle.transform.position);
         // m_TestFillButton.transform.position = new Vector2(10, 10);
-        flashingEle.transform.position = originalEle.LocalToWorld(pos);
+        // flashingEle.transform.position = originalEle.LocalToWorld(pos);
 
 
     }
@@ -196,106 +225,166 @@ public class TutorialPopupTrigger : MonoBehaviour
     //proceed to next popup window
     private void OnNextButtonClicked()
     {
-        DOTween.KillAll();
-        if (elementToAnimate != null)
+        if (m_popupIndex < PopupScriptableObjects.Length - 1)
         {
-            elementToAnimate.transform.scale = new Vector3(1, 1, 1);
-            elementToAnimate.style.display = DisplayStyle.None;
+            m_popupIndex++;
+            UpdateQuickTourAnimations(m_popupIndex);
         }
-        if (popupIndex < PopupScriptableObjects.Length - 1)
+
+    }
+
+    private void StageTween(List<VisualElement> elements)
+    {
+        Debug.Log($"elements.Count: {elements.Count} ");
+        if (elements.Count == 1)
         {
-            //move to next scriptable object
-            popupIndex++;
+            GrowTween = DOTween.To(()
+                    => elements[0].transform.scale,
+                    x => elements[0].transform.scale = x,
+                    new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
+                    .SetEase(Ease.Linear);
 
+            ShrinkTween = DOTween.To(()
+                            => elements[0].transform.scale,
+                            x => elements[0].transform.scale = x,
+                            new Vector3(1f, 1f, 1f), 0.5f)
+                            .SetEase(Ease.Linear);
+        }
+        else
+        {
+            GrowTween = DOTween.To(()
+                    => elements[0].transform.scale,
+                    x => elements[0].transform.scale = x,
+                    new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
+                    .SetEase(Ease.Linear);
 
+            ShrinkTween = DOTween.To(()
+                            => elements[0].transform.scale,
+                            x => elements[0].transform.scale = x,
+                            new Vector3(1f, 1f, 1f), 0.5f)
+                            .SetEase(Ease.Linear);
 
+            GrowTween2 = DOTween.To(()
+                               => elements[1].transform.scale,
+                               x => elements[1].transform.scale = x,
+                               new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
+                               .SetEase(Ease.Linear);
+
+            ShrinkTween2 = DOTween.To(()
+                              => elements[1].transform.scale,
+                              x => elements[1].transform.scale = x,
+                              new Vector3(1f, 1f, 1f), 0.5f)
+                              .SetEase(Ease.Linear);
+        }
+    }
+
+    private void UpdateQuickTourAnimations(int popUpIndex)
+    {
+        DOTween.KillAll();
+        // if (elementToAnimate != null)
+
+        foreach (var ele in ElementsToAnimate)
+        {
+            ele.transform.scale = new Vector3(1, 1, 1);
+            ele.style.display = DisplayStyle.None;
+        }
+        for (int i = 0; i < OriginalElementsToAnimateCopy.Count; i++)
+        {
+            OriginalElementsToAnimateCopy[i].style.opacity = 1;
+        }
+        // elementToAnimate.transform.scale = new Vector3(1, 1, 1);
+        // elementToAnimate.style.display = DisplayStyle.None;
+        ElementsToAnimate.Clear();
+        OriginalElementsToAnimateCopy.Clear();
+
+        if (popUpIndex < PopupScriptableObjects.Length - 1)
+        {
             //change 'element to animate' data to Tween within AnimateUI() (Coroutine)
-            switch (popupIndex)
+            switch (popUpIndex)
             {
 
 
                 case 1:
-                    elementToAnimate = m_FillButton_flashing;
-                    originalElementToCopy = m_FillButton;
+                    ElementsToAnimate.Add(m_FillButton_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_FillButton);
+                    // ElementsToAnimateArr[0, 0] = m_FillButton_flashing;
                     break;
                 case 2:
-                    elementToAnimate = m_PauseButton_flashing;
-                    originalElementToCopy = m_PauseButton;
+                    ElementsToAnimate.Add(m_PauseButton_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_PauseButton);
+                    // ElementsToAnimateArr[0, 0] = m_PauseButton_flashing;
                     break;
                 case 3:
-                    elementToAnimate = m_PlayButton_flashing;
-                    originalElementToCopy = m_PlayButton;
+                    ElementsToAnimate.Add(m_PlayButton_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_PlayButton);
+                    // ElementsToAnimateArr[0, 0] = m_FillButton_flashing;
                     break;
                 case 4:
-                    elementToAnimate = m_ResetButton_flashing;
-                    originalElementToCopy = m_ResetButton;
+                    ElementsToAnimate.Add(m_ResetButton_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_ResetButton);
+                    // ElementsToAnimateArr[0, 0] = m_ResetButton_flashing;
                     break;
                 case 5:
-                    elementToAnimate = m_MenuButton_flashing;
-                    originalElementToCopy = m_MenuButton;
+                    ElementsToAnimate.Add(m_MenuButton_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_MenuButton);
+                    // ElementsToAnimateArr[0, 0] = m_MenuButton_flashing;
                     break;
                 case 6:
-                    elementToAnimate = m_SupplyPanel_flashing;
-                    originalElementToCopy = m_SupplyPanel;
+                    ElementsToAnimate.Add(m_SupplyPanel_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_SupplyPanel);
+                    // ElementsToAnimateArr[0, 0] = m_FillButton_flashing;
                     break;
                 case 7:
-                    elementToAnimate = m_Zone2_flashing;
-                    originalElementToCopy = m_PressureZone2Panel;
+                    ElementsToAnimate.Add(m_Zone2_flashing);
+                    ElementsToAnimate.Add(m_Zone3_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_PressureZone2Panel);
+                    OriginalElementsToAnimateCopy.Add(m_PressureZone3Panel);
+                    // ElementsToAnimateArr[0, 0] = m_Zone2_flashing;
+                    // ElementsToAnimateArr[1, 0] = m_Zone3_flashing;
+                    // ElementsToAnimateArr[0, 1] = m_PressureZone2Panel;
+                    // ElementsToAnimateArr[1, 1] = m_PressureZone3Panel;
 
                     break;
                 case 8:
-                    elementToAnimate = null;
+                    ElementsToAnimate.Clear();
+                    OriginalElementsToAnimateCopy.Clear();
                     break;
 
             }
 
             //re-position flashing element to match origianl element position
-            PositionFlashingElement(originalElementToCopy, elementToAnimate);
+            PositionFlashingElement(OriginalElementsToAnimateCopy, ElementsToAnimate);
 
             //hide origianl element
-            if (elementToAnimate != null)
+            for (int i = 0; i < OriginalElementsToAnimateCopy.Count; i++)
             {
-                elementToAnimate.style.display = DisplayStyle.Flex;
+                OriginalElementsToAnimateCopy[i].style.opacity = 0;
+            }
 
-                // Debug.Log($"elementToAnimate.style.display: {elementToAnimate.style.display}");
+            //display element to animate
+            if (ElementsToAnimate.Count > 0)
+            {
+                foreach (var ele in ElementsToAnimate)
+                {
+                    ele.style.display = DisplayStyle.Flex;
+                }
 
-
-                //Tween scale (may explore other properties later)
-
-                GrowTween = DOTween.To(()
-                   => elementToAnimate.transform.scale,
-                   x => elementToAnimate.transform.scale = x,
-                   new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
-                   .SetEase(Ease.Linear);
-
-                ShrinkTween = DOTween.To(()
-                                => elementToAnimate.transform.scale,
-                                x => elementToAnimate.transform.scale = x,
-                                new Vector3(1f, 1f, 1f), 0.5f)
-                                .SetEase(Ease.Linear);
-
-
-
-
-
-
+                //set up tweens in case there are more than one
+                StageTween(ElementsToAnimate);
 
                 //animate flashing element    
                 StartCoroutine(AnimateUi());
             }
         }
-
     }
-
-
     //go back to previous popup window
     private void OnPrevButtonClicked()
     {
-        if (popupIndex >= 1)
+        if (m_popupIndex >= 1)
         {
 
-
-            popupIndex--;
+            m_popupIndex--;
+            UpdateQuickTourAnimations(m_popupIndex);
 
         }
     }
@@ -332,8 +421,8 @@ public class TutorialPopupTrigger : MonoBehaviour
     //update popp window style and text (text is taken from scriptable objects array)
     private void UpdatePopup()
     {
-        TutorialSystem.Show(PopupScriptableObjects[popupIndex].content, PopupScriptableObjects[popupIndex].header);
-        if (popupIndex == 0)
+        TutorialSystem.Show(PopupScriptableObjects[m_popupIndex].content, PopupScriptableObjects[m_popupIndex].header);
+        if (m_popupIndex == 0)
         {
 
             m_PopupContent.style.display = DisplayStyle.None;
@@ -343,7 +432,7 @@ public class TutorialPopupTrigger : MonoBehaviour
             m_PreviousButton.style.display = DisplayStyle.None;
 
         }
-        else if (popupIndex == PopupScriptableObjects.Length - 1)
+        else if (m_popupIndex == PopupScriptableObjects.Length - 1)
         {
             m_NextButton.style.display = DisplayStyle.None;
             m_SkipButton.RemoveFromClassList("skip-button");
@@ -356,7 +445,7 @@ public class TutorialPopupTrigger : MonoBehaviour
             m_PreviousButton.style.display = DisplayStyle.Flex;
             m_PopupContent.style.display = DisplayStyle.Flex;
         }
-        if (popupIndex == PopupScriptableObjects.Length - 1)
+        if (m_popupIndex == PopupScriptableObjects.Length - 1)
         {
 
             m_NextButton.style.display = DisplayStyle.None;
@@ -387,10 +476,31 @@ public class TutorialPopupTrigger : MonoBehaviour
     private IEnumerator AnimateUi()
     {
 
-        Sequence mySequence = DOTween.Sequence();
-        mySequence.Append(GrowTween).Append(ShrinkTween).SetLoops(-1).SetEase(Ease.Linear);
+        Sequence mySequence;
+        Sequence mySequence2;
+        if (ElementsToAnimate.Count > 1)
+        {
 
-        yield return mySequence.WaitForKill();
+            mySequence = DOTween.Sequence();
+            mySequence2 = DOTween.Sequence();
+            mySequence.Append(GrowTween).Append(ShrinkTween).SetEase(Ease.Linear).SetLoops(-1);
+            mySequence2.Append(GrowTween2).Append(ShrinkTween2).SetEase(Ease.Linear).SetLoops(-1);
+
+            yield return mySequence.WaitForKill();
+
+        }
+
+        else
+        {
+
+            mySequence = DOTween.Sequence();
+            mySequence.Append(GrowTween).Append(ShrinkTween).SetEase(Ease.Linear).SetLoops(-1);
+
+            yield return mySequence.WaitForKill();
+
+        }
+
+
 
     }
 

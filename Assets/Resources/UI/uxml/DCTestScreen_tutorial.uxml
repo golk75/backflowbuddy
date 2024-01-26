@@ -91,7 +91,7 @@
     <ui:VisualElement name="SupplyPressure__panel-flash" picking-mode="Ignore" class="supply-pressure-zone-panel panel-flashing">
         <ui:VisualElement name="SupplyPressure_value_container" class="supply-pressure-value-container supply-pressure-value-container-parked">
             <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="supply-pressure-zone-header supply-pressure-zone-header-parked" />
-            <ui:TextField name="SupplyPressure__value" max-length="2" />
+            <ui:TextField name="SupplyPressure__value" max-length="2" value="80" />
         </ui:VisualElement>
         <ui:VisualElement name="CheckSpring_value_container" class="check-spring-value-container check-spring-value-container-parked">
             <ui:VisualElement name="CheckSpring1_value_container" class="check-spring-value-sub-container check-spring-value-sub-container-parked">
@@ -101,7 +101,7 @@
                         <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_add_button" class="check-spring-value-button check-spring-value-button-parked" />
                         <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_subtract_button" class="check-spring-value-button check-spring-value-button-parked" />
                     </ui:VisualElement>
-                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_label" class="check-spring-value-label check-spring-value-label-parked" />
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_label" text="2" class="check-spring-value-label check-spring-value-label-parked" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="CheckSpring2_value_container" class="check-spring-value-sub-container check-spring-value-sub-container-parked" style="margin-top: 0;">
@@ -111,23 +111,29 @@
                         <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_add_button" class="check-spring-value-button check-spring-value-button-parked" />
                         <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_subtract_button" class="check-spring-value-button check-spring-value-button-parked" />
                     </ui:VisualElement>
-                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_label" class="check-spring-value-label" />
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_label" text="1" class="check-spring-value-label" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="PressureZone__two_panel-flash" picking-mode="Ignore" class="pressure-zone-panel panel-flashing">
-        <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" />
+        <ui:VisualElement name="PressureZoneSliderContainer" picking-mode="Ignore">
+            <Style src="project://database/Assets/Resources/UI/uss/PressureZoneSlider.uss?fileID=7433441132597879392&amp;guid=b928e6a2ee3824672bcb593bd1e09328&amp;type=3#PressureZoneSlider" />
+            <ui:Slider picking-mode="Ignore" label="Slider" high-value="2" name="PressureZoneSlider" direction="Vertical" class="pressure-zone-slider" />
+        </ui:VisualElement>
         <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container pressure-zone-value-container-parked">
             <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
-            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" text="78" class="pressure-zone-value-label pressure-zone-value-label-parked" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="PressureZone__three_panel-flash" picking-mode="Ignore" class="pressure-zone-panel pressure-zone-panel-parked panel-flashing">
-        <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" />
+        <ui:VisualElement name="PressureZoneSliderContainer" picking-mode="Ignore">
+            <Style src="project://database/Assets/Resources/UI/uss/PressureZoneSlider.uss?fileID=7433441132597879392&amp;guid=b928e6a2ee3824672bcb593bd1e09328&amp;type=3#PressureZoneSlider" />
+            <ui:Slider picking-mode="Ignore" label="Slider" high-value="2" name="PressureZoneSlider" direction="Vertical" class="pressure-zone-slider" />
+        </ui:VisualElement>
         <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container pressure-zone-value-container-parked">
             <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
-            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_label" text="77" class="pressure-zone-value-label pressure-zone-value-label-parked" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

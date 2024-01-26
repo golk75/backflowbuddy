@@ -934,7 +934,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b186a8f30024c4d10bbb233e107c7be0, type: 2}
   - {fileID: 11400000, guid: 2aff891d64cca45a78ea9ffd5709a0b2, type: 2}
   - {fileID: 11400000, guid: 505dc70bba8a8400ba92046ac6ac27e6, type: 2}
-  popupIndex: 0
+  m_popupIndex: 0
   skipTutPlayerPrefTestInt: 1
 --- !u!1 &908969837 stripped
 GameObject:
