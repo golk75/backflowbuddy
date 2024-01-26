@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private WaterController waterController;
 
     PlayerInputAction playerInput;
-    public InputAction Touch0Position;
+
     public Vector3 touchStart;
 
     public Vector2 primaryTouchStartPos;
@@ -96,45 +96,21 @@ public class PlayerController : MonoBehaviour
         testCockController = TestCockManager.GetComponent<TestCockController>();
         waterController = WaterManager.GetComponent<WaterController>();
 
-#if UNITY_EDITOR
-        Debug.Log("Unity Editor");
-#endif
-
-#if UNITY_IOS || UNITY_ANDROID
 
 
-        //Touch Input
-        operableObject = initialOperableObject;
-        playerInput.Touchscreen.Touch0Contact.started += Touch0Contact_started;
-        playerInput.Touchscreen.Touch0Contact.canceled += Touch0Contact_canceled;
-        playerInput.Touchscreen.Touch0Contact.performed += Touch0Contact_performed;
-        playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
-        playerInput.Touchscreen.Touch0Delta.canceled += Touch0Delta_canceled;
-        playerInput.Touchscreen.Touch1Contact.started += Touch1Contact_started;
-        playerInput.Touchscreen.Touch1Contact.canceled += Touch1Contact_canceled;
-        playerInput.Touchscreen.Touch0Delta.started += Touch0Delta_started;
-        Touch0Position = playerInput.Touchscreen.Touch0Position;
-#endif
 
-#if UNITY_STANDALONE_OSX
-       
-         playerInput.MouseOperate.Click.started += LeftMouseClick_started;
-         playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
-         playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
-
-#endif
-
-#if UNITY_STANDALONE_WIN
-     
-          //Mouse Input
-         playerInput.MouseOperate.Click.started += LeftMouseClick_started;
-         playerInput.MouseOperate.Click.canceled += LeftMouseClick_canceled;
-         playerInput.MouseOperate.Click.performed += LeftMouseClick_performed;
-#endif
-
-
+        //Dual Input (mouse/keyboard and touch)
+        playerInput.DualMap.Touch0Contact.started += Touch0Contact_started;
+        playerInput.DualMap.Touch0Contact.canceled += Touch0Contact_canceled;
+        playerInput.DualMap.Touch0Contact.performed += Touch0Contact_performed;
+        playerInput.DualMap.Touch0Delta.started += Touch0Delta_started;
+        playerInput.DualMap.Touch0Delta.canceled += Touch0Delta_canceled;
+        playerInput.DualMap.Touch1Contact.started += Touch1Contact_started;
+        playerInput.DualMap.Touch1Contact.canceled += Touch1Contact_canceled;
+        playerInput.DualMap.Touch0Delta.started += Touch0Delta_started;
 
         _operableTestGaugeObject = initialTestGaugeOperableObject;
+
     }
 
 
@@ -150,82 +126,6 @@ public class PlayerController : MonoBehaviour
         playerInput.Disable();
     }
 
-
-    private void LeftMouseClick_started(InputAction.CallbackContext context)
-    {
-        primaryClickStarted = context.ReadValue<float>();
-        touchStart = Camera.main.ScreenToWorldPoint(
-            playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
-        );
-        primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        primaryClickPerformed = context.ReadValue<float>();
-        if (uiClickFilter.isUiClicked == false)
-            DetectObjectWithRaycast();
-    }
-
-
-    private void LeftMouseClick_canceled(InputAction.CallbackContext context)
-    {
-        primaryClickStarted = context.ReadValue<float>();
-        primaryClickPerformed = context.ReadValue<float>();
-        primaryTouchPerformed = context.ReadValueAsButton();
-        OnPanCanceled?.Invoke();
-        if (operableComponentDescription != null)
-        {
-            if (
-                 // isOperableObject == true
-                 operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestKitHose
-                    ||
-                    operableComponentDescription.partsType
-                    == OperableComponentDescription.PartsType.TestKitSightTube
-            )
-            {
-                Actions.onComponentDrop?.Invoke(operableObject, operableComponentDescription);
-            }
-
-            isOperableObject = false;
-            operableObject = null;
-            _operableTestGaugeObject = null;
-            primaryTouchStartPos = Vector3.zero;
-            touchStart = Vector3.zero;
-            operableComponentDescription = null;
-
-        }
-        uiClickFilter.isUiClicked = false;
-    }
-
-
-    private void LeftMouseClick_performed(InputAction.CallbackContext context)
-    {
-        primaryTouchPerformed = context.ReadValueAsButton();
-        if (uiClickFilter.isUiClicked == false || uiClickFilter.isUiHovered == false)
-            if (operableComponentDescription != null)
-            {
-                if (
-                     // isOperableObject == true
-                     operableComponentDescription.partsType
-                        == OperableComponentDescription.PartsType.TestKitHose
-                )
-                {
-                    Actions.onComponentGrab?.Invoke(operableObject, operableComponentDescription);
-                }
-                if (
-                   //   isOperableObject == true
-                   operableComponentDescription.partsType
-                      == OperableComponentDescription.PartsType.TestKitSightTube
-              )
-                {
-                    Actions.onSightTubeGrab?.Invoke(operableObject);
-                }
-                if (ClickOperationEnabled == true)
-                {
-                    ClickOperate();
-
-                }
-            }
-    }
-
     /// <summary>
     ///Input-------------------
     /// </summary>
@@ -234,12 +134,18 @@ public class PlayerController : MonoBehaviour
     {
         primaryClickStarted = context.ReadValue<float>();
         touchStart = Camera.main.ScreenToWorldPoint(
-            playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
+             playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
+        // playerInput.DualMap.Touch0Position.ReadValue<Vector2>()
         );
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        DetectObjectWithRaycast();
 
-        if (operableComponentDescription != null && uiClickFilter.isUiClicked == false)
+        if (uiClickFilter.isUiClicked == false)
+        {
+            DetectObjectWithRaycast();
+        }
+
+
+        if (uiClickFilter.isUiClicked == false)
         {
             ///Click/press and drag-----------------------------------------------------------------------
             if (ClickOperationEnabled == false)
@@ -265,8 +171,9 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
+
         primaryClickStarted = context.ReadValue<float>();
-        primaryClickPerformed = context.ReadValue<float>();
+        // primaryClickPerformed = context.ReadValue<float>();
         OnPanCanceled?.Invoke();
         if (operableComponentDescription != null && uiClickFilter.isUiClicked == false)
         {
@@ -298,15 +205,15 @@ public class PlayerController : MonoBehaviour
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
 
-        primaryClickPerformed = context.ReadValue<float>();
-        if (primaryTouchPerformed == false)
-        {
-            primaryTouchPerformed = true;
-        }
-        else
-        {
-            primaryTouchPerformed = false;
-        }
+        // primaryClickPerformed = context.ReadValue<float>();
+        // if (primaryTouchPerformed == false)
+        // {
+        //     primaryTouchPerformed = true;
+        // }
+        // else
+        // {
+        //     primaryTouchPerformed = false;
+        // }
 
     }
 
@@ -403,7 +310,7 @@ public class PlayerController : MonoBehaviour
     private void ClickOperate()
     {
         ///Click/press---------------------------------------------------------------------------------
-        if (OperableObject != null)
+        if (OperableObject != null && uiClickFilter == false)
         {
 
             if (_operableObjectRotation.z > 0)
@@ -434,7 +341,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void OperateCheck()
     {
-        if (primaryClickPerformed > 0)
+        if (primaryClickStarted > 0)
         {
             Operate();
         }
@@ -444,6 +351,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         OperateCheck();
-
+        Debug.Log($"{primaryClickStarted}");
     }
 }

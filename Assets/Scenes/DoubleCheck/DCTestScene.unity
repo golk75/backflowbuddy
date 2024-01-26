@@ -525,6 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MenuScreenName: GameMenuScreen
   m_OptionsScreenName: GameMenuOptionsScreen
+  m_DCTestScene_tutorial: DCTestScene_tutorial
 --- !u!114 &354497761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7305,6 +7306,11 @@ PrefabInstance:
       objectReference: {fileID: 1446278363}
     - target: {fileID: 4657695335378183965, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
+      propertyPath: uiClickFilter
+      value: 
+      objectReference: {fileID: 354497751}
+    - target: {fileID: 4657695335378183965, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
       propertyPath: isTestCock3Open
       value: 0
       objectReference: {fileID: 0}
@@ -9465,6 +9471,11 @@ PrefabInstance:
       propertyPath: initialOperableObject
       value: 
       objectReference: {fileID: 7351243177841485223}
+    - target: {fileID: 2188251840394604002, guid: e6f20a08661774fbc9fa6c2efdef3a81,
+        type: 3}
+      propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 3130206605340565032, guid: e6f20a08661774fbc9fa6c2efdef3a81,
         type: 3}
       propertyPath: m_Name

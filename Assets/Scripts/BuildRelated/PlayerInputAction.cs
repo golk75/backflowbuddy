@@ -200,6 +200,156 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             ]
         },
         {
+            ""name"": ""DualMap"",
+            ""id"": ""39ade25a-d00d-4886-a2b6-d51f54501bb8"",
+            ""actions"": [
+                {
+                    ""name"": ""Touch0Contact"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a3e498a-937b-4ae4-a264-373d9dbd2dd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Touch0Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""d0056932-63dd-42f8-884d-f1cead6b2c2b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch0Delta"",
+                    ""type"": ""Value"",
+                    ""id"": ""30d27155-8f99-4b6a-8eb1-e162aef9c267"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch1Contact"",
+                    ""type"": ""Button"",
+                    ""id"": ""c31ada63-36b6-4dab-83b0-b553b80954e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Touch1Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""eab868cb-9c01-4580-9375-e223f484ed51"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Touch1Delta"",
+                    ""type"": ""Value"",
+                    ""id"": ""b242120e-0f4b-42ff-978c-a9ab31dacb74"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""930b3e72-35de-40a9-a88c-488d47de3307"",
+                    ""path"": ""<Touchscreen>/touch1/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch1Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f03b1cc0-320f-4f96-87f5-08dce4c7e92a"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch0Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""151fe2d2-4e2d-4ffe-bde7-291cd239ba9e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch0Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0c509d8-f074-4c83-ab5b-6bd223be4867"",
+                    ""path"": ""<Touchscreen>/touch1/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch1Delta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56f4558e-6bfc-4d09-99be-07789427a921"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch0Contact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fec8c24-15a1-4c24-bcef-5e071b3f7869"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch0Contact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12c77ddb-74b5-4e83-b08f-c4c81357aba0"",
+                    ""path"": ""<Touchscreen>/touch1/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch1Contact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a06bff3-2466-4399-a5ca-05c00b5b3b4a"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch0Delta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""CameraMap"",
             ""id"": ""6cc00a72-f569-4d7d-9b92-fb6b0ed6850c"",
             ""actions"": [
@@ -401,6 +551,14 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Touchscreen_Touch1Contact = m_Touchscreen.FindAction("Touch1Contact", throwIfNotFound: true);
         m_Touchscreen_Touch1Position = m_Touchscreen.FindAction("Touch1Position", throwIfNotFound: true);
         m_Touchscreen_Touch1Delta = m_Touchscreen.FindAction("Touch1Delta", throwIfNotFound: true);
+        // DualMap
+        m_DualMap = asset.FindActionMap("DualMap", throwIfNotFound: true);
+        m_DualMap_Touch0Contact = m_DualMap.FindAction("Touch0Contact", throwIfNotFound: true);
+        m_DualMap_Touch0Position = m_DualMap.FindAction("Touch0Position", throwIfNotFound: true);
+        m_DualMap_Touch0Delta = m_DualMap.FindAction("Touch0Delta", throwIfNotFound: true);
+        m_DualMap_Touch1Contact = m_DualMap.FindAction("Touch1Contact", throwIfNotFound: true);
+        m_DualMap_Touch1Position = m_DualMap.FindAction("Touch1Position", throwIfNotFound: true);
+        m_DualMap_Touch1Delta = m_DualMap.FindAction("Touch1Delta", throwIfNotFound: true);
         // CameraMap
         m_CameraMap = asset.FindActionMap("CameraMap", throwIfNotFound: true);
         m_CameraMap_RotateCamera = m_CameraMap.FindAction("RotateCamera", throwIfNotFound: true);
@@ -605,6 +763,92 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     }
     public TouchscreenActions @Touchscreen => new TouchscreenActions(this);
 
+    // DualMap
+    private readonly InputActionMap m_DualMap;
+    private List<IDualMapActions> m_DualMapActionsCallbackInterfaces = new List<IDualMapActions>();
+    private readonly InputAction m_DualMap_Touch0Contact;
+    private readonly InputAction m_DualMap_Touch0Position;
+    private readonly InputAction m_DualMap_Touch0Delta;
+    private readonly InputAction m_DualMap_Touch1Contact;
+    private readonly InputAction m_DualMap_Touch1Position;
+    private readonly InputAction m_DualMap_Touch1Delta;
+    public struct DualMapActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public DualMapActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Touch0Contact => m_Wrapper.m_DualMap_Touch0Contact;
+        public InputAction @Touch0Position => m_Wrapper.m_DualMap_Touch0Position;
+        public InputAction @Touch0Delta => m_Wrapper.m_DualMap_Touch0Delta;
+        public InputAction @Touch1Contact => m_Wrapper.m_DualMap_Touch1Contact;
+        public InputAction @Touch1Position => m_Wrapper.m_DualMap_Touch1Position;
+        public InputAction @Touch1Delta => m_Wrapper.m_DualMap_Touch1Delta;
+        public InputActionMap Get() { return m_Wrapper.m_DualMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DualMapActions set) { return set.Get(); }
+        public void AddCallbacks(IDualMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DualMapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DualMapActionsCallbackInterfaces.Add(instance);
+            @Touch0Contact.started += instance.OnTouch0Contact;
+            @Touch0Contact.performed += instance.OnTouch0Contact;
+            @Touch0Contact.canceled += instance.OnTouch0Contact;
+            @Touch0Position.started += instance.OnTouch0Position;
+            @Touch0Position.performed += instance.OnTouch0Position;
+            @Touch0Position.canceled += instance.OnTouch0Position;
+            @Touch0Delta.started += instance.OnTouch0Delta;
+            @Touch0Delta.performed += instance.OnTouch0Delta;
+            @Touch0Delta.canceled += instance.OnTouch0Delta;
+            @Touch1Contact.started += instance.OnTouch1Contact;
+            @Touch1Contact.performed += instance.OnTouch1Contact;
+            @Touch1Contact.canceled += instance.OnTouch1Contact;
+            @Touch1Position.started += instance.OnTouch1Position;
+            @Touch1Position.performed += instance.OnTouch1Position;
+            @Touch1Position.canceled += instance.OnTouch1Position;
+            @Touch1Delta.started += instance.OnTouch1Delta;
+            @Touch1Delta.performed += instance.OnTouch1Delta;
+            @Touch1Delta.canceled += instance.OnTouch1Delta;
+        }
+
+        private void UnregisterCallbacks(IDualMapActions instance)
+        {
+            @Touch0Contact.started -= instance.OnTouch0Contact;
+            @Touch0Contact.performed -= instance.OnTouch0Contact;
+            @Touch0Contact.canceled -= instance.OnTouch0Contact;
+            @Touch0Position.started -= instance.OnTouch0Position;
+            @Touch0Position.performed -= instance.OnTouch0Position;
+            @Touch0Position.canceled -= instance.OnTouch0Position;
+            @Touch0Delta.started -= instance.OnTouch0Delta;
+            @Touch0Delta.performed -= instance.OnTouch0Delta;
+            @Touch0Delta.canceled -= instance.OnTouch0Delta;
+            @Touch1Contact.started -= instance.OnTouch1Contact;
+            @Touch1Contact.performed -= instance.OnTouch1Contact;
+            @Touch1Contact.canceled -= instance.OnTouch1Contact;
+            @Touch1Position.started -= instance.OnTouch1Position;
+            @Touch1Position.performed -= instance.OnTouch1Position;
+            @Touch1Position.canceled -= instance.OnTouch1Position;
+            @Touch1Delta.started -= instance.OnTouch1Delta;
+            @Touch1Delta.performed -= instance.OnTouch1Delta;
+            @Touch1Delta.canceled -= instance.OnTouch1Delta;
+        }
+
+        public void RemoveCallbacks(IDualMapActions instance)
+        {
+            if (m_Wrapper.m_DualMapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDualMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DualMapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DualMapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DualMapActions @DualMap => new DualMapActions(this);
+
     // CameraMap
     private readonly InputActionMap m_CameraMap;
     private List<ICameraMapActions> m_CameraMapActionsCallbackInterfaces = new List<ICameraMapActions>();
@@ -707,6 +951,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
     }
     public interface ITouchscreenActions
+    {
+        void OnTouch0Contact(InputAction.CallbackContext context);
+        void OnTouch0Position(InputAction.CallbackContext context);
+        void OnTouch0Delta(InputAction.CallbackContext context);
+        void OnTouch1Contact(InputAction.CallbackContext context);
+        void OnTouch1Position(InputAction.CallbackContext context);
+        void OnTouch1Delta(InputAction.CallbackContext context);
+    }
+    public interface IDualMapActions
     {
         void OnTouch0Contact(InputAction.CallbackContext context);
         void OnTouch0Position(InputAction.CallbackContext context);

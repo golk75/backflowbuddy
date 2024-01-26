@@ -309,8 +309,7 @@ public class HoseController : MonoBehaviour
         {
             //check is mouse left button or screen is being pressed down
             while (
-                playerController.primaryClickPerformed > 0 && isAttaching == false
-                || playerController.primaryClickStarted > 0 && isAttaching == false
+                 playerController.primaryClickStarted > 0 && isAttaching == false
             )
             {
 
@@ -334,8 +333,8 @@ public class HoseController : MonoBehaviour
         else
         {
             while (
-                playerController.primaryClickPerformed > 0 && isAttaching == false
-                || playerController.primaryClickStarted > 0 && isAttaching == false
+
+                playerController.primaryClickStarted > 0 && isAttaching == false
             )
             {
                 Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);

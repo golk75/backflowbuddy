@@ -115,13 +115,13 @@ public class TestCockController : MonoBehaviour
     Vector3 _operableTestCockColliderScale;
     public ZibraLiquid liquid;
     public bool isCurrentTestCockOpen { get; private set; } = false;
-    [SerializeField]
+
     public bool isTestCock1Open;
-    [SerializeField]
+
     public bool isTestCock2Open;
-    [SerializeField]
+
     public bool isTestCock3Open;
-    [SerializeField]
+
     public bool isTestCock4Open;
 
     private ZibraLiquidVoid _zoneVoid;
@@ -143,6 +143,7 @@ public class TestCockController : MonoBehaviour
         private set { value = _checkZoneDetector; }
     }
 
+    public UiClickFilter uiClickFilter;
 
     void OnEnable()
     {
@@ -177,6 +178,7 @@ public class TestCockController : MonoBehaviour
             if (
                 playerController.operableComponentDescription.partsType
                 == OperableComponentDescription.PartsType.TestCock
+
             )
             {
                 testCockComponentDescription =

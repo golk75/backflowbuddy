@@ -127,7 +127,7 @@ public class CameraController : MonoBehaviour
 
 
         while (
-            playerController.primaryClickPerformed > 0
+            playerController.primaryClickStarted > 0
             && playerController.secondaryTouchStarted == false
             && uiClickFilter.isUiClicked == false
         )
@@ -244,7 +244,7 @@ public class CameraController : MonoBehaviour
         {
             if (
                 playerController.secondaryTouchStarted == false
-                && playerController.primaryClickPerformed > 0
+                && playerController.primaryClickStarted > 0
             )
             {
 
