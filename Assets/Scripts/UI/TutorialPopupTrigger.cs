@@ -25,12 +25,18 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string ResetButtonString = "ResetButton";
     private const string PauseButtonString = "PauseButton";
     private const string PlayButtonString = "PlayButton";
+    private const string SupplyPanelString = "SupplyPressure__panel";
+    private const string Zone2PanelString = "PressureZone__two_panel";
+    private const string Zone3PanelString = "PressureZone3__three_panel";
     //visual elements to animate 
     private const string MenuButtonFlashingString = "MenuButton-flash";
     private const string FillButtonFlashingString = "FillButton-flash";
     private const string ResetButtonFlashingString = "ResetButton-flash";
     private const string PauseButtonFlashingString = "PauseButton-flash";
     private const string PlayButtonFlashingString = "PlayButton-flash";
+    private const string SupplyPanelFlashingString = "SupplyPressure__panel-flash";
+    private const string PressureZone2FlashingString = "PressureZone__two_panel-flash";
+    private const string PressureZone3FlashingString = "PressureZone__three_panel-flash";
 
 
     private const string TestFillButtonString = "TestFillButton";
@@ -47,6 +53,9 @@ public class TutorialPopupTrigger : MonoBehaviour
     private VisualElement m_PopupHeader;
     private VisualElement m_PopupContent;
     private VisualElement m_ButtonContainer;
+    private VisualElement m_SupplyPanel;
+    private VisualElement m_PressureZone2Panel;
+    private VisualElement m_PressureZone3Panel;
     private Button m_NextButton;
     private Button m_PreviousButton;
     private Button m_SkipButton;
@@ -61,7 +70,9 @@ public class TutorialPopupTrigger : MonoBehaviour
     private Button m_ResetButton_flashing;
     private Button m_PauseButton_flashing;
     private Button m_PlayButton_flashing;
-
+    private VisualElement m_SupplyPanel_flashing;
+    private VisualElement m_Zone2_flashing;
+    private VisualElement m_Zone3_flashing;
 
     private VisualElement originalElementToCopy;
     private VisualElement elementToAnimate;
@@ -85,7 +96,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     //arrays
     public TutorialPopUpScriptableObject[] PopupScriptableObjects;
-
+    public VisualElement[] ElemensToAnimate;
 
     //Vectors
 
@@ -136,6 +147,9 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_ResetButton = root.rootVisualElement.Q<Button>(ResetButtonString);
         m_PauseButton = root.rootVisualElement.Q<Button>(PauseButtonString);
         m_PlayButton = root.rootVisualElement.Q<Button>(PlayButtonString);
+        m_SupplyPanel = root.rootVisualElement.Q<VisualElement>(SupplyPanelString);
+        m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(Zone2PanelString);
+        m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(Zone3PanelString);
 
         //flashing elements
         m_MenuButton_flashing = root.rootVisualElement.Q<Button>(MenuButtonFlashingString);
@@ -144,6 +158,9 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_PauseButton_flashing = root.rootVisualElement.Q<Button>(PauseButtonFlashingString);
         m_PlayButton_flashing = root.rootVisualElement.Q<Button>(PlayButtonFlashingString);
 
+        m_SupplyPanel_flashing = root.rootVisualElement.Q<VisualElement>(SupplyPanelFlashingString);
+        m_Zone2_flashing = root.rootVisualElement.Q<VisualElement>(PressureZone2FlashingString);
+        m_Zone3_flashing = root.rootVisualElement.Q<VisualElement>(PressureZone3FlashingString);
 
 
 
@@ -153,7 +170,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     {
         if (originalEle == null || flashingEle == null)
             return;
-        var pos = originalEle.parent.LocalToWorld(originalEle.transform.position);
+        var pos = originalEle.parent.parent.LocalToWorld(originalEle.transform.position);
         // m_TestFillButton.transform.position = new Vector2(10, 10);
         flashingEle.transform.position = originalEle.LocalToWorld(pos);
 
@@ -218,12 +235,13 @@ public class TutorialPopupTrigger : MonoBehaviour
                     originalElementToCopy = m_MenuButton;
                     break;
                 case 6:
-                    elementToAnimate = m_MenuButton_flashing;
-                    originalElementToCopy = m_MenuButton;
+                    elementToAnimate = m_SupplyPanel_flashing;
+                    originalElementToCopy = m_SupplyPanel;
                     break;
                 case 7:
-                    elementToAnimate = m_MenuButton_flashing;
-                    originalElementToCopy = m_MenuButton;
+                    elementToAnimate = m_Zone2_flashing;
+                    originalElementToCopy = m_PressureZone2Panel;
+
                     break;
                 case 8:
                     elementToAnimate = null;
@@ -243,6 +261,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
                 //Tween scale (may explore other properties later)
+
                 GrowTween = DOTween.To(()
                    => elementToAnimate.transform.scale,
                    x => elementToAnimate.transform.scale = x,
