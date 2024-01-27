@@ -499,7 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: e46d6d19c93aa44c6ab2a5e70272a2d8, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 6ea79bdbd42624843836dee45697c05b,
+  sourceAsset: {fileID: 9197481963319205126, guid: 874d60cdfb4574ea7bd9b186bfb5a256,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1214863522
@@ -529,8 +529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a976d874ea45485d9a0a94542bec1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DCTestScene_tutorial: DCTestScene_tutorial
   m_DCTestScene: DCTestScene
-  _bannerViewController: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
