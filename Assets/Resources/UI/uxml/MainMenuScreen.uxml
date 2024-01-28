@@ -1,17 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/MainMenu.uss?fileID=7433441132597879392&amp;guid=c5bd34c57e0dc4d5f9c34d52ef006148&amp;type=3#MainMenu" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
-    <ui:VisualElement name="screen" class="screen" style="flex-grow: 1; background-color: rgb(28, 196, 255); display: flex;">
-        <ui:Label tabindex="-1" text="This is the Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" />
-        <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="play-button" />
-        <ui:Button text="Learn" parse-escape-sequences="true" display-tooltip-when-elided="true" name="learn-button" />
-    </ui:VisualElement>
-    <ui:VisualElement name="MainMenu_container" style="display: none;">
-        <ui:VisualElement name="MainMenu_title_container" />
-        <ui:VisualElement name="MainMenu_panel">
-            <ui:Button text="Play" display-tooltip-when-elided="true" name="PlayButton" focusable="false" class="main-menu-button" />
-            <ui:Button text="Learn" display-tooltip-when-elided="true" name="LearnButton" focusable="false" class="main-menu-button" />
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" focusable="false" class="main-menu-button" />
+    <ui:VisualElement name="screen" class="screen" style="flex-grow: 1; background-color: rgb(255, 255, 255); display: flex; flex-direction: column;">
+        <ui:VisualElement name="MainMenu_title_container" style="background-image: resource(&apos;UI/Textures/Backflow_Buddy_Title 2&apos;); flex-grow: 1; align-self: center; width: 50%; height: 100%; -unity-background-scale-mode: scale-to-fit;" />
+        <ui:VisualElement name="MainMenu_panel" style="width: 100%; align-items: center; justify-content: center; margin-bottom: 10%;">
+            <ui:Button text="Play" display-tooltip-when-elided="true" name="play-button" focusable="false" class="main-menu-button" />
+            <ui:Button text="Learn" display-tooltip-when-elided="true" name="learn-button" focusable="false" class="main-menu-button" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="quit-button" focusable="false" class="main-menu-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
