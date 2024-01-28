@@ -5,7 +5,7 @@
     <ui:Template name="PlayScreenQuickTour" src="project://database/Assets/Resources/UI/uxml/PlayScreenQuickTour.uxml?fileID=9197481963319205126&amp;guid=6b7914e914235479ba0329c2c3094ec1&amp;type=3#PlayScreenQuickTour" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
     <MainMenuScreenManager name="MainMenuScreenManager" class="screen">
-        <ui:Instance template="MainMenuScreen" name="MainMenuScreen" class="screen" style="display: flex;" />
+        <ui:Instance template="MainMenuScreen" name="MainMenuScreen" class="screen" />
         <ui:Instance template="LearnScreen" name="LearnScreen" class="screen" style="display: none;" />
         <ui:Instance template="PlayScreen" name="PlayScreen" class="screen" style="display: none;" />
         <ui:Instance template="PlayScreenQuickTour" name="PlayScreenQuickTour" class="screen" style="display: none;" />

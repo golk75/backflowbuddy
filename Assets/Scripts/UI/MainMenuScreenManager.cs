@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class MainMenuScreenManager : VisualElement
@@ -58,42 +59,23 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnablePlayScreen()
     {
-        m_MainMenuScreen.style.display = DisplayStyle.None;
-        m_PlayScreen.style.display = DisplayStyle.Flex;
-        m_LearnScreen.style.display = DisplayStyle.None;
+
+
+        var sceneLoad = SceneManager.LoadSceneAsync("DCTestScene");
+
+        //wait for scene to load before switching Ui
+        if (sceneLoad.isDone)
+        {
+            m_MainMenuScreen.style.display = DisplayStyle.None;
+            m_PlayScreen.style.display = DisplayStyle.Flex;
+            m_LearnScreen.style.display = DisplayStyle.None;
+
+        }
+
+
+
     }
 
-    // public void EnableHostScreen()
-    // {
-    //     m_TitleScreen.style.display = DisplayStyle.None;
-    //     m_HostScreen.style.display = DisplayStyle.Flex;
-    //     m_JoinScreen.style.display = DisplayStyle.None;
-    //     m_ManualConnectScreen.style.display = DisplayStyle.None;
 
-    // }
-
-    // public void EnableJoinScreen()
-    // {
-    //     m_TitleScreen.style.display = DisplayStyle.None;
-    //     m_HostScreen.style.display = DisplayStyle.None;
-    //     m_JoinScreen.style.display = DisplayStyle.Flex;
-    //     m_ManualConnectScreen.style.display = DisplayStyle.None;
-    // }
-
-    // public void EnableManualScreen()
-    // {
-    //     m_TitleScreen.style.display = DisplayStyle.None;
-    //     m_HostScreen.style.display = DisplayStyle.None;
-    //     m_JoinScreen.style.display = DisplayStyle.None;
-    //     m_ManualConnectScreen.style.display = DisplayStyle.Flex;
-    // }
-
-    // public void EnableTitleScreen()
-    // {
-    //     m_TitleScreen.style.display = DisplayStyle.Flex;
-    //     m_HostScreen.style.display = DisplayStyle.None;
-    //     m_JoinScreen.style.display = DisplayStyle.None;
-    //     m_ManualConnectScreen.style.display = DisplayStyle.None;
-    // }
 
 }

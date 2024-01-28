@@ -351,6 +351,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         OperateCheck();
-        Debug.Log($"{primaryClickStarted}");
+
     }
 }
