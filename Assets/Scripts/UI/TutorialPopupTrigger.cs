@@ -199,11 +199,6 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         }
 
-        // var pos = originalEle.parent.parent.LocalToWorld(originalEle.transform.position);
-        // m_TestFillButton.transform.position = new Vector2(10, 10);
-        // flashingEle.transform.position = originalEle.LocalToWorld(pos);
-
-
     }
     //register call backs
     private void RegisterCallbacks()
@@ -218,7 +213,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private void OnOptionsTutorialButtonClicked()
     {
         SaveTutorialPrefs(0);
-        SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
+        // SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
 
     }
 
@@ -467,7 +462,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 1)
         {
             DOTween.KillAll();
-            SceneManager.LoadScene(m_DCTestScene);
+            // SceneManager.LoadScene(m_DCTestScene);
 
         }
     }
