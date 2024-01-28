@@ -11,6 +11,11 @@ public class MainMenuScreenManager : VisualElement
     VisualElement m_PlayScreen;
     VisualElement m_PlayScreenQuickTour;
 
+
+    const string MainMenuPlayButtonString = "play-button";
+    const string MainMenuLearnButtonString = "learn-button";
+    const string MainMenuQuitButtonString = "quit-button";
+
     public new class UxmlFactory : UxmlFactory<MainMenuScreenManager, UxmlTraits> { }
 
     public MainMenuScreenManager()
@@ -25,8 +30,10 @@ public class MainMenuScreenManager : VisualElement
         m_PlayScreen = this.Q("PlayScreen");
         m_PlayScreenQuickTour = this.Q("PlayScreenQuickTour");
 
-        m_MainMenuScreen?.Q("play-button")?.RegisterCallback<ClickEvent>(ev => EnablePlayScreen());
-        m_MainMenuScreen?.Q("learn-button")?.RegisterCallback<ClickEvent>(ev => EnableLearnScreen());
+
+
+        m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(ev => EnablePlayScreen());
+        m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(ev => EnableLearnScreen());
 
         m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(ev => EnableTitleScreen());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(ev => EnableTitleScreen());
