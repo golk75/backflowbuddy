@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public static class PressurePanel
+public static class SearchHiearchy
 {
     public static VisualElement GetFirstAncestorWithClass(this VisualElement element, string className)
     {

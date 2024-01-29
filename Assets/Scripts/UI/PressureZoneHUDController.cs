@@ -25,6 +25,8 @@ public class PressureZoneHUDController : MonoBehaviour
 
     const string PressureZone2PanelTemplateString = "PressureZone2__panel";
     const string PressureZone3PanelTemplateString = "PressureZone3__panel";
+    const string PressureZone2PanelString = "PressureZone__two_panel";
+    const string PressureZone3PanelString = "PressureZone__three_panel";
     const string SupplyPressurePanelTemplateString = "SupplyPressure__panelTemp";
     const string CheckSpring1ValueLabelString = "CheckSpring1_value_label";
     const string CheckSpring2ValueLabelString = "CheckSpring2_value_label";
@@ -372,7 +374,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
         // currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
 
-        ZonePressureOperations(evt.newValue, PressurePanel.GetFirstAncestorWithClass(currentSliderBar, "panel-template"));
+        ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "pressure-zone-panel"));
 
     }
 
@@ -385,7 +387,6 @@ public class PressureZoneHUDController : MonoBehaviour
         waterController.supplyPsi = result;
     }
 
-
     void ZonePressureOperations(float zonePressureSliderValue, VisualElement zonePressureSlider)
     {
 
@@ -394,11 +395,11 @@ public class PressureZoneHUDController : MonoBehaviour
             case SupplyPressurePanelTemplateString:
 
                 break;
-            case PressureZone2PanelTemplateString:
+            case PressureZone2PanelString:
                 waterController.zone2PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone2 slider operated");
                 break;
-            case PressureZone3PanelTemplateString:
+            case PressureZone3PanelString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone3 slider operated");
                 break;
