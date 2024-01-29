@@ -44,6 +44,7 @@ public class MainMenuScreenManager : VisualElement
 
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(ev => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(ev => EnableLearnScreen());
+        m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(ev => QuitApplication());
 
         m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(ev => EnableTitleScreen());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(ev => EnableTitleScreen());
@@ -52,6 +53,15 @@ public class MainMenuScreenManager : VisualElement
 
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
+    }
+
+    private void QuitApplication()
+    {
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+#endif
+            Application.Quit();
+
     }
 
     private void EnableTitleScreen()
@@ -70,8 +80,6 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnablePlayScreen()
     {
-
-
 
         //Async Load Scene--> prevents ui from changing until scene is loaded up
         //DO NOT CHANGE THE ORDER IN THIS---->

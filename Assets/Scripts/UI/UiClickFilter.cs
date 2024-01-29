@@ -67,7 +67,7 @@ public class UiClickFilter : MonoBehaviour
 
     private void PointerDown(PointerDownEvent evt)
     {
-        Debug.Log($"{evt.target}");
+
         isUiClicked = true;
         playerController.isOperableObject = false;
         playerController.operableObject = null;
