@@ -283,7 +283,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //THIS ONLY OPERATES ASSEMBY COMPONENTS! NOT TESTGAUGE COMPONENTS
+
     private void Operate()
     {
 
@@ -309,8 +309,9 @@ public class PlayerController : MonoBehaviour
     }
     private void ClickOperate()
     {
+
         ///Click/press---------------------------------------------------------------------------------
-        if (OperableObject != null && uiClickFilter == false)
+        if (OperableObject != null && uiClickFilter.isUiClicked == false)
         {
 
             if (_operableObjectRotation.z > 0)
