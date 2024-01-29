@@ -58,6 +58,7 @@
     flex-grow: 0;
     flex-direction: row;
     cursor: resource('UI/Textures/icons8-hand-32');
+    margin-left: 2%;
 }
 
 .scene-container {
