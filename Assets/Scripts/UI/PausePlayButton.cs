@@ -12,6 +12,9 @@ public class PausePlayButton : MonoBehaviour
 
     private void Start()
     {
+        //need this incase scene is reloaded or changed -> otherwise there is strange hose spring behaviour 
+        ResumeGame();
+
         var root = GetComponent<UIDocument>();
         m_PauseButton = root.rootVisualElement.Q<Button>(PauseButtonString);
         m_PlayButton = root.rootVisualElement.Q<Button>(PlayButtonString);
