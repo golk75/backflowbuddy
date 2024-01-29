@@ -81,6 +81,7 @@ public class MainMenuScreenManager : VisualElement
     private void EnablePlayScreen()
     {
 
+        PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
         //Async Load Scene--> prevents ui from changing until scene is loaded up
         //DO NOT CHANGE THE ORDER IN THIS---->
         {

@@ -39,13 +39,8 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string PressureZone3FlashingString = "PressureZone__three_panel-flash";
 
 
-    private const string TestFillButtonString = "TestFillButton";
-
     //style classes
     private const string StartQuickTourButtonString = "tutorial-popup-button-start";
-    private const string QuickTourContainerDarkStyle = "quick-tour-container-light";
-    private const string QuickTourContainerLightStyle = "quick-tour-container-dark";
-
 
 
     //visual elements
@@ -74,12 +69,6 @@ public class TutorialPopupTrigger : MonoBehaviour
     private VisualElement m_Zone2_flashing;
     private VisualElement m_Zone3_flashing;
 
-    private VisualElement originalElementToCopy;
-    private VisualElement elementToAnimate;
-
-
-
-
 
     //scene management
     [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
@@ -104,11 +93,11 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
     //Vectors
-    Vector2 originalElementToCopyPos;
+
 
     //throw away
     public int m_popupIndex = 0;
-    public int skipTutPlayerPrefTestInt = 0;
+
 
 
     //DOTween
@@ -276,7 +265,6 @@ public class TutorialPopupTrigger : MonoBehaviour
     private void UpdateQuickTourAnimations(int popUpIndex)
     {
         DOTween.KillAll();
-        // if (elementToAnimate != null)
 
         foreach (var ele in ElementsToAnimate)
         {
@@ -287,8 +275,6 @@ public class TutorialPopupTrigger : MonoBehaviour
         {
             OriginalElementsToAnimateCopy[i].style.opacity = 1;
         }
-        // elementToAnimate.transform.scale = new Vector3(1, 1, 1);
-        // elementToAnimate.style.display = DisplayStyle.None;
         ElementsToAnimate.Clear();
         OriginalElementsToAnimateCopy.Clear();
 

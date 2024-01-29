@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.UIElements;
@@ -10,12 +11,18 @@ public class TutorialSystem : MonoBehaviour
 
     private static TutorialSystem current;
     public TutorialPopup tutorialPopup;
-
+    [SerializeField]
+    int skipTourPlayerPrefs;
 
 
     void Awake()
     {
         current = this;
+
+    }
+    void OnEnable()
+    {
+        skipTourPlayerPrefs = PlayerPrefs.GetInt("Skip Tutorial");
     }
     public static void Hide()
     {

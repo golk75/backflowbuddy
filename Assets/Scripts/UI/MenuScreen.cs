@@ -12,7 +12,16 @@ using UnityEngine.UIElements;
 
 public class MenuScreen : MonoBehaviour
 {
-
+    [SerializeField]
+    int skipTourPlayerPrefs;
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    private void Start()
+    {
+        skipTourPlayerPrefs = PlayerPrefs.GetInt("Skip Tutorial");
+    }
     //     public static event Action GamePlayed;
     //     public static event Action GameQuit;
 
