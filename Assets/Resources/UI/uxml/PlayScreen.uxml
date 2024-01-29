@@ -82,7 +82,7 @@
                 </ui:Instance>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="QuickTourContainer" class="quick-tour-container-dark quick-tour-container-light">
+        <ui:VisualElement name="QuickTourContainer" class="quick-tour-container-dark quick-tour-container-light" style="display: none;">
             <ui:Instance template="TutorialPopup" name="TutorialPopup" class="tutorial-container" />
         </ui:VisualElement>
         <ui:Button name="FillButton-flash" focusable="false" class="button button-flashing" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&amp;guid=6f649aea2852e3b46a8c4386355a2c53&amp;type=3#T_5_drop_&apos;);" />

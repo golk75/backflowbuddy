@@ -444,7 +444,6 @@ public class TutorialPopupTrigger : MonoBehaviour
         {
 
             m_NextButton.style.display = DisplayStyle.None;
-            m_PopupHeader.style.display = DisplayStyle.None;
             DOTween.KillAll();
             m_SkipButton.text = "Close";
         }
@@ -462,7 +461,8 @@ public class TutorialPopupTrigger : MonoBehaviour
         if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 1)
         {
             DOTween.KillAll();
-            // SceneManager.LoadScene(m_DCTestScene);
+            m_QuickTourContainer.style.display = DisplayStyle.None;
+
 
         }
     }
@@ -507,100 +507,4 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
     }
-    //     using System;
-    // using System.Collections;
-    // using System.Collections.Generic;
-    // using UnityEngine;
-    // using UnityEngine.UIElements;
-    // using DG.Tweening;
-    // public class MainMenuScreen : MonoBehaviour
-    // {
-    //     [SerializeField] private UIDocument m_uIDocument;
-    //     [SerializeField] private StyleSheet m_styleSheet;
-    //     Button animateButton;
-    //     VisualElement testBox;
-    //     Button stopAnimateBtn;
-    //     // Quaternion initTestBoxRot;
-    //     Vector3 initTestBoxPos;
-    //     bool stopAnimationButtonPressed;
-    //     VisualElement root;
-    //     Tween GrowTween;
-    //     Tween ShrinkTween;
-
-    //     public Coroutine OnAnimateGrow { get; private set; }
-
-    //     private void Start()
-    //     {
-    //         root = m_uIDocument.rootVisualElement;
-    //         animateButton = root.Q<Button>("animate-button");
-    //         stopAnimateBtn = root.Q<Button>("stop-animate");
-    //         testBox = root.Q<VisualElement>("test-box");
-
-    //         animateButton.RegisterCallback<ClickEvent>(ClickedAnimate);
-    //         testBox.RegisterCallback<ClickEvent>(ClickedAnimate);
-    //         stopAnimateBtn.RegisterCallback<ClickEvent>(StopAnimation);
-
-    //         initTestBoxPos = testBox.transform.scale;
-
-
-    //     }
-
-    //     private void StopAnimation(ClickEvent evt)
-    //     {
-    //         stopAnimationButtonPressed = true;
-    //         DOTween.KillAll();
-    //         testBox.transform.scale = initTestBoxPos;
-    //     }
-
-    //     private void ClickedAnimate(ClickEvent evt)
-    //     {
-    //         GrowTween = DOTween.To(()
-    //            => testBox.transform.scale,
-    //            x => testBox.transform.scale = x,
-    //            new Vector3(2f, 2f, 2f), 0.5f)
-    //            .SetEase(Ease.Linear);
-
-    //         ShrinkTween = DOTween.To(()
-    //                         => testBox.transform.scale,
-    //                         x => testBox.transform.scale = x,
-    //                         new Vector3(1f, 1f, 1f), 0.5f)
-    //                         .SetEase(Ease.Linear);
-
-
-    //         StartCoroutine(AnimateUI());
-    //     }
-
-
-    //     private IEnumerator AnimateUI()
-    //     {
-
-    //         // Tween outerTween = DOTween.To(()
-    //         //              => testBox.worldTransform.rotation.eulerAngles,
-    //         //              x => testBox.transform.rotation = Quaternion.Euler(x),
-    //         //              new Vector3(0, 0, 360), 5 / 0.5f)
-    //         //              .SetEase(Ease.Linear);  
-    //         Sequence mySequence = DOTween.Sequence();
-    //         mySequence.Append(GrowTween).Append(ShrinkTween).SetLoops(-1);
-
-    //         yield return mySequence.WaitForKill();
-
-
-    //     }
-
-
-
-
-
-    //     //Wait until tweens finish (+1 extra second for display purposes) 
-
-
-    //     //Disable the visiblity
-
-    // }
-
-
-
-
-
-
 }
