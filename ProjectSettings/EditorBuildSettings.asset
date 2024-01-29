@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DoubleCheck/DCTestScene_tutorial.unity
-    guid: ebd180057c7074a859403a0037551187
-  - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 41668fa4a6cbd4cd29650f82499a826c
   - enabled: 1

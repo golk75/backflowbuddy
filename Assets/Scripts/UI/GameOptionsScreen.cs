@@ -13,7 +13,7 @@ public class GameOptionsScreen : MonoBehaviour
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_MenuScreenName = "GameMenuScreen";
     [SerializeField] string m_OptionsScreenName = "GameMenuOptionsScreen";
-    [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
+    const string DCTestSceneName = "DCTestScene";
     const string m_OptionsScreenMainMenuButtonName = "OptionsMenuScreen_main-menu-button";
     const string m_OptionsScreenSaveButtonName = "OptionsMenuScreen_save-button";
     const string CloseMenuButtonString = "OptionsMenuScreen_close-button";
@@ -62,7 +62,7 @@ public class GameOptionsScreen : MonoBehaviour
     private void TutorialButtonClicked(ClickEvent evt)
     {
         PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
-        SceneManager.LoadScene(m_DCTestScene_tutorial);
+        SceneManager.LoadScene(DCTestSceneName);
     }
 
     private void ResumeGame(ClickEvent evt)

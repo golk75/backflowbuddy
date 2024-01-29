@@ -179,7 +179,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void PositionFlashingElement(List<VisualElement> originalElementList, List<VisualElement> flashingElementList)
     {
-        Debug.Log($"here");
+
 
         if (originalElementList.Count <= 0 || flashingElementList.Count <= 0)
             return;
@@ -230,7 +230,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void StageTween(List<VisualElement> elements)
     {
-        Debug.Log($"elements.Count: {elements.Count} ");
+
         if (elements.Count == 1)
         {
             GrowTween = DOTween.To(()
@@ -388,8 +388,10 @@ public class TutorialPopupTrigger : MonoBehaviour
     private void OnSkipButtonClicked()
     {
         //save prefs to device to not show tutorial on scene open (unless opened through options)
+
         SaveTutorialPrefs(1);
         DOTween.KillAll();
+        SceneManager.LoadSceneAsync(m_DCTestScene);
     }
 
     //cache tutorial skipping preference to device memory

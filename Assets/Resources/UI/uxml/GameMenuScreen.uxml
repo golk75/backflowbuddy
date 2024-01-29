@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/GameMenuScreen.uss?fileID=7433441132597879392&amp;guid=3f629d560412543729baa98ea06c55aa&amp;type=3#GameMenuScreen" />
-    <ui:VisualElement name="GameMenuScreen_anchor" class="game-menu-screen-anchor">
+    <ui:VisualElement name="GameMenuScreen_anchor" class="game-menu-screen-anchor floating">
         <ui:VisualElement name="GameMenuScreen_panel" class="pause-screen-panel game-menu-panel">
             <ui:VisualElement name="GameMenuScreen_header" class="pause-screen-header game-menu-header">
                 <ui:Label tabindex="-1" text="Menu" display-tooltip-when-elided="true" name="GameMenuScreen_label" enable-rich-text="true" picking-mode="Ignore" class="game-menu-label game-menu-header-label" />

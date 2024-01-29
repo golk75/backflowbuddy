@@ -1,3 +1,6 @@
 .screen {
     flex-grow: 1;
 }
+
+.floating {
+}

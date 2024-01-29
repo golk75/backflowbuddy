@@ -12,14 +12,20 @@ public class UiClickFilter : MonoBehaviour
     public UIDocument _uiDocument;
     public PlayerController playerController;
     //string ids
-    const string GameMenuScreenName = "GameMenuScreen";
+    const string QuickTourScreenName = "QuickTourContainer";
+    const string DCTestContainerName = "DCTestContainer";
+    const string PopUpContainerName = "PopUpContainer";
+    const string GameMenuScreenName = "GameMenuScreen_anchor";
     const string GameMenuOptionsScreenName = "GameMenuOptionsScreen";
     const string SupplyPressurePanelName = "SupplyPressure__panel";
     const string PressureZone2PanelName = "PressureZone2__panel";
     const string PressureZone3PanelName = "PressureZone3__panel";
 
     //visual elements
+    VisualElement m_QuickTourScreen;
+    VisualElement m_PopUpContainer;
     VisualElement m_GameMenuScreen;
+    VisualElement m_DCTestContainer;
     VisualElement m_GameMenuOptionsScreen;
     VisualElement m_SupplyPressurePanel;
     VisualElement m_PressureZone2Panel;
@@ -28,7 +34,7 @@ public class UiClickFilter : MonoBehaviour
     VisualElement m_Slider_PressureZone3;
 
     //lists
-    List<VisualElement> SliderList;
+    List<VisualElement> FloatingElements;
 
     public bool isUiClicked = false;
     public bool isUiHovered = false;
@@ -37,39 +43,20 @@ public class UiClickFilter : MonoBehaviour
     {
         //set visual elements
         var root = GetComponent<UIDocument>();
-        SliderList = root.rootVisualElement.Query(className: "unity-base-slider__dragger").ToList();
-        m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelName);
-        m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelName);
-        m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelName);
-        m_GameMenuScreen = root.rootVisualElement.Q<VisualElement>(GameMenuScreenName);
-        m_GameMenuOptionsScreen = root.rootVisualElement.Q<VisualElement>(GameMenuOptionsScreenName);
+        FloatingElements = root.rootVisualElement.Query(className: "floating").ToList();
 
-
-
-        //Register callbacks
-        //MouseDown
-        m_SupplyPressurePanel.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
-        m_GameMenuScreen.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
-
-
-
-        //MouseUp
-        m_SupplyPressurePanel.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
-        m_GameMenuScreen.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
-
-
-        foreach (var slider in SliderList)
+        foreach (var ele in FloatingElements)
         {
-            Debug.Log($"slider: {slider.name}");
-            slider.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
-            slider.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+
+
+            ele.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+
+            ele.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+
+
+
         }
+
 
     }
 
@@ -80,6 +67,7 @@ public class UiClickFilter : MonoBehaviour
 
     private void PointerDown(PointerDownEvent evt)
     {
+        Debug.Log($"{evt.target}");
         isUiClicked = true;
         playerController.isOperableObject = false;
         playerController.operableObject = null;
