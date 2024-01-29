@@ -130,7 +130,7 @@ public class HoseController : MonoBehaviour
                     break;
             }
             //sight tube will use connection point; see Update()
-            Debug.Log($"description: {description}");
+
             hoseConnectionPoint = @object.transform.position;
 
 
@@ -236,7 +236,7 @@ public class HoseController : MonoBehaviour
 
             componentGrabbed = true;
 
-            // Debug.Log($"@object: {@object}");
+
             switch (description.partsType)
             {
                 case OperableComponentDescription.PartsType.TestKitHose:

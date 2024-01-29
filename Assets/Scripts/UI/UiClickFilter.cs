@@ -24,8 +24,11 @@ public class UiClickFilter : MonoBehaviour
     VisualElement m_SupplyPressurePanel;
     VisualElement m_PressureZone2Panel;
     VisualElement m_PressureZone3Panel;
-    VisualElement m_Slider;
+    VisualElement m_Slider_PressureZone2;
+    VisualElement m_Slider_PressureZone3;
 
+    //lists
+    List<VisualElement> SliderList;
 
     public bool isUiClicked = false;
     public bool isUiHovered = false;
@@ -34,99 +37,52 @@ public class UiClickFilter : MonoBehaviour
     {
         //set visual elements
         var root = GetComponent<UIDocument>();
-
+        SliderList = root.rootVisualElement.Query(className: "unity-base-slider__dragger").ToList();
         m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelName);
         m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelName);
         m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelName);
         m_GameMenuScreen = root.rootVisualElement.Q<VisualElement>(GameMenuScreenName);
         m_GameMenuOptionsScreen = root.rootVisualElement.Q<VisualElement>(GameMenuOptionsScreenName);
-        m_Slider = root.rootVisualElement.Q<VisualElement>("PressureZoneSlider");
+
+
 
         //Register callbacks
         //MouseDown
-        m_SupplyPressurePanel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_GameMenuScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<MouseDownEvent>(MouseDown, TrickleDown.TrickleDown);
-        m_Slider.RegisterCallback<PointerEnterEvent>(PointerEnter, TrickleDown.TrickleDown);
+        m_SupplyPressurePanel.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+        m_GameMenuScreen.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+        m_GameMenuOptionsScreen.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
 
 
 
         //MouseUp
-        m_SupplyPressurePanel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_GameMenuScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        m_GameMenuOptionsScreen.RegisterCallback<MouseUpEvent>(MouseUp, TrickleDown.TrickleDown);
-        // m_Slider.RegisterCallback<PointerEnterEvent>(PointerEnter, TrickleDown.TrickleDown);
+        m_SupplyPressurePanel.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+        m_PressureZone2Panel.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+        m_PressureZone3Panel.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+        m_GameMenuScreen.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+        m_GameMenuOptionsScreen.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
 
 
-
-        // //MouseOut
-        m_SupplyPressurePanel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<MouseOutEvent>(MouseOut, TrickleDown.TrickleDown);
-        // m_Slider.RegisterCallback<PointerEnterEvent>(PointerEnter, TrickleDown.TrickleDown);
-
-
-        //MouseOver
-        m_SupplyPressurePanel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
-        m_PressureZone2Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
-        m_PressureZone3Panel.RegisterCallback<MouseOverEvent>(MouseOver, TrickleDown.TrickleDown);
-        // m_Slider.RegisterCallback<PointerEnterEvent>(PointerEnter, TrickleDown.TrickleDown);
-
-        // m_Slider.RegisterCallback<PointerLeaveEvent>(PointerExit, TrickleDown.TrickleDown);
+        foreach (var slider in SliderList)
+        {
+            Debug.Log($"slider: {slider.name}");
+            slider.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+            slider.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+        }
 
     }
 
-    private void PointerExit(PointerLeaveEvent evt)
+    private void PointerUp(PointerUpEvent evt)
     {
         isUiClicked = false;
     }
 
-    private void PointerEnter(PointerEnterEvent evt)
+    private void PointerDown(PointerDownEvent evt)
     {
-        isUiClicked = true;
-    }
-
-    void OnEnable()
-    {
-
-    }
-    private void MouseOver(MouseOverEvent evt)
-    {
-
-        isUiHovered = true;
-
-    }
-    private void MouseEnter(MouseEnterEvent evt)
-    {
-
-        isUiHovered = true;
-    }
-    private void MouseOut(MouseOutEvent evt)
-    {
-
-        isUiHovered = false;
-
-    }
-    private void MouseDown(MouseDownEvent evt)
-    {
-
         isUiClicked = true;
         playerController.isOperableObject = false;
         playerController.operableObject = null;
-
-
     }
-    private void MouseUp(MouseUpEvent evt)
-    {
-        isUiClicked = false;
-    }
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

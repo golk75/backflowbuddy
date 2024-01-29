@@ -134,8 +134,10 @@ public class PlayerController : MonoBehaviour
     {
         primaryClickStarted = context.ReadValue<float>();
         touchStart = Camera.main.ScreenToWorldPoint(
-             playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
-        // playerInput.DualMap.Touch0Position.ReadValue<Vector2>()
+        //  playerInput.MouseOperate.MousePosition.ReadValue<Vector2>()
+        playerInput.DualMap.Touch0Position.ReadValue<Vector2>()
+
+        //playerInput.DualMap.Touch0Position.ReadValue<Vector2>()
         );
         primaryTouchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
