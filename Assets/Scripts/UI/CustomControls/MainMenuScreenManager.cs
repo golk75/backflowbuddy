@@ -13,7 +13,8 @@ public class MainMenuScreenManager : VisualElement
     private VisualElement m_PlayScreenQuickTour;
     private VisualElement m_QuickTourContainer;
     private VisualElement m_DeviceSelectionScreen;
-    private VisualElement m_RpzPopup;
+    private VisualElement m_LearnScreenRpzPopup;
+    private VisualElement m_PlayScreenRpzPopup;
 
 
     private const string MainMenuPlayButtonString = "play-button";
@@ -53,7 +54,8 @@ public class MainMenuScreenManager : VisualElement
         m_PlayScreenQuickTour = this.Q("PlayScreenQuickTour");
         m_QuickTourContainer = this.Q(QuickTourContainerString);
         m_DeviceSelectionScreen = this.Q(DeviceSelectionScreenString);
-        m_RpzPopup = m_DeviceSelectionScreen.Q(RpzPopupString);
+        m_LearnScreenRpzPopup = m_LearnScreen.Q(RpzPopupString);
+        m_PlayScreenRpzPopup = m_PlayScreen.Q(RpzPopupString);
 
 
 
@@ -65,13 +67,21 @@ public class MainMenuScreenManager : VisualElement
         //end Main Menu
 
         //Device Seleciton screen buttons
-        m_DeviceSelectionScreen?.Q(DoubleCheckButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckScreen());
-        m_DeviceSelectionScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnableRpzPopUp());
-        m_DeviceSelectionScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
-        m_DeviceSelectionScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
+        // m_DeviceSelectionScreen?.Q(DoubleCheckButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckScreen());
+        // m_DeviceSelectionScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreenRpzPopUp());
+        // m_DeviceSelectionScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
+        // m_DeviceSelectionScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
-        //
+        //LearnScreen
+        //m_LearnScreen?.Q(DoubleCheckButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckScreen());
+        m_LearnScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreenRpzPopUp());
+        m_LearnScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
+
+
+        //Play Screen
+        m_PlayScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreenRpzPopUp());
+        m_PlayScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
 
@@ -79,17 +89,40 @@ public class MainMenuScreenManager : VisualElement
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
-    private void EnablePlayScreen()
+    private void EnablePlayScreenRpzPopUp()
     {
-        EnableDeviceSelectionScreen();
+        ScreensToShow = new List<VisualElement>
+         {
+            m_PlayScreen,
+             m_PlayScreenRpzPopup
+
+         };
+        ChangeScreenStatus(ScreensToShow, ScreensToHide);
     }
 
-    private void EnableRpzPopUp()
+    private void EnablePlayScreen()
+    {
+
+        ScreensToHide = new List<VisualElement>()
+         {
+             m_MainMenuScreen,
+             m_PlayScreenRpzPopup
+         };
+        ScreensToShow = new List<VisualElement>
+         {
+             m_PlayScreen
+
+         };
+        ChangeScreenStatus(ScreensToShow, ScreensToHide);
+    }
+
+    private void EnableLearnScreenRpzPopUp()
     {
 
         ScreensToShow = new List<VisualElement>
          {
-             m_RpzPopup
+            m_LearnScreen,
+             m_LearnScreenRpzPopup
 
          };
         ChangeScreenStatus(ScreensToShow, ScreensToHide);
@@ -104,7 +137,7 @@ public class MainMenuScreenManager : VisualElement
              m_QuickTourContainer,
              m_MainMenuScreen,
              m_LearnScreen,
-             m_RpzPopup
+             m_LearnScreenRpzPopup
          };
         ScreensToShow = new List<VisualElement>
          {
@@ -123,9 +156,9 @@ public class MainMenuScreenManager : VisualElement
     {
         ScreensToHide = new List<VisualElement>()
          {
-             m_DeviceSelectionScreen,
-             m_QuickTourContainer,
+
              m_LearnScreen,
+             m_PlayScreen
          };
         ScreensToShow = new List<VisualElement>
          {
@@ -140,7 +173,17 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnableLearnScreen()
     {
-        EnableDeviceSelectionScreen();
+        ScreensToHide = new List<VisualElement>()
+         {
+             m_MainMenuScreen,
+             m_LearnScreenRpzPopup
+         };
+        ScreensToShow = new List<VisualElement>
+         {
+             m_LearnScreen
+
+         };
+        ChangeScreenStatus(ScreensToShow, ScreensToHide);
 
     }
 

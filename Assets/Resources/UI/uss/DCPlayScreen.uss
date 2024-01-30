@@ -1,9 +1,4 @@
-:root {
-    --border-width: 3px;
-    --border-radius: 15px;
-    --border-color-white: white;
-    --background-color-dark-blue: rgb(53, 55, 62);
-}
+
 
 .fill-button {
     background-image: url('project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&guid=6f649aea2852e3b46a8c4386355a2c53&type=3#T_5_drop_');

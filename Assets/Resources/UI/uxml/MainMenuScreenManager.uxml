@@ -1,15 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MainMenuScreen" src="project://database/Assets/Resources/UI/uxml/MainMenuScreen.uxml?fileID=9197481963319205126&amp;guid=6ea79bdbd42624843836dee45697c05b&amp;type=3#MainMenuScreen" />
     <ui:Template name="LearnScreen" src="project://database/Assets/Resources/UI/uxml/LearnScreen.uxml?fileID=9197481963319205126&amp;guid=91467036a7b7448aebd296b43c25cf9d&amp;type=3#LearnScreen" />
-    <ui:Template name="PlayScreen" src="project://database/Assets/Resources/UI/uxml/PlayScreen.uxml?fileID=9197481963319205126&amp;guid=9fe5aae37fb75438ebb6f5591f750946&amp;type=3#PlayScreen" />
     <ui:Template name="PlayScreenQuickTour" src="project://database/Assets/Resources/UI/uxml/PlayScreenQuickTour.uxml?fileID=9197481963319205126&amp;guid=6b7914e914235479ba0329c2c3094ec1&amp;type=3#PlayScreenQuickTour" />
-    <ui:Template name="DeviceSelectionScreen" src="project://database/Assets/Resources/UI/uxml/DeviceSelectionScreen.uxml?fileID=9197481963319205126&amp;guid=97150f102c0c84231a670faea9d4edba&amp;type=3#DeviceSelectionScreen" />
+    <ui:Template name="DeviceSelectionScreen" src="project://database/Assets/Resources/UI/uxml/DeviceSelection.uxml?fileID=9197481963319205126&amp;guid=97150f102c0c84231a670faea9d4edba&amp;type=3#DeviceSelection" />
+    <ui:Template name="PlayScreen" src="project://database/Assets/Resources/UI/uxml/PlayScreen.uxml?fileID=9197481963319205126&amp;guid=9fe5aae37fb75438ebb6f5591f750946&amp;type=3#PlayScreen" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
     <MainMenuScreenManager name="MainMenuScreenManager" class="screen">
         <ui:Instance template="MainMenuScreen" name="MainMenuScreen" class="screen" />
         <ui:Instance template="LearnScreen" name="LearnScreen" class="screen" style="display: none;" />
-        <ui:Instance template="PlayScreen" name="PlayScreen" class="screen" style="display: none;" />
         <ui:Instance template="PlayScreenQuickTour" name="PlayScreenQuickTour" class="screen" style="display: none;" />
         <ui:Instance template="DeviceSelectionScreen" name="DeviceSelectionScreen" class="screen" style="display: none;" />
+        <ui:Instance template="PlayScreen" name="PlayScreen" class="screen" style="display: none;" />
     </MainMenuScreenManager>
 </ui:UXML>

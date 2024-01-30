@@ -68,3 +68,9 @@
 
 .main-menu-title-container {
 }
+
+.screen-label {
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
