@@ -60,7 +60,7 @@ public class MainMenuScreenManager : VisualElement
 
         //Main Menu screen buttons
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
-        m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
+        m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
         //end Main Menu
 
@@ -142,9 +142,8 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnableLearnScreen()
     {
-        m_MainMenuScreen.style.display = DisplayStyle.None;
-        m_PlayScreen.style.display = DisplayStyle.None;
-        m_LearnScreen.style.display = DisplayStyle.Flex;
+
+
     }
 
     private void EnableDoubleCheckScreen()
