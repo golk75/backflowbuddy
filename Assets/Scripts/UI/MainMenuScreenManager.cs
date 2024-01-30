@@ -59,8 +59,8 @@ public class MainMenuScreenManager : VisualElement
 
 
         //Main Menu screen buttons
-        m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
-        m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
+        m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
+        m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
         //end Main Menu
 
@@ -70,13 +70,18 @@ public class MainMenuScreenManager : VisualElement
         m_DeviceSelectionScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
         m_DeviceSelectionScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
-        //tests
+        //
         m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
 
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
+    }
+
+    private void EnablePlayScreen()
+    {
+        EnableDeviceSelectionScreen();
     }
 
     private void EnableRpzPopUp()
@@ -112,14 +117,7 @@ public class MainMenuScreenManager : VisualElement
 
     }
 
-    private void QuitApplication()
-    {
-#if UNITY_EDITOR
-        if (Application.isPlaying)
-#endif
-            Application.Quit();
 
-    }
 
     private void EnableTitleScreen()
     {
@@ -142,7 +140,7 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnableLearnScreen()
     {
-
+        EnableDeviceSelectionScreen();
 
     }
 
@@ -252,6 +250,16 @@ public class MainMenuScreenManager : VisualElement
 
         ScreensToShow.Clear();
         ScreensToHide.Clear();
+    }
+
+
+    private void QuitApplication()
+    {
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+#endif
+            Application.Quit();
+
     }
 
 }
