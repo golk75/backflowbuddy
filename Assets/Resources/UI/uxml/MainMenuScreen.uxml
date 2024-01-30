@@ -6,7 +6,7 @@
         <ui:VisualElement name="MainMenu_panel" style="width: 100%; align-items: center; justify-content: center; margin-bottom: 10%;">
             <ui:Button text="Play" display-tooltip-when-elided="true" name="play-button" focusable="false" class="main-menu-button" />
             <ui:Button text="Learn" display-tooltip-when-elided="true" name="learn-button" focusable="false" class="main-menu-button" />
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="quit-button" focusable="false" class="main-menu-button" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="quit-button" focusable="false" class="main-menu-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

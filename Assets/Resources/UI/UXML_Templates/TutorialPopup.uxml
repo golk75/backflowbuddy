@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
+    <Style src="project://database/Assets/Resources/UI/uss/PopUpModal.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#PopUpModal" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
     <ui:VisualElement name="TutorialPopup" class="tutorial-container floating">
-        <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel">
+        <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel" style="background-color: rgb(54, 54, 62);">
             <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
                 <ui:VisualElement name="TutorialPopup_header">
                     <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_header_label" text="This is the Header" class="tutorial-popup-label" />

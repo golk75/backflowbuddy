@@ -1,5 +1,3 @@
-
-
 .fill-button {
     background-image: url('project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&guid=6f649aea2852e3b46a8c4386355a2c53&type=3#T_5_drop_');
     border-left-color: rgba(0, 0, 0, 0);
@@ -154,4 +152,12 @@
     align-items: flex-start;
     width: 50%;
     margin-left: 10%;
+}
+
+.button-flashing {
+}
+
+.quick-tour-container {
+    width: 100%;
+    position: absolute;
 }

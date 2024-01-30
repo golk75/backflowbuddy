@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DCPlayScreen" src="project://database/Assets/Resources/UI/uxml/DCPlayScreen.uxml?fileID=9197481963319205126&amp;guid=774e85ad42730471896add4b1aad1891&amp;type=3#DCPlayScreen" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenu.uss?fileID=7433441132597879392&amp;guid=c5bd34c57e0dc4d5f9c34d52ef006148&amp;type=3#MainMenu" />
     <Style src="project://database/Assets/Resources/UI/uss/PopUpModal.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#PopUpModal" />
@@ -31,5 +32,6 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Instance template="DCPlayScreen" name="DCPlayScreen" class="screen" style="display: none;" />
     </PlayScreen>
 </ui:UXML>

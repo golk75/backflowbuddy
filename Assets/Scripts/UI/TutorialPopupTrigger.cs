@@ -72,7 +72,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     //scene management
     [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
-    [SerializeField] string m_DCTestScene = "DCTestScene";
+    [SerializeField] string m_DCTestScene = "DCPlayScene";
 
 
 
@@ -347,6 +347,7 @@ public class TutorialPopupTrigger : MonoBehaviour
             {
                 foreach (var ele in ElementsToAnimate)
                 {
+
                     ele.style.display = DisplayStyle.Flex;
                 }
 

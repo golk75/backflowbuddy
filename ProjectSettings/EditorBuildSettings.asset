@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 41668fa4a6cbd4cd29650f82499a826c
   - enabled: 1
-    path: Assets/Scenes/DoubleCheck/DCTestScene.unity
+    path: Assets/Scenes/DoubleCheck/DCPlayScene.unity
     guid: f42051b850ba64ba4a2df1ba1ea3e3b7
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 30df0976a818842158d9427757b3b14d,

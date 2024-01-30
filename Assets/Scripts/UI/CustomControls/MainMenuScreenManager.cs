@@ -7,14 +7,14 @@ using UnityEngine.UIElements;
 
 public class MainMenuScreenManager : VisualElement
 {
-    private VisualElement m_MainMenuScreen;
-    private VisualElement m_LearnScreen;
-    private VisualElement m_PlayScreen;
-    private VisualElement m_PlayScreenQuickTour;
-    private VisualElement m_QuickTourContainer;
-    private VisualElement m_DeviceSelectionScreen;
-    private VisualElement m_LearnScreenRpzPopup;
-    private VisualElement m_PlayScreenRpzPopup;
+    public VisualElement m_MainMenuScreen;
+    public VisualElement m_LearnScreen;
+    public VisualElement m_PlayScreen;
+    public VisualElement m_PlayScreenQuickTour;
+    public VisualElement m_QuickTourContainer;
+    public VisualElement m_DeviceSelectionScreen;
+    public VisualElement m_LearnScreenRpzPopup;
+    public VisualElement m_PlayScreenRpzPopup;
 
 
     private const string MainMenuPlayButtonString = "play-button";
@@ -28,7 +28,7 @@ public class MainMenuScreenManager : VisualElement
     private const string QuickTourContainerString = "QuickTourContainer";
     private const string DeviceSelectionScreenString = "DeviceSelectionScreen";
 
-    private const string DCTestSceneString = "DCTestScene";
+    private const string DCTestSceneString = "DCPlayScene";
 
 
     private const string TutorialPlayerPrefString = "Skip Tutorial";
@@ -60,240 +60,94 @@ public class MainMenuScreenManager : VisualElement
 
 
 
+
         //Main Menu screen buttons
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
-        //end Main Menu
 
-        //Device Seleciton screen buttons
-        // m_DeviceSelectionScreen?.Q(DoubleCheckButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckScreen());
-        // m_DeviceSelectionScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreenRpzPopUp());
-        // m_DeviceSelectionScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDeviceSelectionScreen());
-        // m_DeviceSelectionScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
-
-        //LearnScreen
-        //m_LearnScreen?.Q(DoubleCheckButtonString)?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckScreen());
-        m_LearnScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreenRpzPopUp());
-        m_LearnScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
-
-
-        //Play Screen
-        m_PlayScreen?.Q(RpzButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreenRpzPopUp());
-        m_PlayScreen?.Q(RpzBackButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
-
+        // m_LearnScreen.style.display = DisplayStyle.None;
+        // m_PlayScreen.style.display = DisplayStyle.None;
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
-    private void EnablePlayScreenRpzPopUp()
-    {
-        ScreensToShow = new List<VisualElement>
-         {
-            m_PlayScreen,
-             m_PlayScreenRpzPopup
-
-         };
-        ChangeScreenStatus(ScreensToShow, ScreensToHide);
-    }
 
     private void EnablePlayScreen()
     {
-
-        ScreensToHide = new List<VisualElement>()
-         {
-             m_MainMenuScreen,
-             m_PlayScreenRpzPopup
-         };
-        ScreensToShow = new List<VisualElement>
-         {
-             m_PlayScreen
-
-         };
-        ChangeScreenStatus(ScreensToShow, ScreensToHide);
+        m_MainMenuScreen.style.display = DisplayStyle.None;
+        m_LearnScreen.style.display = DisplayStyle.None;
+        m_PlayScreen.style.display = DisplayStyle.Flex;
     }
-
-    private void EnableLearnScreenRpzPopUp()
-    {
-
-        ScreensToShow = new List<VisualElement>
-         {
-            m_LearnScreen,
-             m_LearnScreenRpzPopup
-
-         };
-        ChangeScreenStatus(ScreensToShow, ScreensToHide);
-    }
-
-
-    private void EnableDeviceSelectionScreen()
-    {
-
-        ScreensToHide = new List<VisualElement>()
-         {
-             m_QuickTourContainer,
-             m_MainMenuScreen,
-             m_LearnScreen,
-             m_LearnScreenRpzPopup
-         };
-        ScreensToShow = new List<VisualElement>
-         {
-             m_DeviceSelectionScreen
-
-         };
-
-
-        ChangeScreenStatus(ScreensToShow, ScreensToHide);
-
-    }
-
-
 
     private void EnableTitleScreen()
     {
-        ScreensToHide = new List<VisualElement>()
-         {
-
-             m_LearnScreen,
-             m_PlayScreen
-         };
-        ScreensToShow = new List<VisualElement>
-         {
-             m_MainMenuScreen
-
-         };
-        ChangeScreenStatus(ScreensToShow, ScreensToHide);
-        // m_MainMenuScreen.style.display = DisplayStyle.Flex;
-        // m_PlayScreen.style.display = DisplayStyle.None;
-        // m_LearnScreen.style.display = DisplayStyle.None;
+        m_MainMenuScreen.style.display = DisplayStyle.Flex;
+        m_PlayScreen.style.display = DisplayStyle.None;
+        m_LearnScreen.style.display = DisplayStyle.None;
     }
 
     private void EnableLearnScreen()
     {
-        ScreensToHide = new List<VisualElement>()
-         {
-             m_MainMenuScreen,
-             m_LearnScreenRpzPopup
-         };
-        ScreensToShow = new List<VisualElement>
-         {
-             m_LearnScreen
-
-         };
-        ChangeScreenStatus(ScreensToShow, ScreensToHide);
-
-    }
-
-    private void EnableDoubleCheckScreen()
-    {
-        /// <summary>
-        /// Quick Tour Disabled
-        /// </summary>
-
-        if (PlayerPrefs.GetInt(TutorialPlayerPrefString) == 1)
-        {
-            ScreensToHide = new List<VisualElement>()
-         {
-            m_QuickTourContainer,
-            m_MainMenuScreen,
-            m_LearnScreen,
-            m_DeviceSelectionScreen
-
-         };
-
-            ScreensToShow = new List<VisualElement>
-         {
-            m_PlayScreen
-        };
-        }
-        /// <summary>
-        /// Quick Tour Enabled
-        /// </summary>
-
-        else
-        {
-            ScreensToHide = new List<VisualElement>()
-            {
-                m_MainMenuScreen,
-                m_LearnScreen,
-                m_DeviceSelectionScreen
-            };
-
-
-            ScreensToShow = new List<VisualElement>
-            {
-              m_PlayScreen,
-              m_QuickTourContainer
-            };
-
-
-        }
-
-        ChangeSceneAndScreen(DCTestSceneString, PlayerPrefs.GetInt(TutorialPlayerPrefString), ScreensToShow, ScreensToHide);
-
-
+        m_MainMenuScreen.style.display = DisplayStyle.None;
+        m_LearnScreen.style.display = DisplayStyle.Flex;
     }
 
 
+    // private void ChangeSceneAndScreen(string sceneToLoad, int playerPref, List<VisualElement> listToShow, List<VisualElement> listToHide)
+    // {
+
+    //     //Async Load Scene--> prevents ui from changing until scene is loaded up
+    //     //DO NOT CHANGE THE ORDER IN THIS---->
+    //     {
+    //         AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync(sceneToLoad);
+
+
+    //         // #if UNITY_EDITOR
+    //         //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+    //         // #endif
+
+
+    //         //skipping quick tour
+
+    //         //wait for scene to load before switching Ui
+    //         if (sceneLoadAsync.isDone)
+    //         {
+
+    //             ChangeScreenStatus(listToShow, listToHide);
+    //         }
+
+
+    //     }
+
+
+    // }
 
 
 
+    // private void ChangeScreenStatus(List<VisualElement> listOfScreensToShow, List<VisualElement> listOfScreensToHide)
+    // {
+    //     if (listOfScreensToShow == null || listOfScreensToHide == null)
+    //     {
+    //         return;
+    //     }
 
+    //     foreach (var screenToHide in listOfScreensToHide)
+    //     {
+    //         screenToHide.style.display = DisplayStyle.None;
+    //     }
+    //     foreach (var screenToShow in listOfScreensToShow)
+    //     {
 
-    private void ChangeSceneAndScreen(string sceneToLoad, int playerPref, List<VisualElement> listToShow, List<VisualElement> listToHide)
-    {
+    //         screenToShow.style.display = DisplayStyle.Flex;
+    //     }
 
-        //Async Load Scene--> prevents ui from changing until scene is loaded up
-        //DO NOT CHANGE THE ORDER IN THIS---->
-        {
-            AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync(sceneToLoad);
-
-
-            // #if UNITY_EDITOR
-            //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
-            // #endif
-
-
-            //skipping quick tour
-
-            //wait for scene to load before switching Ui
-            if (sceneLoadAsync.isDone)
-            {
-
-                ChangeScreenStatus(listToShow, listToHide);
-            }
-
-
-        }
-
-
-    }
-
-
-
-    private void ChangeScreenStatus(List<VisualElement> listOfScreensToShow, List<VisualElement> listOfScreensToHide)
-    {
-        if (listOfScreensToShow == null || listOfScreensToHide == null)
-        {
-            return;
-        }
-
-        foreach (var screenToHide in listOfScreensToHide)
-        {
-            screenToHide.style.display = DisplayStyle.None;
-        }
-        foreach (var screenToShow in listOfScreensToShow)
-        {
-
-            screenToShow.style.display = DisplayStyle.Flex;
-        }
-
-        ScreensToShow.Clear();
-        ScreensToHide.Clear();
-    }
+    //     ScreensToShow.Clear();
+    //     ScreensToHide.Clear();
+    // }
 
 
     private void QuitApplication()
@@ -304,5 +158,6 @@ public class MainMenuScreenManager : VisualElement
             Application.Quit();
 
     }
+
 
 }

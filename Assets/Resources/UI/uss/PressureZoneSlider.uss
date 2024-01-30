@@ -16,14 +16,6 @@
     right: 0;
 }
 
-.pressure-panel-supply {
-    position: absolute;
-    left: 210px;
-    top: 250px;
-    right: 0;
-    bottom: 0;
-}
-
 .pressure-zone-slider {
     height: 103px;
 }
