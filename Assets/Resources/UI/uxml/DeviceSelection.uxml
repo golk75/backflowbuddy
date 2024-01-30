@@ -1,19 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenu.uss?fileID=7433441132597879392&amp;guid=c5bd34c57e0dc4d5f9c34d52ef006148&amp;type=3#MainMenu" />
+    <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
     <DeviceSelectionScreen class="screen">
         <ui:VisualElement name="screen" class="screen" style="flex-grow: 1; background-color: rgb(84, 84, 84); display: flex; flex-direction: column;">
             <ui:VisualElement name="MainMenu_title_container" style="background-image: resource(&apos;UI/Textures/Backflow_Buddy_Title 2&apos;); flex-grow: 1; align-self: center; width: 50%; height: 100%; -unity-background-scale-mode: scale-to-fit;" />
             <ui:VisualElement name="MainMenu_panel" style="width: 100%; align-items: center; justify-content: center; margin-bottom: 10%;">
                 <ui:Button text="Double Check" display-tooltip-when-elided="true" name="double-check-button" focusable="false" class="main-menu-button" />
                 <ui:Button text="RPZ" display-tooltip-when-elided="true" name="rpz-button" focusable="false" class="main-menu-button" />
-                <ui:Button text="Back" display-tooltip-when-elided="true" name="device-selection-back-button" focusable="false" class="main-menu-button" />
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="back-button" focusable="false" class="main-menu-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </DeviceSelectionScreen>
     <ui:VisualElement name="rpz-pop-up" style="position: absolute; top: 50%; flex-grow: 1; justify-content: center; align-self: center; display: none;">
-        <Style src="project://database/Assets/Resources/UI/uss/TutorialPopUp.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#TutorialPopUp" />
-        <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
         <ui:VisualElement name="TutorialPopup" class="tutorial-container floating">
             <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel" style="background-color: rgb(54, 54, 62); width: 277px; align-self: center; align-items: center; justify-content: center;">
                 <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
