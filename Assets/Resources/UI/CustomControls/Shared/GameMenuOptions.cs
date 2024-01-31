@@ -1,12 +1,14 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class DCLearnScreen : VisualElement
+public class GameMenuOptions : VisualElement
 {
 
-    public new class UxmlFactory : UxmlFactory<DCLearnScreen, UxmlTraits> { }
+    public new class UxmlFactory : UxmlFactory<GameMenuOptions, UxmlTraits> { }
 
-    public DCLearnScreen()
+    public GameMenuOptions()
     {
         this.RegisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
@@ -15,6 +17,9 @@ public class DCLearnScreen : VisualElement
     {
 
 
+
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
+
+
 }

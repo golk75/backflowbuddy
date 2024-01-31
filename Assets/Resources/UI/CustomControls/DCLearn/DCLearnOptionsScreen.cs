@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class DCPlayScreen : VisualElement
+public class DCLearnOptionsScreen : VisualElement
 {
+    VisualElement m_MenuButton;
+    VisualElement m_RestartButton;
+    VisualElement m_HelpButton;
+    public new class UxmlFactory : UxmlFactory<DCLearnOptionsScreen, UxmlTraits> { }
 
-    public new class UxmlFactory : UxmlFactory<DCPlayScreen, UxmlTraits> { }
-
-    public DCPlayScreen()
+    public DCLearnOptionsScreen()
     {
         this.RegisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }

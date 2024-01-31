@@ -511,20 +511,6 @@ MonoBehaviour:
   playerController: {fileID: 1446278365}
   isUiClicked: 0
   isUiHovered: 0
---- !u!114 &354497752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354497734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adec644b2f27841a390be2222fdf5671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MenuScreenName: GameMenuScreen
-  m_OptionsScreenName: GameMenuOptionsScreen
 --- !u!114 &354497761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10050,6 +10036,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5223085132162842862, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223085132162842862, guid: e8e079197ce4f417e91c42a2a0cca0c9,
+        type: 3}
       propertyPath: m_OptionsScreenName
       value: GameMenuOptionsScreen
       objectReference: {fileID: 0}
@@ -10254,10 +10245,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 354497751}
-    - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 354497752}
     - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       insertIndex: -1

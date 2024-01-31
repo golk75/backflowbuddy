@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/PopUpModal.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#PopUpModal" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
+    <Style src="project://database/Assets/Resources/UI/uss/GameMenuOptions.uss?fileID=7433441132597879392&amp;guid=71207e421da21479195f56ca423ee95a&amp;type=3#GameMenuOptions" />
     <ui:VisualElement name="TutorialPopup" class="tutorial-container floating">
         <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel" style="background-color: rgb(54, 54, 62);">
             <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
@@ -14,9 +15,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="TutorialPopup_button_container" class="tutorial-popup-button-container">
-                <ui:Button text="Previous" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_previous_button" class="tutorial-popup-button" />
-                <ui:Button text="Skip All" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_skip_button" class="skip-button tutorial-popup-button" />
-                <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-button" />
+                <ui:Button text="Previous" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_previous_button" class="tutorial-popup-button game-menu-options-button" />
+                <ui:Button text="Skip All" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_skip_button" class="skip-button tutorial-popup-button game-menu-options-button" />
+                <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Tutotial_next_button" class="tutorial-popup-button game-menu-options-button" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

@@ -17,7 +17,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string TutorialSkipButtonString = "Tutotial_skip_button";
     private const string TutorialPopupHeaderString = "TutorialPopup_header";
     private const string TutorialPopupContentString = "TutorialPopup_content";
-    private const string OptionsTutorialButtonString = "OptionsMenuScreen_tutorial_button";
+    private const string QuickTourButtonString = "quick-tour-button";
     private const string TutorialPlayerPrefString = "Skip Tutorial";
     private const string TutorialButtonContainerString = "TutorialPopup_button_container";
     private const string MenuButtonString = "MenuButton";
@@ -54,7 +54,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private Button m_NextButton;
     private Button m_PreviousButton;
     private Button m_SkipButton;
-    private Button m_OptionsTutorialButton;
+    private Button m_QuickTourButton;
     private Button m_MenuButton;
     private Button m_FillButton;
     private Button m_ResetButton;
@@ -72,7 +72,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     //scene management
     [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
-    [SerializeField] string m_DCTestScene = "DCPlayScene";
+    [SerializeField] string m_DCPlayScene = "DCPlayScene";
 
 
 
@@ -137,7 +137,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_NextButton = root.rootVisualElement.Q<Button>(TutorialNextButtonString);
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
-        m_OptionsTutorialButton = root.rootVisualElement.Q<Button>(OptionsTutorialButtonString);
+        m_QuickTourButton = root.rootVisualElement.Q<Button>(QuickTourButtonString);
         m_QuickTourContainer = root.rootVisualElement.Q<VisualElement>(QuickTourContainerString);
         m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
         m_PopupContent = root.rootVisualElement.Q<VisualElement>(TutorialPopupContentString);
@@ -195,11 +195,11 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_NextButton.clicked += OnNextButtonClicked;
         m_SkipButton.clicked += OnSkipButtonClicked;
         m_PreviousButton.clicked += OnPrevButtonClicked;
-        m_OptionsTutorialButton.clicked += OnOptionsTutorialButtonClicked;
+        m_QuickTourButton.clicked += QuickTourButtonClicked;
     }
 
 
-    private void OnOptionsTutorialButtonClicked()
+    private void QuickTourButtonClicked()
     {
         SaveTutorialPrefs(0);
         // SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
@@ -378,7 +378,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         SaveTutorialPrefs(1);
         DOTween.KillAll();
-        SceneManager.LoadSceneAsync(m_DCTestScene);
+        SceneManager.LoadSceneAsync(m_DCPlayScene);
     }
 
     //cache tutorial skipping preference to device memory
@@ -399,7 +399,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_NextButton.clicked -= OnNextButtonClicked;
         m_SkipButton.clicked -= OnSkipButtonClicked;
         m_PreviousButton.clicked -= OnPrevButtonClicked;
-        m_OptionsTutorialButton.clicked -= OnOptionsTutorialButtonClicked;
+        m_QuickTourButton.clicked -= QuickTourButtonClicked;
     }
 
     //update popp window style and text (text is taken from scriptable objects array)

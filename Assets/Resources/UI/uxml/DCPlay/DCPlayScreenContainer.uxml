@@ -1,7 +1,7 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:Template name="PressureZoneSlider" src="project://database/Assets/Resources/UI/uxml/PressureZoneSlider.uxml?fileID=9197481963319205126&amp;guid=eede08432da9d4042ba725e9a47f0c99&amp;type=3#PressureZoneSlider" />
-    <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
-    <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="PressureZoneSlider" src="project://database/Assets/Resources/UI/uxml/Shared/PressureZoneSlider.uxml?fileID=9197481963319205126&amp;guid=eede08432da9d4042ba725e9a47f0c99&amp;type=3#PressureZoneSlider" />
+    <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/Shared/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
+    <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/Shared/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
     <ui:Template name="TutorialPopup" src="project://database/Assets/Resources/UI/UXML_Templates/TutorialPopup.uxml?fileID=9197481963319205126&amp;guid=b7f6de83c470e4033b4619c6264c23e9&amp;type=3#TutorialPopup" />
     <ui:VisualElement name="DCTestSceneContainer" class="screen" style="width: 100%; height: 100%;">
         <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">

@@ -476,25 +476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
---- !u!114 &354497750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354497734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59cce0be7363b453fb94531cc9ac1b9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterController: {fileID: 4261158086632363316}
-  playerController: {fileID: 1446278365}
-  uiClickFilter: {fileID: 354497751}
-  isPointerDown: 0
-  maxSpringPressure: 3
-  check1SpringPressure: 2
-  check2SpringPressure: 1
 --- !u!114 &354497751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9952,7 +9933,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pressureZoneHUDController
       value: 
-      objectReference: {fileID: 354497750}
+      objectReference: {fileID: 0}
     - target: {fileID: 4188148446844342141, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       propertyPath: doubleCheckTestKitController
@@ -10246,10 +10227,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 354497742}
-    - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 354497750}
     - targetCorrespondingSourceObject: {fileID: 5701968674246366777, guid: e8e079197ce4f417e91c42a2a0cca0c9,
         type: 3}
       insertIndex: -1
