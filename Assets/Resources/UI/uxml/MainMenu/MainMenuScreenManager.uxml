@@ -1,15 +1,37 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="PlayScreen" src="project://database/Assets/Resources/UI/uxml/PlayScreen.uxml?fileID=9197481963319205126&amp;guid=9fe5aae37fb75438ebb6f5591f750946&amp;type=3#PlayScreen" />
-    <ui:Template name="LearnScreen" src="project://database/Assets/Resources/UI/uxml/LearnScreen.uxml?fileID=9197481963319205126&amp;guid=91467036a7b7448aebd296b43c25cf9d&amp;type=3#LearnScreen" />
-    <ui:Template name="PlayScreenQuickTour" src="project://database/Assets/Resources/UI/uxml/PlayScreenQuickTour.uxml?fileID=9197481963319205126&amp;guid=6b7914e914235479ba0329c2c3094ec1&amp;type=3#PlayScreenQuickTour" />
-    <ui:Template name="DeviceSelectionScreen" src="project://database/Assets/Resources/UI/uxml/DeviceSelection.uxml?fileID=9197481963319205126&amp;guid=97150f102c0c84231a670faea9d4edba&amp;type=3#DeviceSelection" />
-    <ui:Template name="MainMenuScreen" src="project://database/Assets/Resources/UI/uxml/MainMenuScreen.uxml?fileID=9197481963319205126&amp;guid=6ea79bdbd42624843836dee45697c05b&amp;type=3#MainMenuScreen" />
+    <ui:Template name="PlayScreen" src="project://database/Assets/Resources/UI/uxml/DCPlay/PlayScreen.uxml?fileID=9197481963319205126&amp;guid=9fe5aae37fb75438ebb6f5591f750946&amp;type=3#PlayScreen" />
+    <ui:Template name="LearnScreen" src="project://database/Assets/Resources/UI/uxml/DCLearn/LearnScreen.uxml?fileID=9197481963319205126&amp;guid=91467036a7b7448aebd296b43c25cf9d&amp;type=3#LearnScreen" />
+    <ui:Template name="PlayScreenQuickTour" src="project://database/Assets/Resources/UI/uxml/DCPlay/PlayScreenQuickTour.uxml?fileID=9197481963319205126&amp;guid=6b7914e914235479ba0329c2c3094ec1&amp;type=3#PlayScreenQuickTour" />
+    <ui:Template name="DeviceSelectionScreen" src="project://database/Assets/Resources/UI/uxml/Shared/DeviceSelection.uxml?fileID=9197481963319205126&amp;guid=97150f102c0c84231a670faea9d4edba&amp;type=3#DeviceSelection" />
+    <ui:Template name="MainMenuScreen" src="project://database/Assets/Resources/UI/uxml/MainMenu/MainMenuScreen.uxml?fileID=9197481963319205126&amp;guid=6ea79bdbd42624843836dee45697c05b&amp;type=3#MainMenuScreen" />
     <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
+    <Style src="project://database/Assets/Resources/UI/uss/GameMenuOptions.uss?fileID=7433441132597879392&amp;guid=71207e421da21479195f56ca423ee95a&amp;type=3#GameMenuOptions" />
+    <Style src="project://database/Assets/Resources/UI/uss/MainMenu.uss?fileID=7433441132597879392&amp;guid=c5bd34c57e0dc4d5f9c34d52ef006148&amp;type=3#MainMenu" />
+    <Style src="project://database/Assets/Resources/UI/uss/PopUpModal.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#PopUpModal" />
     <MainMenuScreenManager name="MainMenuScreenManager" class="screen" style="background-color: rgb(255, 255, 255);">
         <ui:Instance template="PlayScreen" name="PlayScreen" class="screen" style="display: none;" />
         <ui:Instance template="LearnScreen" name="LearnScreen" class="screen" style="display: none;" />
         <ui:Instance template="PlayScreenQuickTour" name="PlayScreenQuickTour" class="screen" style="display: none;" />
         <ui:Instance template="DeviceSelectionScreen" name="DeviceSelectionScreen" class="screen" style="display: none;" />
         <ui:Instance template="MainMenuScreen" name="MainMenuScreen" class="screen" />
+        <ui:VisualElement name="learn-coming-soon-pop-up" class="screen" style="position: absolute; top: 50%; flex-grow: 1; justify-content: center; align-self: center; display: none;">
+            <ui:VisualElement name="TutorialPopup" class="tutorial-container floating">
+                <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel" style="background-color: rgb(54, 54, 62); width: 277px; align-self: center; align-items: center; justify-content: center;">
+                    <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
+                        <ui:VisualElement name="TutorialPopup_header">
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_header_label" text="Comming Soon!" class="tutorial-popup-label" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="TutorialPopup_content_container" class="tutorial-popup-label-container">
+                        <ui:VisualElement name="TutorialPopup_content">
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_content_label" text="currently under construction" class="tutorial-popup-label" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="TutorialPopup_button_container" class="tutorial-popup-button-container" style="justify-content: center;">
+                        <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="learn-popup-back-button" class="skip-button tutorial-popup-button game-menu-options-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
     </MainMenuScreenManager>
 </ui:UXML>

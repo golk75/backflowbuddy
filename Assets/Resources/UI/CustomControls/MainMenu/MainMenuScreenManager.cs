@@ -14,6 +14,7 @@ public class MainMenuScreenManager : VisualElement
     public VisualElement m_QuickTourContainer;
     public VisualElement m_DeviceSelectionScreen;
     public VisualElement m_LearnScreenRpzPopup;
+    private VisualElement m_LearnScreenComingSoonPopup;
     public VisualElement m_PlayScreenRpzPopup;
 
 
@@ -55,6 +56,7 @@ public class MainMenuScreenManager : VisualElement
         m_QuickTourContainer = this.Q(QuickTourContainerString);
         m_DeviceSelectionScreen = this.Q(DeviceSelectionScreenString);
         m_LearnScreenRpzPopup = m_LearnScreen.Q(RpzPopupString);
+        m_LearnScreenComingSoonPopup = this.Q("learn-coming-soon-pop-up");
         m_PlayScreenRpzPopup = m_PlayScreen.Q(RpzPopupString);
 
 
@@ -65,8 +67,9 @@ public class MainMenuScreenManager : VisualElement
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
-
+        m_LearnScreenComingSoonPopup?.Q("learn-popup-back-button")?.RegisterCallback<ClickEvent>(evt => CloseLearnPopup());
         m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
+
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
         // m_LearnScreen.style.display = DisplayStyle.None;
@@ -75,6 +78,10 @@ public class MainMenuScreenManager : VisualElement
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
+    private void CloseLearnPopup()
+    {
+        m_LearnScreenComingSoonPopup.style.display = DisplayStyle.None;
+    }
 
     private void EnablePlayScreen()
     {
@@ -92,8 +99,9 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnableLearnScreen()
     {
-        m_MainMenuScreen.style.display = DisplayStyle.None;
-        m_LearnScreen.style.display = DisplayStyle.Flex;
+        m_LearnScreenComingSoonPopup.style.display = DisplayStyle.Flex;
+        // m_MainMenuScreen.style.display = DisplayStyle.None;
+        // m_LearnScreen.style.display = DisplayStyle.Flex;
     }
 
 
