@@ -1,0 +1,163 @@
+.fill-button {
+    background-image: url('project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&guid=6f649aea2852e3b46a8c4386355a2c53&type=3#T_5_drop_');
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.menu-button {
+    background-image: url('project://database/Assets/Clean%20Vector%20Icons/T_23_gear_.png?fileID=2800000&guid=9a58f5069a59d1644b55a5aadc5dd58b&type=3#T_23_gear_');
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.button {
+    flex-grow: 0;
+    align-items: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.button:hover {
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(98, 178, 245);
+}
+
+.button:active {
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.button-wrapper {
+    flex-grow: 0;
+    flex-direction: row;
+    cursor: resource('UI/Textures/icons8-hand-32');
+    margin-left: 2%;
+}
+
+.scene-container {
+    width: 100%;
+    height: 100%;
+    cursor: resource('UI/Textures/icons8-hand-32');
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.gauge-reading-wrapper {
+    align-items: auto;
+    align-self: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-grow: 0;
+    width: 80%;
+    height: 35%;
+}
+
+.toggle {
+    background-color: rgb(53, 55, 62);
+    align-items: center;
+    align-self: flex-start;
+    justify-content: center;
+    margin-top: 11px;
+    flex-direction: row;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.toggle > .unity-toggle__label {
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.unity-toggle__label {
+    -unity-font-style: bold;
+    flex-grow: 0;
+    align-items: auto;
+    align-self: auto;
+    flex-direction: column;
+    margin-right: -20px;
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.unity-toggle__input {
+    align-items: center;
+    align-self: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.unity-toggle__checkmark {
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    align-items: auto;
+    align-self: auto;
+    justify-content: flex-start;
+    margin-right: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: resource('UI/Textures/icons8-hand-33');
+}
+
+.game-menu-modal {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.pressure-zone-hud-wrapper {
+    flex-direction: row;
+    align-self: flex-end;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+    margin-left: 10%;
+}
+
+.button-flashing {
+}
+
+.quick-tour-container {
+    width: 100%;
+    position: absolute;
+}

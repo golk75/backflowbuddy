@@ -23,7 +23,6 @@ public class PlayScreen : VisualElement
         m_DCPlayScreen = this.Q("DCPlayScreen");
         m_DeviceSelectionScreen = this.Q("device-selection");
 
-
         this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRpzPopup());
         this?.Q("rpz-popup-back-button")?.RegisterCallback<ClickEvent>(evt => RemoveRpzPopup());
 
@@ -39,7 +38,7 @@ public class PlayScreen : VisualElement
     {
 
 
-        // m_DCPlayScreen.style.display = DisplayStyle.Flex;
+
         //Async Load Scene--> prevents ui from changing until scene is loaded up
         //DO NOT CHANGE THE ORDER IN THIS---->
         {
@@ -56,7 +55,6 @@ public class PlayScreen : VisualElement
             //wait for scene to load before switching Ui
             if (sceneLoadAsync.isDone)
             {
-
                 m_DeviceSelectionScreen.style.display = DisplayStyle.None;
             }
 

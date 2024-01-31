@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DCLearnScreen" src="project://database/Assets/Resources/UI/uxml/DCLearnScreen.uxml?fileID=9197481963319205126&amp;guid=89aaeb3eb5d454c66a973abefc333ff3&amp;type=3#DCLearnScreen" />
+    <Style src="project://database/Assets/Resources/UI/uss/DCLearnScreenUi.uss?fileID=7433441132597879392&amp;guid=44a06e9f992124df4b34efc008843cc0&amp;type=3#DCLearnScreenUi" />
+    <DCLearnScreenManager class="screen">
+        <ui:Instance template="DCLearnScreen" name="DCLearnScreen" class="screen" />
+    </DCLearnScreenManager>
+</ui:UXML>
