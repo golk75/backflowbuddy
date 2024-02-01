@@ -75,7 +75,7 @@
                 <AttributeOverrides element-name="TeachingMode_toggle" value="true" />
             </ui:Instance>
         </ui:VisualElement>
-        <ui:VisualElement name="QuickTourContainer" class="quick-tour-container-dark quick-tour-container-light floating" style="width: 100%; height: 100%; display: flex; position: absolute;">
+        <ui:VisualElement name="QuickTourContainer" class="quick-tour-container-dark quick-tour-container-light floating" style="width: 100%; height: 200%; display: flex; position: absolute; background-color: rgba(91, 91, 91, 0.7); flex-grow: 1;">
             <ui:Instance template="TutorialPopup" name="TutorialPopup" picking-mode="Ignore" class="tutorial-container" style="position: absolute;" />
         </ui:VisualElement>
         <ui:Button name="FillButton-flash" focusable="false" class="button button-flashing floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&amp;guid=6f649aea2852e3b46a8c4386355a2c53&amp;type=3#T_5_drop_&apos;); display: none; position: absolute; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
