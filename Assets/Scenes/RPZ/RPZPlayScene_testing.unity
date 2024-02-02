@@ -962,6 +962,7 @@ MonoBehaviour:
   test1InProgress: 0
   check1FFStrength: 0.5
   check2FFStrength: 0.5
+  Zone1TcMinParticleCount: 500
 --- !u!1 &575506696
 GameObject:
   m_ObjectHideFlags: 0

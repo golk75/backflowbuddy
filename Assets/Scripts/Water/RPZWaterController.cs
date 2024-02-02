@@ -214,6 +214,7 @@ public class RPZWaterController : MonoBehaviour
     public bool test1InProgress = false;
     public float check1FFStrength;
     public float check2FFStrength;
+    public float Zone1TcMinParticleCount = 3000;
     void Start()
     {
 
@@ -642,7 +643,7 @@ public class RPZWaterController : MonoBehaviour
                     )
                 {
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -666,7 +667,7 @@ public class RPZWaterController : MonoBehaviour
                 {
 
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
 
                         TestCockFF3.Strength = 0;
@@ -691,7 +692,7 @@ public class RPZWaterController : MonoBehaviour
                       )
                 {
 
-                    if (check2Detector.ParticlesInside > 3000)
+                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF4.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -725,7 +726,7 @@ public class RPZWaterController : MonoBehaviour
                 )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -753,7 +754,7 @@ public class RPZWaterController : MonoBehaviour
                )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -781,7 +782,7 @@ public class RPZWaterController : MonoBehaviour
                  )
             {
 
-                if (check2Detector.ParticlesInside > 3000)
+                if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
@@ -829,7 +830,7 @@ public class RPZWaterController : MonoBehaviour
                     )
                 {
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -853,7 +854,7 @@ public class RPZWaterController : MonoBehaviour
                 {
 
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
 
                         TestCockFF3.Strength = 0;
@@ -878,7 +879,7 @@ public class RPZWaterController : MonoBehaviour
                       )
                 {
 
-                    if (check2Detector.ParticlesInside > 3000)
+                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF4.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -912,7 +913,7 @@ public class RPZWaterController : MonoBehaviour
                 )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -940,7 +941,7 @@ public class RPZWaterController : MonoBehaviour
                )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -968,7 +969,7 @@ public class RPZWaterController : MonoBehaviour
                  )
             {
 
-                if (check2Detector.ParticlesInside > 3000)
+                if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
@@ -1027,7 +1028,7 @@ public class RPZWaterController : MonoBehaviour
                     )
                 {
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -1333,7 +1334,7 @@ public class RPZWaterController : MonoBehaviour
                     )
                 {
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -1357,7 +1358,7 @@ public class RPZWaterController : MonoBehaviour
                 {
 
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
 
                         TestCockFF3.Strength = 0;
@@ -1382,7 +1383,7 @@ public class RPZWaterController : MonoBehaviour
                       )
                 {
 
-                    if (check2Detector.ParticlesInside > 3000)
+                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF4.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -1416,7 +1417,7 @@ public class RPZWaterController : MonoBehaviour
                 )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -1444,7 +1445,7 @@ public class RPZWaterController : MonoBehaviour
                )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -1472,7 +1473,7 @@ public class RPZWaterController : MonoBehaviour
                  )
             {
 
-                if (check2Detector.ParticlesInside > 3000)
+                if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
@@ -1520,7 +1521,7 @@ public class RPZWaterController : MonoBehaviour
                     )
                 {
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -1544,7 +1545,7 @@ public class RPZWaterController : MonoBehaviour
                 {
 
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
 
                         TestCockFF3.Strength = 0;
@@ -1569,7 +1570,7 @@ public class RPZWaterController : MonoBehaviour
                       )
                 {
 
-                    if (check2Detector.ParticlesInside > 3000)
+                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF4.Strength = 0;
                         sightTubeEmitter.enabled = true;
@@ -1603,7 +1604,7 @@ public class RPZWaterController : MonoBehaviour
                 )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -1631,7 +1632,7 @@ public class RPZWaterController : MonoBehaviour
                )
             {
 
-                if (check1Detector.ParticlesInside > 3000)
+                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -1659,7 +1660,7 @@ public class RPZWaterController : MonoBehaviour
                  )
             {
 
-                if (check2Detector.ParticlesInside > 3000)
+                if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
@@ -1718,7 +1719,7 @@ public class RPZWaterController : MonoBehaviour
                     )
                 {
 
-                    if (check1Detector.ParticlesInside > 3000)
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
                     {
                         TestCockFF2.Strength = 0;
                         sightTubeEmitter.enabled = true;
