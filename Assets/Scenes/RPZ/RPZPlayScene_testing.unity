@@ -870,6 +870,98 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1788849262}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &549292919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549292916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7645d2a47fdc485eaea800f841a7da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkValveCollision: {fileID: 0}
+  testCockManager: {fileID: 2614389505626383443}
+  shutOffValveManager: {fileID: 4573864958915425051}
+  hoseController: {fileID: 746981164190540200}
+  sightTube: {fileID: 2001235575}
+  checkValveStatus: {fileID: 873336866102218116}
+  doubleCheckTestKitController: {fileID: 2769071947225662792}
+  sightTubeController: {fileID: 2001235590}
+  ShutOffValve1: {fileID: 4005733787468232117}
+  mainSupplyEmitter: {fileID: 1788849310}
+  ShutOffValve2: {fileID: 291841097159207565}
+  supplyCollider: {fileID: 1788849309}
+  supplyVoid: {fileID: 1788849308}
+  TestCock1Emitter: {fileID: 1788849307}
+  TestCockDetector1: {fileID: 1788849306}
+  TestCockDetector2: {fileID: 1788849305}
+  TestCockDetector3: {fileID: 1788849304}
+  TestCockDetector4: {fileID: 1788849303}
+  TestCockHoseDetect1: {fileID: 2710404239225386102}
+  TestCockHoseDetect2: {fileID: 5582824196569063747}
+  TestCockHoseDetect3: {fileID: 8223883707261353593}
+  TestCockHoseDetect4: {fileID: 5597532315951293177}
+  BodyDetectorZone1: {fileID: 1788849302}
+  check1Detector: {fileID: 467660110644254147}
+  check2Detector: {fileID: 6423705231874470771}
+  TestCockFF1: {fileID: 1788849301}
+  TestCockFF2: {fileID: 1788849300}
+  TestCockFF3: {fileID: 1788849299}
+  TestCockFF4: {fileID: 1788849298}
+  hoseDetector1: {fileID: 1354698777}
+  hoseDetector2: {fileID: 41788560}
+  hoseDetector3: {fileID: 2007149931}
+  hoseDetector4: {fileID: 1128289294}
+  sightTubeEmitter: {fileID: 1578613353}
+  sightTubeVoid: {fileID: 1781930379}
+  bleederCatchVoid: {fileID: 2012908870}
+  check1housingForceField: {fileID: 1788849297}
+  check2housingForceField: {fileID: 1788849296}
+  Void_Check1: {fileID: 1286364577}
+  Void_Check2: {fileID: 525274343}
+  check1VoidMaxSize: {x: 0.045, y: 0.0354, z: 0.0201}
+  check2VoidMaxSize: {x: 0.045, y: 0.0354, z: 0.0201}
+  Check1VoidGrowSpeed: 2.5
+  Check2VoidGrowSpeed: 8
+  CheckValve1: {fileID: 2102190765}
+  CheckValve2: {fileID: 908969837}
+  sightTubeCurrentConnection: {fileID: 0}
+  testCock1MaxStr: 10
+  testCock2MaxStr: 5
+  testCock3MaxStr: 2.5
+  testCock3MinStr: 1.5
+  testCock3Str: 5
+  HoseDetector2: {fileID: 5582824196569063747}
+  testCock4MinStr: 4
+  testCock4MaxStr: 6
+  testCock4Str: 0
+  checkValve1: {fileID: 2102190765}
+  checkValve2: {fileID: 908969837}
+  liquid: {fileID: 1788849263}
+  randomizePressure: 1
+  isDeviceInStaticCondition: 0
+  isTeachingModeEnabled: 0
+  initialCheck1Mass: 0
+  initialCheck2Mass: 0
+  inputForce: 500
+  volume: 0
+  supplyPsi: 80
+  zone2Pressure: 0
+  zone3Pressure: 0
+  check1SpringForce: 10
+  check2SpringForce: 5
+  zone2PsiChange: 0
+  zone3PsiChange: 0
+  zone1to2PsiDiff: 0
+  zone2to3PsiDiff: 0
+  zone2primedParticleCount: 10000
+  zone3primedParticleCount: 10000
+  test1InProgress: 0
+  check1FFStrength: 0.5
+  check2FFStrength: 0.5
 --- !u!1 &575506696
 GameObject:
   m_ObjectHideFlags: 0
@@ -76364,6 +76456,11 @@ PrefabInstance:
       objectReference: {fileID: 1788849263}
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
       propertyPath: psiChange
       value: 0.1
       objectReference: {fileID: 0}
@@ -77319,7 +77416,11 @@ PrefabInstance:
         type: 3}
       insertIndex: 5
       addedObject: {fileID: 1289458758}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1247718687702654465, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 549292919}
   m_SourcePrefab: {fileID: 100100000, guid: b9242a77ce9b24fab85cddfa72914f01, type: 3}
 --- !u!114 &1788849263 stripped
 MonoBehaviour:
@@ -84202,6 +84303,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: CV02
       objectReference: {fileID: 0}
+    - target: {fileID: 2941782552187268010, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1756
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941782552187268010, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 3119602493956845058, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -84481,6 +84592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AssemblyManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112885055992806375, guid: 5cb0acac16e984deab4d687da8d483d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0802
       objectReference: {fileID: 0}
     - target: {fileID: 8387807898551396980, guid: 5cb0acac16e984deab4d687da8d483d5,
         type: 3}
