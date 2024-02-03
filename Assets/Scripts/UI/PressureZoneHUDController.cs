@@ -433,13 +433,29 @@ public class PressureZoneHUDController : MonoBehaviour
 
                 waterController.zone2PsiChange = zonePressureSliderValue;
                 m_rpzWaterController.zone2PsiChange = zonePressureSliderValue;
-                m_Zone2PressureSliderValue.text = zonePressureSliderValue.ToString();
+                if (zonePressureSliderValue >= 0)
+                {
+                    m_Zone2PressureSliderValue.text = "+" + zonePressureSliderValue.ToString();
+                }
+                else
+                {
+                    m_Zone2PressureSliderValue.text = zonePressureSliderValue.ToString();
+                }
+
 
                 // Debug.Log($"Zone2 slider operated");
                 break;
             case PressureZone3PanelString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
                 m_rpzWaterController.zone3PsiChange = zonePressureSliderValue;
+                if (zonePressureSliderValue >= 0)
+                {
+                    m_Zone3PressureSliderValue.text = "+" + zonePressureSliderValue.ToString();
+                }
+                else
+                {
+                    m_Zone3PressureSliderValue.text = zonePressureSliderValue.ToString();
+                }
                 // Debug.Log($"Zone3 slider operated");
                 break;
             default:
