@@ -3,6 +3,10 @@
     <ui:Template name="GameMenuScreen" src="project://database/Assets/Resources/UI/uxml/Shared/GameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=2e25b565a276f4f559a4af91aac30d44&amp;type=3#GameMenuScreen" />
     <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/Shared/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
     <ui:Template name="TutorialPopup" src="project://database/Assets/Resources/UI/UXML_Templates/TutorialPopup.uxml?fileID=9197481963319205126&amp;guid=b7f6de83c470e4033b4619c6264c23e9&amp;type=3#TutorialPopup" />
+    <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreenUi.uss?fileID=7433441132597879392&amp;guid=9d019c51a23314a4ba6172303a84226e&amp;type=3#DCPlayScreenUi" />
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=52141e1763a324a00b382ca1bd2d11b0&amp;type=3#PressureZoneHud" />
+    <Style src="project://database/Assets/Resources/UI/uss/PopUpModal.uss?fileID=7433441132597879392&amp;guid=bede7fbf464e546668c1bae0b1d208af&amp;type=3#PopUpModal" />
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneSlider.uss?fileID=7433441132597879392&amp;guid=b928e6a2ee3824672bcb593bd1e09328&amp;type=3#PressureZoneSlider" />
     <ui:VisualElement name="DCTestSceneContainer" class="screen" style="width: 100%; height: 100%;">
         <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
             <ui:VisualElement name="Top_container" style="flex-direction: row; height: 10%;">
@@ -52,9 +56,9 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="PressureZone2__panel" class="pressure-panel-2 floating">
-                <ui:VisualElement name="PressureZone__two_panel" picking-mode="Ignore" class="pressure-zone-panel pressure-zone-panel-parked">
-                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" />
+            <ui:VisualElement name="PressureZone2__panel" class="pressure-panel-2 floating" style="opacity: 1;">
+                <ui:VisualElement name="PressureZone__two_panel" picking-mode="Ignore" class="pressure-zone-panel pressure-zone-panel-parked" style="opacity: 1;">
+                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" style="opacity: 1;" />
                     <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container pressure-zone-value-container-parked">
                         <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
                         <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
@@ -75,7 +79,7 @@
                 <AttributeOverrides element-name="TeachingMode_toggle" value="true" />
             </ui:Instance>
         </ui:VisualElement>
-        <ui:VisualElement name="QuickTourContainer" class="quick-tour-container-dark quick-tour-container-light floating" style="width: 100%; height: 200%; display: flex; position: absolute; background-color: rgba(91, 91, 91, 0.7); flex-grow: 1;">
+        <ui:VisualElement name="QuickTourContainer" class="quick-tour-container-dark quick-tour-container-light floating" style="width: 100%; height: 200%; display: flex; position: absolute; background-color: rgba(91, 91, 91, 0.7); flex-grow: 1; top: 0; left: 0;">
             <ui:Instance template="TutorialPopup" name="TutorialPopup" picking-mode="Ignore" class="tutorial-container" style="position: absolute;" />
         </ui:VisualElement>
         <ui:Button name="FillButton-flash" focusable="false" class="button button-flashing floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_5_drop_.png?fileID=2800000&amp;guid=6f649aea2852e3b46a8c4386355a2c53&amp;type=3#T_5_drop_&apos;); display: none; position: absolute; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />

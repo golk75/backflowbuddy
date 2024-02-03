@@ -15,7 +15,6 @@
     align-items: center;
     align-self: flex-start;
     flex-direction: row;
-    flex-grow: 0;
 }
 
 .pressure-zone-header {

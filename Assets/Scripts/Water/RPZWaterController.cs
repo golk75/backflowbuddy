@@ -187,7 +187,7 @@ public class RPZWaterController : MonoBehaviour
     public GameObject checkValve2;
     Rigidbody check1Rb;
     Rigidbody check2Rb;
-
+    public Rigidbody reliefCheckRb;
     public ZibraLiquid liquid;
     ZibraLiquidSolverParameters liquidSolverParameters;
     public bool randomizePressure = true;
@@ -198,12 +198,14 @@ public class RPZWaterController : MonoBehaviour
     public float inputForce = 1;
     public float volume;
     public float supplyPsi = 80f;
+
     float zone1Pressure;
     public float zone2Pressure;
     public float zone3Pressure;
 
     public float check1SpringForce;
     public float check2SpringForce;
+    public float reliefValveSpringForce;
     float zone1PsiChange;
     public float zone2PsiChange;
     public float zone3PsiChange;
@@ -215,6 +217,9 @@ public class RPZWaterController : MonoBehaviour
     public float check1FFStrength;
     public float check2FFStrength;
     public float Zone1TcMinParticleCount = 3000;
+    public float reliefValveOpeningPoint;
+    public float pressureAgainstRelief;
+
     void Start()
     {
 
@@ -224,6 +229,7 @@ public class RPZWaterController : MonoBehaviour
         initSupplyColliderPos = supplyCollider.transform.localPosition;
         check1Rb = checkValve1.GetComponent<Rigidbody>();
         check2Rb = checkValve2.GetComponent<Rigidbody>();
+
         initialCheck1Mass = check1Rb.mass;
         initialCheck2Mass = check1Rb.mass;
         sightTubeVoidInitSurfaceDist = sightTubeVoid.GetComponent<AnalyticSDF>().SurfaceDistance;
@@ -284,9 +290,14 @@ public class RPZWaterController : MonoBehaviour
         zone1Pressure = supplyPsi;
         zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange;
         zone3Pressure = (zone2Pressure - check2SpringForce) + zone3PsiChange;
+        pressureAgainstRelief = zone2Pressure + reliefValveSpringForce;
+
+
+        reliefValveOpeningPoint = zone2Pressure + reliefValveSpringForce;
 
         zone1to2PsiDiff = (zone1Pressure - zone2Pressure) / 10;
         zone2to3PsiDiff = (zone2Pressure - zone3Pressure) / 10;
+
         if (zone2Pressure <= 0)
         {
             zone2Pressure = 0;
@@ -299,13 +310,28 @@ public class RPZWaterController : MonoBehaviour
     }
     void CheckValveRegulate()
     {
+        //DEFAULT/Home position
         if (zone1Pressure < (check1SpringForce + zone2Pressure))
         {
+
             check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
         }
         if (zone2Pressure < (check2SpringForce + zone3Pressure))
         {
             check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+        }
+        if (pressureAgainstRelief >= zone1Pressure)
+        {
+
+            reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
+            Debug.Log($"RVOP reached! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
+
+        }
+        else
+        {
+            reliefCheckRb.AddForce(new Vector3(1, 0, 0) * inputForce, ForceMode.Force);
+            Debug.Log($"RVOP NOT REACHED! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
+
         }
         /// <summary>
         /// Non-Static (non-testing conditions)
@@ -432,10 +458,12 @@ public class RPZWaterController : MonoBehaviour
 
             else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
             {
+
                 check1housingForceField.Strength = 0;
                 check2housingForceField.Strength = 0;
                 check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                 check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
             }
         }
 

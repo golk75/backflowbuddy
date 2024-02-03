@@ -14,8 +14,11 @@ public class PressureZoneHUDController : MonoBehaviour
 
     //game objects
     public WaterController waterController;
+    public RPZWaterController m_rpzWaterController;
     public PlayerController playerController;
     public UiClickFilter uiClickFilter;
+    public GameObject ActiveWaterController;
+
 
     //string ids
     const string SupplyPressureTextString = "SupplyPressure__value";
@@ -44,6 +47,8 @@ public class PressureZoneHUDController : MonoBehaviour
     Label m_PressureZone3TextField;
     Label m_CheckSpring1Value;
     Label m_CheckSpring2Value;
+    Label m_Zone2PressureSliderValue;
+    Label m_Zone3PressureSliderValue;
     Button m_CheckSpring1AddButton;
     Button m_CheckSpring1SubtractButton;
     Button m_CheckSpring2AddButton;
@@ -76,10 +81,11 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //floats
-    public float maxSpringPressure = 20f;
+    public float maxSpringPressure = 50f;
     public float check1SpringPressure = 10;
     public float check2SpringPressure = 5;
-
+    public float check1SpringInitPressure = 5f;
+    public float check2SpringInitPressure = 4f;
 
 
 
@@ -92,15 +98,18 @@ public class PressureZoneHUDController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         SetVisualElements();
         RegisterCallBacks();
 
 
         m_SupplyPressureTextField.isDelayed = false;
-        m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
+
+
         m_SupplyPressurePanel.pickingMode = PickingMode.Ignore;
         m_PressureZone2Panel.pickingMode = PickingMode.Ignore;
         m_PressureZone3Panel.pickingMode = PickingMode.Ignore;
+
 
     }
 
@@ -109,6 +118,8 @@ public class PressureZoneHUDController : MonoBehaviour
     {
         root = GetComponent<UIDocument>();
         m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelTemplateString);
+
+
         m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelTemplateString);
         m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelTemplateString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
@@ -127,6 +138,10 @@ public class PressureZoneHUDController : MonoBehaviour
         m_DropAreaMidSlot = root.rootVisualElement.Q<VisualElement>(DropAreaMidSlotString);
         m_DropAreaBotSlot = root.rootVisualElement.Q<VisualElement>(DropAreaBotSlotString);
 
+        m_Zone2PressureSliderValue = m_PressureZone2Panel.Q<Label>("slider-value-label");
+        m_Zone3PressureSliderValue = m_PressureZone3Panel.Q<Label>("slider-value-label");
+
+
 
         DropAreaSlotList.Add(m_DropAreaTopSlot);
         DropAreaSlotList.Add(m_DropAreaMidSlot);
@@ -136,9 +151,6 @@ public class PressureZoneHUDController : MonoBehaviour
         m_SupplyPressurePanel.AddManipulator(new PanelDragger(m_SupplyPressurePanel));
         m_PressureZone2Panel.AddManipulator(new PanelDragger(m_PressureZone2Panel));
         m_PressureZone3Panel.AddManipulator(new PanelDragger(m_PressureZone3Panel));
-
-
-
 
         foreach (var dragger in SliderHandleList)
         {
@@ -152,8 +164,24 @@ public class PressureZoneHUDController : MonoBehaviour
             RegisterSliderCallBacks(sliderBar);
         }
 
+        /// <summary>
+        /// This if statement changes the active water controller being refernced. This is neccessary because, at this time, there
+        ///  are seperate water controllers for each backflow assembly type
+        /// </summary>
 
+        if (waterController.isActiveAndEnabled)
+        {
+            m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
 
+        }
+        else
+        {
+            m_SupplyPressureTextField.value = m_rpzWaterController.supplyPsi.ToString();
+
+        }
+
+        check1SpringPressure = check1SpringInitPressure;
+        check2SpringPressure = check2SpringInitPressure;
     }
 
 
@@ -341,9 +369,6 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
 
-
-
-
     ///
     /// CUSTOM SLIDER
     /// 
@@ -376,15 +401,24 @@ public class PressureZoneHUDController : MonoBehaviour
 
         ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "pressure-zone-panel"));
 
+
     }
 
     private void InputValueChanged(ChangeEvent<string> evt)
     {
 
-        bool isInt = Int32.TryParse(evt.newValue, out int result);
+        var isInt = Int32.TryParse(evt.newValue, out int result);
+
+        if (waterController.isActiveAndEnabled)
+        {
+            waterController.supplyPsi = result;
+        }
+        else
+        {
+            m_rpzWaterController.supplyPsi = result;
+        }
 
 
-        waterController.supplyPsi = result;
     }
 
     void ZonePressureOperations(float zonePressureSliderValue, VisualElement zonePressureSlider)
@@ -396,11 +430,16 @@ public class PressureZoneHUDController : MonoBehaviour
 
                 break;
             case PressureZone2PanelString:
+
                 waterController.zone2PsiChange = zonePressureSliderValue;
+                m_rpzWaterController.zone2PsiChange = zonePressureSliderValue;
+                m_Zone2PressureSliderValue.text = zonePressureSliderValue.ToString();
+
                 // Debug.Log($"Zone2 slider operated");
                 break;
             case PressureZone3PanelString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
+                m_rpzWaterController.zone3PsiChange = zonePressureSliderValue;
                 // Debug.Log($"Zone3 slider operated");
                 break;
             default:
@@ -415,7 +454,16 @@ public class PressureZoneHUDController : MonoBehaviour
     //regulate min-max values as well as setting text in ui label
     void CheckSpring1Regulate()
     {
-        waterController.check1SpringForce = check1SpringPressure;
+        if (waterController.isActiveAndEnabled)
+        {
+            waterController.check1SpringForce = check1SpringPressure;
+        }
+        else
+        {
+
+            m_rpzWaterController.check1SpringForce = check1SpringPressure;
+        }
+
         if (check1SpringPressure >= maxSpringPressure)
         {
 
@@ -425,6 +473,7 @@ public class PressureZoneHUDController : MonoBehaviour
         }
         else if (check1SpringPressure > 0 && check1SpringPressure < maxSpringPressure)
         {
+            // Debug.Log($"m_CheckSpring1Value.text: {m_CheckSpring1Value.text}");
             m_CheckSpring1Value.text = ((short)check1SpringPressure).ToString();
         }
         else
@@ -437,7 +486,15 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void CheckSpring2Regulate()
     {
-        waterController.check2SpringForce = check2SpringPressure;
+        if (waterController.isActiveAndEnabled)
+        {
+            waterController.check2SpringForce = check2SpringPressure;
+        }
+        else
+        {
+            m_rpzWaterController.check2SpringForce = check2SpringPressure;
+        }
+
         if (check2SpringPressure >= maxSpringPressure)
         {
             check2SpringPressure = maxSpringPressure;
@@ -461,9 +518,17 @@ public class PressureZoneHUDController : MonoBehaviour
         CheckSpring1Regulate();
         CheckSpring2Regulate();
 
+        if (waterController.isActiveAndEnabled)
+        {
+            m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
+            m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
+        }
+        else
+        {
+            m_PressureZone2TextLabel.text = m_rpzWaterController.zone2Pressure.ToString();
+            m_PressureZone3TextField.text = m_rpzWaterController.zone3Pressure.ToString();
+        }
 
-        m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
-        m_PressureZone3TextField.text = waterController.zone3Pressure.ToString();
 
 
     }

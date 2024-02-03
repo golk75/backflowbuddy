@@ -1,5 +1,8 @@
 .pressure-zone-slider {
-    height: 100%;
+    margin-top: 15%;
+    margin-right: 15%;
+    margin-bottom: 15%;
+    margin-left: 15%;
 }
 
 .pressure-panel-3 {
@@ -17,7 +20,7 @@
 }
 
 .pressure-zone-slider {
-    height: 103px;
+    height: 121px;
 }
 
 .unity-slider__label {
@@ -29,7 +32,22 @@
 
 #unity-tracker {
     background-color: rgb(255, 255, 255);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .absolute-reposition {
+}
+
+#slider-value #Label {
+}
+
+#slider-value {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5;
+    margin-top: 5%;
+    -unity-text-align: upper-center;
+    font-size: 18px;
 }
