@@ -324,13 +324,13 @@ public class RPZWaterController : MonoBehaviour
         {
 
             reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
-            Debug.Log($"RVOP reached! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
+            // Debug.Log($"RVOP reached! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
 
         }
         else
         {
             reliefCheckRb.AddForce(new Vector3(1, 0, 0) * inputForce, ForceMode.Force);
-            Debug.Log($"RVOP NOT REACHED! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
+            // Debug.Log($"RVOP NOT REACHED! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
 
         }
         /// <summary>

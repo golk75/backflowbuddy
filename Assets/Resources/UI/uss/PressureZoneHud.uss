@@ -7,6 +7,13 @@
     font-size: 25px;
 }
 
+.pressure-panel-supply {
+    position: absolute;
+    left: 114px;
+    top: 250px;
+    right: 0;
+}
+
 .pressure-zone-panel {
     background-color: rgba(54, 55, 63, 0.63);
     border-color: var(--border-color-white);
@@ -43,6 +50,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    opacity: 1;
 }
 
 .pressure-zone-value-label {
@@ -189,11 +197,4 @@
     border-radius: 25px;
     border-width: var(--border-width);
     border-color: var(--border-color-white);
-}
-
-.pressure-panel-supply {
-    position: absolute;
-    left: 195px;
-    top: 250px;
-    right: 0;
 }

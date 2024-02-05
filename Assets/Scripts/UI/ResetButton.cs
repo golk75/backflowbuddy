@@ -22,6 +22,7 @@ public class ResetButton : MonoBehaviour
     public SightTubeController sightTubeController;
     public TestKitManager testKitManager;
     public PressureZoneHUDController pressureZoneHUDController;
+    public RPZWaterController m_rpzWaterController;
     public GameObject sightTube;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
@@ -145,10 +146,12 @@ public class ResetButton : MonoBehaviour
 
 
         //reset ui pressure values to 0
-        pressureZoneHUDController.check1SpringPressure = 0;
-        pressureZoneHUDController.check2SpringPressure = 0;
+        // pressureZoneHUDController.check1SpringPressure = 0;
+        // pressureZoneHUDController.check2SpringPressure = 0;
+
         waterController.supplyPsi = 0;
-        pressureZoneHUDController.m_SupplyPressureTextField.value = "0";
+        m_rpzWaterController.supplyPsi = 0;
+        pressureZoneHUDController.m_SupplyPressureTextField.text = "0";
 
         //ads control
 
