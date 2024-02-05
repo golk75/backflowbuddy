@@ -1,6 +1,10 @@
 .supply-pressure-slider-container {
 }
 
+#PressureZone__supply_panel #slider-value {
+    display: none;
+}
+
 #unity-text-input {
     border-color: var(--border-color-white);
     border-radius: var(--border-radius);
