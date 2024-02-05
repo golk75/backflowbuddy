@@ -412,7 +412,7 @@ public class PressureZoneHUDController : MonoBehaviour
         VisualElement currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
 
-
+        Debug.Log($"slider evt.newValue: {evt.newValue}");
         // Vector2 offset = new Vector2((currentNewDragger.layout.width - currentDragger.layout.width) / 2, (currentNewDragger.layout.height - currentDragger.layout.height) / 2);
         // Vector2 position = currentDragger.parent.LocalToWorld(currentDragger.transform.position);
 
