@@ -442,6 +442,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
     void ZonePressureOperations(float zonePressureSliderValue, VisualElement zonePressureSlider)
     {
+
         switch (zonePressureSlider.name)
         {
 
@@ -463,7 +464,7 @@ public class PressureZoneHUDController : MonoBehaviour
                 // }
                 break;
 
-            case PressureZone2PanelString:
+            case PressureZone2PanelTemplateString:
 
                 waterController.zone2PsiChange = zonePressureSliderValue;
                 m_rpzWaterController.zone2PsiChange = zonePressureSliderValue;
@@ -477,7 +478,7 @@ public class PressureZoneHUDController : MonoBehaviour
                 }
                 break;
 
-            case PressureZone3PanelString:
+            case PressureZone3PanelTemplateString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
                 m_rpzWaterController.zone3PsiChange = zonePressureSliderValue;
                 if (zonePressureSliderValue >= 0)
