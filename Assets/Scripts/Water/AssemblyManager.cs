@@ -10,16 +10,7 @@ public class AssemblyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // if (SceneManager.GetActiveScene().name == "RPZPlayScene_testing" || SceneManager.GetActiveScene().name == "RPZPlayScene_testing1")
-        // {
-        //     m_DCWaterManager.SetActive(false);
-        //     m_RPZWaterManager.SetActive(true);
-        // }
-        // else
-        // {
-        //     m_DCWaterManager.SetActive(true);
-        //     m_RPZWaterManager.SetActive(false);
-        // }
+
     }
 
     // Update is called once per frame
