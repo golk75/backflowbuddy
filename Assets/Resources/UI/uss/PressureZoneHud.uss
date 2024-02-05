@@ -181,9 +181,6 @@
     bottom: 0;
 }
 
-.pressure-zone-slider {
-}
-
 .new-dragger {
     background-color: rgba(0, 0, 0, 0);
     position: absolute;

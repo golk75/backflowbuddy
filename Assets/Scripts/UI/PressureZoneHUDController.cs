@@ -447,19 +447,20 @@ public class PressureZoneHUDController : MonoBehaviour
 
             case SupplyPressurePanelTemplateString:
 
+                m_rpzWaterController.supplyPsi = zonePressureSliderValue;
                 //add supply pressure
-                if (zonePressureSliderValue > lastSupplySliderValue)
-                {
-                    waterController.supplyPsi += 1;
-                    m_rpzWaterController.supplyPsi += 1;
+                // if (zonePressureSliderValue > lastSupplySliderValue)
+                // {
+                //     waterController.supplyPsi += 1;
+                //     m_rpzWaterController.supplyPsi += 1;
 
-                }
+                // }
                 //subtract supply pressure
-                else
-                {
-                    waterController.supplyPsi -= 1;
-                    m_rpzWaterController.supplyPsi -= 1;
-                }
+                // else
+                // {
+                //     waterController.supplyPsi -= 1;
+                //     m_rpzWaterController.supplyPsi -= 1;
+                // }
                 break;
 
             case PressureZone2PanelString:
@@ -555,7 +556,7 @@ public class PressureZoneHUDController : MonoBehaviour
         {
 
             m_CheckSpring2Value.text = ((short)check2SpringPressure).ToString();
-            Debug.Log($"check2SpringPressure: {check2SpringPressure} || m_CheckSpring2Value.text: {m_CheckSpring2Value.text}");
+
         }
         else
         {
