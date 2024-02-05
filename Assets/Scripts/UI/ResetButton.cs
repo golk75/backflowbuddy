@@ -155,7 +155,8 @@ public class ResetButton : MonoBehaviour
         // Actions.onResetBacklowPreventer?.Invoke();
         //ads control
 
-        SceneManager.LoadScene("RPZPlayScene_testing");
+        // SceneManager.LoadScene("RPZPlayScene_testing");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
