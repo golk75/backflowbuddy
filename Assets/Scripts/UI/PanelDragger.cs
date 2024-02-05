@@ -134,7 +134,7 @@ public class PanelDragger : PointerManipulator
 
     private Vector3 RootSpaceOfSlot(VisualElement slot)
     {
-        Vector2 slotWorldSpace = slot.parent.parent.parent.LocalToWorld(slot.layout.position);
+        Vector2 slotWorldSpace = slot.parent.parent.LocalToWorld(slot.layout.position);
         Vector2 dist = target.parent.WorldToLocal(target.layout.position);
         Vector2 diff = new Vector2(slotWorldSpace.x - dist.x, slotWorldSpace.y - dist.y);
         return root.WorldToLocal(diff);

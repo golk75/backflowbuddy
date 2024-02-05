@@ -31,7 +31,7 @@ public class PressureZoneHUDController : MonoBehaviour
     const string PressureZone2PanelString = "PressureZone__two_panel";
     const string PressureZone3PanelString = "PressureZone__three_panel";
     // const string SupplyPressurePanelTemplateString = "SupplyPressure__panelTemp";
-    const string SupplyPressurePanelTemplateString = "PressureZone__supply_panel";
+    const string SupplyPressurePanelTemplateString = "SupplyPressureZone__panel";
     const string CheckSpring1ValueLabelString = "CheckSpring1_value_label";
     const string CheckSpring2ValueLabelString = "CheckSpring2_value_label";
     const string CheckSpring1AddButtonString = "CheckSpring1_add_button";
@@ -418,7 +418,7 @@ public class PressureZoneHUDController : MonoBehaviour
 
         // currentNewDragger.transform.position = currentNewDragger.parent.WorldToLocal(position - offset);
 
-        ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "pressure-zone-panel"));
+        ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "floating"));
 
 
     }
