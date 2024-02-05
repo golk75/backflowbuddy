@@ -6,6 +6,7 @@ using com.zibra.liquid.Solver;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class ResetButton : MonoBehaviour
@@ -112,50 +113,49 @@ public class ResetButton : MonoBehaviour
         // m_interstitialAdController.ShowAd();
 
 
+        // // liquid.enabled = false;
+        // liquid.ReleaseSimulation();
         // liquid.enabled = false;
-        liquid.ReleaseSimulation();
-        liquid.enabled = false;
 
-        shutOffValveController.mainSupplyEmitter.enabled = false;
+        // shutOffValveController.mainSupplyEmitter.enabled = false;
 
 
 
-        Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
-        Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
+        // Check1.transform.localPosition = new Vector3(-0.101f, 0, -0.08f);
+        // Check2.transform.localPosition = new Vector3(-0.201f, -2.25f, -0.17f);
 
-        ResetTransforms();
+        // ResetTransforms();
 
-        foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
-        {
-            testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
-            testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
+        // foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+        // {
+        //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+        //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = true;
 
-        }
-        foreach (var hose in doubleCheckTestKitController.AttachedHoseList)
-        {
+        // }
+        // foreach (var hose in doubleCheckTestKitController.AttachedHoseList)
+        // {
 
-            Actions.onComponentGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
-            Actions.onComponentDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
+        //     Actions.onComponentGrab?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
+        //     Actions.onComponentDrop?.Invoke(hose, hose.GetComponent<OperableComponentDescription>());
 
-        }
-        Actions.onSightTubeGrab?.Invoke(sightTube);
-        Actions.onSightTubeDrop?.Invoke(sightTube);
-        doubleCheckTestKitController.AttachedTestCockList.Clear();
-        doubleCheckTestKitController.AttachedHoseList.Clear();
+        // }
+        // Actions.onSightTubeGrab?.Invoke(sightTube);
+        // Actions.onSightTubeDrop?.Invoke(sightTube);
+        // doubleCheckTestKitController.AttachedTestCockList.Clear();
+        // doubleCheckTestKitController.AttachedHoseList.Clear();
 
 
 
-        //reset ui pressure values to 0
-        // pressureZoneHUDController.check1SpringPressure = 0;
-        // pressureZoneHUDController.check2SpringPressure = 0;
+        // //reset ui pressure values to 0
+        // // pressureZoneHUDController.check1SpringPressure = 0;
+        // // pressureZoneHUDController.check2SpringPressure = 0;
 
-        waterController.supplyPsi = 0;
-        m_rpzWaterController.supplyPsi = 0;
-        pressureZoneHUDController.m_SupplyPressureTextField.text = "0";
+        // waterController.supplyPsi = 0;
 
+        // Actions.onResetBacklowPreventer?.Invoke();
         //ads control
 
-
+        SceneManager.LoadScene("RPZPlayScene_testing");
     }
 
 }
