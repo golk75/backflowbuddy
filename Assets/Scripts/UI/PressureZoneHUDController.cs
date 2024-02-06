@@ -357,7 +357,7 @@ public class PressureZoneHUDController : MonoBehaviour
         {
             m_PressureZone2TextLabel.text = m_rpzWaterController.zone2Pressure.ToString();
             m_PressureZone3TextField.text = m_rpzWaterController.zone3Pressure.ToString();
-            m_SupplyPressureTextField.text = m_rpzWaterController.supplyPsi.ToString();
+            m_SupplyPressureTextField.text = m_rpzWaterController.zone1Pressure.ToString();
         }
 
 
