@@ -143,6 +143,7 @@ public class RPZWaterController : MonoBehaviour
         private set { value = _checkZoneDetector; }
     }
 
+    public ZibraLiquidDetector m_detectorZone2;
     public GameObject CheckValve1;
     public GameObject CheckValve2;
     public GameObject sightTubeCurrentConnection;
@@ -286,26 +287,33 @@ public class RPZWaterController : MonoBehaviour
     void PressureZoneRegulate()
     {
 
-
         zone1Pressure = supplyPsi;
+        //------> Come back to this!
+        // zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange + (m_detectorZone2.ParticlesInside * 0.01f);
+
         zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange;
         zone3Pressure = (zone2Pressure - check2SpringForce) + zone3PsiChange;
+
+
+
+
+        // zone1Pressure = supplyPsi;
+        // zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange;
+        // zone3Pressure = (zone2Pressure - check2SpringForce) + zone3PsiChange;
         pressureAgainstRelief = zone2Pressure + reliefValveSpringForce;
-
-
         reliefValveOpeningPoint = zone2Pressure + reliefValveSpringForce;
 
         zone1to2PsiDiff = (zone1Pressure - zone2Pressure) / 10;
         zone2to3PsiDiff = (zone2Pressure - zone3Pressure) / 10;
 
-        if (zone2Pressure <= 0)
-        {
-            zone2Pressure = 0;
-        }
-        if (zone3Pressure <= 0)
-        {
-            zone3Pressure = 0;
-        }
+        // if (zone2Pressure <= 0)
+        // {
+        //     zone2Pressure = 0;
+        // }
+        // if (zone3Pressure <= 0)
+        // {
+        //     zone3Pressure = 0;
+        // }
 
     }
     void CheckValveRegulate()
@@ -322,7 +330,6 @@ public class RPZWaterController : MonoBehaviour
         }
         if (pressureAgainstRelief >= zone1Pressure)
         {
-
             reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
             // Debug.Log($"RVOP reached! pressureAgainstRelief: {pressureAgainstRelief} || zone1Pressure: {zone1Pressure}");
 
