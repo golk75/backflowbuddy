@@ -301,8 +301,10 @@ public class RPZWaterController : MonoBehaviour
 
 
 
-        zone1Pressure = supplyPsi + (m_detectorZone1.ParticlesInside / 1000) * 0.1f;
-        zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange + (m_detectorZone2.ParticlesInside / 1000) * 0.1f;
+        // zone1Pressure = supplyPsi + (m_detectorZone1.ParticlesInside / 1000) * 0.1f;
+        // zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange + (m_detectorZone2.ParticlesInside / 1000) * 0.1f;
+        zone1Pressure = supplyPsi;
+        zone2Pressure = (zone1Pressure - check1SpringForce) + zone2PsiChange;
         zone3Pressure = (zone2Pressure - check2SpringForce) + zone3PsiChange;
         pressureAgainstRelief = zone2Pressure + reliefValveSpringForce;
         reliefValveOpeningPoint = zone2Pressure + reliefValveSpringForce;
