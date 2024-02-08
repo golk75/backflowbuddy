@@ -173,6 +173,7 @@ public class RPZWaterController : MonoBehaviour
     Vector3 supplyVoidTargetPos = new Vector3(-9.5f, 0, 0);
     Vector3 initSupplyVoidPos;
     Vector3 maxCheck1CloseColliderSize = new Vector3(0.057f, 0.007f, 0.07f);
+    Vector3 maxCheck2CloseVoidSize = new Vector3(0.055f, 0.005f, 0.05f);
 
     Vector3 initSupplyVoidScale;
     Vector3 currentSupplyVoidScale;
@@ -227,8 +228,8 @@ public class RPZWaterController : MonoBehaviour
     public float zone3PsiChange;
     public float zone1to2PsiDiff;
     public float zone2to3PsiDiff;
-    public float zone2primedParticleCount = 10000;
-    public float zone3primedParticleCount = 10000;
+    public float zone2primedParticleCount = 5000;
+    public float zone3primedParticleCount = 5000;
     public float devicePrimedParticleCount = 39000;
     public bool test1InProgress = false;
     public float check1FFStrength;
@@ -396,12 +397,39 @@ public class RPZWaterController : MonoBehaviour
         reliefValveOpeningPoint = zone1Pressure - zone2Pressure - 2;
 
     }
+    void CloseCheckValve(GameObject checkValveRb, bool checkStatus, ZibraLiquidCollider checkCollider, ZibraLiquidVoid checkVoid)
+    {
+        Rigidbody rb = checkValveRb.GetComponent<Rigidbody>();
+        Vector3 refSize = Vector3.zero;
+        rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+        if (checkCollider == null || checkVoid == null)
+            return;
+
+        //if check valve is closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
+        if (checkStatus == true)
+        {
+            checkVoid.transform.localScale = Vector3.SmoothDamp(checkVoid.transform.localScale, maxCheck1CloseColliderSize, ref refSize, 0.5f, 1f);
+
+            if (checkVoid.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
+            {
+                checkCollider.transform.localScale = Vector3.SmoothDamp(checkCollider.transform.localScale, maxCheck1CloseColliderSize, ref refSize, 0.5f, 1f);
+            }
+        }
+        else
+        {
+            checkCollider.transform.localScale = Vector3.SmoothDamp(checkCollider.transform.localScale, Vector3.zero, ref refSize, 2f, 2f);
+            checkVoid.transform.localScale = Vector3.SmoothDamp(checkVoid.transform.localScale, Vector3.zero, ref refSize, 2f, 1f);
+        }
+
+
+    }
     void CheckValveRegulate()
     {
         if (zone1Pressure < check1SpringForce)
         {
 
-            //While device is empty, supply pressure must overcome #1 check 
+            //While device is empty, supply pressure must overcome check#1
             check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
             m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
 
@@ -420,7 +448,7 @@ public class RPZWaterController : MonoBehaviour
             //close #1 if zone2 is higher than supply or if relief opened
             check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
 
-            //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
+            // //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
             if (Check1Status.GetComponent<CheckValveCollision>().isCheckClosed == true)
             {
                 m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, maxCheck1CloseColliderSize, ref check1VoidRef, 0.5f, 1f);
@@ -431,7 +459,7 @@ public class RPZWaterController : MonoBehaviour
                 }
             }
 
-
+            //CloseCheckValve(checkValve1, Check1Status.GetComponent<CheckValveCollision>().isCheckClosed, m_Collider_Check1Close, m_VoidCheck1);
 
         }
         else
@@ -439,6 +467,18 @@ public class RPZWaterController : MonoBehaviour
             m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
             m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
         }
+        if (zone2Pressure < check2SpringForce)
+        {
+            //While device is empty, zone2 pressure must overcome check#2
+            check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
+        }
+        else
+        {
+            m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
+            m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
+        }
+
         if (zone2Pressure < zone3Pressure)
         {
             //close #2 if zone 3 is higher than zone2
@@ -446,13 +486,15 @@ public class RPZWaterController : MonoBehaviour
             //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
             if (Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed == true)
             {
-                m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, maxCheck1CloseColliderSize, ref check2VoidRef, 0.5f, 1f);
+                m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, maxCheck2CloseVoidSize, ref check2VoidRef, 0.5f, 1f);
                 if (m_VoidCheck2.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
                 {
                     m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
 
                 }
             }
+
+            // CloseCheckValve(checkValve2, Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed, m_Collider_Check2Close, m_VoidCheck2);
         }
         else
         {
@@ -544,8 +586,8 @@ public class RPZWaterController : MonoBehaviour
                 check2housingForceField.Strength = 0;
             }
 
-            //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
 
+            //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
             if (testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false && shutOffValveController.IsSecondShutOffOpen == false)
             {
 
@@ -557,36 +599,9 @@ public class RPZWaterController : MonoBehaviour
                 {
                     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                 }
-                //     if (check1Detector.ParticlesInside > zone2primedParticleCount)
-                //     {
-                //         Debug.Log($"here2");
-                //         check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                //     }
-                //     else
-                //     {
-                //         check1housingForceField.Strength = Mathf.SmoothDamp(
-                //           check1housingForceField.Strength,
-                //           check1FFStrength,
-                //           ref check1FFref.x,
-                //           0.5f
-                //       );
-                //     }
-
-                //     if (check2Detector.ParticlesInside > zone3primedParticleCount)
-                //     {
-                //         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                //     }
-                //     else
-                //     {
-                //         check2housingForceField.Strength = Mathf.SmoothDamp(
-                //             check2housingForceField.Strength,
-                //             check1FFStrength,
-                //             ref check2FFref.x,
-                //             0.5f
-                //         );
-                //     }
 
             }
+            //open check#2 if tc#4 is opened
             if (testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
             {
 
@@ -594,18 +609,18 @@ public class RPZWaterController : MonoBehaviour
                 {
                     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                 }
-                check1housingForceField.Strength = Mathf.SmoothDamp(
-                       check1housingForceField.Strength,
-                       check1FFStrength,
-                       ref check1FFref.x,
-                       0.5f
-                   );
-                check2housingForceField.Strength = Mathf.SmoothDamp(
-                        check2housingForceField.Strength,
-                        check2FFStrength,
-                        ref check2FFref.x,
-                        0.5f
-                    );
+                // check1housingForceField.Strength = Mathf.SmoothDamp(
+                //        check1housingForceField.Strength,
+                //        check1FFStrength,
+                //        ref check1FFref.x,
+                //        0.5f
+                //    );
+                // check2housingForceField.Strength = Mathf.SmoothDamp(
+                //         check2housingForceField.Strength,
+                //         check2FFStrength,
+                //         ref check2FFref.x,
+                //         0.5f
+                //     );
 
             }
             if (testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false && shutOffValveController.IsSecondShutOffOpen == false)
@@ -783,18 +798,6 @@ public class RPZWaterController : MonoBehaviour
         }
 
     }
-
-    private IEnumerator Check1Close()
-    {
-        while (Check1Status.GetComponent<CheckValveCollision>().isCheckClosed == true)
-        {
-            m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
-
-            yield return null;
-        }
-        m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 0.5f, 1f);
-    }
-
     void TestCock1Regulate()
     {
 
