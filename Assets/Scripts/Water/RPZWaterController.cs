@@ -30,6 +30,7 @@ public class RPZWaterController : MonoBehaviour
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
     public DoubleCheckTestKitController doubleCheckTestKitController;
+    // public RpzTestKitController rpzTestKitController;
     [SerializeField]
     SightTubeController sightTubeController;
     [SerializeField]
@@ -962,6 +963,11 @@ public class RPZWaterController : MonoBehaviour
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
             }
 
+            /// <summary>
+            /// hose(s) connected
+            /// </summary>
+            /// 
+
 
             if (
                     testCockController.isTestCock2Open == true
@@ -1048,8 +1054,9 @@ public class RPZWaterController : MonoBehaviour
             }
 
             /// <summary>
-            /// No sight tube or hose connected
+            /// end hose(s) connected
             /// </summary>
+            /// 
 
             if (
                     testCockController.isTestCock2Open == true
@@ -1145,7 +1152,6 @@ public class RPZWaterController : MonoBehaviour
             if (
                     testCockController.isTestCock2Open == true
                     && TestCockHoseDetect2.isConnected == false
-                // && sightTubeController.currentTestCockConnection != hoseDetector2
                 )
             {
 
@@ -1173,7 +1179,7 @@ public class RPZWaterController : MonoBehaviour
             if (
                    testCockController.isTestCock3Open == true
                    && TestCockHoseDetect3.isConnected == false
-               // && sightTubeController.currentTestCockConnection != hoseDetector2
+
                )
             {
 
@@ -1201,7 +1207,7 @@ public class RPZWaterController : MonoBehaviour
             if (
                      testCockController.isTestCock4Open == true
                      && TestCockHoseDetect4.isConnected == false
-                 // && sightTubeController.currentTestCockConnection != hoseDetector2
+
                  )
             {
 
