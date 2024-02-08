@@ -860,96 +860,6 @@ public class RPZWaterController : MonoBehaviour
             }
 
 
-            // Void_Check1.transform.localScale = Vector3.zero;
-
-            //Void_Check2.transform.localScale = Vector3.zero;
-
-
-
-            /// <summary>
-            ///Sight tube operation---------------------------------------------------
-            /// </summary>
-
-            //tc2 non-static condition pressure
-            if (sightTubeController.currentTestCockConnection == hoseDetector2)
-            {
-                if (
-                        testCockController.isTestCock2Open == true
-                        && TestCockHoseDetect2.isConnected == true
-                    )
-                {
-
-                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
-                    {
-                        TestCockFF2.Strength = 0;
-                        sightTubeEmitter.enabled = true;
-                    }
-
-                }
-                else
-                {
-                    sightTubeEmitter.enabled = false;
-
-                }
-            }
-            //tc3 non-static condition pressure
-            else if (sightTubeController.currentTestCockConnection == hoseDetector3)
-            {
-
-                if (
-                         testCockController.isTestCock3Open == true
-                         && TestCockHoseDetect3.isConnected == true
-                     )
-                {
-
-
-                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
-                    {
-
-                        TestCockFF3.Strength = 0;
-                        sightTubeEmitter.enabled = true;
-                    }
-
-                }
-                else
-                {
-
-                    sightTubeEmitter.enabled = false;
-
-                }
-            }
-            //tc4 non-static condition pressure
-            else if (sightTubeController.currentTestCockConnection == hoseDetector4)
-            {
-
-                if (
-                          testCockController.isTestCock4Open == true
-                          && TestCockHoseDetect4.isConnected == true
-                      )
-                {
-
-                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
-                    {
-                        TestCockFF4.Strength = 0;
-                        sightTubeEmitter.enabled = true;
-                    }
-
-                }
-                else
-                {
-                    sightTubeEmitter.enabled = false;
-
-                }
-            }
-            //sight tube not connected to anything
-            else
-            {
-                sightTubeEmitter.enabled = false;
-            }
-            /// <summary>
-            /// End sight tube operation---------------------------------------------------------------------------------
-            /// </summary>
-
 
             /// <summary>
             /// No sight tube or hose connected
@@ -1058,91 +968,6 @@ public class RPZWaterController : MonoBehaviour
 
 
             /// <summary>
-            ///Sight tube operation---------------------------------------------------
-            /// </summary>
-
-            //tc2 non-static condition pressure
-            if (sightTubeController.currentTestCockConnection == hoseDetector2)
-            {
-                if (
-                        testCockController.isTestCock2Open == true
-                        && TestCockHoseDetect2.isConnected == true
-                    )
-                {
-
-                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
-                    {
-                        TestCockFF2.Strength = 0;
-                        sightTubeEmitter.enabled = true;
-                    }
-
-                }
-                else
-                {
-                    sightTubeEmitter.enabled = false;
-
-                }
-            }
-            //tc3 non-static condition pressure
-            else if (sightTubeController.currentTestCockConnection == hoseDetector3)
-            {
-
-                if (
-                         testCockController.isTestCock3Open == true
-                         && TestCockHoseDetect3.isConnected == true
-                     )
-                {
-
-
-                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
-                    {
-
-                        TestCockFF3.Strength = 0;
-                        sightTubeEmitter.enabled = true;
-                    }
-
-                }
-                else
-                {
-
-                    sightTubeEmitter.enabled = false;
-
-                }
-            }
-            //tc4 non-static condition pressure
-            else if (sightTubeController.currentTestCockConnection == hoseDetector4)
-            {
-
-                if (
-                          testCockController.isTestCock4Open == true
-                          && TestCockHoseDetect4.isConnected == true
-                      )
-                {
-
-                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
-                    {
-                        TestCockFF4.Strength = 0;
-                        sightTubeEmitter.enabled = true;
-                    }
-
-                }
-                else
-                {
-                    sightTubeEmitter.enabled = false;
-
-                }
-            }
-            //sight tube not connected to anything
-            else
-            {
-                sightTubeEmitter.enabled = false;
-            }
-            /// <summary>
-            /// End sight tube operation---------------------------------------------------------------------------------
-            /// </summary>
-
-
-            /// <summary>
             /// No sight tube or hose connected
             /// </summary>
 
@@ -1237,7 +1062,7 @@ public class RPZWaterController : MonoBehaviour
         /// Static conditions
         /// </summary>
 
-        else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
+        else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
             isDeviceInStaticCondition = true;
 
