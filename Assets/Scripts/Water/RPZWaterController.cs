@@ -591,64 +591,61 @@ public class RPZWaterController : MonoBehaviour
             if (testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false && shutOffValveController.IsSecondShutOffOpen == false)
             {
 
-                if (m_detectorZone3.ParticlesInside >= 37000)
-                {
-                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                }
-                if (m_detectorZone2.ParticlesInside >= 30000)
+                if (m_detectorZone2.ParticlesInside > zone2primedParticleCount)
                 {
                     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
                 }
+                else
+                {
+                    check1housingForceField.Strength = Mathf.SmoothDamp(
+                      check1housingForceField.Strength,
+                      check1FFStrength,
+                      ref check1FFref.x,
+                      0.5f
+                  );
+                }
+
+                if (m_detectorZone3.ParticlesInside > zone3primedParticleCount)
+                {
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                    check2housingForceField.Strength = 0;
+                }
+                else
+                {
+                    check2housingForceField.Strength = Mathf.SmoothDamp(
+                        check2housingForceField.Strength,
+                        check1FFStrength,
+                        ref check2FFref.x,
+                        0.5f
+                    );
+                }
+
 
             }
             //open check#2 if tc#4 is opened
             if (testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
             {
 
-                if (check1Detector.ParticlesInside > zone2primedParticleCount)
-                {
-                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                }
-                // check1housingForceField.Strength = Mathf.SmoothDamp(
-                //        check1housingForceField.Strength,
-                //        check1FFStrength,
-                //        ref check1FFref.x,
-                //        0.5f
-                //    );
-                // check2housingForceField.Strength = Mathf.SmoothDamp(
-                //         check2housingForceField.Strength,
-                //         check2FFStrength,
-                //         ref check2FFref.x,
-                //         0.5f
-                //     );
+
 
             }
             if (testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false && shutOffValveController.IsSecondShutOffOpen == false)
             {
 
-                if (check2Detector.ParticlesInside > zone3primedParticleCount)
+                if (m_detectorZone2.ParticlesInside > zone2primedParticleCount)
                 {
                     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                    check2housingForceField.Strength = 0;
+                }
+                else
+                {
                     check1housingForceField.Strength = Mathf.SmoothDamp(
                      check1housingForceField.Strength,
-                     check1FFStrength,
+                     1f,
                      ref check1FFref.x,
                      0.5f);
-
                 }
-
-                // if (check1Detector.ParticlesInside > zone2primedParticleCount)
-                // {
-                //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                // }
-                // else
-                // {
-                //     check1housingForceField.Strength = Mathf.SmoothDamp(
-                //      check1housingForceField.Strength,
-                //      1f,
-                //      ref check1FFref.x,
-                //      0.5f);
-                // }
 
 
             }
