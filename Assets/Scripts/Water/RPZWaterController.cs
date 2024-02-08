@@ -241,6 +241,7 @@ public class RPZWaterController : MonoBehaviour
 
     //booleans
     public bool randomizePressure = true;
+    private bool isDeviceInTestingCondititons;
     public bool isDeviceInStaticCondition;
     public bool isTeachingModeEnabled = false;
     public bool isReliefValveOpen;
@@ -550,10 +551,10 @@ public class RPZWaterController : MonoBehaviour
 
 
         /// <summary>
-        /// Non-Static (non-testing conditions)
+        /// non-testing conditions
         /// </summary>
         /// <value></value>
-        if (isDeviceInStaticCondition == false)
+        if (isDeviceInTestingCondititons)
         {
 
             if (reliefValveOpeningPoint > 0)
@@ -666,27 +667,24 @@ public class RPZWaterController : MonoBehaviour
 
             }
 
-            else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
-            {
 
-                check1housingForceField.Strength = 0;
-                check2housingForceField.Strength = 0;
-                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+        }
+        else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
+        {
 
-            }
+            check1housingForceField.Strength = 0;
+            check2housingForceField.Strength = 0;
+            check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
         }
 
-
         /// <summary>
-        /// Static (testing conditions)
+        /// device is not in testing conditions (both shut offs open)
         /// </summary>
         /// <value></value>
         else
         {
-
-
-
 
             if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
             {
@@ -1042,10 +1040,14 @@ public class RPZWaterController : MonoBehaviour
             /// </summary>
         }
 
+        /// <summary>
+        /// Testing conditions (#1 shutoff open & #2 shutoff closed)
+        /// </summary>
 
 
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
+            isDeviceInTestingCondititons = true;
             isDeviceInStaticCondition = false;
             foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
