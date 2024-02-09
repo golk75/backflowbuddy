@@ -442,6 +442,9 @@ public class RpzTestKitController : MonoBehaviour
     {
         // _gaugeProgressBar.style.width = Length.Percent(GetPsidDigitalNeedle());
     }
+
+
+
     private void PressureControl()
     {
 
@@ -453,46 +456,108 @@ public class RpzTestKitController : MonoBehaviour
         // Start Test Procedures//========================>
         //========================================
 
+
+
+
         if (isConnectedToAssembly == true)
         {
 
 
-            if (
-                  AttachedHoseList.Contains(HighHose)
-                  && rpzWaterController.m_detectorZone1.ParticlesInside > 100
-                  && isTestCock2Open
-                  && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-               //   && !isTestCock3Open
-               )
+
+            if (AttachedHoseList.Contains(HighHose))
             {
-
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    maxPSID,
-                    needleRiseSpeed
-                );
-
+                var highHoseConnection = HighHose.GetComponent<HoseBib>().testCock.name;
+                if (highHoseConnection != null)
+                {
+                    switch (highHoseConnection)
+                    {
+                        case
+                            "HoseDetector1":
+                            Debug.Log($"HighHose connected to tc#1");
+                            break;
+                        case "HoseDetector2":
+                            Debug.Log($"HighHose connected to tc#2");
+                            break;
+                        case "HoseDetector3":
+                            Debug.Log($"HighHose connected to tc#3");
+                            break;
+                        case "HoseDetector4":
+                            Debug.Log($"HighHose connected to tc#4");
+                            break;
+                        default:
+                            Debug.Log($"High Hose connectee not recognized");
+                            break;
+                    }
+                }
             }
-            if (
-                 AttachedHoseList.Contains(LowHose)
-                 && rpzWaterController.m_detectorZone2.ParticlesInside > 100
-                 && isTestCock3Open
-                 && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose
-              //  && !isTestCock3Open
-              )
-            {
 
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    maxPSID,
-                    needleRiseSpeed
-                );
 
-            }
-            else
-            {
-                //Debug.Log($"AttachedHoseList.Contains(LowHose): {AttachedHoseList.Contains(LowHose)} || rpzWaterController.m_detectorZone2.ParticlesInside > 100: {rpzWaterController.m_detectorZone2.ParticlesInside > 100} || isTestCock3Open: {isTestCock3Open} || TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose: {TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose}");
-            }
+
+            // if (rpzWaterController.m_detectorZone1.ParticlesInside > 0)
+            // {
+            //     if (AttachedHoseList.Contains(HighHose))
+            //     {
+            //         if (isTestCock2Open)
+            //         {
+            //             hosePressure = Mathf.SmoothStep(
+            //                     hosePressure,
+            //                     maxPSID,
+            //                     needleRiseSpeed
+            //                     );
+            //         }
+
+            //     }
+            //     if (AttachedHoseList.Contains(HighHose) && AttachedHoseList.Contains(LowHose))
+            //     {
+
+
+            //         if (
+            //             isTestCock2Open
+            //             && isTestCock3Open
+            //         )
+            //             hosePressure = Mathf.SmoothStep(
+            //                  hosePressure,
+            //                  zone1to2PsiDiff,
+            //                  needleRiseSpeed
+            //              );
+            //     }
+
+            // if (
+            //       AttachedHoseList.Contains(HighHose)
+            //       && rpzWaterController.m_detectorZone1.ParticlesInside > 100
+            //       && isTestCock2Open
+            //       && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+            //    //   && !isTestCock3Open
+            //    )
+            // {
+
+            //     hosePressure = Mathf.SmoothStep(
+            //         hosePressure,
+            //         maxPSID,
+            //         needleRiseSpeed
+            //     );
+
+            // }
+            // if (
+            //      AttachedHoseList.Contains(LowHose)
+            //      && rpzWaterController.m_detectorZone2.ParticlesInside > 100
+            //      && isTestCock3Open
+            //      && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose
+            //   //  && !isTestCock3Open
+            //   )
+            // {
+
+            //     hosePressure = Mathf.SmoothStep(
+            //         hosePressure,
+            //         maxPSID,
+            //         needleRiseSpeed
+            //     );
+
+            // }
+            // else
+            // {
+            //     //Debug.Log($"AttachedHoseList.Contains(LowHose): {AttachedHoseList.Contains(LowHose)} || rpzWaterController.m_detectorZone2.ParticlesInside > 100: {rpzWaterController.m_detectorZone2.ParticlesInside > 100} || isTestCock3Open: {isTestCock3Open} || TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose: {TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose}");
+            // }
 
             //========================================
             // Relief Valave Opening Point//========================>
@@ -666,27 +731,28 @@ public class RpzTestKitController : MonoBehaviour
                         //========================================
                          */
         }
-
-        //if hose is disconnected, drop pressure on gauge
-        if (!AttachedHoseList.Contains(HighHose))
-        {
-            // hosePressure -= 5;
-            hosePressure = Mathf.SmoothStep(
-              hosePressure,
-              0,
-              0.5f
-          );
-        }
-        if (hosePressure <= minPSID)
-        {
-            hosePressure = minPSID;
-        }
-        if (hosePressure > maxPSID)
-        {
-            hosePressure = maxPSID;
-        }
-
     }
+
+    //if hose is disconnected, drop pressure on gauge
+    // if (!AttachedHoseList.Contains(HighHose))
+    // {
+    //     // hosePressure -= 5;
+    //     hosePressure = Mathf.SmoothStep(
+    //       hosePressure,
+    //       0,
+    //       0.5f
+    //   );
+    // }
+    // if (hosePressure <= minPSID)
+    // {
+    //     hosePressure = minPSID;
+    // }
+    // if (hosePressure > maxPSID)
+    // {
+    //     hosePressure = maxPSID;
+    // }
+
+
 
     private float CaptureCheck1ClosingPoint(float psid)
     {
