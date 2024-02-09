@@ -18,6 +18,7 @@ public class FillButton : MonoBehaviour
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public DoubleCheckTestKitController doubleCheckTestKitController;
+    public RpzTestKitController rpzTestKitController;
     public GameObject SO1;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
@@ -71,7 +72,7 @@ public class FillButton : MonoBehaviour
             playerController._operableObjectRotation.y = 180;
             // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
-            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
+            foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;

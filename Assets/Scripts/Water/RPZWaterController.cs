@@ -1,15 +1,15 @@
 
 
-using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.Security;
 using com.zibra.liquid.DataStructures;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.SDFObjects;
 using com.zibra.liquid.Solver;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEditor.Rendering;
+
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class RPZWaterController : MonoBehaviour
 {
@@ -117,6 +117,9 @@ public class RPZWaterController : MonoBehaviour
     public ZibraLiquidVoid Void_floor;
     public ZibraLiquidVoid Void_floor_mid;
     public ZibraLiquidVoid Void_ReliefCheck_front;
+    public ZibraLiquidVoid m_ReliefValve_top_void;
+    public ZibraLiquidVoid m_VoidOutfeed;
+
     [SerializeField]
     public ZibraLiquidForceField check1housingForceField;
 
@@ -124,6 +127,7 @@ public class RPZWaterController : MonoBehaviour
     public ZibraLiquidForceField check2housingForceField;
 
     public ZibraLiquidForceField m_sensingLineFF;
+    public ZibraLiquidForceField m_ReliefDumpFF;
 
 
     //Coroutines
@@ -165,6 +169,7 @@ public class RPZWaterController : MonoBehaviour
     public GameObject CheckValve2;
     public GameObject sightTubeCurrentConnection;
 
+    Vector3 initSupplyEmitterPos;
     Vector3 CheckValve1StartingPos;
     Vector3 CheckValve2StartingPos;
     Vector3 supplyColliderPos;
@@ -248,7 +253,10 @@ public class RPZWaterController : MonoBehaviour
     public bool isReliefValveOpen;
     public bool isCheck1Closed;
     public bool isCheck2Closed;
-
+    [SerializeField]
+    List<ZibraLiquidVoid> VoidList;
+    [SerializeField]
+    List<ZibraLiquidCollider> ColliderList;
 
     void Start()
     {
@@ -270,12 +278,14 @@ public class RPZWaterController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        testCock4Str = Random.Range(testCock4MinStr, testCock4MaxStr);
-        testCock3Str = Random.Range(testCock3MinStr, testCock3MaxStr);
+        testCock4Str = UnityEngine.Random.Range(testCock4MinStr, testCock4MaxStr);
+        testCock3Str = UnityEngine.Random.Range(testCock3MinStr, testCock3MaxStr);
         CheckValve1StartingPos = checkValve1.transform.position;
         CheckValve2StartingPos = checkValve2.transform.position;
         liquidSolverParameters = liquid.GetComponent<ZibraLiquidSolverParameters>();
+        initSupplyEmitterPos = mainSupplyEmitter.transform.localPosition;
         mainSupplyEmitter.VolumePerSimTime = 0;
+
 
     }
     void SupplyRegulate()
@@ -285,23 +295,56 @@ public class RPZWaterController : MonoBehaviour
         /// </summary>
         supplyColliderTargetPos.x =
             shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
-        supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
         supplyVoidTargetPos.x = shutOffValveController.ShutOffValve1.transform.eulerAngles.z / 90;
         supplyVoid.transform.localPosition = initSupplyVoidPos - supplyVoidTargetPos;
 
-        volume = Mathf.Lerp(
-                          supplyPsi,
-                          0,
-                          ShutOffValve1.transform.eulerAngles.z / 90f
-                      );
+        // volume = Mathf.Lerp(
+        //                   supplyPsi,
+        //                   0,
+        //                   ShutOffValve1.transform.eulerAngles.z / 90f
+        //               );
+        if (shutOffValveController.IsSupplyOn == true)
+        {
+            foreach (var liquidVoid in VoidList)
+            {
+                liquidVoid.enabled = true;
+            }
+            foreach (var liquidCollider in ColliderList)
+            {
+                liquidCollider.enabled = false;
+            }
+            m_ReliefDumpFF.enabled = false;
+            m_sensingLineFF.enabled = true;
+            liquid.SimulationTimeScale = 60;
 
-        mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
-            mainSupplyEmitter.VolumePerSimTime,
-            volume,
-            1f
-        );
+            supplyCollider.transform.localPosition = initSupplyColliderPos + supplyColliderTargetPos;
+            mainSupplyEmitter.VolumePerSimTime = Mathf.SmoothStep(
+                mainSupplyEmitter.VolumePerSimTime,
+                supplyPsi,
+                1f
+            );
+        }
+        else
+        {
+            foreach (var liquidVoid in VoidList)
+            {
+                liquidVoid.enabled = false;
+            }
+            foreach (var liquidCollider in ColliderList)
+            {
+                liquidCollider.enabled = true;
+            }
+            liquid.SimulationTimeScale = 30;
 
-        if (m_reliefValveSensingLineDetector.ParticlesInside < 500)
+            supplyCollider.transform.localPosition = new Vector3(1.24000001f, 2.21000004f, 0.0299999993f);
+            mainSupplyEmitter.VolumePerSimTime = 0;
+            m_sensingLineFF.enabled = false;
+            m_ReliefDumpFF.enabled = false;
+
+
+        }
+
+        if (m_reliefValveSensingLineDetector.ParticlesInside < 500 && shutOffValveController.IsSupplyOn == true)
         {
             m_sensingLineEmitter.VolumePerSimTime = mainSupplyEmitter.VolumePerSimTime / 100;
         }
@@ -323,7 +366,7 @@ public class RPZWaterController : MonoBehaviour
         }
         else
         {
-            supplyVoid.transform.localScale = Vector3.SmoothDamp(supplyVoid.transform.localScale, Vector3.zero, ref supplyVoidScaleRef, 1f, 1f);
+            supplyVoid.transform.localScale = Vector3.SmoothDamp(supplyVoid.transform.localScale, new Vector3(2.89f, 1.37f, -0.02f), ref supplyVoidScaleRef, 1f, 1f);
         }
 
 
@@ -369,26 +412,30 @@ public class RPZWaterController : MonoBehaviour
         //------------------------------------------------------------------------------------------------------------
 
 
-        zone1Pressure = supplyPsi + (m_detectorZone1.ParticlesInside / 1000) * 0.1f;
 
+        zone1Pressure = supplyPsi + m_detectorZone1.ParticlesInside / 1000 * 0.1f;
 
-        if (zone1Pressure - check1SpringForce + zone2PsiChange <= 0 && m_detectorZone2.ParticlesInside <= 0)
+        if (zone1Pressure - check1SpringForce + zone2PsiChange >= 0 && m_detectorZone2.ParticlesInside >= 0)
         {
-            zone2Pressure = 0;
-            check1housingForceField.Strength = 0;
-        }
-        else if (m_detectorZone2.ParticlesInside > 500)
-        {
+
             zone2Pressure = zone1Pressure - check1SpringForce + zone2PsiChange;
         }
-        if (zone2Pressure - check2SpringForce + zone3PsiChange <= 0 && m_detectorZone3.ParticlesInside <= 0)
+        else
         {
-            zone3Pressure = 0;
-            check2housingForceField.Strength = 0;
+            zone2Pressure = m_detectorZone2.ParticlesInside / 1000 * 0.1f;
+            check1housingForceField.Strength = 0;
+
         }
-        else if (m_detectorZone3.ParticlesInside > 500)
+        if (zone2Pressure - check2SpringForce + zone3PsiChange >= 0 && m_detectorZone3.ParticlesInside >= 0)
         {
             zone3Pressure = zone2Pressure - check2SpringForce + zone3PsiChange;
+
+        }
+        else
+        {
+            zone3Pressure = m_detectorZone3.ParticlesInside / 1000 * 0.1f;
+            check2housingForceField.Strength = 0;
+
         }
 
 
@@ -431,7 +478,7 @@ public class RPZWaterController : MonoBehaviour
         /// <summary>
         /// any conditions
         /// </summary>
-        /// <value></value>
+
         if (zone1Pressure < check1SpringForce)
         {
 
@@ -479,11 +526,14 @@ public class RPZWaterController : MonoBehaviour
             //While device is empty, zone2 pressure must overcome check#2
             check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
             m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
+            if (shutOffValveController.IsSecondShutOffOpen == true)
+                m_VoidOutfeed.enabled = true;
         }
         else
         {
             m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
             m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
+            m_VoidOutfeed.enabled = false;
         }
 
         if (zone2Pressure < zone3Pressure)
@@ -499,14 +549,17 @@ public class RPZWaterController : MonoBehaviour
                     m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
                     check2housingForceField.Strength = 0;
                 }
+
             }
 
             // CloseCheckValve(checkValve2, Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed, m_Collider_Check2Close, m_VoidCheck2);
         }
         else
         {
+
             m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
             m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
+            //m_VoidOutfeed.enabled = false;
         }
 
 
@@ -555,12 +608,15 @@ public class RPZWaterController : MonoBehaviour
         {
             reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
         }
+        /// <summary>
+        /// END -any conditions
+        /// </summary>
+
 
 
         /// <summary>
-        /// testing conditions
+        /// testing conditions - no attachments
         /// </summary>
-        /// <value></value>
         if (isDeviceInTestingCondititons)
         {
 
@@ -674,130 +730,162 @@ public class RPZWaterController : MonoBehaviour
         }
 
         /// <summary>
-        /// non-testing conditions
+        /// non-testing conditions - no attachments
         /// </summary>
-        /// <value></value>
+
+
+        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
+        {
+            check1housingForceField.Strength = 0;
+            check2housingForceField.Strength = 0;
+
+
+        }
         else
         {
 
-            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
-            {
+            //only worried about check housing force field right now
+            check1housingForceField.Strength = Mathf.SmoothDamp(
+                  check1housingForceField.Strength,
+                  check1FFStrength,
+                  ref check1FFref.x,
+                  0.5f
+              );
+            check2housingForceField.Strength = Mathf.SmoothDamp(
+                                check2housingForceField.Strength,
+                                check2FFStrength,
+                                ref check2FFref.x,
+                                0.5f
+                            );
+            { /*
+                        if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
+                        {
 
-                if (check1Detector.ParticlesInside > zone2primedParticleCount)
-                {
-                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                }
-                else
-                {
-                    check1housingForceField.Strength = Mathf.SmoothDamp(
-                      check1housingForceField.Strength,
-                      check1FFStrength,
-                      ref check1FFref.x,
-                      0.5f
-                  );
-                }
+                            // if (check1Detector.ParticlesInside > zone2primedParticleCount)
+                            // {
+                            //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                            // }
+                            // else
+                            // {
+                            //     check1housingForceField.Strength = Mathf.SmoothDamp(
+                            //       check1housingForceField.Strength,
+                            //       check1FFStrength,
+                            //       ref check1FFref.x,
+                            //       0.5f
+                            //   );
+                            // }
 
-                if (check2Detector.ParticlesInside > zone3primedParticleCount)
-                {
-                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                }
-                else
-                {
-                    check2housingForceField.Strength = Mathf.SmoothDamp(
-                        check2housingForceField.Strength,
-                        check2FFStrength,
-                        ref check2FFref.x,
-                        0.5f
-                    );
-                }
+                            // if (check2Detector.ParticlesInside > zone3primedParticleCount)
+                            // {
+                            //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                            // }
+                            // else
+                            // {
+                            //     check2housingForceField.Strength = Mathf.SmoothDamp(
+                            //         check2housingForceField.Strength,
+                            //         check2FFStrength,
+                            //         ref check2FFref.x,
+                            //         0.5f
+                            //     );
+                            // }
+                        }
+                        if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
+                        {
+
+
+                        }
+                        if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
+                        {
+                            //closing checks during testing procedures---> evaluating gauge
+
+                            // if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                            // {
+                            //     check1housingForceField.Strength = Mathf.SmoothDamp(
+                            //     check1housingForceField.Strength,
+                            //     check1FFStrength,
+                            //     ref check1FFref.x,
+                            //     0.2f
+                            //     );
+                            //     check2housingForceField.Strength = 0;
+                            //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                            // }
+                            // else
+                            // {
+                            //     check1housingForceField.Strength = 0;
+                            //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                            //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+                            // }
+
+                        }
+                        if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
+                        {
+
+                            // check1housingForceField.Strength = 0;
+                            // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                            // check2housingForceField.Strength = 0;
+                            // check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+                        }
+                        if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true)
+                        {
+                            //closing checks during testing procedures---> evaluating gauge
+
+
+                            // if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+                            // {
+
+                            //     check1housingForceField.Strength = Mathf.SmoothDamp(
+                            //     check1housingForceField.Strength,
+                            //     check1FFStrength,
+                            //     ref check1FFref.x,
+                            //     0.2f
+                            //     );
+
+                            //     check2housingForceField.Strength = Mathf.SmoothDamp(
+                            //     check2housingForceField.Strength,
+                            //     check2FFStrength,
+                            //     ref check2FFref.x,
+                            //     0.2f
+                            //     );
+
+
+                            // }
+                            // else
+                            // {
+                            //     check1housingForceField.Strength = 0;
+                            //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                            //     check2housingForceField.Strength = 0;
+                            //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+                            // }
+                        }
+                        if (testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
+                        {
+
+                        }
+
+                    }
+                    /// <summary>
+                    /// END - non-testing conditions - no attachments
+                    /// </summary>
+                    if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
+                    {
+
+                        check1housingForceField.Strength = 0;
+                        check2housingForceField.Strength = 0;
+                        check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                        check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+                    }
+             */
             }
-            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
-            {
-
-
-            }
-            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
-            {
-                //closing checks during testing procedures---> evaluating gauge
-
-                // if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
-                // {
-                //     check1housingForceField.Strength = Mathf.SmoothDamp(
-                //     check1housingForceField.Strength,
-                //     check1FFStrength,
-                //     ref check1FFref.x,
-                //     0.2f
-                //     );
-                //     check2housingForceField.Strength = 0;
-                //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                // }
-                // else
-                // {
-                //     check1housingForceField.Strength = 0;
-                //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
-                // }
-
-            }
-            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
-            {
-
-                // check1housingForceField.Strength = 0;
-                // check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                // check2housingForceField.Strength = 0;
-                // check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
-            }
-            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true)
-            {
-                //closing checks during testing procedures---> evaluating gauge
-
-
-                // if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
-                // {
-
-                //     check1housingForceField.Strength = Mathf.SmoothDamp(
-                //     check1housingForceField.Strength,
-                //     check1FFStrength,
-                //     ref check1FFref.x,
-                //     0.2f
-                //     );
-
-                //     check2housingForceField.Strength = Mathf.SmoothDamp(
-                //     check2housingForceField.Strength,
-                //     check2FFStrength,
-                //     ref check2FFref.x,
-                //     0.2f
-                //     );
-
-
-                // }
-                // else
-                // {
-                //     check1housingForceField.Strength = 0;
-                //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                //     check2housingForceField.Strength = 0;
-                //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
-                // }
-            }
-            if (testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
-            {
-
-            }
-
         }
-        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == true)
+        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
         {
-
             check1housingForceField.Strength = 0;
             check2housingForceField.Strength = 0;
-            check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-            check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
         }
-
 
     }
     void TestCock1Regulate()
@@ -852,7 +940,6 @@ public class RPZWaterController : MonoBehaviour
     {
 
 
-
         if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
             ///Determine if testing conditions are met ---------------------------------------------------
@@ -874,7 +961,7 @@ public class RPZWaterController : MonoBehaviour
                 )
             {
 
-                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
+                if (m_detectorZone1.ParticlesInside > 5000)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -959,12 +1046,12 @@ public class RPZWaterController : MonoBehaviour
             }
 
             /// <summary>
-            /// hose(s) connected
+            /// hose(s) connected - water ops
             /// </summary>
 
             if (
                     testCockController.isTestCock2Open == true
-                    // m_detectorZone1.ParticlesInside > 0
+                    && m_detectorZone1.ParticlesInside > 0
                     && TestCockHoseDetect2.isConnected == true
 
                 )
@@ -1019,9 +1106,6 @@ public class RPZWaterController : MonoBehaviour
                 TestCockFF3.Strength = 0;
             }
 
-            //tc4 static condition pressure
-
-
             if (
                      testCockController.isTestCock4Open == true
                      && TestCockHoseDetect4.isConnected == true
@@ -1048,7 +1132,7 @@ public class RPZWaterController : MonoBehaviour
             }
 
             /// <summary>
-            /// END - hose(s) connected
+            /// END - hose(s) connected - water ops
             /// </summary>
 
 
