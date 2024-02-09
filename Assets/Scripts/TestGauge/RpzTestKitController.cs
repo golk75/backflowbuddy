@@ -348,12 +348,13 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (bleederHoseEmitter.VolumePerSimTime > 0)
                     {
-                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
 
+                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
                     }
                     else
                     {
-                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+
 
                     }
 
@@ -366,9 +367,9 @@ public class RpzTestKitController : MonoBehaviour
         }
     }
 
-    IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
+    IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
-        Debug.Log($"{obj} rotated CLOSE");
+        Debug.Log($"{obj} rotated OPEN");
         float timeLerped = 0.0f;
 
         while (timeLerped < 1.0)
@@ -378,9 +379,9 @@ public class RpzTestKitController : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
+    IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
-        Debug.Log($"{obj} rotated OPEN");
+        Debug.Log($"{obj} rotated CLOSED");
         float timeLerped = 0.0f;
         knobOpened = true;
         while (timeLerped < 1.0)
@@ -443,144 +444,189 @@ public class RpzTestKitController : MonoBehaviour
     }
     private void PressureControl()
     {
-        // For  now, soely using high hose (double check assembly testing)
+
 
 
         if (isConnectedToAssembly == true)
         {
-
             //========================================
-            // #1 Check Test//========================>
-            //========================================
-
-            if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock2Open
-                && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-                && !isTestCock3Open
-            )
-            {
-                //maxed out psid (needle pinned out)
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    maxPSID,
-                    needleRiseSpeed
-                );
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock2Open
-                && isTestCock3Open
-                && waterController.isDeviceInStaticCondition == true
-            )
-            {
-                //best looking psid drop so far is: hosePressure -= 0.3f;
-                // differnce ratio between windows to mac = 1:15
-                //Windows----------------
-
-                // if (liquid.UseFixedTimestep == true)
-                // {
-                //     hosePressure -= 0.04f;
-                // }
-                // //!Windows----------------
-                // else
-                // {
-                //     hosePressure -= 0.65f;
-                // }
-
-                hosePressure = Mathf.SmoothStep(
-                  hosePressure,
-                  waterController.zone1to2PsiDiff,
-                  0.1f
-              );
-
-
-
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock2Open
-                && isTestCock3Open
-                && shutOffValveController.IsSupplyOn == false
-
-            )
-            {
-                hosePressure += 0;
-
-            }
-            //========================================
-            // END - #1 Check Test//==================>
-            //========================================
-            //========================================
-            // #2 Check Test//========================>
+            // Begin Test Procedures//========================>
             //========================================
 
-            if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock3Open
-                && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-                && !isTestCock4Open
-            )
-            {
 
-                //maxed out psid (needle pinned out)
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    maxPSID,
-                    needleRiseSpeed
-                );
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock3Open
-                && isTestCock4Open
-                && waterController.isDeviceInStaticCondition == true
-            )
-            {
-                //best looking psid drop so far is: hosePressure -= 0.3f;
-                // differnce ratio between windows to mac = 1:15
-                //Windows----------------
-
-                // if (liquid.UseFixedTimestep == true)
-                // {
-                //     hosePressure -= 0.04f;
-                // }
-                // //!Windows----------------
-                // else
-                // {
-                //     hosePressure -= 0.65f;
-                // }
-
-                hosePressure = Mathf.SmoothStep(
-                  hosePressure,
-                  waterController.zone2to3PsiDiff,
-                  0.1f
-              );
-
-
-
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock3Open
-                && isTestCock4Open
-                && shutOffValveController.IsSupplyOn == false
-
-            )
-            {
-                hosePressure += 0;
-
-            }
             //========================================
-            // END - #2 Check Test//==================>
+            // Relief Valave Opening Point//========================>
             //========================================
+
+
+            //========================================
+            // END - Relief Valave Opening Point//==================>
+            //========================================   
+
+
+            //========================================
+            // Check Valve #2//========================>
+            //========================================
+
+
+            //========================================
+            // END - Check Valve #2//==================>
+            //========================================
+
+
+            //========================================
+            // Check Valve #1//========================>
+            //========================================
+
+
+            //========================================
+            // END - Check Valve #1//==================>
+            //========================================
+
+
+
+
+
+
+            //========================================
+            // End Test Procedures//========================>
+            //========================================
+
+            /*
+                        //========================================
+                        // #1 Check Test//========================>
+                        //========================================
+
+                        if (
+                            AttachedHoseList.Contains(HighHose)
+                            && shutOffValveController.IsSupplyOn == true
+                            && isTestCock2Open
+                            && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+                            && !isTestCock3Open
+                        )
+                        {
+                            //maxed out psid (needle pinned out)
+                            hosePressure = Mathf.SmoothStep(
+                                hosePressure,
+                                maxPSID,
+                                needleRiseSpeed
+                            );
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock2Open
+                            && isTestCock3Open
+                            && waterController.isDeviceInStaticCondition == true
+                        )
+                        {
+                            //best looking psid drop so far is: hosePressure -= 0.3f;
+                            // differnce ratio between windows to mac = 1:15
+                            //Windows----------------
+
+                            // if (liquid.UseFixedTimestep == true)
+                            // {
+                            //     hosePressure -= 0.04f;
+                            // }
+                            // //!Windows----------------
+                            // else
+                            // {
+                            //     hosePressure -= 0.65f;
+                            // }
+
+                            hosePressure = Mathf.SmoothStep(
+                              hosePressure,
+                              waterController.zone1to2PsiDiff,
+                              0.1f
+                          );
+
+
+
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock2Open
+                            && isTestCock3Open
+                            && shutOffValveController.IsSupplyOn == false
+
+                        )
+                        {
+                            hosePressure += 0;
+
+                        }
+                        //========================================
+                        // END - #1 Check Test//==================>
+                        //========================================
+                        //========================================
+                        // #2 Check Test//========================>
+                        //========================================
+
+                        if (
+                            AttachedHoseList.Contains(HighHose)
+                            && shutOffValveController.IsSupplyOn == true
+                            && isTestCock3Open
+                            && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+                            && !isTestCock4Open
+                        )
+                        {
+
+                            //maxed out psid (needle pinned out)
+                            hosePressure = Mathf.SmoothStep(
+                                hosePressure,
+                                maxPSID,
+                                needleRiseSpeed
+                            );
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock3Open
+                            && isTestCock4Open
+                            && waterController.isDeviceInStaticCondition == true
+                        )
+                        {
+                            //best looking psid drop so far is: hosePressure -= 0.3f;
+                            // differnce ratio between windows to mac = 1:15
+                            //Windows----------------
+
+                            // if (liquid.UseFixedTimestep == true)
+                            // {
+                            //     hosePressure -= 0.04f;
+                            // }
+                            // //!Windows----------------
+                            // else
+                            // {
+                            //     hosePressure -= 0.65f;
+                            // }
+
+                            hosePressure = Mathf.SmoothStep(
+                              hosePressure,
+                              waterController.zone2to3PsiDiff,
+                              0.1f
+                          );
+
+
+
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock3Open
+                            && isTestCock4Open
+                            && shutOffValveController.IsSupplyOn == false
+
+                        )
+                        {
+                            hosePressure += 0;
+
+                        }
+                        //========================================
+                        // END - #2 Check Test//==================>
+                        //========================================
+                         */
         }
+
         //if hose is disconnected, drop pressure on gauge
         if (!AttachedHoseList.Contains(HighHose))
         {

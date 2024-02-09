@@ -30,7 +30,7 @@ public class RPZWaterController : MonoBehaviour
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
     public DoubleCheckTestKitController doubleCheckTestKitController;
-    // public RpzTestKitController rpzTestKitController;
+    public RpzTestKitController rpzTestKitController;
     [SerializeField]
     SightTubeController sightTubeController;
     [SerializeField]
@@ -867,7 +867,7 @@ public class RPZWaterController : MonoBehaviour
             if (
                     testCockController.isTestCock2Open == true
                     && TestCockHoseDetect2.isConnected == false
-                // && sightTubeController.currentTestCockConnection != hoseDetector2
+
                 )
             {
 
@@ -923,7 +923,7 @@ public class RPZWaterController : MonoBehaviour
             if (
                      testCockController.isTestCock4Open == true
                      && TestCockHoseDetect4.isConnected == false
-                 // && sightTubeController.currentTestCockConnection != hoseDetector2
+
                  )
             {
 
@@ -949,6 +949,12 @@ public class RPZWaterController : MonoBehaviour
             /// </summary>
         }
 
+
+
+
+
+
+
         /// <summary>
         /// Testing conditions (#1 shutoff open & #2 shutoff closed)
         /// </summary>
@@ -967,16 +973,15 @@ public class RPZWaterController : MonoBehaviour
             /// hose(s) connected
             /// </summary>
             /// 
-
-
             if (
-                    testCockController.isTestCock2Open == true
+                    // testCockController.isTestCock2Open == true
+                    m_detectorZone1.ParticlesInside > 0
                     && TestCockHoseDetect2.isConnected == true
 
                 )
             {
 
-                if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -1007,7 +1012,7 @@ public class RPZWaterController : MonoBehaviour
                )
             {
 
-                if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -1035,7 +1040,7 @@ public class RPZWaterController : MonoBehaviour
                  )
             {
 
-                if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+                if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
@@ -1065,7 +1070,7 @@ public class RPZWaterController : MonoBehaviour
                 )
             {
 
-                if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
                     TestCockFF2.Strength = Mathf.SmoothDamp(
                         TestCockFF2.Strength,
@@ -1096,7 +1101,7 @@ public class RPZWaterController : MonoBehaviour
                )
             {
 
-                if (doubleCheckTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
                 {
                     TestCockFF3.Strength = Mathf.SmoothDamp(
                         TestCockFF3.Strength,
@@ -1124,7 +1129,7 @@ public class RPZWaterController : MonoBehaviour
                  )
             {
 
-                if (doubleCheckTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+                if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
                 {
                     TestCockFF4.Strength = Mathf.SmoothDamp(
                         TestCockFF4.Strength,
