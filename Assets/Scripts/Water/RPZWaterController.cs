@@ -229,8 +229,8 @@ public class RPZWaterController : MonoBehaviour
     public float zone3PsiChange;
     public float zone1to2PsiDiff;
     public float zone2to3PsiDiff;
-    public float zone2primedParticleCount = 5000;
-    public float zone3primedParticleCount = 5000;
+    public float zone2primedParticleCount = 10000;
+    public float zone3primedParticleCount = 10000;
     public float devicePrimedParticleCount = 39000;
     public bool test1InProgress = false;
     public float check1FFStrength;
@@ -428,6 +428,10 @@ public class RPZWaterController : MonoBehaviour
     }
     void CheckValveRegulate()
     {
+        /// <summary>
+        /// any conditions
+        /// </summary>
+        /// <value></value>
         if (zone1Pressure < check1SpringForce)
         {
 
@@ -457,7 +461,7 @@ public class RPZWaterController : MonoBehaviour
                 if (m_VoidCheck1.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
                 {
                     m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
-
+                    check1housingForceField.Strength = 0;
                 }
             }
 
@@ -468,6 +472,7 @@ public class RPZWaterController : MonoBehaviour
         {
             m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
             m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
+
         }
         if (zone2Pressure < check2SpringForce)
         {
@@ -492,7 +497,7 @@ public class RPZWaterController : MonoBehaviour
                 if (m_VoidCheck2.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
                 {
                     m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
-
+                    check2housingForceField.Strength = 0;
                 }
             }
 
@@ -540,7 +545,8 @@ public class RPZWaterController : MonoBehaviour
         if (reliefValveOpeningPoint > 0)
         {
             isReliefValveOpen = false;
-            reliefCheckRb.AddForce(new Vector3(1, 0, 0) * inputForce, ForceMode.Force);
+            if (m_reliefValveSensingLineDetector.ParticlesInside > 0)
+                reliefCheckRb.AddForce(new Vector3(1, 0, 0) * inputForce, ForceMode.Force);
             // Debug.Log($"RVOP NOT REACHED! reliefValveOpeningPoint: {reliefValveOpeningPoint}, condition: reliefValveOpeningPoint > 0");
 
         }
@@ -668,7 +674,7 @@ public class RPZWaterController : MonoBehaviour
         }
 
         /// <summary>
-        /// device is not in testing conditions (both shut offs open || shutoff#1 closed and shutoff#2 open)
+        /// non-testing conditions
         /// </summary>
         /// <value></value>
         else
@@ -846,13 +852,13 @@ public class RPZWaterController : MonoBehaviour
     {
 
 
-        /// <summary>
-        ///Non-Testing conditions ---------------------------------------------------
-        /// </summary>
-        /// 
+
         if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
+            ///Determine if testing conditions are met ---------------------------------------------------
             isDeviceInTestingCondititons = false;
+
+
 
             // foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)
             // {
@@ -886,9 +892,6 @@ public class RPZWaterController : MonoBehaviour
                 TestCockFF2.Strength = 0;
             }
 
-            //tc3 non-static condition pressure
-
-
             if (
                    testCockController.isTestCock3Open == true
                    && TestCockHoseDetect3.isConnected == false
@@ -918,10 +921,9 @@ public class RPZWaterController : MonoBehaviour
 
 
             if (
-                     testCockController.isTestCock4Open == true
-                     && TestCockHoseDetect4.isConnected == false
-
-                 )
+                    testCockController.isTestCock4Open == true
+                    && TestCockHoseDetect4.isConnected == false
+               )
             {
 
                 if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
@@ -941,23 +943,13 @@ public class RPZWaterController : MonoBehaviour
 
                 TestCockFF4.Strength = 0;
             }
-            /// <summary>
-            /// End no sight tube or hose operation---------------------------------------------------------------------------------
-            /// </summary>
+
         }
 
 
-
-
-
-
-
-        /// <summary>
-        /// Define/check for testing conditions (#1 shutoff open & #2 shutoff closed)
-        /// </summary>
-        /// 
         else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
         {
+            ///Determine if testing conditions are met ---------------------------------------------------
             isDeviceInTestingCondititons = true;
 
             foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)
@@ -969,10 +961,10 @@ public class RPZWaterController : MonoBehaviour
             /// <summary>
             /// hose(s) connected
             /// </summary>
-            /// 
+
             if (
-                    // testCockController.isTestCock2Open == true
-                    m_detectorZone1.ParticlesInside > 0
+                    testCockController.isTestCock2Open == true
+                    // m_detectorZone1.ParticlesInside > 0
                     && TestCockHoseDetect2.isConnected == true
 
                 )
@@ -1056,182 +1048,197 @@ public class RPZWaterController : MonoBehaviour
             }
 
             /// <summary>
-            /// end hose(s) connected
+            /// END - hose(s) connected
             /// </summary>
-            /// 
 
-            if (
-                    testCockController.isTestCock2Open == true
-                    && TestCockHoseDetect2.isConnected == false
 
-                )
+            /// <summary>
+            /// No hose(s) connected
+            /// </summary>
             {
-
-                if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                if (
+                        testCockController.isTestCock2Open == true
+                        && TestCockHoseDetect2.isConnected == false
+                    )
                 {
-                    TestCockFF2.Strength = Mathf.SmoothDamp(
-                        TestCockFF2.Strength,
-                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                        ref testCockFF2Ref.x,
-                        0.005f
-                    );
+
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
+                    {
+                        TestCockFF2.Strength = Mathf.SmoothDamp(
+                            TestCockFF2.Strength,
+                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                            ref testCockFF2Ref.x,
+                            0.005f
+                        );
+
+                    }
 
                 }
                 else
                 {
+
                     TestCockFF2.Strength = 0;
                 }
 
-            }
-            else
-            {
-
-                TestCockFF2.Strength = 0;
-            }
-
-            //tc3 static condition pressure
 
 
-            if (
-                   testCockController.isTestCock3Open == true
-                   && TestCockHoseDetect3.isConnected == false
-               )
-            {
 
-                if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                if (
+                       testCockController.isTestCock3Open == true
+                       && TestCockHoseDetect3.isConnected == false
+
+                   )
                 {
-                    TestCockFF3.Strength = Mathf.SmoothDamp(
-                        TestCockFF3.Strength,
-                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
-                        ref testCockFF3Ref.x,
-                        0.005f
-                    );
+
+                    if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
+                    {
+                        TestCockFF3.Strength = Mathf.SmoothDamp(
+                            TestCockFF3.Strength,
+                            Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                            ref testCockFF3Ref.x,
+                            0.005f
+                        );
+
+                    }
 
                 }
-
-            }
-            else
-            {
-
-                TestCockFF3.Strength = 0;
-            }
-
-            //tc4 static condition pressure
-
-
-            if (
-                     testCockController.isTestCock4Open == true
-                     && TestCockHoseDetect4.isConnected == false
-
-                 )
-            {
-
-                if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+                else
                 {
-                    TestCockFF4.Strength = Mathf.SmoothDamp(
-                        TestCockFF4.Strength,
-                        Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
-                        ref testCockFF4Ref.x,
-                        0.005f
-                    );
 
+                    TestCockFF3.Strength = 0;
                 }
 
-            }
-            else
-            {
 
-                TestCockFF4.Strength = 0;
-            }
-            /// <summary>
-            /// End no sight tube or hose operation---------------------------------------------------------------------------------
-            /// </summary>
 
-            /// <summary>
-            /// No sight tube or hose connected
-            /// </summary>
 
-            if (
-                    testCockController.isTestCock2Open == true
-                    && TestCockHoseDetect2.isConnected == false
-                )
-            {
-
-                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
+                if (
+                       testCockController.isTestCock4Open == true
+                       && TestCockHoseDetect4.isConnected == false
+                   )
                 {
-                    TestCockFF2.Strength = Mathf.SmoothDamp(
-                        TestCockFF2.Strength,
-                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                        ref testCockFF2Ref.x,
-                        0.005f
-                    );
+
+                    if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
+                    {
+                        TestCockFF4.Strength = Mathf.SmoothDamp(
+                            TestCockFF4.Strength,
+                            Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
+                            ref testCockFF4Ref.x,
+                            0.005f
+                        );
+
+                    }
 
                 }
-
-            }
-            else
-            {
-
-                TestCockFF2.Strength = 0;
-            }
-
-            //tc3 non-static condition pressure
-
-
-            if (
-                   testCockController.isTestCock3Open == true
-                   && TestCockHoseDetect3.isConnected == false
-
-               )
-            {
-
-                if (check1Detector.ParticlesInside > Zone1TcMinParticleCount)
+                else
                 {
-                    TestCockFF3.Strength = Mathf.SmoothDamp(
-                        TestCockFF3.Strength,
-                        Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
-                        ref testCockFF3Ref.x,
-                        0.005f
-                    );
 
+                    TestCockFF4.Strength = 0;
                 }
-
-            }
-            else
-            {
-
-                TestCockFF3.Strength = 0;
-            }
-
-            //tc4 non-static condition pressure
+                /// <summary>
+                ///END - No hose(s) connected
+                /// </summary>
 
 
-            if (
-                   testCockController.isTestCock4Open == true
-                   && TestCockHoseDetect4.isConnected == false
-               )
-            {
 
-                if (check2Detector.ParticlesInside > Zone1TcMinParticleCount)
+
+
+
+
+
+                /// <summary>
+                ////////TEST/// No hose(s) connected
+                /// </summary>
                 {
-                    TestCockFF4.Strength = Mathf.SmoothDamp(
-                        TestCockFF4.Strength,
-                        Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
-                        ref testCockFF4Ref.x,
-                        0.005f
-                    );
+                    // if (
+                    //         testCockController.isTestCock2Open == true
+                    //         && TestCockHoseDetect2.isConnected == false
 
+                    //     )
+                    // {
+
+                    //     if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                    //     {
+                    //         TestCockFF2.Strength = Mathf.SmoothDamp(
+                    //             TestCockFF2.Strength,
+                    //             Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
+                    //             ref testCockFF2Ref.x,
+                    //             0.005f
+                    //         );
+
+                    //     }
+                    //     else
+                    //     {
+                    //         TestCockFF2.Strength = 0;
+                    //     }
+
+                    // }
+                    // else
+                    // {
+
+                    //     TestCockFF2.Strength = 0;
+                    // }
+
+                    // //tc3 static condition pressure
+
+
+                    // if (
+                    //        testCockController.isTestCock3Open == true
+                    //        && TestCockHoseDetect3.isConnected == false
+                    //    )
+                    // {
+
+                    //     if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
+                    //     {
+                    //         TestCockFF3.Strength = Mathf.SmoothDamp(
+                    //             TestCockFF3.Strength,
+                    //             Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
+                    //             ref testCockFF3Ref.x,
+                    //             0.005f
+                    //         );
+
+                    //     }
+
+                    // }
+                    // else
+                    // {
+
+                    //     TestCockFF3.Strength = 0;
+                    // }
+
+                    // //tc4 static condition pressure
+
+
+                    // if (
+                    //          testCockController.isTestCock4Open == true
+                    //          && TestCockHoseDetect4.isConnected == false
+
+                    //      )
+                    // {
+
+                    //     if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
+                    //     {
+                    //         TestCockFF4.Strength = Mathf.SmoothDamp(
+                    //             TestCockFF4.Strength,
+                    //             Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
+                    //             ref testCockFF4Ref.x,
+                    //             0.005f
+                    //         );
+
+                    //     }
+
+                    // }
+                    // else
+                    // {
+
+                    //     TestCockFF4.Strength = 0;
+                    // }
                 }
+                /// <summary>
+                ////////TEST///END - No hose(s) connected
+                /// </summary>
+
 
             }
-            else
-            {
-
-                TestCockFF4.Strength = 0;
-            }
-            /// <summary>
-            /// End no sight tube or hose operation---------------------------------------------------------------------------------
-            /// </summary>
         }
 
 

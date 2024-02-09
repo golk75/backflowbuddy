@@ -448,7 +448,7 @@ public class RpzTestKitController : MonoBehaviour
         //track zone pressures
         zone1to2PsiDiff = rpzWaterController.zone1to2PsiDiff;
         zone2to3PsiDiff = rpzWaterController.zone2to3PsiDiff;
-        Debug.Log($"zone1to2PsiDiff: {zone1to2PsiDiff}");
+
         //========================================
         // Start Test Procedures//========================>
         //========================================
