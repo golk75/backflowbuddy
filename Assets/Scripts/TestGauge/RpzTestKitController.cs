@@ -19,6 +19,8 @@ public class RpzTestKitController : MonoBehaviour
     public TestCockController testCockController;
     public CheckValveStatus checkValveStatus;
     public Animator openKnobAnimation;
+    public RPZWaterController rpzWaterController;
+
 
     public ZibraLiquid liquid;
     public GameObject highBleed;
@@ -32,14 +34,10 @@ public class RpzTestKitController : MonoBehaviour
     public GameObject digitalKitNeedle;
     public GameObject currentKnob;
 
-    [SerializeField]
-    GameObject LowHose;
 
-    [SerializeField]
-    GameObject HighHose;
-
-    [SerializeField]
-    GameObject BypassHose;
+    public GameObject LowHose;
+    public GameObject HighHose;
+    public GameObject BypassHose;
 
     [SerializeField]
     GameObject Check1;
@@ -142,6 +140,8 @@ public class RpzTestKitController : MonoBehaviour
     private float MinFillPos = 0;
     private float MaxFillPos = 100;
     public float knobRotation;
+    private float zone1to2PsiDiff;
+    private float zone2to3PsiDiff;
 
     public float needleRiseSpeed = 0.25f;
     public List<GameObject> StaticTestCockList;
@@ -435,7 +435,7 @@ public class RpzTestKitController : MonoBehaviour
 
     private void NeedleControl()
     {
-        // For  now, soely using high hose (double check assembly)
+
         needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
     }
     private void DigitalNeedleControl()
@@ -445,14 +445,54 @@ public class RpzTestKitController : MonoBehaviour
     private void PressureControl()
     {
 
-
+        //track zone pressures
+        zone1to2PsiDiff = rpzWaterController.zone1to2PsiDiff;
+        zone2to3PsiDiff = rpzWaterController.zone2to3PsiDiff;
+        Debug.Log($"zone1to2PsiDiff: {zone1to2PsiDiff}");
+        //========================================
+        // Start Test Procedures//========================>
+        //========================================
 
         if (isConnectedToAssembly == true)
         {
-            //========================================
-            // Begin Test Procedures//========================>
-            //========================================
 
+
+            if (
+                  AttachedHoseList.Contains(HighHose)
+                  && rpzWaterController.m_detectorZone1.ParticlesInside > 100
+                  && isTestCock2Open
+                  && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+               //   && !isTestCock3Open
+               )
+            {
+
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
+                    maxPSID,
+                    needleRiseSpeed
+                );
+
+            }
+            if (
+                 AttachedHoseList.Contains(LowHose)
+                 && rpzWaterController.m_detectorZone2.ParticlesInside > 100
+                 && isTestCock3Open
+                 && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose
+              //  && !isTestCock3Open
+              )
+            {
+
+                hosePressure = Mathf.SmoothStep(
+                    hosePressure,
+                    maxPSID,
+                    needleRiseSpeed
+                );
+
+            }
+            else
+            {
+                //Debug.Log($"AttachedHoseList.Contains(LowHose): {AttachedHoseList.Contains(LowHose)} || rpzWaterController.m_detectorZone2.ParticlesInside > 100: {rpzWaterController.m_detectorZone2.ParticlesInside > 100} || isTestCock3Open: {isTestCock3Open} || TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose: {TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose}");
+            }
 
             //========================================
             // Relief Valave Opening Point//========================>

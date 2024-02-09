@@ -1,14 +1,12 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 public class HoseDetector : MonoBehaviour
 {
     public TestCockController testCockController;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
+    // public DoubleCheckTestKitController doubleCheckTestKitController;
+    public RpzTestKitController rpzTestKitController;
     public GameObject testCock;
     public GameObject currentHoseConnection;
     public GameObject currentHose;
@@ -54,7 +52,7 @@ public class HoseDetector : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         currentHoseDescription = other.GetComponent<OperableComponentDescription>();
-        if (!doubleCheckTestKitController.AttachedHoseList.Contains(other.gameObject))
+        if (!rpzTestKitController.AttachedHoseList.Contains(other.gameObject))
         {
             currentHose = other.gameObject;
         }
@@ -85,7 +83,7 @@ public class HoseDetector : MonoBehaviour
 
 
         //check if exiting collider is connected or just passing through
-        if (doubleCheckTestKitController.AttachedHoseList.Contains(currentHoseConnection) && doubleCheckTestKitController.AttachedTestCockList.Contains(this.gameObject) && currentHoseConnection == other.gameObject)
+        if (rpzTestKitController.AttachedHoseList.Contains(currentHoseConnection) && rpzTestKitController.AttachedTestCockList.Contains(this.gameObject) && currentHoseConnection == other.gameObject)
         {
             Actions.onRemoveHoseFromList?.Invoke(currentHoseConnection, GetComponent<OperableComponentDescription>());
             Actions.onRemoveTestCockFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
@@ -101,8 +99,8 @@ public class HoseDetector : MonoBehaviour
 
     IEnumerator AttachInitiate(GameObject currentAttachment)
     {
-        //check if test cock and hose are already in lists @doubleCheckTestKitController, if they are, then do not add them again ---->
-        if (!doubleCheckTestKitController.AttachedTestCockList.Contains(this.gameObject) && !doubleCheckTestKitController.AttachedHoseList.Contains(currentHoseConnection))
+        //check if test cock and hose are already in lists @rpzTestKitController, if they are, then do not add them again ---->
+        if (!rpzTestKitController.AttachedTestCockList.Contains(this.gameObject) && !rpzTestKitController.AttachedHoseList.Contains(currentHoseConnection))
         {
             yield return new WaitForSeconds(0.5f);
             if (isConnectionAttempting == true)
