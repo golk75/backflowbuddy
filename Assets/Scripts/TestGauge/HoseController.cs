@@ -122,10 +122,10 @@ public class HoseController : MonoBehaviour
                 case OperableComponentDescription.ComponentId.BypassHose:
                     Destroy(BypassHoseBib.GetComponent<ConfigurableJoint>());
                     break;
-                    //         // case OperableComponentDescription.ComponentId.SightTube:
-                    //         //     
-                    //         //     break;
-                    //         default:
+                case OperableComponentDescription.ComponentId.SightTube:
+
+                    break;
+                default:
 
                     break;
             }

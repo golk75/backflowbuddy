@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,6 +11,7 @@ public class HoseDetector : MonoBehaviour
     public GameObject testCock;
     public GameObject currentHoseConnection;
     public GameObject currentHose;
+    public List<GameObject> disallowedConnections;
     public bool isConnectionAttempting;
     public bool isConnected = false;
     Coroutine onAttachAttempt;
@@ -67,6 +69,13 @@ public class HoseDetector : MonoBehaviour
         {
             if (currentHose != null)
             {
+
+                foreach (var item in disallowedConnections)
+                {
+                    if (currentHose == item)
+                        return;
+                }
+
                 onAttachAttempt = StartCoroutine(AttachInitiate(currentHose));
             }
 
@@ -105,6 +114,12 @@ public class HoseDetector : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             if (isConnectionAttempting == true)
             {
+                // if (currentTestCockDescription.componentId == OperableComponentDescription.ComponentId.TestCock4 && currentHoseDescription.componentId == OperableComponentDescription.ComponentId.LowHose)
+                // {
+                //     isConnected = false;
+                // }
+
+                //currentTestCockDescription: HoseDetector4 (OperableComponentDescription); currentHoseDescription: LowHoseTipHandle (OperableComponentDescription)
                 currentHoseConnection = currentAttachment;
                 Actions.onAddTestCockToList?.Invoke(this.gameObject, currentTestCockDescription);
                 Actions.onAddHoseToList?.Invoke(currentAttachment, currentHoseDescription);
