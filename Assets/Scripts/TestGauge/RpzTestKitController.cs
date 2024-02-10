@@ -466,14 +466,50 @@ public class RpzTestKitController : MonoBehaviour
         {
             if (HighHoseBib.testCock == TestCock1)
             {
-                Debug.Log($"high hose on tc#1");
                 if (isTestCock1Open)
                 {
                     Debug.Log($"high hose on tc#1 && tc#1 opened");
                 }
+                else
+                {
+                    Debug.Log($"high hose on tc#1 && tc#1 closed");
+                }
+
+            }
+            if (HighHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
+                {
+                    Debug.Log($"high hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    Debug.Log($"high hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (HighHoseBib.testCock == TestCock3)
+            {
+                if (isTestCock3Open)
+                {
+                    Debug.Log($"high hose on tc#3 && tc#3 opened");
+                }
+                else
+                {
+                    Debug.Log($"high hose on tc#3 && tc#3 closed");
+                }
             }
 
-
+            if (HighHoseBib.testCock == TestCock4)
+            {
+                if (isTestCock4Open)
+                {
+                    Debug.Log($"high hose on tc#4 && tc#4 opened");
+                }
+                else
+                {
+                    Debug.Log($"high hose on tc#4 && tc#4 closed");
+                }
+            }
         }
 
         // if (AttachedHoseList.Contains(HighHose))
