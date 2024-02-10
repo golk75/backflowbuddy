@@ -122,6 +122,11 @@ public class RpzTestKitController : MonoBehaviour
     public bool isTestCock3Open;
     public bool isTestCock4Open;
 
+    public bool isHighHoseEngaged;
+    public bool isLowHoseEngaged;
+    public bool isBypassHoseEngaged;
+
+
     public float highHosePressure;
     float bypasshosePressure;
     float needleSpeedDamp = 0.005f;
@@ -461,17 +466,21 @@ public class RpzTestKitController : MonoBehaviour
 
 
 
-
+        /// <summary>
+        /// High Hose
+        /// </summary>
         if (AttachedHoseList.Contains(HighHose))
         {
             if (HighHoseBib.testCock == TestCock1)
             {
                 if (isTestCock1Open)
                 {
+                    isHighHoseEngaged = true;
                     Debug.Log($"high hose on tc#1 && tc#1 opened");
                 }
                 else
                 {
+                    isHighHoseEngaged = false;
                     Debug.Log($"high hose on tc#1 && tc#1 closed");
                 }
 
@@ -480,10 +489,12 @@ public class RpzTestKitController : MonoBehaviour
             {
                 if (isTestCock2Open)
                 {
+                    isHighHoseEngaged = true;
                     Debug.Log($"high hose on tc#2 && tc#2 opened");
                 }
                 else
                 {
+                    isHighHoseEngaged = true;
                     Debug.Log($"high hose on tc#2 && tc#2 closed");
                 }
             }
@@ -491,10 +502,12 @@ public class RpzTestKitController : MonoBehaviour
             {
                 if (isTestCock3Open)
                 {
+                    isHighHoseEngaged = true;
                     Debug.Log($"high hose on tc#3 && tc#3 opened");
                 }
                 else
                 {
+                    isHighHoseEngaged = false;
                     Debug.Log($"high hose on tc#3 && tc#3 closed");
                 }
             }
@@ -503,14 +516,132 @@ public class RpzTestKitController : MonoBehaviour
             {
                 if (isTestCock4Open)
                 {
+                    isHighHoseEngaged = true;
                     Debug.Log($"high hose on tc#4 && tc#4 opened");
                 }
                 else
                 {
+                    isHighHoseEngaged = false;
                     Debug.Log($"high hose on tc#4 && tc#4 closed");
                 }
             }
         }
+        /// <summary>
+        /// End - High Hose
+        /// </summary>
+
+        /// <summary>
+        /// Low Hose
+        /// </summary>
+        if (AttachedHoseList.Contains(LowHose))
+        {
+            if (LowHoseBib.testCock == TestCock1)
+            {
+                if (isTestCock1Open)
+                {
+                    Debug.Log($"low hose on tc#1 && tc#1 opened");
+                }
+                else
+                {
+                    Debug.Log($"low hose on tc#1 && tc#1 closed");
+                }
+
+            }
+            if (LowHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
+                {
+                    Debug.Log($"low hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    Debug.Log($"low hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (LowHoseBib.testCock == TestCock3)
+            {
+                if (isTestCock3Open)
+                {
+                    Debug.Log($"low hose on tc#3 && tc#3 opened");
+                }
+                else
+                {
+                    Debug.Log($"low hose on tc#3 && tc#3 closed");
+                }
+            }
+
+            if (LowHoseBib.testCock == TestCock4)
+            {
+                if (isTestCock4Open)
+                {
+                    Debug.Log($"low hose on tc#4 && tc#4 opened");
+                }
+                else
+                {
+                    Debug.Log($"low hose on tc#4 && tc#4 closed");
+                }
+            }
+        }
+        /// <summary>
+        /// End - Low Hose
+        /// </summary>
+
+
+        /// <summary>
+        /// Bypass Hose
+        /// </summary>
+        if (AttachedHoseList.Contains(BypassHose))
+        {
+            if (BypassHoseBib.testCock == TestCock1)
+            {
+                if (isTestCock1Open)
+                {
+                    Debug.Log($"bypass hose on tc#1 && tc#1 opened");
+                }
+                else
+                {
+                    Debug.Log($"bypass hose on tc#1 && tc#1 closed");
+                }
+
+            }
+            if (BypassHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
+                {
+                    Debug.Log($"bypass hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    Debug.Log($"bypass hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (BypassHoseBib.testCock == TestCock3)
+            {
+                if (isTestCock3Open)
+                {
+                    Debug.Log($"bypass hose on tc#3 && tc#3 opened");
+                }
+                else
+                {
+                    Debug.Log($"bypass hose on tc#3 && tc#3 closed");
+                }
+            }
+
+            if (BypassHoseBib.testCock == TestCock4)
+            {
+                if (isTestCock4Open)
+                {
+                    Debug.Log($"bypass hose on tc#4 && tc#4 opened");
+                }
+                else
+                {
+                    Debug.Log($"bypass hose on tc#4 && tc#4 closed");
+                }
+            }
+        }
+        /// <summary>
+        /// End - Bypass Hose
+        /// </summary>
 
         // if (AttachedHoseList.Contains(HighHose))
         // {
