@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 public class BleedHoseController : MonoBehaviour
@@ -29,6 +30,7 @@ public class BleedHoseController : MonoBehaviour
     private void OnDisable()
     {
         Actions.onHighBleedOperate -= HighBleedKnobOperate;
+        Actions.onLowBleedOperate -= LowBleedKnobOperate;
 
 
     }
@@ -41,33 +43,72 @@ public class BleedHoseController : MonoBehaviour
     }
     void HighBleedKnobOperate()
     {
-        if (bleederHoseEmitter.VolumePerSimTime == 0)
+        // if (bleederHoseEmitter.VolumePerSimTime == 0)
+        // {   
+        //     isHighBleedOpen = true;
+        //     bleederHoseEmitter.VolumePerSimTime = 1;
+        // }
+        // else
+        // {
+        //     isHighBleedOpen = false;
+        //     bleederHoseEmitter.VolumePerSimTime = 0;
+        // }
+        // isHighBleedOpen = true;
+        // _ = isHighBleedOpen == true ? isHighBleedOpen = true : isHighBleedOpen = true;
+        if (isHighBleedOpen == false)
         {
             isHighBleedOpen = true;
-            bleederHoseEmitter.VolumePerSimTime = 1;
         }
         else
         {
             isHighBleedOpen = false;
-            bleederHoseEmitter.VolumePerSimTime = 0;
         }
+
     }
     private void LowBleedKnobOperate()
     {
-        if (bleederHoseEmitter.VolumePerSimTime == 0)
+        // if (bleederHoseEmitter.VolumePerSimTime == 0)
+        // {
+        //     isLowBleedOpen = true;
+        //     bleederHoseEmitter.VolumePerSimTime = 1;
+        // }
+        // else
+        // {
+        //     isLowBleedOpen = false;
+        //     bleederHoseEmitter.VolumePerSimTime = 0;
+        //}
+        // _ = isLowBleedOpen == true ? isLowBleedOpen = true : isLowBleedOpen = true;
+        // isLowBleedOpen = true;
+        if (isLowBleedOpen == false)
         {
             isLowBleedOpen = true;
-            bleederHoseEmitter.VolumePerSimTime = 1;
         }
         else
         {
             isLowBleedOpen = false;
-            bleederHoseEmitter.VolumePerSimTime = 0;
         }
+
     }
     // Update is called once per frame
     void Update()
     {
+        if (isLowBleedOpen && isHighBleedOpen)
+        {
+            bleederHoseEmitter.VolumePerSimTime = 1;
+        }
+        else if (!isLowBleedOpen && isHighBleedOpen)
+        {
 
+            bleederHoseEmitter.VolumePerSimTime = 1;
+        }
+        else if (isLowBleedOpen && !isHighBleedOpen)
+        {
+
+            bleederHoseEmitter.VolumePerSimTime = 1;
+        }
+        else
+        {
+            bleederHoseEmitter.VolumePerSimTime = 0;
+        }
     }
 }
