@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.zibra.liquid.Manipulators;
@@ -13,20 +14,22 @@ public class BleedHoseController : MonoBehaviour
     [SerializeField]
     GameObject highBleedKnob;
     public bool isHighBleedOpen;
-
-
-
-
+    private bool isLowBleedOpen;
 
     private void OnEnable()
     {
 
         Actions.onHighBleedOperate += HighBleedKnobOperate;
+        Actions.onLowBleedOperate += LowBleedKnobOperate;
 
     }
+
+
+
     private void OnDisable()
     {
         Actions.onHighBleedOperate -= HighBleedKnobOperate;
+
 
     }
     // Start is called before the first frame update
@@ -49,7 +52,19 @@ public class BleedHoseController : MonoBehaviour
             bleederHoseEmitter.VolumePerSimTime = 0;
         }
     }
-
+    private void LowBleedKnobOperate()
+    {
+        if (bleederHoseEmitter.VolumePerSimTime == 0)
+        {
+            isLowBleedOpen = true;
+            bleederHoseEmitter.VolumePerSimTime = 1;
+        }
+        else
+        {
+            isLowBleedOpen = false;
+            bleederHoseEmitter.VolumePerSimTime = 0;
+        }
+    }
     // Update is called once per frame
     void Update()
     {

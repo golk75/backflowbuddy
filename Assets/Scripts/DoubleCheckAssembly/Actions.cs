@@ -41,6 +41,7 @@ public static class Actions
     public static Action onTestCock4Opened;
     public static Action onTestCock4Closed;
     public static Action onHighBleedOperate;
+    public static Action onLowBleedOperate;
     public static Action onHighBleedClosed;
 
 

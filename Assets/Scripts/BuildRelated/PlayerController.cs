@@ -330,6 +330,11 @@ public class PlayerController : MonoBehaviour
 
                 Actions.onHighBleedOperate?.Invoke();
             }
+            if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.LowBleed)
+            {
+
+                Actions.onLowBleedOperate?.Invoke();
+            }
         }
 
 
