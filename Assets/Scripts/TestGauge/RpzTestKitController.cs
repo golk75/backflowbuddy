@@ -111,7 +111,7 @@ public class RpzTestKitController : MonoBehaviour
     private float minPSID;
     float closingPoint = 0;
     public bool isOperableObject;
-    public bool isConnectedToAssembly;
+
     public bool isCheck1Open;
     public bool isCheck2Open;
     float lowHosePressure;
@@ -125,6 +125,9 @@ public class RpzTestKitController : MonoBehaviour
     public bool isHighHoseEngaged;
     public bool isLowHoseEngaged;
     public bool isBypassHoseEngaged;
+
+    public bool isHighBleedOpen;
+    public bool isLowBleedOpen;
 
 
     public float highHosePressure;
@@ -150,7 +153,7 @@ public class RpzTestKitController : MonoBehaviour
     private float zone1to2PsiDiff;
     private float zone2to3PsiDiff;
 
-    public float needleRiseSpeed = 0.25f;
+    public float needleRiseSpeed = 0.1f;
     public List<GameObject> StaticTestCockList;
     // public List<GameObject> TestCockList;
     public List<GameObject> AttachedTestCockList;
@@ -376,6 +379,14 @@ public class RpzTestKitController : MonoBehaviour
 
     IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
+        if (currentKnob == highBleed)
+        {
+            isHighBleedOpen = true;
+        }
+        else if (currentKnob == lowBleed)
+        {
+            isLowBleedOpen = true;
+        }
         Debug.Log($"{obj} rotated OPEN");
         float timeLerped = 0.0f;
 
@@ -385,9 +396,18 @@ public class RpzTestKitController : MonoBehaviour
             obj.transform.eulerAngles = Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
             yield return null;
         }
+
     }
     IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
+        if (currentKnob == highBleed)
+        {
+            isHighBleedOpen = false;
+        }
+        else if (currentKnob == lowBleed)
+        {
+            isLowBleedOpen = false;
+        }
         Debug.Log($"{obj} rotated CLOSED");
         float timeLerped = 0.0f;
         knobOpened = true;
@@ -397,6 +417,7 @@ public class RpzTestKitController : MonoBehaviour
             obj.transform.eulerAngles = -Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
             yield return null;
         }
+
     }
 
     private void TestCock4Closed()
@@ -469,472 +490,510 @@ public class RpzTestKitController : MonoBehaviour
         /// <summary>
         /// High Hose
         /// </summary>
-        if (AttachedHoseList.Contains(HighHose))
+
+        if (AttachedHoseList.Count > 0)
         {
-            if (HighHoseBib.testCock == TestCock1)
+            if (AttachedHoseList.Contains(HighHose))
             {
-                if (isTestCock1Open)
+                if (HighHoseBib.testCock == TestCock1)
                 {
-                    isHighHoseEngaged = true;
-                    Debug.Log($"high hose on tc#1 && tc#1 opened");
+                    if (isTestCock1Open)
+                    {
+                        isHighHoseEngaged = true;
+                        Debug.Log($"high hose on tc#1 && tc#1 opened");
+
+                    }
+                    else
+                    {
+                        isHighHoseEngaged = false;
+                        Debug.Log($"high hose on tc#1 && tc#1 closed");
+                    }
+
                 }
-                else
+                if (HighHoseBib.testCock == TestCock2)
                 {
-                    isHighHoseEngaged = false;
-                    Debug.Log($"high hose on tc#1 && tc#1 closed");
+                    if (isTestCock2Open)
+                    {
+                        isHighHoseEngaged = true;
+                        // Debug.Log($"high hose on tc#2 && tc#2 opened");
+                        if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && !isHighBleedOpen)
+                        {
+                            hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                            Debug.Log($"here");
+                        }
+                        else if (isHighBleedOpen)
+                        {
+                            Debug.Log($"hosePressure: {hosePressure}; rpzWaterController.check1SpringForce / 10:  {rpzWaterController.check1SpringForce / 10}");
+                            hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
+                        }
+                    }
+                    else
+                    {
+                        isHighHoseEngaged = false;
+                        Debug.Log($"high hose on tc#2 && tc#2 closed");
+                    }
+                }
+                if (HighHoseBib.testCock == TestCock3)
+                {
+                    if (isTestCock3Open)
+                    {
+                        isHighHoseEngaged = true;
+                        Debug.Log($"high hose on tc#3 && tc#3 opened");
+                    }
+                    else
+                    {
+                        isHighHoseEngaged = false;
+                        Debug.Log($"high hose on tc#3 && tc#3 closed");
+                    }
                 }
 
-            }
-            if (HighHoseBib.testCock == TestCock2)
-            {
-                if (isTestCock2Open)
+                if (HighHoseBib.testCock == TestCock4)
                 {
-                    isHighHoseEngaged = true;
-                    Debug.Log($"high hose on tc#2 && tc#2 opened");
-                }
-                else
-                {
-                    isHighHoseEngaged = true;
-                    Debug.Log($"high hose on tc#2 && tc#2 closed");
-                }
-            }
-            if (HighHoseBib.testCock == TestCock3)
-            {
-                if (isTestCock3Open)
-                {
-                    isHighHoseEngaged = true;
-                    Debug.Log($"high hose on tc#3 && tc#3 opened");
-                }
-                else
-                {
-                    isHighHoseEngaged = false;
-                    Debug.Log($"high hose on tc#3 && tc#3 closed");
+                    if (isTestCock4Open)
+                    {
+                        isHighHoseEngaged = true;
+                        Debug.Log($"high hose on tc#4 && tc#4 opened");
+                    }
+                    else
+                    {
+                        isHighHoseEngaged = false;
+                        Debug.Log($"high hose on tc#4 && tc#4 closed");
+                    }
                 }
             }
+            /// <summary>
+            /// End - High Hose
+            /// </summary>
 
-            if (HighHoseBib.testCock == TestCock4)
+            /// <summary>
+            /// Low Hose
+            /// </summary>
+            if (AttachedHoseList.Contains(LowHose))
             {
-                if (isTestCock4Open)
+                if (LowHoseBib.testCock == TestCock1)
                 {
-                    isHighHoseEngaged = true;
-                    Debug.Log($"high hose on tc#4 && tc#4 opened");
+                    if (isTestCock1Open)
+                    {
+                        Debug.Log($"low hose on tc#1 && tc#1 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"low hose on tc#1 && tc#1 closed");
+                    }
+
                 }
-                else
+                if (LowHoseBib.testCock == TestCock2)
                 {
-                    isHighHoseEngaged = false;
-                    Debug.Log($"high hose on tc#4 && tc#4 closed");
+                    if (isTestCock2Open)
+                    {
+                        Debug.Log($"low hose on tc#2 && tc#2 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"low hose on tc#2 && tc#2 closed");
+                    }
+                }
+                if (LowHoseBib.testCock == TestCock3)
+                {
+                    if (isTestCock3Open)
+                    {
+                        isLowHoseEngaged = true;
+                        Debug.Log($"low hose on tc#3 && tc#3 opened");
+                        if (rpzWaterController.m_detectorZone2.ParticlesInside > 100)
+                        {
+                            if (isHighHoseEngaged)
+                            {
+                                hosePressure = Mathf.SmoothStep(hosePressure, zone1to2PsiDiff, needleRiseSpeed);
+                            }
+                            else
+                            {
+                                hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        isLowHoseEngaged = false;
+                        Debug.Log($"low hose on tc#3 && tc#3 closed");
+                    }
+                }
+
+                if (LowHoseBib.testCock == TestCock4)
+                {
+                    if (isTestCock4Open)
+                    {
+                        Debug.Log($"low hose on tc#4 && tc#4 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"low hose on tc#4 && tc#4 closed");
+                    }
                 }
             }
+            /// <summary>
+            /// End - Low Hose
+            /// </summary>
+
+
+            /// <summary>
+            /// Bypass Hose
+            /// </summary>
+            if (AttachedHoseList.Contains(BypassHose))
+            {
+                if (BypassHoseBib.testCock == TestCock1)
+                {
+                    if (isTestCock1Open)
+                    {
+                        Debug.Log($"bypass hose on tc#1 && tc#1 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"bypass hose on tc#1 && tc#1 closed");
+                    }
+
+                }
+                if (BypassHoseBib.testCock == TestCock2)
+                {
+                    if (isTestCock2Open)
+                    {
+                        Debug.Log($"bypass hose on tc#2 && tc#2 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"bypass hose on tc#2 && tc#2 closed");
+                    }
+                }
+                if (BypassHoseBib.testCock == TestCock3)
+                {
+                    if (isTestCock3Open)
+                    {
+                        Debug.Log($"bypass hose on tc#3 && tc#3 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"bypass hose on tc#3 && tc#3 closed");
+                    }
+                }
+
+                if (BypassHoseBib.testCock == TestCock4)
+                {
+                    if (isTestCock4Open)
+                    {
+                        Debug.Log($"bypass hose on tc#4 && tc#4 opened");
+                    }
+                    else
+                    {
+                        Debug.Log($"bypass hose on tc#4 && tc#4 closed");
+                    }
+                }
+            }
+            /// <summary>
+            /// End - Bypass Hose
+            /// </summary>
+
+            // if (AttachedHoseList.Contains(HighHose))
+            // {
+            //     var highHoseConnection = HighHose.GetComponent<HoseBib>().testCock.name;
+            //     if (highHoseConnection != null)
+            //     {
+            //         switch (highHoseConnection)
+            //         {
+            //             case
+            //                 "HoseDetector1":
+            //                 currentHighHoseConnection = TestCock1;
+            //                 Debug.Log($"HighHose connected to tc#1");
+            //                 break;
+            //             case "HoseDetector2":
+            //                 currentHighHoseConnection = TestCock2;
+            //                 Debug.Log($"HighHose connected to tc#2");
+            //                 break;
+            //             case "HoseDetector3":
+            //                 currentHighHoseConnection = TestCock3;
+            //                 Debug.Log($"HighHose connected to tc#3");
+            //                 break;
+            //             case "HoseDetector4":
+            //                 currentHighHoseConnection = TestCock4;
+            //                 Debug.Log($"HighHose connected to tc#4");
+            //                 break;
+            //             default:
+            //                 Debug.Log($"High Hose connectee not recognized");
+            //                 break;
+            //         }
+            //     }
+            // }
+
+
+
+            // if (rpzWaterController.m_detectorZone1.ParticlesInside > 0)
+            // {
+            //     if (AttachedHoseList.Contains(HighHose))
+            //     {
+            //         if (isTestCock2Open)
+            //         {
+            //             hosePressure = Mathf.SmoothStep(
+            //                     hosePressure,
+            //                     maxPSID,
+            //                     needleRiseSpeed
+            //                     );
+            //         }
+
+            //     }
+            //     if (AttachedHoseList.Contains(HighHose) && AttachedHoseList.Contains(LowHose))
+            //     {
+
+
+            //         if (
+            //             isTestCock2Open
+            //             && isTestCock3Open
+            //         )
+            //             hosePressure = Mathf.SmoothStep(
+            //                  hosePressure,
+            //                  zone1to2PsiDiff,
+            //                  needleRiseSpeed
+            //              );
+            //     }
+
+            // if (
+            //       AttachedHoseList.Contains(HighHose)
+            //       && rpzWaterController.m_detectorZone1.ParticlesInside > 100
+            //       && isTestCock2Open
+            //       && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+            //    //   && !isTestCock3Open
+            //    )
+            // {
+
+            //     hosePressure = Mathf.SmoothStep(
+            //         hosePressure,
+            //         maxPSID,
+            //         needleRiseSpeed
+            //     );
+
+            // }
+            // if (
+            //      AttachedHoseList.Contains(LowHose)
+            //      && rpzWaterController.m_detectorZone2.ParticlesInside > 100
+            //      && isTestCock3Open
+            //      && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose
+            //   //  && !isTestCock3Open
+            //   )
+            // {
+
+            //     hosePressure = Mathf.SmoothStep(
+            //         hosePressure,
+            //         maxPSID,
+            //         needleRiseSpeed
+            //     );
+
+            // }
+            // else
+            // {
+            //     //Debug.Log($"AttachedHoseList.Contains(LowHose): {AttachedHoseList.Contains(LowHose)} || rpzWaterController.m_detectorZone2.ParticlesInside > 100: {rpzWaterController.m_detectorZone2.ParticlesInside > 100} || isTestCock3Open: {isTestCock3Open} || TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose: {TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose}");
+            // }
+
+            //========================================
+            // Relief Valave Opening Point//========================>
+            //========================================
+
+
+            //========================================
+            // END - Relief Valave Opening Point//==================>
+            //========================================   
+
+
+            //========================================
+            // Check Valve #2//========================>
+            //========================================
+
+
+            //========================================
+            // END - Check Valve #2//==================>
+            //========================================
+
+
+            //========================================
+            // Check Valve #1//========================>
+            //========================================
+
+
+            //========================================
+            // END - Check Valve #1//==================>
+            //========================================
+
+
+
+
+
+
+            //========================================
+            // End Test Procedures//========================>
+            //========================================
+
+            /*
+                        //========================================
+                        // #1 Check Test//========================>
+                        //========================================
+
+                        if (
+                            AttachedHoseList.Contains(HighHose)
+                            && shutOffValveController.IsSupplyOn == true
+                            && isTestCock2Open
+                            && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+                            && !isTestCock3Open
+                        )
+                        {
+                            //maxed out psid (needle pinned out)
+                            hosePressure = Mathf.SmoothStep(
+                                hosePressure,
+                                maxPSID,
+                                needleRiseSpeed
+                            );
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock2Open
+                            && isTestCock3Open
+                            && waterController.isDeviceInStaticCondition == true
+                        )
+                        {
+                            //best looking psid drop so far is: hosePressure -= 0.3f;
+                            // differnce ratio between windows to mac = 1:15
+                            //Windows----------------
+
+                            // if (liquid.UseFixedTimestep == true)
+                            // {
+                            //     hosePressure -= 0.04f;
+                            // }
+                            // //!Windows----------------
+                            // else
+                            // {
+                            //     hosePressure -= 0.65f;
+                            // }
+
+                            hosePressure = Mathf.SmoothStep(
+                              hosePressure,
+                              waterController.zone1to2PsiDiff,
+                              0.1f
+                          );
+
+
+
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock2Open
+                            && isTestCock3Open
+                            && shutOffValveController.IsSupplyOn == false
+
+                        )
+                        {
+                            hosePressure += 0;
+
+                        }
+                        //========================================
+                        // END - #1 Check Test//==================>
+                        //========================================
+                        //========================================
+                        // #2 Check Test//========================>
+                        //========================================
+
+                        if (
+                            AttachedHoseList.Contains(HighHose)
+                            && shutOffValveController.IsSupplyOn == true
+                            && isTestCock3Open
+                            && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == HighHose
+                            && !isTestCock4Open
+                        )
+                        {
+
+                            //maxed out psid (needle pinned out)
+                            hosePressure = Mathf.SmoothStep(
+                                hosePressure,
+                                maxPSID,
+                                needleRiseSpeed
+                            );
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock3Open
+                            && isTestCock4Open
+                            && waterController.isDeviceInStaticCondition == true
+                        )
+                        {
+                            //best looking psid drop so far is: hosePressure -= 0.3f;
+                            // differnce ratio between windows to mac = 1:15
+                            //Windows----------------
+
+                            // if (liquid.UseFixedTimestep == true)
+                            // {
+                            //     hosePressure -= 0.04f;
+                            // }
+                            // //!Windows----------------
+                            // else
+                            // {
+                            //     hosePressure -= 0.65f;
+                            // }
+
+                            hosePressure = Mathf.SmoothStep(
+                              hosePressure,
+                              waterController.zone2to3PsiDiff,
+                              0.1f
+                          );
+
+
+
+
+                        }
+                        else if (
+                            AttachedHoseList.Contains(HighHose)
+                            && isTestCock3Open
+                            && isTestCock4Open
+                            && shutOffValveController.IsSupplyOn == false
+
+                        )
+                        {
+                            hosePressure += 0;
+
+                        }
+                        //========================================
+                        // END - #2 Check Test//==================>
+                        //========================================
+                         */
         }
         /// <summary>
-        /// End - High Hose
+        /// No hoses attached
         /// </summary>
 
-        /// <summary>
-        /// Low Hose
-        /// </summary>
-        if (AttachedHoseList.Contains(LowHose))
+        else
         {
-            if (LowHoseBib.testCock == TestCock1)
-            {
-                if (isTestCock1Open)
-                {
-                    Debug.Log($"low hose on tc#1 && tc#1 opened");
-                }
-                else
-                {
-                    Debug.Log($"low hose on tc#1 && tc#1 closed");
-                }
-
-            }
-            if (LowHoseBib.testCock == TestCock2)
-            {
-                if (isTestCock2Open)
-                {
-                    Debug.Log($"low hose on tc#2 && tc#2 opened");
-                }
-                else
-                {
-                    Debug.Log($"low hose on tc#2 && tc#2 closed");
-                }
-            }
-            if (LowHoseBib.testCock == TestCock3)
-            {
-                if (isTestCock3Open)
-                {
-                    Debug.Log($"low hose on tc#3 && tc#3 opened");
-                }
-                else
-                {
-                    Debug.Log($"low hose on tc#3 && tc#3 closed");
-                }
-            }
-
-            if (LowHoseBib.testCock == TestCock4)
-            {
-                if (isTestCock4Open)
-                {
-                    Debug.Log($"low hose on tc#4 && tc#4 opened");
-                }
-                else
-                {
-                    Debug.Log($"low hose on tc#4 && tc#4 closed");
-                }
-            }
+            hosePressure = Mathf.SmoothStep(
+                             hosePressure,
+                             0,
+                             needleRiseSpeed
+                         );
         }
-        /// <summary>
-        /// End - Low Hose
-        /// </summary>
 
-
-        /// <summary>
-        /// Bypass Hose
-        /// </summary>
-        if (AttachedHoseList.Contains(BypassHose))
-        {
-            if (BypassHoseBib.testCock == TestCock1)
-            {
-                if (isTestCock1Open)
-                {
-                    Debug.Log($"bypass hose on tc#1 && tc#1 opened");
-                }
-                else
-                {
-                    Debug.Log($"bypass hose on tc#1 && tc#1 closed");
-                }
-
-            }
-            if (BypassHoseBib.testCock == TestCock2)
-            {
-                if (isTestCock2Open)
-                {
-                    Debug.Log($"bypass hose on tc#2 && tc#2 opened");
-                }
-                else
-                {
-                    Debug.Log($"bypass hose on tc#2 && tc#2 closed");
-                }
-            }
-            if (BypassHoseBib.testCock == TestCock3)
-            {
-                if (isTestCock3Open)
-                {
-                    Debug.Log($"bypass hose on tc#3 && tc#3 opened");
-                }
-                else
-                {
-                    Debug.Log($"bypass hose on tc#3 && tc#3 closed");
-                }
-            }
-
-            if (BypassHoseBib.testCock == TestCock4)
-            {
-                if (isTestCock4Open)
-                {
-                    Debug.Log($"bypass hose on tc#4 && tc#4 opened");
-                }
-                else
-                {
-                    Debug.Log($"bypass hose on tc#4 && tc#4 closed");
-                }
-            }
-        }
-        /// <summary>
-        /// End - Bypass Hose
-        /// </summary>
-
-        // if (AttachedHoseList.Contains(HighHose))
+        //if hose is disconnected, drop pressure on gauge
+        // if (!AttachedHoseList.Contains(HighHose))
         // {
-        //     var highHoseConnection = HighHose.GetComponent<HoseBib>().testCock.name;
-        //     if (highHoseConnection != null)
-        //     {
-        //         switch (highHoseConnection)
-        //         {
-        //             case
-        //                 "HoseDetector1":
-        //                 currentHighHoseConnection = TestCock1;
-        //                 Debug.Log($"HighHose connected to tc#1");
-        //                 break;
-        //             case "HoseDetector2":
-        //                 currentHighHoseConnection = TestCock2;
-        //                 Debug.Log($"HighHose connected to tc#2");
-        //                 break;
-        //             case "HoseDetector3":
-        //                 currentHighHoseConnection = TestCock3;
-        //                 Debug.Log($"HighHose connected to tc#3");
-        //                 break;
-        //             case "HoseDetector4":
-        //                 currentHighHoseConnection = TestCock4;
-        //                 Debug.Log($"HighHose connected to tc#4");
-        //                 break;
-        //             default:
-        //                 Debug.Log($"High Hose connectee not recognized");
-        //                 break;
-        //         }
-        //     }
-        // }
-
-
-
-        // if (rpzWaterController.m_detectorZone1.ParticlesInside > 0)
-        // {
-        //     if (AttachedHoseList.Contains(HighHose))
-        //     {
-        //         if (isTestCock2Open)
-        //         {
-        //             hosePressure = Mathf.SmoothStep(
-        //                     hosePressure,
-        //                     maxPSID,
-        //                     needleRiseSpeed
-        //                     );
-        //         }
-
-        //     }
-        //     if (AttachedHoseList.Contains(HighHose) && AttachedHoseList.Contains(LowHose))
-        //     {
-
-
-        //         if (
-        //             isTestCock2Open
-        //             && isTestCock3Open
-        //         )
-        //             hosePressure = Mathf.SmoothStep(
-        //                  hosePressure,
-        //                  zone1to2PsiDiff,
-        //                  needleRiseSpeed
-        //              );
-        //     }
-
-        // if (
-        //       AttachedHoseList.Contains(HighHose)
-        //       && rpzWaterController.m_detectorZone1.ParticlesInside > 100
-        //       && isTestCock2Open
-        //       && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-        //    //   && !isTestCock3Open
-        //    )
-        // {
-
+        //     // hosePressure -= 5;
         //     hosePressure = Mathf.SmoothStep(
-        //         hosePressure,
-        //         maxPSID,
-        //         needleRiseSpeed
-        //     );
-
+        //       hosePressure,
+        //       0,
+        //       0.5f
+        //   );
         // }
-        // if (
-        //      AttachedHoseList.Contains(LowHose)
-        //      && rpzWaterController.m_detectorZone2.ParticlesInside > 100
-        //      && isTestCock3Open
-        //      && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose
-        //   //  && !isTestCock3Open
-        //   )
+        // if (hosePressure <= minPSID)
         // {
-
-        //     hosePressure = Mathf.SmoothStep(
-        //         hosePressure,
-        //         maxPSID,
-        //         needleRiseSpeed
-        //     );
-
+        //     hosePressure = minPSID;
         // }
-        // else
+        // if (hosePressure > maxPSID)
         // {
-        //     //Debug.Log($"AttachedHoseList.Contains(LowHose): {AttachedHoseList.Contains(LowHose)} || rpzWaterController.m_detectorZone2.ParticlesInside > 100: {rpzWaterController.m_detectorZone2.ParticlesInside > 100} || isTestCock3Open: {isTestCock3Open} || TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose: {TestCock3.GetComponent<HoseDetector>().currentHoseConnection == LowHose}");
+        //     hosePressure = maxPSID;
         // }
-
-        //========================================
-        // Relief Valave Opening Point//========================>
-        //========================================
-
-
-        //========================================
-        // END - Relief Valave Opening Point//==================>
-        //========================================   
-
-
-        //========================================
-        // Check Valve #2//========================>
-        //========================================
-
-
-        //========================================
-        // END - Check Valve #2//==================>
-        //========================================
-
-
-        //========================================
-        // Check Valve #1//========================>
-        //========================================
-
-
-        //========================================
-        // END - Check Valve #1//==================>
-        //========================================
-
-
-
-
-
-
-        //========================================
-        // End Test Procedures//========================>
-        //========================================
-
-        /*
-                    //========================================
-                    // #1 Check Test//========================>
-                    //========================================
-
-                    if (
-                        AttachedHoseList.Contains(HighHose)
-                        && shutOffValveController.IsSupplyOn == true
-                        && isTestCock2Open
-                        && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-                        && !isTestCock3Open
-                    )
-                    {
-                        //maxed out psid (needle pinned out)
-                        hosePressure = Mathf.SmoothStep(
-                            hosePressure,
-                            maxPSID,
-                            needleRiseSpeed
-                        );
-
-                    }
-                    else if (
-                        AttachedHoseList.Contains(HighHose)
-                        && isTestCock2Open
-                        && isTestCock3Open
-                        && waterController.isDeviceInStaticCondition == true
-                    )
-                    {
-                        //best looking psid drop so far is: hosePressure -= 0.3f;
-                        // differnce ratio between windows to mac = 1:15
-                        //Windows----------------
-
-                        // if (liquid.UseFixedTimestep == true)
-                        // {
-                        //     hosePressure -= 0.04f;
-                        // }
-                        // //!Windows----------------
-                        // else
-                        // {
-                        //     hosePressure -= 0.65f;
-                        // }
-
-                        hosePressure = Mathf.SmoothStep(
-                          hosePressure,
-                          waterController.zone1to2PsiDiff,
-                          0.1f
-                      );
-
-
-
-
-                    }
-                    else if (
-                        AttachedHoseList.Contains(HighHose)
-                        && isTestCock2Open
-                        && isTestCock3Open
-                        && shutOffValveController.IsSupplyOn == false
-
-                    )
-                    {
-                        hosePressure += 0;
-
-                    }
-                    //========================================
-                    // END - #1 Check Test//==================>
-                    //========================================
-                    //========================================
-                    // #2 Check Test//========================>
-                    //========================================
-
-                    if (
-                        AttachedHoseList.Contains(HighHose)
-                        && shutOffValveController.IsSupplyOn == true
-                        && isTestCock3Open
-                        && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-                        && !isTestCock4Open
-                    )
-                    {
-
-                        //maxed out psid (needle pinned out)
-                        hosePressure = Mathf.SmoothStep(
-                            hosePressure,
-                            maxPSID,
-                            needleRiseSpeed
-                        );
-
-                    }
-                    else if (
-                        AttachedHoseList.Contains(HighHose)
-                        && isTestCock3Open
-                        && isTestCock4Open
-                        && waterController.isDeviceInStaticCondition == true
-                    )
-                    {
-                        //best looking psid drop so far is: hosePressure -= 0.3f;
-                        // differnce ratio between windows to mac = 1:15
-                        //Windows----------------
-
-                        // if (liquid.UseFixedTimestep == true)
-                        // {
-                        //     hosePressure -= 0.04f;
-                        // }
-                        // //!Windows----------------
-                        // else
-                        // {
-                        //     hosePressure -= 0.65f;
-                        // }
-
-                        hosePressure = Mathf.SmoothStep(
-                          hosePressure,
-                          waterController.zone2to3PsiDiff,
-                          0.1f
-                      );
-
-
-
-
-                    }
-                    else if (
-                        AttachedHoseList.Contains(HighHose)
-                        && isTestCock3Open
-                        && isTestCock4Open
-                        && shutOffValveController.IsSupplyOn == false
-
-                    )
-                    {
-                        hosePressure += 0;
-
-                    }
-                    //========================================
-                    // END - #2 Check Test//==================>
-                    //========================================
-                     */
     }
-
-
-    //if hose is disconnected, drop pressure on gauge
-    // if (!AttachedHoseList.Contains(HighHose))
-    // {
-    //     // hosePressure -= 5;
-    //     hosePressure = Mathf.SmoothStep(
-    //       hosePressure,
-    //       0,
-    //       0.5f
-    //   );
-    // }
-    // if (hosePressure <= minPSID)
-    // {
-    //     hosePressure = minPSID;
-    // }
-    // if (hosePressure > maxPSID)
-    // {
-    //     hosePressure = maxPSID;
-    // }
-
 
 
     private float CaptureCheck1ClosingPoint(float psid)
@@ -955,19 +1014,16 @@ public class RpzTestKitController : MonoBehaviour
     void Update()
     {
 
-        if (AttachedHoseList.Count > 0)
-        {
-            isConnectedToAssembly = true;
-        }
-        else
-        {
-            isConnectedToAssembly = false;
-        }
+
         PressureControl();
         OperateControls();
         NeedleControl();
         DigitalNeedleControl();
-        knobRotation = highBleed.transform.eulerAngles.z;
+        // knobRotation = highBleed.transform.eulerAngles.z;
+        if (currentKnob != null)
+        {
+            knobRotation = currentKnob.transform.eulerAngles.z;
+        }
 
     }
 
