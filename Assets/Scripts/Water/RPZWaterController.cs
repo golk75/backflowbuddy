@@ -705,8 +705,7 @@ public class RPZWaterController : MonoBehaviour
                         Debug.Log($"LowBleed closed");
                         check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                        check1housingForceField.Strength = 0;
-                        check2housingForceField.Strength = 0;
+                        m_sensingLineFF.Strength = 0;
                     }
                     // if (m_detectorZone2.ParticlesInside > zone2primedParticleCount)
                     // {

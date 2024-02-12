@@ -491,7 +491,19 @@ public class RpzTestKitController : MonoBehaviour
 
         /// <summary>
         /// High Hose
+        /// 
+        /// Needle should not move unless the high hose is attached to a testcock and the testcock is open
+        /// 
+        /// IRL: The test kit is seperated into 3 parts : High-side, Low-side, and control manifold.
+        /// 
+        /// The High-side of the test kit can only receive pressure through a hose on the high control portion of the manifold.
+        /// The Low-side of the test kit can only receive pressure through a hose on the low control portion of the manifold.
+        ///
+        /// the control valves on the manifold introduces pressure to common "bar". This common bar can recieve pressure from any of the control knobs if they are connected to a supply 
+        /// source and are open, the supply source would be another hose on the manifold hooked up to pressure..Which is to say either of the three sections of the manifold can inrtroduce water pressure out of the other hoses connected to the manifold (once they are opened) 
+        /// 
         /// </summary>
+
 
         if (AttachedHoseList.Count > 0)
         {
@@ -521,15 +533,32 @@ public class RpzTestKitController : MonoBehaviour
                         if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && !isHighBleedOpen)
                         {
                             hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+
+
                         }
-                        else if (isHighBleedOpen)
+                        else if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && isHighBleedOpen)
                         {
-                            hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
+                            hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
+
+                            if (isLowBleedOpen && isLowHoseEngaged)
+                            {
+
+                            }
+                            // apparent reading ?????---->
+                            else if (!isLowBleedOpen && isLowHoseEngaged)
+                            {
+                                hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
+                            }
+
                         }
+
+
+
                     }
                     else
                     {
                         isHighHoseEngaged = false;
+
                         // Debug.Log($"high hose on tc#2 && tc#2 closed");
                     }
                 }
@@ -560,6 +589,12 @@ public class RpzTestKitController : MonoBehaviour
                         // Debug.Log($"high hose on tc#4 && tc#4 closed");
                     }
                 }
+
+
+            }
+            else
+            {
+                hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
             }
             /// <summary>
             /// End - High Hose
@@ -604,14 +639,10 @@ public class RpzTestKitController : MonoBehaviour
                         // Debug.Log($"low hose on tc#3 && tc#3 opened");
                         if (rpzWaterController.m_detectorZone2.ParticlesInside > 100)
                         {
-                            // if (rpzWaterController.m_detectorZone1.ParticlesInside > 100)
-                            // {
-                            //     hosePressure = Mathf.SmoothStep(hosePressure, zone1to2PsiDiff, needleRiseSpeed);
-                            // }
-                            // else
-                            // {
-                            //     hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
-                            // }
+
+
+                            // hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
+
                         }
                     }
                     else
