@@ -22,6 +22,7 @@ public class RpzTestKitController : MonoBehaviour
     public RPZWaterController rpzWaterController;
 
 
+
     public ZibraLiquid liquid;
     public GameObject highBleed;
     public GameObject highControl;
@@ -360,11 +361,26 @@ public class RpzTestKitController : MonoBehaviour
                     {
 
                         KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+                        if (currentKnob == highBleed)
+                        {
+                            isHighBleedOpen = true;
+                        }
+                        else if (currentKnob == lowBleed)
+                        {
+                            isLowBleedOpen = true;
+                        }
                     }
                     else
                     {
                         KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
-
+                        if (currentKnob == highBleed)
+                        {
+                            isHighBleedOpen = false;
+                        }
+                        else if (currentKnob == lowBleed)
+                        {
+                            isLowBleedOpen = false;
+                        }
 
                     }
 
@@ -379,15 +395,8 @@ public class RpzTestKitController : MonoBehaviour
 
     IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
-        if (currentKnob == highBleed)
-        {
-            isHighBleedOpen = true;
-        }
-        else if (currentKnob == lowBleed)
-        {
-            isLowBleedOpen = true;
-        }
-        Debug.Log($"{obj} rotated OPEN");
+
+        // Debug.Log($"{obj} rotated OPEN");
         float timeLerped = 0.0f;
 
         while (timeLerped < 1.0)
@@ -400,15 +409,8 @@ public class RpzTestKitController : MonoBehaviour
     }
     IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
-        if (currentKnob == highBleed)
-        {
-            isHighBleedOpen = false;
-        }
-        else if (currentKnob == lowBleed)
-        {
-            isLowBleedOpen = false;
-        }
-        Debug.Log($"{obj} rotated CLOSED");
+
+        // Debug.Log($"{obj} rotated CLOSED");
         float timeLerped = 0.0f;
         knobOpened = true;
         while (timeLerped < 1.0)
@@ -500,13 +502,13 @@ public class RpzTestKitController : MonoBehaviour
                     if (isTestCock1Open)
                     {
                         isHighHoseEngaged = true;
-                        Debug.Log($"high hose on tc#1 && tc#1 opened");
+                        // Debug.Log($"high hose on tc#1 && tc#1 opened");
 
                     }
                     else
                     {
                         isHighHoseEngaged = false;
-                        Debug.Log($"high hose on tc#1 && tc#1 closed");
+                        // Debug.Log($"high hose on tc#1 && tc#1 closed");
                     }
 
                 }
@@ -515,22 +517,20 @@ public class RpzTestKitController : MonoBehaviour
                     if (isTestCock2Open)
                     {
                         isHighHoseEngaged = true;
-                        // Debug.Log($"high hose on tc#2 && tc#2 opened");
+                        Debug.Log($"high hose on tc#2 && tc#2 opened");
                         if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && !isHighBleedOpen)
                         {
                             hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                            Debug.Log($"here");
                         }
                         else if (isHighBleedOpen)
                         {
-                            Debug.Log($"hosePressure: {hosePressure}; rpzWaterController.check1SpringForce / 10:  {rpzWaterController.check1SpringForce / 10}");
                             hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
                         }
                     }
                     else
                     {
                         isHighHoseEngaged = false;
-                        Debug.Log($"high hose on tc#2 && tc#2 closed");
+                        // Debug.Log($"high hose on tc#2 && tc#2 closed");
                     }
                 }
                 if (HighHoseBib.testCock == TestCock3)
@@ -538,12 +538,12 @@ public class RpzTestKitController : MonoBehaviour
                     if (isTestCock3Open)
                     {
                         isHighHoseEngaged = true;
-                        Debug.Log($"high hose on tc#3 && tc#3 opened");
+                        // Debug.Log($"high hose on tc#3 && tc#3 opened");
                     }
                     else
                     {
                         isHighHoseEngaged = false;
-                        Debug.Log($"high hose on tc#3 && tc#3 closed");
+                        // Debug.Log($"high hose on tc#3 && tc#3 closed");
                     }
                 }
 
@@ -552,12 +552,12 @@ public class RpzTestKitController : MonoBehaviour
                     if (isTestCock4Open)
                     {
                         isHighHoseEngaged = true;
-                        Debug.Log($"high hose on tc#4 && tc#4 opened");
+                        // Debug.Log($"high hose on tc#4 && tc#4 opened");
                     }
                     else
                     {
                         isHighHoseEngaged = false;
-                        Debug.Log($"high hose on tc#4 && tc#4 closed");
+                        // Debug.Log($"high hose on tc#4 && tc#4 closed");
                     }
                 }
             }
@@ -570,15 +570,16 @@ public class RpzTestKitController : MonoBehaviour
             /// </summary>
             if (AttachedHoseList.Contains(LowHose))
             {
+
                 if (LowHoseBib.testCock == TestCock1)
                 {
                     if (isTestCock1Open)
                     {
-                        Debug.Log($"low hose on tc#1 && tc#1 opened");
+                        // Debug.Log($"low hose on tc#1 && tc#1 opened");
                     }
                     else
                     {
-                        Debug.Log($"low hose on tc#1 && tc#1 closed");
+                        // Debug.Log($"low hose on tc#1 && tc#1 closed");
                     }
 
                 }
@@ -586,35 +587,38 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (isTestCock2Open)
                     {
-                        Debug.Log($"low hose on tc#2 && tc#2 opened");
+                        // Debug.Log($"low hose on tc#2 && tc#2 opened");
                     }
                     else
                     {
-                        Debug.Log($"low hose on tc#2 && tc#2 closed");
+                        // Debug.Log($"low hose on tc#2 && tc#2 closed");
                     }
                 }
                 if (LowHoseBib.testCock == TestCock3)
                 {
+
                     if (isTestCock3Open)
                     {
                         isLowHoseEngaged = true;
-                        Debug.Log($"low hose on tc#3 && tc#3 opened");
+
+                        // Debug.Log($"low hose on tc#3 && tc#3 opened");
                         if (rpzWaterController.m_detectorZone2.ParticlesInside > 100)
                         {
-                            if (isHighHoseEngaged)
-                            {
-                                hosePressure = Mathf.SmoothStep(hosePressure, zone1to2PsiDiff, needleRiseSpeed);
-                            }
-                            else
-                            {
-                                hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
-                            }
+                            // if (rpzWaterController.m_detectorZone1.ParticlesInside > 100)
+                            // {
+                            //     hosePressure = Mathf.SmoothStep(hosePressure, zone1to2PsiDiff, needleRiseSpeed);
+                            // }
+                            // else
+                            // {
+                            //     hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
+                            // }
                         }
                     }
                     else
                     {
+
                         isLowHoseEngaged = false;
-                        Debug.Log($"low hose on tc#3 && tc#3 closed");
+                        // Debug.Log($"low hose on tc#3 && tc#3 closed");
                     }
                 }
 
@@ -622,11 +626,11 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (isTestCock4Open)
                     {
-                        Debug.Log($"low hose on tc#4 && tc#4 opened");
+                        // Debug.Log($"low hose on tc#4 && tc#4 opened");
                     }
                     else
                     {
-                        Debug.Log($"low hose on tc#4 && tc#4 closed");
+                        // Debug.Log($"low hose on tc#4 && tc#4 closed");
                     }
                 }
             }
@@ -644,11 +648,11 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (isTestCock1Open)
                     {
-                        Debug.Log($"bypass hose on tc#1 && tc#1 opened");
+                        // Debug.Log($"bypass hose on tc#1 && tc#1 opened");
                     }
                     else
                     {
-                        Debug.Log($"bypass hose on tc#1 && tc#1 closed");
+                        // Debug.Log($"bypass hose on tc#1 && tc#1 closed");
                     }
 
                 }
@@ -656,22 +660,22 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (isTestCock2Open)
                     {
-                        Debug.Log($"bypass hose on tc#2 && tc#2 opened");
+                        // Debug.Log($"bypass hose on tc#2 && tc#2 opened");
                     }
                     else
                     {
-                        Debug.Log($"bypass hose on tc#2 && tc#2 closed");
+                        // Debug.Log($"bypass hose on tc#2 && tc#2 closed");
                     }
                 }
                 if (BypassHoseBib.testCock == TestCock3)
                 {
                     if (isTestCock3Open)
                     {
-                        Debug.Log($"bypass hose on tc#3 && tc#3 opened");
+                        // Debug.Log($"bypass hose on tc#3 && tc#3 opened");
                     }
                     else
                     {
-                        Debug.Log($"bypass hose on tc#3 && tc#3 closed");
+                        // Debug.Log($"bypass hose on tc#3 && tc#3 closed");
                     }
                 }
 
@@ -679,11 +683,11 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (isTestCock4Open)
                     {
-                        Debug.Log($"bypass hose on tc#4 && tc#4 opened");
+                        // Debug.Log($"bypass hose on tc#4 && tc#4 opened");
                     }
                     else
                     {
-                        Debug.Log($"bypass hose on tc#4 && tc#4 closed");
+                        // Debug.Log($"bypass hose on tc#4 && tc#4 closed");
                     }
                 }
             }

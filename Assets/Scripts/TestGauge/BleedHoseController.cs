@@ -15,7 +15,7 @@ public class BleedHoseController : MonoBehaviour
     [SerializeField]
     GameObject highBleedKnob;
     public bool isHighBleedOpen;
-    private bool isLowBleedOpen;
+    public bool isLowBleedOpen;
 
     private void OnEnable()
     {
@@ -43,18 +43,6 @@ public class BleedHoseController : MonoBehaviour
     }
     void HighBleedKnobOperate()
     {
-        // if (bleederHoseEmitter.VolumePerSimTime == 0)
-        // {   
-        //     isHighBleedOpen = true;
-        //     bleederHoseEmitter.VolumePerSimTime = 1;
-        // }
-        // else
-        // {
-        //     isHighBleedOpen = false;
-        //     bleederHoseEmitter.VolumePerSimTime = 0;
-        // }
-        // isHighBleedOpen = true;
-        // _ = isHighBleedOpen == true ? isHighBleedOpen = true : isHighBleedOpen = true;
         if (isHighBleedOpen == false)
         {
             isHighBleedOpen = true;
@@ -67,18 +55,6 @@ public class BleedHoseController : MonoBehaviour
     }
     private void LowBleedKnobOperate()
     {
-        // if (bleederHoseEmitter.VolumePerSimTime == 0)
-        // {
-        //     isLowBleedOpen = true;
-        //     bleederHoseEmitter.VolumePerSimTime = 1;
-        // }
-        // else
-        // {
-        //     isLowBleedOpen = false;
-        //     bleederHoseEmitter.VolumePerSimTime = 0;
-        //}
-        // _ = isLowBleedOpen == true ? isLowBleedOpen = true : isLowBleedOpen = true;
-        // isLowBleedOpen = true;
         if (isLowBleedOpen == false)
         {
             isLowBleedOpen = true;

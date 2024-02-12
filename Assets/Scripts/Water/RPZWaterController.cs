@@ -30,6 +30,7 @@ public class RPZWaterController : MonoBehaviour
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
     public RpzTestKitController rpzTestKitController;
+    public BleedHoseController bleedHoseController;
 
     [SerializeField]
     SightTubeController sightTubeController;
@@ -563,8 +564,6 @@ public class RPZWaterController : MonoBehaviour
         }
 
 
-
-
         //sensing line regulate
         //max sensing line ff strength = 1.32f
 
@@ -577,10 +576,6 @@ public class RPZWaterController : MonoBehaviour
             m_sensingLineFF.Strength = 1.32f;
         }
 
-
-
-
-
         //RVOP reached - opening relief valve
         if (reliefValveOpeningPoint <= 0)
         {
@@ -591,7 +586,6 @@ public class RPZWaterController : MonoBehaviour
             isReliefValveOpen = true;
             reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
             // Debug.Log($"RVOP reached! reliefValveOpeningPoint: {reliefValveOpeningPoint}, condition: reliefValveOpeningPoint <= 0");
-
 
         }
         //normal flow - closing relief valve
@@ -617,7 +611,7 @@ public class RPZWaterController : MonoBehaviour
         /// <summary>
         /// testing conditions - no attachments
         /// </summary>
-        if (isDeviceInTestingCondititons)
+        if (isDeviceInTestingCondititons == false)
         {
 
             if (reliefValveOpeningPoint > 0)
@@ -695,9 +689,17 @@ public class RPZWaterController : MonoBehaviour
 
                 if (m_detectorZone2.ParticlesInside > zone2primedParticleCount)
                 {
+
+
+
+
                     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                     check2housingForceField.Strength = 0;
+
+
+
                 }
+
                 else
                 {
                     check1housingForceField.Strength = Mathf.SmoothDamp(
@@ -706,6 +708,7 @@ public class RPZWaterController : MonoBehaviour
                      ref check1FFref.x,
                      0.5f);
                 }
+
 
 
             }
@@ -940,7 +943,7 @@ public class RPZWaterController : MonoBehaviour
     {
 
 
-        if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
+        if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true && rpzTestKitController.AttachedHoseList.Count == 0)
         {
             ///Determine if testing conditions are met ---------------------------------------------------
             isDeviceInTestingCondititons = false;
@@ -1034,10 +1037,10 @@ public class RPZWaterController : MonoBehaviour
         }
 
 
-        else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false)
+        else if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == false && rpzTestKitController.AttachedHoseList.Count == 0)
         {
             ///Determine if testing conditions are met ---------------------------------------------------
-            isDeviceInTestingCondititons = true;
+            isDeviceInTestingCondititons = false;
 
             foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)
             {
