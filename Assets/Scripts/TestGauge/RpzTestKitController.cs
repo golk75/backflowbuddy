@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
 public class RpzTestKitController : MonoBehaviour
@@ -20,7 +21,7 @@ public class RpzTestKitController : MonoBehaviour
     public CheckValveStatus checkValveStatus;
     public Animator openKnobAnimation;
     public RPZWaterController rpzWaterController;
-
+    public BleedHoseController bleedHoseController;
 
 
     public ZibraLiquid liquid;
@@ -298,6 +299,9 @@ public class RpzTestKitController : MonoBehaviour
 
     private void OperateControls()
     {
+        isHighBleedOpen = bleedHoseController.isHighBleedOpen;
+        isLowBleedOpen = bleedHoseController.isLowBleedOpen;
+
         if (playerController.isOperableObject == true)
         {
             if (
@@ -361,26 +365,11 @@ public class RpzTestKitController : MonoBehaviour
                     {
 
                         KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
-                        if (currentKnob == highBleed)
-                        {
-                            isHighBleedOpen = true;
-                        }
-                        else if (currentKnob == lowBleed)
-                        {
-                            isLowBleedOpen = true;
-                        }
+
                     }
                     else
                     {
                         KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
-                        if (currentKnob == highBleed)
-                        {
-                            isHighBleedOpen = false;
-                        }
-                        else if (currentKnob == lowBleed)
-                        {
-                            isLowBleedOpen = false;
-                        }
 
                     }
 
@@ -395,6 +384,14 @@ public class RpzTestKitController : MonoBehaviour
 
     IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
+        // if (currentKnob == highBleed)
+        // {
+        //     isHighBleedOpen = true;
+        // }
+        // else if (currentKnob == lowBleed)
+        // {
+        //     isLowBleedOpen = true;
+        // }
 
         // Debug.Log($"{obj} rotated OPEN");
         float timeLerped = 0.0f;
@@ -409,6 +406,15 @@ public class RpzTestKitController : MonoBehaviour
     }
     IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
+        //     if (currentKnob == highBleed)
+        //     {
+        //         isHighBleedOpen = false;
+        //     }
+        //     else if (currentKnob == lowBleed)
+        //     {
+        //         isLowBleedOpen = false;
+        //     }
+
 
         // Debug.Log($"{obj} rotated CLOSED");
         float timeLerped = 0.0f;
@@ -529,28 +535,28 @@ public class RpzTestKitController : MonoBehaviour
                     if (isTestCock2Open)
                     {
                         isHighHoseEngaged = true;
-                        Debug.Log($"high hose on tc#2 && tc#2 opened");
-                        if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && !isHighBleedOpen)
-                        {
-                            hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
 
+                        // Debug.Log($"high hose on tc#2 && tc#2 opened");
+                        // if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && isHighBleedOpen == false)
+                        // {
+                        //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
 
-                        }
-                        else if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && isHighBleedOpen)
-                        {
-                            hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
+                        // }
+                        // else if (rpzWaterController.m_detectorZone1.ParticlesInside > 100 && isHighBleedOpen == true)
+                        // {
+                        //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
 
-                            if (isLowBleedOpen && isLowHoseEngaged)
-                            {
+                        //     if (isLowBleedOpen && isLowHoseEngaged)
+                        //     {
 
-                            }
-                            // apparent reading ?????---->
-                            else if (!isLowBleedOpen && isLowHoseEngaged)
-                            {
-                                hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
-                            }
+                        //     }
+                        //     // apparent reading ?????---->
+                        //     if (!isLowBleedOpen && isLowHoseEngaged)
+                        //     {
+                        //         hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
+                        //     }
 
-                        }
+                        // }
 
 
 
@@ -725,6 +731,35 @@ public class RpzTestKitController : MonoBehaviour
             /// <summary>
             /// End - Bypass Hose
             /// </summary>
+
+
+            if (rpzWaterController.m_detectorZone1.ParticlesInside > 100)
+            {
+
+
+                if (isHighHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == false)
+                {
+                    Debug.Log($"here1");
+                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
+                }
+                else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == true)
+                {
+                    Debug.Log($"here2");
+                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.1f, needleRiseSpeed);
+                }
+                else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == false && isLowBleedOpen == false)
+                {
+                    Debug.Log($"apparent reading");
+                    hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
+                }
+                else if (isHighHoseEngaged == true)
+                {
+                    Debug.Log($"here4");
+                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                }
+
+
+            }
 
             // if (AttachedHoseList.Contains(HighHose))
             // {

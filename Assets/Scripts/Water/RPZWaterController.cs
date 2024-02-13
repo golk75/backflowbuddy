@@ -689,7 +689,7 @@ public class RPZWaterController : MonoBehaviour
                 {
                     if (rpzTestKitController.isLowBleedOpen)
                     {
-                        Debug.Log($"LowBleed open");
+
 
                         check1housingForceField.Strength = Mathf.SmoothDamp(
                           check1housingForceField.Strength,
@@ -702,7 +702,7 @@ public class RPZWaterController : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log($"LowBleed closed");
+
                         check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
                         m_sensingLineFF.Strength = 0;

@@ -207,15 +207,12 @@ public class PlayerController : MonoBehaviour
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
 
-        // primaryClickPerformed = context.ReadValue<float>();
-        // if (primaryTouchPerformed == false)
-        // {
-        //     primaryTouchPerformed = true;
-        // }
-        // else
-        // {
-        //     primaryTouchPerformed = false;
-        // }
+        primaryClickPerformed = context.ReadValue<float>();
+        if (primaryTouchPerformed == true)
+        {
+            primaryTouchPerformed = false;
+        }
+
 
     }
 
@@ -229,7 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         secondaryTouchStarted = context.ReadValueAsButton();
 
-
+        primaryTouchPerformed = false;
         onZoomStop?.Invoke();
     }
 
