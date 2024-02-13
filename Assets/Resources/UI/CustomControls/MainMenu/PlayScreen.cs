@@ -8,6 +8,7 @@ public class PlayScreen : VisualElement
 {
     public VisualElement m_RpzPopup;
     public VisualElement m_DCPlayScreen;
+    public VisualElement m_RPZPlayScreen;
     public VisualElement m_DeviceSelectionScreen;
     public new class UxmlFactory : UxmlFactory<PlayScreen, UxmlTraits> { }
 
@@ -23,15 +24,41 @@ public class PlayScreen : VisualElement
         m_DCPlayScreen = this.Q("DCPlayScreen");
         m_DeviceSelectionScreen = this.Q("device-selection");
 
-        this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRpzPopup());
-        this?.Q("rpz-popup-back-button")?.RegisterCallback<ClickEvent>(evt => RemoveRpzPopup());
-
+        //RPZ button
+        //this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRpzPopup());
+        //this?.Q("rpz-popup-back-button")?.RegisterCallback<ClickEvent>(evt => RemoveRpzPopup());
+        this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
 
         //Double Check button
         this?.Q("double-check-button")?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
 
 
+
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
+    }
+
+    private void EnableRPZPlayScreenAndScene()
+    {
+        {
+            AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync("RPZPlayScene");
+
+
+            // #if UNITY_EDITOR
+            //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+            // #endif
+
+
+            // skipping quick tour
+
+            //wait for scene to load before switching Ui
+            if (sceneLoadAsync.isDone)
+            {
+                m_DeviceSelectionScreen.style.display = DisplayStyle.None;
+            }
+
+
+
+        }
     }
 
     private void EnableDoubleCheckPlayScreenAndScene()

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="RPZPlayScreenContainer" src="project://database/Assets/Resources/UI/uxml/RPZPlay/RPZPlayScreenContainer.uxml?fileID=9197481963319205126&amp;guid=93b0dacd93915460092fee99120f08d3&amp;type=3#RPZPlayScreenContainer" />
+    <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=52141e1763a324a00b382ca1bd2d11b0&amp;type=3#PressureZoneHud" />
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneSlider.uss?fileID=7433441132597879392&amp;guid=b928e6a2ee3824672bcb593bd1e09328&amp;type=3#PressureZoneSlider" />
+    <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreen.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DCPlayScreen" />
+    <RPZPlayScreen>
+        <ui:Instance template="RPZPlayScreenContainer" name="RPZPlayScreenContainer" />
+    </RPZPlayScreen>
+</ui:UXML>
