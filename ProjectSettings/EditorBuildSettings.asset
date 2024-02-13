@@ -14,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DoubleCheck/DCLearnScene.unity
     guid: c2ce7d5f5df894592a63758e6ddd1c2a
-  - enabled: 1
-    path: Assets/Scenes/RPZ/RPZPlayScene.unity
-    guid: 7946e9ac53e6f44a5b3f6262aed959cf
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 30df0976a818842158d9427757b3b14d,
       type: 2}
