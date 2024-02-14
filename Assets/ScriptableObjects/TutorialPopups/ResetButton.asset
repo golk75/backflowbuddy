@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ResetButton
   m_EditorClassIdentifier: 
   header: Reset
-  content: Click here to reset device and water back to orignal state (ie. Supply
-    pressure back to 0, remove all water from device, disconnect any connected tools
-    and/or hoses).
+  content: Click here to reset the backflow assembly to its original empty state.
+    This removes all water from the backflow assembly and disconnect any connected
+    tools and/or hoses.

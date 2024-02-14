@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     PlayerInputAction playerInput;
 
     private PlayerController playerController;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
+
 
     [SerializeField]
     GameObject playerManager;

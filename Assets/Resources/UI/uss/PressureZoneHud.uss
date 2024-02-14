@@ -168,20 +168,20 @@
 .pressure-panel-supply {
     position: absolute;
     left: 89px;
-    top: 366px;
+    top: 241px;
     right: 0;
 }
 
 .pressure-panel-3 {
     position: absolute;
     left: 842px;
-    top: 366px;
+    top: 241px;
     right: 0;
 }
 
 .pressure-panel-2 {
     position: absolute;
     left: 525px;
-    top: 366px;
+    top: 241px;
     right: 0;
 }

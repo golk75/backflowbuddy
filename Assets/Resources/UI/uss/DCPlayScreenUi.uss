@@ -7,16 +7,7 @@
 .floating {
 }
 
-.pressure-panel-flash {
-    position: absolute;
-    left: auto;
-    top: auto;
-    right: auto;
-}
-
-.pressure-panel-supply-flash {
-    position: absolute;
-    left: auto;
-    top: auto;
-    right: auto;
+.scene-top-container {
+    flex-direction: row;
+    height: 10%;
 }

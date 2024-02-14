@@ -11,7 +11,6 @@ public class HoseController : MonoBehaviour
     public PlayerController playerController;
     public CameraController cameraController;
     public UiClickFilter uiClickFilter;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
     private Vector3 initHighHosePos;
     private Vector3 initAnchorPos_highHose;
     private Vector3 initAnchorPos_lowHose;
