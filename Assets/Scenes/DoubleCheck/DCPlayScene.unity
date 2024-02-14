@@ -489,12 +489,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterController: {fileID: 4261158086632363316}
+  m_rpzWaterController: {fileID: 0}
   playerController: {fileID: 1446278365}
   uiClickFilter: {fileID: 354497751}
+  ActiveWaterController: {fileID: 0}
   isPointerDown: 0
   maxSpringPressure: 3
   check1SpringPressure: 2
   check2SpringPressure: 1
+  check1SpringInitPressure: 0
+  check2SpringInitPressure: 0
 --- !u!114 &354497751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2211,6 +2215,7 @@ MonoBehaviour:
   doubleCheckTestKitController: {fileID: 0}
   highBleedKnob: {fileID: 1032487122}
   isHighBleedOpen: 0
+  isLowBleedOpen: 0
 --- !u!4 &744900688229994192
 Transform:
   m_ObjectHideFlags: 0

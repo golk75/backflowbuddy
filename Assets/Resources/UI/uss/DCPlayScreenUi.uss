@@ -6,3 +6,17 @@
 
 .floating {
 }
+
+.pressure-panel-flash {
+    position: absolute;
+    left: auto;
+    top: auto;
+    right: auto;
+}
+
+.pressure-panel-supply-flash {
+    position: absolute;
+    left: auto;
+    top: auto;
+    right: auto;
+}

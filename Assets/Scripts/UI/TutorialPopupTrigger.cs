@@ -25,7 +25,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string ResetButtonString = "ResetButton";
     private const string PauseButtonString = "PauseButton";
     private const string PlayButtonString = "PlayButton";
-    private const string SupplyPanelString = "SupplyPressure__panel";
+    private const string SupplyPanelString = "SupplyPressureZone__panel";
     private const string Zone2PanelString = "PressureZone__two_panel";
     private const string Zone3PanelString = "PressureZone__three_panel";
     //visual elements to animate 
@@ -182,7 +182,7 @@ public class TutorialPopupTrigger : MonoBehaviour
             for (int j = 0; j < flashingElementList.Count; j++)
             {
                 flashingElementList[j].transform.position = originalElementList[j].LocalToWorld(o_pos);
-
+                Debug.Log($"originalElementList[i]: {originalElementList[i]} opos: {o_pos} ; flashingElementList[j]: {flashingElementList[j]}");
             }
 
 
@@ -313,6 +313,7 @@ public class TutorialPopupTrigger : MonoBehaviour
                 case 6:
                     ElementsToAnimate.Add(m_SupplyPanel_flashing);
                     OriginalElementsToAnimateCopy.Add(m_SupplyPanel);
+
                     // ElementsToAnimateArr[0, 0] = m_FillButton_flashing;
                     break;
                 case 7:
@@ -378,7 +379,15 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         SaveTutorialPrefs(1);
         DOTween.KillAll();
-        SceneManager.LoadSceneAsync(m_DCPlayScene);
+        if (SceneManager.GetActiveScene().name == "RPZPlayScene")
+        {
+            SceneManager.LoadSceneAsync("RPZPlayScene");
+        }
+        else if (SceneManager.GetActiveScene().name == m_DCPlayScene)
+        {
+            SceneManager.LoadSceneAsync(m_DCPlayScene);
+        }
+
     }
 
     //cache tutorial skipping preference to device memory

@@ -26,6 +26,14 @@ public class GameMenuScreen : VisualElement
     {
 
         PlayerPrefs.SetInt("Skip Tutorial", 0);
-        SceneManager.LoadScene("DCPlayScene");
+        if (SceneManager.GetActiveScene().name == "RPZPlayScene")
+        {
+            SceneManager.LoadSceneAsync("RPZPlayScene");
+        }
+        else if (SceneManager.GetActiveScene().name == "DCPlayScene")
+        {
+            SceneManager.LoadSceneAsync("DCPlayScene");
+        }
+
     }
 }
