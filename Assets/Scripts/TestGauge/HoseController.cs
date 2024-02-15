@@ -230,8 +230,10 @@ public class HoseController : MonoBehaviour
     private void GrabComponent(GameObject @object, OperableComponentDescription description)
     {
 
+
         if (uiClickFilter.isUiClicked == false)
         {
+
 
             componentGrabbed = true;
 

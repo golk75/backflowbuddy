@@ -43,7 +43,9 @@ public static class Actions
     public static Action onHighBleedOperate;
     public static Action onLowBleedOperate;
     public static Action onHighBleedClosed;
-
+    public static Action onHighControlOperate;
+    public static Action onLowControlOperate;
+    public static Action onBypassControlOperate;
 
 
 }

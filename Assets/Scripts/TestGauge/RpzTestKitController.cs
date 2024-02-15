@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 
@@ -25,16 +26,23 @@ public class RpzTestKitController : MonoBehaviour
 
 
     public ZibraLiquid liquid;
+
     public GameObject highBleed;
     public GameObject highControl;
     public GameObject lowBleed;
     public GameObject lowControl;
     public GameObject bypassControl;
+    public GameObject currentKnobIndicator;
     public PressureZoneHUDController pressureZoneHUDController;
 
     public GameObject needle;
     public GameObject digitalKitNeedle;
     public GameObject currentKnob;
+    public GameObject highBleedIndicator;
+    public GameObject lowBleedIndicator;
+    public GameObject highControlIndicator;
+    public GameObject lowControlIndicator;
+    public GameObject bypassIndicator;
     public GameObject LowHose;
     public GameObject HighHose;
     public GameObject BypassHose;
@@ -89,7 +97,7 @@ public class RpzTestKitController : MonoBehaviour
     [SerializeField]
     ZibraLiquidDetector TestCock2Detector;
 
-
+    Tween TweenColor;
 
     // private const float MinNeedle_rotation = 55;
     // private const float MaxNeedle_rotation = -55;
@@ -130,6 +138,9 @@ public class RpzTestKitController : MonoBehaviour
 
     public bool isHighBleedOpen;
     public bool isLowBleedOpen;
+    public bool isLowControlOpen;
+    public bool isHighControlOpen;
+    public bool isBypassControlOpen;
 
 
     public float highHosePressure;
@@ -160,7 +171,11 @@ public class RpzTestKitController : MonoBehaviour
     // public List<GameObject> TestCockList;
     public List<GameObject> AttachedTestCockList;
     public List<GameObject> AttachedHoseList;
+    Color openColor = new Color(0.121469043f, 0.830188692f, 0, 10);
+    Color closedColor = new Color(0.860397637f, 0.0180187989f, 0, 10);
     int rot = 0;
+
+
     void OnEnable()
     {
 
@@ -177,10 +192,15 @@ public class RpzTestKitController : MonoBehaviour
         Actions.onRemoveTestCockFromList += RemoveTestCockFromList;
         Actions.onAddHoseToList += AddHoseToList;
         Actions.onRemoveHoseFromList += RemoveHoseFromList;
-
+        Actions.onHighBleedOperate += HighBleedKnobOperate;
+        Actions.onLowBleedOperate += LowBleedKnobOperate;
+        Actions.onHighControlOperate += HighControlKnobOperate;
+        Actions.onLowControlOperate += LowControlKnobOperate;
+        Actions.onBypassControlOperate += BypassControlOperate;
 
 
     }
+
 
 
     void OnDisable()
@@ -198,6 +218,11 @@ public class RpzTestKitController : MonoBehaviour
         Actions.onRemoveTestCockFromList -= RemoveTestCockFromList;
         Actions.onAddHoseToList -= AddHoseToList;
         Actions.onRemoveHoseFromList -= RemoveHoseFromList;
+        Actions.onHighBleedOperate -= HighBleedKnobOperate;
+        Actions.onLowBleedOperate -= LowBleedKnobOperate;
+        Actions.onHighControlOperate -= HighControlKnobOperate;
+        Actions.onLowControlOperate -= LowControlKnobOperate;
+        Actions.onBypassControlOperate -= BypassControlOperate;
 
 
     }
@@ -228,7 +253,6 @@ public class RpzTestKitController : MonoBehaviour
         initHighHosePosition = HighHose.transform.position;
         initBypassHosePosition = BypassHose.transform.position;
     }
-
 
     private void AddHoseToList(GameObject @object, OperableComponentDescription description)
     {
@@ -285,6 +309,134 @@ public class RpzTestKitController : MonoBehaviour
     }
 
 
+
+    private void OperateControls()
+    {
+
+        // isHighBleedOpen = bleedHoseController.isHighBleedOpen;
+        // isLowBleedOpen = bleedHoseController.isLowBleedOpen;
+
+        //switch (playerController.operableComponentDescription.componentId)
+        // {
+        //     case OperableComponentDescription.ComponentId.HighBleed:
+        //         currentKnob = highBleed;
+        //         // 0, 201, 2 -> green
+        //         // 201, 4, 0 -> red
+        //         // currentKnobIndicator = highBleedIndicator;
+
+        //         if (isHighBleedOpen == true)
+        //         {
+        //             highBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         else
+        //         {
+        //             highBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         break;
+        //     case OperableComponentDescription.ComponentId.LowBleed:
+        //         currentKnob = lowBleed;
+        //         if (isLowBleedOpen == true)
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         else
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         break;
+        //     case OperableComponentDescription.ComponentId.LowControl:
+        //         currentKnob = lowControl;
+        //         if (isLowControlOpen == true)
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         else
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         break;
+        //     case OperableComponentDescription.ComponentId.HighControl:
+        //         currentKnob = highControl;
+        //         if (isHighControlOpen == true)
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         else
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         break;
+        //     case OperableComponentDescription.ComponentId.BypassControl:
+        //         currentKnob = bypassControl;
+        //         if (isBypassControlOpen == true)
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        //         }
+        //         else
+        //         {
+        //             lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+        //             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+
+        //         }
+        //         break;
+        //     default:
+        //         currentKnob = null;
+        //         break;
+
+
+        //         if (playerController.ClickOperationEnabled == false)
+        //         {
+
+
+
+        //             //check click operation status
+
+        //             //if disabled, use click and drag
+
+        //             currentKnobRotation +=
+        //                 (
+        //                     playerController.touchStart.x
+        //                     - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
+        //                 ) / 5;
+
+
+        //             if (currentKnobRotation > maxKnobRotation)
+        //             {
+        //                 currentKnobRotation = maxKnobRotation;
+        //             }
+        //             if (currentKnobRotation < minKnobRotation)
+        //             {
+        //                 currentKnobRotation = minKnobRotation;
+        //             }
+        //             if (currentKnob != null)
+        //                 currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
+        //             //}
+        //             //if enabled, spin to max rotation
+        //             //         TweenColor = DOTween.To(()
+        //             // => elements[0].transform.scale,
+        //             // x => elements[0].transform.scale = x,
+        //             // tweenScaleUp, tweenScaleUpSpeed)
+        //             // .SetEase(GrowEase);
+
+
+
+        //         }
+        // }
+    }
+
+    /// <summary>
+    /// Knob controls
+    /// </summary>
+
     public float GetKnobRotation()
     {
         // max - min to rotate left while increasing
@@ -297,125 +449,123 @@ public class RpzTestKitController : MonoBehaviour
         return MinKnob_rotation + normalizedRotation * rotationDiff * knobRotationFactor;
     }
 
-    private void OperateControls()
+    void HighBleedKnobOperate()
     {
-        isHighBleedOpen = bleedHoseController.isHighBleedOpen;
-        isLowBleedOpen = bleedHoseController.isLowBleedOpen;
+        Debug.Log($"High Bleed");
+        currentKnob = highBleed;
 
-        if (playerController.isOperableObject == true)
+        if (isHighBleedOpen == false)
         {
-            if (
-                playerController.operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitValve
-            )
-            {
-                switch (playerController.operableComponentDescription.componentId)
-                {
-                    case OperableComponentDescription.ComponentId.HighBleed:
-                        currentKnob = highBleed;
-                        break;
-                    case OperableComponentDescription.ComponentId.LowBleed:
-                        currentKnob = lowBleed;
-                        break;
-                    case OperableComponentDescription.ComponentId.LowControl:
-                        currentKnob = lowControl;
-                        break;
-                    case OperableComponentDescription.ComponentId.HighControl:
-                        currentKnob = highControl;
-                        break;
-                    case OperableComponentDescription.ComponentId.BypassControl:
-                        currentKnob = bypassControl;
-                        break;
-                    default:
-                        currentKnob = null;
-                        break;
-                }
+            isHighBleedOpen = true;
+            bleederHoseEmitter.VolumePerSimTime = 1;
+            highBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
-                if (playerController.ClickOperationEnabled == false)
-                {
+        }
+        else
+        {
+            isHighBleedOpen = false;
+            bleederHoseEmitter.VolumePerSimTime = 0;
+            highBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
 
+        }
 
+    }
+    private void LowBleedKnobOperate()
+    {
+        Debug.Log($"Low Bleed");
+        currentKnob = lowBleed;
+        if (isLowBleedOpen == false)
+        {
+            isLowBleedOpen = true;
+            bleederHoseEmitter.VolumePerSimTime = 1;
+            lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
-                    //check click operation status
+        }
+        else
+        {
+            isLowBleedOpen = false;
+            bleederHoseEmitter.VolumePerSimTime = 0;
+            lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        }
 
-                    //if disabled, use click and drag
+    }
+    private void BypassControlOperate()
+    {
+        Debug.Log($"Bypass Control");
+        currentKnob = bypassControl;
+        if (isBypassControlOpen == false)
+        {
+            isBypassControlOpen = true;
+            bypassIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
-                    currentKnobRotation +=
-                        (
-                            playerController.touchStart.x
-                            - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
-                        ) / 5;
+        }
+        else
+        {
+            isBypassControlOpen = false;
+            bypassIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        }
+    }
 
+    private void LowControlKnobOperate()
+    {
+        Debug.Log($"Low Control");
+        currentKnob = lowControl;
+        if (isLowControlOpen == false)
+        {
+            isLowControlOpen = true;
+            lowControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        }
+        else
+        {
+            isLowControlOpen = false;
+            lowControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+        }
+    }
 
-                    if (currentKnobRotation > maxKnobRotation)
-                    {
-                        currentKnobRotation = maxKnobRotation;
-                    }
-                    if (currentKnobRotation < minKnobRotation)
-                    {
-                        currentKnobRotation = minKnobRotation;
-                    }
-                    if (currentKnob != null)
-                        currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
-                }
-                //if enabled, spin to max rotation
-                else if (playerController.ClickOperationEnabled == true)
-                {
-                    if (bleederHoseEmitter.VolumePerSimTime > 0)
-                    {
-
-                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
-
-                    }
-                    else
-                    {
-                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
-
-                    }
-
-
-                }
-
-            }
-
-
+    private void HighControlKnobOperate()
+    {
+        Debug.Log($"High Control");
+        currentKnob = highControl;
+        if (isHighControlOpen == false)
+        {
+            isHighControlOpen = true;
+            highControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
+        }
+        else
+        {
+            isHighControlOpen = false;
+            highControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
     }
 
     IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
     {
-        // if (currentKnob == highBleed)
-        // {
-        //     isHighBleedOpen = true;
-        // }
-        // else if (currentKnob == lowBleed)
-        // {
-        //     isLowBleedOpen = true;
-        // }
 
-        // Debug.Log($"{obj} rotated OPEN");
         float timeLerped = 0.0f;
 
         while (timeLerped < 1.0)
         {
+
             timeLerped += Time.deltaTime;
             obj.transform.eulerAngles = Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
+
             yield return null;
         }
+
 
     }
     IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
     {
-        //     if (currentKnob == highBleed)
-        //     {
-        //         isHighBleedOpen = false;
-        //     }
-        //     else if (currentKnob == lowBleed)
-        //     {
-        //         isLowBleedOpen = false;
-        //     }
-
-
         // Debug.Log($"{obj} rotated CLOSED");
         float timeLerped = 0.0f;
         knobOpened = true;
@@ -425,8 +575,11 @@ public class RpzTestKitController : MonoBehaviour
             obj.transform.eulerAngles = -Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
             yield return null;
         }
-
     }
+    /// <summary>
+    /// End - Knob controls
+    /// </summary>
+
 
     private void TestCock4Closed()
     {
@@ -739,22 +892,18 @@ public class RpzTestKitController : MonoBehaviour
 
                 if (isHighHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == false)
                 {
-                    Debug.Log($"here1");
                     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
                 }
                 else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == true)
                 {
-                    Debug.Log($"here2");
                     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.1f, needleRiseSpeed);
                 }
                 else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == false && isLowBleedOpen == false)
                 {
-                    Debug.Log($"apparent reading");
                     hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
                 }
                 else if (isHighHoseEngaged == true)
                 {
-                    Debug.Log($"here4");
                     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
                 }
 

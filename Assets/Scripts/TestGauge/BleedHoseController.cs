@@ -43,7 +43,7 @@ public class BleedHoseController : MonoBehaviour
     }
     void HighBleedKnobOperate()
     {
-        Debug.Log($"here");
+
         if (isHighBleedOpen == false)
         {
             isHighBleedOpen = true;

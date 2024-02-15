@@ -17,6 +17,11 @@
                     <ui:Button name="PauseButton" focusable="false" class="fill-button button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_8_pause_.png?fileID=2800000&amp;guid=a1bda28f797f71c4db09f6a0d4af4759&amp;type=3#T_8_pause_&apos;);" />
                     <ui:Button name="PlayButton" focusable="false" class="fill-button button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_6_continue_.png?fileID=2800000&amp;guid=d42cfe7bed8439c439378d1a7e76f4e3&amp;type=3#T_6_continue_&apos;);" />
                 </ui:VisualElement>
+                <ui:VisualElement name="LowBleedStatus_container" style="left: 177px; top: 60px; font-size: 31px; -unity-font-style: bold; -unity-text-align: middle-center; align-items: center; width: 25px; display: none;">
+                    <ui:VisualElement name="closed-label" class="closed-knob-indicator" style="display: none; opacity: 1;" />
+                    <ui:VisualElement name="open-label" class="open-knob-indicator" style="flex-grow: 1; background-color: rgb(82, 204, 61); display: none; opacity: 1;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="HighBleedStatus_container" style="background-color: rgba(255, 255, 255, 0.99); width: 73px; left: 972px; top: 47px; font-size: 31px; -unity-font-style: bold; -unity-text-align: middle-center; display: none;" />
             </ui:VisualElement>
             <ui:VisualElement name="Middle_container" picking-mode="Ignore" style="flex-direction: row; width: 126px;">
                 <ui:VisualElement name="PanelSlots" picking-mode="Ignore" class="pressure-panel-slot-container" style="height: 390px; width: 111px;">

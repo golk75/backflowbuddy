@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject TestCockManager;
     TestCockController testCockController;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
+
     public GameObject FillButton;
     public UiClickFilter uiClickFilter;
     [SerializeField]
@@ -322,16 +322,27 @@ public class PlayerController : MonoBehaviour
                 _operableObjectRotation.z = 90;
 
             }
-            if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.HighBleed)
+            switch (operableComponentDescription.componentId)
             {
-
-                Actions.onHighBleedOperate?.Invoke();
+                case OperableComponentDescription.ComponentId.HighBleed:
+                    Actions.onHighBleedOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.LowBleed:
+                    Actions.onLowBleedOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.HighControl:
+                    Actions.onHighControlOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.LowControl:
+                    Actions.onLowControlOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.BypassControl:
+                    Actions.onBypassControlOperate?.Invoke();
+                    break;
+                default:
+                    break;
             }
-            if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.LowBleed)
-            {
 
-                Actions.onLowBleedOperate?.Invoke();
-            }
         }
 
 
