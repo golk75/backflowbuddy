@@ -42,7 +42,7 @@ public class RpzTestKitController : MonoBehaviour
     public GameObject lowBleedIndicator;
     public GameObject highControlIndicator;
     public GameObject lowControlIndicator;
-    public GameObject bypassIndicator;
+    public GameObject bypassControlIndicator;
     public GameObject LowHose;
     public GameObject HighHose;
     public GameObject BypassHose;
@@ -148,10 +148,13 @@ public class RpzTestKitController : MonoBehaviour
     float needleSpeedDamp = 0.005f;
     public float knobRotationFactor = 0;
 
-    Coroutine KnobClickOperate;
 
+    Coroutine m_ChangeColorOpen;
+    Coroutine m_ChangeColorClose;
+    Coroutine KnobClickOperate;
     Coroutine Check1ClosingPoint;
     float needleVelRef = 0;
+    public float lerpDuration = 0.5f;
     public bool knobOpened = false;
 
     //ui toolkit
@@ -175,7 +178,7 @@ public class RpzTestKitController : MonoBehaviour
     Color closedColor = new Color(0.860397637f, 0.0180187989f, 0, 10);
     int rot = 0;
 
-
+    private const string EmissionColor = "_EmissionColor";
     void OnEnable()
     {
 
@@ -437,6 +440,42 @@ public class RpzTestKitController : MonoBehaviour
     /// Knob controls
     /// </summary>
 
+    IEnumerator OpenColorChange(Material mat)
+    {
+        float percentage = 0;
+        float startTime = Time.time;
+
+        Color initialColor = mat.GetColor(EmissionColor);
+        Color currentColor;
+
+        while (percentage < 1f)
+        {
+            percentage = (Time.time - startTime) / lerpDuration;
+            currentColor = Color.Lerp(initialColor, openColor, percentage);
+            mat.SetColor(EmissionColor, currentColor);
+            yield return null;
+        }
+
+    }
+
+    IEnumerator CloseColorChange(Material mat)
+    {
+        float percentage = 0;
+        float startTime = Time.time;
+
+        Color initialColor = mat.GetColor(EmissionColor);
+        Color currentColor;
+
+        while (percentage < 1f)
+        {
+            percentage = (Time.time - startTime) / lerpDuration;
+            currentColor = Color.Lerp(initialColor, closedColor, percentage);
+            mat.SetColor(EmissionColor, currentColor);
+            yield return null;
+        }
+
+    }
+
     public float GetKnobRotation()
     {
         // max - min to rotate left while increasing
@@ -451,6 +490,7 @@ public class RpzTestKitController : MonoBehaviour
 
     void HighBleedKnobOperate()
     {
+
         Debug.Log($"High Bleed");
         currentKnob = highBleed;
 
@@ -458,7 +498,7 @@ public class RpzTestKitController : MonoBehaviour
         {
             isHighBleedOpen = true;
             bleederHoseEmitter.VolumePerSimTime = 1;
-            highBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            m_ChangeColorOpen = StartCoroutine(OpenColorChange(highBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
         }
@@ -466,7 +506,7 @@ public class RpzTestKitController : MonoBehaviour
         {
             isHighBleedOpen = false;
             bleederHoseEmitter.VolumePerSimTime = 0;
-            highBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            m_ChangeColorClose = StartCoroutine(CloseColorChange(highBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
 
         }
@@ -480,7 +520,7 @@ public class RpzTestKitController : MonoBehaviour
         {
             isLowBleedOpen = true;
             bleederHoseEmitter.VolumePerSimTime = 1;
-            lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            m_ChangeColorOpen = StartCoroutine(OpenColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
         }
@@ -488,7 +528,7 @@ public class RpzTestKitController : MonoBehaviour
         {
             isLowBleedOpen = false;
             bleederHoseEmitter.VolumePerSimTime = 0;
-            lowBleedIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            m_ChangeColorClose = StartCoroutine(CloseColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
 
@@ -500,14 +540,14 @@ public class RpzTestKitController : MonoBehaviour
         if (isBypassControlOpen == false)
         {
             isBypassControlOpen = true;
-            bypassIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            m_ChangeColorOpen = StartCoroutine(OpenColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
         }
         else
         {
             isBypassControlOpen = false;
-            bypassIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            m_ChangeColorClose = StartCoroutine(CloseColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
     }
@@ -519,13 +559,13 @@ public class RpzTestKitController : MonoBehaviour
         if (isLowControlOpen == false)
         {
             isLowControlOpen = true;
-            lowControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            m_ChangeColorOpen = StartCoroutine(OpenColorChange(lowControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
         }
         else
         {
             isLowControlOpen = false;
-            lowControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            m_ChangeColorClose = StartCoroutine(CloseColorChange(lowControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
     }
@@ -537,13 +577,13 @@ public class RpzTestKitController : MonoBehaviour
         if (isHighControlOpen == false)
         {
             isHighControlOpen = true;
-            highControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", openColor);
+            m_ChangeColorOpen = StartCoroutine(OpenColorChange(highControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
         }
         else
         {
             isHighControlOpen = false;
-            highControlIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", closedColor);
+            m_ChangeColorClose = StartCoroutine(CloseColorChange(highControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
     }
