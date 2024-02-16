@@ -583,7 +583,7 @@ public class RPZWaterController : MonoBehaviour
                 //open relief
                 isReliefValveOpen = true;
                 reliefCheckRb.AddForce(new Vector3(-1f, 0, 0) * inputForce, ForceMode.Force);
-                Debug.Log($"RVOP reached! reliefValveOpeningPoint: {reliefValveOpeningPoint}, condition: reliefValveOpeningPoint <= 0");
+                //Debug.Log($"RVOP reached! reliefValveOpeningPoint: {reliefValveOpeningPoint}, condition: reliefValveOpeningPoint <= 0");
 
             }
             //normal flow - closing relief valve
