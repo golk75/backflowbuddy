@@ -476,9 +476,7 @@ public class RPZWaterController : MonoBehaviour
     }
     void CheckValveRegulate()
     {
-        /// <summary>
-        /// any conditions
-        /// </summary>
+
         {
             if (zone1Pressure < check1SpringForce)
             {
@@ -495,7 +493,7 @@ public class RPZWaterController : MonoBehaviour
                 m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
 
             }
-            if (zone1Pressure < zone2Pressure || reliefValveOpeningPoint <= 0)
+            if (zone1Pressure < zone2Pressure)
             {
 
 
@@ -584,8 +582,8 @@ public class RPZWaterController : MonoBehaviour
 
                 //open relief
                 isReliefValveOpen = true;
-                reliefCheckRb.AddForce(new Vector3(-1, 0, 0) * inputForce, ForceMode.Force);
-                // Debug.Log($"RVOP reached! reliefValveOpeningPoint: {reliefValveOpeningPoint}, condition: reliefValveOpeningPoint <= 0");
+                reliefCheckRb.AddForce(new Vector3(-1f, 0, 0) * inputForce, ForceMode.Force);
+                Debug.Log($"RVOP reached! reliefValveOpeningPoint: {reliefValveOpeningPoint}, condition: reliefValveOpeningPoint <= 0");
 
             }
             //normal flow - closing relief valve
