@@ -56,7 +56,9 @@ public class PressureZoneHUDController : MonoBehaviour
     public VisualElement m_SupplyPressurePanel;
     public VisualElement m_PressureZone2Panel;
     public VisualElement m_PressureZone3Panel;
-
+    public Slider m_SupplyPressurePanelSlider;
+    public Slider m_PressureZone2PanelSlider;
+    public Slider m_PressureZone3PanelSlider;
 
     //slider elements
 
@@ -125,10 +127,12 @@ public class PressureZoneHUDController : MonoBehaviour
     {
         root = GetComponent<UIDocument>();
         m_SupplyPressurePanel = root.rootVisualElement.Q<VisualElement>(SupplyPressurePanelTemplateString);
-
-
         m_PressureZone2Panel = root.rootVisualElement.Q<VisualElement>(PressureZone2PanelTemplateString);
         m_PressureZone3Panel = root.rootVisualElement.Q<VisualElement>(PressureZone3PanelTemplateString);
+        m_SupplyPressurePanelSlider = m_SupplyPressurePanel.Q<Slider>(className: "pressure-zone-slider");
+        m_PressureZone2PanelSlider = m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider");
+        m_PressureZone3PanelSlider = m_PressureZone3Panel.Q<Slider>(className: "pressure-zone-slider");
+
         // m_SupplyPressureTextField = root.rootVisualElement.Q<TextField>(SupplyPressureTextString);
         m_SupplyPressureTextField = root.rootVisualElement.Q<Label>(SupplyPressureTextString);
         m_PressureZone2TextLabel = root.rootVisualElement.Q<Label>(PressureZone2LabelString);

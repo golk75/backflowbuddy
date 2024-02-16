@@ -569,7 +569,79 @@ public class RpzTestKitController : MonoBehaviour
     }
 
 
+    private void BleederHoseControl()
+    {
+        #region     
+        if (Zone1Detector.ParticlesInside > 100)
+        {
+            if (isHighHoseEngaged && isLowHoseEngaged)
+            {
+                if (isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (!isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (isHighBleedOpen && !isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
 
+
+            }
+            else if (isHighHoseEngaged && !isLowHoseEngaged)
+            {
+                if (isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (!isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+                else if (isHighBleedOpen && !isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+
+            }
+            else if (!isHighHoseEngaged && isLowHoseEngaged)
+            {
+                if (isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (!isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (isHighBleedOpen && !isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+                else
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+
+            }
+            else if (!isHighHoseEngaged && !isLowHoseEngaged)
+            {
+                bleederHoseEmitter.VolumePerSimTime = 0;
+            }
+        }
+        #endregion
+    }
     private void PressureControl()
     {
 
@@ -780,7 +852,9 @@ public class RpzTestKitController : MonoBehaviour
             //========================================
             // Start Test Procedures//========================>
             //========================================
-            if (rpzWaterController.m_detectorZone1.ParticlesInside > 100)
+
+            //check if device is ready for test (so#1 open & so#2 closed)
+            if (rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
             {
 
                 if (isHighHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == false)
@@ -802,14 +876,14 @@ public class RpzTestKitController : MonoBehaviour
                     //========================================
                     if (isLowControlOpen & isHighControlOpen)
                     {
-                        Debug.Log($"here");
+
                         /*
                         1. move pressure accross #1 check, simulating a leak. (increase pressure in zone two)
                         2. drop needle while pressure increases in zone 2
                         3.crack open relief, stop needle.
                         */
 
-                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider").value));
+                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_SupplyPressurePanelSlider.value, pressureZoneHUDController.m_PressureZone2PanelSlider.value));
 
 
                     }
@@ -880,91 +954,20 @@ public class RpzTestKitController : MonoBehaviour
                              needleRiseSpeed
                          );
         }
-        /// <summary>
-        /// Bleeder hose emitter - > 
-        /// </summary>
-        #region     
-        if (Zone1Detector.ParticlesInside > 100)
-        {
-            if (isHighHoseEngaged && isLowHoseEngaged)
-            {
-                if (isHighBleedOpen && isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else if (!isHighBleedOpen && isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else if (isHighBleedOpen && !isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 0;
-                }
 
 
-            }
-            else if (isHighHoseEngaged && !isLowHoseEngaged)
-            {
-                if (isHighBleedOpen && isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else if (!isHighBleedOpen && isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 0;
-                }
-                else if (isHighBleedOpen && !isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 0;
-                }
-
-            }
-            else if (!isHighHoseEngaged && isLowHoseEngaged)
-            {
-                if (isHighBleedOpen && isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else if (!isHighBleedOpen && isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 1;
-                }
-                else if (isHighBleedOpen && !isLowBleedOpen)
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 0;
-                }
-                else
-                {
-                    bleederHoseEmitter.VolumePerSimTime = 0;
-                }
-
-            }
-            else if (!isHighHoseEngaged && !isLowHoseEngaged)
-            {
-                bleederHoseEmitter.VolumePerSimTime = 0;
-            }
-        }
-        #endregion
 
 
     }
 
-    private IEnumerator TestRVOP(float zone2Pressure)
+    private IEnumerator TestRVOP(float supplyPressure, float zone2Pressure)
     {
         // pressureZoneHUDController.m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider").value += 1;
-
-        while (zone2Pressure > rpzWaterController.reliefValveOpeningPoint)
+        Debug.Log($"here");
+        while (zone2Pressure < supplyPressure)
         {
             Debug.Log($"adding pressure to zone 2");
-            pressureZoneHUDController.m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider").value += 0.1f;
+            // pressureZoneHUDController.m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider").value += 0.1f;
             yield return null;
         }
 
@@ -979,6 +982,7 @@ public class RpzTestKitController : MonoBehaviour
     void Update()
     {
         PressureControl();
+        BleederHoseControl();
         NeedleControl();
         DigitalNeedleControl();
 
