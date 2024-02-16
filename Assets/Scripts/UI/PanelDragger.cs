@@ -53,7 +53,7 @@ public class PanelDragger : PointerManipulator
             return;
 
         m_Active = false;
-        target.ReleaseMouse();
+        target.ReleasePointer(m_PointerId);
         evt.StopPropagation();
 
     }

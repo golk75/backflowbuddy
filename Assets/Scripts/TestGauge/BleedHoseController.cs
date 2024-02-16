@@ -9,7 +9,7 @@ public class BleedHoseController : MonoBehaviour
 {
     ZibraLiquidEmitter bleederHoseEmitter;
     float controlKnobRotation;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
+    public RpzTestKitController rpzTestKitController;
     float currentFlow = 0;
     float appliedKnobRotation = 0;
     [SerializeField]
@@ -71,17 +71,18 @@ public class BleedHoseController : MonoBehaviour
     {
         if (isLowBleedOpen && isHighBleedOpen)
         {
-            bleederHoseEmitter.VolumePerSimTime = 1;
+            if (rpzTestKitController.isHighHoseEngaged && rpzTestKitController.isLowHoseEngaged)
+                bleederHoseEmitter.VolumePerSimTime = 1;
         }
         else if (!isLowBleedOpen && isHighBleedOpen)
         {
-
-            bleederHoseEmitter.VolumePerSimTime = 1;
+            if (rpzTestKitController.isHighHoseEngaged)
+                bleederHoseEmitter.VolumePerSimTime = 1;
         }
         else if (isLowBleedOpen && !isHighBleedOpen)
         {
-
-            bleederHoseEmitter.VolumePerSimTime = 1;
+            if (rpzTestKitController.isLowHoseEngaged)
+                bleederHoseEmitter.VolumePerSimTime = 1;
         }
         else
         {

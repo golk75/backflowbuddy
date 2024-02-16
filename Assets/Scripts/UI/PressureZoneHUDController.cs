@@ -53,9 +53,9 @@ public class PressureZoneHUDController : MonoBehaviour
     Button m_CheckSpring1SubtractButton;
     Button m_CheckSpring2AddButton;
     Button m_CheckSpring2SubtractButton;
-    VisualElement m_SupplyPressurePanel;
-    VisualElement m_PressureZone2Panel;
-    VisualElement m_PressureZone3Panel;
+    public VisualElement m_SupplyPressurePanel;
+    public VisualElement m_PressureZone2Panel;
+    public VisualElement m_PressureZone3Panel;
 
 
     //slider elements
@@ -73,18 +73,19 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     //lists
-    List<VisualElement> SlidersToResetList;
+    List<VisualElement> DraggersToReset;
+    List<VisualElement> DummyDraggersToReset;
     List<VisualElement> SliderBarList;
     public List<VisualElement> DropAreaSlotList = new List<VisualElement>();
 
-
+    VisualElement currentSliderBar;
     //floats
     public float maxSpringPressure = 50f;
     public float check1SpringPressure;
     public float check2SpringPressure;
     public float check1SpringInitPressure;
     public float check2SpringInitPressure;
-
+    public float sliderAdjustAmount;
 
     void Start()
     {
@@ -98,7 +99,27 @@ public class PressureZoneHUDController : MonoBehaviour
 
 
     }
+    /// <summary>
+    /// This function is called when the object becomes enabled and active.
+    /// </summary>
+    private void OnEnable()
+    {
+        Actions.onHighControlOperate += HighControlKnobOperate;
+        Actions.onLowControlOperate += LowControlKnobOperate;
+        Actions.onBypassControlOperate += BypassControlOperate;
+    }
 
+
+
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    private void OnDisable()
+    {
+        Actions.onHighControlOperate -= HighControlKnobOperate;
+        Actions.onLowControlOperate -= LowControlKnobOperate;
+        Actions.onBypassControlOperate -= BypassControlOperate;
+    }
 
     void SetVisualElements()
     {
@@ -114,6 +135,9 @@ public class PressureZoneHUDController : MonoBehaviour
         m_PressureZone3TextField = m_PressureZone3Panel.Q<Label>(PressureZone3LabelString);
 
         SliderBarList = root.rootVisualElement.Query(className: "pressure-zone-slider").ToList();
+        // DraggersToReset = root.rootVisualElement.Query(className: "unity-base-slider__dragger").ToList();
+        DraggersToReset = root.rootVisualElement.Query("unity-dragger").ToList();
+        DummyDraggersToReset = root.rootVisualElement.Query(className: "dummy-dragger").ToList();
 
         m_CheckSpring1Value = m_SupplyPressurePanel.Q<Label>(CheckSpring1ValueLabelString);
         m_CheckSpring2Value = m_SupplyPressurePanel.Q<Label>(CheckSpring2ValueLabelString);
@@ -163,6 +187,22 @@ public class PressureZoneHUDController : MonoBehaviour
             check2SpringPressure = m_rpzWaterController.check2SpringForce;
 
         }
+        // foreach (var dummyDragger in DummyDraggersToReset)
+        // {
+        //     // dummyDragger.AddManipulator(new DraggerHandle(dummyDragger));
+        //     // var target = m_SupplyPressurePanel.Q<VisualElement>("unity-dragger");
+
+
+
+        // }
+        // foreach (var dragger in DraggersToReset)
+        // {
+        //     dragger.AddManipulator(new DraggerHandle(dragger));
+        //     // var target = m_SupplyPressurePanel.Q<VisualElement>("unity-dragger");
+
+
+
+        // }
 
 
     }
@@ -214,14 +254,15 @@ public class PressureZoneHUDController : MonoBehaviour
     }
 
 
+
     private void SliderValueChanged(ChangeEvent<float> evt)
     {
 
+
         uiClickFilter.isUiClicked = true;
-        VisualElement currentSliderBar = (VisualElement)evt.target;
+        currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
         ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "floating"));
-
 
     }
 
@@ -234,7 +275,6 @@ public class PressureZoneHUDController : MonoBehaviour
             case SupplyPressurePanelTemplateString:
 
                 m_rpzWaterController.supplyPsi = zonePressureSliderValue;
-
                 break;
 
             case PressureZone2PanelTemplateString:
@@ -338,7 +378,21 @@ public class PressureZoneHUDController : MonoBehaviour
             m_CheckSpring2Value.text = check2SpringPressure.ToString();
         }
     }
+    private void BypassControlOperate()
+    {
 
+
+    }
+
+    private void LowControlKnobOperate()
+    {
+
+    }
+
+    private void HighControlKnobOperate()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -359,6 +413,10 @@ public class PressureZoneHUDController : MonoBehaviour
             m_PressureZone3TextField.text = m_rpzWaterController.zone3Pressure.ToString();
             m_SupplyPressureTextField.text = m_rpzWaterController.zone1Pressure.ToString();
         }
+
+
+
+
 
 
 

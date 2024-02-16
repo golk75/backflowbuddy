@@ -30,3 +30,9 @@
     -unity-text-align: upper-center;
     font-size: 18px;
 }
+
+.floating {
+}
+
+.dummy-dragger {
+}
