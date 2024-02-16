@@ -377,7 +377,7 @@ public class RpzTestKitController : MonoBehaviour
         if (isHighBleedOpen == false)
         {
             isHighBleedOpen = true;
-            bleederHoseEmitter.VolumePerSimTime = 1;
+
             m_ChangeColorOpen = StartCoroutine(OpenColorChange(highBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
@@ -385,7 +385,7 @@ public class RpzTestKitController : MonoBehaviour
         else
         {
             isHighBleedOpen = false;
-            bleederHoseEmitter.VolumePerSimTime = 0;
+
             m_ChangeColorClose = StartCoroutine(CloseColorChange(highBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
 
@@ -399,7 +399,7 @@ public class RpzTestKitController : MonoBehaviour
         if (isLowBleedOpen == false)
         {
             isLowBleedOpen = true;
-            bleederHoseEmitter.VolumePerSimTime = 1;
+
             m_ChangeColorOpen = StartCoroutine(OpenColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
@@ -407,7 +407,7 @@ public class RpzTestKitController : MonoBehaviour
         else
         {
             isLowBleedOpen = false;
-            bleederHoseEmitter.VolumePerSimTime = 0;
+
             m_ChangeColorClose = StartCoroutine(CloseColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
@@ -692,14 +692,7 @@ public class RpzTestKitController : MonoBehaviour
                     {
                         isLowHoseEngaged = true;
 
-                        // Debug.Log($"low hose on tc#3 && tc#3 opened");
-                        if (rpzWaterController.m_detectorZone2.ParticlesInside > 100)
-                        {
 
-
-                            // hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
-
-                        }
                     }
                     else
                     {
@@ -869,7 +862,12 @@ public class RpzTestKitController : MonoBehaviour
             //========================================
             // End Test Procedures//========================>
             //========================================
+
+
+
         }
+
+
         /// <summary>
         /// No hoses attached
         /// </summary>
@@ -882,6 +880,81 @@ public class RpzTestKitController : MonoBehaviour
                              needleRiseSpeed
                          );
         }
+        /// <summary>
+        /// Bleeder hose emitter - > 
+        /// </summary>
+        #region     
+        if (Zone1Detector.ParticlesInside > 100)
+        {
+            if (isHighHoseEngaged && isLowHoseEngaged)
+            {
+                if (isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (!isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (isHighBleedOpen && !isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+
+
+            }
+            else if (isHighHoseEngaged && !isLowHoseEngaged)
+            {
+                if (isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (!isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+                else if (isHighBleedOpen && !isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+
+            }
+            else if (!isHighHoseEngaged && isLowHoseEngaged)
+            {
+                if (isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (!isHighBleedOpen && isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 1;
+                }
+                else if (isHighBleedOpen && !isLowBleedOpen)
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+                else
+                {
+                    bleederHoseEmitter.VolumePerSimTime = 0;
+                }
+
+            }
+            else if (!isHighHoseEngaged && !isLowHoseEngaged)
+            {
+                bleederHoseEmitter.VolumePerSimTime = 0;
+            }
+        }
+        #endregion
+
+
     }
 
     private IEnumerator TestRVOP(float zone2Pressure)

@@ -30,7 +30,7 @@ public class RPZWaterController : MonoBehaviour
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
     public RpzTestKitController rpzTestKitController;
-    public BleedHoseController bleedHoseController;
+
 
     [SerializeField]
     SightTubeController sightTubeController;

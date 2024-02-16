@@ -69,24 +69,24 @@ public class BleedHoseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLowBleedOpen && isHighBleedOpen)
-        {
-            if (rpzTestKitController.isHighHoseEngaged && rpzTestKitController.isLowHoseEngaged)
-                bleederHoseEmitter.VolumePerSimTime = 1;
-        }
-        else if (!isLowBleedOpen && isHighBleedOpen)
-        {
-            if (rpzTestKitController.isHighHoseEngaged)
-                bleederHoseEmitter.VolumePerSimTime = 1;
-        }
-        else if (isLowBleedOpen && !isHighBleedOpen)
-        {
-            if (rpzTestKitController.isLowHoseEngaged)
-                bleederHoseEmitter.VolumePerSimTime = 1;
-        }
-        else
-        {
-            bleederHoseEmitter.VolumePerSimTime = 0;
-        }
+        // if (isLowBleedOpen && isHighBleedOpen)
+        // {
+        //     if (rpzTestKitController.isHighHoseEngaged && rpzTestKitController.isLowHoseEngaged)
+        //         bleederHoseEmitter.VolumePerSimTime = 1;
+        // }
+        // else if (!isLowBleedOpen && isHighBleedOpen)
+        // {
+        //     if (rpzTestKitController.isHighHoseEngaged)
+        //         bleederHoseEmitter.VolumePerSimTime = 1;
+        // }
+        // else if (isLowBleedOpen && !isHighBleedOpen)
+        // {
+        //     if (rpzTestKitController.isLowHoseEngaged)
+        //         bleederHoseEmitter.VolumePerSimTime = 1;
+        // }
+        // else
+        // {
+        //     bleederHoseEmitter.VolumePerSimTime = 0;
+        // }
     }
 }
