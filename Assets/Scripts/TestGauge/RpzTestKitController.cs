@@ -65,6 +65,7 @@ public class RpzTestKitController : MonoBehaviour
     public HoseBib BypassHoseBib;
     [SerializeField]
     ZibraLiquidEmitter bleederHoseEmitter;
+    public ZibraLiquidEmitter bypassHoseEmitter;
     [SerializeField]
     ZibraLiquidDetector LowHoseDetector;
 
@@ -434,11 +435,12 @@ public class RpzTestKitController : MonoBehaviour
             isBypassControlOpen = true;
             m_ChangeColorOpen = StartCoroutine(OpenColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
-
+            bypassHoseEmitter.enabled = true;
         }
         else
         {
             isBypassControlOpen = false;
+            bypassHoseEmitter.enabled = false;
             m_ChangeColorClose = StartCoroutine(CloseColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
