@@ -87,8 +87,12 @@ public class PressureZoneHUDController : MonoBehaviour
     public float check2SpringPressure;
     public float check1SpringInitPressure;
     public float check2SpringInitPressure;
-    public float sliderAdjustAmount;
-
+    public GameObject reliefSpringFrontSeat;
+    public ConfigurableJoint reliefSpring;
+    public float reliefSpringXDrive;
+    public float reliefSpringXDamper;
+    public float sliderToReliefSpringFactor;
+    public float springDamperFactor;
     void Start()
     {
 
@@ -106,9 +110,9 @@ public class PressureZoneHUDController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        Actions.onHighControlOperate += HighControlKnobOperate;
-        Actions.onLowControlOperate += LowControlKnobOperate;
-        Actions.onBypassControlOperate += BypassControlOperate;
+        // Actions.onHighControlOperate += HighControlKnobOperate;
+        // Actions.onLowControlOperate += LowControlKnobOperate;
+        // Actions.onBypassControlOperate += BypassControlOperate;
     }
 
 
@@ -118,9 +122,9 @@ public class PressureZoneHUDController : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        Actions.onHighControlOperate -= HighControlKnobOperate;
-        Actions.onLowControlOperate -= LowControlKnobOperate;
-        Actions.onBypassControlOperate -= BypassControlOperate;
+        // Actions.onHighControlOperate -= HighControlKnobOperate;
+        // Actions.onLowControlOperate -= LowControlKnobOperate;
+        // Actions.onBypassControlOperate -= BypassControlOperate;
     }
 
     void SetVisualElements()
@@ -284,20 +288,22 @@ public class PressureZoneHUDController : MonoBehaviour
             case PressureZone2PanelTemplateString:
 
                 waterController.zone2PsiChange = zonePressureSliderValue;
-                m_rpzWaterController.zone2PsiChange = zonePressureSliderValue;
+                m_rpzWaterController.zone2PsiChange = (int)zonePressureSliderValue;
+                // ReliefValveControl(zonePressureSliderValue * sliderToReliefSpringFactor);
+                // reliefSpringXDrive = zonePressureSliderValue / sliderToReliefSpringFactor;
                 if (zonePressureSliderValue >= 0)
                 {
-                    m_Zone2PressureSliderValue.text = "+" + zonePressureSliderValue.ToString();
+                    m_Zone2PressureSliderValue.text = "+" + ((int)zonePressureSliderValue).ToString();
                 }
                 else
                 {
-                    m_Zone2PressureSliderValue.text = zonePressureSliderValue.ToString();
+                    m_Zone2PressureSliderValue.text = ((int)zonePressureSliderValue).ToString();
                 }
                 break;
 
             case PressureZone3PanelTemplateString:
                 waterController.zone3PsiChange = zonePressureSliderValue;
-                m_rpzWaterController.zone3PsiChange = zonePressureSliderValue;
+                m_rpzWaterController.zone3PsiChange = (int)zonePressureSliderValue;
                 if (zonePressureSliderValue >= 0)
                 {
                     m_Zone3PressureSliderValue.text = "+" + zonePressureSliderValue.ToString();
@@ -382,28 +388,35 @@ public class PressureZoneHUDController : MonoBehaviour
             m_CheckSpring2Value.text = check2SpringPressure.ToString();
         }
     }
-    private void BypassControlOperate()
+    private void ReliefValveControl(float sliderValue)
     {
+
+
+        // JointDrive drive = reliefSpring.xDrive;
+        // drive.positionSpring = sliderValue;
+        // drive.positionDamper = sliderValue * springDamperFactor;
+        // reliefSpring.xDrive = drive;
+        // var currentPos = reliefSpringFrontSeat.transform.localPosition;
+        // currentPos.x -= -sliderValue;
+        // if (currentPos.x > -0.0861f)
+        // {
+        //     currentPos.x -= sliderValue;
+        // }
+
+        // reliefSpringFrontSeat.transform.localPosition = currentPos;
+
+
 
 
     }
 
-    private void LowControlKnobOperate()
-    {
-
-    }
-
-    private void HighControlKnobOperate()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
         CheckSpring1Regulate();
         CheckSpring2Regulate();
-
+        // ReliefValveControl();
         if (waterController.isActiveAndEnabled)
         {
             m_PressureZone2TextLabel.text = waterController.zone2Pressure.ToString();
