@@ -211,8 +211,8 @@ public class RPZWaterController : MonoBehaviour
     public float testCock4Str;
     public GameObject checkValve1;
     public GameObject checkValve2;
-    Rigidbody check1Rb;
-    Rigidbody check2Rb;
+    public Rigidbody check1Rb;
+    public Rigidbody check2Rb;
     public Rigidbody reliefCheckRb;
     public ZibraLiquid liquid;
     ZibraLiquidSolverParameters liquidSolverParameters;
@@ -231,8 +231,8 @@ public class RPZWaterController : MonoBehaviour
     public float check2SpringForce;
     public float reliefValveSpringForce;
     float zone1PsiChange;
-    public float zone2PsiChange;
-    public float zone3PsiChange;
+    public int zone2PsiChange;
+    public int zone3PsiChange;
     public float zone1to2PsiDiff;
     public float zone2to3PsiDiff;
     public float zone2primedParticleCount = 10000;
@@ -423,18 +423,21 @@ public class RPZWaterController : MonoBehaviour
         }
         else
         {
-            zone2Pressure = m_detectorZone2.ParticlesInside / 1000 * 0.1f;
+            // zone2Pressure = m_detectorZone2.ParticlesInside / 1000 * 0.1f;
+            zone2Pressure = m_detectorZone2.ParticlesInside;
             check1housingForceField.Strength = 0;
 
         }
         if (zone2Pressure - check2SpringForce + zone3PsiChange >= 0 && m_detectorZone3.ParticlesInside >= 0)
         {
+            zone3Pressure = m_detectorZone3.ParticlesInside;
             zone3Pressure = zone2Pressure - check2SpringForce + zone3PsiChange;
 
         }
         else
         {
-            zone3Pressure = m_detectorZone3.ParticlesInside / 1000 * 0.1f;
+            // zone3Pressure = m_detectorZone3.ParticlesInside / 1000 * 0.1f;
+
             check2housingForceField.Strength = 0;
 
         }
@@ -1826,7 +1829,7 @@ public class RPZWaterController : MonoBehaviour
         /// </summary>
         //PressureZoneRegulate();
 
-
+        // Debug.Log($"reliefValveOpeningPoint: {reliefValveOpeningPoint}");
     }
 
 

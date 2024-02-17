@@ -46,6 +46,7 @@ public static class Actions
     public static Action onHighControlOperate;
     public static Action onLowControlOperate;
     public static Action onBypassControlOperate;
+    public static Action onRVOPTest;
 
 
 }

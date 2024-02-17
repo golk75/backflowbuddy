@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
@@ -179,8 +180,14 @@ public class RpzTestKitController : MonoBehaviour
     Color openColor = new Color(0.121469043f, 0.830188692f, 0, 10);
     Color closedColor = new Color(0.860397637f, 0.0180187989f, 0, 10);
     int rot = 0;
-
+    public ForceMode fMode;
+    public Vector3 forceDir;
+    public float fStrength;
     private const string EmissionColor = "_EmissionColor";
+    public GameObject check1BackSeat;
+    Vector3 check1BackSeatInitPos;
+    Vector3 check1BackSeatClosedPos = new Vector3(-0.129500002f, 0f, -0.0860999972f);
+    Vector3 check1BackSeatLeakingPos = new Vector3(-0.133900002f, 0, -0.0860999972f);
     void OnEnable()
     {
 
@@ -257,6 +264,8 @@ public class RpzTestKitController : MonoBehaviour
         initLowHosePosition = LowHose.transform.position;
         initHighHosePosition = HighHose.transform.position;
         initBypassHosePosition = BypassHose.transform.position;
+        check1BackSeatInitPos = check1BackSeat.transform.position;
+
     }
 
     private void AddHoseToList(GameObject @object, OperableComponentDescription description)
@@ -883,8 +892,21 @@ public class RpzTestKitController : MonoBehaviour
                         3.crack open relief, stop needle.
                         */
 
-                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_SupplyPressurePanelSlider.value, pressureZoneHUDController.m_PressureZone2PanelSlider.value));
+                        // ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_SupplyPressurePanelSlider.value, pressureZoneHUDController.m_PressureZone2PanelSlider.value));
+                        if (!rpzWaterController.isReliefValveOpen)
+                        {
 
+                            // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 6.01f, 0.1f);
+                            ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
+
+
+
+                        }
+                        else
+                        {
+                            Debug.Log($"rvop coroutine stopped");
+                            StopCoroutine(TestRVOP());
+                        }
 
                     }
 
@@ -960,15 +982,17 @@ public class RpzTestKitController : MonoBehaviour
 
     }
 
-    private IEnumerator TestRVOP(float supplyPressure, float zone2Pressure)
+    private IEnumerator TestRVOP()
     {
-        // pressureZoneHUDController.m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider").value += 1;
-        Debug.Log($"here");
-        while (zone2Pressure < supplyPressure)
+
+        while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
         {
-            Debug.Log($"adding pressure to zone 2");
-            // pressureZoneHUDController.m_PressureZone2Panel.Q<Slider>(className: "pressure-zone-slider").value += 0.1f;
-            yield return null;
+
+            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
+
+            // pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1;
+            Debug.Log($"+1");
+            yield return new WaitForSeconds(1);
         }
 
     }
