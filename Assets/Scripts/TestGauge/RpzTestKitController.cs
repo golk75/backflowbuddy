@@ -156,6 +156,8 @@ public class RpzTestKitController : MonoBehaviour
     Coroutine KnobClickOperate;
 
     Coroutine ReliefValveOpeningPoint;
+    Coroutine ReliefValveOpeningPointReturn;
+    float reliefValveInitValue;
     float needleVelRef = 0;
     public float lerpDuration = 0.5f;
     public bool knobOpened = false;
@@ -188,6 +190,7 @@ public class RpzTestKitController : MonoBehaviour
     Vector3 check1BackSeatInitPos;
     Vector3 check1BackSeatClosedPos = new Vector3(-0.129500002f, 0f, -0.0860999972f);
     Vector3 check1BackSeatLeakingPos = new Vector3(-0.133900002f, 0, -0.0860999972f);
+    public float RVOP;
     void OnEnable()
     {
 
@@ -897,17 +900,21 @@ public class RpzTestKitController : MonoBehaviour
                         {
 
                             // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 6.01f, 0.1f);
+                            reliefValveInitValue = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
                             ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
-
-
 
                         }
                         else
                         {
                             Debug.Log($"rvop coroutine stopped");
                             StopCoroutine(TestRVOP());
+
                         }
 
+                    }
+                    else
+                    {
+                        ReliefValveOpeningPointReturn = StartCoroutine(StopTestRVOP());
                     }
 
                     //========================================
@@ -985,10 +992,14 @@ public class RpzTestKitController : MonoBehaviour
     private IEnumerator TestRVOP()
     {
 
-        while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
+        // while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
+        // while (rpzWaterController.zone1Pressure - (rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) > RVOP)
+        while (rpzWaterController.isReliefValveOpen == false)
+        // while
         {
 
             pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
+            // hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
 
             // pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1;
             Debug.Log($"+1");
@@ -997,7 +1008,21 @@ public class RpzTestKitController : MonoBehaviour
 
     }
 
+    private IEnumerator StopTestRVOP()
+    {
+        while (pressureZoneHUDController.m_PressureZone2PanelSlider.value >= 0)
+        // while
+        {
 
+            pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 1.0f / (1000 * 0.1f);
+            // hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
+
+            // pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1;
+            Debug.Log($"-1");
+            yield return new WaitForSeconds(1);
+        }
+
+    }
 
 
 
