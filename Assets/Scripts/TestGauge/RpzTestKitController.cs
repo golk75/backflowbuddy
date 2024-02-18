@@ -66,6 +66,8 @@ public class RpzTestKitController : MonoBehaviour
     [SerializeField]
     ZibraLiquidEmitter bleederHoseEmitter;
     public ZibraLiquidEmitter bypassHoseEmitter;
+    public ZibraLiquidEmitter lowHoseEmitter;
+    public ZibraLiquidEmitter highHoseEmitter;
     [SerializeField]
     ZibraLiquidDetector LowHoseDetector;
 
@@ -138,6 +140,10 @@ public class RpzTestKitController : MonoBehaviour
     public bool isHighHoseEngaged;
     public bool isLowHoseEngaged;
     public bool isBypassHoseEngaged;
+
+    public bool isHighHoseConnected;
+    public bool isLowHoseConnected;
+    public bool isBypassHoseConnected;
 
     public bool isHighBleedOpen;
     public bool isLowBleedOpen;
@@ -435,12 +441,15 @@ public class RpzTestKitController : MonoBehaviour
             isBypassControlOpen = true;
             m_ChangeColorOpen = StartCoroutine(OpenColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
-            bypassHoseEmitter.enabled = true;
+
+
+
+
         }
         else
         {
             isBypassControlOpen = false;
-            bypassHoseEmitter.enabled = false;
+
             m_ChangeColorClose = StartCoroutine(CloseColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
@@ -571,7 +580,44 @@ public class RpzTestKitController : MonoBehaviour
 
     #endregion
 
+    private void HoseEmittersControl()
+    {
+        //High
+        if (isHighControlOpen && !isHighHoseConnected && rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
+        {
 
+            Debug.Log($"1");
+            if (!isLowHoseConnected && !isBypassHoseConnected)
+            {
+                Debug.Log($"2");
+                highHoseEmitter.enabled = false;
+            }
+            if (isLowHoseEngaged || isBypassHoseEngaged)
+            {
+                Debug.Log($"3");
+
+                highHoseEmitter.enabled = true;
+
+            }
+            else
+            {
+                Debug.Log($"4");
+                highHoseEmitter.enabled = false;
+            }
+
+        }
+        else
+        {
+            Debug.Log($"5");
+            highHoseEmitter.enabled = false;
+        }
+
+        //Low
+
+
+        //Bypass
+
+    }
     private void NeedleControl()
     {
 
@@ -697,6 +743,7 @@ public class RpzTestKitController : MonoBehaviour
                 }
                 if (HighHoseBib.testCock == TestCock2)
                 {
+                    isHighHoseConnected = true;
                     if (isTestCock2Open)
                     {
                         isHighHoseEngaged = true;
@@ -707,6 +754,10 @@ public class RpzTestKitController : MonoBehaviour
                         isHighHoseEngaged = false;
 
                     }
+                }
+                else
+                {
+                    isHighHoseConnected = false;
                 }
                 if (HighHoseBib.testCock == TestCock3)
                 {
@@ -737,6 +788,8 @@ public class RpzTestKitController : MonoBehaviour
             else
             {
                 hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
+                isHighHoseConnected = false;
+
             }
             /// <summary>
             /// End - High Hose
@@ -773,7 +826,7 @@ public class RpzTestKitController : MonoBehaviour
                 }
                 if (LowHoseBib.testCock == TestCock3)
                 {
-
+                    isLowHoseConnected = true;
                     if (isTestCock3Open)
                     {
                         isLowHoseEngaged = true;
@@ -787,6 +840,10 @@ public class RpzTestKitController : MonoBehaviour
                         // Debug.Log($"low hose on tc#3 && tc#3 closed");
                     }
                 }
+                else
+                {
+                    isLowHoseConnected = false;
+                }
 
                 if (LowHoseBib.testCock == TestCock4)
                 {
@@ -799,6 +856,11 @@ public class RpzTestKitController : MonoBehaviour
                         // Debug.Log($"low hose on tc#4 && tc#4 closed");
                     }
                 }
+            }
+            else
+            {
+                isLowHoseConnected = false;
+
             }
             /// <summary>
             /// End - Low Hose
@@ -837,25 +899,40 @@ public class RpzTestKitController : MonoBehaviour
                 {
                     if (isTestCock3Open)
                     {
+
                         // Debug.Log($"bypass hose on tc#3 && tc#3 opened");
                     }
                     else
                     {
+
                         // Debug.Log($"bypass hose on tc#3 && tc#3 closed");
                     }
                 }
 
                 if (BypassHoseBib.testCock == TestCock4)
                 {
+                    isBypassHoseConnected = true;
+                    bypassHoseEmitter.enabled = false;
                     if (isTestCock4Open)
                     {
+                        isBypassHoseEngaged = true;
+
                         // Debug.Log($"bypass hose on tc#4 && tc#4 opened");
                     }
                     else
                     {
+                        isBypassHoseEngaged = false;
                         // Debug.Log($"bypass hose on tc#4 && tc#4 closed");
                     }
                 }
+                else
+                {
+                    isBypassHoseConnected = false;
+                }
+            }
+            else
+            {
+                isBypassHoseConnected = false;
             }
             /// <summary>
             /// End - Bypass Hose
@@ -984,6 +1061,8 @@ public class RpzTestKitController : MonoBehaviour
                              0,
                              needleRiseSpeed
                          );
+
+
         }
 
 
@@ -1032,10 +1111,12 @@ public class RpzTestKitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         PressureControl();
         BleederHoseControl();
         NeedleControl();
         DigitalNeedleControl();
+        HoseEmittersControl();
 
     }
 
