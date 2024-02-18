@@ -218,7 +218,7 @@ public class RpzTestKitController : MonoBehaviour
         Actions.onLowBleedOperate += LowBleedKnobOperate;
         Actions.onHighControlOperate += HighControlKnobOperate;
         Actions.onLowControlOperate += LowControlKnobOperate;
-        Actions.onBypassControlOperate += BypassControlOperate;
+        Actions.onBypassControlOperate += BypassControlKnobOperate;
 
 
     }
@@ -244,7 +244,7 @@ public class RpzTestKitController : MonoBehaviour
         Actions.onLowBleedOperate -= LowBleedKnobOperate;
         Actions.onHighControlOperate -= HighControlKnobOperate;
         Actions.onLowControlOperate -= LowControlKnobOperate;
-        Actions.onBypassControlOperate -= BypassControlOperate;
+        Actions.onBypassControlOperate -= BypassControlKnobOperate;
 
 
     }
@@ -432,7 +432,7 @@ public class RpzTestKitController : MonoBehaviour
         }
 
     }
-    private void BypassControlOperate()
+    private void BypassControlKnobOperate()
     {
 
         currentKnob = bypassControl;
@@ -586,37 +586,91 @@ public class RpzTestKitController : MonoBehaviour
         if (isHighControlOpen && !isHighHoseConnected && rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
         {
 
-            Debug.Log($"1");
+
             if (!isLowHoseConnected && !isBypassHoseConnected)
             {
-                Debug.Log($"2");
+
                 highHoseEmitter.enabled = false;
             }
             if (isLowHoseEngaged || isBypassHoseEngaged)
             {
-                Debug.Log($"3");
+
 
                 highHoseEmitter.enabled = true;
 
             }
             else
             {
-                Debug.Log($"4");
+
                 highHoseEmitter.enabled = false;
             }
 
         }
         else
         {
-            Debug.Log($"5");
+
             highHoseEmitter.enabled = false;
         }
 
         //Low
 
+        if (isLowControlOpen && !isLowHoseConnected && rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
+        {
 
+
+            if (!isHighHoseConnected && !isBypassHoseConnected)
+            {
+
+                lowHoseEmitter.enabled = false;
+            }
+            if (isHighHoseEngaged || isBypassHoseEngaged)
+            {
+
+
+                lowHoseEmitter.enabled = true;
+
+            }
+            else
+            {
+
+                lowHoseEmitter.enabled = false;
+            }
+
+        }
+        else
+        {
+
+            lowHoseEmitter.enabled = false;
+        }
         //Bypass
+        if (isBypassControlOpen && !isBypassHoseConnected && rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
+        {
 
+
+            if (!isLowHoseConnected && !isHighHoseConnected)
+            {
+
+                bypassHoseEmitter.enabled = false;
+            }
+            if (isLowHoseEngaged || isHighHoseEngaged)
+            {
+
+
+                bypassHoseEmitter.enabled = true;
+
+            }
+            else
+            {
+
+                bypassHoseEmitter.enabled = false;
+            }
+
+        }
+        else
+        {
+
+            bypassHoseEmitter.enabled = false;
+        }
     }
     private void NeedleControl()
     {

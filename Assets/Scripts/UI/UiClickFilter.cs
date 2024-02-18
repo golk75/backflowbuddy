@@ -39,7 +39,7 @@ public class UiClickFilter : MonoBehaviour
     public bool isUiClicked = false;
     public bool isUiHovered = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //set visual elements
         var root = GetComponent<UIDocument>();
@@ -49,9 +49,9 @@ public class UiClickFilter : MonoBehaviour
         {
 
 
-            ele.RegisterCallback<PointerDownEvent>(PointerDown, TrickleDown.TrickleDown);
+            ele.RegisterCallback<PointerDownEvent>(PointerDown);
 
-            ele.RegisterCallback<PointerUpEvent>(PointerUp, TrickleDown.TrickleDown);
+            ele.RegisterCallback<PointerUpEvent>(PointerUp);
 
 
 
@@ -69,8 +69,8 @@ public class UiClickFilter : MonoBehaviour
     {
 
         isUiClicked = true;
-        playerController.isOperableObject = false;
-        playerController.operableObject = null;
+        // playerController.isOperableObject = false;
+        // playerController.operableObject = null;
     }
 
 }

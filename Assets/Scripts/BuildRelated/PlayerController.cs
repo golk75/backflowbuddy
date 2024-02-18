@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     public UIDocument root;
     public Toggle toggle;
     public bool clickPerformed;
+    Coroutine DelayFilterReading;
     // Start is called before the first frame update
     void Awake()
     {
@@ -129,7 +130,47 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     ///Input-------------------
     /// </summary>
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.01f);
 
+        ///Click/press---------------------------------------------------------------------------------
+        if (operableObject != null && uiClickFilter.isUiClicked == false)
+        {
+
+            if (_operableObjectRotation.z > 0)
+            {
+                _operableObjectRotation.z = 0;
+            }
+            else if (_operableObjectRotation.z <= 0)
+            {
+                _operableObjectRotation.z = 90;
+
+            }
+            switch (operableComponentDescription.componentId)
+            {
+                case OperableComponentDescription.ComponentId.HighBleed:
+                    Actions.onHighBleedOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.LowBleed:
+                    Actions.onLowBleedOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.HighControl:
+                    Actions.onHighControlOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.LowControl:
+                    Actions.onLowControlOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.BypassControl:
+                    Actions.onBypassControlOperate?.Invoke();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+    }
     public void Touch0Contact_started(InputAction.CallbackContext context)
     {
         primaryClickStarted = context.ReadValue<float>();
@@ -309,45 +350,8 @@ public class PlayerController : MonoBehaviour
     private void ClickOperate()
     {
 
-        ///Click/press---------------------------------------------------------------------------------
-        if (OperableObject != null && uiClickFilter.isUiClicked == false)
-        {
+        DelayFilterReading = StartCoroutine(Delay());
 
-            if (_operableObjectRotation.z > 0)
-            {
-                _operableObjectRotation.z = 0;
-            }
-            else if (_operableObjectRotation.z <= 0)
-            {
-                _operableObjectRotation.z = 90;
-
-            }
-            switch (operableComponentDescription.componentId)
-            {
-                case OperableComponentDescription.ComponentId.HighBleed:
-                    Actions.onHighBleedOperate?.Invoke();
-                    break;
-                case OperableComponentDescription.ComponentId.LowBleed:
-                    Actions.onLowBleedOperate?.Invoke();
-                    break;
-                case OperableComponentDescription.ComponentId.HighControl:
-                    Actions.onHighControlOperate?.Invoke();
-                    break;
-                case OperableComponentDescription.ComponentId.LowControl:
-                    Actions.onLowControlOperate?.Invoke();
-                    break;
-                case OperableComponentDescription.ComponentId.BypassControl:
-                    Actions.onBypassControlOperate?.Invoke();
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-
-
-        ///End Click/press------------------------------------------------------------------------------
     }
 
     private void Start() { }
