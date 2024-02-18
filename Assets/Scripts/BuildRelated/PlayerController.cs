@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.00001f);
 
         ///Click/press---------------------------------------------------------------------------------
         if (operableObject != null && uiClickFilter.isUiClicked == false)
@@ -220,6 +220,7 @@ public class PlayerController : MonoBehaviour
         OnPanCanceled?.Invoke();
         if (operableComponentDescription != null && uiClickFilter.isUiClicked == false)
         {
+
             if (
                  // isOperableObject == true
                  operableComponentDescription.partsType
@@ -350,6 +351,45 @@ public class PlayerController : MonoBehaviour
     private void ClickOperate()
     {
 
+        // if (operableObject != null)
+        // {
+        //     Debug.Log($"uiClickFilter: {uiClickFilter.isUiClicked}");
+        //     if (uiClickFilter.isUiClicked == false)
+        //     {
+
+        //         if (_operableObjectRotation.z > 0)
+        //         {
+        //             _operableObjectRotation.z = 0;
+        //         }
+        //         else if (_operableObjectRotation.z <= 0)
+        //         {
+        //             _operableObjectRotation.z = 90;
+
+        //         }
+        //     }
+
+        //     switch (operableComponentDescription.componentId)
+        //     {
+        //         case OperableComponentDescription.ComponentId.HighBleed:
+        //             Actions.onHighBleedOperate?.Invoke();
+        //             break;
+        //         case OperableComponentDescription.ComponentId.LowBleed:
+        //             Actions.onLowBleedOperate?.Invoke();
+        //             break;
+        //         case OperableComponentDescription.ComponentId.HighControl:
+        //             Actions.onHighControlOperate?.Invoke();
+        //             break;
+        //         case OperableComponentDescription.ComponentId.LowControl:
+        //             Actions.onLowControlOperate?.Invoke();
+        //             break;
+        //         case OperableComponentDescription.ComponentId.BypassControl:
+        //             Actions.onBypassControlOperate?.Invoke();
+        //             break;
+        //         default:
+        //             break;
+        //     }
+
+        // }
         DelayFilterReading = StartCoroutine(Delay());
 
     }
