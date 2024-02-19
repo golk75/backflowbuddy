@@ -39,8 +39,8 @@ TagManager:
   - Emitter
   - OperableObject
   - Assembly
-  - 
-  - 
+  - ReliefCheck
+  - ReliefCheckSeat
   - 
   - 
   - 
