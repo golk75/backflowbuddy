@@ -1105,7 +1105,8 @@ public class RPZWaterController : MonoBehaviour
     {
 
 
-        if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true && rpzTestKitController.AttachedHoseList.Count == 0)
+        // if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true && rpzTestKitController.AttachedHoseList.Count == 0)
+        if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
             ///Determine if testing conditions are met ---------------------------------------------------
             isDeviceInTestingCondititons = false;
