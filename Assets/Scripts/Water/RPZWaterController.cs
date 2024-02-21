@@ -421,25 +421,36 @@ public class RPZWaterController : MonoBehaviour
 
             zone2Pressure = zone1Pressure - check1SpringForce + zone2PsiChange;
         }
-        else
+        else if (zone1Pressure - check2SpringForce + zone2PsiChange == 0)
         {
+            zone2Pressure = 0;
             // zone2Pressure = m_detectorZone2.ParticlesInside / 1000 * 0.1f;
-            zone2Pressure = m_detectorZone2.ParticlesInside;
+            // zone2Pressure = m_detectorZone2.ParticlesInside;
             check1housingForceField.Strength = 0;
 
         }
+        else
+        {
+            zone2Pressure = 0;
+        }
         if (zone2Pressure - check2SpringForce + zone3PsiChange >= 0 && m_detectorZone3.ParticlesInside >= 0)
         {
-            zone3Pressure = m_detectorZone3.ParticlesInside;
+
             zone3Pressure = zone2Pressure - check2SpringForce + zone3PsiChange;
+
+        }
+        else if (zone2Pressure - check2SpringForce + zone3PsiChange == 0)
+        {
+            zone3Pressure = 0;
+            // zone3Pressure = m_detectorZone3.ParticlesInside / 1000 * 0.1f;
+            // zone3Pressure = m_detectorZone3.ParticlesInside;
+
+            check2housingForceField.Strength = 0;
 
         }
         else
         {
-            // zone3Pressure = m_detectorZone3.ParticlesInside / 1000 * 0.1f;
-
-            check2housingForceField.Strength = 0;
-
+            zone3Pressure = 0;
         }
 
 
@@ -1111,15 +1122,6 @@ public class RPZWaterController : MonoBehaviour
             ///Determine if testing conditions are met ---------------------------------------------------
             isDeviceInTestingCondititons = false;
 
-
-
-            // foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)
-            // {
-            //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-            //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled =
-            //         false;
-            // }
-
             if (
                     testCockController.isTestCock2Open == true
                     && TestCockHoseDetect2.isConnected == false
@@ -1388,104 +1390,6 @@ public class RPZWaterController : MonoBehaviour
                 ///END - No hose(s) connected
                 /// </summary>
 
-
-
-
-
-
-
-
-                /// <summary>
-                ////////TEST/// No hose(s) connected
-                /// </summary>
-                {
-                    // if (
-                    //         testCockController.isTestCock2Open == true
-                    //         && TestCockHoseDetect2.isConnected == false
-
-                    //     )
-                    // {
-
-                    //     if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
-                    //     {
-                    //         TestCockFF2.Strength = Mathf.SmoothDamp(
-                    //             TestCockFF2.Strength,
-                    //             Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock2MaxStr),
-                    //             ref testCockFF2Ref.x,
-                    //             0.005f
-                    //         );
-
-                    //     }
-                    //     else
-                    //     {
-                    //         TestCockFF2.Strength = 0;
-                    //     }
-
-                    // }
-                    // else
-                    // {
-
-                    //     TestCockFF2.Strength = 0;
-                    // }
-
-                    // //tc3 static condition pressure
-
-
-                    // if (
-                    //        testCockController.isTestCock3Open == true
-                    //        && TestCockHoseDetect3.isConnected == false
-                    //    )
-                    // {
-
-                    //     if (rpzTestKitController.hosePressure - 0.01f > zone1to2PsiDiff)
-                    //     {
-                    //         TestCockFF3.Strength = Mathf.SmoothDamp(
-                    //             TestCockFF3.Strength,
-                    //             Mathf.Clamp(check1Detector.ParticlesInside, 0, testCock3MaxStr),
-                    //             ref testCockFF3Ref.x,
-                    //             0.005f
-                    //         );
-
-                    //     }
-
-                    // }
-                    // else
-                    // {
-
-                    //     TestCockFF3.Strength = 0;
-                    // }
-
-                    // //tc4 static condition pressure
-
-
-                    // if (
-                    //          testCockController.isTestCock4Open == true
-                    //          && TestCockHoseDetect4.isConnected == false
-
-                    //      )
-                    // {
-
-                    //     if (rpzTestKitController.hosePressure - 0.01f > zone2to3PsiDiff)
-                    //     {
-                    //         TestCockFF4.Strength = Mathf.SmoothDamp(
-                    //             TestCockFF4.Strength,
-                    //             Mathf.Clamp(check2Detector.ParticlesInside, 0, testCock4MaxStr),
-                    //             ref testCockFF4Ref.x,
-                    //             0.005f
-                    //         );
-
-                    //     }
-
-                    // }
-                    // else
-                    // {
-
-                    //     TestCockFF4.Strength = 0;
-                    // }
-                }
-                /// <summary>
-                ////////TEST///END - No hose(s) connected
-                /// </summary>
 
 
             }

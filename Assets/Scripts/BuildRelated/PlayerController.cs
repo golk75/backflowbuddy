@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject WaterManager;
 
-    private WaterController waterController;
+
 
     PlayerInputAction playerInput;
 
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         playerInput = new PlayerInputAction();
 
         testCockController = TestCockManager.GetComponent<TestCockController>();
-        waterController = WaterManager.GetComponent<WaterController>();
+
 
 
 

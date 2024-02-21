@@ -257,8 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2b33d10e79348928f83991f26cb06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testKitManager: {fileID: 0}
   playerManager: {fileID: 0}
+  uiClickFilter: {fileID: 0}
   mainCam: {fileID: 7975887091541937799}
   isZooming: 0
   isPanning: 0

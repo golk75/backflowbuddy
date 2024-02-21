@@ -16,7 +16,7 @@ using UnityEngine.UIElements;
 
 public class RpzTestKitController : MonoBehaviour
 {
-    public WaterController waterController;
+    public DCWaterController waterController;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public TestCockController testCockController;
@@ -35,7 +35,8 @@ public class RpzTestKitController : MonoBehaviour
     public GameObject lowControl;
     public GameObject bypassControl;
     public GameObject currentKnobIndicator;
-    public PressureZoneHUDController pressureZoneHUDController;
+    // public PressureZoneHUDController pressureZoneHUDController;
+    public RPZPressureZoneHUDController pressureZoneHUDController;
 
     public GameObject needle;
     public GameObject digitalKitNeedle;
@@ -51,11 +52,6 @@ public class RpzTestKitController : MonoBehaviour
 
     GameObject currentHighHoseConnection;
 
-    [SerializeField]
-    GameObject Check1;
-
-    [SerializeField]
-    Vector3 Check1Pos;
 
     Vector3 initLowHosePosition;
     Vector3 initHighHosePosition;

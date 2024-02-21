@@ -19,11 +19,9 @@ public class ResetButton : MonoBehaviour
     public GameObject ShutOff1;
     public GameObject Tc1;
     public TestCockController testCockController;
-    public WaterController waterController;
+    public DCWaterController waterController;
     public SightTubeController sightTubeController;
     public TestKitManager testKitManager;
-    public PressureZoneHUDController pressureZoneHUDController;
-    public RPZWaterController m_rpzWaterController;
     public GameObject sightTube;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
@@ -57,36 +55,36 @@ public class ResetButton : MonoBehaviour
 
 
     }
-    private void Awake()
-    {
-        for (int i = 0; i < objectsToReset.Count; i++)
-        {
-            SetResetables(objectsToReset[i]);
-        }
+    // private void Awake()
+    // {
+    //     for (int i = 0; i < objectsToReset.Count; i++)
+    //     {
+    //         SetResetables(objectsToReset[i]);
+    //     }
 
-        // m_bannerViewController = m_adsManager.GetComponent<MyBannerViewController>();
-        // m_interstitialAdController = m_adsManager.GetComponent<MyInterstitialAdController>();
-        // m_bannerViewController.LoadAd();
-        // m_interstitialAdController.LoadAd();
+    //     // m_bannerViewController = m_adsManager.GetComponent<MyBannerViewController>();
+    //     // m_interstitialAdController = m_adsManager.GetComponent<MyInterstitialAdController>();
+    //     // m_bannerViewController.LoadAd();
+    //     // m_interstitialAdController.LoadAd();
 
-    }
-    private void SetResetables(ResetableObject resetableObject)
-    {
-        this.resetableObject = resetableObject;
-        resetableObject.initRotation = resetableObject.alteredObject.transform.rotation;
-        resetableObject.initScale = resetableObject.alteredObject.transform.localScale;
-        resetableObject.initPos = resetableObject.alteredObject.transform.localPosition;
+    // }
+    // private void SetResetables(ResetableObject resetableObject)
+    // {
+    //     this.resetableObject = resetableObject;
+    //     resetableObject.initRotation = resetableObject.alteredObject.transform.rotation;
+    //     resetableObject.initScale = resetableObject.alteredObject.transform.localScale;
+    //     resetableObject.initPos = resetableObject.alteredObject.transform.localPosition;
 
-    }
-    private void ResetTransforms()
-    {
-        foreach (ResetableObject item in objectsToReset)
-        {
-            item.alteredObject.transform.rotation = item.initRotation;
-            item.alteredObject.transform.localScale = item.initScale;
-            item.alteredObject.transform.localPosition = item.initPos;
-        }
-    }
+    // }
+    // private void ResetTransforms()
+    // {
+    //     foreach (ResetableObject item in objectsToReset)
+    //     {
+    //         item.alteredObject.transform.rotation = item.initRotation;
+    //         item.alteredObject.transform.localScale = item.initScale;
+    //         item.alteredObject.transform.localPosition = item.initPos;
+    //     }
+    // }
 
     // Start is called before the first frame update
     void Start()

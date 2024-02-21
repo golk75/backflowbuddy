@@ -12,7 +12,7 @@ public class FillButton : MonoBehaviour
     public GameObject Check1;
     public GameObject Check2;
     public GameObject ShutOff1;
-    public WaterController waterController;
+    public DCWaterController waterController;
     public TestCockController testCockController;
     OperableComponentDescription ShutOff1OperableDescription;
     public PlayerController playerController;
