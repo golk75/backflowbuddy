@@ -261,6 +261,7 @@ public class DCWaterController : MonoBehaviour
     public bool isReliefValveOpen;
     public bool isCheck1Closed;
     public bool isCheck2Closed;
+
     [SerializeField]
     List<ZibraLiquidVoid> VoidList;
     [SerializeField]
@@ -407,109 +408,10 @@ public class DCWaterController : MonoBehaviour
     }
     void CheckValveRegulate()
     {
-
-
+        if (sightTubeController.currentTestCockConnection == null)
         {
-            if (zone1Pressure < check1SpringForce)
+
             {
-
-                //While device is empty, supply pressure must overcome check#1
-                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
-
-            }
-            else
-            {
-
-                m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
-                m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
-
-            }
-            if (zone1Pressure <= zone2Pressure)
-            {
-
-
-                //close #1 if zone2 is higher than supply or if relief opened
-                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-
-                // //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
-                if (Check1Status.GetComponent<CheckValveCollision>().isCheckClosed == true)
-                {
-                    m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, maxCheck1CloseColliderSize, ref check1VoidRef, 0.5f, 1f);
-                    if (m_VoidCheck1.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
-                    {
-                        m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
-                        check1housingForceField.Strength = 0;
-                    }
-                }
-
-                //CloseCheckValve(checkValve1, Check1Status.GetComponent<CheckValveCollision>().isCheckClosed, m_Collider_Check1Close, m_VoidCheck1);
-
-            }
-            else
-            {
-                m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
-                m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
-
-            }
-            if (zone2Pressure < check2SpringForce)
-            {
-                //While device is empty, zone2 pressure must overcome check#2
-                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
-                if (shutOffValveController.IsSecondShutOffOpen == true)
-                    m_VoidOutfeed.enabled = true;
-            }
-            else
-            {
-                m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
-                m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
-                m_VoidOutfeed.enabled = false;
-            }
-
-            if (zone2Pressure <= zone3Pressure)
-            {
-                //close #2 if zone 3 is higher than zone2
-                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
-                if (Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed == true)
-                {
-                    m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, maxCheck2CloseVoidSize, ref check2VoidRef, 0.5f, 1f);
-                    if (m_VoidCheck2.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
-                    {
-                        m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
-                        check2housingForceField.Strength = 0;
-                    }
-
-                }
-
-                // CloseCheckValve(checkValve2, Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed, m_Collider_Check2Close, m_VoidCheck2);
-            }
-            else
-            {
-
-                m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
-                m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
-                //m_VoidOutfeed.enabled = false;
-            }
-
-
-            //sensing line regulate
-            //max sensing line ff strength = 1.32f
-
-
-        }
-        /// <summary>
-        /// END -any conditions
-        /// </summary>
-
-        /// <summary>
-        /// shutoff testing conditions - with > 0 attachments
-        /// </summary>
-        {
-            if (isDeviceInTestingCondititons == true)
-            {
-
                 if (zone1Pressure < check1SpringForce)
                 {
 
@@ -593,14 +495,115 @@ public class DCWaterController : MonoBehaviour
                     //m_VoidOutfeed.enabled = false;
                 }
 
+
+                //sensing line regulate
+                //max sensing line ff strength = 1.32f
+
+            }
+
+            /// <summary>
+            /// END -any conditions
+            /// </summary>
+
+            /// <summary>
+            /// shutoff testing conditions - with > 0 attachments
+            /// </summary>
+
+            if (isDeviceInTestingCondititons == true && sightTubeController.currentTestCockConnection == null)
+            {
+
+                if (zone1Pressure < check1SpringForce)
+                {
+
+                    //While device is empty, supply pressure must overcome check#1
+                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                    m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
+
+                }
+                else
+                {
+
+                    m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
+                    m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
+
+                }
+                if (zone1Pressure <= zone2Pressure)
+                {
+
+
+                    //close #1 if zone2 is higher than supply or if relief opened
+                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+                    // //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
+                    if (Check1Status.GetComponent<CheckValveCollision>().isCheckClosed == true)
+                    {
+                        m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, maxCheck1CloseColliderSize, ref check1VoidRef, 0.5f, 1f);
+                        if (m_VoidCheck1.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
+                        {
+                            m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
+                            check1housingForceField.Strength = 0;
+                        }
+                    }
+
+                    //CloseCheckValve(checkValve1, Check1Status.GetComponent<CheckValveCollision>().isCheckClosed, m_Collider_Check1Close, m_VoidCheck1);
+
+                }
+                else
+                {
+                    m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
+                    m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
+
+                }
+                if (zone2Pressure < check2SpringForce)
+                {
+                    //While device is empty, zone2 pressure must overcome check#2
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                    m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
+                    if (shutOffValveController.IsSecondShutOffOpen == true)
+                        m_VoidOutfeed.enabled = true;
+                }
+                else
+                {
+                    m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
+                    m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
+                    m_VoidOutfeed.enabled = false;
+
+                }
+
+                if (zone2Pressure <= zone3Pressure)
+                {
+                    //close #2 if zone 3 is higher than zone2
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                    //check if closed, scale up void just before scaling up collider. This eliminates unatural spash that occurs when collider scaled up and compresses water into check housing wall
+                    if (Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed == true)
+                    {
+                        m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, maxCheck2CloseVoidSize, ref check2VoidRef, 0.5f, 1f);
+                        if (m_VoidCheck2.transform.localScale.x >= maxCheck1CloseColliderSize.x / 2)
+                        {
+                            m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
+                            check2housingForceField.Strength = 0;
+                        }
+
+                    }
+
+                    // CloseCheckValve(checkValve2, Check2Status.GetComponent<CheckValve2Collision>().isCheckClosed, m_Collider_Check2Close, m_VoidCheck2);
+                }
+                else
+                {
+
+                    m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
+                    m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
+                    //m_VoidOutfeed.enabled = false;
+                }
+
                 // //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
-                // if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
-                // {
-                //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
+                {
+                    check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                    check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
 
 
-                // }
+                }
                 // if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
                 // {
                 //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
@@ -625,6 +628,28 @@ public class DCWaterController : MonoBehaviour
 
             }
         }
+        else if (isDeviceInTestingCondititons == true && sightTubeController.currentTestCockConnection != null)
+        {
+            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
+            {
+                Debug.Log($"here");
+                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+
+            }
+            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
+            {
+
+                Debug.Log($"here");
+                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                Debug.Log($"m_DoubleCheckTestKitController.hosePressure: {m_DoubleCheckTestKitController.hosePressure * 10}");
+
+
+            }
+        }
+
         /// <summary>
         /// END - shutoff testing conditions - with > 0 attachments
         /// </summary>

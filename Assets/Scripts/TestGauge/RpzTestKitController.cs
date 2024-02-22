@@ -120,6 +120,7 @@ public class RpzTestKitController : MonoBehaviour
     private float currentPSID;
 
     private float minPSID;
+
     float closingPoint = 0;
     public bool isOperableObject;
 
@@ -146,6 +147,9 @@ public class RpzTestKitController : MonoBehaviour
     public bool isLowControlOpen;
     public bool isHighControlOpen;
     public bool isBypassControlOpen;
+
+    public bool isDeviceBleeding;
+    public bool isApparentReadingShown;
 
 
     public float highHosePressure;
@@ -194,6 +198,10 @@ public class RpzTestKitController : MonoBehaviour
     Vector3 check1BackSeatClosedPos = new Vector3(-0.129500002f, 0f, -0.0860999972f);
     Vector3 check1BackSeatLeakingPos = new Vector3(-0.133900002f, 0, -0.0860999972f);
     public float RVOP;
+    float rvopRef = 0;
+    public float apparentReading;
+    public float preRvopReading;
+    public bool rvopTestInprogress;
     void OnEnable()
     {
 
@@ -363,6 +371,7 @@ public class RpzTestKitController : MonoBehaviour
 
         while (percentage < 1f)
         {
+
             percentage = (Time.time - startTime) / lerpDuration;
             currentColor = Color.Lerp(initialColor, closedColor, percentage);
             mat.SetColor(EmissionColor, currentColor);
@@ -422,7 +431,6 @@ public class RpzTestKitController : MonoBehaviour
         else
         {
             isLowBleedOpen = false;
-
             m_ChangeColorClose = StartCoroutine(CloseColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
@@ -460,12 +468,6 @@ public class RpzTestKitController : MonoBehaviour
             isLowControlOpen = true;
             m_ChangeColorOpen = StartCoroutine(OpenColorChange(lowControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
-
-            //move water depending on what else in control manifold is open/closed.
-
-
-
-
 
 
         }
@@ -798,6 +800,7 @@ public class RpzTestKitController : MonoBehaviour
                     {
                         isHighHoseEngaged = true;
 
+
                     }
                     else
                     {
@@ -814,6 +817,7 @@ public class RpzTestKitController : MonoBehaviour
                     if (isTestCock3Open)
                     {
                         isHighHoseEngaged = true;
+
                     }
                     else
                     {
@@ -998,66 +1002,115 @@ public class RpzTestKitController : MonoBehaviour
             if (rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
             {
 
-                if (isHighHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == false)
-                {
-                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
-                }
-                else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == true)
-                {
-                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.1f, needleRiseSpeed);
-                }
-                else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == false && isLowBleedOpen == false)
-                {
-                    //apparent reading
-                    hosePressure = Mathf.SmoothStep(hosePressure, rpzWaterController.check1SpringForce / 10, needleRiseSpeed);
+                //when is gauge bleeding to prime device back up?
 
-
-                    //========================================
-                    // Relief Valave Opening Point//========================>
-                    //========================================
-                    if (isLowControlOpen & isHighControlOpen)
-                    {
-
-                        /*
-                        1. move pressure accross #1 check, simulating a leak. (increase pressure in zone two)
-                        2. drop needle while pressure increases in zone 2
-                        3.crack open relief, stop needle.
-                        */
-
-                        // ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_SupplyPressurePanelSlider.value, pressureZoneHUDController.m_PressureZone2PanelSlider.value));
-                        if (!rpzWaterController.isReliefValveOpen)
-                        {
-
-                            // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 6.01f, 0.1f);
-                            reliefValveInitValue = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
-                            ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
-
-                        }
-                        else
-                        {
-                            Debug.Log($"rvop coroutine stopped");
-                            StopCoroutine(TestRVOP());
-
-                        }
-
-                    }
-                    else
-                    {
-                        ReliefValveOpeningPointReturn = StartCoroutine(StopTestRVOP());
-                    }
-
-                    //========================================
-                    // END - Relief Valave Opening Point//==================>
-                    //========================================  
-
-
-
-                }
-                else if (isHighHoseEngaged == true)
+                if (isLowBleedOpen && isLowHoseEngaged && isHighHoseEngaged)
                 {
 
+                    isDeviceBleeding = true;
+                    isApparentReadingShown = false;
                     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                    // Debug.Log($"here1");
                 }
+                else if (!isLowBleedOpen && isLowHoseEngaged && isHighHoseEngaged && isLowControlOpen == false)
+                {
+                    //Apparent Reading
+                    isDeviceBleeding = false;
+                    isApparentReadingShown = true;
+                    hosePressure = Mathf.SmoothStep(hosePressure, (rpzWaterController.zone1Pressure - rpzWaterController.zone2Pressure) / 10, needleRiseSpeed);
+                    // Debug.Log($"here2");
+                }
+                if (isHighControlOpen && isLowControlOpen)
+                {
+                    if (isHighHoseEngaged && isLowHoseEngaged)
+                    {
+                        // Debug.Log($"here3");
+                        if (rvopTestInprogress == false)
+                        {
+                            preRvopReading = hosePressure;
+                        }
+                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
+
+                    }
+                }
+                else if (isHighControlOpen && !isLowControlOpen)
+                {
+                    // Debug.Log($"here4");
+                    rvopTestInprogress = false;
+                }
+                if (isHighHoseEngaged)
+                {
+                    if (isApparentReadingShown == false && isDeviceBleeding == false)
+                    {
+                        // Debug.Log($"here5");
+                        hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                    }
+                }
+
+
+                // if (isHighHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == false)
+                // {
+                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
+                // }
+                // else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == true)
+                // {
+                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.1f, needleRiseSpeed);
+                // }
+                // else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == false && isLowBleedOpen == false)
+                // {
+                //     //apparent reading
+
+
+
+                //     //========================================
+                //     // Relief Valave Opening Point//========================>
+                //     //========================================
+                //     if (isLowControlOpen & isHighControlOpen)
+                //     {
+
+                //         /*
+                //         1. move pressure accross #1 check, simulating a leak. (increase pressure in zone two)
+                //         2. drop needle while pressure increases in zone 2
+                //         3. crack open relief, stop needle.
+                //         */
+
+                //         // ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_SupplyPressurePanelSlider.value, pressureZoneHUDController.m_PressureZone2PanelSlider.value));
+                //         if (!rpzWaterController.isReliefValveOpen)
+                //         {
+
+                //             // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 6.01f, 0.1f);
+                //             reliefValveInitValue = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
+                //             hosePressure = Mathf.SmoothStep(hosePressure, 0.2f, needleRiseSpeed);
+                //             ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
+
+
+                //         }
+                //         else if (rpzWaterController.isReliefValveOpen)
+                //         {
+                //             hosePressure = Mathf.SmoothStep(hosePressure, 0.2f, needleRiseSpeed);
+
+                //             // StopCoroutine(TestRVOP());
+
+                //         }
+
+                //     }
+                //     else
+                //     {
+                //         ReliefValveOpeningPointReturn = StartCoroutine(StopTestRVOP());
+                //     }
+
+                //     //========================================
+                //     // END - Relief Valave Opening Point//==================>
+                //     //========================================  
+
+
+
+                // }
+                // else if (isHighHoseEngaged == true)
+                // {
+
+                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                // }
 
 
 
@@ -1126,16 +1179,35 @@ public class RpzTestKitController : MonoBehaviour
         // while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
         // while (rpzWaterController.zone1Pressure - (rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) > RVOP)
         while (rpzWaterController.isReliefValveOpen == false)
-        // while
         {
+            // Debug.Log($"rpzWaterController.reliefValveOpeningPoint: {rpzWaterController.reliefValveOpeningPoint}");
+            //pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 7, 0.008f);
+            // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, hosePressure, 0.008f);
 
-            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
-            // hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
+            rvopTestInprogress = true;
+            // pressureZoneHUDController.m_PressureZone2PanelSlider.value += hosePressure;
 
-            // pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1;
-            Debug.Log($"+1");
-            yield return new WaitForSeconds(1);
+            //testing only
+
+            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.0001f;
+            hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+            // hosePressure = Mathf.SmoothStep(hosePressure, 0.0f, 0.0025f);
+
+
+            Debug.Log($"hosePressure: {hosePressure} ; pressureZoneHUDController.m_PressureZone2PanelSlider.value: {pressureZoneHUDController.m_PressureZone2PanelSlider.value}");
+            yield return null;
         }
+
+
+        // while (rpzWaterController.isReliefValveOpen == false)
+        // // while
+        // {
+
+        //     pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
+
+        //     Debug.Log($"+1");
+        //     yield return new WaitForSeconds(1);
+        // }
 
     }
 
@@ -1146,10 +1218,7 @@ public class RpzTestKitController : MonoBehaviour
         {
 
             pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 1.0f / (1000 * 0.1f);
-            // hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
 
-            // pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1;
-            Debug.Log($"-1");
             yield return new WaitForSeconds(1);
         }
 
@@ -1161,6 +1230,7 @@ public class RpzTestKitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
 
         PressureControl();
         BleederHoseControl();
