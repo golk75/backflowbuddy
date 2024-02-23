@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
             operableComponentDescription = null;
 
         }
-        // uiClickFilter.isUiClicked = false;
+        uiClickFilter.isUiClicked = false;
     }
 
     private void Touch0Contact_performed(InputAction.CallbackContext context)

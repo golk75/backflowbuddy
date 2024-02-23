@@ -1049,7 +1049,9 @@ public class RpzTestKitController : MonoBehaviour
                         // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
                         /// Slider event is being called in hud controller -> is this preventing me from rotating knobs?
                         /// Must use SetValueWithoutNotif()
-                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
+                        pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
+                        hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+
                     }
 
 
@@ -1254,17 +1256,18 @@ public class RpzTestKitController : MonoBehaviour
 
 
         // Update is called once per frame
-        void Update()
-        {
 
 
-            PressureControl();
-            BleederHoseControl();
-            NeedleControl();
-            DigitalNeedleControl();
-            HoseEmittersControl();
+    }
+    void Update()
+    {
 
-        }
+
+        PressureControl();
+        BleederHoseControl();
+        NeedleControl();
+        DigitalNeedleControl();
+        HoseEmittersControl();
 
     }
 }
