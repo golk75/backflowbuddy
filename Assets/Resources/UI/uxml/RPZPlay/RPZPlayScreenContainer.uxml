@@ -32,32 +32,32 @@
             </ui:VisualElement>
             <ui:VisualElement name="Bottom_container" picking-mode="Ignore" style="flex-direction: row; height: 0;" />
             <ui:VisualElement name="SupplyPressureZone__panel" class="pressure-panel-supply floating">
-                <ui:VisualElement name="PressureZone__supply_panel" picking-mode="Ignore" class="pressure-zone-panel" style="opacity: 1;">
+                <ui:VisualElement name="PressureZone__supply_panel" picking-mode="Ignore" class="pressure-zone-panel floating" style="opacity: 1;">
                     <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore">
                         <AttributeOverrides element-name="PressureZoneSlider" low-value="-100" high-value="100" show-input-field="false" />
                     </ui:Instance>
-                    <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container">
+                    <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container floating">
                         <ui:Label tabindex="-1" text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
                         <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressureZone_value_label" class="pressure-zone-value-label" />
                         <ui:TextField picking-mode="Ignore" value="filler text" name="SupplyPressureZone_value_label" class="pressure-zone-value-label" style="display: none;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="CheckSpring_value_container" class="check-spring-value-container">
-                        <ui:VisualElement name="CheckSpring1_value_container" class="check-spring-value-sub-container check-spring-value-sub-container-parked">
+                        <ui:VisualElement name="CheckSpring1_value_container" class="check-spring-value-sub-container">
                             <ui:Label tabindex="-1" text="Check #1 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_header" class="check-spring-value-header check-spring-value-header-parked" />
-                            <ui:VisualElement name="CheckSpring1_value_button_container" class="check-spring-value-button-container check-spring-value-button-container-parked">
+                            <ui:VisualElement name="CheckSpring1_value_button_container" picking-mode="Ignore" class="check-spring-value-button-container check-spring-value-button-container-parked">
                                 <ui:VisualElement name="CheckSpring1_value_button_subcontainer" class="check-spring-button-sub-container check-spring-button-sub-container-parked">
-                                    <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_add_button" class="check-spring-value-button check-spring-value-button-parked" />
-                                    <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_subtract_button" class="check-spring-value-button check-spring-value-button-parked" />
+                                    <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_add_button" class="check-spring-value-button" />
+                                    <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_subtract_button" class="check-spring-value-button" />
                                 </ui:VisualElement>
                                 <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_label" class="check-spring-value-label check-spring-value-label-parked" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:VisualElement name="CheckSpring2_value_container" class="check-spring-value-sub-container check-spring-value-sub-container-parked" style="margin-top: 0;">
                             <ui:Label tabindex="-1" text="Check #2 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_header" class="check-spring-value-header check-spring-value-header-parked" />
-                            <ui:VisualElement name="CheckSpring2_value_button_container" class="check-spring-value-button-container check-spring-value-button-container-parked">
-                                <ui:VisualElement name="CheckSpring2_value_button_subcontainer" class="check-spring-button-sub-container check-spring-button-sub-container-parked">
-                                    <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_add_button" class="check-spring-value-button check-spring-value-button-parked" />
-                                    <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_subtract_button" class="check-spring-value-button check-spring-value-button-parked" />
+                            <ui:VisualElement name="CheckSpring2_value_button_container" class="check-spring-value-button-container check-spring-value-button-container-parked floating">
+                                <ui:VisualElement name="CheckSpring2_value_button_subcontainer" class="check-spring-button-sub-container check-spring-button-sub-container-parked floating">
+                                    <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_add_button" class="check-spring-value-button floating" />
+                                    <ui:Button text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_subtract_button" class="check-spring-value-button floating" />
                                 </ui:VisualElement>
                                 <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring2_value_label" class="check-spring-value-label check-spring-value-label-parked" />
                             </ui:VisualElement>
