@@ -35,6 +35,7 @@ public class UiClickFilter : MonoBehaviour
 
     //lists
     List<VisualElement> FloatingElements;
+    List<Button> FloatingButtons;
 
     public bool isUiClicked = false;
     public bool isUiHovered = false;
@@ -44,7 +45,26 @@ public class UiClickFilter : MonoBehaviour
         //set visual elements
         var root = GetComponent<UIDocument>();
         FloatingElements = root.rootVisualElement.Query(className: "floating").ToList();
+        FloatingButtons = root.rootVisualElement.Query<Button>(className: "unity-button").ToList();
+        foreach (var button in FloatingButtons)
+        {
 
+
+            button.RegisterCallback<PointerDownEvent>(
+                e =>
+                {
+                    isUiClicked = true;
+
+                },
+                TrickleDown.TrickleDown);
+            button.RegisterCallback<PointerUpEvent>(
+                e =>
+                {
+                    isUiClicked = false;
+                },
+                TrickleDown.TrickleDown);
+
+        }
         foreach (var ele in FloatingElements)
         {
 
@@ -58,6 +78,7 @@ public class UiClickFilter : MonoBehaviour
         }
 
 
+
     }
 
     private void PointerUp(PointerUpEvent evt)
@@ -69,8 +90,8 @@ public class UiClickFilter : MonoBehaviour
     {
 
         isUiClicked = true;
-        // playerController.isOperableObject = false;
-        // playerController.operableObject = null;
+        playerController.isOperableObject = false;
+        playerController.operableObject = null;
     }
 
 }
