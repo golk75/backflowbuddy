@@ -8,7 +8,7 @@ using com.zibra.liquid.Solver;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
-
+using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Timeline;
@@ -202,6 +202,8 @@ public class RpzTestKitController : MonoBehaviour
     public float apparentReading;
     public float preRvopReading;
     public bool rvopTestInprogress;
+    public float rvop;
+    public float previousZone2SliderVal;
     void OnEnable()
     {
 
@@ -430,6 +432,7 @@ public class RpzTestKitController : MonoBehaviour
         }
         else
         {
+
             isLowBleedOpen = false;
             m_ChangeColorClose = StartCoroutine(CloseColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
@@ -473,7 +476,7 @@ public class RpzTestKitController : MonoBehaviour
         else
         {
             isLowControlOpen = false;
-            preRvopReading = 0;
+
             m_ChangeColorClose = StartCoroutine(CloseColorChange(lowControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
 
@@ -1011,7 +1014,7 @@ public class RpzTestKitController : MonoBehaviour
                     isDeviceBleeding = true;
                     isApparentReadingShown = false;
                     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                    // Debug.Log($"here1");
+                    Debug.Log($"here1");
                 }
                 else if (!isLowBleedOpen && isLowHoseEngaged && isHighHoseEngaged && isLowControlOpen == false)
                 {
@@ -1019,6 +1022,7 @@ public class RpzTestKitController : MonoBehaviour
                     isDeviceBleeding = false;
                     isApparentReadingShown = true;
                     hosePressure = Mathf.SmoothStep(hosePressure, (rpzWaterController.zone1Pressure - rpzWaterController.zone2Pressure) / 10, needleRiseSpeed);
+                    apparentReading = hosePressure;
                     // Debug.Log($"here2");
                 }
                 // if (isHighControlOpen && isLowControlOpen)
@@ -1040,19 +1044,92 @@ public class RpzTestKitController : MonoBehaviour
 
                 //     rvopTestInprogress = false;
                 // }
-                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen)
+                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen && !isLowBleedOpen)
                 {
                     if (rpzWaterController.isReliefValveOpen == false)
                     {
+                        //RVOP Test
+
 
                         // hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
                         // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
                         /// Slider event is being called in hud controller -> is this preventing me from rotating knobs?
                         /// Must use SetValueWithoutNotif()
-                        pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
-                        hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
 
+
+                        pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.03f;
+                        hosePressure = apparentReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+                        previousZone2SliderVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
+                        rvop = hosePressure;
+
+                        // Debug.Log($"previousZone2SliderVal: {previousZone2SliderVal}; hosePressure: {hosePressure}; rvop: {rvop}");
                     }
+
+
+
+                }
+                // else if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen && !isLowBleedOpen && hosePressure > preRvopReading)
+                // {
+                //     if (rpzWaterController.isReliefValveOpen == false)
+                //     {
+                //         //RVOP Test
+
+
+                //         // hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+                //         // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
+                //         /// Slider event is being called in hud controller -> is this preventing me from rotating knobs?
+                //         /// Must use SetValueWithoutNotif()
+
+
+                //         pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.03f;
+                //         hosePressure = pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+                //         previousZone2SliderVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
+                //         rvop = hosePressure;
+
+                //         // Debug.Log($"previousZone2SliderVal: {previousZone2SliderVal}; hosePressure: {hosePressure}; rvop: {rvop}");
+                //     }
+                // }
+                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && !isLowControlOpen && rpzWaterController.isReliefValveOpen == true && !isLowBleedOpen)
+                {
+                    if (rpzWaterController.isReliefValveOpen == true)
+                    {
+                        pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 0.01f;
+                    }
+
+
+
+                    // hosePressure = pressureZoneHUDController.m_PressureZone2PanelSlider.value / 100f;
+
+
+
+
+
+                }
+
+                else if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && !isLowControlOpen && rpzWaterController.isReliefValveOpen == false && !isLowBleedOpen)
+                {
+                    if (rpzWaterController.isReliefValveOpen == false && hosePressure < preRvopReading)
+                    {
+                        pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.01f;
+                    }
+
+                }
+
+                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen && isLowBleedOpen)
+                {
+
+
+
+                    if (pressureZoneHUDController.m_PressureZone2PanelSlider.value > 0)
+                    {
+
+                        hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                        pressureZoneHUDController.m_PressureZone2PanelSlider.value = 0f;
+                    }
+
+
+
+
 
 
                 }
