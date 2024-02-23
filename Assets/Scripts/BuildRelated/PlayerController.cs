@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public float deviceRotSensitivity;
 
     public GameObject operableObject;
+    public GameObject prevOperableObject;
 
     public GameObject _operableTestGaugeObject;
     public GameObject OperableTestGaugeObject
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.001f);
 
         ///Click/press---------------------------------------------------------------------------------
         if (operableObject != null && uiClickFilter.isUiClicked == false)
@@ -150,18 +151,23 @@ public class PlayerController : MonoBehaviour
             switch (operableComponentDescription.componentId)
             {
                 case OperableComponentDescription.ComponentId.HighBleed:
+
                     Actions.onHighBleedOperate?.Invoke();
                     break;
                 case OperableComponentDescription.ComponentId.LowBleed:
+
                     Actions.onLowBleedOperate?.Invoke();
                     break;
                 case OperableComponentDescription.ComponentId.HighControl:
+
                     Actions.onHighControlOperate?.Invoke();
                     break;
                 case OperableComponentDescription.ComponentId.LowControl:
+
                     Actions.onLowControlOperate?.Invoke();
                     break;
                 case OperableComponentDescription.ComponentId.BypassControl:
+
                     Actions.onBypassControlOperate?.Invoke();
                     break;
                 default:
@@ -235,6 +241,7 @@ public class PlayerController : MonoBehaviour
 
 
             isOperableObject = false;
+            prevOperableObject = operableObject;
             operableObject = null;
             _operableTestGaugeObject = null;
             primaryTouchStartPos = Vector3.zero;

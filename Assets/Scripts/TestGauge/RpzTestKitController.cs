@@ -446,14 +446,10 @@ public class RpzTestKitController : MonoBehaviour
             m_ChangeColorOpen = StartCoroutine(OpenColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
-
-
-
         }
         else
         {
             isBypassControlOpen = false;
-
             m_ChangeColorClose = StartCoroutine(CloseColorChange(bypassControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
         }
@@ -470,12 +466,17 @@ public class RpzTestKitController : MonoBehaviour
             KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
 
 
+            preRvopReading = hosePressure;
+
+
         }
         else
         {
             isLowControlOpen = false;
+            preRvopReading = 0;
             m_ChangeColorClose = StartCoroutine(CloseColorChange(lowControlIndicator.GetComponent<Renderer>().material));
             KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
+
         }
     }
 
@@ -501,7 +502,7 @@ public class RpzTestKitController : MonoBehaviour
     {
 
         float timeLerped = 0.0f;
-
+        knobOpened = true;
         while (timeLerped < 1.0)
         {
 
@@ -517,7 +518,7 @@ public class RpzTestKitController : MonoBehaviour
     {
         // Debug.Log($"{obj} rotated CLOSED");
         float timeLerped = 0.0f;
-        knobOpened = true;
+        knobOpened = false;
         while (timeLerped < 1.0)
         {
             timeLerped += Time.deltaTime;
@@ -1020,24 +1021,40 @@ public class RpzTestKitController : MonoBehaviour
                     hosePressure = Mathf.SmoothStep(hosePressure, (rpzWaterController.zone1Pressure - rpzWaterController.zone2Pressure) / 10, needleRiseSpeed);
                     // Debug.Log($"here2");
                 }
-                if (isHighControlOpen && isLowControlOpen)
-                {
-                    if (isHighHoseEngaged && isLowHoseEngaged)
-                    {
-                        // Debug.Log($"here3");
-                        if (rvopTestInprogress == false)
-                        {
-                            preRvopReading = hosePressure;
-                        }
-                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
+                // if (isHighControlOpen && isLowControlOpen)
+                // {
+                //     if (isHighHoseEngaged && isLowHoseEngaged)
+                //     {
+                //         // Debug.Log($"here3");
+                //         if (rvopTestInprogress == false)
+                //         {
+                //             preRvopReading = hosePressure;
+                //         }
+                //         // ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
 
-                    }
-                }
-                else if (isHighControlOpen && !isLowControlOpen)
+                //     }
+                // }
+                // else if (!isHighControlOpen || !isLowControlOpen)
+                // {
+                //     // Debug.Log($"here4");
+
+                //     rvopTestInprogress = false;
+                // }
+                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen)
                 {
-                    // Debug.Log($"here4");
-                    rvopTestInprogress = false;
+                    if (rpzWaterController.isReliefValveOpen == false)
+                    {
+
+                        // hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+                        // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
+                        /// Slider event is being called in hud controller -> is this preventing me from rotating knobs?
+                        /// Must use SetValueWithoutNotif()
+                        ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
+                    }
+
+
                 }
+
                 if (isHighHoseEngaged)
                 {
                     if (isApparentReadingShown == false && isDeviceBleeding == false)
@@ -1176,70 +1193,79 @@ public class RpzTestKitController : MonoBehaviour
     private IEnumerator TestRVOP()
     {
 
-        // while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
-        // while (rpzWaterController.zone1Pressure - (rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) > RVOP)
-        while (rpzWaterController.isReliefValveOpen == false)
+        ///
+        /// If called from of Action-->
+        /// 
+        while (rpzWaterController.isReliefValveOpen == false && playerController.operableObject != null)
         {
-            // Debug.Log($"rpzWaterController.reliefValveOpeningPoint: {rpzWaterController.reliefValveOpeningPoint}");
-            //pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 7, 0.008f);
-            // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, hosePressure, 0.008f);
+            Debug.Log($"rvop start");
 
             rvopTestInprogress = true;
-            // pressureZoneHUDController.m_PressureZone2PanelSlider.value += hosePressure;
 
-            //testing only
+            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.01f;
 
-            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.0001f;
             hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
-            // hosePressure = Mathf.SmoothStep(hosePressure, 0.0f, 0.0025f);
 
-
-            Debug.Log($"hosePressure: {hosePressure} ; pressureZoneHUDController.m_PressureZone2PanelSlider.value: {pressureZoneHUDController.m_PressureZone2PanelSlider.value}");
             yield return null;
         }
 
 
-        // while (rpzWaterController.isReliefValveOpen == false)
-        // // while
-        // {
+        //     ///
+        //     /// If called outside of Action-->
+        //     /// 
+        //     // while (rpzWaterController.isReliefValveOpen == false)
+        //     // {
 
-        //     pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
 
-        //     Debug.Log($"+1");
-        //     yield return new WaitForSeconds(1);
+
+
+        //     //     rvopTestInprogress = true;
+
+
+
+
+        //     //     pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.0001f;
+        //     //     hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+
+        //     //     yield return null;
+        //     // }
+
+
         // }
 
-    }
+        // private IEnumerator StopTestRVOP()
+        // {
+        //     while (rpzWaterController.isReliefValveOpen == true && playerController.operableObject != null)
+        //     {
 
-    private IEnumerator StopTestRVOP()
-    {
-        while (pressureZoneHUDController.m_PressureZone2PanelSlider.value >= 0)
-        // while
+        //         rvopTestInprogress = false;
+        //         Debug.Log($"rvop stop");
+
+        //         pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 0.01f;
+
+        //         hosePressure = preRvopReading + pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
+
+        //         yield return null;
+        //     }
+
+        // }
+
+
+
+
+        // Update is called once per frame
+        void Update()
         {
 
-            pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 1.0f / (1000 * 0.1f);
 
-            yield return new WaitForSeconds(1);
+            PressureControl();
+            BleederHoseControl();
+            NeedleControl();
+            DigitalNeedleControl();
+            HoseEmittersControl();
+
         }
 
     }
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-        PressureControl();
-        BleederHoseControl();
-        NeedleControl();
-        DigitalNeedleControl();
-        HoseEmittersControl();
-
-    }
-
-
 }
 

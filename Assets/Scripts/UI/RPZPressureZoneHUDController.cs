@@ -271,7 +271,7 @@ public class RPZPressureZoneHUDController : MonoBehaviour
         currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
         ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "floating"));
-
+        Debug.Log($"here");
     }
 
     void ZonePressureOperations(float zonePressureSliderValue, VisualElement zonePressureSlider)
