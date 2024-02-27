@@ -105,7 +105,9 @@ public class RpzTestKitController : MonoBehaviour
     public float MinNeedle_rotation = 135;
     public float MaxNeedle_rotation = -135;
     public float hosePressure;
-    public float maxPSID;
+    public float DifferentialPresure { get { return differentialPressure; } private set { differentialPressure = value; } }
+    private float differentialPressure;
+    public int maxPSID;
     private const float MinKnob_rotation = 0;
 
     //limit knobs to 4 complete rotations (x1 rotation = 360;)->
@@ -120,13 +122,15 @@ public class RpzTestKitController : MonoBehaviour
     private float currentPSID;
 
     private float minPSID;
+    private float hosePressureRef = 0;
+    private float diffPressureRef = 0;
 
     float closingPoint = 0;
     public bool isOperableObject;
 
     public bool isCheck1Open;
     public bool isCheck2Open;
-    float lowHosePressure;
+
 
     public bool isConnectedTestCockOpen;
     public bool isTestCock1Open;
@@ -149,12 +153,13 @@ public class RpzTestKitController : MonoBehaviour
     public bool isBypassControlOpen;
 
     public bool isDeviceBleeding;
+    public bool isDeviceBled;
     public bool isApparentReadingShown;
 
 
-    public float highHosePressure;
+
     float bypasshosePressure;
-    float needleSpeedDamp = 0.005f;
+    public float needleSpeedDamp = 0.005f;
     public float knobRotationFactor = 0;
 
 
@@ -181,7 +186,7 @@ public class RpzTestKitController : MonoBehaviour
     private float zone1to2PsiDiff;
     private float zone2to3PsiDiff;
 
-    public float needleRiseSpeed = 0.1f;
+    public float needleRiseSpeed;
     public List<GameObject> StaticTestCockList;
     // public List<GameObject> TestCockList;
     public List<GameObject> AttachedTestCockList;
@@ -204,6 +209,14 @@ public class RpzTestKitController : MonoBehaviour
     public bool rvopTestInprogress;
     public float rvop;
     public float previousZone2SliderVal;
+
+    public float m_highSidePressure;
+    public float m_lowSidePressure;
+    public float m_manifoldPressure;
+    public float m_highSideManifoldPressure;
+    public float m_lowSideManifoldPressure;
+    public float m_bypassSideManifoldPressure;
+    public float m_GaugeReading;
     void OnEnable()
     {
 
@@ -275,7 +288,7 @@ public class RpzTestKitController : MonoBehaviour
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
         minKnobRotation = 0;
-        highHosePressure = 0;
+
         hosePressure = 0;
         initLowHosePosition = LowHose.transform.position;
         initHighHosePosition = HighHose.transform.position;
@@ -758,6 +771,7 @@ public class RpzTestKitController : MonoBehaviour
         }
         #endregion
     }
+
     private void PressureControl()
     {
 
@@ -765,504 +779,307 @@ public class RpzTestKitController : MonoBehaviour
         zone1to2PsiDiff = rpzWaterController.zone1to2PsiDiff;
         zone2to3PsiDiff = rpzWaterController.zone2to3PsiDiff;
 
-        if (AttachedHoseList.Count > 0)
+
+
+        /// <summary>
+        /// High Hose
+        /// 
+        /// Needle should not move unless the high hose is attached to a testcock and the testcock is open
+        /// 
+        /// IRL: The test kit is seperated into 3 parts : High-side, Low-side, and control manifold.
+        /// 
+        /// The High-side of the test kit can only receive pressure through a hose on the high control portion of the manifold.
+        /// The Low-side of the test kit can only receive pressure through a hose on the low control portion of the manifold.
+        ///
+        /// the control valves on the manifold introduces pressure to common "bar". This common bar can recieve pressure from any of the control knobs if they are connected to a supply 
+        /// source and are open, the supply source would be another hose on the manifold hooked up to pressure..Which is to say either of the three sections of the manifold can inrtroduce water pressure out of the other hoses connected to the manifold (once they are opened) 
+        /// 
+        /// </summary>
+        if (AttachedHoseList.Contains(HighHose))
         {
-
-            /// <summary>
-            /// High Hose
-            /// 
-            /// Needle should not move unless the high hose is attached to a testcock and the testcock is open
-            /// 
-            /// IRL: The test kit is seperated into 3 parts : High-side, Low-side, and control manifold.
-            /// 
-            /// The High-side of the test kit can only receive pressure through a hose on the high control portion of the manifold.
-            /// The Low-side of the test kit can only receive pressure through a hose on the low control portion of the manifold.
-            ///
-            /// the control valves on the manifold introduces pressure to common "bar". This common bar can recieve pressure from any of the control knobs if they are connected to a supply 
-            /// source and are open, the supply source would be another hose on the manifold hooked up to pressure..Which is to say either of the three sections of the manifold can inrtroduce water pressure out of the other hoses connected to the manifold (once they are opened) 
-            /// 
-            /// </summary>
-            if (AttachedHoseList.Contains(HighHose))
+            isHighHoseConnected = true;
+            if (HighHoseBib.testCock == TestCock1)
             {
-                if (HighHoseBib.testCock == TestCock1)
+                if (isTestCock1Open)
                 {
-                    if (isTestCock1Open)
-                    {
-                        isHighHoseEngaged = true;
+                    isHighHoseEngaged = true;
 
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-                    }
-
-                }
-                if (HighHoseBib.testCock == TestCock2)
-                {
-                    isHighHoseConnected = true;
-                    if (isTestCock2Open)
-                    {
-                        isHighHoseEngaged = true;
-
-
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-
-                    }
                 }
                 else
                 {
-                    isHighHoseConnected = false;
+                    isHighHoseEngaged = false;
                 }
-                if (HighHoseBib.testCock == TestCock3)
+
+            }
+            if (HighHoseBib.testCock == TestCock2)
+            {
+                isHighHoseConnected = true;
+                if (isTestCock2Open)
                 {
-                    if (isTestCock3Open)
-                    {
-                        isHighHoseEngaged = true;
+                    isHighHoseEngaged = true;
 
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-                    }
+
                 }
-
-                if (HighHoseBib.testCock == TestCock4)
+                else
                 {
-                    if (isTestCock4Open)
-                    {
-                        isHighHoseEngaged = true;
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-                    }
+                    isHighHoseEngaged = false;
+
                 }
-
-
             }
             else
             {
-                hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
-                isHighHoseConnected = false;
 
             }
-            /// <summary>
-            /// End - High Hose
-            /// </summary>
-
-            /// <summary>
-            /// Low Hose
-            /// </summary>
-            if (AttachedHoseList.Contains(LowHose))
+            if (HighHoseBib.testCock == TestCock3)
             {
-
-                if (LowHoseBib.testCock == TestCock1)
+                if (isTestCock3Open)
                 {
-                    if (isTestCock1Open)
-                    {
-                        // Debug.Log($"low hose on tc#1 && tc#1 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"low hose on tc#1 && tc#1 closed");
-                    }
+                    isHighHoseEngaged = true;
 
-                }
-                if (LowHoseBib.testCock == TestCock2)
-                {
-                    if (isTestCock2Open)
-                    {
-                        // Debug.Log($"low hose on tc#2 && tc#2 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"low hose on tc#2 && tc#2 closed");
-                    }
-                }
-                if (LowHoseBib.testCock == TestCock3)
-                {
-                    isLowHoseConnected = true;
-                    if (isTestCock3Open)
-                    {
-                        isLowHoseEngaged = true;
-
-
-                    }
-                    else
-                    {
-
-                        isLowHoseEngaged = false;
-                        // Debug.Log($"low hose on tc#3 && tc#3 closed");
-                    }
                 }
                 else
                 {
-                    isLowHoseConnected = false;
+                    isHighHoseEngaged = false;
+                }
+            }
+
+            if (HighHoseBib.testCock == TestCock4)
+            {
+                if (isTestCock4Open)
+                {
+                    isHighHoseEngaged = true;
+                }
+                else
+                {
+                    isHighHoseEngaged = false;
+                }
+            }
+
+
+        }
+        else
+        {
+            // hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
+
+            isHighHoseConnected = false;
+            isHighHoseEngaged = false;
+            isDeviceBled = false;
+
+        }
+        /// <summary>
+        /// End - High Hose
+        /// </summary>
+
+        /// <summary>
+        /// Low Hose
+        /// </summary>
+        if (AttachedHoseList.Contains(LowHose))
+        {
+
+            if (LowHoseBib.testCock == TestCock1)
+            {
+                if (isTestCock1Open)
+                {
+                    // Debug.Log($"low hose on tc#1 && tc#1 opened");
+                }
+                else
+                {
+                    // Debug.Log($"low hose on tc#1 && tc#1 closed");
                 }
 
-                if (LowHoseBib.testCock == TestCock4)
+            }
+            if (LowHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
                 {
-                    if (isTestCock4Open)
-                    {
-                        // Debug.Log($"low hose on tc#4 && tc#4 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"low hose on tc#4 && tc#4 closed");
-                    }
+                    // Debug.Log($"low hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    // Debug.Log($"low hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (LowHoseBib.testCock == TestCock3)
+            {
+                isLowHoseConnected = true;
+                if (isTestCock3Open)
+                {
+                    isLowHoseEngaged = true;
+
+
+                }
+                else
+                {
+
+                    isLowHoseEngaged = false;
+                    // Debug.Log($"low hose on tc#3 && tc#3 closed");
                 }
             }
             else
             {
                 isLowHoseConnected = false;
-
             }
-            /// <summary>
-            /// End - Low Hose
-            /// </summary>
 
-
-            /// <summary>
-            /// Bypass Hose
-            /// </summary>
-            if (AttachedHoseList.Contains(BypassHose))
+            if (LowHoseBib.testCock == TestCock4)
             {
-                if (BypassHoseBib.testCock == TestCock1)
+                if (isTestCock4Open)
                 {
-                    if (isTestCock1Open)
-                    {
-                        // Debug.Log($"bypass hose on tc#1 && tc#1 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"bypass hose on tc#1 && tc#1 closed");
-                    }
-
-                }
-                if (BypassHoseBib.testCock == TestCock2)
-                {
-                    if (isTestCock2Open)
-                    {
-                        // Debug.Log($"bypass hose on tc#2 && tc#2 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"bypass hose on tc#2 && tc#2 closed");
-                    }
-                }
-                if (BypassHoseBib.testCock == TestCock3)
-                {
-                    if (isTestCock3Open)
-                    {
-
-                        // Debug.Log($"bypass hose on tc#3 && tc#3 opened");
-                    }
-                    else
-                    {
-
-                        // Debug.Log($"bypass hose on tc#3 && tc#3 closed");
-                    }
-                }
-
-                if (BypassHoseBib.testCock == TestCock4)
-                {
-                    isBypassHoseConnected = true;
-                    bypassHoseEmitter.enabled = false;
-                    if (isTestCock4Open)
-                    {
-                        isBypassHoseEngaged = true;
-
-                        // Debug.Log($"bypass hose on tc#4 && tc#4 opened");
-                    }
-                    else
-                    {
-                        isBypassHoseEngaged = false;
-                        // Debug.Log($"bypass hose on tc#4 && tc#4 closed");
-                    }
+                    // Debug.Log($"low hose on tc#4 && tc#4 opened");
                 }
                 else
                 {
-                    isBypassHoseConnected = false;
+                    // Debug.Log($"low hose on tc#4 && tc#4 closed");
+                }
+            }
+        }
+        else
+        {
+            isLowHoseConnected = false;
+
+        }
+        /// <summary>
+        /// End - Low Hose
+        /// </summary>
+
+
+        /// <summary>
+        /// Bypass Hose
+        /// </summary>
+        if (AttachedHoseList.Contains(BypassHose))
+        {
+            if (BypassHoseBib.testCock == TestCock1)
+            {
+                if (isTestCock1Open)
+                {
+                    // Debug.Log($"bypass hose on tc#1 && tc#1 opened");
+                }
+                else
+                {
+                    // Debug.Log($"bypass hose on tc#1 && tc#1 closed");
+                }
+
+            }
+            if (BypassHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
+                {
+                    // Debug.Log($"bypass hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    // Debug.Log($"bypass hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (BypassHoseBib.testCock == TestCock3)
+            {
+                if (isTestCock3Open)
+                {
+
+                    // Debug.Log($"bypass hose on tc#3 && tc#3 opened");
+                }
+                else
+                {
+
+                    // Debug.Log($"bypass hose on tc#3 && tc#3 closed");
+                }
+            }
+
+            if (BypassHoseBib.testCock == TestCock4)
+            {
+                isBypassHoseConnected = true;
+                bypassHoseEmitter.enabled = false;
+                if (isTestCock4Open)
+                {
+                    isBypassHoseEngaged = true;
+
+                    // Debug.Log($"bypass hose on tc#4 && tc#4 opened");
+                }
+                else
+                {
+                    isBypassHoseEngaged = false;
+                    // Debug.Log($"bypass hose on tc#4 && tc#4 closed");
                 }
             }
             else
             {
                 isBypassHoseConnected = false;
             }
-            /// <summary>
-            /// End - Bypass Hose
-            /// </summary>
+        }
+        else
+        {
+            isBypassHoseConnected = false;
+        }
+        /// <summary>
+        /// End - Bypass Hose
+        /// </summary>
 
 
 
-            //========================================
-            // Start Test Procedures//========================>
-            //========================================
+        //========================================
+        // Start Test Procedures//========================>
+        //========================================
 
-            //check if device is ready for test (so#1 open & so#2 closed)
-            if (rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
-            {
+        //check if device is ready for test (so#1 open & so#2 closed)
+        if (rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
+        {
 
-                //when is gauge bleeding to prime device back up?
 
-                if (isLowBleedOpen && isLowHoseEngaged && isHighHoseEngaged)
-                {
 
-                    isDeviceBleeding = true;
-                    isApparentReadingShown = false;
-                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                    Debug.Log($"here1");
-                }
-                else if (!isLowBleedOpen && isLowHoseEngaged && isHighHoseEngaged && isLowControlOpen == false)
-                {
-                    //Apparent Reading
-                    isDeviceBleeding = false;
-                    isApparentReadingShown = true;
-                    hosePressure = Mathf.SmoothStep(hosePressure, (rpzWaterController.zone1Pressure - rpzWaterController.zone2Pressure) / 10, needleRiseSpeed);
-                    apparentReading = hosePressure;
-                    // Debug.Log($"here2");
-                }
-                // if (isHighControlOpen && isLowControlOpen)
-                // {
-                //     if (isHighHoseEngaged && isLowHoseEngaged)
-                //     {
-                //         // Debug.Log($"here3");
-                //         if (rvopTestInprogress == false)
-                //         {
-                //             preRvopReading = hosePressure;
-                //         }
-                //         // ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
-
-                //     }
-                // }
-                // else if (!isHighControlOpen || !isLowControlOpen)
-                // {
-                //     // Debug.Log($"here4");
-
-                //     rvopTestInprogress = false;
-                // }
-                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen && !isLowBleedOpen)
-                {
-                    if (rpzWaterController.isReliefValveOpen == false)
-                    {
-                        //RVOP Test
-
-
-                        // hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
-                        // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
-                        /// Slider event is being called in hud controller -> is this preventing me from rotating knobs?
-                        /// Must use SetValueWithoutNotif()
-
-
-                        pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.03f;
-                        hosePressure = apparentReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
-                        previousZone2SliderVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
-                        rvop = hosePressure;
-
-                        // Debug.Log($"previousZone2SliderVal: {previousZone2SliderVal}; hosePressure: {hosePressure}; rvop: {rvop}");
-                    }
-
-
-
-                }
-                // else if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen && !isLowBleedOpen && hosePressure > preRvopReading)
-                // {
-                //     if (rpzWaterController.isReliefValveOpen == false)
-                //     {
-                //         //RVOP Test
-
-
-                //         // hosePressure = preRvopReading - pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
-                //         // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 8, 0.01f);
-                //         /// Slider event is being called in hud controller -> is this preventing me from rotating knobs?
-                //         /// Must use SetValueWithoutNotif()
-
-
-                //         pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.03f;
-                //         hosePressure = pressureZoneHUDController.m_PressureZone2PanelSlider.value / 10;
-                //         previousZone2SliderVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
-                //         rvop = hosePressure;
-
-                //         // Debug.Log($"previousZone2SliderVal: {previousZone2SliderVal}; hosePressure: {hosePressure}; rvop: {rvop}");
-                //     }
-                // }
-                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && !isLowControlOpen && rpzWaterController.isReliefValveOpen == true && !isLowBleedOpen)
-                {
-                    if (rpzWaterController.isReliefValveOpen == true)
-                    {
-                        pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 0.01f;
-                    }
-
-
-
-                    // hosePressure = pressureZoneHUDController.m_PressureZone2PanelSlider.value / 100f;
-
-
-
-
-
-                }
-
-                else if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && !isLowControlOpen && rpzWaterController.isReliefValveOpen == false && !isLowBleedOpen)
-                {
-                    if (rpzWaterController.isReliefValveOpen == false && hosePressure < preRvopReading)
-                    {
-                        pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.01f;
-                    }
-
-                }
-
-                if (isHighHoseEngaged && isLowHoseEngaged && isHighControlOpen && isLowControlOpen && isLowBleedOpen)
-                {
-
-
-
-                    if (pressureZoneHUDController.m_PressureZone2PanelSlider.value > 0)
-                    {
-
-                        hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                        pressureZoneHUDController.m_PressureZone2PanelSlider.value = 0f;
-                    }
-
-
-
-
-
-
-                }
-
-                if (isHighHoseEngaged)
-                {
-                    if (isApparentReadingShown == false && isDeviceBleeding == false)
-                    {
-                        // Debug.Log($"here5");
-                        hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                    }
-                }
-
-
-                // if (isHighHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == false)
-                // {
-                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.09f, needleRiseSpeed);
-                // }
-                // else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == true && isLowBleedOpen == true)
-                // {
-                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID - 0.1f, needleRiseSpeed);
-                // }
-                // else if (isHighHoseEngaged == true && isLowHoseEngaged == true && isHighBleedOpen == false && isLowBleedOpen == false)
-                // {
-                //     //apparent reading
-
-
-
-                //     //========================================
-                //     // Relief Valave Opening Point//========================>
-                //     //========================================
-                //     if (isLowControlOpen & isHighControlOpen)
-                //     {
-
-                //         /*
-                //         1. move pressure accross #1 check, simulating a leak. (increase pressure in zone two)
-                //         2. drop needle while pressure increases in zone 2
-                //         3. crack open relief, stop needle.
-                //         */
-
-                //         // ReliefValveOpeningPoint = StartCoroutine(TestRVOP(pressureZoneHUDController.m_SupplyPressurePanelSlider.value, pressureZoneHUDController.m_PressureZone2PanelSlider.value));
-                //         if (!rpzWaterController.isReliefValveOpen)
-                //         {
-
-                //             // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothStep(pressureZoneHUDController.m_PressureZone2PanelSlider.value, 6.01f, 0.1f);
-                //             reliefValveInitValue = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
-                //             hosePressure = Mathf.SmoothStep(hosePressure, 0.2f, needleRiseSpeed);
-                //             ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
-
-
-                //         }
-                //         else if (rpzWaterController.isReliefValveOpen)
-                //         {
-                //             hosePressure = Mathf.SmoothStep(hosePressure, 0.2f, needleRiseSpeed);
-
-                //             // StopCoroutine(TestRVOP());
-
-                //         }
-
-                //     }
-                //     else
-                //     {
-                //         ReliefValveOpeningPointReturn = StartCoroutine(StopTestRVOP());
-                //     }
-
-                //     //========================================
-                //     // END - Relief Valave Opening Point//==================>
-                //     //========================================  
-
-
-
-                // }
-                // else if (isHighHoseEngaged == true)
-                // {
-
-                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                // }
-
-
-
-
-            }
-
-
-
-
-            //========================================
-            // Check Valve #2//========================>
-            //========================================
-
-
-            //========================================
-            // END - Check Valve #2//==================>
-            //========================================
-
-
-            //========================================
-            // Check Valve #1//========================>
-            //========================================
-
-
-            //========================================
-            // END - Check Valve #1//==================>
-            //========================================
-
-
-
-
-
-
-            //========================================
-            // End Test Procedures//========================>
-            //========================================
 
 
 
         }
+
+
+
+
+        //========================================
+        // Check Valve #2//========================>
+        //========================================
+
+
+        //========================================
+        // END - Check Valve #2//==================>
+        //========================================
+
+
+        //========================================
+        // Check Valve #1//========================>
+        //========================================
+
+
+        //========================================
+        // END - Check Valve #1//==================>
+        //========================================
+
+
+
+
+
+
+        //========================================
+        // End Test Procedures//========================>
+        //========================================
+
+
+
+
 
 
         /// <summary>
         /// No hoses attached
         /// </summary>
-        else
-        {
-            //nothing attached, remove pressure from test gauge
-            hosePressure = Mathf.SmoothStep(
-                             hosePressure,
-                             0,
-                             needleRiseSpeed
-                         );
+        // else
+        // {
+        //     //nothing attached, remove pressure from test gauge
+        //     hosePressure = Mathf.SmoothStep(
+        //                      hosePressure,
+        //                      0,
+        //                      needleRiseSpeed
+        //                  );
 
 
-        }
+        // }
 
 
 
@@ -1336,10 +1153,121 @@ public class RpzTestKitController : MonoBehaviour
 
 
     }
-    void Update()
+
+    public float HighSide(float highSideManifoldPressure)
+    {
+        // {
+        //     highSideManifoldPressure = m_highSideManifoldPressure;
+        //     lowSideManifoldPressure = m_lowSideManifoldPressure;
+        //     bypassSideManifoldPressure = m_bypassSideManifoldPressure;
+
+        return highSideManifoldPressure / 10;
+    }
+    public float LowSide(float lowSideManifoldPressure)
+    {
+        return lowSideManifoldPressure / 10;
+
+
+    }
+    public float Manifold(float highHosePressure, float lowHosePressure, float bypassHosePressure)
+    {
+        return highHosePressure + lowHosePressure + bypassHosePressure;
+    }
+    public void DifferentialGauge()
     {
 
 
+
+        if (hosePressure <= maxPSID)
+        {
+
+            if (isHighHoseEngaged)
+            {
+                //max out gauge---> m_highSideManifoldPressure = rpzWaterController.zone1Pressure / 10 * 0.1f;
+                m_highSideManifoldPressure = rpzWaterController.zone1Pressure;
+
+            }
+            else if (!isHighHoseConnected)
+            {
+                m_highSideManifoldPressure = 0.0f;
+                isDeviceBled = false;
+
+            }
+            if (isLowHoseEngaged && isHighHoseEngaged)
+            {
+                if (isLowBleedOpen)
+                {
+                    //bleeding test gauge!
+                    isDeviceBleeding = true;
+                    needleSpeedDamp = 0.9f;
+                    m_lowSideManifoldPressure = 0;
+                }
+                if (isDeviceBleeding)
+                {
+                    if (!isLowBleedOpen)
+                    {
+                        isDeviceBled = true;
+
+                    }
+
+                }
+
+                if (isHighHoseEngaged && isDeviceBled && !isLowBleedOpen)
+                {
+                    needleSpeedDamp = 0.2f;
+                    m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
+                }
+                // else if (isHighHoseEngaged && !isDeviceBled)
+                // {
+                //     m_lowSideManifoldPressure = 0;
+                // }
+
+
+            }
+            else if (isLowHoseEngaged && !isHighHoseEngaged)
+            {
+                m_highSideManifoldPressure = 0.0f;
+
+            }
+            if (differentialPressure <= maxPSID)
+            {
+                differentialPressure = Mathf.SmoothDamp(differentialPressure, HighSide(m_highSideManifoldPressure) - LowSide(m_lowSideManifoldPressure), ref diffPressureRef, needleSpeedDamp);
+            }
+            else if (differentialPressure > maxPSID)
+            {
+                differentialPressure = maxPSID;
+            }
+
+            hosePressure = Mathf.SmoothDamp(hosePressure, differentialPressure, ref hosePressureRef, needleSpeedDamp);
+            Debug.Log($"m_highSideManifoldPressure: {m_highSideManifoldPressure}; m_lowSideManifoldPressure: {m_lowSideManifoldPressure}; m_bypassSideManifoldPressure: {m_bypassSideManifoldPressure}");
+            //hosePressure = Mathf.SmoothDamp(hosePressure, differentialPressure, ref hosePressureRef, needleSpeedDamp);
+
+            m_GaugeReading = hosePressure * 10;
+        }
+        if (hosePressure > maxPSID)
+        {
+
+            hosePressure = maxPSID;
+        }
+        if (hosePressure < 0)
+        {
+            hosePressure = 0;
+        }
+
+
+
+
+
+
+
+
+        Debug.Log($"differentialPressure: {differentialPressure}; hosePressure = {hosePressure}");
+
+    }
+    void Update()
+    {
+
+        DifferentialGauge();
         PressureControl();
         BleederHoseControl();
         NeedleControl();

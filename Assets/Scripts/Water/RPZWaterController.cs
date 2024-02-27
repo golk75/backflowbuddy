@@ -414,7 +414,7 @@ public class RPZWaterController : MonoBehaviour
 
 
 
-        zone1Pressure = supplyPsi + m_detectorZone1.ParticlesInside / 1000 * 0.1f;
+        zone1Pressure = supplyPsi + m_detectorZone1.ParticlesInside / 10000 * 0.1f;
 
         if (zone1Pressure - check1SpringForce + zone2PsiChange >= 0 && m_detectorZone2.ParticlesInside >= 0)
         {
