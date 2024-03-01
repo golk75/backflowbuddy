@@ -231,8 +231,8 @@ public class RPZWaterController : MonoBehaviour
     public float check2SpringForce;
     public float reliefValveSpringForce;
     float zone1PsiChange;
-    public int zone2PsiChange;
-    public int zone3PsiChange;
+    public float zone2PsiChange;
+    public float zone3PsiChange;
     public float zone1to2PsiDiff;
     public float zone2to3PsiDiff;
     public float zone2primedParticleCount = 10000;

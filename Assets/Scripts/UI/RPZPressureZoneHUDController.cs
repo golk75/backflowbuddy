@@ -288,7 +288,8 @@ public class RPZPressureZoneHUDController : MonoBehaviour
             case PressureZone2PanelTemplateString:
 
 
-                m_rpzWaterController.zone2PsiChange = (int)zonePressureSliderValue;
+                // m_rpzWaterController.zone2PsiChange = (int)zonePressureSliderValue;
+                m_rpzWaterController.zone2PsiChange = zonePressureSliderValue;
                 // ReliefValveControl(zonePressureSliderValue * sliderToReliefSpringFactor);
                 // reliefSpringXDrive = zonePressureSliderValue / sliderToReliefSpringFactor;
                 if (zonePressureSliderValue >= 0)
@@ -426,9 +427,9 @@ public class RPZPressureZoneHUDController : MonoBehaviour
         CheckSpring1Regulate();
         CheckSpring2Regulate();
 
-        m_PressureZone2TextLabel.text = m_rpzWaterController.zone2Pressure.ToString();
-        m_PressureZone3TextField.text = m_rpzWaterController.zone3Pressure.ToString();
-        m_SupplyPressureTextField.text = m_rpzWaterController.zone1Pressure.ToString();
+        m_PressureZone2TextLabel.text = (Mathf.Round(m_rpzWaterController.zone2Pressure * 10) * 0.1f).ToString();
+        m_PressureZone3TextField.text = (Mathf.Round(m_rpzWaterController.zone3Pressure * 10) * 0.1f).ToString();
+        m_SupplyPressureTextField.text = (Mathf.Round(m_rpzWaterController.zone1Pressure * 10) * 0.1f).ToString();
 
 
 
