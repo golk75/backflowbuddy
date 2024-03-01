@@ -43,8 +43,8 @@ public class RPZPressureZoneHUDController : MonoBehaviour
     //visual elements
     // public TextField m_SupplyPressureTextField;
     public Label m_SupplyPressureTextField;
-    Label m_PressureZone2TextLabel;
-    Label m_PressureZone3TextField;
+    public Label m_PressureZone2TextLabel;
+    public Label m_PressureZone3TextField;
     Label m_CheckSpring1Value;
     Label m_CheckSpring2Value;
     Label m_Zone2PressureSliderValue;

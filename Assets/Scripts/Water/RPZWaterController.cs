@@ -491,22 +491,23 @@ public class RPZWaterController : MonoBehaviour
     void CheckValveRegulate()
     {
 
+
         {
-            if (zone1Pressure < check1SpringForce)
-            {
+            // if (zone1Pressure < check1SpringForce)
+            // {
 
-                //While device is empty, supply pressure must overcome check#1
-                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-                m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
+            //     //While device is empty, supply pressure must overcome check#1
+            //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            //     m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, maxCheck1CloseColliderSize, ref check1ColliderClose, 0.5f, 1f);
 
-            }
-            else
-            {
+            // }
+            // else
+            // {
 
-                m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
-                m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
+            //     m_Collider_Check1Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check1Close.transform.localScale, Vector3.zero, ref check1ColliderClose, 2f, 2f);
+            //     m_VoidCheck1.transform.localScale = Vector3.SmoothDamp(m_VoidCheck1.transform.localScale, Vector3.zero, ref check1VoidRef, 2f, 1f);
 
-            }
+            // }
             if (zone1Pressure < zone2Pressure)
             {
 
@@ -582,10 +583,16 @@ public class RPZWaterController : MonoBehaviour
             if (isReliefValveOpen == true)
             {
                 m_sensingLineFF.Strength = 0;
+                m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, maxCheck1CloseColliderSize, ref check2ColliderClose, 0.5f, 1f);
+                if (shutOffValveController.IsSecondShutOffOpen == true)
+                    m_VoidOutfeed.enabled = true;
             }
             else
             {
                 m_sensingLineFF.Strength = 1.32f;
+                m_Collider_Check2Close.transform.localScale = Vector3.SmoothDamp(m_Collider_Check2Close.transform.localScale, Vector3.zero, ref check2ColliderClose, 2f, 2f);
+                m_VoidCheck2.transform.localScale = Vector3.SmoothDamp(m_VoidCheck2.transform.localScale, Vector3.zero, ref check2VoidRef, 2f, 1f);
+                m_VoidOutfeed.enabled = false;
             }
 
             //RVOP reached - opening relief valve
