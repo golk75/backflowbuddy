@@ -1104,17 +1104,11 @@ public class RpzTestKitController : MonoBehaviour
 
         while (!rpzWaterController.isReliefValveOpen)
         {
-            //         needleTweenSpeed = 2;
-            //         sliderTweenSpeed = 2;
-            //         DOTween.To(()
-            //      => pressureZoneHUDController.m_PressureZone2PanelSlider.value,
-            //      x => pressureZoneHUDController.m_PressureZone2PanelSlider.value = x,
-            // (rvop - 0.1f - Mathf.Round(rpzWaterController.zone1Pressure) + Mathf.Round(rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce)) * -1, sliderTweenSpeed).SetEase(sliderEase);
+
             needleTweenSpeed = 0.1f;
             pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
             Debug.Log($" pressureZoneHUDController.m_PressureZone2PanelSlider.value: {pressureZoneHUDController.m_PressureZone2PanelSlider.value}");
-            //pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.SmoothDamp(pressureZoneHUDController.m_PressureZone2PanelSlider.value, (rvop - 0.1f - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1, ref rvopRef, sliderTweenSpeed);
-            // pressureZoneHUDController.m_PressureZone2PanelSlider.value = Mathf.Lerp(pressureZoneHUDController.m_PressureZone2PanelSlider.value, (rvop - 0.1f - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1, sliderTweenSpeed);
+
             yield return null;
         }
 
@@ -1319,14 +1313,8 @@ public class RpzTestKitController : MonoBehaviour
             if (differentialPressure <= maxPSID)
             {
 
-                //differentialPressure = Mathf.SmoothDamp(differentialPressure, HighSide(m_highSideManifoldPressure) - LowSide(m_lowSideManifoldPressure) + Manifold(), ref diffPressureRef, needleSpeedDamp);
                 differentialPressure = HighSide(m_highSideManifoldPressure) - LowSide(m_lowSideManifoldPressure);
-                // DOTween.To(()
-                //           => differentialPressure,
-                //           x => differentialPressure = x,
-                //            HighSide(m_highSideManifoldPressure) - LowSide(m_lowSideManifoldPressure), needleTweenSpeed).SetEase(Ease.Linear)
-                //           ;
-                //differentialPressure = Mathf.SmoothDamp(differentialPressure, HighSide(m_highSideManifoldPressure) - LowSide(m_lowSideManifoldPressure), ref diffPressureRef, needleSpeedDamp);
+
             }
             else if (differentialPressure > maxPSID)
             {
@@ -1338,13 +1326,12 @@ public class RpzTestKitController : MonoBehaviour
                          => hosePressure,
                          x => hosePressure = x,
                           differentialPressure, needleTweenSpeed).SetEase(Ease.Linear);
-            //hosePressure = Mathf.SmoothDamp(hosePressure, differentialPressure, ref hosePressureRef, needleSpeedDamp);
-            //Debug.Log($"HighSide(m_highSideManifoldPressure): {HighSide(m_highSideManifoldPressure)}; LowSide(m_lowSideManifoldPressure): {LowSide(m_lowSideManifoldPressure)}; m_bypassSideManifoldPressure: {m_bypassSideManifoldPressure}; Manifold(): {Manifold()}");
-
-            //hosePressure = differentialPressure;
 
 
-            // Debug.Log($"differentialPressure: {differentialPressure}");
+
+
+
+
 
             m_GaugeReading = hosePressure * 10;
         }
