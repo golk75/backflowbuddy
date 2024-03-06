@@ -1149,17 +1149,17 @@ public class RpzTestKitController : MonoBehaviour
 
     private IEnumerator TestRVOP()
     {
-
+        var newVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
         while (!rpzWaterController.isReliefValveOpen && isLowControlOpen && !isLowBleedOpen)
         {
 
             needleTweenSpeed = 0.1f;
             //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
-            var newVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
 
-            newVal += 0.1f * Time.deltaTime * sliderTweenSpeed;
+
+            newVal += 0.1f * Time.deltaTime * 10;
             pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(newVal);
-            rpzWaterController.zone2PsiChange += 0.01f;
+            rpzWaterController.zone2PsiChange += 0.1f * Time.deltaTime * 10;
             if (newVal < 1)
             {
                 // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
@@ -1172,11 +1172,15 @@ public class RpzTestKitController : MonoBehaviour
             }
 
 
-            Debug.Log($"rvop test in progress");
+
+            //  Debug.Log($"rvop test in progress");
 
 
             yield return null;
         }
+
+        pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + (rvop - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1;
+
 
 
     }
@@ -1206,7 +1210,7 @@ public class RpzTestKitController : MonoBehaviour
 
 
 
-            Debug.Log($"falling to apparent reading");
+            //    Debug.Log($"falling to apparent reading");
 
 
 
@@ -1231,6 +1235,7 @@ public class RpzTestKitController : MonoBehaviour
         {
             needleTweenSpeed = 0.1f;
             //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
+            sliderTweenSpeed = 10;
             var newVal = pressureZoneHUDController.m_PressureZone2PanelSlider.value;
             if (newVal > 0)
             {
@@ -1241,12 +1246,19 @@ public class RpzTestKitController : MonoBehaviour
                 newVal = 0;
             }
             pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(newVal);
+            //rpzWaterController.zone2PsiChange -= 0.01f;
 
-            rpzWaterController.zone2PsiChange -= 0.1f;
+            if (rpzWaterController.zone2Pressure > rpzWaterController.zone1Pressure - 10)
+            {
+                rpzWaterController.zone2PsiChange -= 1f * Time.deltaTime * sliderTweenSpeed;
+            }
+
+
             if (newVal < 1)
             {
                 // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
                 pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+0";
+                // m_lowSideManifoldPressure = 0;
 
             }
             else
@@ -1258,12 +1270,13 @@ public class RpzTestKitController : MonoBehaviour
 
 
 
-            Debug.Log($"bleeding in progress");
+            //Debug.Log($"bleeding in progress");
 
 
             yield return null;
         }
         isDeviceBled = true;
+        sliderTweenSpeed = 6;
 
 
     }
@@ -1378,6 +1391,7 @@ public class RpzTestKitController : MonoBehaviour
                     if (isDeviceBled && !isLowBleedOpen && !isHighBleedOpen && !isLowControlOpen)
                     {
                         m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
+                        Debug.Log($"herere");
                     }
                     if (isLowBleedOpen)
                     {
