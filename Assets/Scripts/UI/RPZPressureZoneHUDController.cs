@@ -47,8 +47,8 @@ public class RPZPressureZoneHUDController : MonoBehaviour
     public Label m_PressureZone3TextField;
     Label m_CheckSpring1Value;
     Label m_CheckSpring2Value;
-    Label m_Zone2PressureSliderValue;
-    Label m_Zone3PressureSliderValue;
+    public Label m_Zone2PressureSliderValue;
+    public Label m_Zone3PressureSliderValue;
     Button m_CheckSpring1AddButton;
     Button m_CheckSpring1SubtractButton;
     Button m_CheckSpring2AddButton;
@@ -270,6 +270,7 @@ public class RPZPressureZoneHUDController : MonoBehaviour
         uiClickFilter.isUiClicked = true;
         currentSliderBar = (VisualElement)evt.target;
         VisualElement currentDragger = currentSliderBar.Query(name: "unity-dragger");
+
         ZonePressureOperations(evt.newValue, SearchHiearchy.GetFirstAncestorWithClass(currentSliderBar, "floating"));
 
     }
