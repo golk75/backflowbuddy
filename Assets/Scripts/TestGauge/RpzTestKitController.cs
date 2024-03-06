@@ -493,13 +493,7 @@ public class RpzTestKitController : MonoBehaviour
 
 
             }
-            if (isDeviceBled && !isHighBleedOpen && isLowControlOpen)
-            {
-                //apparent reading
-                //fall to apparent reading -> then start rvop coroutine 
 
-
-            }
 
 
             m_ChangeColorClose = StartCoroutine(CloseColorChange(lowBleedIndicator.GetComponent<Renderer>().material));
@@ -1178,15 +1172,15 @@ public class RpzTestKitController : MonoBehaviour
 
             yield return null;
         }
-
-        pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + (rvop - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1;
+        if (rpzWaterController.isReliefValveOpen)
+            pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + (rvop - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1;
 
 
 
     }
     private IEnumerator ApparrentReading()
     {
-        while (isLowBleedOpen == false && differentialPressure > 0.8f)
+        while (isLowBleedOpen == false && differentialPressure > rpzWaterController.check1SpringForce * 0.1f)
         {
             needleTweenSpeed = 0.1f;
             //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
@@ -1247,7 +1241,7 @@ public class RpzTestKitController : MonoBehaviour
             }
             pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(newVal);
             //rpzWaterController.zone2PsiChange -= 0.01f;
-
+            // rpzWaterController.zone2PsiChange -= 1f * Time.deltaTime * sliderTweenSpeed;
             if (rpzWaterController.zone2Pressure > rpzWaterController.zone1Pressure - 10)
             {
                 rpzWaterController.zone2PsiChange -= 1f * Time.deltaTime * sliderTweenSpeed;
@@ -1388,6 +1382,7 @@ public class RpzTestKitController : MonoBehaviour
             {
                 if (!shutOffValveController.IsSecondShutOffOpen)
                 {
+                    m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
                     if (isDeviceBled && !isLowBleedOpen && !isHighBleedOpen && !isLowControlOpen)
                     {
                         m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
@@ -1398,12 +1393,16 @@ public class RpzTestKitController : MonoBehaviour
 
                         isDeviceBleeding = true;
                         needleSpeedDamp = 0.9f;
-                        m_lowSideManifoldPressure = 0;
+                        // m_lowSideManifoldPressure = 0;
                         //     // Debug.Log($"m_lowSideManifoldPressure: bleeding {m_lowSideManifoldPressure / 10}; m_highSideManifoldPressure: {m_highSideManifoldPressure / 10}");
                     }
                     if (isHighControlOpen && isLowControlOpen)
                     {
                         m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
+                    }
+                    if (isHighControlOpen && isLowControlOpen)
+                    {
+
                     }
                     // if (isDeviceBleeding)
                     // {
