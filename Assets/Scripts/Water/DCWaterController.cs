@@ -261,6 +261,8 @@ public class DCWaterController : MonoBehaviour
     public bool isReliefValveOpen;
     public bool isCheck1Closed;
     public bool isCheck2Closed;
+    public GameObject highHose;
+
 
     [SerializeField]
     List<ZibraLiquidVoid> VoidList;
@@ -620,25 +622,25 @@ public class DCWaterController : MonoBehaviour
 
 
             }
-            // if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
-            // {
-            //     check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
-            //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            if (testCockController.isTestCock2Open == true && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
+            {
+                check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
 
 
-            // }
-            // if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
-            // {
-            //     check1Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
-            //     check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+            }
+            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
+            {
+                check1Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
+                check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
 
-            // }
-            // if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == true)
-            // {
-            //     check1Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
-            //     check2Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
+            }
+            if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == true)
+            {
+                check1Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
+                check2Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
 
-            // }
+            }
 
 
 
@@ -1487,7 +1489,7 @@ public class DCWaterController : MonoBehaviour
         else
         {
             //if device is in testing conditions
-            if (m_SightTubeController.currentTestCockConnection == hoseDetector3 && testCockController.isTestCock3Open && zone1Pressure >= zone2Pressure)
+            if (m_SightTubeController.currentTestCockConnection == hoseDetector3 && testCockController.isTestCock3Open && zone1Pressure >= zone2Pressure && TestCockHoseDetect2.currentHoseConnection == highHose)
             {
                 if (m_detectorZone1.ParticlesInside > 1000)
                 {
@@ -1498,7 +1500,7 @@ public class DCWaterController : MonoBehaviour
 
             }
 
-            else if (m_SightTubeController.currentTestCockConnection == hoseDetector4 && testCockController.isTestCock4Open && zone2Pressure >= zone3Pressure)
+            else if (m_SightTubeController.currentTestCockConnection == hoseDetector4 && testCockController.isTestCock4Open && zone2Pressure >= zone3Pressure && TestCockHoseDetect3.currentHoseConnection == highHose)
             {
                 if (m_detectorZone2.ParticlesInside > 1000)
                 {

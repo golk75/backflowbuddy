@@ -1262,7 +1262,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private IEnumerator TestCheck2()
     {
 
-        var newVal = pressureZoneHUDController.m_PressureZone3PanelSlider.value;
+
         while (dcWaterController.zone2to3PsiDiff > 0)
         {
 
@@ -1270,18 +1270,29 @@ public class DoubleCheckTestKitController : MonoBehaviour
             //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
 
 
-            newVal += 0.01f * Time.deltaTime;
-            pressureZoneHUDController.m_PressureZone3PanelSlider.SetValueWithoutNotify(newVal);
+            // newVal -= 0.01f * Time.deltaTime;
+            // pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(pressureZoneHUDController.m_SupplyPressurePanelSlider.value - newVal);
+            dcWaterController.supplyPsi -= 0.01f * Time.deltaTime;
+            var newVal = dcWaterController.zone1Pressure;
+            pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(newVal);
+            dcWaterController.zone2PsiChange += 0.01f * Time.deltaTime;
             dcWaterController.zone3PsiChange += 0.01f * Time.deltaTime;
+            pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(dcWaterController.zone1Pressure - pressureZoneHUDController.m_PressureZone2PanelSlider.value + newVal);
+            pressureZoneHUDController.m_PressureZone3PanelSlider.SetValueWithoutNotify(dcWaterController.zone2Pressure - pressureZoneHUDController.m_PressureZone3PanelSlider.value + newVal);
+
             if (newVal < 1)
             {
                 // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
+                pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+0";
                 pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+0";
-
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
             }
             else
             {
-                pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+" + ((int)newVal).ToString();
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
+                pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)dcWaterController.zone2PsiChange).ToString();
+                pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+" + ((int)dcWaterController.zone3PsiChange).ToString();
+
             }
 
 
