@@ -1073,74 +1073,6 @@ public class RpzTestKitController : MonoBehaviour
 
 
 
-        //========================================
-        // Start Test Procedures//========================>
-        //========================================
-
-        //check if device is ready for test (so#1 open & so#2 closed)
-        if (rpzWaterController.m_detectorZone1.ParticlesInside > 1000)
-        {
-
-
-
-
-
-
-        }
-
-
-
-
-        //========================================
-        // Check Valve #2//========================>
-        //========================================
-
-
-        //========================================
-        // END - Check Valve #2//==================>
-        //========================================
-
-
-        //========================================
-        // Check Valve #1//========================>
-        //========================================
-
-
-        //========================================
-        // END - Check Valve #1//==================>
-        //========================================
-
-
-
-
-
-
-        //========================================
-        // End Test Procedures//========================>
-        //========================================
-
-
-
-
-
-
-        /// <summary>
-        /// No hoses attached
-        /// </summary>
-        // else
-        // {
-        //     //nothing attached, remove pressure from test gauge
-        //     hosePressure = Mathf.SmoothStep(
-        //                      hosePressure,
-        //                      0,
-        //                      needleRiseSpeed
-        //                  );
-
-
-        // }
-
-
-
 
     }
     private IEnumerator RvopRecover()
@@ -1249,7 +1181,6 @@ public class RpzTestKitController : MonoBehaviour
         }
 
     }
-
     private IEnumerator BleedTestKit()
     {
 
@@ -1400,9 +1331,6 @@ public class RpzTestKitController : MonoBehaviour
             else if (!isHighHoseConnected)
             {
                 m_highSideManifoldPressure = 0.0f;
-                needleSpeedDamp = 0.5f;
-
-
 
             }
 
@@ -1410,7 +1338,7 @@ public class RpzTestKitController : MonoBehaviour
             {
                 if (!shutOffValveController.IsSecondShutOffOpen)
                 {
-                    // 
+
                     if (isDeviceBled && !isLowBleedOpen && !isHighBleedOpen && !isLowControlOpen)
                     {
                         m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
@@ -1420,9 +1348,8 @@ public class RpzTestKitController : MonoBehaviour
                     {
 
                         isDeviceBleeding = true;
-                        needleSpeedDamp = 0.9f;
                         m_lowSideManifoldPressure = 0;
-                        //     // Debug.Log($"m_lowSideManifoldPressure: bleeding {m_lowSideManifoldPressure / 10}; m_highSideManifoldPressure: {m_highSideManifoldPressure / 10}");
+                        // Debug.Log($"m_lowSideManifoldPressure: bleeding {m_lowSideManifoldPressure / 10}; m_highSideManifoldPressure: {m_highSideManifoldPressure / 10}");
                     }
                     if (isHighControlOpen && isLowControlOpen)
                     {
@@ -1447,50 +1374,6 @@ public class RpzTestKitController : MonoBehaviour
                         }
 
                     }
-
-
-                    // if (isDeviceBled && !isLowBleedOpen && !isHighBleedOpen && !isLowControlOpen)
-                    // {
-                    //     //apparent reading
-
-                    //     needleSpeedDamp = 0.09f;
-                    //     // m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
-                    //     //     // Debug.Log($"m_lowSideManifoldPressure: apparent {m_lowSideManifoldPressure / 10}; m_highSideManifoldPressure: {m_highSideManifoldPressure / 10}");
-                    // }
-                    // else if (isHighHoseEngaged && isLowControlOpen && isHighControlOpen && !isBypassControlOpen)
-                    // {
-                    //     if (!shutOffValveController.IsSecondShutOffOpen)
-                    //     {
-                    //         //rvop
-                    //         // ReliefValveOpeningPoint = StartCoroutine(TestRVOP());
-                    //         //  m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
-                    //         // Debug.Log($"m_lowSideManifoldPressure : {m_lowSideManifoldPressure}; pressureZoneHUDController.m_PressureZone2PanelSlider.value: {pressureZoneHUDController.m_PressureZone2PanelSlider.value}");
-
-                    //     }
-                    // }
-                    // else if (isHighHoseEngaged && !isLowControlOpen && isHighControlOpen && !isBypassControlOpen)
-                    // {
-                    //     if (!shutOffValveController.IsSecondShutOffOpen && !isLowBleedOpen && !isDeviceBled)
-                    //     {
-                    //         //stop rvop
-
-                    //         //m_lowSideManifoldPressure = rpzWaterController.zone2Pressure;
-                    //         //Debug.Log($"m_lowSideManifoldPressure : {m_lowSideManifoldPressure}; pressureZoneHUDController.m_PressureZone2PanelSlider.value: {pressureZoneHUDController.m_PressureZone2PanelSlider.value}");
-
-                    //     }
-                    //     else if (!shutOffValveController.IsSecondShutOffOpen && isLowBleedOpen)
-                    //     {
-                    //         needleTweenSpeed = 1;
-                    //         isDeviceBled = true;
-                    //         m_lowSideManifoldPressure = 0;
-                    //     }
-                    // }
-                    // if (!isDeviceBled && !isLowBleedOpen && !isHighBleedOpen)
-                    // {
-
-                    //     needleSpeedDamp = 0.09f;
-                    //     m_lowSideManifoldPressure = 0;
-                    // }
 
                 }
                 else

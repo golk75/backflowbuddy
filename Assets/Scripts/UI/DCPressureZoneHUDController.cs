@@ -43,12 +43,12 @@ public class DCPressureZoneHUDController : MonoBehaviour
     //visual elements
     // public TextField m_SupplyPressureTextField;
     public Label m_SupplyPressureTextField;
-    Label m_PressureZone2TextLabel;
-    Label m_PressureZone3TextField;
-    Label m_CheckSpring1Value;
-    Label m_CheckSpring2Value;
-    Label m_Zone2PressureSliderValue;
-    Label m_Zone3PressureSliderValue;
+    public Label m_PressureZone2TextLabel;
+    public Label m_PressureZone3TextField;
+    public Label m_CheckSpring1Value;
+    public Label m_CheckSpring2Value;
+    public Label m_Zone2PressureSliderValue;
+    public Label m_Zone3PressureSliderValue;
     Button m_CheckSpring1AddButton;
     Button m_CheckSpring1SubtractButton;
     Button m_CheckSpring2AddButton;
@@ -260,13 +260,13 @@ public class DCPressureZoneHUDController : MonoBehaviour
             case SupplyPressurePanelTemplateString:
 
                 m_dcWaterController.supplyPsi = zonePressureSliderValue;
-
                 break;
 
             case PressureZone2PanelTemplateString:
 
 
-                m_dcWaterController.zone2PsiChange = (int)zonePressureSliderValue;
+                // m_dcWaterController.zone2PsiChange = (int)zonePressureSliderValue;
+                m_dcWaterController.zone2PsiChange = zonePressureSliderValue;
                 // ReliefValveControl(zonePressureSliderValue * sliderToReliefSpringFactor);
                 // reliefSpringXDrive = zonePressureSliderValue / sliderToReliefSpringFactor;
                 if (zonePressureSliderValue >= 0)
@@ -281,7 +281,16 @@ public class DCPressureZoneHUDController : MonoBehaviour
 
             case PressureZone3PanelTemplateString:
 
-                m_dcWaterController.zone3PsiChange = (int)zonePressureSliderValue;
+                if (m_dcWaterController.zone3PsiChange >= 0)
+                {
+                    m_dcWaterController.zone3PsiChange = (int)zonePressureSliderValue;
+                }
+                else
+                {
+                    m_dcWaterController.zone3PsiChange = 0 - (int)zonePressureSliderValue;
+                }
+
+
                 if (zonePressureSliderValue >= 0)
                 {
                     m_Zone3PressureSliderValue.text = "+" + zonePressureSliderValue.ToString();
@@ -397,9 +406,9 @@ public class DCPressureZoneHUDController : MonoBehaviour
         // ReliefValveControl();
 
 
-        m_PressureZone2TextLabel.text = m_dcWaterController.zone2Pressure.ToString();
-        m_PressureZone3TextField.text = m_dcWaterController.zone3Pressure.ToString();
-        m_SupplyPressureTextField.text = m_dcWaterController.zone1Pressure.ToString();
+        m_PressureZone2TextLabel.text = (Mathf.Round(m_dcWaterController.zone2Pressure * 10) * 0.1f).ToString();
+        m_PressureZone3TextField.text = (Mathf.Round(m_dcWaterController.zone3Pressure * 10) * 0.1f).ToString();
+        m_SupplyPressureTextField.text = (Mathf.Round(m_dcWaterController.zone1Pressure * 10) * 0.1f).ToString();
 
 
 

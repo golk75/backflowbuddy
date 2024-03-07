@@ -158,7 +158,7 @@ public class HoseDetector : MonoBehaviour
             //check if exiting collider is connected or just passing through
             if (dcTestKitController.AttachedHoseList.Contains(currentHoseConnection) && dcTestKitController.AttachedTestCockList.Contains(this.gameObject) && currentHoseConnection == other.gameObject)
             {
-                Debug.Log($"here2");
+
 
                 Actions.onRemoveHoseFromList?.Invoke(currentHoseConnection, GetComponent<OperableComponentDescription>());
                 Actions.onRemoveTestCockFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());

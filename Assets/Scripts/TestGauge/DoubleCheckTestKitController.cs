@@ -16,7 +16,7 @@ using UnityEngine.UIElements;
 public class DoubleCheckTestKitController : MonoBehaviour
 {
 
-    public DCWaterController waterController;
+    public DCWaterController dcWaterController;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public TestCockController testCockController;
@@ -51,7 +51,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public GameObject LowHose;
     public GameObject HighHose;
     public GameObject BypassHose;
-
+    public GameObject SightTube;
     GameObject currentHighHoseConnection;
 
 
@@ -62,6 +62,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public HoseBib LowHoseBib;
     public HoseBib BypassHoseBib;
     public HoseBib m_SightTubeHoseBib;
+
     [SerializeField]
     ZibraLiquidEmitter bleederHoseEmitter;
     public ZibraLiquidEmitter bypassHoseEmitter;
@@ -127,8 +128,8 @@ public class DoubleCheckTestKitController : MonoBehaviour
     float closingPoint = 0;
     public bool isOperableObject;
 
-    public bool isCheck1Open;
-    public bool isCheck2Open;
+    public CheckValveCollision isCheck1Open;
+    public CheckValve2Collision isCheck2Open;
     float lowHosePressure;
 
     public bool isConnectedTestCockOpen;
@@ -201,6 +202,16 @@ public class DoubleCheckTestKitController : MonoBehaviour
     Vector3 check1BackSeatClosedPos = new Vector3(-0.129500002f, 0f, -0.0860999972f);
     Vector3 check1BackSeatLeakingPos = new Vector3(-0.133900002f, 0, -0.0860999972f);
     public float RVOP;
+    public float m_lowSideManifoldPressure;
+    public float m_highSideManifoldPressure;
+    public float differentialPressure;
+    public float needleTweenSpeed;
+    public float m_GaugeReading;
+    HoseDetector m_hoseDetector1;
+    HoseDetector m_hoseDetector2;
+    HoseDetector m_hoseDetector3;
+    HoseDetector m_hoseDetector4;
+    bool hasTest1Started;
     void OnEnable()
     {
 
@@ -278,6 +289,10 @@ public class DoubleCheckTestKitController : MonoBehaviour
         initHighHosePosition = HighHose.transform.position;
         initBypassHosePosition = BypassHose.transform.position;
         check1BackSeatInitPos = check1BackSeat.transform.position;
+        m_hoseDetector1 = dcWaterController.hoseDetector1.GetComponent<HoseDetector>();
+        m_hoseDetector2 = dcWaterController.hoseDetector2.GetComponent<HoseDetector>();
+        m_hoseDetector3 = dcWaterController.hoseDetector3.GetComponent<HoseDetector>();
+        m_hoseDetector4 = dcWaterController.hoseDetector4.GetComponent<HoseDetector>(); ;
 
     }
 
@@ -550,6 +565,14 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private void TestCoc4Opened()
     {
         isTestCock4Open = true;
+        if (m_hoseDetector3.currentHoseConnection == HighHose && m_hoseDetector4.currentHoseConnection == SightTube)
+        {
+            if (dcWaterController.isDeviceInTestingCondititons)
+            {
+                StartCoroutine(TestCheck2());
+            }
+
+        }
     }
 
     private void TestCock3Closed()
@@ -560,6 +583,14 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private void TestCock3Opened()
     {
         isTestCock3Open = true;
+        if (m_hoseDetector2.currentHoseConnection == HighHose && m_hoseDetector3.currentHoseConnection == SightTube)
+        {
+            if (dcWaterController.isDeviceInTestingCondititons)
+            {
+                StartCoroutine(TestCheck1());
+            }
+
+        }
     }
 
     private void TestCock2Closed()
@@ -570,6 +601,8 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private void TestCoc2Opened()
     {
         isTestCock2Open = true;
+
+        //Debug.Log($"m_hoseDetector2.currentHoseConnection: {m_hoseDetector2.currentHoseConnection}");
     }
 
     private void TestCock1Closed()
@@ -580,6 +613,9 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private void TestCock1Opened()
     {
         isTestCock1Open = true;
+
+
+
     }
 
     #endregion
@@ -587,7 +623,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private void HoseEmittersControl()
     {
         //High
-        if (isHighControlOpen && !isHighHoseConnected && waterController.m_detectorZone1.ParticlesInside > 1000)
+        if (isHighControlOpen && !isHighHoseConnected && dcWaterController.m_detectorZone1.ParticlesInside > 1000)
         {
 
 
@@ -618,7 +654,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
         //Low
 
-        if (isLowControlOpen && !isLowHoseConnected && waterController.m_detectorZone1.ParticlesInside > 1000)
+        if (isLowControlOpen && !isLowHoseConnected && dcWaterController.m_detectorZone1.ParticlesInside > 1000)
         {
 
 
@@ -647,7 +683,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
             lowHoseEmitter.enabled = false;
         }
         //Bypass
-        if (isBypassControlOpen && !isBypassHoseConnected && waterController.m_detectorZone1.ParticlesInside > 1000)
+        if (isBypassControlOpen && !isBypassHoseConnected && dcWaterController.m_detectorZone1.ParticlesInside > 1000)
         {
 
 
@@ -764,358 +800,347 @@ public class DoubleCheckTestKitController : MonoBehaviour
     {
 
         //track zone pressures
-        zone1to2PsiDiff = waterController.zone1to2PsiDiff;
-        zone2to3PsiDiff = waterController.zone2to3PsiDiff;
+        zone1to2PsiDiff = dcWaterController.zone1to2PsiDiff;
+        zone2to3PsiDiff = dcWaterController.zone2to3PsiDiff;
 
-        if (AttachedHoseList.Count > 0)
+
+        /// <summary>
+        /// High Hose
+        /// 
+        /// Needle should not move unless the high hose is attached to a testcock and the testcock is open
+        /// 
+        /// IRL: The test kit is seperated into 3 parts : High-side, Low-side, and control manifold.
+        /// 
+        /// The High-side of the test kit can only receive pressure through a hose on the high control portion of the manifold.
+        /// The Low-side of the test kit can only receive pressure through a hose on the low control portion of the manifold.
+        ///
+        /// the control valves on the manifold introduces pressure to common "bar". This common bar can recieve pressure from any of the control knobs if they are connected to a supply 
+        /// source and are open, the supply source would be another hose on the manifold hooked up to pressure..Which is to say either of the three sections of the manifold can inrtroduce water pressure out of the other hoses connected to the manifold (once they are opened) 
+        /// 
+        /// </summary>
+        if (AttachedHoseList.Contains(HighHose))
         {
-
-            /// <summary>
-            /// High Hose
-            /// 
-            /// Needle should not move unless the high hose is attached to a testcock and the testcock is open
-            /// 
-            /// IRL: The test kit is seperated into 3 parts : High-side, Low-side, and control manifold.
-            /// 
-            /// The High-side of the test kit can only receive pressure through a hose on the high control portion of the manifold.
-            /// The Low-side of the test kit can only receive pressure through a hose on the low control portion of the manifold.
-            ///
-            /// the control valves on the manifold introduces pressure to common "bar". This common bar can recieve pressure from any of the control knobs if they are connected to a supply 
-            /// source and are open, the supply source would be another hose on the manifold hooked up to pressure..Which is to say either of the three sections of the manifold can inrtroduce water pressure out of the other hoses connected to the manifold (once they are opened) 
-            /// 
-            /// </summary>
-            if (AttachedHoseList.Contains(HighHose))
+            if (HighHoseBib.testCock == TestCock1)
             {
-                if (HighHoseBib.testCock == TestCock1)
+                if (isTestCock1Open)
                 {
-                    if (isTestCock1Open)
-                    {
-                        isHighHoseEngaged = true;
+                    isHighHoseEngaged = true;
 
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-                    }
-
-                }
-                if (HighHoseBib.testCock == TestCock2)
-                {
-                    isHighHoseConnected = true;
-                    if (isTestCock2Open)
-                    {
-                        isHighHoseEngaged = true;
-
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-
-                    }
                 }
                 else
                 {
-                    isHighHoseConnected = false;
+                    isHighHoseEngaged = false;
                 }
-                if (HighHoseBib.testCock == TestCock3)
+
+            }
+            if (HighHoseBib.testCock == TestCock2)
+            {
+                isHighHoseConnected = true;
+                if (isTestCock2Open)
                 {
-                    if (isTestCock3Open)
-                    {
-                        isHighHoseEngaged = true;
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-                    }
-                }
+                    isHighHoseEngaged = true;
 
-                if (HighHoseBib.testCock == TestCock4)
+                }
+                else
                 {
-                    if (isTestCock4Open)
-                    {
-                        isHighHoseEngaged = true;
-                    }
-                    else
-                    {
-                        isHighHoseEngaged = false;
-                    }
+                    isHighHoseEngaged = false;
+
                 }
-
-
             }
             else
             {
-                hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
                 isHighHoseConnected = false;
-
             }
-            /// <summary>
-            /// End - High Hose
-            /// </summary>
-
-            /// <summary>
-            /// Low Hose
-            /// </summary>
-            if (AttachedHoseList.Contains(LowHose))
+            if (HighHoseBib.testCock == TestCock3)
             {
-
-                if (LowHoseBib.testCock == TestCock1)
+                if (isTestCock3Open)
                 {
-                    if (isTestCock1Open)
-                    {
-                        // Debug.Log($"low hose on tc#1 && tc#1 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"low hose on tc#1 && tc#1 closed");
-                    }
-
-                }
-                if (LowHoseBib.testCock == TestCock2)
-                {
-                    if (isTestCock2Open)
-                    {
-                        // Debug.Log($"low hose on tc#2 && tc#2 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"low hose on tc#2 && tc#2 closed");
-                    }
-                }
-                if (LowHoseBib.testCock == TestCock3)
-                {
-                    isLowHoseConnected = true;
-                    if (isTestCock3Open)
-                    {
-                        isLowHoseEngaged = true;
-
-
-                    }
-                    else
-                    {
-
-                        isLowHoseEngaged = false;
-                        // Debug.Log($"low hose on tc#3 && tc#3 closed");
-                    }
+                    isHighHoseEngaged = true;
                 }
                 else
                 {
-                    isLowHoseConnected = false;
+                    isHighHoseEngaged = false;
+                }
+            }
+
+            if (HighHoseBib.testCock == TestCock4)
+            {
+                if (isTestCock4Open)
+                {
+                    isHighHoseEngaged = true;
+                }
+                else
+                {
+                    isHighHoseEngaged = false;
+                }
+            }
+
+
+        }
+        else
+        {
+            //hosePressure = Mathf.SmoothStep(hosePressure, 0, needleRiseSpeed);
+            isHighHoseConnected = false;
+            isHighHoseEngaged = false;
+
+        }
+        /// <summary>
+        /// End - High Hose
+        /// </summary>
+
+        /// <summary>
+        /// Low Hose
+        /// </summary>
+        if (AttachedHoseList.Contains(LowHose))
+        {
+
+            if (LowHoseBib.testCock == TestCock1)
+            {
+                if (isTestCock1Open)
+                {
+                    // Debug.Log($"low hose on tc#1 && tc#1 opened");
+                }
+                else
+                {
+                    // Debug.Log($"low hose on tc#1 && tc#1 closed");
                 }
 
-                if (LowHoseBib.testCock == TestCock4)
+            }
+            if (LowHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
                 {
-                    if (isTestCock4Open)
-                    {
-                        // Debug.Log($"low hose on tc#4 && tc#4 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"low hose on tc#4 && tc#4 closed");
-                    }
+                    // Debug.Log($"low hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    // Debug.Log($"low hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (LowHoseBib.testCock == TestCock3)
+            {
+                isLowHoseConnected = true;
+                if (isTestCock3Open)
+                {
+                    isLowHoseEngaged = true;
+
+
+                }
+                else
+                {
+
+                    isLowHoseEngaged = false;
+                    // Debug.Log($"low hose on tc#3 && tc#3 closed");
                 }
             }
             else
             {
                 isLowHoseConnected = false;
-
             }
-            /// <summary>
-            /// End - Low Hose
-            /// </summary>
 
-
-            /// <summary>
-            /// Bypass Hose
-            /// </summary>
-            if (AttachedHoseList.Contains(BypassHose))
+            if (LowHoseBib.testCock == TestCock4)
             {
-                if (BypassHoseBib.testCock == TestCock1)
+                if (isTestCock4Open)
                 {
-                    if (isTestCock1Open)
-                    {
-                        // Debug.Log($"bypass hose on tc#1 && tc#1 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"bypass hose on tc#1 && tc#1 closed");
-                    }
-
-                }
-                if (BypassHoseBib.testCock == TestCock2)
-                {
-                    if (isTestCock2Open)
-                    {
-                        // Debug.Log($"bypass hose on tc#2 && tc#2 opened");
-                    }
-                    else
-                    {
-                        // Debug.Log($"bypass hose on tc#2 && tc#2 closed");
-                    }
-                }
-                if (BypassHoseBib.testCock == TestCock3)
-                {
-                    if (isTestCock3Open)
-                    {
-
-                        // Debug.Log($"bypass hose on tc#3 && tc#3 opened");
-                    }
-                    else
-                    {
-
-                        // Debug.Log($"bypass hose on tc#3 && tc#3 closed");
-                    }
-                }
-
-                if (BypassHoseBib.testCock == TestCock4)
-                {
-                    isBypassHoseConnected = true;
-                    bypassHoseEmitter.enabled = false;
-                    if (isTestCock4Open)
-                    {
-                        isBypassHoseEngaged = true;
-
-                        // Debug.Log($"bypass hose on tc#4 && tc#4 opened");
-                    }
-                    else
-                    {
-                        isBypassHoseEngaged = false;
-                        // Debug.Log($"bypass hose on tc#4 && tc#4 closed");
-                    }
+                    // Debug.Log($"low hose on tc#4 && tc#4 opened");
                 }
                 else
                 {
-                    isBypassHoseConnected = false;
+                    // Debug.Log($"low hose on tc#4 && tc#4 closed");
+                }
+            }
+        }
+        else
+        {
+            isLowHoseConnected = false;
+
+        }
+        /// <summary>
+        /// End - Low Hose
+        /// </summary>
+
+
+        /// <summary>
+        /// Bypass Hose
+        /// </summary>
+        if (AttachedHoseList.Contains(BypassHose))
+        {
+            if (BypassHoseBib.testCock == TestCock1)
+            {
+                if (isTestCock1Open)
+                {
+                    // Debug.Log($"bypass hose on tc#1 && tc#1 opened");
+                }
+                else
+                {
+                    // Debug.Log($"bypass hose on tc#1 && tc#1 closed");
+                }
+
+            }
+            if (BypassHoseBib.testCock == TestCock2)
+            {
+                if (isTestCock2Open)
+                {
+                    // Debug.Log($"bypass hose on tc#2 && tc#2 opened");
+                }
+                else
+                {
+                    // Debug.Log($"bypass hose on tc#2 && tc#2 closed");
+                }
+            }
+            if (BypassHoseBib.testCock == TestCock3)
+            {
+                if (isTestCock3Open)
+                {
+
+                    // Debug.Log($"bypass hose on tc#3 && tc#3 opened");
+                }
+                else
+                {
+
+                    // Debug.Log($"bypass hose on tc#3 && tc#3 closed");
+                }
+            }
+
+            if (BypassHoseBib.testCock == TestCock4)
+            {
+                isBypassHoseConnected = true;
+                bypassHoseEmitter.enabled = false;
+                if (isTestCock4Open)
+                {
+                    isBypassHoseEngaged = true;
+
+                    // Debug.Log($"bypass hose on tc#4 && tc#4 opened");
+                }
+                else
+                {
+                    isBypassHoseEngaged = false;
+                    // Debug.Log($"bypass hose on tc#4 && tc#4 closed");
                 }
             }
             else
             {
                 isBypassHoseConnected = false;
             }
-            /// <summary>
-            /// End - Bypass Hose
-            /// </summary>
-
-
-
-            //========================================
-            // Start Test Procedures//========================>
-            //========================================
-
-            //check if device is ready for test (so#1 open & so#2 closed)
-            if (waterController.m_detectorZone1.ParticlesInside > 1000)
-            {
-                if (isHighHoseEngaged == true)
-                {
-                    hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                }
-
-                else if (!isHighHoseConnected)
-                {
-
-                    //nothing attached, remove pressure from test gauge
-                    hosePressure = Mathf.SmoothStep(
-                                     hosePressure,
-                                     0,
-                                     needleRiseSpeed
-                                 );
-
-
-                }
-
-                if (isHighHoseEngaged == true && HighHoseBib.testCock == TestCock2 && m_SightTubeHoseBib.testCock == TestCock3 && isTestCock3Open)
-                {
-
-                    if (isCheck1Open == false)
-                    {
-                        if (waterController.isDeviceInTestingCondititons)
-                            CheckValve1Test = StartCoroutine(TestCheck1());
-                    }
-                    else
-                    {
-                        StopCoroutine(TestCheck1());
-                    }
-
-
-
-                }
-                else
-                {
-                    Zone2TestRecovery = StartCoroutine(StopTestCheck1());
-                }
-                // else if (isHighHoseEngaged == true)
-                // {
-                //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
-                // }
-
-                //========================================
-                // Check Valve #1//========================>
-                //========================================
-
-
-                //========================================
-                // END - Check Valve #1//==================>
-                //========================================
-
-
-
-
-
-                //========================================
-                // Check Valve #2//========================>
-                //========================================
-
-
-                //========================================
-                // END - Check Valve #2//==================>
-                //========================================
-
-
-
-
-
-
-            }
-
-
-
-
-            //========================================
-            // Check Valve #2//========================>
-            //========================================
-
-
-            //========================================
-            // END - Check Valve #2//==================>
-            //========================================
-
-
-
-
-
-
-
-
-
-            //========================================
-            // End Test Procedures//========================>
-            //========================================
-
-
-
         }
         else
         {
-
-            //nothing attached, remove pressure from test gauge
-            hosePressure = Mathf.SmoothStep(
-                             hosePressure,
-                             0,
-                             needleRiseSpeed
-                         );
-
-
+            isBypassHoseConnected = false;
         }
+        /// <summary>
+        /// End - Bypass Hose
+        /// </summary>
+
+
+        /*
+                    //========================================
+                    // Start Test Procedures//========================>
+                    //========================================
+
+                    //check if device is ready for test (so#1 open & so#2 closed)
+                    if (waterController.m_detectorZone1.ParticlesInside > 1000)
+                    {
+                        if (isHighHoseEngaged == true)
+                        {
+                            hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                        }
+
+                        else if (!isHighHoseConnected)
+                        {
+
+                            //nothing attached, remove pressure from test gauge
+                            hosePressure = Mathf.SmoothStep(
+                                             hosePressure,
+                                             0,
+                                             needleRiseSpeed
+                                         );
+
+
+                        }
+
+                        if (isHighHoseEngaged == true && HighHoseBib.testCock == TestCock2 && m_SightTubeHoseBib.testCock == TestCock3 && isTestCock3Open)
+                        {
+
+                            if (isCheck1Open == false)
+                            {
+                                if (waterController.isDeviceInTestingCondititons)
+
+                                    CheckValve1Test = StartCoroutine(TestCheck1());
+                                hosePressure -= 0.1f;
+                            }
+                            else
+                            {
+                                StopCoroutine(TestCheck1());
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            Zone2TestRecovery = StartCoroutine(StopTestCheck1());
+                        }
+                        // else if (isHighHoseEngaged == true)
+                        // {
+                        //     hosePressure = Mathf.SmoothStep(hosePressure, maxPSID, needleRiseSpeed);
+                        // }
+
+                        //========================================
+                        // Check Valve #1//========================>
+                        //========================================
+
+
+                        //========================================
+                        // END - Check Valve #1//==================>
+                        //========================================
+
+
+
+
+
+                        //========================================
+                        // Check Valve #2//========================>
+                        //========================================
+
+
+                        //========================================
+                        // END - Check Valve #2//==================>
+                        //========================================
+
+
+
+
+
+
+                    }
+        */
+
+
+
+        //========================================
+        // Check Valve #2//========================>
+        //========================================
+
+
+        //========================================
+        // END - Check Valve #2//==================>
+        //========================================
+
+
+
+
+
+
+
+
+
+        //========================================
+        // End Test Procedures//========================>
+        //========================================
+
+
+
+
 
 
         //keep gauge pressure maxed out if highhose is at least engaged--
@@ -1123,47 +1148,148 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
 
     }
-    private IEnumerator TestCheck1()
+    public float HighSide(float highSideManifoldPressure)
+    {
+        // {
+        //     highSideManifoldPressure = m_highSideManifoldPressure;
+        //     lowSideManifoldPressure = m_lowSideManifoldPressure;
+        //     bypassSideManifoldPressure = m_bypassSideManifoldPressure;
+
+        return highSideManifoldPressure * 0.1f;
+    }
+    public float LowSide(float lowSideManifoldPressure)
+    {
+        return lowSideManifoldPressure * 0.1f;
+
+
+    }
+    public void DifferentialGauge()
     {
 
-        // while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
-        // while (waterController.zone1Pressure - (waterController.zone1Pressure - waterController.check1SpringForce) > RVOP)
-        while (zone1to2PsiDiff >= 0)
-        // while
+
+
+        if (hosePressure <= maxPSID)
         {
 
-            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
+            if (isHighHoseEngaged)
+            {
+                //max out gauge---> m_highSideManifoldPressure = rpzWaterController.zone1Pressure / 10 * 0.1f;
 
-            yield return new WaitForSeconds(1);
+                m_highSideManifoldPressure = dcWaterController.zone1Pressure;
+
+
+            }
+            else if (!isHighHoseConnected)
+            {
+                m_highSideManifoldPressure = 0.0f;
+
+            }
+
+            if (differentialPressure <= maxPSID)
+            {
+
+                differentialPressure = HighSide(m_highSideManifoldPressure) - LowSide(m_lowSideManifoldPressure);
+
+            }
+            else if (differentialPressure > maxPSID)
+            {
+                differentialPressure = maxPSID;
+            }
+
+            DOTween.To(()
+                         => hosePressure,
+                         x => hosePressure = x,
+                          differentialPressure, needleTweenSpeed).SetEase(Ease.Linear);
+
+
+            m_GaugeReading = hosePressure * 10;
+        }
+        if (hosePressure > maxPSID)
+        {
+
+            hosePressure = maxPSID;
+        }
+        if (hosePressure < 0)
+        {
+            hosePressure = 0;
+
         }
 
     }
-
-    private IEnumerator StopTestCheck1()
+    private IEnumerator TestCheck1()
     {
-        while (pressureZoneHUDController.m_PressureZone2PanelSlider.value >= 0)
-        // while
+
+        while (dcWaterController.zone1to2PsiDiff > 0)
         {
 
-            pressureZoneHUDController.m_PressureZone2PanelSlider.value -= 1.0f / (1000 * 0.1f);
+            needleTweenSpeed = 0.1f;
+            //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
 
-            yield return new WaitForSeconds(1);
+
+            // newVal -= 0.01f * Time.deltaTime;
+            // pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(pressureZoneHUDController.m_SupplyPressurePanelSlider.value - newVal);
+            dcWaterController.supplyPsi -= 0.01f * Time.deltaTime;
+            var newVal = dcWaterController.zone1Pressure;
+            pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(newVal);
+            dcWaterController.zone2PsiChange += 0.01f * Time.deltaTime;
+            pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(dcWaterController.zone1Pressure - pressureZoneHUDController.m_PressureZone2PanelSlider.value + newVal);
+
+            if (newVal < 1)
+            {
+                // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
+                pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+0";
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)dcWaterController.zone2PsiChange).ToString();
+            }
+            else
+            {
+                pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)dcWaterController.zone2PsiChange).ToString();
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
+            }
+
+
+
+            // Debug.Log($"test check#1 in progress");
+
+
+            yield return null;
         }
+        // if (dcWaterController.isReliefValveOpen)
+        //     pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + (rvop - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1;
+
 
     }
 
     private IEnumerator TestCheck2()
     {
 
-        // while (pressureZoneHUDController.m_PressureZone2PanelSlider.value <= 6)
-        // while (waterController.zone1Pressure - (waterController.zone1Pressure - waterController.check1SpringForce) > RVOP)
-        while (waterController.isReliefValveOpen == false)
-        // while
+        var newVal = pressureZoneHUDController.m_PressureZone3PanelSlider.value;
+        while (dcWaterController.zone2to3PsiDiff > 0)
         {
 
-            pressureZoneHUDController.m_PressureZone2PanelSlider.value += 1.0f / (1000 * 0.1f);
+            needleTweenSpeed = 0.1f;
+            //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
 
-            yield return new WaitForSeconds(1);
+
+            newVal += 0.01f * Time.deltaTime;
+            pressureZoneHUDController.m_PressureZone3PanelSlider.SetValueWithoutNotify(newVal);
+            dcWaterController.zone3PsiChange += 0.01f * Time.deltaTime;
+            if (newVal < 1)
+            {
+                // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
+                pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+0";
+
+            }
+            else
+            {
+                pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+" + ((int)newVal).ToString();
+            }
+
+
+
+            // Debug.Log($"test check#1 in progress");
+
+
+            yield return null;
         }
 
     }
@@ -1216,8 +1342,9 @@ public class DoubleCheckTestKitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        DifferentialGauge();
         PressureControl();
+
         BleederHoseControl();
         NeedleControl();
         DigitalNeedleControl();
@@ -1225,618 +1352,4 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
     }
 
-
-    /*
-    public DCWaterController waterController;
-    public PlayerController playerController;
-    public ShutOffValveController shutOffValveController;
-    public TestCockController testCockController;
-    public CheckValveStatus checkValveStatus;
-    public Animator openKnobAnimation;
-
-    public ZibraLiquid liquid;
-    public GameObject highBleed;
-    public GameObject highControl;
-    public GameObject lowBleed;
-    public GameObject lowControl;
-    public GameObject bypassControl;
-    public DCPressureZoneHUDController pressureZoneHUDController;
-
-    public GameObject needle;
-    public GameObject digitalKitNeedle;
-    public GameObject currentKnob;
-
-    [SerializeField]
-    GameObject LowHose;
-
-    [SerializeField]
-    GameObject HighHose;
-
-    [SerializeField]
-    GameObject BypassHose;
-
-    [SerializeField]
-    GameObject Check1;
-
-    [SerializeField]
-    Vector3 Check1Pos;
-
-    Vector3 initLowHosePosition;
-    Vector3 initHighHosePosition;
-    Vector3 initBypassHosePosition;
-
-    [SerializeField]
-    ZibraLiquidEmitter bleederHoseEmitter;
-    [SerializeField]
-    ZibraLiquidDetector LowHoseDetector;
-
-    [SerializeField]
-    ZibraLiquidDetector HighHoseDetector;
-
-    [SerializeField]
-    ZibraLiquidDetector BypassHoseDetector;
-
-    [SerializeField]
-    ZibraLiquidDetector Zone1Detector;
-    [SerializeField]
-    ZibraLiquidDetector Zone2Detector;
-    [SerializeField]
-    ZibraLiquidDetector Zone3Detector;
-    [SerializeField]
-    GameObject TestCock1;
-
-    [SerializeField]
-    GameObject TestCock2;
-
-    [SerializeField]
-    GameObject TestCock3;
-
-    [SerializeField]
-    GameObject TestCock4;
-
-
-    [SerializeField]
-    GameObject connectedTestCock;
-
-    [SerializeField]
-    ZibraLiquidDetector TestCock2Detector;
-
-
-
-    // private const float MinNeedle_rotation = 55;
-    // private const float MaxNeedle_rotation = -55;
-    public float MinNeedle_rotation = 135;
-    public float MaxNeedle_rotation = -135;
-    public float hosePressure;
-    public float maxPSID;
-    private const float MinKnob_rotation = 0;
-
-    //limit knobs to 4 complete rotations (x1 rotation = 360;)->
-    private const float MaxKnob_rotation = 1440;
-    private float currentKnobRotCount;
-
-    private float currentKnobRotation;
-    private float maxKnobRotation;
-    private float minKnobRotation;
-
-    [SerializeField]
-    private float currentPSID;
-
-    private float minPSID;
-    float closingPoint = 0;
-    public bool isOperableObject;
-    public bool isConnectedToAssembly;
-    public bool isCheck1Open;
-    public bool isCheck2Open;
-    float lowHosePressure;
-
-    public bool isConnectedTestCockOpen;
-    public bool isTestCock1Open;
-    public bool isTestCock2Open;
-    public bool isTestCock3Open;
-    public bool isTestCock4Open;
-
-    public float highHosePressure;
-    float bypasshosePressure;
-    float needleSpeedDamp = 0.005f;
-    public float knobRotationFactor = 0;
-
-    Coroutine KnobClickOperate;
-
-    Coroutine Check1ClosingPoint;
-    float needleVelRef = 0;
-    public bool knobOpened = false;
-
-    //ui toolkit
-    public UIDocument _root;
-    //public VisualElement _root;
-    // private VisualElement _gaugeProgressBar;
-    // private Length MinFillPos = Length.Percent(0);
-    // private Length MaxFillPos = Length.Percent(100);
-    private float MinFillPos = 0;
-    private float MaxFillPos = 100;
-    public float knobRotation;
-
-    public float needleRiseSpeed = 0.25f;
-    public List<GameObject> StaticTestCockList;
-    // public List<GameObject> TestCockList;
-    public List<GameObject> AttachedTestCockList;
-    public List<GameObject> AttachedHoseList;
-    int rot = 0;
-    void OnEnable()
-    {
-
-
-        Actions.onTestCock1Opened += TestCock1Opened;
-        Actions.onTestCock1Closed += TestCock1Closed;
-        Actions.onTestCock2Opened += TestCoc2Opened;
-        Actions.onTestCock2Closed += TestCock2Closed;
-        Actions.onTestCock3Opened += TestCock3Opened;
-        Actions.onTestCock3Closed += TestCock3Closed;
-        Actions.onTestCock4Opened += TestCoc4Opened;
-        Actions.onTestCock4Closed += TestCock4Closed;
-        Actions.onAddTestCockToList += AddTestCockToList;
-        Actions.onRemoveTestCockFromList += RemoveTestCockFromList;
-        Actions.onAddHoseToList += AddHoseToList;
-        Actions.onRemoveHoseFromList += RemoveHoseFromList;
-
-
-
-    }
-
-
-    void OnDisable()
-    {
-
-        Actions.onTestCock1Opened -= TestCock1Opened;
-        Actions.onTestCock1Closed -= TestCock1Closed;
-        Actions.onTestCock2Opened -= TestCoc2Opened;
-        Actions.onTestCock2Opened -= TestCock2Closed;
-        Actions.onTestCock3Opened -= TestCock3Opened;
-        Actions.onTestCock3Closed -= TestCock3Closed;
-        Actions.onTestCock4Opened -= TestCoc4Opened;
-        Actions.onTestCock4Closed -= TestCock4Closed;
-        Actions.onAddTestCockToList -= AddTestCockToList;
-        Actions.onRemoveTestCockFromList -= RemoveTestCockFromList;
-        Actions.onAddHoseToList -= AddHoseToList;
-        Actions.onRemoveHoseFromList -= RemoveHoseFromList;
-
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-
-        /// <summary>
-        /// //ui tool kit for digital gauge
-        /// </summary>
-        /// <typeparam name="UIDocument"></typeparam>
-        /// <returns></returns>
-        // _root = GetComponent<UIDocument>().rootVisualElement;
-        // _gaugeProgressBar = _root.rootVisualElement.Q<VisualElement>("Gauge_progress_bar");
-
-
-        currentPSID = 0;
-        minPSID = 0;
-        maxPSID = 1;
-        currentKnobRotation = 0;
-        maxKnobRotation = 1440;
-        minKnobRotation = 0;
-        highHosePressure = 0;
-        hosePressure = 0;
-        initLowHosePosition = LowHose.transform.position;
-        initHighHosePosition = HighHose.transform.position;
-        initBypassHosePosition = BypassHose.transform.position;
-    }
-
-
-    private void AddHoseToList(GameObject @object, OperableComponentDescription description)
-    {
-        if (!AttachedHoseList.Contains(@object))
-        {
-            AttachedHoseList.Add(@object);
-        }
-    }
-    private void RemoveHoseFromList(GameObject @object, OperableComponentDescription description)
-    {
-
-        if (AttachedHoseList.Contains(@object))
-        {
-            AttachedHoseList.Remove(@object);
-        }
-    }
-
-
-    private void AddTestCockToList(GameObject @object, OperableComponentDescription description)
-    {
-        if (!AttachedTestCockList.Contains(@object))
-        {
-            AttachedTestCockList.Add(@object);
-        }
-    }
-
-    private void RemoveTestCockFromList(GameObject @object, OperableComponentDescription description)
-    {
-
-        if (AttachedTestCockList.Contains(@object))
-        {
-            AttachedTestCockList.Remove(@object);
-        }
-    }
-
-    private float GetPsidNeedleRotation()
-    {
-        float PsidDiff = MinNeedle_rotation - MaxNeedle_rotation;
-
-        float normalizedPsid = hosePressure / maxPSID;
-
-        return MinNeedle_rotation - normalizedPsid * PsidDiff;
-
-    }
-    private float GetPsidDigitalNeedle()
-    {
-        float PsiDiff = MinFillPos - MaxFillPos;
-
-        float normalizedPsid = hosePressure / maxPSID;
-
-        return MinFillPos - normalizedPsid * PsiDiff;
-
-
-    }
-
-
-    public float GetKnobRotation()
-    {
-        // max - min to rotate left while increasing
-        float rotationDiff = MaxKnob_rotation - MinKnob_rotation;
-
-        float normalizedRotation = currentKnobRotation / maxKnobRotation;
-
-        knobRotation = MinKnob_rotation + normalizedRotation * rotationDiff;
-
-        return MinKnob_rotation + normalizedRotation * rotationDiff * knobRotationFactor;
-    }
-
-    private void OperateControls()
-    {
-        if (playerController.isOperableObject == true)
-        {
-            if (
-                playerController.operableComponentDescription.partsType
-                == OperableComponentDescription.PartsType.TestKitValve
-            )
-            {
-                switch (playerController.operableComponentDescription.componentId)
-                {
-                    case OperableComponentDescription.ComponentId.HighBleed:
-                        currentKnob = highBleed;
-                        break;
-                    case OperableComponentDescription.ComponentId.LowBleed:
-                        currentKnob = lowBleed;
-                        break;
-                    case OperableComponentDescription.ComponentId.LowControl:
-                        currentKnob = lowControl;
-                        break;
-                    case OperableComponentDescription.ComponentId.HighControl:
-                        currentKnob = highControl;
-                        break;
-                    case OperableComponentDescription.ComponentId.BypassControl:
-                        currentKnob = bypassControl;
-                        break;
-                    default:
-                        currentKnob = null;
-                        break;
-                }
-
-                if (playerController.ClickOperationEnabled == false)
-                {
-
-
-
-                    //check click operation status
-
-                    //if disabled, use click and drag
-
-                    currentKnobRotation +=
-                        (
-                            playerController.touchStart.x
-                            - Camera.main.ScreenToWorldPoint(Input.mousePosition).x
-                        ) / 5;
-
-
-                    if (currentKnobRotation > maxKnobRotation)
-                    {
-                        currentKnobRotation = maxKnobRotation;
-                    }
-                    if (currentKnobRotation < minKnobRotation)
-                    {
-                        currentKnobRotation = minKnobRotation;
-                    }
-                    if (currentKnob != null)
-                        currentKnob.transform.eulerAngles = new Vector3(0, 0, GetKnobRotation());
-                }
-                //if enabled, spin to max rotation
-                else if (playerController.ClickOperationEnabled == true)
-                {
-                    if (bleederHoseEmitter.VolumePerSimTime > 0)
-                    {
-                        KnobClickOperate = StartCoroutine(RotateKnobClosed(currentKnob, new Vector3(0, 0, 180)));
-
-                    }
-                    else
-                    {
-                        KnobClickOperate = StartCoroutine(RotateKnobOpen(currentKnob, new Vector3(0, 0, 180)));
-
-                    }
-
-
-                }
-
-            }
-
-
-        }
-    }
-
-    IEnumerator RotateKnobClosed(GameObject obj, Vector3 targetRotation)
-    {
-        float timeLerped = 0.0f;
-
-        while (timeLerped < 1.0)
-        {
-            timeLerped += Time.deltaTime;
-            obj.transform.eulerAngles = Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
-            yield return null;
-        }
-    }
-    IEnumerator RotateKnobOpen(GameObject obj, Vector3 targetRotation)
-    {
-
-        float timeLerped = 0.0f;
-        knobOpened = true;
-        while (timeLerped < 1.0)
-        {
-            timeLerped += Time.deltaTime;
-            obj.transform.eulerAngles = -Vector3.Lerp(Vector3.zero, targetRotation, timeLerped) * 10;
-            yield return null;
-        }
-    }
-
-    private void TestCock4Closed()
-    {
-        isTestCock4Open = false;
-    }
-
-    private void TestCoc4Opened()
-    {
-        isTestCock4Open = true;
-    }
-
-    private void TestCock3Closed()
-    {
-        isTestCock3Open = false;
-    }
-
-    private void TestCock3Opened()
-    {
-        isTestCock3Open = true;
-    }
-
-    private void TestCock2Closed()
-    {
-        isTestCock2Open = false;
-    }
-
-    private void TestCoc2Opened()
-    {
-        isTestCock2Open = true;
-    }
-
-    private void TestCock1Closed()
-    {
-        isTestCock1Open = false;
-    }
-
-    private void TestCock1Opened()
-    {
-        isTestCock1Open = true;
-    }
-
-
-    private void NeedleControl()
-    {
-        // For  now, soely using high hose (double check assembly)
-        needle.transform.eulerAngles = new Vector3(0, 0, GetPsidNeedleRotation());
-    }
-    private void DigitalNeedleControl()
-    {
-        // _gaugeProgressBar.style.width = Length.Percent(GetPsidDigitalNeedle());
-    }
-    private void PressureControl()
-    {
-        // For  now, soely using high hose (double check assembly testing)
-
-
-        if (isConnectedToAssembly == true)
-        {
-
-            //========================================
-            // #1 Check Test//========================>
-            //========================================
-
-            if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock2Open
-                && TestCock2.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-                && !isTestCock3Open
-            )
-            {
-                //maxed out psid (needle pinned out)
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    maxPSID,
-                    needleRiseSpeed
-                );
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock2Open
-                && isTestCock3Open
-                && waterController.isDeviceInStaticCondition == true
-            )
-            {
-
-                hosePressure = Mathf.SmoothStep(
-                  hosePressure,
-                  waterController.zone1to2PsiDiff,
-                  0.1f
-              );
-
-
-
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock2Open
-                && isTestCock3Open
-                && shutOffValveController.IsSupplyOn == false
-
-            )
-            {
-                hosePressure += 0;
-
-            }
-            //========================================
-            // END - #1 Check Test//==================>
-            //========================================
-            //========================================
-            // #2 Check Test//========================>
-            //========================================
-
-            if (
-                AttachedHoseList.Contains(HighHose)
-                && shutOffValveController.IsSupplyOn == true
-                && isTestCock3Open
-                && TestCock3.GetComponent<HoseDetector>().currentHoseConnection == HighHose
-                && !isTestCock4Open
-            )
-            {
-
-                //maxed out psid (needle pinned out)
-                hosePressure = Mathf.SmoothStep(
-                    hosePressure,
-                    maxPSID,
-                    needleRiseSpeed
-                );
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock3Open
-                && isTestCock4Open
-                && waterController.isDeviceInStaticCondition == true
-            )
-            {
-                //best looking psid drop so far is: hosePressure -= 0.3f;
-                // differnce ratio between windows to mac = 1:15
-                //Windows----------------
-
-                // if (liquid.UseFixedTimestep == true)
-                // {
-                //     hosePressure -= 0.04f;
-                // }
-                // //!Windows----------------
-                // else
-                // {
-                //     hosePressure -= 0.65f;
-                // }
-
-                hosePressure = Mathf.SmoothStep(
-                  hosePressure,
-                  waterController.zone2to3PsiDiff,
-                  0.1f
-              );
-
-
-
-
-            }
-            else if (
-                AttachedHoseList.Contains(HighHose)
-                && isTestCock3Open
-                && isTestCock4Open
-                && shutOffValveController.IsSupplyOn == false
-
-            )
-            {
-                hosePressure += 0;
-
-            }
-            //========================================
-            // END - #2 Check Test//==================>
-            //========================================
-        }
-        //if hose is disconnected, drop pressure on gauge
-        if (!AttachedHoseList.Contains(HighHose))
-        {
-            // hosePressure -= 5;
-            hosePressure = Mathf.SmoothStep(
-              hosePressure,
-              0,
-              0.5f
-          );
-        }
-        if (hosePressure <= minPSID)
-        {
-            hosePressure = minPSID;
-        }
-        if (hosePressure > maxPSID)
-        {
-            hosePressure = maxPSID;
-        }
-
-    }
-
-    private float CaptureCheck1ClosingPoint(float psid)
-    {
-        return psid;
-    }
-
-    IEnumerator Check1Test()
-    {
-        while (true)
-        {
-            closingPoint += 0.1f * Time.deltaTime;
-            yield return null;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (AttachedHoseList.Count > 0)
-        {
-            isConnectedToAssembly = true;
-        }
-        else
-        {
-            isConnectedToAssembly = false;
-        }
-        PressureControl();
-        OperateControls();
-        NeedleControl();
-        DigitalNeedleControl();
-        knobRotation = highBleed.transform.eulerAngles.z;
-
-    }
-    */
-
-
 }
-
