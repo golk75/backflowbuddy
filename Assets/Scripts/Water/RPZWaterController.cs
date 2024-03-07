@@ -700,7 +700,26 @@ public class RPZWaterController : MonoBehaviour
                 if (testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == true && shutOffValveController.IsSecondShutOffOpen == false)
                 {
 
+                    if (rpzTestKitController.isLowBleedOpen)
+                    {
 
+
+                        check1housingForceField.Strength = Mathf.SmoothDamp(
+                          check1housingForceField.Strength,
+                          1f,
+                          ref check1FFref.x,
+                          0.5f);
+
+                        check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+
+                    }
+                    else
+                    {
+
+                        check1Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                        check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
+                        m_sensingLineFF.Strength = 0;
+                    }
 
                 }
                 //close check valves if the device is full and no water is being used downstream (ie. shutOff #2 is closed)
