@@ -271,7 +271,7 @@ public class DCWaterController : MonoBehaviour
     public ZibraLiquidVoid tc2DrainVoid;
     public ZibraLiquidVoid tc3DrainVoid;
     public ZibraLiquidVoid tc4DrainVoid;
-
+    public float tc2DrainSpeed;
     [SerializeField]
     List<ZibraLiquidVoid> VoidList;
     [SerializeField]
@@ -354,7 +354,15 @@ public class DCWaterController : MonoBehaviour
             {
                 liquidCollider.enabled = true;
             }
-            liquid.SimulationTimeScale = 30;
+            if (!testCockController.isTestCock2Open && !testCockController.isTestCock3Open && !testCockController.isTestCock4Open)
+            {
+                liquid.SimulationTimeScale = 30;
+            }
+            else
+            {
+                liquid.SimulationTimeScale = 60;
+            }
+
 
             supplyCollider.transform.localPosition = new Vector3(0.54000001f, 2.21000004f, 0.0299999993f);
             mainSupplyEmitter.VolumePerSimTime = 0;
@@ -1789,7 +1797,7 @@ public class DCWaterController : MonoBehaviour
                             TestCockFF2.Strength,
                             Mathf.Clamp(TestCockDetector2.ParticlesInside, 0, testCock2MaxStr),
                             ref testCockFF2Ref.x,
-                            0.005f
+                            tc2DrainSpeed
                         );
 
                     }
@@ -1799,7 +1807,7 @@ public class DCWaterController : MonoBehaviour
                     TestCockFF2.Strength,
                     0,
                     ref testCockFF2Ref.x,
-                    0.05f
+                    tc2DrainSpeed
                 );
                     }
 
@@ -1818,7 +1826,7 @@ public class DCWaterController : MonoBehaviour
                             TestCockFF3.Strength,
                             Mathf.Clamp(TestCockDetector3.ParticlesInside, 0, testCock3MaxStr),
                             ref testCockFF3Ref.x,
-                            0.005f
+                            tc2DrainSpeed
                         );
 
                     }
@@ -1828,7 +1836,7 @@ public class DCWaterController : MonoBehaviour
                     TestCockFF3.Strength,
                     0,
                     ref testCockFF3Ref.x,
-                    0.05f
+                    tc2DrainSpeed
                 );
                     }
 
