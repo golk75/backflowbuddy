@@ -249,6 +249,9 @@ public class DCWaterController : MonoBehaviour
     public float check1FFStrength;
     public float check2FFStrength;
     public float Zone1TcMinParticleCount = 3000;
+    public float Zone1TcDrainMinParticleCount = 3000;
+    public float Zone2TcDrainMinParticleCount = 3000;
+    public float Zone3TcDrainMinParticleCount = 3000;
     public float reliefValveOpeningPoint;
     public float pressureAgainstRelief;
     public float supplyVoidToZone1ConversionFactor = 10000f;
@@ -262,7 +265,12 @@ public class DCWaterController : MonoBehaviour
     public bool isCheck1Closed;
     public bool isCheck2Closed;
     public GameObject highHose;
-
+    public ZibraLiquidCollider tcCap2;
+    public ZibraLiquidCollider tcCap3;
+    public ZibraLiquidCollider tcCap4;
+    public ZibraLiquidVoid tc2DrainVoid;
+    public ZibraLiquidVoid tc3DrainVoid;
+    public ZibraLiquidVoid tc4DrainVoid;
 
     [SerializeField]
     List<ZibraLiquidVoid> VoidList;
@@ -335,7 +343,8 @@ public class DCWaterController : MonoBehaviour
                 1f
             );
         }
-        else
+        else if (shutOffValveController.IsSupplyOn == false && !shutOffValveController.IsSecondShutOffOpen)
+
         {
             foreach (var liquidVoid in VoidList)
             {
@@ -347,7 +356,27 @@ public class DCWaterController : MonoBehaviour
             }
             liquid.SimulationTimeScale = 30;
 
-            supplyCollider.transform.localPosition = new Vector3(1.24000001f, 2.21000004f, 0.0299999993f);
+            supplyCollider.transform.localPosition = new Vector3(0.54000001f, 2.21000004f, 0.0299999993f);
+            mainSupplyEmitter.VolumePerSimTime = 0;
+
+
+
+
+        }
+        else if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen)
+
+        {
+            foreach (var liquidVoid in VoidList)
+            {
+                liquidVoid.enabled = true;
+            }
+            foreach (var liquidCollider in ColliderList)
+            {
+                liquidCollider.enabled = true;
+            }
+            liquid.SimulationTimeScale = 30;
+
+            supplyCollider.transform.localPosition = new Vector3(0.54000001f, 2.21000004f, 0.0299999993f);
             mainSupplyEmitter.VolumePerSimTime = 0;
 
 
@@ -441,7 +470,7 @@ public class DCWaterController : MonoBehaviour
                 check1housingForceField.Strength = 0;
 
             }
-            if (zone1Pressure <= zone2Pressure || zone2Pressure <= zone3Pressure)
+            if (zone1Pressure <= zone2Pressure || zone2Pressure <= zone3Pressure || isDeviceInTestingCondititons)
             {
 
 
@@ -487,7 +516,7 @@ public class DCWaterController : MonoBehaviour
                 m_VoidOutfeed.enabled = false;
             }
 
-            if (zone2Pressure <= zone3Pressure)
+            if (zone2Pressure <= zone3Pressure || isDeviceInTestingCondititons)
             {
                 //close #2 if zone 3 is higher than zone2
                 check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
@@ -1196,50 +1225,78 @@ public class DCWaterController : MonoBehaviour
             TestCock1Emitter.enabled = false;
             TestCockFF1.Strength = 0f;
         }
-        // if (testCockController.isTestCock1Open == true
-        //           && TestCockHoseDetect1.isConnected == false
-        //           && shutOffValveController.IsSupplyOn == false
-        //           && shutOffValveController.IsSecondShutOffOpen == false
-        //           )
-        // {
-        //     //both shutoffs closed
-        //     TestCockFF1.Strength = 0f;
-        //     TestCock1Emitter.enabled = true;
 
+    }
+    private void RegulateConnectedTestCockCaps()
+    {
+        if (isDeviceInTestingCondititons)
+        {
 
-        // }
-        // else if (testCockController.isTestCock1Open == true
-        //      && TestCockHoseDetect1.isConnected == false
-        //      && shutOffValveController.IsSupplyOn == false
-        //     )
-        // {
-        //     // only shutoff #2 closed
-        //     TestCock1Emitter.enabled = true;
+            if (testCockController.isTestCock2Open)
+            {
+                if (TestCockHoseDetect2.currentHoseConnection == highHose || TestCockHoseDetect2.currentHoseConnection == sightTube)
+                {
+                    tcCap2.enabled = true;
+                    tc2DrainVoid.enabled = false;
+                }
+                else
+                {
+                    tcCap2.enabled = false;
+                    tc2DrainVoid.enabled = true;
+                }
+            }
+            else
+            {
+                tc2DrainVoid.enabled = false;
+                tcCap2.enabled = true;
+            }
+            if (testCockController.isTestCock3Open)
+            {
+                if (TestCockHoseDetect3.currentHoseConnection == highHose || TestCockHoseDetect3.currentHoseConnection == sightTube)
+                {
+                    tcCap3.enabled = true;
+                    tc3DrainVoid.enabled = false;
+                }
+                else
+                {
+                    tcCap3.enabled = false;
+                    tc3DrainVoid.enabled = true;
+                }
+            }
+            else
+            {
+                tc3DrainVoid.enabled = false;
+                tcCap3.enabled = true;
+            }
+            if (testCockController.isTestCock4Open)
+            {
+                if (TestCockHoseDetect4.currentHoseConnection == highHose || TestCockHoseDetect4.currentHoseConnection == sightTube)
+                {
+                    tcCap4.enabled = true;
+                    tc4DrainVoid.enabled = false;
+                }
+                else
+                {
+                    tcCap4.enabled = false;
+                    tc4DrainVoid.enabled = true;
+                }
+            }
+            else
+            {
+                tc4DrainVoid.enabled = false;
+                tcCap4.enabled = true;
+            }
+        }
+        else
+        {
+            tcCap2.enabled = false;
+            tc2DrainVoid.enabled = false;
+            tcCap3.enabled = false;
+            tc3DrainVoid.enabled = false;
+            tcCap4.enabled = false;
+            tc4DrainVoid.enabled = false;
 
-        // }
-        // else if (testCockController.isTestCock1Open == false
-        //     && TestCockHoseDetect1.isConnected == false
-        //     && shutOffValveController.IsSupplyOn == false
-        //    )
-        // {
-        //     TestCock1Emitter.enabled = false;
-
-
-        // }
-        // else if (testCockController.isTestCock1Open == true
-        //    && TestCockHoseDetect1.isConnected == false
-        //    && shutOffValveController.IsSupplyOn == true
-        //   )
-        // {
-        //     TestCockFF1.Strength = 2f;
-        // }
-        // else if (testCockController.isTestCock1Open == false
-        //    && TestCockHoseDetect1.isConnected == false
-        //    && shutOffValveController.IsSupplyOn == true
-        //   )
-        // {
-        //     TestCockFF1.Strength = 0f;
-        // }
+        }
     }
     void WaterOperations()
     {
@@ -1248,9 +1305,6 @@ public class DCWaterController : MonoBehaviour
 
         if (shutOffValveController.IsSupplyOn == true && shutOffValveController.IsSecondShutOffOpen == true)
         {
-
-
-
 
             if (
                     testCockController.isTestCock2Open == true
@@ -1336,11 +1390,11 @@ public class DCWaterController : MonoBehaviour
         {
 
 
-            foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
-            {
-                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
-            }
+            // foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
+            // {
+            //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+            //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+            // }
 
             /// <summary>
             /// No hose(s) connected - water ops
@@ -1528,11 +1582,11 @@ public class DCWaterController : MonoBehaviour
             ///Determine if testing conditions are met ---------------------------------------------------
 
 
-            foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
-            {
-                testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
-                testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
-            }
+            // foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
+            // {
+            //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
+            //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+            // }
 
             /// <summary>
             /// hose(s) connected - water ops
@@ -1715,6 +1769,114 @@ public class DCWaterController : MonoBehaviour
             }
         }
 
+        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false && m_DoubleCheckTestKitController.AttachedHoseList.Count == 0)
+        {
+            // foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
+            // {
+            //     testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = false;
+            //     testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;
+            // }
+            /// <summary>
+            /// No hose(s) connected
+            /// </summary>
+            {
+                if (testCockController.isTestCock2Open == true)
+                {
+
+                    if (TestCockDetector2.ParticlesInside > Zone1TcDrainMinParticleCount)
+                    {
+                        TestCockFF2.Strength = Mathf.SmoothDamp(
+                            TestCockFF2.Strength,
+                            Mathf.Clamp(TestCockDetector2.ParticlesInside, 0, testCock2MaxStr),
+                            ref testCockFF2Ref.x,
+                            0.005f
+                        );
+
+                    }
+                    else
+                    {
+                        TestCockFF2.Strength = Mathf.SmoothDamp(
+                    TestCockFF2.Strength,
+                    0,
+                    ref testCockFF2Ref.x,
+                    0.05f
+                );
+                    }
+
+                }
+                else
+                {
+
+                    TestCockFF2.Strength = 0;
+                }
+                if (testCockController.isTestCock3Open == true)
+                {
+
+                    if (TestCockDetector3.ParticlesInside > Zone2TcDrainMinParticleCount)
+                    {
+                        TestCockFF3.Strength = Mathf.SmoothDamp(
+                            TestCockFF3.Strength,
+                            Mathf.Clamp(TestCockDetector3.ParticlesInside, 0, testCock3MaxStr),
+                            ref testCockFF3Ref.x,
+                            0.005f
+                        );
+
+                    }
+                    else
+                    {
+                        TestCockFF3.Strength = Mathf.SmoothDamp(
+                    TestCockFF3.Strength,
+                    0,
+                    ref testCockFF3Ref.x,
+                    0.05f
+                );
+                    }
+
+                }
+                else
+                {
+
+                    TestCockFF3.Strength = 0;
+                }
+
+                if (testCockController.isTestCock4Open == true)
+                {
+
+                    if (TestCockDetector4.ParticlesInside > Zone3TcDrainMinParticleCount)
+                    {
+                        TestCockFF4.Strength = Mathf.SmoothDamp(
+                            TestCockFF4.Strength,
+                            Mathf.Clamp(TestCockDetector4.ParticlesInside, 0, testCock4MaxStr),
+                            ref testCockFF4Ref.x,
+                            0.005f
+                        );
+
+                    }
+                    else
+                    {
+                        TestCockFF4.Strength = Mathf.SmoothDamp(
+                    TestCockFF4.Strength,
+                    0,
+                    ref testCockFF4Ref.x,
+                    0.05f
+                );
+                    }
+
+                }
+                else
+                {
+
+                    TestCockFF4.Strength = 0;
+                }
+                /// <summary>
+                ///END - No hose(s) connected
+                /// </summary>
+
+            }
+        }
+
+
+
     }
     void SightTubeControl()
     {
@@ -1849,8 +2011,14 @@ public class DCWaterController : MonoBehaviour
         /// <summary>
         /// Regulate sight tube
         /// </summary>
-
         SightTubeControl();
+
+
+        /// <summary>
+        /// Regulate testcock caps
+        /// </summary>
+        RegulateConnectedTestCockCaps();
+
 
     }
     void FixedUpdate()
