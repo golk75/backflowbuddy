@@ -563,7 +563,7 @@ public class DCWaterController : MonoBehaviour
             /// high hose disconnected
             /// </summary>
             {
-                if (!m_DoubleCheckTestKitController.AttachedHoseList.Contains(highHose))
+                // if (!m_DoubleCheckTestKitController.AttachedHoseList.Contains(highHose))
                 {
                     if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
                     {
@@ -581,14 +581,15 @@ public class DCWaterController : MonoBehaviour
                     }
                     if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == true && testCockController.isTestCock4Open == false)
                     {
-                        check1Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
+                        Debug.Log($"here1");
+                        check1Rb.AddForce(new Vector3(2, 2, 0) * inputForce, ForceMode.Force);
                         check2Rb.AddForce(new Vector3(-1, -1, 0) * inputForce, ForceMode.Force);
 
                     }
                     if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == true)
                     {
-                        check1Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
-                        check2Rb.AddForce(new Vector3(1, 1, 0) * inputForce, ForceMode.Force);
+                        check1Rb.AddForce(new Vector3(2, 2, 0) * inputForce, ForceMode.Force);
+                        check2Rb.AddForce(new Vector3(2, 2, 0) * inputForce, ForceMode.Force);
 
                     }
 
@@ -1237,6 +1238,23 @@ public class DCWaterController : MonoBehaviour
     }
     private void RegulateConnectedTestCockCaps()
     {
+        if (TestCockHoseDetect1.currentHoseConnection == highHose || TestCockHoseDetect1.currentHoseConnection == sightTube)
+        {
+            TestCockFF1.Strength = 0;
+        }
+        if (TestCockHoseDetect2.currentHoseConnection == highHose || TestCockHoseDetect2.currentHoseConnection == sightTube)
+        {
+            TestCockFF2.Strength = 0;
+        }
+        if (TestCockHoseDetect3.currentHoseConnection == highHose || TestCockHoseDetect3.currentHoseConnection == sightTube)
+        {
+            TestCockFF3.Strength = 0;
+        }
+        if (TestCockHoseDetect4.currentHoseConnection == highHose || TestCockHoseDetect4.currentHoseConnection == sightTube)
+        {
+            TestCockFF4.Strength = 0;
+        }
+
         if (isDeviceInTestingCondititons)
         {
 
@@ -1280,12 +1298,20 @@ public class DCWaterController : MonoBehaviour
             {
                 if (TestCockHoseDetect4.currentHoseConnection == highHose || TestCockHoseDetect4.currentHoseConnection == sightTube)
                 {
+
                     tcCap4.enabled = true;
+
+
+
                     tc4DrainVoid.enabled = false;
                 }
                 else
                 {
-                    tcCap4.enabled = false;
+                    if (TestCockDetector4.ParticlesInside > Zone3TcDrainMinParticleCount)
+                    {
+                        tcCap4.enabled = false;
+                    }
+
                     tc4DrainVoid.enabled = true;
                 }
             }
@@ -1777,7 +1803,8 @@ public class DCWaterController : MonoBehaviour
             }
         }
 
-        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false && m_DoubleCheckTestKitController.AttachedHoseList.Count == 0)
+        // if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false && m_DoubleCheckTestKitController.AttachedHoseList.Count == 0)
+        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
         {
             // foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
             // {
@@ -1807,7 +1834,7 @@ public class DCWaterController : MonoBehaviour
                     TestCockFF2.Strength,
                     0,
                     ref testCockFF2Ref.x,
-                    tc2DrainSpeed
+                    0.1f
                 );
                     }
 
@@ -1856,7 +1883,7 @@ public class DCWaterController : MonoBehaviour
                             TestCockFF4.Strength,
                             Mathf.Clamp(TestCockDetector4.ParticlesInside, 0, testCock4MaxStr),
                             ref testCockFF4Ref.x,
-                            0.005f
+                            tc2DrainSpeed
                         );
 
                     }
@@ -1866,9 +1893,12 @@ public class DCWaterController : MonoBehaviour
                     TestCockFF4.Strength,
                     0,
                     ref testCockFF4Ref.x,
-                    0.05f
+                    0.01f
                 );
+                        tcCap3.enabled = true;
                     }
+
+
 
                 }
                 else
@@ -1953,7 +1983,8 @@ public class DCWaterController : MonoBehaviour
         else
         {
             //if device is in testing conditions
-            if (m_SightTubeController.currentTestCockConnection == hoseDetector3 && testCockController.isTestCock3Open && zone1Pressure >= zone2Pressure && TestCockHoseDetect2.currentHoseConnection == highHose)
+            // if (m_SightTubeController.currentTestCockConnection == hoseDetector3 && testCockController.isTestCock3Open && zone1Pressure >= zone2Pressure && TestCockHoseDetect2.currentHoseConnection == highHose)
+            if (m_SightTubeController.currentTestCockConnection == hoseDetector3 && testCockController.isTestCock3Open && zone1Pressure >= zone2Pressure)
             {
                 if (m_detectorZone1.ParticlesInside > 1000)
                 {
@@ -1964,7 +1995,8 @@ public class DCWaterController : MonoBehaviour
 
             }
 
-            else if (m_SightTubeController.currentTestCockConnection == hoseDetector4 && testCockController.isTestCock4Open && zone2Pressure >= zone3Pressure && TestCockHoseDetect3.currentHoseConnection == highHose)
+            // else if (m_SightTubeController.currentTestCockConnection == hoseDetector4 && testCockController.isTestCock4Open && zone2Pressure >= zone3Pressure && TestCockHoseDetect3.currentHoseConnection == highHose)
+            else if (m_SightTubeController.currentTestCockConnection == hoseDetector4 && testCockController.isTestCock4Open && zone2Pressure >= zone3Pressure)
             {
                 if (m_detectorZone2.ParticlesInside > 1000)
                 {
