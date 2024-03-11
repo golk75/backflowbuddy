@@ -563,7 +563,8 @@ public class DCWaterController : MonoBehaviour
             /// high hose disconnected
             /// </summary>
             {
-                // if (!m_DoubleCheckTestKitController.AttachedHoseList.Contains(highHose))
+
+                if (!m_DoubleCheckTestKitController.AttachedHoseList.Contains(highHose))
                 {
                     if (testCockController.isTestCock2Open == false && testCockController.isTestCock3Open == false && testCockController.isTestCock4Open == false)
                     {
@@ -1804,7 +1805,8 @@ public class DCWaterController : MonoBehaviour
         }
 
         // if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false && m_DoubleCheckTestKitController.AttachedHoseList.Count == 0)
-        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
+        // if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false)
+        if (shutOffValveController.IsSupplyOn == false && shutOffValveController.IsSecondShutOffOpen == false && !m_DoubleCheckTestKitController.AttachedHoseList.Contains(highHose))
         {
             // foreach (GameObject testCock in m_DoubleCheckTestKitController.StaticTestCockList)
             // {

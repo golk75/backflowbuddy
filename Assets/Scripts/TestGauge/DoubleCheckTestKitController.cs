@@ -213,7 +213,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
     HoseDetector m_hoseDetector4;
     public bool Check1TestComplete;
     public bool Check1TestInProgress;
-    public float previousSupplyPsi;
+
+
+    public bool Check2TestComplete { get; private set; }
+    public bool Check2TestInProgress { get; private set; }
+
     void OnEnable()
     {
 
@@ -588,7 +592,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         {
             if (dcWaterController.isDeviceInTestingCondititons)
             {
-                previousSupplyPsi = dcWaterController.supplyPsi;
+
                 StartCoroutine(TestCheck1());
             }
 
@@ -629,6 +633,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
         {
             Check1TestInProgress = false;
             StartCoroutine(Check1TestRecover());
+        }
+        if (Check2TestComplete)
+        {
+            Check2TestInProgress = false;
+            StartCoroutine(Check2TestRecover());
         }
     }
 
@@ -838,6 +847,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
         {
             if (HighHoseBib.testCock == TestCock1)
             {
+                isHighHoseConnected = true;
                 if (isTestCock1Open)
                 {
                     isHighHoseEngaged = true;
@@ -869,6 +879,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
             }
             if (HighHoseBib.testCock == TestCock3)
             {
+                isHighHoseConnected = true;
                 if (isTestCock3Open)
                 {
                     isHighHoseEngaged = true;
@@ -881,6 +892,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
             if (HighHoseBib.testCock == TestCock4)
             {
+                isHighHoseConnected = true;
                 if (isTestCock4Open)
                 {
                     isHighHoseEngaged = true;
@@ -1182,20 +1194,16 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public void DifferentialGauge()
     {
 
-
-
         if (hosePressure <= maxPSID)
         {
 
-            if (isHighHoseEngaged)
+            if (isHighHoseEngaged && isHighHoseConnected)
             {
                 //max out gauge---> m_highSideManifoldPressure = rpzWaterController.zone1Pressure / 10 * 0.1f;
-
                 m_highSideManifoldPressure = dcWaterController.zone1Pressure;
 
-
             }
-            else if (!isHighHoseConnected)
+            if (!isHighHoseConnected && !isHighHoseEngaged)
             {
                 m_highSideManifoldPressure = 0.0f;
 
@@ -1296,37 +1304,37 @@ public class DoubleCheckTestKitController : MonoBehaviour
     private IEnumerator TestCheck2()
     {
 
-
         while (dcWaterController.zone2to3PsiDiff > 0)
         {
 
+            Check2TestComplete = false;
+            Check2TestInProgress = true;
             needleTweenSpeed = 0.1f;
             //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
 
 
             // newVal -= 0.01f * Time.deltaTime;
-            // pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(pressureZoneHUDController.m_SupplyPressurePanelSlider.value - newVal);
+
             dcWaterController.supplyPsi -= 0.01f * Time.deltaTime;
-            var newVal = dcWaterController.zone1Pressure;
-            pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(newVal);
+            var newVal = dcWaterController.zone2Pressure;
+            pressureZoneHUDController.m_PressureZone3PanelSlider.SetValueWithoutNotify(newVal);
             dcWaterController.zone2PsiChange += 0.01f * Time.deltaTime;
             dcWaterController.zone3PsiChange += 0.01f * Time.deltaTime;
-            pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(dcWaterController.zone1Pressure - pressureZoneHUDController.m_PressureZone2PanelSlider.value + newVal);
-            pressureZoneHUDController.m_PressureZone3PanelSlider.SetValueWithoutNotify(dcWaterController.zone2Pressure - pressureZoneHUDController.m_PressureZone3PanelSlider.value + newVal);
+
+            // pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(dcWaterController.zone1Pressure - pressureZoneHUDController.m_PressureZone2PanelSlider.value + newVal);
 
             if (newVal < 1)
             {
                 // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
                 pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+0";
                 pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+0";
-                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)dcWaterController.zone2PsiChange).ToString();
             }
             else
             {
-                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
                 pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)dcWaterController.zone2PsiChange).ToString();
                 pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+" + ((int)dcWaterController.zone3PsiChange).ToString();
-
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
             }
 
 
@@ -1336,6 +1344,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
             yield return null;
         }
+        // if (dcWaterController.isReliefValveOpen)
+        //     pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + (rvop - rpzWaterController.zone1Pressure + rpzWaterController.zone1Pressure - rpzWaterController.check1SpringForce) * -1;
+        Check2TestComplete = true;
+
+
 
     }
     private IEnumerator Check1TestRecover()
@@ -1377,6 +1390,48 @@ public class DoubleCheckTestKitController : MonoBehaviour
             yield return null;
         }
 
+    }
+    private IEnumerator Check2TestRecover()
+    {
+        while (dcWaterController.zone3PsiChange > 0)
+        {
+
+
+            needleTweenSpeed = 0.1f;
+            //pressureZoneHUDController.m_PressureZone2PanelSlider.value += 0.1f * Time.deltaTime * sliderTweenSpeed;
+
+
+            // newVal -= 0.01f * Time.deltaTime;
+            // pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(pressureZoneHUDController.m_SupplyPressurePanelSlider.value - newVal);
+            dcWaterController.supplyPsi += 0.01f * Time.deltaTime;
+            var newVal = dcWaterController.zone1Pressure;
+            pressureZoneHUDController.m_SupplyPressurePanelSlider.SetValueWithoutNotify(newVal);
+            dcWaterController.zone2PsiChange -= 0.01f * Time.deltaTime;
+            dcWaterController.zone3PsiChange -= 0.01f * Time.deltaTime;
+
+            // pressureZoneHUDController.m_PressureZone2PanelSlider.SetValueWithoutNotify(dcWaterController.zone1Pressure - pressureZoneHUDController.m_PressureZone2PanelSlider.value + newVal);
+
+            if (newVal < 1)
+            {
+                // pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)newVal).ToString();
+                pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+0";
+                pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+0";
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)dcWaterController.zone2PsiChange).ToString();
+            }
+            else
+            {
+                pressureZoneHUDController.m_Zone2PressureSliderValue.text = "+" + ((int)dcWaterController.zone3PsiChange).ToString();
+                pressureZoneHUDController.m_Zone3PressureSliderValue.text = "+" + ((int)dcWaterController.zone2PsiChange).ToString();
+                pressureZoneHUDController.m_SupplyPressureTextField.text = ((int)newVal).ToString();
+            }
+
+
+
+            // Debug.Log($"test check#1 in progress");
+
+
+            yield return null;
+        }
     }
 
 

@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
     float panningRightBoundry = 23.0f;
 
     [SerializeField]
-    float panningTopBoundry = 4.0f;
+    float panningTopBoundry = 2.8f;
 
     [SerializeField]
     float panningBottomBoundry = 0.1f;
