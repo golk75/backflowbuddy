@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
     public Toggle toggle;
     public bool clickPerformed;
     Coroutine DelayFilterReading;
+    public Texture2D handOpen;
+    public Texture2D handClosed;
     // Start is called before the first frame update
     void Awake()
     {
@@ -220,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
-
+        UnityEngine.Cursor.SetCursor(handOpen, new Vector2(handOpen.width / 2, handOpen.height / 2), CursorMode.Auto);
         primaryClickStarted = context.ReadValue<float>();
         // primaryClickPerformed = context.ReadValue<float>();
         OnPanCanceled?.Invoke();
@@ -319,10 +321,12 @@ public class PlayerController : MonoBehaviour
             operableObject = hit.collider.transform.gameObject;
 
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
+            UnityEngine.Cursor.SetCursor(handClosed, new Vector2(handClosed.width / 2, handClosed.height / 2), CursorMode.Auto);
         }
 
         else
         {
+
             _operableTestGaugeObject = null;
             operableObject = null;
             isOperableObject = false;

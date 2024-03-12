@@ -13,7 +13,7 @@ public class FillButton : MonoBehaviour
     public GameObject Check1;
     public GameObject Check2;
     public GameObject ShutOff1;
-    public DCWaterController waterController;
+    public DCWaterController dcWaterController;
     public RPZWaterController rPZWaterController;
     public TestCockController testCockController;
     OperableComponentDescription ShutOff1OperableDescription;
@@ -53,7 +53,7 @@ public class FillButton : MonoBehaviour
 
     public void FillDevice()
     {
-        if (rPZWaterController.supplyPsi >= 0)
+        if (dcWaterController.supplyPsi >= 0)
         {
             liquid.ReleaseSimulation();
             liquid.InitialState = ZibraLiquid.InitialStateType.BakedLiquidState;
@@ -74,7 +74,7 @@ public class FillButton : MonoBehaviour
             playerController._operableObjectRotation.y = 180;
             // SO1.transform.eulerAngles = new Vector3(90, 180, 360);
 
-            foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)
+            foreach (GameObject testCock in doubleCheckTestKitController.StaticTestCockList)
             {
                 testCock.GetComponent<AssignTestCockManipulators>().testCockVoid.enabled = true;
                 testCock.GetComponent<AssignTestCockManipulators>().testCockCollider.enabled = false;

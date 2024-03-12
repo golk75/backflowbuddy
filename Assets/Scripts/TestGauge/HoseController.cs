@@ -60,6 +60,9 @@ public class HoseController : MonoBehaviour
     public float testCockPositionOffset;
     public HoseDetector hoseDetector;
     public bool componentGrabbed;
+    public Texture2D handOpen;
+    public Texture2D handClosed;
+
     private void OnEnable()
     {
         Actions.onComponentGrab += GrabComponent;
@@ -157,6 +160,7 @@ public class HoseController : MonoBehaviour
     private void DropComponent(GameObject @object, OperableComponentDescription description)
     {
         componentGrabbed = false;
+
         //check if its not the sight tube
         if (@object != sightTube)
         {
