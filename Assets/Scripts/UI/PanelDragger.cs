@@ -48,53 +48,58 @@ public class PanelDragger : PointerManipulator
 
     private void OnPointerUp(PointerUpEvent evt)
     {
+        if (target.HasPointerCapture(evt.pointerId))
+        {
+            m_Active = false;
+            target.ReleasePointer(evt.pointerId);
+            evt.StopPropagation();
+        }
 
-        if (!m_Active || !target.HasPointerCapture(m_PointerId) || !CanStopManipulation(evt))
-            return;
-
-        m_Active = false;
-        target.ReleasePointer(m_PointerId);
-        evt.StopPropagation();
 
     }
 
 
     private void OnPointerMove(PointerMoveEvent evt)
     {
-        if (!m_Active || !target.HasPointerCapture(m_PointerId))
-            return;
-        VisualElement testTarg = (VisualElement)evt.target;
-        //Vector3 pointerDelta = evt.position - pointerStartPosition;
-        pointerDelta = evt.position - pointerStartPosition;
+        // if (!m_Active || !target.HasPointerCapture(m_PointerId))
+        //     return;
+        if (enabled && target.HasPointerCapture(evt.pointerId))
+        {
 
-        target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y);
+            Vector3 pointerDelta = evt.position - pointerStartPosition;
+            //pointerDelta = evt.position - pointerStartPosition;
 
-        evt.StopPropagation();
+            target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y);
+
+        }
 
     }
 
 
     private void OnPointerDown(PointerDownEvent evt)
     {
+        targetStartPosition = target.transform.position;
+        pointerStartPosition = evt.position;
+        target.CapturePointer(evt.pointerId);
+        enabled = true;
+        // if (m_Active)
+        // {
+        //     evt.StopPropagation();
+        //     return;
+        // }
+        // if (CanStartManipulation(evt))
+        // {
+        //     // pointerDelta = evt.position - pointerStartPosition;
+        //     var pos = target.parent.LocalToWorld(target.layout.position);
+        //     targetStartPosition = target.parent.LocalToWorld(target.transform.position);
+        //     pointerStartPosition = evt.position;
+        //     m_Start = evt.localPosition;
+        //     m_PointerId = evt.pointerId;
+        //     m_Active = true;
+        //     target.CapturePointer(evt.pointerId);
+        //     enabled = true;
 
-        if (m_Active)
-        {
-            evt.StopPropagation();
-            return;
-        }
-        if (CanStartManipulation(evt))
-        {
-            // pointerDelta = evt.position - pointerStartPosition;
-            var pos = target.parent.LocalToWorld(target.layout.position);
-            targetStartPosition = target.parent.LocalToWorld(target.transform.position);
-            pointerStartPosition = evt.position;
-            m_Start = evt.localPosition;
-            m_PointerId = evt.pointerId;
-            m_Active = true;
-            target.CapturePointer(evt.pointerId);
-            enabled = true;
-
-        }
+        // }
     }
 
 
