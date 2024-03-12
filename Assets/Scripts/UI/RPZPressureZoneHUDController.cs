@@ -179,22 +179,23 @@ public class RPZPressureZoneHUDController : MonoBehaviour
         ///  are seperate water controllers for each backflow assembly type
         /// </summary>
 
-        if (waterController.isActiveAndEnabled)
-        {
+        // if (waterController.isActiveAndEnabled)
+        // {
 
-            // m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
-            m_SupplyPressureTextField.text = waterController.supplyPsi.ToString();
+        //     // m_SupplyPressureTextField.value = waterController.supplyPsi.ToString();
+        //     m_SupplyPressureTextField.text = waterController.supplyPsi.ToString();
 
 
-        }
-        else
-        {
-            // m_SupplyPressureTextField.value = m_rpzWaterController.supplyPsi.ToString();
-            m_SupplyPressureTextField.text = m_rpzWaterController.supplyPsi.ToString();
-            check1SpringPressure = m_rpzWaterController.check1SpringForce;
-            check2SpringPressure = m_rpzWaterController.check2SpringForce;
+        // }
+        // else
+        // {
+        //     // m_SupplyPressureTextField.value = m_rpzWaterController.supplyPsi.ToString();
 
-        }
+
+        // }
+        m_SupplyPressureTextField.text = m_rpzWaterController.supplyPsi.ToString();
+        check1SpringPressure = m_rpzWaterController.check1SpringForce;
+        check2SpringPressure = m_rpzWaterController.check2SpringForce;
         // foreach (var dummyDragger in DummyDraggersToReset)
         // {
         //     // dummyDragger.AddManipulator(new DraggerHandle(dummyDragger));
