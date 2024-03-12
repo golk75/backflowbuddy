@@ -9,7 +9,7 @@
     <Style src="project://database/Assets/Resources/UI/uss/PressureZoneSlider.uss?fileID=7433441132597879392&amp;guid=b928e6a2ee3824672bcb593bd1e09328&amp;type=3#PressureZoneSlider" />
     <ui:VisualElement name="RPZTestSceneContainer" class="screen" style="width: 100%; height: 100%;">
         <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
-            <ui:VisualElement name="Top_container" picking-mode="Ignore" class="scene-top-container">
+            <ui:VisualElement name="Top_container" class="scene-top-container">
                 <ui:VisualElement name="ButtonWrapper" picking-mode="Ignore" class="button-wrapper">
                     <ui:Button name="MenuButton" focusable="false" class="menu-button button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_15_list_.png?fileID=2800000&amp;guid=32a4f33563139ce4da97630a9d7a3722&amp;type=3#T_15_list_&apos;);" />
                     <ui:Button name="FillButton" focusable="false" class="fill-button button floating" />

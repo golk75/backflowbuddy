@@ -77,8 +77,8 @@ public class UiClickFilter : MonoBehaviour
                 {
                     // isUiClicked = true;
                     UnityEngine.Cursor.SetCursor(handPoint, new Vector2(handPoint.width / 2, 0), CursorMode.Auto);
-                },
-                TrickleDown.TrickleDown);
+
+                });
             button.RegisterCallback<PointerLeaveEvent>(
                 e =>
                 {
@@ -86,8 +86,7 @@ public class UiClickFilter : MonoBehaviour
                     UnityEngine.Cursor.SetCursor(handOpen, new Vector2(handOpen.width / 2, handOpen.height / 2), CursorMode.Auto);
 
 
-                },
-                TrickleDown.TrickleDown);
+                });
 
         }
         foreach (var ele in FloatingElements)
