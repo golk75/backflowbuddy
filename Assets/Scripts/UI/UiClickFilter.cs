@@ -37,6 +37,12 @@ public class UiClickFilter : MonoBehaviour
     List<VisualElement> FloatingElements;
     List<Button> FloatingButtons;
 
+    public List<VisualElement> SliderDraggers { get; private set; }
+
+
+    public Texture2D handGrab;
+    public Texture2D handOpen;
+    public Texture2D handPoint;
     public bool isUiClicked = false;
     public bool isUiHovered = false;
     // Start is called before the first frame update
@@ -46,6 +52,7 @@ public class UiClickFilter : MonoBehaviour
         var root = GetComponent<UIDocument>();
         FloatingElements = root.rootVisualElement.Query(className: "floating").ToList();
         FloatingButtons = root.rootVisualElement.Query<Button>(className: "unity-button").ToList();
+        SliderDraggers = root.rootVisualElement.Query<VisualElement>("unity-drag-container").ToList();
         foreach (var button in FloatingButtons)
         {
 
@@ -54,13 +61,31 @@ public class UiClickFilter : MonoBehaviour
                 e =>
                 {
                     isUiClicked = true;
-
+                    // UnityEngine.Cursor.SetCursor(handPoint, new Vector2(0, 0), CursorMode.Auto);
                 },
                 TrickleDown.TrickleDown);
             button.RegisterCallback<PointerUpEvent>(
                 e =>
                 {
                     isUiClicked = false;
+
+                },
+                TrickleDown.TrickleDown);
+
+            button.RegisterCallback<PointerEnterEvent>(
+                e =>
+                {
+                    // isUiClicked = true;
+                    UnityEngine.Cursor.SetCursor(handPoint, new Vector2(handPoint.width / 2, 0), CursorMode.Auto);
+                },
+                TrickleDown.TrickleDown);
+            button.RegisterCallback<PointerLeaveEvent>(
+                e =>
+                {
+                    // isUiClicked = false;
+                    UnityEngine.Cursor.SetCursor(handOpen, new Vector2(handOpen.width / 2, handOpen.height / 2), CursorMode.Auto);
+
+
                 },
                 TrickleDown.TrickleDown);
 
@@ -68,16 +93,47 @@ public class UiClickFilter : MonoBehaviour
         foreach (var ele in FloatingElements)
         {
 
+            ele.RegisterCallback<PointerUpEvent>(
+                e =>
+                {
+                    isUiClicked = false;
+                    UnityEngine.Cursor.SetCursor(handOpen, new Vector2(handOpen.width / 2, handOpen.height / 2), CursorMode.Auto);
+                }, TrickleDown.TrickleDown);
+            ele.RegisterCallback<PointerDownEvent>(
+            e =>
+            {
+                UnityEngine.Cursor.SetCursor(handGrab, new Vector2(handGrab.width / 2, handGrab.height / 2), CursorMode.Auto);
+                isUiClicked = true;
+                playerController.isOperableObject = false;
+                playerController.operableObject = null;
 
-            ele.RegisterCallback<PointerDownEvent>(PointerDown);
-
-            ele.RegisterCallback<PointerUpEvent>(PointerUp);
 
 
+            }, TrickleDown.TrickleDown);
+            // ele.RegisterCallback<PointerDownEvent>(PointerDown);
 
+            // ele.RegisterCallback<PointerUpEvent>(PointerUp);
         }
 
+        foreach (var dragger in SliderDraggers)
+        {
+            dragger.RegisterCallback<PointerUpEvent>(
+               e =>
+               {
+                   isUiClicked = false;
+                   UnityEngine.Cursor.SetCursor(handOpen, new Vector2(handOpen.width / 2, handOpen.height / 2), CursorMode.Auto);
+               });
+            dragger.RegisterCallback<PointerDownEvent>(
+            e =>
+            {
+                isUiClicked = true;
+                playerController.isOperableObject = false;
+                playerController.operableObject = null;
+                UnityEngine.Cursor.SetCursor(handGrab, new Vector2(handGrab.width / 2, handGrab.height / 2), CursorMode.Auto);
 
+
+            }, TrickleDown.TrickleDown);
+        }
 
     }
 
@@ -92,6 +148,7 @@ public class UiClickFilter : MonoBehaviour
         isUiClicked = true;
         playerController.isOperableObject = false;
         playerController.operableObject = null;
+
     }
 
 }

@@ -28,11 +28,11 @@
             <ui:VisualElement name="Bottom_container" picking-mode="Ignore" style="flex-direction: row; height: 0;" />
             <ui:VisualElement name="SupplyPressure__panelTemp" class="floating pressure-panel-supply" style="display: none;">
                 <ui:VisualElement name="SupplyPressure__panel" picking-mode="Ignore" class="supply-pressure-zone-panel">
-                    <ui:VisualElement name="SupplyPressure_value_container" class="supply-pressure-value-container supply-pressure-value-container-parked">
+                    <ui:VisualElement name="SupplyPressure_value_container" class="supply-pressure-value-container">
                         <ui:Label text="Supply Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SupplyPressure__header" class="supply-pressure-zone-header supply-pressure-zone-header-parked" />
                         <ui:TextField name="SupplyPressure__value" max-length="2" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="CheckSpring_value_container" class="check-spring-value-container check-spring-value-container-parked">
+                    <ui:VisualElement name="CheckSpring_value_container" class="check-spring-value-container">
                         <ui:VisualElement name="CheckSpring1_value_container" class="check-spring-value-sub-container check-spring-value-sub-container-parked">
                             <ui:Label tabindex="-1" text="Check #1 Spring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CheckSpring1_value_header" class="check-spring-value-header check-spring-value-header-parked" />
                             <ui:VisualElement name="CheckSpring1_value_button_container" class="check-spring-value-button-container check-spring-value-button-container-parked">
@@ -57,8 +57,8 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="SupplyPressureZone__panel" class="pressure-panel-supply floating" style="top: 366px; right: 0; left: 89px;">
-                <ui:VisualElement name="PressureZone__supply_panel" picking-mode="Ignore" class="pressure-zone-panel" style="opacity: 1;">
-                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore">
+                <ui:VisualElement name="PressureZone__supply_panel" picking-mode="Ignore" class="pressure-zone-panel floating" style="opacity: 1;">
+                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" class="floating">
                         <AttributeOverrides element-name="PressureZoneSlider" low-value="-100" high-value="100" show-input-field="false" />
                     </ui:Instance>
                     <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container">
@@ -91,8 +91,10 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="PressureZone2__panel" class="pressure-panel-2 floating" style="opacity: 1;">
-                <ui:VisualElement name="PressureZone__two_panel" picking-mode="Ignore" class="pressure-zone-panel">
-                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" style="opacity: 1;" />
+                <ui:VisualElement name="PressureZone__two_panel" picking-mode="Ignore" class="pressure-zone-panel floating">
+                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" class="floating" style="opacity: 1;">
+                        <AttributeOverrides element-name="PressureZoneSlider" low-value="-100" high-value="100" show-input-field="false" />
+                    </ui:Instance>
                     <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container">
                         <ui:Label tabindex="-1" text="Zone #2 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header" />
                         <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone2_value_label" class="pressure-zone-value-label" />
@@ -100,9 +102,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="PressureZone3__panel" class="pressure-panel-3 floating">
-                <ui:VisualElement name="PressureZone__three_panel" picking-mode="Ignore" class="pressure-zone-panel pressure-zone-panel-parked">
-                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" />
-                    <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container pressure-zone-value-container-parked">
+                <ui:VisualElement name="PressureZone__three_panel" picking-mode="Ignore" class="pressure-zone-panel floating">
+                    <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" class="floating" />
+                    <ui:VisualElement name="PressureZone_value_container" class="pressure-zone-value-container">
                         <ui:Label tabindex="-1" text="Zone #3 Pressure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone_value_header" class="pressure-zone-header pressure-zone-header-parked" />
                         <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PressureZone3_value_label" class="pressure-zone-value-label pressure-zone-value-label-parked" />
                     </ui:VisualElement>
