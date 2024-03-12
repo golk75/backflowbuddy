@@ -57,7 +57,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="SupplyPressureZone__panel" class="pressure-panel-supply floating" style="top: 366px; right: 0; left: 89px;">
-                <ui:VisualElement name="PressureZone__supply_panel" picking-mode="Ignore" class="pressure-zone-panel floating" style="opacity: 1;">
+                <ui:VisualElement name="PressureZone__supply_panel" picking-mode="Ignore" class="pressure-zone-panel" style="opacity: 1;">
                     <ui:Instance template="PressureZoneSlider" name="PressureZoneSliderContainer" picking-mode="Ignore" class="floating">
                         <AttributeOverrides element-name="PressureZoneSlider" low-value="-100" high-value="100" show-input-field="false" />
                     </ui:Instance>
