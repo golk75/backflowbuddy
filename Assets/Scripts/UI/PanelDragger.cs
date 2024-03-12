@@ -61,13 +61,11 @@ public class PanelDragger : PointerManipulator
 
     private void OnPointerMove(PointerMoveEvent evt)
     {
-        // if (!m_Active || !target.HasPointerCapture(m_PointerId))
-        //     return;
+
         if (enabled && target.HasPointerCapture(evt.pointerId))
         {
 
             Vector3 pointerDelta = evt.position - pointerStartPosition;
-            //pointerDelta = evt.position - pointerStartPosition;
 
             target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y);
 
@@ -82,24 +80,7 @@ public class PanelDragger : PointerManipulator
         pointerStartPosition = evt.position;
         target.CapturePointer(evt.pointerId);
         enabled = true;
-        // if (m_Active)
-        // {
-        //     evt.StopPropagation();
-        //     return;
-        // }
-        // if (CanStartManipulation(evt))
-        // {
-        //     // pointerDelta = evt.position - pointerStartPosition;
-        //     var pos = target.parent.LocalToWorld(target.layout.position);
-        //     targetStartPosition = target.parent.LocalToWorld(target.transform.position);
-        //     pointerStartPosition = evt.position;
-        //     m_Start = evt.localPosition;
-        //     m_PointerId = evt.pointerId;
-        //     m_Active = true;
-        //     target.CapturePointer(evt.pointerId);
-        //     enabled = true;
 
-        // }
     }
 
 
