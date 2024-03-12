@@ -4,6 +4,6 @@
     <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreenUi.uss?fileID=7433441132597879392&amp;guid=9d019c51a23314a4ba6172303a84226e&amp;type=3#DCPlayScreenUi" />
     <RPZPlayScreenManager name="RPZPlayScreenManager" class="screen">
         <ui:Instance template="RPZPlayScreen" name="RPZPlayScreen" class="screen" />
-        <ui:Instance template="RPZPlayMenuScreen" name="RPZPlayMenuScreen" class="screen" style="display: none;" />
+        <ui:Instance template="RPZPlayMenuScreen" name="RPZPlayMenuScreen" class="screen" style="display: none; position: absolute;" />
     </RPZPlayScreenManager>
 </ui:UXML>
