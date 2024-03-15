@@ -1,0 +1,34 @@
+.screen {
+    flex-grow: 1;
+}
+
+.question {
+    background-color: rgb(229, 137, 0);
+    width: 75%;
+    align-self: center;
+}
+
+.answer {
+    background-color: rgb(137, 0, 226);
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    font-size: 29px;
+    width: 45%;
+    -unity-text-align: upper-center;
+}
+
+.question-container {
+}
+
+.quiz-box {
+}
+
+.answer-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.quiz-panel {
+}
