@@ -48,53 +48,39 @@ public class PanelDragger : PointerManipulator
 
     private void OnPointerUp(PointerUpEvent evt)
     {
+        if (target.HasPointerCapture(evt.pointerId))
+        {
+            m_Active = false;
+            target.ReleasePointer(evt.pointerId);
+            evt.StopPropagation();
+        }
 
-        if (!m_Active || !target.HasPointerCapture(m_PointerId) || !CanStopManipulation(evt))
-            return;
-
-        m_Active = false;
-        target.ReleaseMouse();
-        evt.StopPropagation();
 
     }
 
 
     private void OnPointerMove(PointerMoveEvent evt)
     {
-        if (!m_Active || !target.HasPointerCapture(m_PointerId))
-            return;
-        VisualElement testTarg = (VisualElement)evt.target;
-        //Vector3 pointerDelta = evt.position - pointerStartPosition;
-        pointerDelta = evt.position - pointerStartPosition;
 
-        target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y);
+        if (enabled && target.HasPointerCapture(evt.pointerId))
+        {
 
-        evt.StopPropagation();
+            Vector3 pointerDelta = evt.position - pointerStartPosition;
+
+            target.transform.position = new Vector2(targetStartPosition.x + pointerDelta.x, targetStartPosition.y + pointerDelta.y);
+
+        }
 
     }
 
 
     private void OnPointerDown(PointerDownEvent evt)
     {
+        targetStartPosition = target.transform.position;
+        pointerStartPosition = evt.position;
+        target.CapturePointer(evt.pointerId);
+        enabled = true;
 
-        if (m_Active)
-        {
-            evt.StopPropagation();
-            return;
-        }
-        if (CanStartManipulation(evt))
-        {
-            // pointerDelta = evt.position - pointerStartPosition;
-            var pos = target.parent.LocalToWorld(target.layout.position);
-            targetStartPosition = target.parent.LocalToWorld(target.transform.position);
-            pointerStartPosition = evt.position;
-            m_Start = evt.localPosition;
-            m_PointerId = evt.pointerId;
-            m_Active = true;
-            target.CapturePointer(evt.pointerId);
-            enabled = true;
-
-        }
     }
 
 
@@ -134,7 +120,7 @@ public class PanelDragger : PointerManipulator
 
     private Vector3 RootSpaceOfSlot(VisualElement slot)
     {
-        Vector2 slotWorldSpace = slot.parent.parent.parent.LocalToWorld(slot.layout.position);
+        Vector2 slotWorldSpace = slot.parent.parent.LocalToWorld(slot.layout.position);
         Vector2 dist = target.parent.WorldToLocal(target.layout.position);
         Vector2 diff = new Vector2(slotWorldSpace.x - dist.x, slotWorldSpace.y - dist.y);
         return root.WorldToLocal(diff);

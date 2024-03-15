@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using com.zibra.liquid.Manipulators;
+using com.zibra.liquid.Solver;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -11,7 +13,6 @@ public class HoseController : MonoBehaviour
     public PlayerController playerController;
     public CameraController cameraController;
     public UiClickFilter uiClickFilter;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
     private Vector3 initHighHosePos;
     private Vector3 initAnchorPos_highHose;
     private Vector3 initAnchorPos_lowHose;
@@ -47,7 +48,7 @@ public class HoseController : MonoBehaviour
     public bool isCurrentTestCockAttached;
     public bool sightTubeGrabbed = false;
     public bool isSightTubeConnected = false;
-
+    public ZibraLiquidEmitter m_SightTubeEmitter;
     public GameObject currentHoseTipCollider;
     public GameObject lastHoseTipCollider;
     public GameObject testCockToRemove;
@@ -59,6 +60,9 @@ public class HoseController : MonoBehaviour
     public float testCockPositionOffset;
     public HoseDetector hoseDetector;
     public bool componentGrabbed;
+    public Texture2D handOpen;
+    public Texture2D handClosed;
+
     private void OnEnable()
     {
         Actions.onComponentGrab += GrabComponent;
@@ -92,7 +96,6 @@ public class HoseController : MonoBehaviour
         //identifying current test cock being hooked up to, for connection positioning
         currentTestCock = testCockDetector;
 
-
     }
 
 
@@ -122,10 +125,10 @@ public class HoseController : MonoBehaviour
                 case OperableComponentDescription.ComponentId.BypassHose:
                     Destroy(BypassHoseBib.GetComponent<ConfigurableJoint>());
                     break;
-                    //         // case OperableComponentDescription.ComponentId.SightTube:
-                    //         //     
-                    //         //     break;
-                    //         default:
+                case OperableComponentDescription.ComponentId.SightTube:
+
+                    break;
+                default:
 
                     break;
             }
@@ -157,6 +160,7 @@ public class HoseController : MonoBehaviour
     private void DropComponent(GameObject @object, OperableComponentDescription description)
     {
         componentGrabbed = false;
+
         //check if its not the sight tube
         if (@object != sightTube)
         {
@@ -217,7 +221,7 @@ public class HoseController : MonoBehaviour
         else
         {
 
-            if (!isAttaching)
+            if (isAttaching != true)
             {
                 @object.transform.localPosition = sightTubeHomePos;
                 isSightTubeConnected = false;
@@ -230,9 +234,9 @@ public class HoseController : MonoBehaviour
 
     private void GrabComponent(GameObject @object, OperableComponentDescription description)
     {
-
         if (uiClickFilter.isUiClicked == false)
         {
+
 
             componentGrabbed = true;
 
@@ -241,9 +245,11 @@ public class HoseController : MonoBehaviour
             {
                 case OperableComponentDescription.PartsType.TestKitHose:
                     HandleHoseGrab(@object);
+
                     break;
                 case OperableComponentDescription.PartsType.TestKitSightTube:
                     HandleSightTubeGrab(@object);
+
                     break;
                 default:
                     break;
@@ -254,6 +260,7 @@ public class HoseController : MonoBehaviour
 
     private void HandleSightTubeGrab(GameObject obj)
     {
+        m_SightTubeEmitter.enabled = false;
         SightTubeMovement = StartCoroutine(MoveHoseAnchor(obj));
 
     }
@@ -337,9 +344,19 @@ public class HoseController : MonoBehaviour
                 playerController.primaryClickStarted > 0 && isAttaching == false
             )
             {
+                isSightTubeConnected = false;
                 Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                obj.transform.position = new Vector3(direction.x, direction.y, obj.transform.position.z);
+                // obj.transform.position = new Vector3(direction.x, direction.y, obj.transform.position.z);
+                obj.GetComponent<Rigidbody>().Move(
+                 new Vector3(direction.x, direction.y, obj.transform.position.z),
+                 Quaternion.Euler(
+                     obj.transform.eulerAngles.x,
+                     obj.transform.eulerAngles.y,
+                     obj.transform.eulerAngles.z
+                 )
+             );
+
                 yield return null;
             }
 

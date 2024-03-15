@@ -114,10 +114,12 @@ public class ShutOffValveController : MonoBehaviour
         if (ShutOffValve1.transform.rotation.eulerAngles.z == 90)
         {
             _isSupplyOn = false;
+            Actions.onSupplyClosed?.Invoke();
         }
         else
         {
             _isSupplyOn = true;
+            Actions.onSupplyOpen?.Invoke();
         }
         if (ShutOffValve2.transform.rotation.eulerAngles.z == 90)
         {

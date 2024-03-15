@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/UI/uss/QuizManager.uss?fileID=7433441132597879392&amp;guid=c93d8e952e6d7487b9f61948a4b4ec20&amp;type=3#QuizManager" />
+    <ui:VisualElement name="QuizPanel" class="screen quiz-panel" style="padding-top: 25px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px; justify-content: space-around;">
+        <ui:VisualElement name="QuestionContiner" class="question-container">
+            <ui:VisualElement name="Question" class="question quiz-box">
+                <ui:Label tabindex="-1" text="This is a Question" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: upper-center; font-size: 42px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="AnswerContainer" class="answer-container">
+            <ui:VisualElement name="Answer-a" class="quiz-box answer">
+                <ui:Label tabindex="-1" text="Answer - A" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Answer-b" class="quiz-box answer">
+                <ui:Label tabindex="-1" text="Answer - B" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Answer-c" class="quiz-box answer">
+                <ui:Label tabindex="-1" text="Answer - C" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Answer-d" class="quiz-box answer">
+                <ui:Label tabindex="-1" text="Answer - D" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

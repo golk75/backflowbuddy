@@ -34,10 +34,12 @@ public class SightTubeController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         currentTestCockConnection = null;
+        // 
     }
     private void CurrentTestCockExit(GameObject @object, OperableComponentDescription description)
     {
-
+        Actions.onRemoveHoseFromList?.Invoke(this.gameObject, GetComponent<OperableComponentDescription>());
+        Actions.onRemoveTestCockFromList?.Invoke(@object, GetComponent<OperableComponentDescription>());
         // currentTestCockConnection = null;
     }
 

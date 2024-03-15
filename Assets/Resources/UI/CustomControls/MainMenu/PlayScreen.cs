@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -23,8 +22,10 @@ public class PlayScreen : VisualElement
         m_DCPlayScreen = this.Q("DCPlayScreen");
         m_DeviceSelectionScreen = this.Q("device-selection");
 
-        this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRpzPopup());
-        this?.Q("rpz-popup-back-button")?.RegisterCallback<ClickEvent>(evt => RemoveRpzPopup());
+        // this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRpzPopup());
+        // this?.Q("rpz-popup-back-button")?.RegisterCallback<ClickEvent>(evt => RemoveRpzPopup());
+        this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
+
 
 
         //Double Check button
@@ -34,11 +35,34 @@ public class PlayScreen : VisualElement
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
+    private void EnableRPZPlayScreenAndScene()
+    {
+        //Async Load Scene--> prevents ui from changing until scene is loaded up
+        //DO NOT CHANGE THE ORDER IN THIS---->
+        {
+            AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync("RPZPlayScene");
+
+
+            // #if UNITY_EDITOR
+            //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+            // #endif
+
+
+            // skipping quick tour
+
+            //wait for scene to load before switching Ui
+            if (sceneLoadAsync.isDone)
+            {
+                m_DeviceSelectionScreen.style.display = DisplayStyle.None;
+            }
+
+
+
+        }
+    }
+
     private void EnableDoubleCheckPlayScreenAndScene()
     {
-
-
-
         //Async Load Scene--> prevents ui from changing until scene is loaded up
         //DO NOT CHANGE THE ORDER IN THIS---->
         {

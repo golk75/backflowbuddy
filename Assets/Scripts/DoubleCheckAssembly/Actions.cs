@@ -21,9 +21,10 @@ public static class Actions
     public static Action<GameObject, OperableComponentDescription> onComponentGrab;
     public static Action<GameObject, OperableComponentDescription> onComponentDrop;
 
-    //only being used in reset button
+    //from reset button
     public static Action<GameObject> onSightTubeGrab;
     public static Action<GameObject> onSightTubeDrop;
+
 
 
 
@@ -40,7 +41,14 @@ public static class Actions
     public static Action onTestCock4Opened;
     public static Action onTestCock4Closed;
     public static Action onHighBleedOperate;
+    public static Action onLowBleedOperate;
     public static Action onHighBleedClosed;
+    public static Action onHighControlOperate;
+    public static Action onLowControlOperate;
+    public static Action onBypassControlOperate;
+    public static Action onSupplyOpen;
+    public static Action onSupplyClosed;
+    public static Action onRVOPTest;
 
 
 }

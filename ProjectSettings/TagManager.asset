@@ -38,9 +38,9 @@ TagManager:
   - ShutOffValve
   - Emitter
   - OperableObject
-  - 
-  - 
-  - 
+  - Assembly
+  - ReliefCheck
+  - ReliefCheckSeat
   - 
   - 
   - 

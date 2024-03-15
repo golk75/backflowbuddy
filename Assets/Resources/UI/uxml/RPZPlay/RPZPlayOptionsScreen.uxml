@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="GameMenuOptions" src="project://database/Assets/Resources/UI/uxml/Shared/GameMenuOptions.uxml?fileID=9197481963319205126&amp;guid=a4fa425c9902248d7955d733f854dcdc&amp;type=3#GameMenuOptions" />
+    <Style src="project://database/Assets/Resources/UI/uss/GameMenuOptions.uss?fileID=7433441132597879392&amp;guid=71207e421da21479195f56ca423ee95a&amp;type=3#GameMenuOptions" />
+    <Style src="project://database/Assets/Resources/UI/uss/MainMenuUi.uss?fileID=7433441132597879392&amp;guid=1b326e54f788d43ee89afef8e60b995d&amp;type=3#MainMenuUi" />
+    <DCPlayOptionsScreen class="screen">
+        <ui:Instance template="GameMenuOptions" name="GameMenuOptions" class="screen" />
+    </DCPlayOptionsScreen>
+</ui:UXML>

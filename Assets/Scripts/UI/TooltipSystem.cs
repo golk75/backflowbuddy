@@ -6,7 +6,7 @@ public class TooltipSystem : MonoBehaviour
 #if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
     private static TooltipSystem current;
     public Tooltip tooltip;
-    
+
 
     void Awake()
     {

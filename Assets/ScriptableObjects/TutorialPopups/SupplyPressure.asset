@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: SupplyPressure
   m_EditorClassIdentifier: 
   header: Supply Pressure Control
-  content: Here, you can adjust the supply pressure as well as individual check valve
-    spring pressures.
+  content: 'Your supply side pressure (psi) can be found here. The supply pressure
+    can be increased or decreased adjusting the slider up or down. Individual check
+    valve spring strengths can increased and decreased using the "+" and "-" buttons.
+    This box can be moved anywhere on your screen. '

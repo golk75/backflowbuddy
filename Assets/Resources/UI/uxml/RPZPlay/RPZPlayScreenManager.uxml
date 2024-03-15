@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="RPZPlayScreen" src="project://database/Assets/Resources/UI/uxml/RPZPlay/RPZPlayScreen.uxml?fileID=9197481963319205126&amp;guid=355d576db2fde41a5a0814af4ead3434&amp;type=3#RPZPlayScreen" />
+    <ui:Template name="RPZPlayMenuScreen" src="project://database/Assets/Resources/UI/uxml/RPZPlay/RPZPlayMenuScreen.uxml?fileID=9197481963319205126&amp;guid=72e3294245f4a44319bf796bbceda345&amp;type=3#RPZPlayMenuScreen" />
+    <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreenUi.uss?fileID=7433441132597879392&amp;guid=9d019c51a23314a4ba6172303a84226e&amp;type=3#DCPlayScreenUi" />
+    <RPZPlayScreenManager name="RPZPlayScreenManager" class="screen">
+        <ui:Instance template="RPZPlayScreen" name="RPZPlayScreen" class="screen" />
+        <ui:Instance template="RPZPlayMenuScreen" name="RPZPlayMenuScreen" class="screen" style="display: none; position: absolute;" />
+    </RPZPlayScreenManager>
+</ui:UXML>

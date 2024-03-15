@@ -490,6 +490,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 64299822}
   playerController: {fileID: 1446278365}
+  handGrab: {fileID: 0}
+  handOpen: {fileID: 0}
+  handPoint: {fileID: 0}
   isUiClicked: 0
   isUiHovered: 0
 --- !u!114 &354497752
@@ -504,8 +507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adec644b2f27841a390be2222fdf5671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MenuScreenName: GameMenuScreen
-  m_OptionsScreenName: GameMenuOptionsScreen
 --- !u!114 &354497761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2203,9 +2204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ffae3f0ef0a4a939c34e2ec923e146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubleCheckTestKitController: {fileID: 0}
+  rpzTestKitController: {fileID: 0}
   highBleedKnob: {fileID: 1032487122}
   isHighBleedOpen: 0
+  isLowBleedOpen: 0
 --- !u!4 &744900688229994192
 Transform:
   m_ObjectHideFlags: 0
@@ -2238,7 +2240,6 @@ MonoBehaviour:
   playerController: {fileID: 1446278365}
   cameraController: {fileID: 1372113979}
   uiClickFilter: {fileID: 354497751}
-  doubleCheckTestKitController: {fileID: 0}
   hoseConnectionPoint: {x: 0, y: 0, z: 0}
   sightTubeConnectionPoint: {x: 0, y: 0, z: 0}
   sightTubeHomePos: {x: 0, y: 0, z: 0}
@@ -2264,12 +2265,15 @@ MonoBehaviour:
   isCurrentTestCockAttached: 0
   sightTubeGrabbed: 0
   isSightTubeConnected: 0
+  m_SightTubeEmitter: {fileID: 0}
   currentHoseTipCollider: {fileID: 0}
   lastHoseTipCollider: {fileID: 0}
   testCockToRemove: {fileID: 0}
   testCockPositionOffset: 1.2
   hoseDetector: {fileID: 0}
   componentGrabbed: 0
+  handOpen: {fileID: 0}
+  handClosed: {fileID: 0}
 --- !u!1 &753978615707022301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,6 +3115,11 @@ PrefabInstance:
     - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
         type: 3}
       propertyPath: doubleCheckTestKitController
+      value: 
+      objectReference: {fileID: 2769071947225662792}
+    - target: {fileID: 6495351112855094922, guid: b9242a77ce9b24fab85cddfa72914f01,
+        type: 3}
+      propertyPath: m_DoubleCheckTestKitController
       value: 
       objectReference: {fileID: 2769071947225662792}
     - target: {fileID: 6562516706392596113, guid: b9242a77ce9b24fab85cddfa72914f01,
@@ -4478,28 +4487,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddb0ce3eb71a4d33b4621cbebd8f181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterController: {fileID: 4261158086632363316}
+  dcWaterController: {fileID: 4261158086632363316}
   playerController: {fileID: 1446278365}
   shutOffValveController: {fileID: 637003913549386116}
   testCockController: {fileID: 2275129408291974312}
   checkValveStatus: {fileID: 873336866102218116}
   openKnobAnimation: {fileID: 0}
+  bleedHoseController: {fileID: 0}
   liquid: {fileID: 567161191454459828}
   highBleed: {fileID: 1032487122}
   highControl: {fileID: 770964668}
   lowBleed: {fileID: 1148582266}
   lowControl: {fileID: 1613671802}
   bypassControl: {fileID: 519896913}
+  currentKnobIndicator: {fileID: 0}
   pressureZoneHUDController: {fileID: 0}
   needle: {fileID: 467466902}
   digitalKitNeedle: {fileID: 0}
   currentKnob: {fileID: 0}
+  highBleedIndicator: {fileID: 0}
+  lowBleedIndicator: {fileID: 0}
+  highControlIndicator: {fileID: 0}
+  lowControlIndicator: {fileID: 0}
+  bypassControlIndicator: {fileID: 0}
   LowHose: {fileID: 7633477802536089285}
   HighHose: {fileID: 465822009263529420}
   BypassHose: {fileID: 2970852437638764132}
-  Check1: {fileID: 5802997508446611150}
-  Check1Pos: {x: 0, y: 0, z: 0}
+  SightTube: {fileID: 0}
+  HighHoseBib: {fileID: 0}
+  LowHoseBib: {fileID: 0}
+  BypassHoseBib: {fileID: 0}
+  m_SightTubeHoseBib: {fileID: 0}
   bleederHoseEmitter: {fileID: 2023966569}
+  bypassHoseEmitter: {fileID: 0}
+  lowHoseEmitter: {fileID: 0}
+  highHoseEmitter: {fileID: 0}
   LowHoseDetector: {fileID: 0}
   HighHoseDetector: {fileID: 0}
   BypassHoseDetector: {fileID: 0}
@@ -4518,16 +4540,27 @@ MonoBehaviour:
   maxPSID: 0
   currentPSID: 0
   isOperableObject: 0
-  isConnectedToAssembly: 0
-  isCheck1Open: 0
-  isCheck2Open: 0
+  isCheck1Open: {fileID: 0}
+  isCheck2Open: {fileID: 0}
   isConnectedTestCockOpen: 0
   isTestCock1Open: 0
   isTestCock2Open: 0
   isTestCock3Open: 0
   isTestCock4Open: 0
+  isHighHoseEngaged: 0
+  isLowHoseEngaged: 0
+  isBypassHoseEngaged: 0
+  isHighHoseConnected: 0
+  isLowHoseConnected: 0
+  isBypassHoseConnected: 0
+  isHighBleedOpen: 0
+  isLowBleedOpen: 0
+  isLowControlOpen: 0
+  isHighControlOpen: 0
+  isBypassControlOpen: 0
   highHosePressure: 0
   knobRotationFactor: 2
+  lerpDuration: 0.5
   knobOpened: 0
   _root: {fileID: 64299822}
   knobRotation: 0
@@ -4538,6 +4571,18 @@ MonoBehaviour:
   - {fileID: 390608882774367305}
   AttachedTestCockList: []
   AttachedHoseList: []
+  fMode: 0
+  forceDir: {x: 0, y: 0, z: 0}
+  fStrength: 0
+  check1BackSeat: {fileID: 0}
+  RVOP: 0
+  m_lowSideManifoldPressure: 0
+  m_highSideManifoldPressure: 0
+  differentialPressure: 0
+  needleTweenSpeed: 0
+  m_GaugeReading: 0
+  Check1TestComplete: 0
+  Check1TestInProgress: 0
 --- !u!114 &2820352474242559008 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5054539038417289118, guid: b9242a77ce9b24fab85cddfa72914f01,

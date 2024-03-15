@@ -12,7 +12,7 @@ public class TeachingModeToggle : MonoBehaviour
 
     public Toggle toggle;
 
-    public WaterController waterController;
+    public DCWaterController waterController;
     const string PressureZone2PanelTemplateString = "PressureZone2__panel";
     const string PressureZone3PanelTemplateString = "PressureZone3__panel";
     const string SupplyPressurePanelTemplateString = "SupplyPressure__panelTemp";

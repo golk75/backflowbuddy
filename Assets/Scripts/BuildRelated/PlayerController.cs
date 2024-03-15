@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject TestCockManager;
     TestCockController testCockController;
-    public DoubleCheckTestKitController doubleCheckTestKitController;
+
     public GameObject FillButton;
     public UiClickFilter uiClickFilter;
     [SerializeField]
     GameObject WaterManager;
 
-    private WaterController waterController;
+
 
     PlayerInputAction playerInput;
 
@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public float deviceRotSensitivity;
 
     public GameObject operableObject;
+    public GameObject prevOperableObject;
 
     public GameObject _operableTestGaugeObject;
     public GameObject OperableTestGaugeObject
@@ -83,6 +84,9 @@ public class PlayerController : MonoBehaviour
     public UIDocument root;
     public Toggle toggle;
     public bool clickPerformed;
+    Coroutine DelayFilterReading;
+    public Texture2D handOpen;
+    public Texture2D handClosed;
     // Start is called before the first frame update
     void Awake()
     {
@@ -94,7 +98,7 @@ public class PlayerController : MonoBehaviour
         playerInput = new PlayerInputAction();
 
         testCockController = TestCockManager.GetComponent<TestCockController>();
-        waterController = WaterManager.GetComponent<WaterController>();
+
 
 
 
@@ -129,7 +133,52 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     ///Input-------------------
     /// </summary>
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.001f);
 
+        ///Click/press---------------------------------------------------------------------------------
+        if (operableObject != null && uiClickFilter.isUiClicked == false)
+        {
+
+            if (_operableObjectRotation.z > 0)
+            {
+                _operableObjectRotation.z = 0;
+            }
+            else if (_operableObjectRotation.z <= 0)
+            {
+                _operableObjectRotation.z = 90;
+
+            }
+            switch (operableComponentDescription.componentId)
+            {
+                case OperableComponentDescription.ComponentId.HighBleed:
+
+                    Actions.onHighBleedOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.LowBleed:
+
+                    Actions.onLowBleedOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.HighControl:
+
+                    Actions.onHighControlOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.LowControl:
+
+                    Actions.onLowControlOperate?.Invoke();
+                    break;
+                case OperableComponentDescription.ComponentId.BypassControl:
+
+                    Actions.onBypassControlOperate?.Invoke();
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+    }
     public void Touch0Contact_started(InputAction.CallbackContext context)
     {
         primaryClickStarted = context.ReadValue<float>();
@@ -173,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
     private void Touch0Contact_canceled(InputAction.CallbackContext context)
     {
-
+        UnityEngine.Cursor.SetCursor(handOpen, new Vector2(handOpen.width / 2, handOpen.height / 2), CursorMode.Auto);
         primaryClickStarted = context.ReadValue<float>();
         // primaryClickPerformed = context.ReadValue<float>();
         OnPanCanceled?.Invoke();
@@ -194,6 +243,7 @@ public class PlayerController : MonoBehaviour
 
 
             isOperableObject = false;
+            prevOperableObject = operableObject;
             operableObject = null;
             _operableTestGaugeObject = null;
             primaryTouchStartPos = Vector3.zero;
@@ -207,15 +257,12 @@ public class PlayerController : MonoBehaviour
     private void Touch0Contact_performed(InputAction.CallbackContext context)
     {
 
-        // primaryClickPerformed = context.ReadValue<float>();
-        // if (primaryTouchPerformed == false)
-        // {
-        //     primaryTouchPerformed = true;
-        // }
-        // else
-        // {
-        //     primaryTouchPerformed = false;
-        // }
+        primaryClickPerformed = context.ReadValue<float>();
+        if (primaryTouchPerformed == true)
+        {
+            primaryTouchPerformed = false;
+        }
+
 
     }
 
@@ -229,7 +276,7 @@ public class PlayerController : MonoBehaviour
     {
         secondaryTouchStarted = context.ReadValueAsButton();
 
-
+        primaryTouchPerformed = false;
         onZoomStop?.Invoke();
     }
 
@@ -274,10 +321,12 @@ public class PlayerController : MonoBehaviour
             operableObject = hit.collider.transform.gameObject;
 
             _operableObjectRotation = operableObject.transform.rotation.eulerAngles;
+            UnityEngine.Cursor.SetCursor(handClosed, new Vector2(handClosed.width / 2, handClosed.height / 2), CursorMode.Auto);
         }
 
         else
         {
+
             _operableTestGaugeObject = null;
             operableObject = null;
             isOperableObject = false;
@@ -312,29 +361,8 @@ public class PlayerController : MonoBehaviour
     private void ClickOperate()
     {
 
-        ///Click/press---------------------------------------------------------------------------------
-        if (OperableObject != null && uiClickFilter.isUiClicked == false)
-        {
+        DelayFilterReading = StartCoroutine(Delay());
 
-            if (_operableObjectRotation.z > 0)
-            {
-                _operableObjectRotation.z = 0;
-            }
-            else if (_operableObjectRotation.z <= 0)
-            {
-                _operableObjectRotation.z = 90;
-
-            }
-            if (operableComponentDescription.componentId == OperableComponentDescription.ComponentId.HighBleed)
-            {
-
-                Actions.onHighBleedOperate?.Invoke();
-            }
-        }
-
-
-
-        ///End Click/press------------------------------------------------------------------------------
     }
 
     private void Start() { }

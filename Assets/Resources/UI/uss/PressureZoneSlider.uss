@@ -1,23 +1,6 @@
 .pressure-zone-slider {
-    height: 100%;
-}
-
-.pressure-panel-3 {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-}
-
-.pressure-panel-2 {
-    position: absolute;
-    left: 525px;
-    top: 250px;
-    right: 0;
-}
-
-.pressure-zone-slider {
-    height: 103px;
+    padding-bottom: 10px;
+    margin-left: 10px;
 }
 
 .unity-slider__label {
@@ -29,7 +12,27 @@
 
 #unity-tracker {
     background-color: rgb(255, 255, 255);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .absolute-reposition {
+}
+
+#slider-value #Label {
+}
+
+#slider-value {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5;
+    -unity-text-align: upper-center;
+    font-size: 18px;
+}
+
+.floating {
+}
+
+.dummy-dragger {
 }

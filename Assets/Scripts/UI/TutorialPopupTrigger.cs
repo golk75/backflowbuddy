@@ -25,7 +25,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     private const string ResetButtonString = "ResetButton";
     private const string PauseButtonString = "PauseButton";
     private const string PlayButtonString = "PlayButton";
-    private const string SupplyPanelString = "SupplyPressure__panel";
+    private const string SupplyPanelString = "SupplyPressureZone__panel";
     private const string Zone2PanelString = "PressureZone__two_panel";
     private const string Zone3PanelString = "PressureZone__three_panel";
     //visual elements to animate 
@@ -92,12 +92,7 @@ public class TutorialPopupTrigger : MonoBehaviour
     public List<VisualElement> OriginalElementsToAnimateCopy = new();
 
 
-    //Vectors
-
-
-    //throw away
     public int m_popupIndex = 0;
-
 
 
     //DOTween
@@ -105,7 +100,12 @@ public class TutorialPopupTrigger : MonoBehaviour
     Tween ShrinkTween;
     Tween GrowTween2;
     Tween ShrinkTween2;
-
+    Tween GrowTween3;
+    Tween ShrinkTween3;
+    public Ease GrowEase;
+    public Ease ShrinkEase;
+    public Vector3 tweenScaleUp = new Vector3(1.2f, 1.2f, 1.2f);
+    public float tweenScaleUpSpeed;
 
 
     private void Awake()
@@ -182,7 +182,6 @@ public class TutorialPopupTrigger : MonoBehaviour
             for (int j = 0; j < flashingElementList.Count; j++)
             {
                 flashingElementList[j].transform.position = originalElementList[j].LocalToWorld(o_pos);
-
             }
 
 
@@ -225,40 +224,80 @@ public class TutorialPopupTrigger : MonoBehaviour
             GrowTween = DOTween.To(()
                     => elements[0].transform.scale,
                     x => elements[0].transform.scale = x,
-                    new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
-                    .SetEase(Ease.Linear);
+                    tweenScaleUp, tweenScaleUpSpeed)
+                    .SetEase(GrowEase);
 
             ShrinkTween = DOTween.To(()
                             => elements[0].transform.scale,
                             x => elements[0].transform.scale = x,
-                            new Vector3(1f, 1f, 1f), 0.5f)
-                            .SetEase(Ease.Linear);
+                            new Vector3(1f, 1f, 1f), tweenScaleUpSpeed)
+                            .SetEase(ShrinkEase);
         }
-        else
+        else if (elements.Count == 2)
         {
             GrowTween = DOTween.To(()
                     => elements[0].transform.scale,
                     x => elements[0].transform.scale = x,
-                    new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
-                    .SetEase(Ease.Linear);
+                    tweenScaleUp, tweenScaleUpSpeed)
+                    .SetEase(GrowEase);
 
             ShrinkTween = DOTween.To(()
                             => elements[0].transform.scale,
                             x => elements[0].transform.scale = x,
-                            new Vector3(1f, 1f, 1f), 0.5f)
-                            .SetEase(Ease.Linear);
+                            new Vector3(1f, 1f, 1f), tweenScaleUpSpeed)
+                            .SetEase(ShrinkEase);
 
             GrowTween2 = DOTween.To(()
                                => elements[1].transform.scale,
                                x => elements[1].transform.scale = x,
-                               new Vector3(1.2f, 1.2f, 1.2f), 0.5f)
-                               .SetEase(Ease.Linear);
+                               tweenScaleUp, tweenScaleUpSpeed)
+                               .SetEase(GrowEase);
 
             ShrinkTween2 = DOTween.To(()
                               => elements[1].transform.scale,
                               x => elements[1].transform.scale = x,
-                              new Vector3(1f, 1f, 1f), 0.5f)
-                              .SetEase(Ease.Linear);
+                              new Vector3(1f, 1f, 1f), tweenScaleUpSpeed)
+                              .SetEase(ShrinkEase);
+
+        }
+        else if (elements.Count == 3)
+        {
+
+            GrowTween = DOTween.To(()
+                    => elements[0].transform.scale,
+                    x => elements[0].transform.scale = x,
+                    tweenScaleUp, tweenScaleUpSpeed)
+                    .SetEase(GrowEase);
+
+            ShrinkTween = DOTween.To(()
+                            => elements[0].transform.scale,
+                            x => elements[0].transform.scale = x,
+                            new Vector3(1f, 1f, 1f), tweenScaleUpSpeed)
+                            .SetEase(ShrinkEase);
+
+            GrowTween2 = DOTween.To(()
+                               => elements[1].transform.scale,
+                               x => elements[1].transform.scale = x,
+                               tweenScaleUp, tweenScaleUpSpeed)
+                               .SetEase(GrowEase);
+
+            ShrinkTween2 = DOTween.To(()
+                              => elements[1].transform.scale,
+                              x => elements[1].transform.scale = x,
+                              new Vector3(1f, 1f, 1f), tweenScaleUpSpeed)
+                              .SetEase(ShrinkEase);
+
+            GrowTween3 = DOTween.To(()
+                              => elements[2].transform.scale,
+                              x => elements[2].transform.scale = x,
+                              tweenScaleUp, tweenScaleUpSpeed)
+                              .SetEase(GrowEase);
+
+            ShrinkTween3 = DOTween.To(()
+                              => elements[2].transform.scale,
+                              x => elements[2].transform.scale = x,
+                              new Vector3(1f, 1f, 1f), tweenScaleUpSpeed)
+                              .SetEase(ShrinkEase);
         }
     }
 
@@ -312,10 +351,20 @@ public class TutorialPopupTrigger : MonoBehaviour
                     break;
                 case 6:
                     ElementsToAnimate.Add(m_SupplyPanel_flashing);
+                    ElementsToAnimate.Add(m_Zone2_flashing);
+                    ElementsToAnimate.Add(m_Zone3_flashing);
                     OriginalElementsToAnimateCopy.Add(m_SupplyPanel);
-                    // ElementsToAnimateArr[0, 0] = m_FillButton_flashing;
+                    OriginalElementsToAnimateCopy.Add(m_PressureZone2Panel);
+                    OriginalElementsToAnimateCopy.Add(m_PressureZone3Panel);
+                    // ElementsToAnimateArr[0, 0] = m_MenuButton_flashing;
                     break;
                 case 7:
+                    ElementsToAnimate.Add(m_SupplyPanel_flashing);
+                    OriginalElementsToAnimateCopy.Add(m_SupplyPanel);
+
+                    // ElementsToAnimateArr[0, 0] = m_FillButton_flashing;
+                    break;
+                case 8:
                     ElementsToAnimate.Add(m_Zone2_flashing);
                     ElementsToAnimate.Add(m_Zone3_flashing);
                     OriginalElementsToAnimateCopy.Add(m_PressureZone2Panel);
@@ -326,7 +375,7 @@ public class TutorialPopupTrigger : MonoBehaviour
                     // ElementsToAnimateArr[1, 1] = m_PressureZone3Panel;
 
                     break;
-                case 8:
+                case 9:
                     ElementsToAnimate.Clear();
                     OriginalElementsToAnimateCopy.Clear();
                     break;
@@ -378,7 +427,15 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         SaveTutorialPrefs(1);
         DOTween.KillAll();
-        SceneManager.LoadSceneAsync(m_DCPlayScene);
+        if (SceneManager.GetActiveScene().name == "RPZPlayScene")
+        {
+            SceneManager.LoadSceneAsync("RPZPlayScene");
+        }
+        else if (SceneManager.GetActiveScene().name == m_DCPlayScene)
+        {
+            SceneManager.LoadSceneAsync(m_DCPlayScene);
+        }
+
     }
 
     //cache tutorial skipping preference to device memory
@@ -462,7 +519,17 @@ public class TutorialPopupTrigger : MonoBehaviour
 
         Sequence mySequence;
         Sequence mySequence2;
-        if (ElementsToAnimate.Count > 1)
+        Sequence mySequence3;
+        if (ElementsToAnimate.Count == 1)
+        {
+
+            mySequence = DOTween.Sequence();
+            mySequence.Append(GrowTween).Append(ShrinkTween).SetEase(Ease.Linear).SetLoops(-1);
+
+            yield return mySequence.WaitForKill();
+
+        }
+        else if (ElementsToAnimate.Count == 2)
         {
 
             mySequence = DOTween.Sequence();
@@ -473,16 +540,20 @@ public class TutorialPopupTrigger : MonoBehaviour
             yield return mySequence.WaitForKill();
 
         }
-
-        else
+        else if (ElementsToAnimate.Count == 3)
         {
 
             mySequence = DOTween.Sequence();
+            mySequence2 = DOTween.Sequence();
+            mySequence3 = DOTween.Sequence();
             mySequence.Append(GrowTween).Append(ShrinkTween).SetEase(Ease.Linear).SetLoops(-1);
+            mySequence2.Append(GrowTween2).Append(ShrinkTween2).SetEase(Ease.Linear).SetLoops(-1);
+            mySequence3.Append(GrowTween3).Append(ShrinkTween3).SetEase(Ease.Linear).SetLoops(-1);
 
             yield return mySequence.WaitForKill();
 
         }
+
 
 
 

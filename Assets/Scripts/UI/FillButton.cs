@@ -1,4 +1,5 @@
 
+using System.Security;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
 using UnityEngine;
@@ -12,12 +13,14 @@ public class FillButton : MonoBehaviour
     public GameObject Check1;
     public GameObject Check2;
     public GameObject ShutOff1;
-    public WaterController waterController;
+    public DCWaterController dcWaterController;
+    public RPZWaterController rPZWaterController;
     public TestCockController testCockController;
     OperableComponentDescription ShutOff1OperableDescription;
     public PlayerController playerController;
     public ShutOffValveController shutOffValveController;
     public DoubleCheckTestKitController doubleCheckTestKitController;
+    public RpzTestKitController rpzTestKitController;
     public GameObject SO1;
     public ZibraLiquidForceField check1HousingFF;
     public ZibraLiquidForceField check2HousingFF;
@@ -50,7 +53,7 @@ public class FillButton : MonoBehaviour
 
     public void FillDevice()
     {
-        if (waterController.supplyPsi >= 0)
+        if (dcWaterController.supplyPsi >= 0)
         {
             liquid.ReleaseSimulation();
             liquid.InitialState = ZibraLiquid.InitialStateType.BakedLiquidState;

@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: ZonePressures
   m_EditorClassIdentifier: 
   header: Zone Pressure Control
-  content: The individual check spring strenghts are displayed here. These values
-    are derived from the Supply Control panel we saw earlier. You can tweak these
-    values with the slider.
+  content: Individual zone pressures can be observed here. You can add or remove
+    pressure within each zone adjusting the slider up or down.
