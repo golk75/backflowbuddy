@@ -46,7 +46,6 @@
 .game-menu-button:hover {
     align-self: center;
     width: 100%;
-    cursor: initial;
     color: rgb(54, 55, 63);
     -unity-font-style: bold;
     background-color: rgb(98, 178, 245);
@@ -59,7 +58,6 @@
 .game-menu-button:active {
     align-self: center;
     width: 100%;
-    cursor: initial;
     color: rgb(54, 55, 63);
     -unity-font-style: bold;
     background-color: rgb(255, 255, 255);
@@ -78,7 +76,6 @@
     width: 30px;
     height: 30px;
     justify-content: flex-start;
-    cursor: initial;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
@@ -96,7 +93,6 @@
     width: auto;
     height: auto;
     align-self: auto;
-    cursor: initial;
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
     font-size: 17px;
@@ -111,7 +107,6 @@
     width: 30px;
     height: 30px;
     justify-content: flex-start;
-    cursor: initial;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);

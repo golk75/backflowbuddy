@@ -1,4 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/test.uss?fileID=7433441132597879392&amp;guid=7568ae93da2134005863ba752101ee6e&amp;type=3#test" />
-    <ui:VisualElement class="floating" style="flex-grow: 0; background-color: rgb(255, 131, 131); width: 141px; height: 121px; left: 276px; top: 273px;" />
-</ui:UXML>

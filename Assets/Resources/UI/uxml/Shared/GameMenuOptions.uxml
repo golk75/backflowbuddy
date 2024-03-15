@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/Resources/UI/uss/GameMenuOptions.uss?fileID=7433441132597879392&amp;guid=71207e421da21479195f56ca423ee95a&amp;type=3#GameMenuOptions" />
     <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreenUi.uss?fileID=7433441132597879392&amp;guid=9d019c51a23314a4ba6172303a84226e&amp;type=3#DCPlayScreenUi" />
     <GameMenuOptions name="GameMenuOptions" class="screen">
-        <ui:VisualElement name="GameMenuOptions_panel" class="game-menu-screen-anchor floating">
+        <ui:VisualElement name="GameMenuOptions_panel" class="game-menu-screen-anchor">
             <ui:VisualElement name="GameMenuScreen_overlay" class="pause-screen-button pause-screen-overlay" />
             <ui:VisualElement name="GameMenuScreen_panel" class="game-menu-panel">
                 <ui:VisualElement name="GameMenuScreen_header" class="pause-screen-header game-menu-header">

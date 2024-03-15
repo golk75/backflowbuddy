@@ -11,11 +11,11 @@
         <ui:VisualElement name="SceneContainer" tabindex="0" focusable="false" class="scene-container" style="cursor: resource(&apos;UI/Textures/icons8-hand-32&apos;);">
             <ui:VisualElement name="Top_container" class="scene-top-container">
                 <ui:VisualElement name="ButtonWrapper" picking-mode="Ignore" class="button-wrapper">
-                    <ui:Button name="MenuButton" focusable="false" class="menu-button button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_15_list_.png?fileID=2800000&amp;guid=32a4f33563139ce4da97630a9d7a3722&amp;type=3#T_15_list_&apos;);" />
-                    <ui:Button name="FillButton" focusable="false" class="fill-button button floating" />
-                    <ui:Button display-tooltip-when-elided="false" name="ResetButton" focusable="false" class="button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_19_previoust2_.png?fileID=2800000&amp;guid=ce5dfcf0b45530443bd2fbf805c38d52&amp;type=3#T_19_previoust2_&apos;);" />
-                    <ui:Button name="PauseButton" focusable="false" class="fill-button button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_8_pause_.png?fileID=2800000&amp;guid=a1bda28f797f71c4db09f6a0d4af4759&amp;type=3#T_8_pause_&apos;);" />
-                    <ui:Button name="PlayButton" focusable="false" class="fill-button button floating" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_6_continue_.png?fileID=2800000&amp;guid=d42cfe7bed8439c439378d1a7e76f4e3&amp;type=3#T_6_continue_&apos;);" />
+                    <ui:Button name="MenuButton" focusable="false" class="menu-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_15_list_.png?fileID=2800000&amp;guid=32a4f33563139ce4da97630a9d7a3722&amp;type=3#T_15_list_&apos;);" />
+                    <ui:Button name="FillButton" focusable="false" class="fill-button button" />
+                    <ui:Button display-tooltip-when-elided="false" name="ResetButton" focusable="false" class="button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_19_previoust2_.png?fileID=2800000&amp;guid=ce5dfcf0b45530443bd2fbf805c38d52&amp;type=3#T_19_previoust2_&apos;);" />
+                    <ui:Button name="PauseButton" focusable="false" class="fill-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_8_pause_.png?fileID=2800000&amp;guid=a1bda28f797f71c4db09f6a0d4af4759&amp;type=3#T_8_pause_&apos;);" />
+                    <ui:Button name="PlayButton" focusable="false" class="fill-button button" style="background-image: url(&apos;project://database/Assets/Clean%20Vector%20Icons/T_6_continue_.png?fileID=2800000&amp;guid=d42cfe7bed8439c439378d1a7e76f4e3&amp;type=3#T_6_continue_&apos;);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="LowBleedStatus_container" style="left: 177px; top: 60px; font-size: 31px; -unity-font-style: bold; -unity-text-align: middle-center; align-items: center; width: 25px; display: none;">
                     <ui:VisualElement name="closed-label" class="closed-knob-indicator" style="display: none; opacity: 1;" />
