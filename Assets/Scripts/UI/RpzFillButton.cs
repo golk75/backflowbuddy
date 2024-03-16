@@ -47,13 +47,13 @@ public class RpzFillButton : MonoBehaviour
             liquid.enabled = true;
             liquid.InitializeSimulation();
 
-            playerController.operableObject = ShutOff1;
-            playerController.operableComponentDescription = ShutOff1OperableDescription;
+            // playerController.operableObject = ShutOff1;
+            // playerController.operableComponentDescription = ShutOff1OperableDescription;
 
 
 
-            playerController._operableObjectRotation.z = 0;
-            playerController._operableObjectRotation.y = 180;
+            // playerController._operableObjectRotation.z = 0;
+            // playerController._operableObjectRotation.y = 180;
 
 
             foreach (GameObject testCock in rpzTestKitController.StaticTestCockList)

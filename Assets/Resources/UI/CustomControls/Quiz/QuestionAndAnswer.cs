@@ -7,9 +7,12 @@ public class QuestionAndAnswer : VisualElement
 {
 
 
-    public VisualElement m_RpzPopup;
-    public VisualElement m_DCPlayScreen;
-    public VisualElement m_DeviceSelectionScreen;
+    VisualElement m_RpzPopup;
+    VisualElement m_DCPlayScreen;
+
+    StyleSheet m_PortraitStyleSheet;
+    StyleSheet m_LandscapeStyleSheet;
+
 
     public new class UxmlFactory : UxmlFactory<QuestionAndAnswer, UxmlTraits> { }
 
