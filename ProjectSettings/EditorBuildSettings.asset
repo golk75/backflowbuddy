@@ -15,6 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/RPZ/RPZPlayScene.unity
     guid: 7946e9ac53e6f44a5b3f6262aed959cf
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
+      guid: 1ecc540dfebd34a9099e7492f8e56d49, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 30df0976a818842158d9427757b3b14d,
       type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,

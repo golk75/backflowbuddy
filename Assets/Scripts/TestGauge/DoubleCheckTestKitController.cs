@@ -213,7 +213,7 @@ public class DoubleCheckTestKitController : MonoBehaviour
     HoseDetector m_hoseDetector4;
     public bool Check1TestComplete;
     public bool Check1TestInProgress;
-
+    private float hosePressureRef;
 
     public bool Check2TestComplete { get; private set; }
     public bool Check2TestInProgress { get; private set; }
@@ -1233,10 +1233,11 @@ public class DoubleCheckTestKitController : MonoBehaviour
             // }
 
 
-            DOTween.To(()
-                         => hosePressure,
-                         x => hosePressure = x,
-                          differentialPressure, needleTweenSpeed).SetEase(Ease.Linear);
+            // DOTween.To(()
+            //              => hosePressure,
+            //              x => hosePressure = x,
+            //               differentialPressure, needleTweenSpeed).SetEase(Ease.Linear);
+            hosePressure = Mathf.SmoothDamp(hosePressure, differentialPressure, ref hosePressureRef, needleTweenSpeed, 1);
 
 
             m_GaugeReading = hosePressure * 10;

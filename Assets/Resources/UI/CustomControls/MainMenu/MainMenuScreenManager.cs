@@ -47,7 +47,7 @@ public class MainMenuScreenManager : VisualElement
     void OnGeometryChange(GeometryChangedEvent evt)
     {
 
-
+        
 
         m_MainMenuScreen = this.Q("MainMenuScreen");
         m_LearnScreen = this.Q("LearnScreen");
@@ -100,8 +100,8 @@ public class MainMenuScreenManager : VisualElement
     private void EnableLearnScreen()
     {
         m_LearnScreenComingSoonPopup.style.display = DisplayStyle.Flex;
-        // m_MainMenuScreen.style.display = DisplayStyle.None;
-        // m_LearnScreen.style.display = DisplayStyle.Flex;
+       //  m_MainMenuScreen.style.display = DisplayStyle.None;
+         //m_LearnScreen.style.display = DisplayStyle.Flex;
     }
 
 

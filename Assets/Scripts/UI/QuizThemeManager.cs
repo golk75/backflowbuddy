@@ -16,19 +16,7 @@ public class QuizThemeManager : MonoBehaviour
         root = uIDocument.rootVisualElement;
 
 
-        // button.clicked += () =>
-        // {
-        //     if (root.styleSheets.Contains(theme1))
-        //     {
-        //         root.styleSheets.Remove(theme1);
-        //         root.styleSheets.Add(theme2);
-        //     }
-        //     else
-        //     {
-        //         root.styleSheets.Remove(theme2);
-        //         root.styleSheets.Add(theme1);
-        //     }
-        // };
+
     }
     void Update()
     {
@@ -49,6 +37,24 @@ public class QuizThemeManager : MonoBehaviour
             Debug.Log($"landscape");
 
         }
+
+        // if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+        // {
+
+        //     root.styleSheets.Remove(portraitTheme);
+        //     root.styleSheets.Add(landscapeTheme);
+        //     Debug.Log($"landscape");
+
+
+        // }
+        // else
+        // {
+        //     root.styleSheets.Remove(landscapeTheme);
+        //     root.styleSheets.Add(portraitTheme);
+        //     Debug.Log($"portrait");
+        // }
+
+
     }
 
 

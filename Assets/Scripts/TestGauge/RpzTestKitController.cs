@@ -1400,11 +1400,11 @@ public class RpzTestKitController : MonoBehaviour
             }
 
 
-            DOTween.To(()
-                         => hosePressure,
-                         x => hosePressure = x,
-                          differentialPressure, needleTweenSpeed).SetEase(Ease.Linear);
-
+            // DOTween.To(()
+            //              => hosePressure,
+            //              x => hosePressure = x,
+            //               differentialPressure, needleTweenSpeed).SetEase(Ease.Linear);
+            hosePressure = Mathf.SmoothDamp(hosePressure, differentialPressure, ref hosePressureRef, needleTweenSpeed, 1);
 
 
 
