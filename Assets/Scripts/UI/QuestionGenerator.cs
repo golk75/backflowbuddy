@@ -97,7 +97,7 @@ public class QuestionGenerator : MonoBehaviour
             if (random == 0 && !correctAnswerSelected)
             {
                 correctAnswer = i;
-                // Debug.Log($"answerButtons[i]: {answerButtons[correctAnswer].name}");
+                //set correct answer to a button
                 correctAnswerButton = answerButtons[correctAnswer];
                 correctAnswerSelected = true;
             }
@@ -119,97 +119,8 @@ public class QuestionGenerator : MonoBehaviour
 
         answerButtons = root.rootVisualElement.Query(className: "answer-button").ToList();
 
-        foreach (var button in answerButtons)
-        {
-            Debug.Log($"{button.name}");
-            // answerButtons.Add((Button)button);
-
-
-        }
-
-
 
 
     }
 
-    // private void AnswerButtonClicked(PointerDownEvent evt)
-    // {
-    //     if (evt.target == correctAnswerButton)
-    //     {
-
-    //     }
-
-    // }
-
-    // private void SelectNewQuestion()
-    // {
-    //     //Get random question
-    //     int randomIndex = Random.Range(0, questions.Count);
-
-    //     //set currentquestion to randIndex
-    //     currentQuestion = questions[randomIndex];
-
-    //     //remove this question to avoid repeating
-    //     questions.RemoveAt(randomIndex);
-    // }
-
-    // private void SetQuestionVisualElement()
-    // {
-    //     questionLabel.text = currentQuestion.question;
-    // }
-
-    // private void SetAnswerData()
-    // {
-    //     //randomize answer button order
-    //     List<string> answers = RandomizeAnswers(new List<string>(currentQuestion.answers));
-
-    //     //set answer buttons
-    //     for (int i = 0; i < answerButtons.Count; i++)
-    //     {
-    //         bool isCorrect = false;
-
-    //         if (i == correctAnswer)
-    //         {
-    //             isCorrect = true;
-    //             correctAnswerButton = answerButtons[i];
-    //             correctAnswerButton.text = correctAnswerText;
-    //         }
-    //         else
-    //         {
-    //             answerButtons[i].text = answers[i];
-    //         }
-    //         // answerButtons[i].SetIsCorrect(isCorrect);
-    //         // answerButtons[i].SetAnswer(answers[i]);
-
-    //     }
-
-
-    // }
-
-    // private List<string> RandomizeAnswers(List<string> originalList)
-    // {
-    //     bool correctAnswerSelected = false;
-    //     List<string> newList = new List<string>();
-    //     for (int i = 0; i < answerButtons.Count; i++)
-    //     {
-    //         int random = Random.Range(0, originalList.Count);
-    //         if (random == 0 && !correctAnswerSelected)
-    //         {
-    //             correctAnswer = i;
-    //             correctAnswerText = originalList[random];
-    //             correctAnswerSelected = true;
-    //         }
-    //         newList.Add(originalList[random]);
-    //         originalList.RemoveAt(random);
-    //     }
-    //     return newList;
-    // }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
