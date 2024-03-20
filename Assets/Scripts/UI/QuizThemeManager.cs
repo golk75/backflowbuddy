@@ -25,7 +25,7 @@ public class QuizThemeManager : MonoBehaviour
 
             root.styleSheets.Remove(landscapeTheme);
             root.styleSheets.Add(portraitTheme);
-            Debug.Log($"portrait");
+
 
 
 
@@ -34,7 +34,7 @@ public class QuizThemeManager : MonoBehaviour
         {
             root.styleSheets.Remove(portraitTheme);
             root.styleSheets.Add(landscapeTheme);
-            Debug.Log($"landscape");
+
 
         }
 

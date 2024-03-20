@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(fileName = "TutorialPopUpScriptableObject", menuName = "TutorialPopUpObjects/ PopUp")]
+[CreateAssetMenu(fileName = "TutorialPopUpScriptableObject", menuName = "TutorialPopUpObject/ PopUp")]
 public class TutorialPopUpScriptableObject : ScriptableObject
 {
     public string header;

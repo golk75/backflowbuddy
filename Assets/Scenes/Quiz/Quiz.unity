@@ -392,6 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1662340543}
   - component: {fileID: 1662340544}
+  - component: {fileID: 1662340545}
   m_Layer: 0
   m_Name: QuizManager
   m_TagString: Untagged
@@ -432,6 +433,21 @@ MonoBehaviour:
   portraitTheme: {fileID: 7433441132597879392, guid: c93d8e952e6d7487b9f61948a4b4ec20,
     type: 3}
   uIDocument: {fileID: 603293674}
+--- !u!114 &1662340545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662340542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4e9e23dbb424cb398fd00651107edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questions: []
+  root: {fileID: 603293674}
+  correctAnswerText: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
