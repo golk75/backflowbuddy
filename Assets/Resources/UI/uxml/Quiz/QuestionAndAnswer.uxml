@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Resources/UI/uss/QuizManager-portrait.uss?fileID=7433441132597879392&amp;guid=c93d8e952e6d7487b9f61948a4b4ec20&amp;type=3#QuizManager-portrait" />
     <QuestionAndAnswer class="screen" style="width: 100%; height: 100%; position: absolute;">
         <ui:VisualElement name="QuestionAndAnswer-panel" class="qa-panel" style="justify-content: space-around;">
             <ui:VisualElement name="question-tracking" class="question-tracker">
@@ -15,7 +14,6 @@
                     <ui:Button text="A DOUBLE CHECK BACKFLOW PREVENTION ASSEMBLY TEST AND MAINTENANCE REPORT SHALL INCLUDE ALL OF THE FOLLOWING INFORMATION EXCEPT THE:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Answer-C" class="answer-button" />
                     <ui:Button text="A DOUBLE CHECK BACKFLOW PREVENTION ASSEMBLY TEST AND MAINTENANCE REPORT SHALL INCLUDE ALL OF THE FOLLOWING INFORMATION EXCEPT THE:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Answer-D" class="answer-button" />
                 </ui:VisualElement>
-                <ui:VisualElement name="Answer_bot_row" class="answer-row" />
             </ui:VisualElement>
         </ui:VisualElement>
     </QuestionAndAnswer>

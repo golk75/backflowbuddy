@@ -50,5 +50,6 @@ public static class Actions
     public static Action onSupplyClosed;
     public static Action onRVOPTest;
 
-
+    //quiz
+    public static Action EndOfQuizQuestions;
 }

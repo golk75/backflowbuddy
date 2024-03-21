@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/UI/uss/QuizManager-main.uss?fileID=7433441132597879392&amp;guid=78761c9a3212048ac99a199ea87731eb&amp;type=3#QuizManager-main" />
+    <EndOfQuiz name="EndOfQuiz" class="screen">
+        <ui:VisualElement name="EndOfQuizContainer" style="flex-grow: 1; background-color: rgb(38, 38, 38);">
+            <ui:VisualElement name="EndOfQuizPanel" class="end-of-quiz-panel">
+                <ui:Label tabindex="-1" text="End of Quiz" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ResultsPanel" style="flex-grow: 1; background-color: rgb(115, 5, 164);">
+                <ui:Label tabindex="-1" text="Results" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:ListView show-border="true" show-foldout-header="false" header-title="Results Scroll List" show-add-remove-footer="true" style="background-color: rgb(0, 0, 179);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </EndOfQuiz>
+</ui:UXML>

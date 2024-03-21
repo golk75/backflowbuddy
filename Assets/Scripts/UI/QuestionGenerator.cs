@@ -7,6 +7,11 @@ public class QuestionGenerator : MonoBehaviour
 {
     //visual element strings
     const string QuestionContainerString = "QuestionContiner";
+    const string EndOfQuizPanelString = "EndOfQuizPanelScreen";
+    const string QuestionAndAnswerString = "QuestionAndAnswer";
+
+
+
 
     [SerializeField]
     private List<QuestionData> questions;
@@ -16,6 +21,8 @@ public class QuestionGenerator : MonoBehaviour
     [SerializeField]
     private List<VisualElement> Buttons;
     private List<VisualElement> answerButtons;
+    private VisualElement endOfQuizPanel;
+    private VisualElement QuestionAndAnswerPanel;
     [SerializeField]
     private VisualElement correctAnswerButton;
     [SerializeField]
@@ -23,7 +30,10 @@ public class QuestionGenerator : MonoBehaviour
     // [SerializeField]
     // private List<AnswerButton> answerButtons;
     private int correctAnswer;
-
+    private List<QuestionData> AnsweredQuestions;
+    private List<QuestionData> FalggedQuestions;
+    [SerializeField]
+    private List<QuestionData> IncorrectlyAnsweredQuestions;
 
     void Awake()
     {
@@ -46,25 +56,60 @@ public class QuestionGenerator : MonoBehaviour
     {
         foreach (var ele in answerButtons)
         {
-            ele.RegisterCallback<PointerDownEvent>(
-                evt =>
-                {
-                    //Correct answer selection
-                    if (evt.target == correctAnswerButton)
-                    {
-                        Debug.Log($"CORRECT ANSWER!");
-                    }
-                    //Incorrect answer selection
-                    else
-                    {
-                        Debug.Log($"WRONG ANSWER!");
-                    }
+            // ele.RegisterCallback<PointerDownEvent>(
+            //     evt =>
+            //     {
+            //         //Correct answer selection
+            //         if (evt.target == correctAnswerButton)
+            //         {
+            //             Debug.Log($"CORRECT ANSWER!");
+            //             SelectNewQuestion();
+            //             SetQuestionLabel();
+            //             SetAnswerLabels();
+            //         }
+            //         //Incorrect answer selection
+            //         else
+            //         {
+            //             Debug.Log($"WRONG ANSWER!");
+            //         }
 
-                }, TrickleDown.TrickleDown);
+            //     }, TrickleDown.TrickleDown);
+            ele.RegisterCallback<PointerUpEvent>(
+               evt =>
+               {
+                   //Correct answer selection
+                   if (evt.target == correctAnswerButton)
+                   {
+                       Debug.Log($"CORRECT ANSWER!");
+                       SelectNewQuestion();
+                       SetQuestionLabel();
+                       SetAnswerLabels();
+                   }
+                   //Incorrect answer selection
+                   else
+                   {
+
+                       Debug.Log($"WRONG ANSWER!");
+                       IncorrectlyAnsweredQuestions.Add(currentQuestion);
+                       SelectNewQuestion();
+                       SetQuestionLabel();
+                       SetAnswerLabels();
+
+                   }
+
+               }, TrickleDown.TrickleDown);
+
         }
     }
+
     private void SelectNewQuestion()
     {
+        if (questions.Count == 0)
+        {
+            EnableEndOfQuizPanel();
+            return;
+        }
+
         //Get random question
         int randomIndex = Random.Range(0, questions.Count);
 
@@ -119,7 +164,21 @@ public class QuestionGenerator : MonoBehaviour
 
         answerButtons = root.rootVisualElement.Query(className: "answer-button").ToList();
 
+        endOfQuizPanel = root.rootVisualElement.Q(EndOfQuizPanelString);
 
+        QuestionAndAnswerPanel = root.rootVisualElement.Q(QuestionAndAnswerString);
+
+    }
+
+    public void EnableEndOfQuizPanel()
+    {
+        // QuestionAndAnswerPanel.style.display = DisplayStyle.None;
+        endOfQuizPanel.style.display = DisplayStyle.Flex;
+        endOfQuizPanel.BringToFront();
+
+
+
+        Debug.Log($"displaying end of quiz panel");
 
     }
 

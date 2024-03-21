@@ -32,6 +32,7 @@
     padding-left: 7%;
     font-size: 40px;
 }
+
 .answer-button:active {
     scale: 1.1;
     background-color: rgb(0, 0, 0);
@@ -59,9 +60,8 @@
     padding-right: 49px;
     padding-bottom: 49px;
     padding-left: 49px;
-    
-    
 }
+
 .question-container {
     background-color: rgb(255, 255, 255);
     border-left-color: rgba(0, 0, 0, 0);
@@ -107,9 +107,7 @@
     -unity-text-align: middle-center;
 }
 
-
-
-.answer-button > .unity-button{
+.answer-button > .unity-button {
     font-size: 40px;
 }
 
@@ -127,10 +125,10 @@
     margin-top: 5px;
 }
 
-#question-tracking #Label{
-    font-size: 40px;
-}
-#Label {
+#question-tracking #Label {
     font-size: 40px;
 }
 
+#Label {
+    font-size: 40px;
+}

@@ -6,26 +6,30 @@ using UnityEngine.UIElements;
 public class QuestionAndAnswer : VisualElement
 {
 
+    private const string EndOfQuizPanelString = "EndOfQuizPanel";
 
-    VisualElement m_RpzPopup;
-    VisualElement m_DCPlayScreen;
-
-    StyleSheet m_PortraitStyleSheet;
-    StyleSheet m_LandscapeStyleSheet;
 
 
     public new class UxmlFactory : UxmlFactory<QuestionAndAnswer, UxmlTraits> { }
 
+
+
     public QuestionAndAnswer()
     {
         this.RegisterCallback<GeometryChangedEvent>(OnGeometryChange);
+
+
+
     }
+
 
     void OnGeometryChange(GeometryChangedEvent evt)
     {
 
+
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
+
 
 
 
