@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: aeff93b3a3a8240ebb9316c8ca8e43e7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - QuestionEntryListTemplate: {fileID: 9197481963319205126, guid: cb2492bce68aa4189b7309d23149e07e,
+      type: 3}
+  - uIDocument: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

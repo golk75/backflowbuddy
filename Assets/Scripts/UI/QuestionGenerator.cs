@@ -1,6 +1,8 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 public class QuestionGenerator : MonoBehaviour
@@ -8,8 +10,9 @@ public class QuestionGenerator : MonoBehaviour
     //visual element strings
     const string QuestionContainerString = "QuestionContiner";
     const string EndOfQuizPanelString = "EndOfQuizPanelScreen";
+    const string ReviewResultsString = "ReviewResults";
     const string QuestionAndAnswerString = "QuestionAndAnswer";
-
+    public VisualTreeAsset m_ResultsEntryListTemplate;
 
 
 
@@ -22,22 +25,33 @@ public class QuestionGenerator : MonoBehaviour
     private List<VisualElement> Buttons;
     private List<VisualElement> answerButtons;
     private VisualElement endOfQuizPanel;
+    private VisualElement ReviewResultsScreen;
     private VisualElement QuestionAndAnswerPanel;
     [SerializeField]
     private VisualElement correctAnswerButton;
     [SerializeField]
     private string correctAnswerText;
+    private float totalQuestionCount;
+    private float totalCorrect;
+    private float totalIncorrect;
+
     // [SerializeField]
     // private List<AnswerButton> answerButtons;
+
     private int correctAnswer;
     private List<QuestionData> AnsweredQuestions;
     private List<QuestionData> FalggedQuestions;
-    [SerializeField]
-    private List<QuestionData> IncorrectlyAnsweredQuestions;
+    //[SerializeField]
+    // private List<QuestionData> IncorrectlyAnsweredQuestions;
+
+    public List<QuizResult> QuizResults;
+    private static string resultsPath = "Assets/Resources/QuizResults";
+
 
     void Awake()
     {
         GetQuestionData();
+        totalQuestionCount = questions.Count;
     }
 
     // Start is called before the first frame update
@@ -50,63 +64,66 @@ public class QuestionGenerator : MonoBehaviour
         SetQuestionLabel();
         SetAnswerLabels();
         RegisterCallBacks();
+
     }
 
     private void RegisterCallBacks()
     {
+        QuizResult resultsData;
+
         foreach (var ele in answerButtons)
         {
-            // ele.RegisterCallback<PointerDownEvent>(
-            //     evt =>
-            //     {
-            //         //Correct answer selection
-            //         if (evt.target == correctAnswerButton)
-            //         {
-            //             Debug.Log($"CORRECT ANSWER!");
-            //             SelectNewQuestion();
-            //             SetQuestionLabel();
-            //             SetAnswerLabels();
-            //         }
-            //         //Incorrect answer selection
-            //         else
-            //         {
-            //             Debug.Log($"WRONG ANSWER!");
-            //         }
-
-            //     }, TrickleDown.TrickleDown);
             ele.RegisterCallback<PointerUpEvent>(
                evt =>
                {
+
+
+
                    //Correct answer selection
                    if (evt.target == correctAnswerButton)
                    {
+                       totalCorrect += 1;
+
                        Debug.Log($"CORRECT ANSWER!");
+                       resultsData = ScriptableObject.CreateInstance<QuizResult>();
+                       resultsData.category = currentQuestion.category;
+                       resultsData.question = currentQuestion.question;
+                       resultsData.correctAnswerIndex = correctAnswer;
+                       resultsData.isCorrect = true;
+                       QuizResults.Add(resultsData);
                        SelectNewQuestion();
                        SetQuestionLabel();
                        SetAnswerLabels();
+
                    }
                    //Incorrect answer selection
                    else
                    {
-
                        Debug.Log($"WRONG ANSWER!");
-                       IncorrectlyAnsweredQuestions.Add(currentQuestion);
+                       resultsData = ScriptableObject.CreateInstance<QuizResult>();
+                       resultsData.category = currentQuestion.category;
+                       resultsData.question = currentQuestion.question;
+                       resultsData.correctAnswerIndex = correctAnswer;
+                       resultsData.isCorrect = false;
+                       QuizResults.Add(resultsData);
                        SelectNewQuestion();
                        SetQuestionLabel();
                        SetAnswerLabels();
-
                    }
-
                }, TrickleDown.TrickleDown);
 
         }
+
     }
 
     private void SelectNewQuestion()
     {
         if (questions.Count == 0)
         {
-            EnableEndOfQuizPanel();
+            //custom controller QuizManager.cs listening
+
+            Actions.EndOfQuizQuestions?.Invoke(QuizResults, m_ResultsEntryListTemplate, totalCorrect / totalQuestionCount * 100);
+
             return;
         }
 
@@ -154,7 +171,8 @@ public class QuestionGenerator : MonoBehaviour
     }
     private void GetQuestionData()
     {
-        questions = new List<QuestionData>(Resources.LoadAll<QuestionData>("ScriptableObjects/Quiz"));
+        questions = new List<QuestionData>(Resources.LoadAll<QuestionData>("ScriptableObjects/QuizQuestions"));
+        Debug.Log($"questions.Count = {questions.Count}");
     }
     private void SetVisualElements()
     {
@@ -166,20 +184,14 @@ public class QuestionGenerator : MonoBehaviour
 
         endOfQuizPanel = root.rootVisualElement.Q(EndOfQuizPanelString);
 
+        ReviewResultsScreen = root.rootVisualElement.Q(ReviewResultsString);
+
         QuestionAndAnswerPanel = root.rootVisualElement.Q(QuestionAndAnswerString);
 
     }
 
-    public void EnableEndOfQuizPanel()
+    void Update()
     {
-        // QuestionAndAnswerPanel.style.display = DisplayStyle.None;
-        endOfQuizPanel.style.display = DisplayStyle.Flex;
-        endOfQuizPanel.BringToFront();
-
-
-
-        Debug.Log($"displaying end of quiz panel");
-
+        // Debug.Log($"GetScore()= {GetScore()}");
     }
-
 }

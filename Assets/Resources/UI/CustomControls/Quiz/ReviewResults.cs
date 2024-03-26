@@ -1,70 +1,34 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+
 public class ReviewResults : VisualElement
 {
 
-    private const string EndOfQuizPanelString = "EndOfQuizPanel";
 
-
-    VisualElement endOfQuizPanel;
-    VisualElement QuestionAndAnswer;
-    // List<Button> Buttons;
     public new class UxmlFactory : UxmlFactory<ReviewResults, UxmlTraits> { }
-
+    ListView m_ResultsListView;
 
 
     public ReviewResults()
     {
         this.RegisterCallback<GeometryChangedEvent>(OnGeometryChange);
-
-
     }
+
 
 
     void OnGeometryChange(GeometryChangedEvent evt)
     {
-        SetVisualElements();
-
-
+        m_ResultsListView = this.Q<ListView>("question-list");
+        m_ResultsListView.selectionChanged += EntrySelectionChanged;
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
-
-
-    private void OnDetachFromPanel(DetachFromPanelEvent evt)
+    private void EntrySelectionChanged(IEnumerable<object> enumerable)
     {
-        // Debug.Log($"Detached/end");
-        // Actions.EndOfQuizQuestions -= EnableEndOfQuizPanel;
-        // endOfQuizPanel.style.display = DisplayStyle.None;
+        var selectedCharacter = m_ResultsListView.selectedItem as QuizResult;
+        Debug.Log($"Selected Result Entry selected = {selectedCharacter.question}");
 
     }
-    private void SetVisualElements()
-    {
-        // endOfQuizPanel = this.Q(EndOfQuizPanelString);
-        // endOfQuizPanel.style.display = DisplayStyle.None;
-        // Debug.Log($"endOfQuizPanel: {endOfQuizPanel}");
-
-    }
-    private void RegisterCallbacks()
-    {
-
-        // Actions.EndOfQuizQuestions += EnableEndOfQuizPanel;
-    }
-
-    public void EnableEndOfQuizPanel()
-    {
-        // endOfQuizPanel.style.display = DisplayStyle.Flex;
-        // endOfQuizPanel.BringToFront();
-
-
-        // Debug.Log($"displaying end of quiz panel");
-
-    }
-
-
-
 }

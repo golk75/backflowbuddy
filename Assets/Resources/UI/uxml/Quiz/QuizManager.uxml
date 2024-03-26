@@ -1,14 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="QuizSelection" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizSelection.uxml?fileID=9197481963319205126&amp;guid=d5a46a80fca304587acb8126b7bb6acc&amp;type=3#QuizSelection" />
     <ui:Template name="Quiz" src="project://database/Assets/Resources/UI/uxml/Quiz/QuestionAndAnswer.uxml?fileID=9197481963319205126&amp;guid=06aae5a350b244e5d99d360cd7cfd4a9&amp;type=3#QuestionAndAnswer" />
-    <ui:Template name="EndOfQuizPanel" src="project://database/Assets/Resources/UI/uxml/Quiz/EndOfQuizPanel.uxml?fileID=9197481963319205126&amp;guid=c56c49f2217a04f1dab9647f1fcac4fd&amp;type=3#EndOfQuizPanel" />
-    <ui:Template name="ReviewResults" src="project://database/Assets/Resources/UI/uxml/Quiz/ReviewResults.uxml?fileID=9197481963319205126&amp;guid=a1f39dd0911644121bcf07471b60fe9e&amp;type=3#ReviewResults" />
+    <ui:Template name="ReviewResults" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizResults.uxml?fileID=9197481963319205126&amp;guid=a1f39dd0911644121bcf07471b60fe9e&amp;type=3#QuizResults" />
     <Style src="project://database/Assets/Resources/UI/uss/QuizManager-main.uss?fileID=7433441132597879392&amp;guid=78761c9a3212048ac99a199ea87731eb&amp;type=3#QuizManager-main" />
     <Style src="project://database/Assets/Resources/UI/uss/QuizManager-landscape.uss?fileID=7433441132597879392&amp;guid=5bc42e28443914bfe9250a9672c482b1&amp;type=3#QuizManager-landscape" />
     <QuizManager name="QuizManager" class="screen">
         <ui:Instance template="QuizSelection" name="QuizSelection" class="screen" style="display: none;" />
         <ui:Instance template="Quiz" name="QuestionAndAnswer" class="screen" style="display: flex;" />
-        <ui:Instance template="EndOfQuizPanel" name="EndOfQuizPanelScreen" picking-mode="Ignore" class="screen" style="display: none; position: absolute; width: 100%; height: 100%;" />
-        <ui:Instance template="ReviewResults" name="ReviewResults" class="screen" style="display: none;" />
+        <ui:Instance template="ReviewResults" name="ReviewResults" class="screen" style="display: none; position: absolute; width: 100%; height: 100%;" />
     </QuizManager>
 </ui:UXML>

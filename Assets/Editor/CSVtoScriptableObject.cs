@@ -10,8 +10,8 @@ using UnityEngine;
 
 public class CSVtoScriptableObject
 {
-    private static string questionsCSVPath = "/Editor/CSVs/BackflowBuddyQuizData.csv";
-    private static string questionsPath = "Assets/Resources/ScriptableObjects/Quiz/";
+    private static string questionsCSVPath = "/Editor/CSVs/BackflowBuddyQuizData1.csv";
+    private static string questionsPath = "Assets/Resources/ScriptableObjects/QuizQuestions/";
     private static int numberOfAnswers = 4;
 
     [MenuItem("Utilities/Generate Questions")]
