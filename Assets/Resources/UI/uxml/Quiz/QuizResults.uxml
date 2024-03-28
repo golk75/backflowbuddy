@@ -4,11 +4,13 @@
         <ui:VisualElement name="background">
             <ui:VisualElement name="main-container" style="justify-content: space-between;">
                 <ui:ListView focusable="true" name="question-list" />
-                <ui:VisualElement name="quiz-report-container" style="flex-grow: 0; background-color: rgb(52, 255, 170); margin-right: 10%; width: 50%;">
-                    <ui:VisualElement name="quiz-report" style="flex-grow: 1;">
-                        <ui:Label tabindex="-1" text="Results" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 58px; -unity-text-align: upper-center;" />
+                <ui:VisualElement name="quiz-report-container" class="quiz-report-container">
+                    <ui:VisualElement name="quiz-report" class="quiz-report">
+                        <ui:Label tabindex="-1" text="Result" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 58px; -unity-text-align: upper-center;" />
                         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="percent" style="-unity-text-align: upper-center; font-size: 70px;" />
                     </ui:VisualElement>
+                    <ui:Button text="Retry" parse-escape-sequences="true" display-tooltip-when-elided="true" name="retry-quiz" class="results-report-button retry-quiz-button result-review-button" />
+                    <ui:Button text="Return to Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="return-home" class="results-report-button return-home-button result-review-button" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

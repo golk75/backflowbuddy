@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class ReviewResults : VisualElement
 {
 
+    ListView m_ResultsListView;
+    VisualElement m_QuestionAndAnswerScreen;
+    int scrollReturnIndex;
 
     public new class UxmlFactory : UxmlFactory<ReviewResults, UxmlTraits> { }
-    ListView m_ResultsListView;
+
 
 
     public ReviewResults()
@@ -20,15 +24,14 @@ public class ReviewResults : VisualElement
 
     void OnGeometryChange(GeometryChangedEvent evt)
     {
-        m_ResultsListView = this.Q<ListView>("question-list");
-        m_ResultsListView.selectionChanged += EntrySelectionChanged;
+        // m_QuestionAndAnswerScreen = parent.parent.Q("QuestionAndAnswer");
+        // m_ResultsListView = this.Q<ListView>("question-list");
+
+
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
-    }
-
-    private void EntrySelectionChanged(IEnumerable<object> enumerable)
-    {
-        var selectedCharacter = m_ResultsListView.selectedItem as QuizResult;
-        Debug.Log($"Selected Result Entry selected = {selectedCharacter.question}");
 
     }
+
+
+
 }

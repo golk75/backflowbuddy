@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ResultsListEntryController : MonoBehaviour
+public class ResultsListEntryController
 {
     Label m_ResultQuestionLabel;
 

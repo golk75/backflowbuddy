@@ -53,4 +53,6 @@ public static class Actions
     //quiz
     public static Action<List<QuizResult>, VisualTreeAsset, float> EndOfQuizQuestions;
     public static Action<int> GenerateQuizReport;
+    public static Action<QuizResult, int> GenerateResultsQuestionReview;
+    public static Action<int> returnScrollHandle;
 }

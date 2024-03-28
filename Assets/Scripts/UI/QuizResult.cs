@@ -8,5 +8,7 @@ public class QuizResult : ScriptableObject
     public string category;
     public string[] answers;
     public int correctAnswerIndex;
+    public int chosenAnswer;
+    public int questionNumber;
     public bool isCorrect;
 }
