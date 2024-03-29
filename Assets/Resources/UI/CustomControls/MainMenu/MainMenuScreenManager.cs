@@ -47,7 +47,7 @@ public class MainMenuScreenManager : VisualElement
     void OnGeometryChange(GeometryChangedEvent evt)
     {
 
-        
+
 
         m_MainMenuScreen = this.Q("MainMenuScreen");
         m_LearnScreen = this.Q("LearnScreen");
@@ -67,13 +67,11 @@ public class MainMenuScreenManager : VisualElement
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
-        m_LearnScreenComingSoonPopup?.Q("learn-popup-back-button")?.RegisterCallback<ClickEvent>(evt => CloseLearnPopup());
-        m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
+        m_MainMenuScreen.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
+        // m_LearnScreenComingSoonPopup?.Q("learn-popup-back-button")?.RegisterCallback<ClickEvent>(evt => CloseLearnPopup());
+        // m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
-
-        // m_LearnScreen.style.display = DisplayStyle.None;
-        // m_PlayScreen.style.display = DisplayStyle.None;
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
@@ -99,9 +97,10 @@ public class MainMenuScreenManager : VisualElement
 
     private void EnableLearnScreen()
     {
-        m_LearnScreenComingSoonPopup.style.display = DisplayStyle.Flex;
-       //  m_MainMenuScreen.style.display = DisplayStyle.None;
-         //m_LearnScreen.style.display = DisplayStyle.Flex;
+        m_LearnScreen.style.display = DisplayStyle.None;
+        m_MainMenuScreen.style.display = DisplayStyle.None;
+        m_PlayScreen.style.display = DisplayStyle.None;
+        SceneManager.LoadScene("Quiz");
     }
 
 

@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RPZ/RPZPlayScene.unity
     guid: 7946e9ac53e6f44a5b3f6262aed959cf
+  - enabled: 1
+    path: Assets/Scenes/Quiz/Quiz.unity
+    guid: b3f02087c67f54e7d8ab0049c4b1321c
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: 1ecc540dfebd34a9099e7492f8e56d49, type: 2}
