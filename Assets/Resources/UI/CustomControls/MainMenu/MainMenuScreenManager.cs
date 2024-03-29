@@ -21,8 +21,7 @@ public class MainMenuScreenManager : VisualElement
     private const string MainMenuPlayButtonString = "play-button";
     private const string MainMenuLearnButtonString = "learn-button";
     private const string MainMenuQuitButtonString = "quit-button";
-    private const string DoubleCheckButtonString = "double-check-button";
-    private const string RpzButtonString = "rpz-button";
+    private const string MainMenuQuizButtonString = "quiz-button";
     private const string RpzPopupString = "rpz-pop-up";
     private const string RpzBackButtonString = "rpz-popup-back-button";
 
@@ -50,13 +49,13 @@ public class MainMenuScreenManager : VisualElement
 
 
         m_MainMenuScreen = this.Q("MainMenuScreen");
-        m_LearnScreen = this.Q("LearnScreen");
+        // m_LearnScreen = this.Q("LearnScreen");
         m_PlayScreen = this.Q("PlayScreen");
         m_PlayScreenQuickTour = this.Q("PlayScreenQuickTour");
         m_QuickTourContainer = this.Q(QuickTourContainerString);
         m_DeviceSelectionScreen = this.Q(DeviceSelectionScreenString);
-        m_LearnScreenRpzPopup = m_LearnScreen.Q(RpzPopupString);
-        m_LearnScreenComingSoonPopup = this.Q("learn-coming-soon-pop-up");
+        //  m_LearnScreenRpzPopup = m_LearnScreen.Q(RpzPopupString);
+        //m_LearnScreenComingSoonPopup = this.Q("learn-coming-soon-pop-up");
         m_PlayScreenRpzPopup = m_PlayScreen.Q(RpzPopupString);
 
 
@@ -67,7 +66,8 @@ public class MainMenuScreenManager : VisualElement
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
-        m_MainMenuScreen.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
+        // m_MainMenuScreen.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
+        m_MainMenuScreen.Q(MainMenuQuizButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         // m_LearnScreenComingSoonPopup?.Q("learn-popup-back-button")?.RegisterCallback<ClickEvent>(evt => CloseLearnPopup());
         // m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
@@ -78,13 +78,13 @@ public class MainMenuScreenManager : VisualElement
 
     private void CloseLearnPopup()
     {
-        m_LearnScreenComingSoonPopup.style.display = DisplayStyle.None;
+        // m_LearnScreenComingSoonPopup.style.display = DisplayStyle.None;
     }
 
     private void EnablePlayScreen()
     {
         m_MainMenuScreen.style.display = DisplayStyle.None;
-        m_LearnScreen.style.display = DisplayStyle.None;
+        ///m_LearnScreen.style.display = DisplayStyle.None;
         m_PlayScreen.style.display = DisplayStyle.Flex;
     }
 
@@ -92,12 +92,12 @@ public class MainMenuScreenManager : VisualElement
     {
         m_MainMenuScreen.style.display = DisplayStyle.Flex;
         m_PlayScreen.style.display = DisplayStyle.None;
-        m_LearnScreen.style.display = DisplayStyle.None;
+        //  m_LearnScreen.style.display = DisplayStyle.None;
     }
 
     private void EnableLearnScreen()
     {
-        m_LearnScreen.style.display = DisplayStyle.None;
+        // m_LearnScreen.style.display = DisplayStyle.None;
         m_MainMenuScreen.style.display = DisplayStyle.None;
         m_PlayScreen.style.display = DisplayStyle.None;
         SceneManager.LoadScene("Quiz");

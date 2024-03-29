@@ -5,7 +5,8 @@
         <ui:VisualElement name="MainMenu_title_container" style="background-image: resource(&apos;UI/Textures/Backflow_Buddy_Title 2&apos;); flex-grow: 1; align-self: center; width: 50%; height: 100%; -unity-background-scale-mode: scale-to-fit;" />
         <ui:VisualElement name="MainMenu_panel" style="width: 100%; align-items: center; justify-content: center; margin-bottom: 10%;">
             <ui:Button text="Play" name="play-button" focusable="false" class="main-menu-button" />
-            <ui:Button text="Learn" name="learn-button" focusable="false" class="main-menu-button" />
+            <ui:Button text="Quiz" name="quiz-button" focusable="false" class="main-menu-button" />
+            <ui:Button text="Learn" name="learn-button" focusable="false" class="main-menu-button" style="display: none;" />
             <ui:Button text="Exit" name="quit-button" focusable="false" class="main-menu-button" />
         </ui:VisualElement>
     </ui:VisualElement>

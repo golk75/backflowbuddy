@@ -7,9 +7,12 @@ using UnityEngine.UIElements;
 public class QuestionAndAnswer : VisualElement
 {
 
-    private VisualElement m_ReviewScreen;
-    private ListView m_ResultsList;
 
+    private const string MenuModalString = "MenuModal";
+    private const string MenuButtonString = "quiz-menu-button";
+
+    Button m_QuizMenuButton;
+    VisualElement m_MenuModal;
 
 
 
@@ -20,12 +23,11 @@ public class QuestionAndAnswer : VisualElement
     public QuestionAndAnswer()
     {
         this.RegisterCallback<GeometryChangedEvent>(OnGeometryChange);
-        // m_ReviewScreen = this.parent.Q("ReviewResults");
-        // m_ResultsList = m_ReviewScreen.Q<ListView>("question-list");
-        // m_ResultsList.selectionChanged += ResultsListEntrySelect;
 
 
     }
+
+
 
     // private void ResultsListEntrySelect(IEnumerable<object> enumerable)
     // {
@@ -34,12 +36,22 @@ public class QuestionAndAnswer : VisualElement
 
     void OnGeometryChange(GeometryChangedEvent evt)
     {
+        // m_ReviewScreen = this.parent.Q("ReviewResults");
+        // m_ResultsList = m_ReviewScreen.Q<ListView>("question-list");
+        // m_ResultsList.selectionChanged += ResultsListEntrySelect;
+        m_QuizMenuButton = this.Q<Button>(MenuButtonString);
+        m_MenuModal = this.Q<VisualElement>(MenuModalString);
 
+        m_QuizMenuButton.RegisterCallback<ClickEvent>(evt => EnableMenuModal());
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
-
+    private void EnableMenuModal()
+    {
+        m_MenuModal.style.display = DisplayStyle.Flex;
+        Debug.Log(m_MenuModal.style.display);
+    }
 
 
 
