@@ -50,7 +50,7 @@ public class QuestionAndAnswer : VisualElement
     private void EnableMenuModal()
     {
         m_MenuModal.style.display = DisplayStyle.Flex;
-        Debug.Log(m_MenuModal.style.display);
+
     }
 
 

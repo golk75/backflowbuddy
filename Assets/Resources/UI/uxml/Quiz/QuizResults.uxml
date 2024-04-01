@@ -1,9 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/UI/uss/QuizManager-main.uss?fileID=7433441132597879392&amp;guid=78761c9a3212048ac99a199ea87731eb&amp;type=3#QuizManager-main" />
+    <Style src="project://database/Assets/Resources/UI/uss/QuizManager-landscape.uss?fileID=7433441132597879392&amp;guid=5bc42e28443914bfe9250a9672c482b1&amp;type=3#QuizManager-landscape" />
     <ReviewResults name="ReviewResults" class="screen">
         <ui:VisualElement name="background">
             <ui:VisualElement name="main-container" style="justify-content: space-between;">
-                <ui:ListView focusable="true" name="question-list" />
+                <ui:VisualElement style="flex-grow: 0; display: flex; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                    <ui:Label tabindex="-1" text="What You Missed" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question-list-header" style="font-size: 35px; -unity-text-align: upper-left; background-color: rgba(0, 0, 0, 0); width: 100%; display: flex; color: rgb(255, 255, 255);" />
+                    <ui:ListView focusable="false" name="question-list" />
+                </ui:VisualElement>
                 <ui:VisualElement name="quiz-report-container" class="quiz-report-container">
                     <ui:VisualElement name="quiz-report" class="quiz-report">
                         <ui:Label tabindex="-1" text="Result" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 58px; -unity-text-align: upper-center;" />

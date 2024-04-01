@@ -25,7 +25,7 @@ public class ReviewResults : VisualElement
     void OnGeometryChange(GeometryChangedEvent evt)
     {
         // m_QuestionAndAnswerScreen = parent.parent.Q("QuestionAndAnswer");
-        // m_ResultsListView = this.Q<ListView>("question-list");
+        m_ResultsListView = this.Q<ListView>("question-list");
 
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);

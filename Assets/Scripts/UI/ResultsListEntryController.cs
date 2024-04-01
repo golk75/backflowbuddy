@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class ResultsListEntryController
 {
     Label m_ResultQuestionLabel;
+    VisualElement m_ResultListEntry;
 
     //This function retrieves a reference to the 
     //character name label inside the UI element.
@@ -11,6 +12,7 @@ public class ResultsListEntryController
     public void SetVisualElement(VisualElement visualElement)
     {
         m_ResultQuestionLabel = visualElement.Q<Label>("question");
+        m_ResultListEntry = visualElement.Q<VisualElement>("list-entry");
     }
 
     //This function receives the character whose name this list 
@@ -20,6 +22,8 @@ public class ResultsListEntryController
 
     public void SetResultsData(QuizResult quizResult)
     {
+
         m_ResultQuestionLabel.text = quizResult.question;
+
     }
 }

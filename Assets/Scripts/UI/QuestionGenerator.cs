@@ -35,6 +35,7 @@ public class QuestionGenerator : MonoBehaviour
     private QuestionData currentQuestion;
     private StyleTranslate scrollBarPreviousPos;
     private Length draggerYPos;
+    private QuizResult currentQuestionResult;
     int resultsListSelectedIndex;
 
 
@@ -139,8 +140,25 @@ public class QuestionGenerator : MonoBehaviour
         ReviewResultsScreen.style.display = DisplayStyle.Flex;
         for (int i = 0; i < answerButtons.Count; i++)
         {
-            answerButtons[i].RemoveFromClassList(className: "correct-answer");
-            answerButtons[i].AddToClassList(className: "answer-button");
+            // answerButtons[i].Q<Button>(className: "unity-button").text = currentQuestionResult.answers[i];
+            if (i == currentQuestionResult.correctAnswerIndex)
+            {
+
+                answerButtons[i].AddToClassList(className: "answer-button");
+                answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
+                answerButtons[i].RemoveFromClassList(className: "correct-answer");
+
+
+            }
+            if (i == currentQuestionResult.chosenAnswer)
+            {
+
+                answerButtons[i].AddToClassList(className: "answer-button");
+                answerButtons[i].RemoveFromClassList(className: "correct-answer");
+                answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
+
+            }
+
 
         }
         EnableAnswerButtons();
@@ -173,6 +191,7 @@ public class QuestionGenerator : MonoBehaviour
         else
         {
 
+
         }
 
 
@@ -182,17 +201,27 @@ public class QuestionGenerator : MonoBehaviour
     private void ReviewQuestion(QuizResult quizResult, int selectedIndex)
     {
         resultsListSelectedIndex = selectedIndex;
+        currentQuestionResult = quizResult;
         DisableAnswerButtons();
         for (int i = 0; i < answerButtons.Count; i++)
         {
             answerButtons[i].Q<Button>(className: "unity-button").text = quizResult.answers[i];
             if (i == quizResult.correctAnswerIndex)
             {
-                // answerButtons[i].style.backgroundColor = Color.green;
+
                 answerButtons[i].RemoveFromClassList(className: "answer-button");
+                answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
                 answerButtons[i].AddToClassList(className: "correct-answer");
 
-                // answerButtons[i].pickingMode = PickingMode.Ignore;
+
+            }
+            if (i == quizResult.chosenAnswer && !quizResult.isCorrect)
+            {
+
+                answerButtons[i].RemoveFromClassList(className: "answer-button");
+                answerButtons[i].RemoveFromClassList(className: "correct-answer");
+                answerButtons[i].AddToClassList(className: "incorrect-answer");
+
             }
 
 
@@ -219,7 +248,12 @@ public class QuestionGenerator : MonoBehaviour
             //stop removing questions
             return;
         }
-
+        //animate buttons reveal
+        // for (int i = 0; i < answerButtons.Count; i++)
+        // {
+        //     answerButtons[i].AddToClassList("answer-button-in");
+        //     answerButtons[i].RemoveFromClassList("answer-button-out");
+        // }
         //Get random question
         int randomIndex = Random.Range(0, questions.Count);
 

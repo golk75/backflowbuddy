@@ -93,6 +93,7 @@ public class QuizResultsManager : MonoBehaviour
             foreach (var question in m_ResultsList)
             {
                 // m_ReviewResults.Q("main-container").Add(m_QuestionListEntryTemplate.CloneTree());
+
                 m_QuestionList.makeItem = () =>
             {
                 // Instantiate the UXML template for the entry
@@ -107,13 +108,50 @@ public class QuizResultsManager : MonoBehaviour
                 // Initialize the controller script
                 newListEntryLogic.SetVisualElement(newListEntry);
 
+                //style list entry according to correctness - correct answer selected vs. incorrect answer selected
+
+
+
                 // Return the root of the instantiated visual tree
                 return newListEntry;
             };
                 m_QuestionList.bindItem = (item, index) =>
                    {
+                       if (m_ResultsList[index].isCorrect)
+                       {
+                           item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0, 0.735849f, 0.05642469f);
+
+                           //-->this on is close!!->>
+                           //item.style.backgroundColor = Color.green;
+
+                           //    item.AddToClassList(".result-list-entry__correct");
+                           //    item.RemoveFromClassList(".result-list-entry__incorrect");
+                       }
+                       else
+                       {
+                           item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0.7735849f, 0.2411385f, 0.1131185f);
+                           //-->this on is close!!->>
+                           //item.style.backgroundColor = Color.red;
+
+                           //    item.AddToClassList(".result-list-entry__incorrect");
+                           //    item.RemoveFromClassList(".result-list-entry__correct");
+                       }
                        (item.userData as ResultsListEntryController).SetResultsData(m_ResultsList[index]);
+
+
                    };
+
+                // if (question.isCorrect)
+                // {
+
+                //     item.AddToClassList(".result-list-entry__correct");
+                //     item.RemoveFromClassList(".result-list-entry__incorrect");
+                // }
+                // else
+                // {
+                //     item.AddToClassList(".result-list-entry__incorrect");
+                //     item.RemoveFromClassList(".result-list-entry__correct");
+                // }
 
                 // Set a fixed item height
                 m_QuestionList.fixedItemHeight = 100;
