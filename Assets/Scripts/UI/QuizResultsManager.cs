@@ -108,7 +108,8 @@ public class QuizResultsManager : MonoBehaviour
                 // Initialize the controller script
                 newListEntryLogic.SetVisualElement(newListEntry);
 
-                //style list entry according to correctness - correct answer selected vs. incorrect answer selected
+                newListEntry.name = "new-list-entry";
+
 
 
 
@@ -154,7 +155,16 @@ public class QuizResultsManager : MonoBehaviour
                 // }
 
                 // Set a fixed item height
-                m_QuestionList.fixedItemHeight = 100;
+                if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
+                {
+                    m_QuestionList.fixedItemHeight = 100;
+
+                }
+                else
+                {
+                    m_QuestionList.fixedItemHeight = 250;
+                }
+
 
                 // Set the actual item's source list/array
                 m_QuestionList.itemsSource = m_ResultsList;

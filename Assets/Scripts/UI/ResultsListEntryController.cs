@@ -23,6 +23,7 @@ public class ResultsListEntryController
     public void SetResultsData(QuizResult quizResult)
     {
 
+
         m_ResultQuestionLabel.text = quizResult.question;
 
     }

@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="list-entry" class="result-list-entry__correct">
-        <ui:Label tabindex="-1" text="asjdfhkljasdhfjkhasdfhalkjsdhfjkhajklsdhfjklahslkjdhlkjahsdfkjhakjsdhkjlahdfkjhaskjhdkjkjf" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question" style="flex-wrap: wrap; white-space: normal;" />
+    <ui:VisualElement name="list-entry">
+        <ui:Label tabindex="-1" text="asjdfhkljasdhfjkhasdfhalkjsdhfjkhajklsdhfjklahslkjdhlkjahsdfkjhakjsdhkjlahdfkjhaskjhdkjkjf" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question" class="entry-label" />
     </ui:VisualElement>
 </ui:UXML>
