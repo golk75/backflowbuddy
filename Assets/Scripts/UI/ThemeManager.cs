@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
-public class QuizThemeManager : MonoBehaviour
+public class ThemeManager : MonoBehaviour
 {
     public StyleSheet landscapeTheme;
     public StyleSheet portraitTheme;

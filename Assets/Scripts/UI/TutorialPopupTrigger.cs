@@ -138,6 +138,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         m_PreviousButton = root.rootVisualElement.Q<Button>(TutorialPrevButtonString);
         m_SkipButton = root.rootVisualElement.Q<Button>(TutorialSkipButtonString);
         m_QuickTourButton = root.rootVisualElement.Q<Button>(QuickTourButtonString);
+
         m_QuickTourContainer = root.rootVisualElement.Q<VisualElement>(QuickTourContainerString);
         m_PopupHeader = root.rootVisualElement.Q<VisualElement>(TutorialPopupHeaderString);
         m_PopupContent = root.rootVisualElement.Q<VisualElement>(TutorialPopupContentString);
@@ -200,7 +201,9 @@ public class TutorialPopupTrigger : MonoBehaviour
 
     private void QuickTourButtonClicked()
     {
+        Debug.Log($"herere");
         SaveTutorialPrefs(0);
+
         // SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
 
     }

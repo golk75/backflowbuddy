@@ -26,10 +26,11 @@ public class RPZPlayScreenManager : VisualElement
         m_GameMenuOptions = m_RPZPlayMenuScreen.Q("GameMenuOptions");
         m_GameMenuScreen = m_RPZPlayMenuScreen.Q("GameMenuScreen");
         m_RPZPlayScreen?.Q("MenuButton")?.RegisterCallback<ClickEvent>(evt => OpenMenu());
+        m_RPZPlayMenuScreen?.Q("resume")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
         m_RPZPlayMenuScreen?.Q("close-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
         m_GameMenuOptions?.Q("close-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
         m_GameMenuOptions?.Q("save-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
-        m_RPZPlayMenuScreen?.Q("quit-button")?.RegisterCallback<ClickEvent>(evt => ExitToMainMenu());
+        m_RPZPlayMenuScreen?.Q("quit")?.RegisterCallback<ClickEvent>(evt => ExitToMainMenu());
 
 
 

@@ -1,4 +1,6 @@
 
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class RPZPlayMenuScreen : VisualElement
@@ -23,7 +25,7 @@ public class RPZPlayMenuScreen : VisualElement
         m_GameMenuOptions?.Q("close-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
         m_GameMenuOptions?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => ShowMenu());
 
-
+        this?.Q("quick-tour-button")?.RegisterCallback<ClickEvent>(evt => StartQuickTour());
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
@@ -44,7 +46,20 @@ public class RPZPlayMenuScreen : VisualElement
         m_GameMenuOptions.style.display = DisplayStyle.Flex;
 
     }
+    private void StartQuickTour()
+    {
 
+        PlayerPrefs.SetInt("Skip Tutorial", 0);
+        if (SceneManager.GetActiveScene().name == "RPZPlayScene")
+        {
+            SceneManager.LoadSceneAsync("RPZPlayScene");
+        }
+        else if (SceneManager.GetActiveScene().name == "DCPlayScene")
+        {
+            SceneManager.LoadSceneAsync("DCPlayScene");
+        }
+
+    }
 
 
     // void SetVisualElements()

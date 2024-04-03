@@ -8,7 +8,7 @@ public class QuestionAndAnswer : VisualElement
 {
 
 
-    private const string MenuModalString = "MenuModal";
+    private const string MenuModalString = "QuizMenuScreen";
     private const string MenuButtonString = "quiz-menu-button";
 
     Button m_QuizMenuButton;

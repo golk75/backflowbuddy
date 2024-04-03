@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="QuizMenuScreen" src="project://database/Assets/Resources/UI/uxml/Shared/QuizMenuScreen.uxml?fileID=9197481963319205126&amp;guid=554fdef41ce6746f7b56d7cdb60ab567&amp;type=3#QuizMenuScreen" />
+    <QuizMenuScreen name="QuizMenuScreen" class="screen">
+        <ui:Instance template="QuizMenuScreen" name="QuizMenuScreen" />
+    </QuizMenuScreen>
+</ui:UXML>

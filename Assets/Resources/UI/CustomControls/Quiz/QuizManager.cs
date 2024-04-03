@@ -9,7 +9,7 @@ public class QuizManager : VisualElement
 {
     private const string ResumeQuizButtonString = "resume-quiz";
     private const string QuitToMenuButtonString = "quit-quiz";
-    private const string QuizMenuString = "MenuModal";
+    private const string QuizMenuString = "QuizMenuScreen";
     VisualElement m_ReviewResults;
     VisualTreeAsset m_QuestionListEntryTemplate;
     ListView m_QuestionList;
@@ -56,7 +56,7 @@ public class QuizManager : VisualElement
         m_QuizMenuModal = this.Q(QuizMenuString);
         m_QuitToMenuButton = this.Q<Button>(QuitToMenuButtonString);
         m_ResumeQuizButton = this.Q<Button>(ResumeQuizButtonString);
-        m_QuizMenuCloseButton = this.Q("GameMenuScreen").Q<Button>("close-button");
+        m_QuizMenuCloseButton = this.Q("QuizMenuScreen").Q<Button>("close-button");
     }
     private void EntrySelectionChanged(IEnumerable<object> enumerable)
     {
@@ -74,10 +74,12 @@ public class QuizManager : VisualElement
         m_ResumeQuizButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
         m_QuitToMenuButton.RegisterCallback<ClickEvent>(evt => QuitToMainMenu());
         m_QuizMenuCloseButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
+
     }
 
     private void QuitToMainMenu()
     {
+
         SceneManager.LoadScene("MainMenu");
     }
     private void ResumeQuiz()

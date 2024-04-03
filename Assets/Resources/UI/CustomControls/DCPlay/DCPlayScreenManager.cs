@@ -27,9 +27,11 @@ public class DCPlayScreenManager : VisualElement
         m_GameMenuScreen = m_DCPlayMenuScreen.Q("GameMenuScreen");
         m_DCPlayScreen?.Q("MenuButton")?.RegisterCallback<ClickEvent>(evt => OpenMenu());
         m_DCPlayMenuScreen?.Q("close-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
+        m_DCPlayMenuScreen?.Q("resume")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
+        m_DCPlayMenuScreen?.Q("quit")?.RegisterCallback<ClickEvent>(evt => ExitToMainMenu());
         m_GameMenuOptions?.Q("close-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
         m_GameMenuOptions?.Q("save-button")?.RegisterCallback<ClickEvent>(evt => CloseMenu());
-        m_DCPlayMenuScreen?.Q("quit-button")?.RegisterCallback<ClickEvent>(evt => ExitToMainMenu());
+
 
 
 

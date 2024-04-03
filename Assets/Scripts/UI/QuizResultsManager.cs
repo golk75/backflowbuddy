@@ -1,10 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -12,7 +7,6 @@ using UnityEngine.UIElements;
 public class QuizResultsManager : MonoBehaviour
 {
 
-    public QuestionGenerator questionGenerator;
     private List<QuizResult> m_ResultsList;
     private ListView m_QuestionList;
     public UIDocument root;

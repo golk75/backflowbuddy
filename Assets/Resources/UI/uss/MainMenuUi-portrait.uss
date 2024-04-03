@@ -1,0 +1,121 @@
+:root {
+    --border-width: 3px;
+    --border-radius: 15px;
+    --border-color-white: white;
+    --background-color-dark-blue: rgb(118, 118, 118);
+}
+
+.screen {
+    flex-grow: 1;
+    background-color: rgba(96, 96, 96, 0);
+}
+
+.floating {
+}
+
+.main-menu-panel {
+    align-items: center;
+    justify-content: center;
+    cursor: resource('UI/Textures/icons8-hand-32');
+    background-image: none;
+    background-color: rgba(54, 55, 63, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    align-self: center;
+    width: 50%;
+    margin-bottom: 5%;
+}
+
+.main-menu-button {
+    cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    background-color: rgb(54, 55, 63);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 62px;
+    -unity-text-align: middle-center;
+    border-left-color: rgba(0, 0, 0, 0.33);
+    border-right-color: rgba(0, 0, 0, 0.33);
+    border-top-color: rgba(0, 0, 0, 0.33);
+    border-bottom-color: rgba(0, 0, 0, 0.33);
+    width: 50%;
+    height: 100%;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+}
+
+.main-menu-button:hover {
+    cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    background-color: rgb(54, 55, 63);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.game-menu-button:active {
+    align-self: center;
+    width: 100%;
+    cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(54, 55, 63);
+    -unity-font-style: bold;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.main-menu-title-label {
+}
+
+.main-menu-title-container {
+}
+
+.screen-label {
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.title {
+    background-image: resource('UI/Textures/Backflow_Buddy_Title 2');
+    -unity-background-scale-mode: scale-to-fit;
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+.main-container {
+    flex-grow: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.main-menu-button__container {
+    width: 100%;
+    align-items: center;
+    margin-bottom: 764px;
+}

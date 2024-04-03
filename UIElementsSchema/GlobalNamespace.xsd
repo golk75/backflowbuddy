@@ -87,279 +87,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="DCPlayMenuScreen" substitutionGroup="engine:VisualElement" type="DCPlayMenuScreenType" />
-  <xs:complexType name="GameMenuScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="GameMenuScreen" substitutionGroup="engine:VisualElement" type="GameMenuScreenType" />
-  <xs:complexType name="DCPlayScreenManagerType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DCPlayScreenManager" substitutionGroup="engine:VisualElement" type="DCPlayScreenManagerType" />
-  <xs:complexType name="EndOfQuizType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="EndOfQuiz" substitutionGroup="engine:VisualElement" type="EndOfQuizType" />
-  <xs:complexType name="RPZLearnMenuScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="RPZLearnMenuScreen" substitutionGroup="engine:VisualElement" type="RPZLearnMenuScreenType" />
-  <xs:complexType name="MainMenuScreenManagerType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="MainMenuScreenManager" substitutionGroup="engine:VisualElement" type="MainMenuScreenManagerType" />
-  <xs:complexType name="LearnScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="LearnScreen" substitutionGroup="engine:VisualElement" type="LearnScreenType" />
-  <xs:complexType name="RPZLearnOptionsScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="RPZLearnOptionsScreen" substitutionGroup="engine:VisualElement" type="RPZLearnOptionsScreenType" />
-  <xs:complexType name="RPZPlayScreenManagerType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="RPZPlayScreenManager" substitutionGroup="engine:VisualElement" type="RPZPlayScreenManagerType" />
-  <xs:complexType name="DCLearnScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DCLearnScreen" substitutionGroup="engine:VisualElement" type="DCLearnScreenType" />
-  <xs:complexType name="DCPlayOptionsScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DCPlayOptionsScreen" substitutionGroup="engine:VisualElement" type="DCPlayOptionsScreenType" />
-  <xs:complexType name="QuizSelectionType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="QuizSelection" substitutionGroup="engine:VisualElement" type="QuizSelectionType" />
-  <xs:complexType name="DCPlayScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DCPlayScreen" substitutionGroup="engine:VisualElement" type="DCPlayScreenType" />
-  <xs:complexType name="DeviceSelectionScreenType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="DeviceSelectionScreen" substitutionGroup="engine:VisualElement" type="DeviceSelectionScreenType" />
   <xs:complexType name="RPZPlayScreenType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -381,7 +108,7 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RPZPlayScreen" substitutionGroup="engine:VisualElement" type="RPZPlayScreenType" />
-  <xs:complexType name="DCLearnMenuScreenType">
+  <xs:complexType name="DCPlayScreenType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -401,7 +128,196 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="DCLearnMenuScreen" substitutionGroup="engine:VisualElement" type="DCLearnMenuScreenType" />
+  <xs:element name="DCPlayScreen" substitutionGroup="engine:VisualElement" type="DCPlayScreenType" />
+  <xs:complexType name="LearnScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LearnScreen" substitutionGroup="engine:VisualElement" type="LearnScreenType" />
+  <xs:complexType name="QuizMenuScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QuizMenuScreen" substitutionGroup="engine:VisualElement" type="QuizMenuScreenType" />
+  <xs:complexType name="QuizNavigateType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QuizNavigate" substitutionGroup="engine:VisualElement" type="QuizNavigateType" />
+  <xs:complexType name="DCPlayOptionsScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DCPlayOptionsScreen" substitutionGroup="engine:VisualElement" type="DCPlayOptionsScreenType" />
+  <xs:complexType name="RPZLearnScreenManagerType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RPZLearnScreenManager" substitutionGroup="engine:VisualElement" type="RPZLearnScreenManagerType" />
+  <xs:complexType name="DCLearnScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DCLearnScreen" substitutionGroup="engine:VisualElement" type="DCLearnScreenType" />
+  <xs:complexType name="QuestionAndAnswerType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QuestionAndAnswer" substitutionGroup="engine:VisualElement" type="QuestionAndAnswerType" />
+  <xs:complexType name="DeviceSelectionScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DeviceSelectionScreen" substitutionGroup="engine:VisualElement" type="DeviceSelectionScreenType" />
+  <xs:complexType name="DCLearnScreenManagerType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DCLearnScreenManager" substitutionGroup="engine:VisualElement" type="DCLearnScreenManagerType" />
   <xs:complexType name="RPZPlayMenuScreenType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -423,48 +339,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RPZPlayMenuScreen" substitutionGroup="engine:VisualElement" type="RPZPlayMenuScreenType" />
-  <xs:complexType name="QuizManagerType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="QuizManager" substitutionGroup="engine:VisualElement" type="QuizManagerType" />
-  <xs:complexType name="ReviewResultsType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ReviewResults" substitutionGroup="engine:VisualElement" type="ReviewResultsType" />
   <xs:complexType name="GameMenuOptionsType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -507,7 +381,7 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="RPZLearnScreen" substitutionGroup="engine:VisualElement" type="RPZLearnScreenType" />
-  <xs:complexType name="RPZPlayOptionsScreenType">
+  <xs:complexType name="RPZLearnMenuScreenType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -527,70 +401,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="RPZPlayOptionsScreen" substitutionGroup="engine:VisualElement" type="RPZPlayOptionsScreenType" />
-  <xs:complexType name="QuestionAndAnswerType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="QuestionAndAnswer" substitutionGroup="engine:VisualElement" type="QuestionAndAnswerType" />
-  <xs:complexType name="QuizNavigateType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="QuizNavigate" substitutionGroup="engine:VisualElement" type="QuizNavigateType" />
-  <xs:complexType name="PlayScreenQuickTourType">
-    <xs:complexContent mixed="false">
-      <xs:restriction base="engine:VisualElementType">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="engine:VisualElement" />
-        </xs:sequence>
-        <xs:attribute default="" name="name" type="xs:string" use="optional" />
-        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
-        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
-        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
-        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
-        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
-        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
-        <xs:attribute default="" name="class" type="xs:string" use="optional" />
-        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
-        <xs:attribute default="" name="style" type="xs:string" use="optional" />
-        <xs:anyAttribute processContents="lax" />
-      </xs:restriction>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="PlayScreenQuickTour" substitutionGroup="engine:VisualElement" type="PlayScreenQuickTourType" />
+  <xs:element name="RPZLearnMenuScreen" substitutionGroup="engine:VisualElement" type="RPZLearnMenuScreenType" />
   <xs:complexType name="PlayScreenType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -612,7 +423,7 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PlayScreen" substitutionGroup="engine:VisualElement" type="PlayScreenType" />
-  <xs:complexType name="RPZLearnScreenManagerType">
+  <xs:complexType name="QuizManagerType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -632,8 +443,8 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="RPZLearnScreenManager" substitutionGroup="engine:VisualElement" type="RPZLearnScreenManagerType" />
-  <xs:complexType name="DCLearnScreenManagerType">
+  <xs:element name="QuizManager" substitutionGroup="engine:VisualElement" type="QuizManagerType" />
+  <xs:complexType name="RPZPlayOptionsScreenType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -653,5 +464,215 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="DCLearnScreenManager" substitutionGroup="engine:VisualElement" type="DCLearnScreenManagerType" />
+  <xs:element name="RPZPlayOptionsScreen" substitutionGroup="engine:VisualElement" type="RPZPlayOptionsScreenType" />
+  <xs:complexType name="QuizSelectionType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QuizSelection" substitutionGroup="engine:VisualElement" type="QuizSelectionType" />
+  <xs:complexType name="RPZLearnOptionsScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RPZLearnOptionsScreen" substitutionGroup="engine:VisualElement" type="RPZLearnOptionsScreenType" />
+  <xs:complexType name="PlayScreenQuickTourType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PlayScreenQuickTour" substitutionGroup="engine:VisualElement" type="PlayScreenQuickTourType" />
+  <xs:complexType name="MainMenuScreenManagerType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MainMenuScreenManager" substitutionGroup="engine:VisualElement" type="MainMenuScreenManagerType" />
+  <xs:complexType name="EndOfQuizType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EndOfQuiz" substitutionGroup="engine:VisualElement" type="EndOfQuizType" />
+  <xs:complexType name="RPZPlayScreenManagerType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RPZPlayScreenManager" substitutionGroup="engine:VisualElement" type="RPZPlayScreenManagerType" />
+  <xs:complexType name="GameMenuScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GameMenuScreen" substitutionGroup="engine:VisualElement" type="GameMenuScreenType" />
+  <xs:complexType name="DCPlayScreenManagerType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DCPlayScreenManager" substitutionGroup="engine:VisualElement" type="DCPlayScreenManagerType" />
+  <xs:complexType name="ReviewResultsType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReviewResults" substitutionGroup="engine:VisualElement" type="ReviewResultsType" />
+  <xs:complexType name="DCLearnMenuScreenType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="engine:VisualElement" />
+        </xs:sequence>
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DCLearnMenuScreen" substitutionGroup="engine:VisualElement" type="DCLearnMenuScreenType" />
 </xs:schema>

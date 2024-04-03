@@ -529,9 +529,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62e8c4285d6a443bb0099d6343dc51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landscapeTheme: {fileID: 0}
-  portraitTheme: {fileID: 0}
-  uIDocument: {fileID: 0}
+  landscapeTheme: {fileID: 7433441132597879392, guid: 1b326e54f788d43ee89afef8e60b995d,
+    type: 3}
+  portraitTheme: {fileID: 7433441132597879392, guid: 15a411a6539eb448392d6609a488ced6,
+    type: 3}
+  uIDocument: {fileID: 1214863521}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

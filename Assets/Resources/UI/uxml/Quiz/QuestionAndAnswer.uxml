@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="QuizGameMenuScreen" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizGameMenuScreen.uxml?fileID=9197481963319205126&amp;guid=fd1d20534eb1b48959888a14c009c688&amp;type=3#QuizGameMenuScreen" />
-    <QuestionAndAnswer class="screen" style="width: 100%; height: 100%; position: absolute;">
+    <ui:Template name="QuizGameMenuScreen" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizMenuScreen.uxml?fileID=9197481963319205126&amp;guid=fd1d20534eb1b48959888a14c009c688&amp;type=3#QuizMenuScreen" />
+    <QuestionAndAnswer name="QuestionAndAnswer" class="screen" style="width: 100%; height: 100%; position: absolute;">
         <ui:VisualElement name="QuestionAndAnswer-panel" class="qa-panel">
             <ui:VisualElement name="nav-container" class="nav-container">
                 <ui:VisualElement name="question-tracking">
@@ -21,6 +21,6 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Instance template="QuizGameMenuScreen" name="MenuModal" class="screen" style="display: none; position: absolute; flex-grow: 1;" />
+        <ui:Instance template="QuizGameMenuScreen" name="QuizMenuScreen" class="screen" style="display: none; position: absolute; flex-grow: 1;" />
     </QuestionAndAnswer>
 </ui:UXML>
