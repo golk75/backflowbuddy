@@ -1,15 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="QuizSelection-panel" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizSelection-panel.uxml?fileID=9197481963319205126&amp;guid=1f662e4f8ae3e46c69a89b462b7fb1f0&amp;type=3#QuizSelection-panel" />
-    <Style src="project://database/Assets/Resources/UI/uss/QuizManager.uss?fileID=7433441132597879392&amp;guid=c93d8e952e6d7487b9f61948a4b4ec20&amp;type=3#QuizManager" />
-    <QuizSelection class="screen">
-        <ui:Instance template="QuizSelection-panel" name="QuizSelection-panel" class="screen" style="background-color: rgb(91, 171, 167);">
-            <ui:VisualElement name="header" style="flex-grow: 1;">
-                <ui:Label tabindex="-1" text="Quiz Selection" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-self: center;" />
-            </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1;">
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-1" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-2" />
-                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-3" />
+    <Style src="project://database/Assets/Resources/UI/uss/QuizManager-landscape.uss?fileID=7433441132597879392&amp;guid=5bc42e28443914bfe9250a9672c482b1&amp;type=3#QuizManager-landscape" />
+    <QuizSelection name="QuizSelection" class="screen">
+        <ui:Instance template="QuizSelection-panel" name="QuizSelection-panel" class="screen">
+            <ui:VisualElement name="quiz-selection-container" style="flex-grow: 1;">
+                <ui:VisualElement name="quiz-selection-header" style="flex-grow: 1; display: none;">
+                    <ui:Label tabindex="-1" text="Quiz Length?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="align-self: center;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="quiz-selection-button-container">
+                    <ui:Button text="25 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-1" class="quiz-selection-button" />
+                    <ui:Button text="50 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-2" class="quiz-selection-button" />
+                    <ui:Button text="100 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-3" class="quiz-selection-button" style="display: flex;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:Instance>
     </QuizSelection>

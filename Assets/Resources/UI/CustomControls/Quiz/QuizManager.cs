@@ -17,6 +17,7 @@ public class QuizManager : VisualElement
     Label resultPercent;
     ListView m_ResultsListView;
     VisualElement m_QuestionAndAnswerScreen;
+    VisualElement m_QuizSelectionScreen;
     VisualElement m_AnswerContainer;
     StyleTranslate scrollBarPos;
 
@@ -24,6 +25,9 @@ public class QuizManager : VisualElement
     private Button m_QuitToMenuButton;
     private Button m_ResumeQuizButton;
     private Button m_QuizMenuCloseButton;
+    private Button m_QuizSelectionButton1;
+    private Button m_QuizSelectionButton2;
+    private Button m_QuizSelectionButton3;
     private VisualElement m_QuizMenuModal;
 
     public new class UxmlFactory : UxmlFactory<QuizManager, UxmlTraits> { }
@@ -52,11 +56,18 @@ public class QuizManager : VisualElement
         m_ReviewResults = this.Q("ReviewResults");
         m_ResultsListView = m_ReviewResults.Q<ListView>("question-list");
         m_QuestionAndAnswerScreen = this.Q("QuestionAndAnswer");
+        m_QuizSelectionScreen = this.Q("QuizSelection");
         m_AnswerContainer = this.Q("AnswersContainer");
         m_QuizMenuModal = this.Q(QuizMenuString);
         m_QuitToMenuButton = this.Q<Button>(QuitToMenuButtonString);
         m_ResumeQuizButton = this.Q<Button>(ResumeQuizButtonString);
         m_QuizMenuCloseButton = this.Q("QuizMenuScreen").Q<Button>("close-button");
+        m_QuizSelectionButton1 = this.Q<Button>("quiz-1");
+        m_QuizSelectionButton2 = this.Q<Button>("quiz-2");
+        m_QuizSelectionButton3 = this.Q<Button>("quiz-3");
+
+
+
     }
     private void EntrySelectionChanged(IEnumerable<object> enumerable)
     {
@@ -71,12 +82,37 @@ public class QuizManager : VisualElement
     private void RegisterCallBacks()
     {
         m_ResultsListView.selectionChanged += EntrySelectionChanged;
+        m_QuizSelectionButton1.RegisterCallback<ClickEvent>(evt => Quiz1Selected());
+        m_QuizSelectionButton2.RegisterCallback<ClickEvent>(evt => Quiz2Selected());
+        m_QuizSelectionButton3.RegisterCallback<ClickEvent>(evt => Quiz3Selected());
         m_ResumeQuizButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
         m_QuitToMenuButton.RegisterCallback<ClickEvent>(evt => QuitToMainMenu());
         m_QuizMenuCloseButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
 
     }
+    private void Quiz3Selected()
+    {
+        Actions.onQuizSelection?.Invoke(100);
+        m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
+        m_QuizSelectionScreen.style.display = DisplayStyle.None;
+    }
 
+    private void Quiz2Selected()
+    {
+        Actions.onQuizSelection?.Invoke(50);
+        m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
+        m_QuizSelectionScreen.style.display = DisplayStyle.None;
+    }
+
+    private void Quiz1Selected()
+    {
+        // Actions.onQuizSelection?.Invoke(25);
+        Actions.onQuizSelection?.Invoke(5);
+        m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
+        m_QuizSelectionScreen.style.display = DisplayStyle.None;
+
+
+    }
     private void QuitToMainMenu()
     {
 

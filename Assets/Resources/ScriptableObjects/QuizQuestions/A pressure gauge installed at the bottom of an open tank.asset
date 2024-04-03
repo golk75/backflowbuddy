@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: A pressure gauge installed at the bottom of an open tank
   m_EditorClassIdentifier: 
   question: A pressure gauge installed at the bottom of an open tank
-  category: ' containing water ten (10) feet deep'
+  category: ' containing water 10 feet deep'
   answers:
   - ' would indicate what pressure reading?'
   - BPAT

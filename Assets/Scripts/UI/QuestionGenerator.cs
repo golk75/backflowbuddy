@@ -37,8 +37,8 @@ public class QuestionGenerator : MonoBehaviour
     private Length draggerYPos;
     private QuizResult currentQuestionResult;
     int resultsListSelectedIndex;
-
-
+    int selectedQuizLength;
+    int questionsAnswered;
     private bool isQuizComplete;
 
 
@@ -46,15 +46,20 @@ public class QuestionGenerator : MonoBehaviour
     void OnEnable()
     {
         Actions.GenerateResultsQuestionReview += ReviewQuestion;
+        Actions.onQuizSelection += SetQuizLength;
     }
+
+
     void OnDisable()
     {
         Actions.GenerateResultsQuestionReview -= ReviewQuestion;
+        Actions.onQuizSelection -= SetQuizLength;
     }
 
     void Awake()
     {
         GetQuestionData();
+
         totalQuestionCount = questions.Count;
 
 
@@ -72,6 +77,9 @@ public class QuestionGenerator : MonoBehaviour
         SetAnswerLabels();
         RegisterCallBacks();
 
+
+        //this must be set after first question is set
+        questionsAnswered = 0;
 
     }
 
@@ -111,6 +119,11 @@ public class QuestionGenerator : MonoBehaviour
 
     }
 
+    private void SetQuizLength(int obj)
+    {
+        selectedQuizLength = obj;
+        m_quesitonTracker.text = 1 + "/" + selectedQuizLength.ToString();
+    }
     private void DisableAnswerButtons()
     {
         for (int i = 0; i < answerButtons.Count; i++)
@@ -172,7 +185,7 @@ public class QuestionGenerator : MonoBehaviour
         {
             if (questionNumber < totalQuestionCount)
                 questionNumber += 1;
-            m_quesitonTracker.text = questionNumber.ToString() + "/" + totalQuestionCount.ToString();
+            m_quesitonTracker.text = questionNumber.ToString() + "/" + selectedQuizLength.ToString();
 
             QuizResult resultsData;
             resultsData = ScriptableObject.CreateInstance<QuizResult>();
@@ -228,7 +241,7 @@ public class QuestionGenerator : MonoBehaviour
         }
 
         questionLabel.text = quizResult.question;
-        m_quesitonTracker.text = quizResult.questionNumber.ToString() + "/" + totalQuestionCount.ToString();
+        m_quesitonTracker.text = quizResult.questionNumber.ToString() + "/" + selectedQuizLength.ToString();
 
         // answerButtons[quizResult.correctAnswerIndex].style.backgroundColor = Color.green;
         // answerButtons[quizResult.chosenAnswer].style.backgroundColor = Color.red;
@@ -239,7 +252,8 @@ public class QuestionGenerator : MonoBehaviour
     }
     private void SelectNewQuestion()
     {
-        if (questions.Count == 0)
+        questionsAnswered += 1;
+        if (questionsAnswered == selectedQuizLength)
         {
             //custom controller QuizManager.cs listening
             isQuizComplete = true;
