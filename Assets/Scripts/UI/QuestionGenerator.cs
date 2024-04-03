@@ -327,6 +327,7 @@ public class QuestionGenerator : MonoBehaviour
 
     void Update()
     {
+
         // Debug.Log($"GetScore()= {GetScore()}");
     }
 }

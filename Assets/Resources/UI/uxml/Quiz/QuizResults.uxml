@@ -6,14 +6,14 @@
                     <ui:VisualElement name="question-list-container" style="flex-grow: 0; display: flex; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
                         <ui:Label tabindex="-1" text="Question Review" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question-list-header" class="question-list-header" />
                         <ui:ListView focusable="false" name="question-list" class="question-list" />
-                        <ui:VisualElement name="quiz-report-button-container" class="quiz-report-button-container">
-                            <ui:Button text="Retry" parse-escape-sequences="true" display-tooltip-when-elided="true" name="retry-quiz" class="retry-quiz-button result-review-button" />
-                            <ui:Button text="Return to Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="return-home" class="return-home-button result-review-button" />
-                        </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="quiz-report" class="quiz-report">
                         <ui:Label tabindex="-1" text="Result" parse-escape-sequences="true" display-tooltip-when-elided="true" class="quiz-report-header" />
                         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="percent" />
+                        <ui:VisualElement name="quiz-report-button-container" class="quiz-report-button-container">
+                            <ui:Button text="Retry" parse-escape-sequences="true" display-tooltip-when-elided="true" name="retry-quiz" class="retry-quiz-button result-review-button" />
+                            <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="return-home" class="return-home-button result-review-button" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

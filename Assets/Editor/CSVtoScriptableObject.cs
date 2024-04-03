@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class CSVtoScriptableObject
 {
-    private static string questionsCSVPath = "/Editor/CSVs/BackflowBuddyQuizData1.csv";
+    private static string questionsCSVPath = "/Editor/CSVs/BackflowBuddyQuizData.csv";
     private static string questionsPath = "Assets/Resources/ScriptableObjects/QuizQuestions/";
     private static int numberOfAnswers = 4;
 
@@ -53,10 +53,15 @@ public class CSVtoScriptableObject
                 // Questions will be named the same as the question text in this example
                 questionData.name = questionData.question.Remove(questionData.question.IndexOf("?"));
             }
-            if (questionData.question.Contains(":"))
+            else if (questionData.question.Contains(":"))
             {
                 // Questions will be named the same as the question text in this example
                 questionData.name = questionData.question.Remove(questionData.question.IndexOf(":"));
+            }
+            else if (questionData.question.Contains("\""))
+            {
+                // Questions will be named the same as the question text in this example
+                questionData.name = questionData.question.Remove(questionData.question.IndexOf("\""));
             }
             else // Does not contain an invalid character, no changes required
             {
