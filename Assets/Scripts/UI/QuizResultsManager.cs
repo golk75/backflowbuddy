@@ -14,6 +14,7 @@ public class QuizResultsManager : MonoBehaviour
     private VisualTreeAsset m_QuestionListEntryTemplate;
     string uxmlPath = "UI/uxml/Quiz/ResultsListEntry";
     private VisualElement m_ReviewResults;
+    private VisualElement m_QuestionAndAnswers;
     private VisualElement m_ScrollBarTracker;
     private VisualElement m_ScrollBarDragger;
     private Button m_RetryButton;
@@ -68,6 +69,7 @@ public class QuizResultsManager : MonoBehaviour
     {
         m_QuestionList = root.rootVisualElement.Q<ListView>("question-list");
         m_ReviewResults = root.rootVisualElement.Q<VisualElement>("ReviewResults");
+        m_QuestionAndAnswers = root.rootVisualElement.Q<VisualElement>("QuestionAndAnswer");
         resultPercent = m_ReviewResults.Q<Label>("percent");
         m_ScrollBarTracker = m_QuestionList.Q<VisualElement>("unity-tracker");
         m_ScrollBarDragger = m_QuestionList.Q<VisualElement>("unity-dragger");
@@ -76,6 +78,7 @@ public class QuizResultsManager : MonoBehaviour
     }
     public void ShowResults(List<QuizResult> quizResults, VisualTreeAsset visualTreeAsset, float sum)
     {
+        Actions.onResultsReveal?.Invoke();
 
         {
             m_ResultsList = quizResults;
@@ -174,6 +177,7 @@ public class QuizResultsManager : MonoBehaviour
         m_QuestionList.Q("unity-low-button").style.display = DisplayStyle.None;
         m_QuestionList.Q("unity-high-button").style.display = DisplayStyle.None;
         m_ScrollBarDragger.AddToClassList("scroll-dragger");
+        m_QuestionAndAnswers.style.display = DisplayStyle.None;
         m_ReviewResults.style.display = DisplayStyle.Flex;
     }
 }

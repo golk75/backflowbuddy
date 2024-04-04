@@ -150,6 +150,7 @@ public class QuestionGenerator : MonoBehaviour
     }
     private void ReturnToResults()
     {
+
         ReviewResultsScreen.style.display = DisplayStyle.Flex;
         for (int i = 0; i < answerButtons.Count; i++)
         {

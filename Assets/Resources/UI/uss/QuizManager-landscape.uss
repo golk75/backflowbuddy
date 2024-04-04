@@ -1,9 +1,28 @@
+:root {
+    --border-width: 3px;
+    --border-radius: 15px;
+    --border-color-white: white;
+    --background-color-dark-blue: rgb(118, 118, 118);
+    --color-red: rgba(183, 34, 26, 1);
+    --color-red-transparent: rgba(183, 34, 26, 0.5);
+    --color-orange: rgba(209, 69, 27, 1);
+    --color-orange-transparent: rgba(209, 69, 27, 0.5);
+    --color-yellow: rgba(242, 193, 44, 1);
+    --color-yellow-transparent: rgba(242, 193, 44, 0.5);
+    --color-blue-transparent: rgba(19, 101, 134, 0.5);
+    --color-blue: rgba(19, 101, 134, 1);
+    --color-blue1: rgba(72, 132, 156, 1);
+    --color-brown: rgba(142, 68, 35, 1);
+    --color-black: rgba(0, 0, 0, 1);
+    --color-black-transparent: rgba(0, 0, 0, 0.25);
+    --color-white: rgba(255, 255, 255, 1);
+    --color-white-transparent: rgba(255, 255, 255, 0.25);
+}
 .screen {
     flex-grow: 1;
 }
 
 .quiz-report {
-    background-image: resource('UI/Textures/gradientbar');
     width: 50%;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
@@ -94,7 +113,7 @@
 }
 
 .answer-button {
-    background-color: rgb(0, 0, 0);
+    background-color: var(--color-blue);
     -unity-text-align: middle-center;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
@@ -105,7 +124,7 @@
     border-top-width: 0;
     border-bottom-width: 0;
     white-space: normal;
-    color: rgb(255, 255, 255);
+    color: var(--color-white);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -115,7 +134,6 @@
     margin-bottom: 5px;
     margin-left: 5px;
     font-size: 24px;
-    background-image: resource('UI/Textures/angled-gradient');
     padding-top: 2%;
     padding-right: 2%;
     padding-bottom: 2%;
@@ -147,7 +165,7 @@
 }
 
 .question-container {
-    background-color: rgba(103, 136, 144, 0.49);
+    background-image: resource('UI/Textures/gradientbar3');
     border-left-color: rgba(224, 224, 224, 0.48);
     border-right-color: rgba(224, 224, 224, 0.48);
     border-top-color: rgba(224, 224, 224, 0.48);
@@ -162,6 +180,9 @@
     border-right-width: 1px;
     border-bottom-width: 1px;
     border-left-width: 1px;
+    flex-grow: 1;
+    justify-content: center;
+    margin-bottom: 1%;
 }
 
 .answer-row {
@@ -178,7 +199,7 @@
     padding-right: 5%;
     padding-left: 5%;
     justify-content: center;
-    background-color: rgb(6, 65, 45);
+    background-color:var(--color-black);
 }
 
 .question-label {
@@ -272,7 +293,6 @@
 .nav-container-element {
     font-size: 23px;
     -unity-text-align: middle-center;
-    background-color: rgb(255, 255, 255);
     height: 100%;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -286,30 +306,13 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    background-image: resource('UI/Textures/angled-gradient-3');
-    color: rgb(255, 255, 255);
+    background-color: var(--color-orange);
+    color:white;
+    background-image: resource('UI/Textures/gradientBar4');
+    
+
 }
 
-.question-container {
-    background-color: rgba(103, 136, 144, 0.49);
-    border-left-color: rgba(224, 224, 224, 0.48);
-    border-right-color: rgba(224, 224, 224, 0.48);
-    border-top-color: rgba(224, 224, 224, 0.48);
-    border-bottom-color: rgba(224, 224, 224, 0.48);
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px;
-    width: 100%;
-    color: rgb(255, 255, 255);
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    flex-grow: 1;
-    justify-content: center;
-    margin-bottom: 1%;
-}
 
 #question-list #unity-tracker {
     background-color: white;
@@ -332,7 +335,7 @@
 
 #background {
     flex-grow: 1;
-    background-color: rgb(6, 65, 45);
+    
 }
 
 #quiz-report-container {
@@ -596,7 +599,8 @@
 
 #quiz-selection-container {
     justify-content: center;
-    background-image: resource('UI/Textures/gradientbar');
+    
+    
 }
 
 #quiz-selection-header {
@@ -631,8 +635,9 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    background-image: resource('UI/Textures/angled-gradient-2');
-    color: rgb(255, 255, 255);
+    background-color: var(--color-orange);
+    color: var(--color-white);
+    
 }
 
 .quiz-selection-button:active {

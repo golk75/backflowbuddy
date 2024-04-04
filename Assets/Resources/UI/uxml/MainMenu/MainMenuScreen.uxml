@@ -3,7 +3,7 @@
         <ui:VisualElement name="main-container" class="main-container">
             <ui:VisualElement name="MainMenu_title_container" class="title" />
             <ui:VisualElement name="MainMenu_panel" class="main-menu-button__container">
-                <ui:Button text="Play" name="play-button" focusable="false" class="main-menu-button" />
+                <ui:Button text="Simulate" name="play-button" focusable="false" class="main-menu-button" />
                 <ui:Button text="Quiz" name="quiz-button" focusable="false" class="main-menu-button" />
                 <ui:Button text="Learn" name="learn-button" focusable="false" class="main-menu-button" style="display: none;" />
                 <ui:Button text="Exit" name="quit-button" focusable="false" class="main-menu-button" />

@@ -1,6 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="QuizSelection-panel" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizSelection-panel.uxml?fileID=9197481963319205126&amp;guid=1f662e4f8ae3e46c69a89b462b7fb1f0&amp;type=3#QuizSelection-panel" />
-    <Style src="project://database/Assets/Resources/UI/uss/QuizManager-landscape.uss?fileID=7433441132597879392&amp;guid=5bc42e28443914bfe9250a9672c482b1&amp;type=3#QuizManager-landscape" />
     <QuizSelection name="QuizSelection" class="screen">
         <ui:Instance template="QuizSelection-panel" name="QuizSelection-panel" class="screen">
             <ui:VisualElement name="quiz-selection-container" style="flex-grow: 1;">

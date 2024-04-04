@@ -107,7 +107,7 @@ public class QuizManager : VisualElement
     private void Quiz1Selected()
     {
         // Actions.onQuizSelection?.Invoke(25);
-        Actions.onQuizSelection?.Invoke(5);
+        Actions.onQuizSelection?.Invoke(25);
         m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
         m_QuizSelectionScreen.style.display = DisplayStyle.None;
 

@@ -56,4 +56,5 @@ public static class Actions
     public static Action<QuizResult, int> GenerateResultsQuestionReview;
     public static Action<int> returnScrollHandle;
     public static Action<int> onQuizSelection;
+    public static Action onResultsReveal;
 }
