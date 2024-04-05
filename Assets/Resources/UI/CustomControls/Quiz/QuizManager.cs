@@ -1,8 +1,6 @@
-using System;
+
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 public class QuizManager : VisualElement

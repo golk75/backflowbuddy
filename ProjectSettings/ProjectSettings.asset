@@ -140,7 +140,10 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 2.3.3
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 1190905661626674033, guid: 30df0976a818842158d9427757b3b14d, type: 2}
+  - {fileID: 11400000, guid: 0e78c5e3c224746dfaf3c45b31936741, type: 2}
+  - {fileID: 11400000, guid: 1ecc540dfebd34a9099e7492f8e56d49, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -168,10 +171,10 @@ PlayerSettings:
     Bratwurst: 0
     Standalone: 1
     VisionOS: 0
-    iPhone: 7
+    iPhone: 8
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 8
+  AndroidBundleVersionCode: 9
   AndroidMinSdkVersion: 33
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1

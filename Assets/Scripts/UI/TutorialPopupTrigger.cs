@@ -71,7 +71,7 @@ public class TutorialPopupTrigger : MonoBehaviour
 
 
     //scene management
-    [SerializeField] string m_DCTestScene_tutorial = "DCTestScene_tutorial";
+
     [SerializeField] string m_DCPlayScene = "DCPlayScene";
 
 
@@ -204,7 +204,7 @@ public class TutorialPopupTrigger : MonoBehaviour
         Debug.Log($"herere");
         SaveTutorialPrefs(0);
 
-        // SceneManager.LoadSceneAsync(m_DCTestScene_tutorial);
+
 
     }
 

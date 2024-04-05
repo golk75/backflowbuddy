@@ -1,16 +1,12 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Timers;
 using com.zibra.liquid.Manipulators;
 using com.zibra.liquid.Solver;
-using DG.Tweening;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
+
 
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 using UnityEngine.UIElements;
 
 public class DoubleCheckTestKitController : MonoBehaviour
@@ -37,9 +33,6 @@ public class DoubleCheckTestKitController : MonoBehaviour
     // public PressureZoneHUDController pressureZoneHUDController;
     // public RPZPressureZoneHUDController pressureZoneHUDController;
     public DCPressureZoneHUDController pressureZoneHUDController;
-
-
-
     public GameObject needle;
     public GameObject digitalKitNeedle;
     public GameObject currentKnob;
@@ -52,12 +45,6 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public GameObject HighHose;
     public GameObject BypassHose;
     public GameObject SightTube;
-    GameObject currentHighHoseConnection;
-
-
-    Vector3 initLowHosePosition;
-    Vector3 initHighHosePosition;
-    Vector3 initBypassHosePosition;
     public HoseBib HighHoseBib;
     public HoseBib LowHoseBib;
     public HoseBib BypassHoseBib;
@@ -102,9 +89,6 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
     [SerializeField]
     ZibraLiquidDetector TestCock2Detector;
-
-    Tween TweenColor;
-
     // private const float MinNeedle_rotation = 55;
     // private const float MaxNeedle_rotation = -55;
     public float MinNeedle_rotation = 135;
@@ -115,23 +99,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
     //limit knobs to 4 complete rotations (x1 rotation = 360;)->
     private const float MaxKnob_rotation = 1440;
-    private float currentKnobRotCount;
-
     private float currentKnobRotation;
     private float maxKnobRotation;
-    private float minKnobRotation;
-
-    [SerializeField]
-    private float currentPSID;
-
-    private float minPSID;
-    float closingPoint = 0;
     public bool isOperableObject;
 
     public CheckValveCollision isCheck1Open;
     public CheckValve2Collision isCheck2Open;
-    float lowHosePressure;
-
     public bool isConnectedTestCockOpen;
     public bool isTestCock1Open;
     public bool isTestCock2Open;
@@ -154,22 +127,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
 
 
     public float highHosePressure;
-    float bypasshosePressure;
-    float needleSpeedDamp = 0.005f;
     public float knobRotationFactor = 0;
 
 
     Coroutine m_ChangeColorOpen;
     Coroutine m_ChangeColorClose;
     Coroutine KnobClickOperate;
-    Coroutine ReliefValveOpeningPoint;
-    Coroutine ReliefValveOpeningPointReturn;
-    Coroutine CheckValve1Test;
-    Coroutine CheckValve2Test;
-    Coroutine Zone2TestRecovery;
-
-    float reliefValveInitValue;
-    float needleVelRef = 0;
     public float lerpDuration = 0.5f;
     public bool knobOpened = false;
 
@@ -179,8 +142,9 @@ public class DoubleCheckTestKitController : MonoBehaviour
     // private VisualElement _gaugeProgressBar;
     // private Length MinFillPos = Length.Percent(0);
     // private Length MaxFillPos = Length.Percent(100);
-    private float MinFillPos = 0;
-    private float MaxFillPos = 100;
+    //digital gauge
+    // private float MinFillPos = 0;
+    // private float MaxFillPos = 100;
     public float knobRotation;
     private float zone1to2PsiDiff;
     private float zone2to3PsiDiff;
@@ -192,15 +156,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
     public List<GameObject> AttachedHoseList;
     Color openColor = new Color(0.121469043f, 0.830188692f, 0, 10);
     Color closedColor = new Color(0.860397637f, 0.0180187989f, 0, 10);
-    int rot = 0;
+
     public ForceMode fMode;
     public Vector3 forceDir;
     public float fStrength;
     private const string EmissionColor = "_EmissionColor";
     public GameObject check1BackSeat;
-    Vector3 check1BackSeatInitPos;
-    Vector3 check1BackSeatClosedPos = new Vector3(-0.129500002f, 0f, -0.0860999972f);
-    Vector3 check1BackSeatLeakingPos = new Vector3(-0.133900002f, 0, -0.0860999972f);
     public float RVOP;
     public float m_lowSideManifoldPressure;
     public float m_highSideManifoldPressure;
@@ -287,18 +248,18 @@ public class DoubleCheckTestKitController : MonoBehaviour
         // _gaugeProgressBar = _root.rootVisualElement.Q<VisualElement>("Gauge_progress_bar");
 
 
-        currentPSID = 0;
-        minPSID = 0;
+
+
         maxPSID = 1;
         currentKnobRotation = 0;
         maxKnobRotation = 1440;
-        minKnobRotation = 0;
+
         highHosePressure = 0;
         hosePressure = 0;
-        initLowHosePosition = LowHose.transform.position;
-        initHighHosePosition = HighHose.transform.position;
-        initBypassHosePosition = BypassHose.transform.position;
-        check1BackSeatInitPos = check1BackSeat.transform.position;
+
+
+
+
         m_hoseDetector1 = dcWaterController.hoseDetector1.GetComponent<HoseDetector>();
         m_hoseDetector2 = dcWaterController.hoseDetector2.GetComponent<HoseDetector>();
         m_hoseDetector3 = dcWaterController.hoseDetector3.GetComponent<HoseDetector>();
@@ -350,16 +311,16 @@ public class DoubleCheckTestKitController : MonoBehaviour
         return MinNeedle_rotation - normalizedPsid * PsidDiff;
 
     }
-    private float GetPsidDigitalNeedle()
-    {
-        float PsiDiff = MinFillPos - MaxFillPos;
+    // private float GetPsidDigitalNeedle()
+    // {
+    //     float PsiDiff = MinFillPos - MaxFillPos;
 
-        float normalizedPsid = hosePressure / maxPSID;
+    //     float normalizedPsid = hosePressure / maxPSID;
 
-        return MinFillPos - normalizedPsid * PsiDiff;
+    //     return MinFillPos - normalizedPsid * PsiDiff;
 
 
-    }
+    // }
 
 
     /// <summary>

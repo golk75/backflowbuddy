@@ -8,13 +8,6 @@ using UnityEngine.UIElements;
 public class GameScreenMenu : MonoBehaviour
 {
 
-    //Actions
-    public static event Action GameQuit;
-    public static event Action<float> GamePaused;
-    public static event Action GameResumed;
-
-
-
     [Header("Menu Screen elements")]
     [Tooltip("String IDs to query Visual Elements")]
     [SerializeField] string m_MenuScreenName = "GameMenuScreen";
@@ -93,7 +86,6 @@ public class GameScreenMenu : MonoBehaviour
 
     private void ResumeGame(ClickEvent evt)
     {
-        // GameResumed?.Invoke();
 
         ShowVisualElement(m_MenuScreen, false);
 

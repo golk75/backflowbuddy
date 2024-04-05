@@ -442,6 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FingerCollider: {fileID: 499542536}
   m_Floor: {fileID: 1319057103}
+  m_ResultsForceField: {fileID: 0}
   touchDelta: {x: 0, y: 0}
 --- !u!1 &499542534
 GameObject:
@@ -469,13 +470,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499542534}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4, y: 0.14, z: -4.39}
-  m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.4, y: 0.13999987, z: -4.390001}
+  m_LocalScale: {x: 0.67, y: 0.66999996, z: 0.66999996}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 853873161}
-  m_Father: {fileID: 2009983760}
+  m_Father: {fileID: 2002491111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &499542536
 MonoBehaviour:
@@ -1787,40 +1788,8 @@ Transform:
   - {fileID: 1081099079}
   - {fileID: 1409834071}
   - {fileID: 1652522686}
-  - {fileID: 2009983760}
-  m_Father: {fileID: 1319057107}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2009983759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2009983760}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2009983760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009983759}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
   - {fileID: 499542535}
-  m_Father: {fileID: 2002491111}
+  m_Father: {fileID: 1319057107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054557016
 GameObject:

@@ -6,9 +6,7 @@ using UnityEngine.UIElements;
 
 public class PanelDragger : PointerManipulator
 {
-    private Vector3 m_Start;
     protected bool m_Active;
-    private int m_PointerId;
     private VisualElement root { get; }
     private bool enabled { get; set; }
     private Vector2 targetStartPosition { get; set; }
@@ -20,7 +18,6 @@ public class PanelDragger : PointerManipulator
     public PanelDragger(VisualElement target)
     {
         activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
-        m_PointerId = -1;
         m_Active = false;
         this.target = target;
         root = target.parent;

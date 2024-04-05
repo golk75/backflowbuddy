@@ -549,7 +549,7 @@ Camera:
   far clip plane: 1000
   field of view: 42.85
   orthographic: 1
-  orthographic size: 2.1
+  orthographic size: 2.29
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057824563}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c2263de80c2afd4f991283956e5e954, type: 3}
   m_Name: 
@@ -1413,10 +1413,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6ee375c01c3754092bcd25096894ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxNumParticles: 262144
+  MaxNumParticles: 499968
   EnableDownscale: 0
   DownscaleFactor: 0.5
-  InitialState: 1
+  InitialState: 0
   BakedInitialStateAsset: {fileID: 4900000, guid: b0ae10064da2c40f6a4a51060f2f7868,
     type: 3}
   CurrentRenderingMode: 1
@@ -1560,7 +1560,7 @@ Transform:
   m_GameObject: {fileID: 1336441353}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.24, y: 0, z: -0.39}
+  m_LocalPosition: {x: 1.57, y: -0, z: 1.07}
   m_LocalScale: {x: 0.3636, y: 0.3636, z: 0.3636}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1593,12 +1593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad548a36b2073645a9674dba048a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 2, y: 0, z: 0.3, w: 10}
+  AdditionalData0: {x: 2, y: 0, z: 0.3, w: -0}
   AdditionalData1: {x: 0, y: 1, z: 0, w: 1}
   Type: 2
   Strength: 0
   DistanceDecay: 0.3
-  DistanceOffset: 10
+  DistanceOffset: -0
   DisableForceInside: 1
   ForceDirection: {x: 0, y: 1, z: 0}
   Shape: 0

@@ -340,15 +340,13 @@ public class RPZPressureZoneHUDController : MonoBehaviour
     //regulate min-max values as well as setting text in ui label
     void CheckSpring1Regulate()
     {
-        if (waterController.isActiveAndEnabled)
-        {
-            waterController.check1SpringForce = check1SpringPressure;
-        }
-        else
-        {
 
-            m_rpzWaterController.check1SpringForce = check1SpringPressure;
-        }
+
+
+
+
+        m_rpzWaterController.check1SpringForce = check1SpringPressure;
+
 
         if (check1SpringPressure >= maxSpringPressure)
         {
@@ -370,16 +368,11 @@ public class RPZPressureZoneHUDController : MonoBehaviour
 
     void CheckSpring2Regulate()
     {
-        if (waterController.isActiveAndEnabled)
-        {
-            waterController.check2SpringForce = check2SpringPressure;
-        }
-        else
-        {
 
-            m_rpzWaterController.check2SpringForce = check2SpringPressure;
 
-        }
+
+        m_rpzWaterController.check2SpringForce = check2SpringPressure;
+
 
         if (check2SpringPressure >= maxSpringPressure)
         {

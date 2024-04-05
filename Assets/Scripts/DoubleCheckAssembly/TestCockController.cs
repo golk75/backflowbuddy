@@ -9,9 +9,6 @@ public class TestCockController : MonoBehaviour
     [SerializeField]
     GameObject PlayerManager;
 
-    public GameObject WaterManager;
-    RelaxWater relaxWater;
-
     [SerializeField]
     ZibraLiquidVoid TestCockVoid1;
 
@@ -154,7 +151,7 @@ public class TestCockController : MonoBehaviour
     void Start()
     {
         playerController = PlayerManager.GetComponent<PlayerController>();
-        relaxWater = WaterManager.GetComponent<RelaxWater>();
+
         testCockClosedScale = TestCockVoid1.transform.localScale;
     }
 
