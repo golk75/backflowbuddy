@@ -117,7 +117,8 @@ public class QuizResultsManager : MonoBehaviour
                    {
                        if (m_ResultsList[index].isCorrect)
                        {
-                           item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0, 0.735849f, 0.05642469f);
+                           //    item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0, 0.735849f, 0.05642469f);
+                           item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0.09198114f, 0.5f, 0.3110409f);
 
                            //-->this on is close!!->>
                            //item.style.backgroundColor = Color.green;
@@ -127,7 +128,8 @@ public class QuizResultsManager : MonoBehaviour
                        }
                        else
                        {
-                           item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0.7735849f, 0.2411385f, 0.1131185f);
+                           //    
+                           item.Q<VisualElement>("list-entry").style.backgroundColor = new Color(0.7176471f, 0.1333333f, 0.1019608f);
                            //-->this on is close!!->>
                            //item.style.backgroundColor = Color.red;
 

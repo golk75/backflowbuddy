@@ -4,7 +4,7 @@
         <ui:VisualElement name="QuestionAndAnswer-panel" class="qa-panel">
             <ui:VisualElement name="nav-container" class="nav-container">
                 <ui:VisualElement name="question-tracking">
-                    <ui:Label tabindex="0" text="1/100" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="nav-container-element" />
+                    <ui:Label tabindex="0" text="1/100" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question-tracker-label" class="nav-container-element" />
                 </ui:VisualElement>
                 <ui:Button text="Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-menu-button" class="nav-container-element" />
                 <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="back-to-results" class="nav-container-element" />

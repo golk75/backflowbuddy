@@ -37,54 +37,56 @@ public class PlayScreen : VisualElement
 
     private void EnableRPZPlayScreenAndScene()
     {
+        SceneManager.LoadScene("RPZPlayScene");
         //Async Load Scene--> prevents ui from changing until scene is loaded up
         //DO NOT CHANGE THE ORDER IN THIS---->
-        {
-            //AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync("RPZPlayScene");
-          SceneManager.LoadScene("RPZPlayScene");
+        // {
+        //     //AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync("RPZPlayScene");
+        //   SceneManager.LoadScene("RPZPlayScene");
 
-            // #if UNITY_EDITOR
-            //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
-            // #endif
-
-
-            // skipping quick tour
-
-            //wait for scene to load before switching Ui
-            if (SceneManager.GetActiveScene().name == "RPZPlayScene")
-            {
-                m_DeviceSelectionScreen.style.display = DisplayStyle.None;
-            }
+        //     // #if UNITY_EDITOR
+        //     //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+        //     // #endif
 
 
+        //     // skipping quick tour
 
-        }
+        //     //wait for scene to load before switching Ui
+        //     if (SceneManager.GetActiveScene().name == "RPZPlayScene")
+        //     {
+        //         m_DeviceSelectionScreen.style.display = DisplayStyle.None;
+        //     }
+
+
+
+        // }
     }
 
     private void EnableDoubleCheckPlayScreenAndScene()
     {
+        SceneManager.LoadScene("DCPlayScene");
         //Async Load Scene--> prevents ui from changing until scene is loaded up
         //DO NOT CHANGE THE ORDER IN THIS---->
-        {
-            //AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync("DCPlayScene");
-            SceneManager.LoadScene("DCPlayScene");
+        // {
+        //     //AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync("DCPlayScene");
+        //     SceneManager.LoadScene("DCPlayScene");
 
-            // #if UNITY_EDITOR
-            //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
-            // #endif
-
-
-            // skipping quick tour
-
-            //wait for scene to load before switching Ui
-            if (SceneManager.GetActiveScene().name == "DCPlayScene")
-            {
-                m_DeviceSelectionScreen.style.display = DisplayStyle.None;
-            }
+        //     // #if UNITY_EDITOR
+        //     //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
+        //     // #endif
 
 
+        //     // skipping quick tour
 
-        }
+        //     //wait for scene to load before switching Ui
+        //     if (SceneManager.GetActiveScene().name == "DCPlayScene")
+        //     {
+        //         m_DeviceSelectionScreen.style.display = DisplayStyle.None;
+        //     }
+
+
+
+        // }
     }
 
     private void EnableRpzPopup()

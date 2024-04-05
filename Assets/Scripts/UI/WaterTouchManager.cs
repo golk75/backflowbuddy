@@ -20,6 +20,7 @@ public class WaterTouchManager : MonoBehaviour
     public GameObject m_Floor;
     public ZibraLiquidForceField m_ResultsForceField;
     public Vector2 touchDelta;
+    private float resultsFFRef;
 
     void OnEnable()
     {
@@ -54,8 +55,9 @@ public class WaterTouchManager : MonoBehaviour
     private void RevealResults()
     {
         // m_ResultsForceField.enabled = true;
-        // m_ResultsForceField.Strength = DOTween.
-        DOTween.To(x => m_ResultsForceField.Strength = x, 0, 4, 5f);
+        // m_ResultsForceField.Strength = Mathf.SmoothDamp(m_ResultsForceField.Strength, 4, ref resultsFFRef, 1f, 2f); ;
+
+
     }
 
 

@@ -1,6 +1,7 @@
 
-using System.Collections.Generic;
 
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 public class QuizManager : VisualElement
@@ -26,6 +27,7 @@ public class QuizManager : VisualElement
     private Button m_QuizSelectionButton1;
     private Button m_QuizSelectionButton2;
     private Button m_QuizSelectionButton3;
+    private Button m_BackToResultsButton;
     private VisualElement m_QuizMenuModal;
 
     public new class UxmlFactory : UxmlFactory<QuizManager, UxmlTraits> { }
@@ -63,6 +65,7 @@ public class QuizManager : VisualElement
         m_QuizSelectionButton1 = this.Q<Button>("quiz-1");
         m_QuizSelectionButton2 = this.Q<Button>("quiz-2");
         m_QuizSelectionButton3 = this.Q<Button>("quiz-3");
+        m_BackToResultsButton = m_QuestionAndAnswerScreen.Q<Button>("back-to-results");
 
 
 
@@ -73,7 +76,7 @@ public class QuizManager : VisualElement
 
 
         m_ReviewResults.style.display = DisplayStyle.None;
-
+        m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
         Actions.GenerateResultsQuestionReview?.Invoke(selectedEntry, m_ResultsListView.selectedIndex);
 
     }
@@ -86,8 +89,17 @@ public class QuizManager : VisualElement
         m_ResumeQuizButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
         m_QuitToMenuButton.RegisterCallback<ClickEvent>(evt => QuitToMainMenu());
         m_QuizMenuCloseButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
+        m_BackToResultsButton.RegisterCallback<ClickEvent>(evt => ReturnToResults());
 
     }
+
+    private void ReturnToResults()
+    {
+        //only dealing with the q&a screen => Results screen is being dealth with in QuestionGenerator class
+
+
+    }
+
     private void Quiz3Selected()
     {
         Actions.onQuizSelection?.Invoke(100);

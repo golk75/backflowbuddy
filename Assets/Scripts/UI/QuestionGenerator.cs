@@ -18,7 +18,6 @@ public class QuestionGenerator : MonoBehaviour
     private List<Button> answerButtons11;
     public List<QuizResult> QuizResults;
     private string[] currentAnswers;
-
     private VisualElement ReviewResultsScreen;
     private Label questionLabel;
     private VisualElement correctAnswerButton;
@@ -150,8 +149,9 @@ public class QuestionGenerator : MonoBehaviour
     }
     private void ReturnToResults()
     {
-
+        QandAScreen.style.display = DisplayStyle.None;
         ReviewResultsScreen.style.display = DisplayStyle.Flex;
+
         for (int i = 0; i < answerButtons.Count; i++)
         {
             // answerButtons[i].Q<Button>(className: "unity-button").text = currentQuestionResult.answers[i];
@@ -161,7 +161,6 @@ public class QuestionGenerator : MonoBehaviour
                 answerButtons[i].AddToClassList(className: "answer-button");
                 answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
                 answerButtons[i].RemoveFromClassList(className: "correct-answer");
-
 
             }
             if (i == currentQuestionResult.chosenAnswer)

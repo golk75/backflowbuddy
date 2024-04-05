@@ -4,7 +4,7 @@
             <ui:VisualElement name="main-container" style="flex-direction: row; flex-grow: 1;">
                 <ui:VisualElement name="quiz-report-container" class="quiz-report-container" style="flex-grow: 1;">
                     <ui:VisualElement name="question-list-container" style="flex-grow: 0; display: flex; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
-                        <ui:Label tabindex="-1" text="Question Review" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question-list-header" class="question-list-header" />
+                        <ui:Label tabindex="-1" text="Question Review" parse-escape-sequences="true" display-tooltip-when-elided="true" name="question-list-header" class="question-list-header" style="display: none;" />
                         <ui:ListView focusable="false" name="question-list" class="question-list" />
                     </ui:VisualElement>
                     <ui:VisualElement name="quiz-report" class="quiz-report">

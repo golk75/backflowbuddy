@@ -3,6 +3,8 @@
     --border-radius: 15px;
     --border-color-white: white;
     --background-color-dark-blue: rgb(118, 118, 118);
+    --color-black-transparent: rgba(0, 0, 0, 0.35);
+    --color-black: rgba(0, 0, 0, 1);
 }
 
 .screen {
@@ -40,7 +42,7 @@
     cursor: resource('UI/Textures/icons8-hand-33');
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    background-color: rgb(54, 55, 63);
+    background-color: var(--color-black-transparent);
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     border-top-right-radius: 25px;
@@ -67,24 +69,56 @@
     cursor: resource('UI/Textures/icons8-hand-33');
     color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    background-color: rgb(54, 55, 63);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    background-color: var(--color-black);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 62px;
+    -unity-text-align: middle-center;
+    border-left-color: rgba(0, 0, 0, 0.33);
+    border-right-color: rgba(0, 0, 0, 0.33);
+    border-top-color: rgba(0, 0, 0, 0.33);
+    border-bottom-color: rgba(0, 0, 0, 0.33);
+    width: 50%;
+    height: 100%;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    scale: 1.1 1.1;
 }
 
-.game-menu-button:active {
-    align-self: center;
-    width: 100%;
+.main-menu-button:active {
     cursor: resource('UI/Textures/icons8-hand-33');
-    color: rgb(54, 55, 63);
+    color: rgb(255, 255, 255);
     -unity-font-style: bold;
-    background-color: rgb(255, 255, 255);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    background-color: var(--color-black);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 62px;
+    -unity-text-align: middle-center;
+    border-left-color: rgba(0, 0, 0, 0.33);
+    border-right-color: rgba(0, 0, 0, 0.33);
+    border-top-color: rgba(0, 0, 0, 0.33);
+    border-bottom-color: rgba(0, 0, 0, 0.33);
+    width: 50%;
+    height: 100%;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    scale: 0.9 0.9;
 }
 
 .main-menu-title-label {
