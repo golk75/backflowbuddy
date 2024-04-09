@@ -58,11 +58,6 @@ public class CSVtoScriptableObject
                 // Questions will be named the same as the question text in this example
                 questionData.name = questionData.question.Remove(questionData.question.IndexOf(":"));
             }
-            else if (questionData.question.Contains("\""))
-            {
-                // Questions will be named the same as the question text in this example
-                questionData.name = questionData.question.Remove(questionData.question.IndexOf("\""));
-            }
             else // Does not contain an invalid character, no changes required
             {
                 questionData.name = questionData.question;

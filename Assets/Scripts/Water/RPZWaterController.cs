@@ -1,13 +1,11 @@
 
 
-using System;
+
 using System.Collections.Generic;
-using System.Security;
+using com.zibra.common.SDFObjects;
 using com.zibra.liquid.DataStructures;
 using com.zibra.liquid.Manipulators;
-using com.zibra.liquid.SDFObjects;
 using com.zibra.liquid.Solver;
-
 using UnityEngine;
 
 
@@ -29,6 +27,7 @@ public class RPZWaterController : MonoBehaviour
 
     TestCockController testCockController;
     ShutOffValveController shutOffValveController;
+
     public RpzTestKitController rpzTestKitController;
 
 
@@ -215,6 +214,7 @@ public class RPZWaterController : MonoBehaviour
     public Rigidbody check2Rb;
     public Rigidbody reliefCheckRb;
     public ZibraLiquid liquid;
+    public GameObject liquidMgr;
     ZibraLiquidSolverParameters liquidSolverParameters;
 
     public float initialCheck1Mass;
@@ -261,7 +261,10 @@ public class RPZWaterController : MonoBehaviour
 
     void Start()
     {
-
+        if (liquid.enabled == false)
+        {
+            liquid.enabled = true;
+        }
         testCockController = testCockManager.GetComponent<TestCockController>();
         shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
         initSupplyVoidPos = supplyVoid.transform.localPosition;
@@ -279,6 +282,7 @@ public class RPZWaterController : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
+
         testCock4Str = UnityEngine.Random.Range(testCock4MinStr, testCock4MaxStr);
         testCock3Str = UnityEngine.Random.Range(testCock3MinStr, testCock3MaxStr);
         CheckValve1StartingPos = checkValve1.transform.position;

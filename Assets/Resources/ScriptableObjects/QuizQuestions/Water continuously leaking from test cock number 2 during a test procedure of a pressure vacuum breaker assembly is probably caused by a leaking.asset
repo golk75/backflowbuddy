@@ -17,7 +17,7 @@ MonoBehaviour:
     of a pressure vacuum breaker assembly is probably caused by a leaking:'
   category: BPAT
   answers:
-  - Inlet shut-off valve number 1
+  - Inlet shut-off valve #1
   - Air inlet valve
-  - Test cock number 1
-  - Outlet shut-off valve number 2
+  - Test cock #1
+  - Outlet shut-off valve #2

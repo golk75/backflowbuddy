@@ -18,6 +18,6 @@ MonoBehaviour:
   category: BPAT
   answers:
   - A malfunction of the relief valve mechanism
-  - A leaking number 1 shut-off valve
+  - A leaking #1 shut-off valve
   - Low water supply pressure
   - Air trapped inside the relief valve

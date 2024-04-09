@@ -4,8 +4,6 @@
   <xs:import schemaLocation="UnityEditor.UIElements.xsd" namespace="UnityEditor.UIElements" />
   <xs:import schemaLocation="UnityEditor.Tilemaps.xsd" namespace="UnityEditor.Tilemaps" />
   <xs:import schemaLocation="UnityEditor.AddressableAssets.GUIElements.xsd" namespace="UnityEditor.AddressableAssets.GUIElements" />
-  <xs:import schemaLocation="UnityEditor.AddressableAssets.Diagnostics.xsd" namespace="UnityEditor.AddressableAssets.Diagnostics" />
-  <xs:import schemaLocation="UnityEditor.AdaptivePerformance.UI.Editor.xsd" namespace="UnityEditor.AdaptivePerformance.UI.Editor" />
   <xs:import schemaLocation="com.zibra.liquid.Foundation.UIElements.xsd" namespace="com.zibra.liquid.Foundation.UIElements" />
   <xs:import schemaLocation="UnityEditor.ShaderGraph.Drawing.xsd" namespace="UnityEditor.ShaderGraph.Drawing" />
   <xs:include schemaLocation="GlobalNamespace.xsd" />

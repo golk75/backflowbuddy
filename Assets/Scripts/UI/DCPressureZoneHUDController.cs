@@ -315,15 +315,9 @@ public class DCPressureZoneHUDController : MonoBehaviour
     //regulate min-max values as well as setting text in ui label
     void CheckSpring1Regulate()
     {
-        if (m_dcWaterController.isActiveAndEnabled)
-        {
-            m_dcWaterController.check1SpringForce = check1SpringPressure;
-        }
-        else
-        {
 
-            m_dcWaterController.check1SpringForce = check1SpringPressure;
-        }
+        m_dcWaterController.check1SpringForce = check1SpringPressure;
+
 
         if (check1SpringPressure >= maxSpringPressure)
         {
@@ -401,6 +395,7 @@ public class DCPressureZoneHUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         CheckSpring1Regulate();
         CheckSpring2Regulate();
         // ReliefValveControl();

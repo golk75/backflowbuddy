@@ -70,12 +70,20 @@ public class MainMenuScreenManager : VisualElement
         m_MainMenuScreen.Q(MainMenuQuizButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         // m_LearnScreenComingSoonPopup?.Q("learn-popup-back-button")?.RegisterCallback<ClickEvent>(evt => CloseLearnPopup());
         // m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
-
+        m_PlayScreen?.Q("rpz-button").RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
+        m_PlayScreen?.Q("double-check-button").RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
-
+    private void EnableRPZPlayScreenAndScene()
+    {
+        SceneManager.LoadScene("RPZPlayScene");
+    }
+    private void EnableDoubleCheckPlayScreenAndScene()
+    {
+        SceneManager.LoadScene("DCPlayScene");
+    }
     private void CloseLearnPopup()
     {
         // m_LearnScreenComingSoonPopup.style.display = DisplayStyle.None;

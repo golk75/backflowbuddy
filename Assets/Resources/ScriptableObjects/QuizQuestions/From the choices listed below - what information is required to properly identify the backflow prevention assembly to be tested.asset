@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c216f963310f248a9b6c86b0f7349ad5, type: 3}
+  m_Name: From the choices listed below - what information is required to properly
+    identify the backflow prevention assembly to be tested
+  m_EditorClassIdentifier: 
+  question: From the choices listed below - what information is required to properly
+    identify the backflow prevention assembly to be tested?
+  category: BPAT
+  answers:
+  - All are required
+  - Type and manufacturer of backflow prevention assembly
+  - Location and size of backflow prevention assembly
+  - Model and serial number of backflow prevention assembly

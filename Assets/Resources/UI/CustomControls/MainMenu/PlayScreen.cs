@@ -24,12 +24,12 @@ public class PlayScreen : VisualElement
 
         // this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRpzPopup());
         // this?.Q("rpz-popup-back-button")?.RegisterCallback<ClickEvent>(evt => RemoveRpzPopup());
-        this?.Q("rpz-button")?.RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
+        // this.Q("rpz-button").RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
 
 
 
         //Double Check button
-        this?.Q("double-check-button")?.RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
+        // this.Q("double-check-button").RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
 
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);

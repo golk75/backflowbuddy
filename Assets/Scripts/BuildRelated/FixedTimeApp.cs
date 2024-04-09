@@ -11,19 +11,19 @@ public class FixedTimeApp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        liquid = GetComponent<ZibraLiquid>();
-        liquidSolverParameters = GetComponent<ZibraLiquidSolverParameters>();
+        // liquid = GetComponent<ZibraLiquid>();
+        // liquidSolverParameters = GetComponent<ZibraLiquidSolverParameters>();
 
-        if (Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            liquid.UseFixedTimestep = true;
-            liquidSolverParameters.ForceInteractionStrength = -0.5f;
-            //moved to water controller 
-            // liquidSolverParameters.ForceInteractionStrength = 0.0f;
+        // if (Application.platform == RuntimePlatform.WindowsPlayer)
+        // {
+        //     liquid.UseFixedTimestep = true;
+        //     liquidSolverParameters.ForceInteractionStrength = -0.5f;
+        //     //moved to water controller 
+        //     // liquidSolverParameters.ForceInteractionStrength = 0.0f;
 
 
 
-        }
+        // }
         //OSX--------------------
         // else
         // {

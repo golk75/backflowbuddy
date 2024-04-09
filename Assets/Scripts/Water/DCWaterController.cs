@@ -1,11 +1,11 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using com.zibra.common.SDFObjects;
 using com.zibra.liquid.DataStructures;
 using com.zibra.liquid.Manipulators;
-using com.zibra.liquid.SDFObjects;
 using com.zibra.liquid.Solver;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -278,7 +278,10 @@ public class DCWaterController : MonoBehaviour
     List<ZibraLiquidCollider> ColliderList;
     void Start()
     {
-
+        if (liquid.enabled == false)
+        {
+            liquid.enabled = true;
+        }
         testCockController = testCockManager.GetComponent<TestCockController>();
         shutOffValveController = shutOffValveManager.GetComponent<ShutOffValveController>();
         initSupplyVoidPos = supplyVoid.transform.localPosition;

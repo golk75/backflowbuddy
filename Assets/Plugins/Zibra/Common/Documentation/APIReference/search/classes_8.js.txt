@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['pluginmanager_0',['PluginManager',['../a00525.html',1,'com::zibra::common::Editor']]]
+];

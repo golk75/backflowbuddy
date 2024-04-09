@@ -16,6 +16,6 @@ MonoBehaviour:
   category: BPAT
   answers:
   - Psia minus atmospheric pressure
-  - The pressure on a psia gauge
-  - ' above sea level'
-  - The pressure on a psia gauge
+  - The pressure on a psia gauge, above sea level
+  - The pressure on a psia gauge, above or below atmospheric pressure
+  - Psia plus atmospheric pressure

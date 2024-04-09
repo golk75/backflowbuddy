@@ -258,7 +258,8 @@ public class DoubleCheckTestKitController : MonoBehaviour
         hosePressure = 0;
 
 
-
+        if (!dcWaterController)
+            return;
 
         m_hoseDetector1 = dcWaterController.hoseDetector1.GetComponent<HoseDetector>();
         m_hoseDetector2 = dcWaterController.hoseDetector2.GetComponent<HoseDetector>();
@@ -786,9 +787,12 @@ public class DoubleCheckTestKitController : MonoBehaviour
     {
 
         //track zone pressures
-        zone1to2PsiDiff = dcWaterController.zone1to2PsiDiff;
-        zone2to3PsiDiff = dcWaterController.zone2to3PsiDiff;
-
+        if (dcWaterController)
+        {
+            zone1to2PsiDiff = dcWaterController.zone1to2PsiDiff;
+            zone2to3PsiDiff = dcWaterController.zone2to3PsiDiff;
+        }
+        else { return; }
 
         /// <summary>
         /// High Hose

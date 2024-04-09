@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c216f963310f248a9b6c86b0f7349ad5, type: 3}
+  m_Name: When testing a spill resistant vacuum breaker - or SVB - the __________
+    is tested by removing the vent screw.
+  m_EditorClassIdentifier: 
+  question: When testing a spill resistant vacuum breaker - or SVB - the __________
+    is tested by removing the vent screw.
+  category: BPAT
+  answers:
+  - The check valve
+  - The #1 shutoff valve
+  - The air inlet valve
+  - The #2 check valvethe #2 check valve
