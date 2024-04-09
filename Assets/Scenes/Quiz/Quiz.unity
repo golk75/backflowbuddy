@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa33ef4a18052b40b7b1ccd35d822a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Friction: 0
   ForceInteraction: 0
   ForceInteractionCallback:
@@ -251,8 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60815565df9b1e64e891757bcf54edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
+  DeletePercentage: 1
   ObjectVersion: 2
 --- !u!1 &116986045
 GameObject:
@@ -432,8 +433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad548a36b2073645a9674dba048a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 2, y: 4, z: 0.1, w: 0}
-  AdditionalData1: {x: 0, y: 1, z: 0, w: 1}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Type: 2
   Strength: 4
   DistanceDecay: 0.1
@@ -756,8 +757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa33ef4a18052b40b7b1ccd35d822a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Friction: 0
   ForceInteraction: 0
   ForceInteractionCallback:
@@ -1187,8 +1188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2263de80c2afd4f991283956e5e954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   VolumePerSimTime: 0.125
   InitialVelocity: {x: 0, y: 0, z: 0}
   ParticlesPerSecOld: 0
@@ -1255,8 +1256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa33ef4a18052b40b7b1ccd35d822a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Friction: 0
   ForceInteraction: 0
   ForceInteractionCallback:
@@ -1337,6 +1338,9 @@ MonoBehaviour:
   EmbeddingTextureBlocks: 0
   SDFTextureDimension: 0
   EmbeddingTextureDimension: 0
+  HeightmapSize: {x: 0, y: 0}
+  HeightmapCount: 0
+  HeightmapCountSqrt: 0
 --- !u!114 &1228038585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,6 +1368,7 @@ MonoBehaviour:
   RayMarchMaxSteps: 128
   RayMarchStepSize: 0.2
   RayMarchStepFactor: 4
+  PresetName: 
   RefractionQualityOld: 0
   ObjectVersion: 2
 --- !u!114 &1228038586
@@ -1386,6 +1391,13 @@ MonoBehaviour:
   MaximumVelocity: 3
   MinimumVelocity: 0
   ForceInteractionStrength: 0
+  HeightmapResolution: 256
+  FoamBuoyancy: 0.6
+  Material1: 0
+  Material2: 0
+  Material3: 0
+  AdditionalParticleSpecies: []
+  PresetName: 
 --- !u!114 &1228038587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,18 +1413,57 @@ MonoBehaviour:
   FluidMeshMaterial: {fileID: 2100000, guid: 248b1858901577949a18bb8d09cb583f, type: 2}
   UpscaleMaterial: {fileID: 2100000, guid: 374557399a8cb1b499aee6a0cc226496, type: 2}
   SDFRenderMaterial: {fileID: 2100000, guid: a29ad26b5c6c24c43ba0cbdc686b6b41, type: 2}
-  Color: {r: 0.23025985, g: 0.8088028, b: 0.9245283, a: 1}
+  UseCubemapRefraction: 0
   ReflectionColor: {r: 1.0450903, g: 1.3694288, b: 1.7207954, a: 1}
+  Color: {r: 0.23025985, g: 0.8088028, b: 0.9245283, a: 1}
   EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
-  Roughness: 0.022
-  Metalness: 0.143
   ScatteringAmount: 0
   AbsorptionAmount: 32.670002
+  Roughness: 0.022
+  Metalness: 0.143
+  FresnelStrength: 1
   IndexOfRefraction: 1.32
   FluidSurfaceBlur: 1.03
+  EnableFoam: 0
+  FoamIntensity: 0.8
+  FoamDecay: 0.01
+  FoamDecaySmoothness: 0.75
+  FoamingOcclusionDistance: 0
+  FoamingThreshold: 0.999
+  FoamBrightness: 1
+  FoamSize: 0.05
+  FoamDiffusion: 0.25
+  FoamSpawning: 0.25
+  FoamMotionBlur: 1
+  MaxFoamParticles: 0
+  FoamParticleLifetime: 128
+  Material1:
+    Color: {r: 0.3411765, g: 0.92156863, b: 0.85236126, a: 1}
+    EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
+    ScatteringAmount: 5
+    AbsorptionAmount: 20
+    Roughness: 0.3
+    Metalness: 0.3
+  Material2:
+    Color: {r: 0.3411765, g: 0.92156863, b: 0.85236126, a: 1}
+    EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
+    ScatteringAmount: 5
+    AbsorptionAmount: 20
+    Roughness: 0.3
+    Metalness: 0.3
+  Material3:
+    Color: {r: 0.3411765, g: 0.92156863, b: 0.85236126, a: 1}
+    EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
+    ScatteringAmount: 5
+    AbsorptionAmount: 20
+    Roughness: 0.3
+    Metalness: 0.3
+  PresetName: 
   SmoothnessOld: 0.96
   Shadowing: 0
-  NoOpMaterial: {fileID: 2100000, guid: 248b1858901577949a18bb8d09cb583f, type: 2}
+  NoOpCompute: {fileID: 7200000, guid: 82c4529b0f5984f10920878932a2435b, type: 3}
+  RendererCompute: {fileID: 7200000, guid: 7b672d1cb8d76914cad3dd17f2b0a7ec, type: 3}
+  HeightmapBlit: {fileID: 2100000, guid: 7495c7ffc90d14e398be72be8ca86c05, type: 2}
   ObjectVersion: 3
 --- !u!114 &1228038588
 MonoBehaviour:
@@ -1429,7 +1480,7 @@ MonoBehaviour:
   MaxNumParticles: 499968
   EnableDownscale: 0
   DownscaleFactor: 0.5
-  InitialState: 0
+  InitialState: 1
   BakedInitialStateAsset: {fileID: 4900000, guid: b0ae10064da2c40f6a4a51060f2f7868,
     type: 3}
   CurrentRenderingMode: 1
@@ -1446,17 +1497,18 @@ MonoBehaviour:
   VisualizeSceneSDF: 0
   ContainerSize: {x: 10, y: 10, z: 10}
   UseFixedTimestep: 0
+  _SimulationGUID: 984b8207-11a3-4bdb-bcc4-80f5aba0713c
   SDFColliders:
+  - {fileID: 57563457}
   - {fileID: 446582018}
   - {fileID: 1140023390}
-  - {fileID: 57563457}
   - {fileID: 2006794023}
   Manipulators:
   - {fileID: 1057824564}
   - {fileID: 113977701}
-  - {fileID: 1336441356}
   - {fileID: 284676431}
   - {fileID: 1306316058}
+  - {fileID: 1336441356}
   - {fileID: 1591892846}
 --- !u!4 &1228038589
 Transform:
@@ -1535,8 +1587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad548a36b2073645a9674dba048a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 2, y: 4, z: 0.1, w: 0}
-  AdditionalData1: {x: 0, y: 1, z: 0, w: 1}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Type: 2
   Strength: 4
   DistanceDecay: 0.1
@@ -1606,8 +1658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad548a36b2073645a9674dba048a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 2, y: 0, z: 0.3, w: -0}
-  AdditionalData1: {x: 0, y: 1, z: 0, w: 1}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Type: 2
   Strength: 0
   DistanceDecay: 0.3
@@ -1677,8 +1729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60815565df9b1e64e891757bcf54edef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
+  DeletePercentage: 1
   ObjectVersion: 2
 --- !u!1 &1552085172
 GameObject:
@@ -1776,8 +1829,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad548a36b2073645a9674dba048a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 2, y: 4, z: 0.3, w: 10}
-  AdditionalData1: {x: 0, y: 1, z: 0, w: 1}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Type: 2
   Strength: 4
   DistanceDecay: 0.3
@@ -2006,8 +2059,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa33ef4a18052b40b7b1ccd35d822a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdditionalData0: {x: 0, y: 0, z: 0, w: 0}
-  AdditionalData1: {x: 0, y: 0, z: 0, w: 0}
+  CurrentInteractionMode: 0
+  ParticleSpecies: 0
   Friction: 0
   ForceInteraction: 0
   ForceInteractionCallback:

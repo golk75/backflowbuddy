@@ -19,6 +19,7 @@
     --color-incorrect-red: rgba(183, 34, 26, 1);
     --color-correct-green: rgba(24, 128, 79, 1);
     --color-blue-dark: rgba(11, 64, 85, 1);
+     --color-question: rgba(33.2, 50, 61.1, 1);
 }
 
 .screen {
@@ -173,7 +174,7 @@
 
 
 .question-container {
-    background-image: resource('UI/Textures/gradientbar3');
+    background-image: resource('UI/Textures/question-background');
     border-left-color: rgba(224, 224, 224, 0.48);
     border-right-color: rgba(224, 224, 224, 0.48);
     border-top-color: rgba(224, 224, 224, 0.48);
@@ -213,13 +214,14 @@ flex-grow:1;
 }
 
 .qa-panel {
+    background-color:var(--color-question);
     width: 100%;
     height: 100%;
     padding-right: 5%;
     padding-left: 5%;
     padding-top: 15%;
     padding-bottom: 0%;
-    background-color:var(--color-black);
+    
 }
 
 .question-label {
@@ -257,7 +259,7 @@ flex-grow:1;
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: var(--color-orange);
     color:white;
-    background-image: resource('UI/Textures/gradientBar4');
+    background-image: resource('UI/Textures/menu-button-background');
     
 
 }
