@@ -1074,6 +1074,8 @@ MonoBehaviour:
     type: 3}
   portraitTheme: {fileID: 7433441132597879392, guid: 15a411a6539eb448392d6609a488ced6,
     type: 3}
+  desktopTheme: {fileID: 7433441132597879392, guid: 6d85d2825dd1d491ba11609f52e0ffb5,
+    type: 3}
   uIDocument: {fileID: 1214863521}
 --- !u!1 &1272057562
 GameObject:

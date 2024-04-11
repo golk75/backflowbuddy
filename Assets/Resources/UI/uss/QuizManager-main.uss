@@ -32,7 +32,6 @@
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     font-size: 60px;
-    background-image: resource('UI/Textures/angled-gradient');
     padding-top: 9%;
     padding-right: 9%;
     padding-bottom: 9%;

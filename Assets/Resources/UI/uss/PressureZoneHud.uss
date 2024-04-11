@@ -1,76 +1,85 @@
-.supply-pressure-slider-container {
+:root {
+    --border-width: 3px;
+    --border-radius: 15px;
+    --border-color-white: white;
+    --background-color-dark-blue: rgb(118, 118, 118);
+    --color-red: rgba(183, 34, 26, 1);
+    --color-red-transparent: rgba(183, 34, 26, 0.5);
+    --color-orange: rgba(209, 69, 27, 1);
+    --color-orange-transparent: rgba(209, 69, 27, 0.5);
+    --color-yellow: rgba(242, 193, 44, 1);
+    --color-yellow-transparent: rgba(242, 193, 44, 0.5);
+    --color-blue-transparent: rgba(19, 101, 134, 0.5);
+    --color-blue: rgba(19, 101, 134, 1);
+    --color-blue-dark: rgba(11, 64, 85, 1);
+    --color-brown: rgba(142, 68, 35, 1);
+    --color-black: rgba(0, 0, 0, 1);
+    --color-black-transparent: rgba(0, 0, 0, 0.65);
+    --color-white: rgba(255, 255, 255, 1);
+    --color-white-transparent: rgba(255, 255, 255, 0.25);
+    --color-incorrect-red: rgba(183, 34, 26, 1);
+    --color-correct-green: rgba(24, 128, 79, 1);
+    --color-question: rgba(33.2, 50, 61.1, 1);
 }
 
+.supply-pressure-slider-container {
+}
+#PressureZone__supply_panel{
+    width:auto;
+ 
+}
 #PressureZone__supply_panel #slider-value {
     display: none;
 }
 
-#unity-text-input {
-    border-color: var(--border-color-white);
-    border-radius: var(--border-radius);
-    height: 75px;
-    width: 100px;
-}
+
 
 .pressure-zone-panel {
-    background-color: rgba(54, 55, 63, 0.63);
+    background-color: var(--color-blue-dark);
     border-color: var(--border-color-white);
     border-width: var(--border-width);
     border-radius: var(--border-radius);
     flex-direction: row;
-    height: 161px;
+    height: 180px;
+    padding:0.5%;
     align-self: flex-start;
+    color: var(--color-white);
 }
 
 .pressure-zone-header {
     flex-direction: row;
     color: rgb(255, 255, 255);
-    font-size: 14px;
+    font-size: 16px;
     -unity-font-style: bold;
+    
 }
 
 .pressure-zone-value-container {
     flex-direction: column;
-    opacity: 1;
+    opacity: 1;    
 }
 
 .pressure-zone-value-label {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--color-white-transparent);
     border-radius: var(--border-radius);
     flex-grow: 1;
     margin-top: 15px;
     margin-right: 15px;
     margin-bottom: 15px;
     margin-left: 15px;
-    font-size: 28px;
+    font-size: 35px;
     -unity-text-align: middle-center;
 }
 
-.supply-pressure-zone-panel {
-    background-color: rgba(54, 55, 63, 0.63);
-    border-radius: var(--border-radius);
-    flex-direction: row;
-    border-color: var(--border-color-white);
-    border-width: var(--border-width);
-}
 
-.supply-pressure-value-container {
-    -unity-text-align: upper-center;
-}
 
-.supply-pressure-zone-header {
-    margin-left: 4px;
-    color: rgb(255, 255, 255);
-    font-size: 14px;
-    -unity-font-style: bold;
-}
 
 .check-spring-value-container {
     flex-direction: column;
-    margin-bottom: 5px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
+    align-self:center;
+    -unity-font-style: bold;
+    
+    
 }
 
 .check-spring-value-sub-container {
@@ -84,20 +93,19 @@
 
 .check-spring-value-button-container {
     flex-direction: row;
-    align-items: center;
+   
+    
     height: 100%;
-    justify-content: space-around;
-    align-self: stretch;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
+ 
+    
+    
 }
 
 .check-spring-button-sub-container {
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-wrap:wrap;
+    align-content:center;
+    
 }
 
 .check-spring-value-button {
@@ -107,29 +115,26 @@
     align-self: center;
     font-size: 22px;
     -unity-text-align: middle-center;
+    color: black;
 }
 
 .check-spring-value-label {
-    background-color: rgb(255, 255, 255);
+    background-color:var(--color-white-transparent);
     -unity-text-align: middle-center;
     border-radius: 5px;
-    flex-grow: 1;
-    margin-left: 0;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
+    font-size:20px;
+    width:50%;
+
 }
 
 .check-spring-value-header {
-    flex-grow: 0;
-    align-items: auto;
-    align-self: auto;
+    flex-grow: 0;  
     justify-content: flex-start;
     flex-direction: row;
     color: rgb(255, 255, 255);
-    font-size: 12px;
+    font-size: 16px;
     margin-top: 5px;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-bottom: 5px;
     margin-left: 5px;
     flex-shrink: 1;

@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="DCPlayScreen" src="project://database/Assets/Resources/UI/uxml/DCPlay/DCPlayScreen.uxml?fileID=9197481963319205126&amp;guid=774e85ad42730471896add4b1aad1891&amp;type=3#DCPlayScreen" />
     <ui:Template name="DCPlayMenuScreen" src="project://database/Assets/Resources/UI/uxml/DCPlay/DCPlayMenuScreen.uxml?fileID=9197481963319205126&amp;guid=d91e65a3436274d2a9fa811f0faab198&amp;type=3#DCPlayMenuScreen" />
-    <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreenUi.uss?fileID=7433441132597879392&amp;guid=9d019c51a23314a4ba6172303a84226e&amp;type=3#DCPlayScreenUi" />
+    <Style src="project://database/Assets/Resources/UI/uss/DCPlayScreen.uss?fileID=7433441132597879392&amp;guid=b21124a1a32674b5dac636e2074cca90&amp;type=3#DCPlayScreen" />
+    <Style src="project://database/Assets/Resources/UI/uss/GameMenuScreen.uss?fileID=7433441132597879392&amp;guid=3f629d560412543729baa98ea06c55aa&amp;type=3#GameMenuScreen" />
+    <Style src="project://database/Assets/Resources/UI/uss/PressureZoneHud.uss?fileID=7433441132597879392&amp;guid=52141e1763a324a00b382ca1bd2d11b0&amp;type=3#PressureZoneHud" />
     <DCPlayScreenManager class="screen">
         <ui:Instance template="DCPlayScreen" name="DCPlayScreen" class="screen" style="display: flex;" />
         <ui:Instance template="DCPlayMenuScreen" name="DCPlayMenuScreen" class="screen" style="display: none; position: absolute; align-self: center; justify-content: center;" />

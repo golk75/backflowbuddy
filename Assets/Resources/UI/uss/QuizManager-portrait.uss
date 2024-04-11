@@ -280,7 +280,7 @@ flex-grow:1;
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: var(--color-orange);
     color:white;
-    background-image: resource('UI/Textures/gradientBar4');
+    background-image: resource('UI/Textures/menu-button-background');
     scale:0.9;
 
 }
@@ -548,104 +548,7 @@ flex-grow:1;
     translate: 0 779%;
 }
 
-.game-menu-button {
-    cursor: initial;
-    color: rgb(54, 55, 63);
-    -unity-font-style: bold;
-    background-color: rgb(255, 255, 255);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    -unity-text-align: upper-center;
-    margin-top: 2px;
-    margin-right: 2px;
-    margin-bottom: 2px;
-    margin-left: 2px;
-}
 
-.game-menu-button:hover {
-    align-self: center;
-    width: 100%;
-    color: rgb(54, 55, 63);
-    -unity-font-style: bold;
-    background-color: rgb(98, 178, 245);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.game-menu-button:active {
-    align-self: center;
-    width: 100%;
-    color: rgb(54, 55, 63);
-    -unity-font-style: bold;
-    background-color: rgb(255, 255, 255);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.game-menu-close-button {
-    position: absolute;
-    align-items: auto;
-    align-self: auto;
-    left: 100%;
-    top: -19%;
-    width: 30px;
-    height: 30px;
-    justify-content: flex-start;
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url("project://database/Assets/Clean%20Vector%20Icons/T_11_no_.png?fileID=2800000&guid=4d2a4136ebef6f041b43fdca42412caa&type=3#T_11_no_");
-}
-
-.game-menu-close-button:active {
-    -unity-background-image-tint-color: rgb(255, 255, 255);
-}
-
-.game-menu-header-label {
-    flex-shrink: 0;
-    width: auto;
-    height: auto;
-    align-self: auto;
-    color: rgb(255, 255, 255);
-    -unity-font-style: bold;
-    font-size: 17px;
-}
-
-.game-menu-close-button:hover {
-    position: absolute;
-    align-items: auto;
-    align-self: auto;
-    left: 100%;
-    top: -19%;
-    width: 30px;
-    height: 30px;
-    justify-content: flex-start;
-    border-left-color: rgba(0, 0, 0, 0);
-    border-right-color: rgba(0, 0, 0, 0);
-    border-top-color: rgba(0, 0, 0, 0);
-    border-bottom-color: rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url("project://database/Assets/Clean%20Vector%20Icons/T_11_no_.png?fileID=2800000&guid=4d2a4136ebef6f041b43fdca42412caa&type=3#T_11_no_");
-    -unity-background-image-tint-color: rgb(98, 178, 245);
-}
-
-.game-menu-header {
-    -unity-text-align: upper-center;
-}
-
-.game-menu-body {
-}
-
-.game-menu-screen-anchor {
-}
 
 .floating {
 }

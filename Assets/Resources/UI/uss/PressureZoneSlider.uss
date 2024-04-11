@@ -25,7 +25,7 @@
 }
 
 #slider-value {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--color-white-transparent);
     border-radius: 5;
     -unity-text-align: upper-center;
     font-size: 18px;
