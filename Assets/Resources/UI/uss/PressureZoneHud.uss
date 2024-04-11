@@ -26,6 +26,7 @@
 }
 #PressureZone__supply_panel{
     width:auto;
+    
  
 }
 #PressureZone__supply_panel #slider-value {
@@ -41,7 +42,7 @@
     border-radius: var(--border-radius);
     flex-direction: row;
     height: 180px;
-    padding:0.5%;
+    
     align-self: flex-start;
     color: var(--color-white);
 }
@@ -76,35 +77,31 @@
 
 .check-spring-value-container {
     flex-direction: column;
-    align-self:center;
-    -unity-font-style: bold;
-    
-    
+    align-items: center;
+    -unity-font-style: bold; 
+    margin-bottom:10px;   
+    padding-bottom:10px;
+    picking-mode: ignore;
 }
 
-.check-spring-value-sub-container {
-    flex-direction: column;
-}
 
 .check-spring-value-sub-container {
     border-radius: var(--border-radius);
-    align-items: center;
+    flex-direction: column;
+    flex-grow:1;
+    
 }
 
 .check-spring-value-button-container {
     flex-direction: row;
-   
-    
-    height: 100%;
- 
-    
-    
+    width:70%;
+    align-self: center;
 }
 
 .check-spring-button-sub-container {
     flex-direction: row;
     flex-wrap:wrap;
-    align-content:center;
+    
     
 }
 
@@ -116,8 +113,11 @@
     font-size: 22px;
     -unity-text-align: middle-center;
     color: black;
-}
 
+}
+.check-spring-value-button:hover {
+       cursor: resource('UI/Textures/icons8-hand-33');
+}
 .check-spring-value-label {
     background-color:var(--color-white-transparent);
     -unity-text-align: middle-center;
