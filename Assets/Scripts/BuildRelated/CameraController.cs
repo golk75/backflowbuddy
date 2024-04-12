@@ -34,17 +34,17 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     float panningSpeed = 0.01f;
 
-    [SerializeField]
-    float panningLeftBoundry = -15.0f;
 
-    [SerializeField]
-    float panningRightBoundry = 23.0f;
+    private float panningLeftBoundry = -30.4f;
 
-    [SerializeField]
-    float panningTopBoundry = 2.8f;
 
-    [SerializeField]
-    float panningBottomBoundry = 0.1f;
+    private float panningRightBoundry = 3f;
+
+
+    private float panningTopBoundry = 2.48f;
+
+
+    private float panningBottomBoundry = -1.9f;
 
     // Start is called before the first frame update
     void Awake()
@@ -55,6 +55,9 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         playerController = playerManager.GetComponent<PlayerController>();
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
     }
 
     void OnEnable()
@@ -62,6 +65,13 @@ public class CameraController : MonoBehaviour
         playerInput.Enable();
         PlayerController.onZoomStop += Zoom_canceled;
         PlayerController.OnPanCanceled += Pan_cancled;
+
+
+        //orientation lock
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
     }
 
     void OnDisable()
@@ -69,6 +79,11 @@ public class CameraController : MonoBehaviour
         playerInput.Disable();
         PlayerController.onZoomStop -= Zoom_canceled;
         PlayerController.OnPanCanceled -= Pan_cancled;
+        //realease orientation lock
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = true;
+        Screen.autorotateToPortraitUpsideDown = false;
     }
 
     private void Pan_started()
@@ -140,37 +155,38 @@ public class CameraController : MonoBehaviour
 
             //placing bounderies on camera panning
             //Debug.Log($"targetPointerPos = {targetPointerPosition}");
-            Camera.main.transform.position += -targetPointerPosition * panningSpeed;
-            if (Camera.main.transform.position.x < panningLeftBoundry)
+
+            Camera.main.transform.localPosition += -targetPointerPosition * panningSpeed;
+            if (Camera.main.transform.localPosition.x < panningLeftBoundry)
             {
-                Camera.main.transform.position = new Vector3(
+                Camera.main.transform.localPosition = new Vector3(
                     panningLeftBoundry,
-                    Camera.main.transform.position.y,
-                    Camera.main.transform.position.z
+                    Camera.main.transform.localPosition.y,
+                    Camera.main.transform.localPosition.z
                 );
             }
-            else if (Camera.main.transform.position.x > panningRightBoundry)
+            else if (Camera.main.transform.localPosition.x > panningRightBoundry)
             {
-                Camera.main.transform.position = new Vector3(
+                Camera.main.transform.localPosition = new Vector3(
                     panningRightBoundry,
-                    Camera.main.transform.position.y,
-                    Camera.main.transform.position.z
+                    Camera.main.transform.localPosition.y,
+                    Camera.main.transform.localPosition.z
                 );
             }
-            if (Camera.main.transform.position.y > panningTopBoundry)
+            if (Camera.main.transform.localPosition.y > panningTopBoundry)
             {
-                Camera.main.transform.position = new Vector3(
-                    Camera.main.transform.position.x,
+                Camera.main.transform.localPosition = new Vector3(
+                    Camera.main.transform.localPosition.x,
                     panningTopBoundry,
-                    Camera.main.transform.position.z
+                    Camera.main.transform.localPosition.z
                 );
             }
-            else if (Camera.main.transform.position.y < panningBottomBoundry)
+            else if (Camera.main.transform.localPosition.y < panningBottomBoundry)
             {
-                Camera.main.transform.position = new Vector3(
-                    Camera.main.transform.position.x,
+                Camera.main.transform.localPosition = new Vector3(
+                    Camera.main.transform.localPosition.x,
                     panningBottomBoundry,
-                    Camera.main.transform.position.z
+                    Camera.main.transform.localPosition.z
                 );
             }
 

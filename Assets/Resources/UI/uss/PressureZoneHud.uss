@@ -81,7 +81,7 @@
     -unity-font-style: bold; 
     margin-bottom:10px;   
     padding-bottom:10px;
-    picking-mode: ignore;
+    
 }
 
 

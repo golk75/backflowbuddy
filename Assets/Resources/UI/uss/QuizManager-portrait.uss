@@ -20,6 +20,7 @@
     --color-correct-green: rgba(24, 128, 79, 1);
     --color-blue-dark: rgba(11, 64, 85, 1);
      --color-question: rgba(33.2, 50, 61.1, 1);
+     --color-black-transparent-question: rgba(0, 0, 0, 0.25);
 }
 
 .screen {
@@ -174,7 +175,7 @@
 
 
 .question-container {
-    background-image: resource('UI/Textures/question-background');
+    background-color: var(--color-black-transparent-question);
     border-left-color: rgba(224, 224, 224, 0.48);
     border-right-color: rgba(224, 224, 224, 0.48);
     border-top-color: rgba(224, 224, 224, 0.48);
@@ -257,9 +258,9 @@ flex-grow:1;
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
-    background-color: var(--color-orange);
+    background-color: var(--color-white-transparent);
     color:white;
-    background-image: resource('UI/Textures/menu-button-background');
+    
     
 
 }
@@ -280,7 +281,7 @@ flex-grow:1;
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: var(--color-orange);
     color:white;
-    background-image: resource('UI/Textures/menu-button-background');
+    background-image: resource('UI/Textures/gradientBar4');
     scale:0.9;
 
 }
