@@ -2,9 +2,9 @@
     <ui:Template name="QuizSelection-panel" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizSelection-panel.uxml?fileID=9197481963319205126&amp;guid=1f662e4f8ae3e46c69a89b462b7fb1f0&amp;type=3#QuizSelection-panel" />
     <QuizSelection name="QuizSelection" class="screen">
         <ui:Instance template="QuizSelection-panel" name="QuizSelection-panel" class="screen">
-            <ui:VisualElement name="quiz-selection-container" style="flex-grow: 1;">
-                <ui:VisualElement name="quiz-selection-header" style="flex-grow: 1; display: none;">
-                    <ui:Label tabindex="-1" text="Quiz Length?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="align-self: center;" />
+            <ui:VisualElement name="quiz-selection-container" class="quiz-selection-container">
+            <ui:VisualElement name="quiz-selection-nav-container" class="quiz-selection-nav-container">
+                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="back-button" class="back-button" /> 
                 </ui:VisualElement>
                 <ui:VisualElement name="quiz-selection-button-container">
                     <ui:Button text="25 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-1" class="quiz-selection-button" />
