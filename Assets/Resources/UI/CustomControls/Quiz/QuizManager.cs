@@ -28,6 +28,7 @@ public class QuizManager : VisualElement
     private Button m_QuizSelectionButton2;
     private Button m_QuizSelectionButton3;
     private Button m_BackToResultsButton;
+    private Button m_BackToMainMenu;
     private VisualElement m_QuizMenuModal;
 
     public new class UxmlFactory : UxmlFactory<QuizManager, UxmlTraits> { }
@@ -66,7 +67,7 @@ public class QuizManager : VisualElement
         m_QuizSelectionButton2 = this.Q<Button>("quiz-2");
         m_QuizSelectionButton3 = this.Q<Button>("quiz-3");
         m_BackToResultsButton = m_QuestionAndAnswerScreen.Q<Button>("back-to-results");
-
+        m_BackToMainMenu = m_QuizSelectionScreen.Q<Button>("back-button");
 
 
     }
@@ -90,6 +91,7 @@ public class QuizManager : VisualElement
         m_QuitToMenuButton.RegisterCallback<ClickEvent>(evt => QuitToMainMenu());
         m_QuizMenuCloseButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
         m_BackToResultsButton.RegisterCallback<ClickEvent>(evt => ReturnToResults());
+        m_BackToMainMenu.RegisterCallback<ClickEvent>(evt => QuitToMainMenu());
 
     }
 
