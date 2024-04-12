@@ -27,13 +27,14 @@ justify-content:center;
 }
 
 .game-menu-panel {
-background-color: var(--color-question);
-padding:1%;
+background-color: var(--color-black-transparent);
+padding:2%;
 border-top-left-radius: 10px;
 border-bottom-left-radius: 10px;
 border-top-right-radius: 10px;
 border-bottom-right-radius: 10px;
 align-self: center;
+width: 25%;
 
 }
 
@@ -42,13 +43,14 @@ align-self: center;
     color:var(--color-white);
     background-image:url('/Assets/UiAssets/button-backgrounds.png#button-backgrounds_0');
     -unity-background-scale-mode: scale-and-crop;
-    font-size: 25px;
+    font-size: 20px;
     -unity-text-align: middle-center;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    
+    padding-left:20px;
+    padding-right:20px;
     border-top-color: rgba(0,0,0,0);
     border-bottom-color: rgba(0,0,0,0);
     border-left-color: rgba(0,0,0,0);
@@ -58,6 +60,30 @@ align-self: center;
     border-bottom-width: 0;
     border-left-width: 0;
     background-color: rgba(0,0,0,0);
+}
+.game-menu-button:active {
+     -unity-font-style: bold;
+    color:var(--color-white);
+    background-image:url('/Assets/UiAssets/button-backgrounds.png#button-backgrounds_0');
+    -unity-background-scale-mode: scale-and-crop;
+    font-size: 20px;
+    -unity-text-align: middle-center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-left:20px;
+    padding-right:20px;
+    border-top-color: rgba(0,0,0,0);
+    border-bottom-color: rgba(0,0,0,0);
+    border-left-color: rgba(0,0,0,0);
+    border-right-color: rgba(0,0,0,0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(0,0,0,0);
+    scale:0.9;
 }
 .unity-text-element.unity-button.game-menu-button:hover {
 background-color: rgba(0,0,0,0);
@@ -71,13 +97,14 @@ background-color: rgba(0,0,0,0);
 
 
 .game-menu-close-button {
+    display:none;
     position: absolute;
     align-items: auto;
     align-self: auto;
-    left: 105%;
-    top: -19%;
-    width: 30px;
-    height: 30px;
+    left: 102%;
+    top:-1;
+    width: 40px;
+    height: 40px;
     justify-content: flex-start;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
@@ -97,8 +124,6 @@ background-color: rgba(0,0,0,0);
     align-self: auto;
     left: 105%;
     top: -19%;
-    width: 50px;
-    height: 50px;
     justify-content: flex-start;
     border-left-color: rgba(0, 0, 0, 0);
     border-right-color: rgba(0, 0, 0, 0);
@@ -106,6 +131,7 @@ background-color: rgba(0,0,0,0);
     border-bottom-color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
     background-image: resource('UI/Textures/close-button');
+    scale: 0.9;
       
 }
 
