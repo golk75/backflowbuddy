@@ -10,11 +10,15 @@ public class ThemeManager : MonoBehaviour
     public StyleSheet desktopTheme;
     public UIDocument uIDocument;
     private VisualElement root;
+
+
+    VisualElement m_GameMenuScreenPanel;
     // Start is called before the first frame update
     void Start()
     {
 
         root = uIDocument.rootVisualElement;
+        m_GameMenuScreenPanel = root.Q("GameMenuScreen_panel");
 
 
 
@@ -28,6 +32,7 @@ public class ThemeManager : MonoBehaviour
 
             root.styleSheets.Remove(landscapeTheme);
             root.styleSheets.Add(portraitTheme);
+            m_GameMenuScreenPanel.style.scale = new StyleScale(new Vector2(3, 3));
 
 
         }
@@ -35,7 +40,7 @@ public class ThemeManager : MonoBehaviour
         {
             root.styleSheets.Remove(portraitTheme);
             root.styleSheets.Add(landscapeTheme);
-
+            m_GameMenuScreenPanel.style.scale = new StyleScale(new Vector2(1, 1));
 
         }
 #endif

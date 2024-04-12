@@ -2,6 +2,7 @@
     <ui:Template name="QuizSelection" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizSelection.uxml?fileID=9197481963319205126&amp;guid=d5a46a80fca304587acb8126b7bb6acc&amp;type=3#QuizSelection" />
     <ui:Template name="Quiz" src="project://database/Assets/Resources/UI/uxml/Quiz/QuestionAndAnswer.uxml?fileID=9197481963319205126&amp;guid=06aae5a350b244e5d99d360cd7cfd4a9&amp;type=3#QuestionAndAnswer" />
     <ui:Template name="ReviewResults" src="project://database/Assets/Resources/UI/uxml/Quiz/QuizResults.uxml?fileID=9197481963319205126&amp;guid=a1f39dd0911644121bcf07471b60fe9e&amp;type=3#QuizResults" />
+    <Style src="project://database/Assets/Resources/UI/uss/GameMenuScreen.uss?fileID=7433441132597879392&amp;guid=3f629d560412543729baa98ea06c55aa&amp;type=3#GameMenuScreen" />
     <QuizManager name="QuizManager" class="screen">
         <ui:Instance template="QuizSelection" name="QuizSelection" class="screen" style="display: flex;" />
         <ui:Instance template="Quiz" name="QuestionAndAnswer" class="screen" style="display: none;" />
