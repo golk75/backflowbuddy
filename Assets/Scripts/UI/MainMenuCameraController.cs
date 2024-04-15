@@ -30,10 +30,10 @@ public class MainMenuCameraController : MonoBehaviour
             m_Camera.orthographicSize = 2.1f;
 
         }
-        Debug.Log($"mobile");
+        // Debug.Log($"mobile");
 #endif
 #if UNITY_EDITOR_OSX
-        Debug.Log($"editor osx");
+        // Debug.Log($"editor osx");
 
 
         m_Camera.orthographicSize = 2.1f;

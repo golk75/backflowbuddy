@@ -7,9 +7,9 @@
                 <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="back-button" class="back-button" /> 
                 </ui:VisualElement>
                 <ui:VisualElement name="quiz-selection-button-container">
-                    <ui:Button text="25 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-1" class="quiz-selection-button" />
-                    <ui:Button text="50 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-2" class="quiz-selection-button" />
-                    <ui:Button text="100 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-3" class="quiz-selection-button" style="display: flex;" />
+                    <ui:Button text="25 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-1" class="quiz-selection-button-out" />
+                    <ui:Button text="50 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-2" class="quiz-selection-button-out" />
+                    <ui:Button text="100 Questions" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quiz-3" class="quiz-selection-button-out" style="display: flex;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:Instance>

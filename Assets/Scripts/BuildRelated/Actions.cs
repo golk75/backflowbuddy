@@ -57,4 +57,6 @@ public static class Actions
     public static Action<int> returnScrollHandle;
     public static Action<int> onQuizSelection;
     public static Action onResultsReveal;
+
+    // public static Action<bool> onAnswerAnimateComplete;
 }

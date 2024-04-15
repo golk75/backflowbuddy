@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -39,20 +40,27 @@ public class QuestionGenerator : MonoBehaviour
     int selectedQuizLength;
     int questionsAnswered;
     private bool isQuizComplete;
-
+    // VisualElement m_QuestionAndAnswerScreen;
+    // private bool answerAnimateComplete = true;
 
 
     void OnEnable()
     {
         Actions.GenerateResultsQuestionReview += ReviewQuestion;
         Actions.onQuizSelection += SetQuizLength;
+        // Actions.onAnswerAnimateComplete += CheckAnswerButtonAnimationState;
     }
 
+    // private void CheckAnswerButtonAnimationState(bool obj)
+    // {
+    //     answerAnimateComplete = obj;
+    // }
 
     void OnDisable()
     {
         Actions.GenerateResultsQuestionReview -= ReviewQuestion;
         Actions.onQuizSelection -= SetQuizLength;
+        // Actions.onAnswerAnimateComplete -= CheckAnswerButtonAnimationState;
     }
 
     void Awake()
@@ -101,7 +109,7 @@ public class QuestionGenerator : MonoBehaviour
 
                        //    Debug.Log($"CORRECT ANSWER!");
 
-                       SetResultData(true, chosenAnswer);
+                       SetResultData(true, answerButtons.IndexOf(ele));
 
                    }
                    //Incorrect answer selection
@@ -109,7 +117,7 @@ public class QuestionGenerator : MonoBehaviour
                    {
                        //    Debug.Log($"WRONG ANSWER!");
 
-                       SetResultData(false, chosenAnswer);
+                       SetResultData(false, answerButtons.IndexOf(ele));
 
                    }
                }, TrickleDown.TrickleDown);
@@ -129,6 +137,7 @@ public class QuestionGenerator : MonoBehaviour
         {
             Invoke(nameof(DelayAnswerButtonDisable), 0.01f);
             answerButtons[i].pickingMode = PickingMode.Ignore;
+
         }
     }
     void DelayAnswerButtonDisable()
@@ -139,8 +148,16 @@ public class QuestionGenerator : MonoBehaviour
     {
         for (int i = 0; i < answerButtons.Count; i++)
         {
+
+
+
+            answerButtons[i].AddToClassList(className: "answer-button");
+            answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
+            answerButtons[i].RemoveFromClassList(className: "correct-answer");
+
+
             Invoke(nameof(DelayAnswerButtonEnable), 0.01f);
-            answerButtons[i].pickingMode = PickingMode.Ignore;
+            answerButtons[i].pickingMode = PickingMode.Position;
         }
     }
     void DelayAnswerButtonEnable()
@@ -152,28 +169,28 @@ public class QuestionGenerator : MonoBehaviour
         QandAScreen.style.display = DisplayStyle.None;
         ReviewResultsScreen.style.display = DisplayStyle.Flex;
 
-        for (int i = 0; i < answerButtons.Count; i++)
-        {
-            // answerButtons[i].Q<Button>(className: "unity-button").text = currentQuestionResult.answers[i];
-            if (i == currentQuestionResult.correctAnswerIndex)
-            {
+        // for (int i = 0; i < answerButtons.Count; i++)
+        // {
+        //     // answerButtons[i].Q<Button>(className: "unity-button").text = currentQuestionResult.answers[i];
+        //     // if (i == currentQuestionResult.correctAnswerIndex)
+        //     // {
 
-                answerButtons[i].AddToClassList(className: "answer-button");
-                answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
-                answerButtons[i].RemoveFromClassList(className: "correct-answer");
+        //     answerButtons[i].AddToClassList(className: "answer-button");
+        //     answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
+        //     answerButtons[i].RemoveFromClassList(className: "correct-answer");
 
-            }
-            if (i == currentQuestionResult.chosenAnswer)
-            {
+        //     // }
+        //     // if (i == currentQuestionResult.chosenAnswer)
+        //     // {
 
-                answerButtons[i].AddToClassList(className: "answer-button");
-                answerButtons[i].RemoveFromClassList(className: "correct-answer");
-                answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
+        //     //     answerButtons[i].AddToClassList(className: "answer-button");
+        //     //     answerButtons[i].RemoveFromClassList(className: "correct-answer");
+        //     //     answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
 
-            }
+        //     // }
 
 
-        }
+        // }
         EnableAnswerButtons();
         Actions.returnScrollHandle?.Invoke(resultsListSelectedIndex);
     }
@@ -198,17 +215,10 @@ public class QuestionGenerator : MonoBehaviour
             resultsData.chosenAnswer = selectedAnswer;
             QuizResults.Add(resultsData);
             SelectNewQuestion();
-            SetQuestionLabel();
-            SetAnswerLabels();
+            //invoking here to give a short delay for button and label animations to start and finish
+            Invoke(nameof(SetQuestionLabel), 0.9f);
+            Invoke(nameof(SetAnswerLabels), 0.9f);
         }
-        else
-        {
-
-
-        }
-
-
-
     }
     //this will display after a question is selected in the quiz results screen
     private void ReviewQuestion(QuizResult quizResult, int selectedIndex)
@@ -219,23 +229,52 @@ public class QuestionGenerator : MonoBehaviour
         for (int i = 0; i < answerButtons.Count; i++)
         {
             answerButtons[i].Q<Button>(className: "unity-button").text = quizResult.answers[i];
-            if (i == quizResult.correctAnswerIndex)
+            if (quizResult.isCorrect && quizResult.chosenAnswer == i)
             {
 
-                answerButtons[i].RemoveFromClassList(className: "answer-button");
-                answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
-                answerButtons[i].AddToClassList(className: "correct-answer");
-
+                answerButtons[i].RemoveFromClassList("answer-button");
+                answerButtons[i].RemoveFromClassList("incorrect-answer");
+                answerButtons[i].AddToClassList("correct-answer");
 
             }
-            if (i == quizResult.chosenAnswer && !quizResult.isCorrect)
+            else if (!quizResult.isCorrect && quizResult.chosenAnswer == i)
             {
-
-                answerButtons[i].RemoveFromClassList(className: "answer-button");
-                answerButtons[i].RemoveFromClassList(className: "correct-answer");
-                answerButtons[i].AddToClassList(className: "incorrect-answer");
-
+                answerButtons[i].RemoveFromClassList("answer-button");
+                answerButtons[i].AddToClassList("incorrect-answer");
+                answerButtons[i].RemoveFromClassList("correct-answer");
             }
+            else if (!quizResult.isCorrect && quizResult.correctAnswerIndex == i)
+            {
+                answerButtons[i].RemoveFromClassList("answer-button");
+                answerButtons[i].RemoveFromClassList("incorrect-answer");
+                answerButtons[i].AddToClassList("correct-answer");
+            }
+            // else
+            // {
+            //     answerButtons[i].AddToClassList("answer-button");
+            //     answerButtons[i].RemoveFromClassList("incorrect-answer");
+            //     answerButtons[i].RemoveFromClassList("correct-answer");
+            // }
+
+            // else if (quizResult.isCorrect == false && i == quizResult.chosenAnswer)
+            // {
+            //     answerButtons[i].AddToClassList("incorrect-answer");
+            //     answerButtons[i].RemoveFromClassList("answer-button");
+
+            //     if (i == quizResult.correctAnswerIndex)
+            //     {
+            //         answerButtons[i].AddToClassList("correct-answer");
+            //         answerButtons[i].RemoveFromClassList("answer-button");
+            //     }
+            //     else
+            //     {
+            //         answerButtons[i].AddToClassList("answer-button");
+            //     }
+
+
+
+
+            // }
 
 
         }
@@ -269,6 +308,7 @@ public class QuestionGenerator : MonoBehaviour
         //     answerButtons[i].RemoveFromClassList("answer-button-out");
         // }
         //Get random question
+
         int randomIndex = Random.Range(0, questions.Count);
 
         //set currentquestion to randIndex
@@ -276,10 +316,14 @@ public class QuestionGenerator : MonoBehaviour
 
         //remove this question to avoid repeating
         questions.RemoveAt(randomIndex);
+
+
     }
     private void SetQuestionLabel()
     {
+
         questionLabel.text = currentQuestion.question;
+
     }
 
     private void SetAnswerLabels()
@@ -336,7 +380,7 @@ public class QuestionGenerator : MonoBehaviour
         ReviewResultsScreen = root.rootVisualElement.Q(ReviewResultsString);
         QandAScreen = root.rootVisualElement.Q("QuestionAndAnswer");
         listView = ReviewResultsScreen.Q<ListView>("question-list");
-
+        // m_QuestionAndAnswerScreen = root.rootVisualElement.Q("QuestionAndAnswer");
     }
 
     void Update()

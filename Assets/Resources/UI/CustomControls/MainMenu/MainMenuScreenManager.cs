@@ -14,30 +14,17 @@ public class MainMenuScreenManager : VisualElement
     public VisualElement m_QuickTourContainer;
     public VisualElement m_DeviceSelectionScreen;
     public VisualElement m_LearnScreenRpzPopup;
-    private VisualElement m_LearnScreenComingSoonPopup;
     public VisualElement m_PlayScreenRpzPopup;
-
-
     private const string MainMenuPlayButtonString = "play-button";
     private const string MainMenuLearnButtonString = "learn-button";
     private const string MainMenuQuitButtonString = "quit-button";
     private const string MainMenuQuizButtonString = "quiz-button";
     private const string RpzPopupString = "rpz-pop-up";
-    private const string RpzBackButtonString = "rpz-popup-back-button";
-
     private const string QuickTourContainerString = "QuickTourContainer";
     private const string DeviceSelectionScreenString = "DeviceSelectionScreen";
-
-    private const string DCTestSceneString = "DCPlayScene";
-
-
-    private const string TutorialPlayerPrefString = "Skip Tutorial";
-
-    private List<VisualElement> ScreensToHide;
-    private List<VisualElement> ScreensToShow;
     private List<VisualElement> PlayScreenButtons;
     private List<VisualElement> MainMenuScreenButtons;
-    private List<VisualElement> QuizSelectionScreenButtons;
+
 
     public new class UxmlFactory : UxmlFactory<MainMenuScreenManager, UxmlTraits> { }
 
@@ -56,7 +43,7 @@ public class MainMenuScreenManager : VisualElement
         m_PlayScreenRpzPopup = m_PlayScreen.Q(RpzPopupString);
         PlayScreenButtons = m_PlayScreen.Query(className: "unity-button").ToList();
         MainMenuScreenButtons = m_MainMenuScreen.Query(className: "unity-button").ToList();
-        QuizSelectionScreenButtons = m_MainMenuScreen.Query(className: "unity-button").ToList();
+
 
         //main menu
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
@@ -72,7 +59,11 @@ public class MainMenuScreenManager : VisualElement
         m_PlayScreen?.Q("double-check-button").RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
-
+        foreach (var button in MainMenuScreenButtons)
+        {
+            button.RemoveFromClassList("main-menu-button-out");
+            button.AddToClassList("main-menu-button");
+        }
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }

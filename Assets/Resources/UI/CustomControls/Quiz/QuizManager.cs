@@ -29,6 +29,10 @@ public class QuizManager : VisualElement
     private Button m_QuizSelectionButton3;
     private Button m_BackToResultsButton;
     private Button m_BackToMainMenu;
+
+    public List<VisualElement> QuizSelectionScreenButtons { get; private set; }
+    public List<VisualElement> AnswerButtons { get; private set; }
+
     private VisualElement m_QuizMenuModal;
 
     public new class UxmlFactory : UxmlFactory<QuizManager, UxmlTraits> { }
@@ -68,7 +72,13 @@ public class QuizManager : VisualElement
         m_QuizSelectionButton3 = this.Q<Button>("quiz-3");
         m_BackToResultsButton = m_QuestionAndAnswerScreen.Q<Button>("back-to-results");
         m_BackToMainMenu = m_QuizSelectionScreen.Q<Button>("back-button");
-
+        QuizSelectionScreenButtons = m_QuizSelectionScreen.Query(className: "quiz-selection-button-out").ToList();
+        AnswerButtons = m_QuestionAndAnswerScreen.Query(className: "answer-button").ToList();
+        foreach (var button in QuizSelectionScreenButtons)
+        {
+            button.RemoveFromClassList("quiz-selection-button-out");
+            button.AddToClassList("quiz-selection-button");
+        }
 
     }
     private void EntrySelectionChanged(IEnumerable<object> enumerable)
@@ -92,7 +102,21 @@ public class QuizManager : VisualElement
         m_QuizMenuCloseButton.RegisterCallback<ClickEvent>(evt => ResumeQuiz());
         m_BackToResultsButton.RegisterCallback<ClickEvent>(evt => ReturnToResults());
         m_BackToMainMenu.RegisterCallback<ClickEvent>(evt => QuitToMainMenu());
-
+        foreach (var button in AnswerButtons)
+        {
+            button.RemoveFromClassList("answer-button");
+            button.AddToClassList("answer-button-out");
+        }
+        // foreach (var button in PlayScreenButtons)
+        // {
+        //     button.RemoveFromClassList("main-menu-button-out");
+        //     button.AddToClassList("main-menu-button");
+        // }
+        // foreach (var button in MainMenuScreenButtons)
+        // {
+        //     button.RemoveFromClassList("main-menu-button");
+        //     button.AddToClassList("main-menu-button-out");
+        // }
     }
 
     private void ReturnToResults()
@@ -104,22 +128,27 @@ public class QuizManager : VisualElement
 
     private void Quiz3Selected()
     {
+
         Actions.onQuizSelection?.Invoke(100);
         m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
         m_QuizSelectionScreen.style.display = DisplayStyle.None;
+
     }
 
     private void Quiz2Selected()
     {
+
         Actions.onQuizSelection?.Invoke(50);
         m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
         m_QuizSelectionScreen.style.display = DisplayStyle.None;
+
     }
 
     private void Quiz1Selected()
     {
+
         // Actions.onQuizSelection?.Invoke(25);
-        Actions.onQuizSelection?.Invoke(25);
+        Actions.onQuizSelection?.Invoke(2);
         m_QuestionAndAnswerScreen.style.display = DisplayStyle.Flex;
         m_QuizSelectionScreen.style.display = DisplayStyle.None;
 
