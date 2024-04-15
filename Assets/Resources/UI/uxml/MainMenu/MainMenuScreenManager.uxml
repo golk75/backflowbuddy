@@ -8,24 +8,5 @@
         <ui:Instance template="PlayScreenQuickTour" name="PlayScreenQuickTour" class="screen" style="display: none;" />
         <ui:Instance template="DeviceSelectionScreen" name="DeviceSelectionScreen" class="screen" style="display: none;" />
         <ui:Instance template="MainMenuScreen" name="MainMenuScreen" class="screen" />
-        <ui:VisualElement name="learn-coming-soon-pop-up" class="screen" style="position: absolute; top: 50%; flex-grow: 1; justify-content: center; align-self: center; display: none;">
-            <ui:VisualElement name="TutorialPopup" class="tutorial-container floating">
-                <ui:VisualElement name="TutorialPopup_panel" class="tutorial-popup-panel" style="background-color: rgb(54, 54, 62); width: 277px; align-self: center; align-items: center; justify-content: center;">
-                    <ui:VisualElement name="TutorialPopup_header_container" class="tutorial-popup-label-container">
-                        <ui:VisualElement name="TutorialPopup_header">
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_header_label" text="Comming Soon!" class="tutorial-popup-label" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="TutorialPopup_content_container" class="tutorial-popup-label-container">
-                        <ui:VisualElement name="TutorialPopup_content">
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TutorialPopup_content_label" text="currently under construction" class="tutorial-popup-label" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement name="TutorialPopup_button_container" class="tutorial-popup-button-container" style="justify-content: center;">
-                        <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="learn-popup-back-button" class="skip-button tutorial-popup-button game-menu-options-button" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:VisualElement>
-        </ui:VisualElement>
     </MainMenuScreenManager>
 </ui:UXML>

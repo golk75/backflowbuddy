@@ -37,6 +37,8 @@ public class MainMenuScreenManager : VisualElement
     private List<VisualElement> ScreensToShow;
     private List<VisualElement> PlayScreenButtons;
     private List<VisualElement> MainMenuScreenButtons;
+    private List<VisualElement> QuizSelectionScreenButtons;
+
     public new class UxmlFactory : UxmlFactory<MainMenuScreenManager, UxmlTraits> { }
 
     public MainMenuScreenManager()
@@ -47,27 +49,28 @@ public class MainMenuScreenManager : VisualElement
     void OnGeometryChange(GeometryChangedEvent evt)
     {
         m_MainMenuScreen = this.Q("MainMenuScreen");
-        // m_LearnScreen = this.Q("LearnScreen");
         m_PlayScreen = this.Q("PlayScreen");
         m_PlayScreenQuickTour = this.Q("PlayScreenQuickTour");
         m_QuickTourContainer = this.Q(QuickTourContainerString);
         m_DeviceSelectionScreen = this.Q(DeviceSelectionScreenString);
-        //  m_LearnScreenRpzPopup = m_LearnScreen.Q(RpzPopupString);
-        //m_LearnScreenComingSoonPopup = this.Q("learn-coming-soon-pop-up");
         m_PlayScreenRpzPopup = m_PlayScreen.Q(RpzPopupString);
-        //Main Menu screen buttons
+        PlayScreenButtons = m_PlayScreen.Query(className: "unity-button").ToList();
+        MainMenuScreenButtons = m_MainMenuScreen.Query(className: "unity-button").ToList();
+        QuizSelectionScreenButtons = m_MainMenuScreen.Query(className: "unity-button").ToList();
+
+        //main menu
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen?.Q(MainMenuQuitButtonString)?.RegisterCallback<ClickEvent>(evt => QuitApplication());
-        // m_MainMenuScreen.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
         m_MainMenuScreen.Q(MainMenuQuizButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
-        // m_LearnScreenComingSoonPopup?.Q("learn-popup-back-button")?.RegisterCallback<ClickEvent>(evt => CloseLearnPopup());
-        // m_LearnScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
+        //play screen
         m_PlayScreen?.Q("rpz-button").RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
         m_PlayScreen?.Q("double-check-button").RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
-        PlayScreenButtons = m_PlayScreen.Query(className: "unity-button").ToList();
-        MainMenuScreenButtons = m_MainMenuScreen.Query(className: "unity-button").ToList();
+        //play screen
+        m_PlayScreen?.Q("rpz-button").RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
+        m_PlayScreen?.Q("double-check-button").RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
+        m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
 
 
 
@@ -80,10 +83,6 @@ public class MainMenuScreenManager : VisualElement
     private void EnableDoubleCheckPlayScreenAndScene()
     {
         SceneManager.LoadScene("DCPlayScene");
-    }
-    private void CloseLearnPopup()
-    {
-        // m_LearnScreenComingSoonPopup.style.display = DisplayStyle.None;
     }
 
     private void EnablePlayScreen()
@@ -131,61 +130,8 @@ public class MainMenuScreenManager : VisualElement
         m_MainMenuScreen.style.display = DisplayStyle.None;
         m_PlayScreen.style.display = DisplayStyle.None;
         SceneManager.LoadScene("Quiz");
+
     }
-
-
-    // private void ChangeSceneAndScreen(string sceneToLoad, int playerPref, List<VisualElement> listToShow, List<VisualElement> listToHide)
-    // {
-
-    //     //Async Load Scene--> prevents ui from changing until scene is loaded up
-    //     //DO NOT CHANGE THE ORDER IN THIS---->
-    //     {
-    //         AsyncOperation sceneLoadAsync = SceneManager.LoadSceneAsync(sceneToLoad);
-
-
-    //         // #if UNITY_EDITOR
-    //         //             PlayerPrefs.SetInt(TutorialPlayerPrefString, 0);
-    //         // #endif
-
-
-    //         //skipping quick tour
-
-    //         //wait for scene to load before switching Ui
-    //         if (sceneLoadAsync.isDone)
-    //         {
-
-    //             ChangeScreenStatus(listToShow, listToHide);
-    //         }
-
-
-    //     }
-
-
-    // }
-
-
-
-    // private void ChangeScreenStatus(List<VisualElement> listOfScreensToShow, List<VisualElement> listOfScreensToHide)
-    // {
-    //     if (listOfScreensToShow == null || listOfScreensToHide == null)
-    //     {
-    //         return;
-    //     }
-
-    //     foreach (var screenToHide in listOfScreensToHide)
-    //     {
-    //         screenToHide.style.display = DisplayStyle.None;
-    //     }
-    //     foreach (var screenToShow in listOfScreensToShow)
-    //     {
-
-    //         screenToShow.style.display = DisplayStyle.Flex;
-    //     }
-
-    //     ScreensToShow.Clear();
-    //     ScreensToHide.Clear();
-    // }
-
 
     private void QuitApplication()
     {
