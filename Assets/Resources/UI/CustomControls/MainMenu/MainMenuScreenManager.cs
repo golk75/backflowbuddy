@@ -35,7 +35,8 @@ public class MainMenuScreenManager : VisualElement
 
     private List<VisualElement> ScreensToHide;
     private List<VisualElement> ScreensToShow;
-
+    private List<VisualElement> PlayScreenButtons;
+    private List<VisualElement> MainMenuScreenButtons;
     public new class UxmlFactory : UxmlFactory<MainMenuScreenManager, UxmlTraits> { }
 
     public MainMenuScreenManager()
@@ -45,9 +46,6 @@ public class MainMenuScreenManager : VisualElement
 
     void OnGeometryChange(GeometryChangedEvent evt)
     {
-
-
-
         m_MainMenuScreen = this.Q("MainMenuScreen");
         // m_LearnScreen = this.Q("LearnScreen");
         m_PlayScreen = this.Q("PlayScreen");
@@ -57,11 +55,6 @@ public class MainMenuScreenManager : VisualElement
         //  m_LearnScreenRpzPopup = m_LearnScreen.Q(RpzPopupString);
         //m_LearnScreenComingSoonPopup = this.Q("learn-coming-soon-pop-up");
         m_PlayScreenRpzPopup = m_PlayScreen.Q(RpzPopupString);
-
-
-
-
-
         //Main Menu screen buttons
         m_MainMenuScreen?.Q(MainMenuPlayButtonString)?.RegisterCallback<ClickEvent>(evt => EnablePlayScreen());
         m_MainMenuScreen?.Q(MainMenuLearnButtonString)?.RegisterCallback<ClickEvent>(evt => EnableLearnScreen());
@@ -73,6 +66,10 @@ public class MainMenuScreenManager : VisualElement
         m_PlayScreen?.Q("rpz-button").RegisterCallback<ClickEvent>(evt => EnableRPZPlayScreenAndScene());
         m_PlayScreen?.Q("double-check-button").RegisterCallback<ClickEvent>(evt => EnableDoubleCheckPlayScreenAndScene());
         m_PlayScreen?.Q("back-button")?.RegisterCallback<ClickEvent>(evt => EnableTitleScreen());
+        PlayScreenButtons = m_PlayScreen.Query(className: "unity-button").ToList();
+        MainMenuScreenButtons = m_MainMenuScreen.Query(className: "unity-button").ToList();
+
+
 
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
@@ -92,15 +89,40 @@ public class MainMenuScreenManager : VisualElement
     private void EnablePlayScreen()
     {
         m_MainMenuScreen.style.display = DisplayStyle.None;
-        ///m_LearnScreen.style.display = DisplayStyle.None;
+
         m_PlayScreen.style.display = DisplayStyle.Flex;
+
+        foreach (var button in PlayScreenButtons)
+        {
+            button.RemoveFromClassList("main-menu-button-out");
+            button.AddToClassList("main-menu-button");
+        }
+        foreach (var button in MainMenuScreenButtons)
+        {
+            button.RemoveFromClassList("main-menu-button");
+            button.AddToClassList("main-menu-button-out");
+        }
+
     }
 
     private void EnableTitleScreen()
     {
+
         m_MainMenuScreen.style.display = DisplayStyle.Flex;
         m_PlayScreen.style.display = DisplayStyle.None;
         //  m_LearnScreen.style.display = DisplayStyle.None;
+        foreach (var button in PlayScreenButtons)
+        {
+            button.RemoveFromClassList("main-menu-button");
+            button.AddToClassList("main-menu-button-out");
+        }
+        foreach (var button in MainMenuScreenButtons)
+        {
+            button.RemoveFromClassList("main-menu-button-out");
+            button.AddToClassList("main-menu-button");
+        }
+
+
     }
 
     private void EnableLearnScreen()

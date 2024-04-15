@@ -4,9 +4,9 @@
         <ui:VisualElement name="device-selection" class="screen" style="flex-grow: 1; display: flex; flex-direction: column;">
             <ui:VisualElement name="MainMenu_title_container" class="title" />
             <ui:VisualElement name="MainMenu_panel" class="main-menu-button__container">
-                <ui:Button text="Double Check" display-tooltip-when-elided="true" name="double-check-button" focusable="false" class="main-menu-button" />
-                <ui:Button text="RPZ" display-tooltip-when-elided="true" name="rpz-button" focusable="false" class="main-menu-button" />
-                <ui:Button text="Back" display-tooltip-when-elided="true" name="back-button" focusable="false" class="main-menu-button" />
+                <ui:Button text="Double Check" display-tooltip-when-elided="true" name="double-check-button" focusable="false" class="main-menu-button-out" />
+                <ui:Button text="RPZ" display-tooltip-when-elided="true" name="rpz-button" focusable="false" class="main-menu-button main-menu-button-out" />
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="back-button" focusable="false" class="main-menu-button main-menu-button-out" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="rpz-pop-up" style="position: absolute; top: 50%; flex-grow: 1; justify-content: center; align-self: center; display: none;">
