@@ -31,18 +31,8 @@ public class QuestionAndAnswer : VisualElement
 
     }
 
-
-
-    // private void ResultsListEntrySelect(IEnumerable<object> enumerable)
-    // {
-    //     throw new NotImplementedException();
-    // }
-
     void OnGeometryChange(GeometryChangedEvent evt)
     {
-        // m_ReviewScreen = this.parent.Q("ReviewResults");
-        // m_ResultsList = m_ReviewScreen.Q<ListView>("question-list");
-        // m_ResultsList.selectionChanged += ResultsListEntrySelect;
         m_QuizMenuButton = this.Q<Button>(MenuButtonString);
         m_MenuModal = this.Q<VisualElement>(MenuModalString);
         Actions.onResultsReveal += QuizCompletionStatus;
@@ -60,6 +50,10 @@ public class QuestionAndAnswer : VisualElement
         this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChange);
     }
 
+
+    // _yoyoLabel.RegisterCallback<TransitionEndEvent>(evt => _yoyoLabel.ToggleInClassList("enlarge-scale-yoyo"));
+    //     // Schedule the first transition 100 milliseconds after the root.schedule.Execute method is called.
+    //     root.schedule.Execute(() => _yoyoLabel.ToggleInClassList("enlarge-scale-yoyo")).StartingIn(100);
     private void QuizCompletionStatus()
     {
 
@@ -72,9 +66,11 @@ public class QuestionAndAnswer : VisualElement
     private void TransitionLeftAnimationEnd()
     {
 
-
+        LastButtonToAnimate.UnregisterCallback<TransitionEndEvent>(evt => TransitionLeftAnimationEnd());
         if (isQuizFinished)
             return;
+
+
         QuestionLabel.RemoveFromClassList("question-label-out");
         foreach (var button in AnswerButtons)
         {
@@ -82,11 +78,10 @@ public class QuestionAndAnswer : VisualElement
             button.RemoveFromClassList("answer-button-out");
             button.AddToClassList("answer-button");
 
-            // this event is firing on the results review portion when checking list view questions/answers
         }
 
-        Debug.Log($"quizCompletionStatus: {isQuizFinished}");
         // Actions.onAnswerAnimateComplete?.Invoke(true);
+
     }
 
     private void AnimateQuestionChange()

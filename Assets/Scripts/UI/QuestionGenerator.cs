@@ -16,7 +16,6 @@ public class QuestionGenerator : MonoBehaviour
     [SerializeField]
     private List<QuestionData> questions;
     private List<VisualElement> answerButtons;
-    private List<Button> answerButtons11;
     public List<QuizResult> QuizResults;
     private string[] currentAnswers;
     private VisualElement ReviewResultsScreen;
@@ -168,29 +167,6 @@ public class QuestionGenerator : MonoBehaviour
     {
         QandAScreen.style.display = DisplayStyle.None;
         ReviewResultsScreen.style.display = DisplayStyle.Flex;
-
-        // for (int i = 0; i < answerButtons.Count; i++)
-        // {
-        //     // answerButtons[i].Q<Button>(className: "unity-button").text = currentQuestionResult.answers[i];
-        //     // if (i == currentQuestionResult.correctAnswerIndex)
-        //     // {
-
-        //     answerButtons[i].AddToClassList(className: "answer-button");
-        //     answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
-        //     answerButtons[i].RemoveFromClassList(className: "correct-answer");
-
-        //     // }
-        //     // if (i == currentQuestionResult.chosenAnswer)
-        //     // {
-
-        //     //     answerButtons[i].AddToClassList(className: "answer-button");
-        //     //     answerButtons[i].RemoveFromClassList(className: "correct-answer");
-        //     //     answerButtons[i].RemoveFromClassList(className: "incorrect-answer");
-
-        //     // }
-
-
-        // }
         EnableAnswerButtons();
         Actions.returnScrollHandle?.Invoke(resultsListSelectedIndex);
     }
@@ -249,42 +225,12 @@ public class QuestionGenerator : MonoBehaviour
                 answerButtons[i].RemoveFromClassList("incorrect-answer");
                 answerButtons[i].AddToClassList("correct-answer");
             }
-            // else
-            // {
-            //     answerButtons[i].AddToClassList("answer-button");
-            //     answerButtons[i].RemoveFromClassList("incorrect-answer");
-            //     answerButtons[i].RemoveFromClassList("correct-answer");
-            // }
-
-            // else if (quizResult.isCorrect == false && i == quizResult.chosenAnswer)
-            // {
-            //     answerButtons[i].AddToClassList("incorrect-answer");
-            //     answerButtons[i].RemoveFromClassList("answer-button");
-
-            //     if (i == quizResult.correctAnswerIndex)
-            //     {
-            //         answerButtons[i].AddToClassList("correct-answer");
-            //         answerButtons[i].RemoveFromClassList("answer-button");
-            //     }
-            //     else
-            //     {
-            //         answerButtons[i].AddToClassList("answer-button");
-            //     }
-
-
-
-
-            // }
 
 
         }
 
         questionLabel.text = quizResult.question;
         m_quesitonTracker.text = quizResult.questionNumber.ToString() + "/" + selectedQuizLength.ToString();
-
-        // answerButtons[quizResult.correctAnswerIndex].style.backgroundColor = Color.green;
-        // answerButtons[quizResult.chosenAnswer].style.backgroundColor = Color.red;
-        // Debug.Log(quizResult.answers);
 
 
 
@@ -301,13 +247,6 @@ public class QuestionGenerator : MonoBehaviour
             //stop removing questions
             return;
         }
-        //animate buttons reveal
-        // for (int i = 0; i < answerButtons.Count; i++)
-        // {
-        //     answerButtons[i].AddToClassList("answer-button-in");
-        //     answerButtons[i].RemoveFromClassList("answer-button-out");
-        // }
-        //Get random question
 
         int randomIndex = Random.Range(0, questions.Count);
 
@@ -331,10 +270,8 @@ public class QuestionGenerator : MonoBehaviour
         currentAnswers = new string[4];
         List<string> answers = RandomizeAnswers(new List<string>(currentQuestion.answers));
         for (int i = 0; i < answerButtons.Count; i++)
-        // for (int i = 0; i < answerButtons11.Count; i++)
         {
             answerButtons[i].Q<Button>(className: "unity-button").text = answers[i];
-            // answerButtons11[i].Q<Button>(className: "unity-button").text = answers[i];
             currentAnswers[i] = answers[i];
         }
     }
@@ -343,7 +280,6 @@ public class QuestionGenerator : MonoBehaviour
         bool correctAnswerSelected = false;
         List<string> newList = new List<string>();
         for (int i = 0; i < answerButtons.Count; i++)
-        // for (int i = 0; i < answerButtons11.Count; i++)
         {
             int random = Random.Range(0, originalList.Count);
             if (random == 0 && !correctAnswerSelected)
@@ -351,7 +287,6 @@ public class QuestionGenerator : MonoBehaviour
                 correctAnswer = i;
                 //set correct answer to a button
                 correctAnswerButton = answerButtons[correctAnswer];
-                // correctAnswerButton = answerButtons11[correctAnswer];
                 correctAnswerSelected = true;
             }
 
@@ -372,7 +307,6 @@ public class QuestionGenerator : MonoBehaviour
         questionLabel = root.rootVisualElement.Q<VisualElement>(QuestionContainerString).Q<Label>(className: "unity-label");
 
         answerButtons = root.rootVisualElement.Query(className: "answer-button").ToList();
-        answerButtons11 = root.rootVisualElement.Query<Button>(className: "answer-button").ToList();
         m_quesitonTracker = root.rootVisualElement.Q<VisualElement>("question-tracking").Q<Label>(className: "unity-label");
         questionNumber = 1;
         m_quesitonTracker.text = questionNumber.ToString() + "/" + totalQuestionCount.ToString();
@@ -380,12 +314,5 @@ public class QuestionGenerator : MonoBehaviour
         ReviewResultsScreen = root.rootVisualElement.Q(ReviewResultsString);
         QandAScreen = root.rootVisualElement.Q("QuestionAndAnswer");
         listView = ReviewResultsScreen.Q<ListView>("question-list");
-        // m_QuestionAndAnswerScreen = root.rootVisualElement.Q("QuestionAndAnswer");
-    }
-
-    void Update()
-    {
-
-        // Debug.Log($"GetScore()= {GetScore()}");
     }
 }
