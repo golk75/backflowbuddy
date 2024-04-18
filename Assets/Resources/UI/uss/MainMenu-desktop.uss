@@ -22,24 +22,7 @@
     --color-correct-green: rgba(24, 128, 79, 1);
     --color-question: rgba(33.2, 50, 61.1, 1);
 }
-:root {
-    --border-width: 3px;
-    --border-radius: 15px;
-    --border-color-white: white;
-    --background-color-dark-blue: rgb(118, 118, 118);
-    --color-red: rgba(183, 34, 26, 1);
-    --color-red-transparent: rgba(183, 34, 26, 0.5);
-    --color-orange: rgba(209, 69, 27, 1);
-    --color-orange-transparent: rgba(209, 69, 27, 0.5);
-    --color-yellow: rgba(242, 193, 44, 1);
-     --color-yellow-transparent: rgb(242, 193, 44, 0.5);
-    --color-blue-transparent: rgba(19, 101, 134, 0.5);
-    --color-blue: rgba(19, 101, 134, 1);
-    --color-blue1: rgba(72, 132, 156, 1);
-    --color-brown: rgba(142, 68, 35, 1);
-    --color-black-transparent: rgba(0, 0, 0, 0.5);
-    --color-black: rgba(0, 0, 0, 1);
-}
+
 
 .screen {
     flex-grow: 1;

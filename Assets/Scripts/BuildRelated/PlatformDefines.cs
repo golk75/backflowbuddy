@@ -8,7 +8,7 @@ public class PlatformDefines : MonoBehaviour
 
     void Start()
     {
-        liquid = GetComponent<ZibraLiquid>();
+
         UpdateLiquidQuality();
     }
     private void UpdateLiquidQuality()

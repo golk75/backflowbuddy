@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac678c2a17cc746ddbaba66d8d99ffe4, type: 3}
   m_Name: InitialPopup
   m_EditorClassIdentifier: 
-  header: Welcome to Play mode!
+  header: Welcome to Simulation Mode!
   content: 
