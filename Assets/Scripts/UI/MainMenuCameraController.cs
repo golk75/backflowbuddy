@@ -36,7 +36,7 @@ public class MainMenuCameraController : MonoBehaviour
         // Debug.Log($"editor osx");
 
 
-        m_Camera.orthographicSize = 2.1f;
+        m_Camera.orthographicSize = 1.73f;
 
 
 #endif

@@ -1,4 +1,3 @@
-
 :root {
     --border-width: 3px;
     --border-radius: 15px;
@@ -9,20 +8,14 @@
     --color-orange: rgba(209, 69, 27, 1);
     --color-orange-transparent: rgba(209, 69, 27, 0.5);
     --color-yellow: rgba(242, 193, 44, 1);
-    --color-yellow-transparent: rgba(242, 193, 44, 0.5);
+     --color-yellow-transparent: rgb(242, 193, 44, 0.5);
     --color-blue-transparent: rgba(19, 101, 134, 0.5);
     --color-blue: rgba(19, 101, 134, 1);
-    --color-blue-dark: rgba(11, 64, 85, 1);
+    --color-blue1: rgba(72, 132, 156, 1);
     --color-brown: rgba(142, 68, 35, 1);
+    --color-black-transparent: rgba(0, 0, 0, 0.5);
     --color-black: rgba(0, 0, 0, 1);
-    --color-black-transparent: rgba(0, 0, 0, 0.65);
-    --color-white: rgba(255, 255, 255, 1);
-    --color-white-transparent: rgba(255, 255, 255, 0.25);
-    --color-incorrect-red: rgba(183, 34, 26, 1);
-    --color-correct-green: rgba(24, 128, 79, 1);
-    --color-question: rgba(33.2, 50, 61.1, 1);
 }
-
 
 .screen {
     flex-grow: 1;
@@ -78,13 +71,87 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+    
 }
-.unity-button:hover {
-   cursor: resource('UI/Textures/icons8-hand-33')
+.main-menu-button-out {
+cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    background-color: var(--color-black-transparent);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 25px;
+    -unity-text-align: middle-center;
+    align-items: center;
+    align-self: center;
+    width: 25%;
+    height: 50%;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    scale:0;
+}
+#double-check-button {
+    transition-duration:0.2;
+}
 
+#rpz-button {
+    transition-duration:0.2;
+    transition-delay:0.06;
+}
+#back-button {
+    transition-duration:0.2;
+    transition-delay:0.12;
+}
+#play-button{
+    transition-duration:0.2;
+    transition-delay:0.06;
+}
+#quiz-button{
+    transition-duration:0.2;
+    transition-delay:0.06;
+}
+#quit-button{
+    transition-duration:0.2;
+    transition-delay:0.12;
 }
 
 
+
+
+.main-menu-button:hover {
+    cursor: resource('UI/Textures/icons8-hand-33');
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    background-color: var(--color-black);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 25px;
+    -unity-text-align: middle-center;
+    align-items: center;
+    align-self: center;
+    width: 25%;
+    height: 50%;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    
+}
+.
 .main-menu-button:active {
    cursor: resource('UI/Textures/icons8-hand-33');
     color: rgb(255, 255, 255);

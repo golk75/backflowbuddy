@@ -104,7 +104,7 @@ public class QuestionGenerator : MonoBehaviour
                    //Correct answer selection
                    if (evt.target == correctAnswerButton)
                    {
-                       totalCorrect += 1;
+                       totalCorrect += 1.0f;
 
                        //    Debug.Log($"CORRECT ANSWER!");
 
@@ -243,7 +243,7 @@ public class QuestionGenerator : MonoBehaviour
             //custom controller QuizManager.cs listening
             isQuizComplete = true;
             m_BackToResultsButton.style.display = DisplayStyle.Flex;
-            Actions.EndOfQuizQuestions?.Invoke(QuizResults, m_ResultsEntryListTemplate, totalCorrect / totalQuestionCount * 100);
+            Actions.EndOfQuizQuestions?.Invoke(QuizResults, m_ResultsEntryListTemplate, totalCorrect * 100 / totalQuestionCount);
             //stop removing questions
             return;
         }

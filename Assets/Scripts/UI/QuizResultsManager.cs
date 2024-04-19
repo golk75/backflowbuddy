@@ -78,13 +78,12 @@ public class QuizResultsManager : MonoBehaviour
     }
     public void ShowResults(List<QuizResult> quizResults, VisualTreeAsset visualTreeAsset, float sum)
     {
-        Actions.onResultsReveal?.Invoke();
 
         {
             m_ResultsList = quizResults;
 
-
-            resultPercent.text = sum.ToString() + "%";
+            double percent = sum / (double)quizResults.Count * 100;
+            resultPercent.text = percent.ToString() + "%";
             m_QuestionListEntryTemplate = Resources.Load<VisualTreeAsset>(uxmlPath);
 
             foreach (var question in m_ResultsList)
@@ -108,7 +107,7 @@ public class QuizResultsManager : MonoBehaviour
                 newListEntry.name = "new-list-entry";
 
 
-
+                Actions.onResultsReveal?.Invoke();
 
                 // Return the root of the instantiated visual tree
                 return newListEntry;
