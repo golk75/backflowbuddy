@@ -161,9 +161,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.BackflowBuddy
-    Standalone: com.DefaultCompany.BackflowBuddy
-    iPhone: com.DefaultCompany.BackflowBuddy
+    Android: com.devdoc.backflowbuddy
+    Standalone: com.devdoc.backflowbuddy
+    iPhone: com.devdoc.backflowbuddy
   buildNumber:
     Bratwurst: 0
     Standalone: 8
