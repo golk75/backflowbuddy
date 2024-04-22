@@ -44,18 +44,18 @@ public class ThemeManager : MonoBehaviour
 
         }
 #endif
-#if UNITY_EDITOR_OSX
-                root.styleSheets.Remove(portraitTheme);
-                root.styleSheets.Remove(landscapeTheme);
-                root.styleSheets.Add(desktopTheme);
+        // #if UNITY_EDITOR_OSX
+        //                 root.styleSheets.Remove(portraitTheme);
+        //                 root.styleSheets.Remove(landscapeTheme);
+        //                 root.styleSheets.Add(desktopTheme);
 
-#endif
-#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
-                root.styleSheets.Remove(portraitTheme);
-                root.styleSheets.Remove(landscapeTheme);
-                root.styleSheets.Add(desktopTheme);
+        // #endif
+        // #if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+        //                 root.styleSheets.Remove(portraitTheme);
+        //                 root.styleSheets.Remove(landscapeTheme);
+        //                 root.styleSheets.Add(desktopTheme);
 
-#endif
+        // #endif
 
         // if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight)
         // {
