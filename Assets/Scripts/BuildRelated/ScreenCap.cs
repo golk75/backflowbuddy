@@ -10,6 +10,7 @@ public class ScreenCap : MonoBehaviour
         int count = 1;
 
         if (Input.GetKeyDown(KeyCode.Space))
-            ScreenCapture.CaptureScreenshot($"/Users/GregP/Desktop/screenshot{count++}.png");
+        { ScreenCapture.CaptureScreenshot($"/Users/GregP/Desktop/screenshot{count++}.png"); }
+
     }
 }
