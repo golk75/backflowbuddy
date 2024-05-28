@@ -1126,7 +1126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1057824564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,7 +1171,7 @@ Transform:
   m_GameObject: {fileID: 1057824563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.43, y: 3.7, z: 2.88}
+  m_LocalPosition: {x: -5, y: 3.7, z: 2.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxNumParticles: 499968
-  EnableDownscale: 0
+  EnableDownscale: 1
   DownscaleFactor: 0.5
   InitialState: 1
   BakedInitialStateAsset: {fileID: 4900000, guid: b0ae10064da2c40f6a4a51060f2f7868,
