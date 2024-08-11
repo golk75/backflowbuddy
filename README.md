@@ -1,10 +1,9 @@
 # BackflowBuddy
 
-<h2>This is a backflow testing training application.</h2>
+<h2>This is a backflow prevention assembly training application.</h2>
 <hr/>
-<h3>Created for for students trying to learn about backflow devices and instructors trying to teach how backflow devices function</h3>
 
-<div>This application can be ran on mobile and desktop devices.</div>
+<div>Introducing Backflow Buddy—the essential app for students pursuing a backflow testing license! Backflow Buddy offers comprehensive study materials, practice exams, and interactive resources to help you master the knowledge needed for certification. This app ensures students understand how backflow devices work, and are fully prepared to ace their backflow testing exam and achieve your professional goals.</div>
 
 
 
