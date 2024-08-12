@@ -1,4 +1,4 @@
-# This .gitignore file should be placed at the root of your Unity project directory
+ This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
@@ -9,7 +9,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-.DS_Store
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -26,20 +25,6 @@
 
 # Visual Studio cache directory
 .vs/
-
-# Mono-specific patterns
-.dirstamp
-compile
-mono.h
-mono-*.tar.*
-mono_crash*
-tmpinst-dir.stamp
-extensions-config.h
-*.dylib.dSYM
-*.mlpd
-llvm/build/
-llvm/usr/
-mcs/build/compiler-server.log
 
 # Gradle cache directory
 .gradle/
