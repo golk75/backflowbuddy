@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['serializecurrentliquidstate_0',['SerializeCurrentLiquidState',['../a00917.html#a53cae94c098143f58dbca8408985f88b',1,'com::zibra::liquid::Solver::ZibraLiquid']]]
-];
